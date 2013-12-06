@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Collect" parent="@style/Holo.Theme.Sherlock.Light">
+        <item name="android:scrollbarThumbHorizontal">@drawable/thumb</item>
+        <item name="android:scrollbarThumbVertical">@drawable/thumb</item>
+        <item name="android:scrollbarSize">1dp</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="actionBarStyle">@style/Widget.Collect.ActionBar</item>
+        <item name="android:actionBarStyle">@style/Widget.Collect.ActionBar</item>
+        <!--
+        <item name="mainLayout">@style/Collect.MainLayout</item>
+	    <item name="button1">@style/Collect.Button1</item>
+	    <item name="button2">@style/Collect.Button2</item>
+	    <item name="buttonLand">@style/Collect.ButtonLand</item>
+	    <item name="buttonList">@style/Collect.List</item>
+	    <item name="widgetActionBar">@style/Widget.Collect.ActionBar</item>
+        -->
+
+    </style>
+
+    <style name="light" parent="@style/Holo.Theme.Light.DarkActionBar">
+        <item name="android:scrollbarThumbHorizontal">@drawable/thumb</item>
+        <item name="android:scrollbarThumbVertical">@drawable/thumb</item>
+        <item name="android:scrollbarSize">1dp</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="actionBarStyle">@style/Widget.Collect.ActionBar</item>
+        <item name="android:actionBarStyle">@style/Widget.Collect.ActionBar</item>
+    </style>
+
+    <style name="Collect.MainLayout">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="Collect.Button1">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_margin">2dp</item>
+    </style>
+
+    <style name="Collect.Button2">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_margin">1dp</item>
+    </style>
+
+    <style name="Collect.ButtonLand">
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:layout_margin">1dp</item>
+    </style>
+
+    <style name="Collect.List">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:divider">@drawable/linear_blue</item>
+        <item name="android:dividerHeight">1dip</item>
+    </style>
+
+    <style name="Widget.Collect.ActionBar" parent="Widget.Sherlock.ActionBar">
+        <item name="android:background">@drawable/action_bar_gradient</item>
+        <item name="titleTextStyle">@style/CustomTitleColorBar</item>
+        <item name="android:titleTextStyle">@style/CustomTitleColorBar</item>
+    </style>
+
+    <style name="CustomTitleColorBar" parent="@style/TextAppearance.Sherlock.Widget.ActionBar.Title">
+        <item name="android:textColor">@drawable/linear_blue</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+
+</resources>

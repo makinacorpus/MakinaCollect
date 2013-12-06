@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2009 University of Washington Licensed under the Apache
+	License, Version 2.0 (the "License"); you may not use this file except in
+	compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+	Unless required by applicable law or agreed to in writing, software distributed
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for
+	the specific language governing permissions and limitations under the License.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- strings that should not be translated -->
+
+	<!-- AboutUS -->
+    <string name="textview_about_us1">The mobile application "Makina Collect" was developed by Makina Corpus</string>
+    <string name="textview_about_us2">Développons de nouveaux horizons</string>
+    <string name="textview_about_us3">www.makina-corpus.com</string>
+    <string name="textview_about_us4">© Makina Corpus 2013</string>
+    <string name="web_site">http://www.makina-corpus.com/</string>
+    <!-- END AboutUs -->
+
+	<!-- Preferences -->
+    <string name="language">Language</string>
+    <string name="current_language">English</string>
+    <string name="language_preferences">language_preferences</string>
+    <string name="theme">Thème</string>
+    <string name="theme_preferences">theme_preferences</string>
+    <string name="theme1">Thème1</string>
+    <string name="theme2">Thème2</string>
+    <string name="luminosity">Luminosity</string>
+    <!-- END- Preferences -->
+    
+    <!--  ActionBar -->
+    <string name="search">Recherche</string>
+    <string name="settings">Paramètres</string>
+    <string name="help">Aide</string>
+    <string name="about_us">A propos</string>
+    <string name="exit">Quitter</string>
+    <string name="upload">Upload</string>
+    <string name="raz">RAZ</string>
+    <string name="hierarchy">Hierarchy</string>
+    <!--  FIN ActionBar -->
+    
+    <string name="app_name" translatable="false">Makina Collect</string>
+    <string name="protocol_odk_default" translatable="false">odk_default</string>
+    <string name="protocol_google" translatable="false">google</string>
+    <string name="protocol_other" translatable="false"></string>
+    <string name="default_server_url" translatable="false">https://opendatakit.appspot.com</string>
+    <string name="default_odk_formlist" translatable="false">/formList</string>
+    <string name="default_odk_submission" translatable="false">/submission</string>
+
+    <item name="mapview" type="id"/>
+
+</resources>

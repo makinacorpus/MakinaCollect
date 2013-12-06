@@ -1,0 +1,132 @@
+/*
+ * Copyright (C) 2011 University of Washington
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
+package com.makina.collect.android.activities;
+import ly.count.android.api.Countly;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
+
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.makina.collect.android.R;
+import com.makina.collect.android.application.Collect;
+import com.makina.collect.android.dialog.AboutUs;
+import com.makina.collect.android.dialog.Help;
+import com.makina.collect.android.preferences.PreferencesActivity;
+import com.makina.collect.android.utilities.Finish;
+
+public class ActivityDashBoard extends SherlockActivity {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // this splash screen should be a blank slate
+        setContentView(R.layout.activity_dashboard);
+        Finish.activityDashBoard=this;
+        Countly.sharedInstance().init(getApplicationContext(), "http://countly.makina-corpus.net", "279676abcbba16c3ee5e2b113a990fe579ddc527");
+    
+        RelativeLayout relativeLayout_download=(RelativeLayout)findViewById(R.id.relativeLayout_download);
+        relativeLayout_download.setOnClickListener(new View.OnClickListener()
+        {
+			@Override
+			public void onClick(View v)
+			{
+				startActivity(new Intent(getApplicationContext(), ActivityDownloadForm.class));
+			}
+		});
+        
+        RelativeLayout relativeLayout_edit=(RelativeLayout)findViewById(R.id.relativeLayout_edit);
+        relativeLayout_edit.setOnClickListener(new View.OnClickListener()
+        {
+			@Override
+			public void onClick(View v)
+			{
+				startActivity(new Intent(getApplicationContext(), ActivityEditForm.class));
+			}
+		});
+        
+        RelativeLayout relativeLayout_save=(RelativeLayout)findViewById(R.id.relativeLayout_save);
+        relativeLayout_save.setOnClickListener(new View.OnClickListener()
+        {
+			@Override
+			public void onClick(View v)
+			{
+				startActivity(new Intent(getApplicationContext(), ActivitySaveForm.class));
+			}
+		});
+        
+        RelativeLayout relativeLayout_send=(RelativeLayout)findViewById(R.id.relativeLayout_send);
+        relativeLayout_send.setOnClickListener(new View.OnClickListener()
+        {
+			@Override
+			public void onClick(View v)
+			{
+				startActivity(new Intent(getApplicationContext(), ActivitySendForm.class));
+			}
+		});
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        super.onCreateOptionsMenu(menu);
+        getSupportMenuInflater().inflate(R.menu.menu_activity_dashboard, menu);
+        
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        // The action bar home/up action should open or close the drawer.
+        // ActionBarDrawerToggle will take care of this.
+        // Handle action buttons for all fragments
+    	switch(item.getItemId())
+    	{
+	        case R.id.menu_settings:
+	        	startActivity(new Intent(this, PreferencesActivity.class));
+	        	return true;
+	        case R.id.menu_help:
+	        	Help.helpDialog(getApplicationContext(), 0);
+	        	return true;
+	        case R.id.menu_about_us:
+	        	AboutUs.aboutUs(this);
+	        	return true;
+	        case R.id.menu_exit:
+	        	Finish.finish();
+	        	return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+        }
+    }
+    
+    @Override
+    protected void onStart() {
+    	super.onStart();
+    	Countly.sharedInstance().onStart();
+		Collect.getInstance().getActivityLogger().logOnStart(this); 
+    }
+    
+    @Override
+    protected void onStop() {
+    	Countly.sharedInstance().onStop();
+		Collect.getInstance().getActivityLogger().logOnStop(this); 
+    	super.onStop();
+    }
+
+}
