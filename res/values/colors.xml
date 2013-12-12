@@ -16,7 +16,7 @@ the License.
 -->
 <resources>
 
-    <drawable name="strocke_about_us">#bdce12</drawable>
+    <drawable name="strocke_about_us">#b8d754</drawable>
     <drawable name="background_drawer_list">#2fffffff</drawable>
     <drawable name="linear_blue">#2bbccc</drawable>
     <drawable name="text_gris">#787c7d</drawable>
@@ -27,5 +27,13 @@ the License.
     <drawable name="linear_green">#b8d754</drawable>
     <drawable name="green_delete">#ccec65</drawable>
     <drawable name="gris_background">#f2f4f4</drawable>
-
+    
+    <color name="actionbarTitleColorGreenDownload">#c8e453</color>
+    <color name="actionbarTitleColorGreenEdit">#b8d754</color>
+    <color name="actionbarTitleColorBlueSave">#1baac2</color>
+    <color name="actionbarTitleColorBlueSend">#2bbccc</color>
+    <color name="actionbarTitleColorGris">#787c7d</color>
+    
+    <color name="about_us_blue">#073239</color>
+    
 </resources>

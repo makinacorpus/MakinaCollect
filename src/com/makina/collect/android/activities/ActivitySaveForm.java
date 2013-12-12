@@ -19,7 +19,9 @@ import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
@@ -27,6 +29,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter; 
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
@@ -59,6 +62,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     {
         super.onCreateOptionsMenu(menu);
         getSupportMenuInflater().inflate(R.menu.menu_activity_edit_form, menu);
+        
         
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         mSearchView = (SearchView) searchItem.getActionView();
@@ -94,14 +98,26 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         }
     }
     
-    @Override
+    @SuppressLint("ResourceAsColor")
+	@Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_save_form);
         
-    	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    	setTitle(getString(R.string.review_data));
+    	Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    	getSupportActionBar().setTitle(getString(R.string.my_forms));
+    	int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
+    	TextView actionbarTitle = (TextView)findViewById(titleId);
+    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+    	actionbarTitle.setTypeface(typeFace);
+    	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
+    	TextView actionbarSubTitle = (TextView)findViewById(titleId);
+    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorBlueSave));
+    	actionbarSubTitle.setTypeface(typeFace);
+    	getSupportActionBar().setSubtitle(getString(R.string.saved).toUpperCase());
+    	
         
         /*TextView tv = (TextView) findViewById(R.id.status_text);
         tv.setVisibility(View.GONE);*/

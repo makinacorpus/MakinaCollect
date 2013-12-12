@@ -20,7 +20,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -137,8 +139,21 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_form);
+        
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle(getString(R.string.send_data));
+        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    	getSupportActionBar().setTitle(getString(R.string.box));
+    	int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
+    	TextView actionbarTitle = (TextView)findViewById(titleId);
+    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+    	actionbarTitle.setTypeface(typeFace);
+    	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
+    	TextView actionbarSubTitle = (TextView)findViewById(titleId);
+    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorBlueSend));
+    	actionbarSubTitle.setTypeface(typeFace);
+    	getSupportActionBar().setSubtitle(getString(R.string.send).toUpperCase());
+        
         textView_pannier=(TextView)findViewById(R.id.textView_pannier);
         RelativeLayout relativeLayout_check_all=(RelativeLayout) findViewById(R.id.check_all);
         relativeLayout_check_all.setOnClickListener(new View.OnClickListener()

@@ -25,7 +25,9 @@ import android.annotation.TargetApi;
 import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -38,6 +40,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -91,13 +94,21 @@ public class ActivityEditForm extends SherlockActivity implements DiskSyncListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_form);
         
-        setTitle(getString(R.string.enter_data));
+        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
+        getSupportActionBar().setTitle(getString(R.string.edit).toUpperCase());
+        int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
+    	TextView actionbarTitle = (TextView)findViewById(titleId);
+    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGreenEdit));
+    	actionbarTitle.setTypeface(typeFace);
+    	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
+    	TextView actionbarSubTitle = (TextView)findViewById(titleId);
+    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+    	actionbarSubTitle.setTypeface(typeFace);
+    	getSupportActionBar().setSubtitle(getString(R.string.form));
+        
         empty_list=(ImageView)findViewById(R.id.empty_list);
         
-        
         data = new ArrayList<FormItem>();
-
-        
 
         swipeListView = (SwipeListView) findViewById(R.id.listView);
         if (Build.VERSION.SDK_INT >= 11) {

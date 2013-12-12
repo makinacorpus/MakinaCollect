@@ -13,7 +13,7 @@ License.
 <resources>
     
     <!-- AboutUS -->
-    <string name="textview_about_us1">L’application mobile "TunOndes" a été développée par Makina Corpus</string>
+    <string name="textview_about_us1">L’application mobile "Makina Collect" a été développée par Makina Corpus</string>
     <!-- END AboutUs -->
     
     <string name="current_language">Français</string>

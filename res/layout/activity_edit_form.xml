@@ -19,7 +19,7 @@ the License.
     xmlns:swipe="http://schemas.android.com/apk/res-auto"
     style="@style/Collect.MainLayout"
     android:layout_alignParentTop="true"
-    android:background="@drawable/bg_list" xmlns:app="http://schemas.android.com/apk/res/com.makina.collect.android">
+    android:background="@drawable/gris_background" >
 
     <RelativeLayout style="@style/Collect.MainLayout" >
 
@@ -32,10 +32,11 @@ the License.
         <com.fortysevendeg.swipelistview.SwipeListView
             android:id="@+id/listView"
             style="@style/Collect.List"
-            swipe:swipeFrontView="@+id/front"
+            android:layout_toRightOf="@id/linear_blue"
             swipe:swipeBackView="@+id/back"
             swipe:swipeCloseAllItemsWhenMoveList="true"
-            swipe:swipeMode="left"/>
+            swipe:swipeFrontView="@+id/front"
+            swipe:swipeMode="left" />
     </RelativeLayout>
 
     <ImageView

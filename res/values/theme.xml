@@ -67,12 +67,15 @@
         <item name="android:background">@drawable/action_bar_gradient</item>
         <item name="titleTextStyle">@style/CustomTitleColorBar</item>
         <item name="android:titleTextStyle">@style/CustomTitleColorBar</item>
+        <item name="android:subtitleTextStyle">@style/CustomSubTitleColorBar</item>
     </style>
 
     <style name="CustomTitleColorBar" parent="@style/TextAppearance.Sherlock.Widget.ActionBar.Title">
-        <item name="android:textColor">@drawable/linear_blue</item>
-        <item name="android:textStyle">bold</item>
+        <!-- <item name="android:textColor">@drawable/actionbarTitleColor</item>-->
     </style>
+    
+    <style name="CustomSubTitleColorBar" parent="@style/TextAppearance.Sherlock.Widget.ActionBar.Title">
+  	</style>
     
 
 </resources>

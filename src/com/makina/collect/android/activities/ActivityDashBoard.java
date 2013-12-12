@@ -15,9 +15,13 @@
 package com.makina.collect.android.activities;
 import ly.count.android.api.Countly;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -35,6 +39,15 @@ public class ActivityDashBoard extends SherlockActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // this splash screen should be a blank slate
+        
+        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
+        getSupportActionBar().setTitle(getString(R.string.app_name));
+    	int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
+    	TextView actionbarTitle = (TextView)findViewById(titleId);
+    	actionbarTitle.setText(Html.fromHtml("<strong><font color=\"#C2EA60\">Makina</font> <font color=\"#1B8FAA\">Collect</font></strong>"));
+    	//actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+    	actionbarTitle.setTypeface(typeFace);
+    	
         setContentView(R.layout.activity_dashboard);
         Finish.activityDashBoard=this;
         Countly.sharedInstance().init(getApplicationContext(), "http://countly.makina-corpus.net", "279676abcbba16c3ee5e2b113a990fe579ddc527");

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="wrap_content" >
 
     <RelativeLayout
         android:id="@+id/back"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/green_delete"
-        android:padding="10dip" >
+        android:layout_centerInParent="true" >
 
         <ImageView
             android:id="@+id/imageView_delete"
@@ -19,9 +17,10 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/front"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="1dp"
+        android:background="@drawable/gris_background"
         android:minHeight="?android:attr/listPreferredItemHeight"
         android:paddingBottom="8dip"
         android:paddingLeft="8dip"
@@ -29,13 +28,11 @@
         android:paddingTop="4dip" >
 
         <RelativeLayout
-            android:id="@+id/front"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="15dip"
-            android:background="@drawable/gris_background">
+            android:padding="15dip" >
 
             <ImageView
                 android:layout_width="wrap_content"

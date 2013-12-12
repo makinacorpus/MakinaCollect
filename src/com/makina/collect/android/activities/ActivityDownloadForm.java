@@ -27,6 +27,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -135,9 +137,19 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         textView_pannier=(TextView)findViewById(R.id.textView_pannier);
        // Finish.activityDownloadForm=this;
         
-        getSupportActionBar().setTitle(getString(R.string.get_forms).toUpperCase());
-        getSupportActionBar().setSubtitle("dfdff");
-        mAlertMsg = getString(R.string.please_wait);
+        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
+        getSupportActionBar().setTitle(getString(R.string.download).toUpperCase());
+        int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
+    	TextView actionbarTitle = (TextView)findViewById(titleId);
+    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGreenDownload));
+    	actionbarTitle.setTypeface(typeFace);
+    	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
+    	TextView actionbarSubTitle = (TextView)findViewById(titleId);
+    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+    	actionbarSubTitle.setTypeface(typeFace);
+    	getSupportActionBar().setSubtitle(getString(R.string.form));
+        
+    	mAlertMsg = getString(R.string.please_wait);
         
         // need clear background before load
         //getListView().setBackgroundResource(R.drawable.background);

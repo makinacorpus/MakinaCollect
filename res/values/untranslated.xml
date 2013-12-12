@@ -42,6 +42,17 @@
     <string name="hierarchy">Hierarchy</string>
     <!--  FIN ActionBar -->
     
+    <!--  ActionBar Title -->
+    <string name="download">Télécharger</string>
+    <string name="edit">Remplir</string>
+    <string name="my_forms">Mes formulaires</string>
+    <string name="saved">Sauvegardés</string>
+    <string name="box">Boite</string>
+    <string name="send">d\'envoi</string>
+    <string name="form">un formulaire</string>
+    
+    <!--  FIN ActionBar Title-->
+    
     <string name="app_name" translatable="false">Makina Collect</string>
     <string name="protocol_odk_default" translatable="false">odk_default</string>
     <string name="protocol_google" translatable="false">google</string>
