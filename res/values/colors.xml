@@ -25,7 +25,7 @@ the License.
     <drawable name="check_all_on">#1594a9</drawable>
     <drawable name="white">#fff</drawable>
     <drawable name="linear_green">#b8d754</drawable>
-    <drawable name="green_delete">#ccec65</drawable>
+    <drawable name="background_swipe_delete">#36d2e3</drawable>
     <drawable name="gris_background">#f2f4f4</drawable>
     
     <color name="actionbarTitleColorGreenDownload">#c8e453</color>

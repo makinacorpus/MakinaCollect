@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.Set;
 
 import com.WazaBe.HoloEverywhere.app.AlertDialog;
-import com.WazaBe.HoloEverywhere.app.Dialog;
 import com.WazaBe.HoloEverywhere.app.ProgressDialog;
 
 import android.annotation.SuppressLint;
@@ -55,6 +54,7 @@ import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.dialog.Help;
+import com.makina.collect.android.dialog.HelpWithConfirmation;
 import com.makina.collect.android.listeners.FormDownloaderListener;
 import com.makina.collect.android.listeners.FormListDownloaderListener;
 import com.makina.collect.android.logic.FormDetails;
@@ -63,6 +63,8 @@ import com.makina.collect.android.tasks.DownloadFormListTask;
 import com.makina.collect.android.tasks.DownloadFormsTask;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.WebUtils;
+import com.makina.collect.android.views.CustomFontTextview;
+
 import android.widget.SearchView;
 /**
  * Responsible for displaying, adding and deleting all the valid forms in the forms directory. One
@@ -122,7 +124,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
     private static final boolean DO_NOT_EXIT = false;
     private boolean mShouldExit;
     private static final String SHOULD_EXIT = "shouldexit";
-    private TextView textView_pannier;
+    private CustomFontTextview textView_pannier;
     private SearchView mSearchView;
     private ArrayList<String> mSelected = new ArrayList<String>();
 
@@ -134,10 +136,13 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         setContentView(R.layout.activity_download_form);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         
-        textView_pannier=(TextView)findViewById(R.id.textView_pannier);
+        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
+        
+        createDialog(PROGRESS_DIALOG);
+        textView_pannier=(CustomFontTextview)findViewById(R.id.textView_pannier);
        // Finish.activityDownloadForm=this;
         
-        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
+        
         getSupportActionBar().setTitle(getString(R.string.download).toUpperCase());
         int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
@@ -149,8 +154,12 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
     	actionbarSubTitle.setTypeface(typeFace);
     	getSupportActionBar().setSubtitle(getString(R.string.form));
         
-    	mAlertMsg = getString(R.string.please_wait);
         
+    	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_download", false))
+    		HelpWithConfirmation.helpDialog(this, getString(R.string.help_download));
+		
+    	
+    	
         // need clear background before load
         //getListView().setBackgroundResource(R.drawable.background);
 
@@ -207,7 +216,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 					selectAllOption();
 					ImageView imageView_check_all=(ImageView)findViewById(R.id.imageView_check_all);
 					imageView_check_all.setImageResource(R.drawable.case_off);
-					TextView textView_check_all=(TextView)findViewById(R.id.textView_check_all);
+					CustomFontTextview textView_check_all=(CustomFontTextview)findViewById(R.id.textView_check_all);
 					textView_check_all.setText("TOUT SÉLECTIONNER");
 					
 				}
@@ -216,7 +225,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 					selectAllOption();
 					ImageView imageView_check_all=(ImageView)findViewById(R.id.imageView_check_all);
 					imageView_check_all.setImageResource(R.drawable.case_on);
-					TextView textView_check_all=(TextView)findViewById(R.id.textView_check_all);
+					CustomFontTextview textView_check_all=(CustomFontTextview)findViewById(R.id.textView_check_all);
 					textView_check_all.setText("TOUT DÉSÉLECTIONNER");
 					
 				}
@@ -239,6 +248,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 
     private void clearChoices() {
         ActivityDownloadForm.this.getListView().clearChoices();
+        
     }
 
 
@@ -361,10 +371,31 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         }
         textView_pannier.setText(mSelected.size()+" formulaire(s) sélectionné(s)");
    }
+    
+    protected void clearAllOption()
+    {
+    	ListView ls = getListView();
+        mToggled = false;
+        mSelected.clear();
+        
+    	for (int pos = 0; pos < ls.getCount(); pos++)
+    	{
+            ls.setItemChecked(pos, mToggled);
+        }
+        
+        textView_pannier.setText(mSelected.size()+" formulaire(s) sélectionné(s)");
+   }
 
-
-    protected Dialog createDialog(int id) {
-        switch (id) {
+    private void dismissDialog()
+    {
+    	if (mProgressDialog!=null)
+    		mProgressDialog.dismiss();
+    }
+    private void createDialog(int id)
+    {
+    	
+        switch (id)
+        {
             case PROGRESS_DIALOG:
                 Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.PROGRESS_DIALOG", "show");
                 mProgressDialog = new ProgressDialog(this);
@@ -389,12 +420,13 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
                         }
                     };
                 mProgressDialog.setTitle(getString(R.string.downloading_data));
-                mProgressDialog.setMessage(mAlertMsg);
-                mProgressDialog.setIcon(android.R.drawable.ic_dialog_info);
+                mProgressDialog.setMessage(getString(R.string.please_wait));
+                mProgressDialog.setIcon(R.drawable.actionbar_about_us);
                 mProgressDialog.setIndeterminate(true);
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.setButton(getString(R.string.cancel), loadingButtonListener);
-                return mProgressDialog;
+                mProgressDialog.show();
+                break;
             case AUTH_DIALOG:
                 Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.AUTH_DIALOG", "show");
                 AlertDialog.Builder b = new AlertDialog.Builder(this);
@@ -451,9 +483,8 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 
                 b.setCancelable(false);
                 mAlertShowing = false;
-                return b.create();
+                mProgressDialog.show();
         }
-        return null;
     }
 
 
@@ -479,7 +510,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 
         if (totalCount > 0) {
             // show dialog box
-            this.showDialog(PROGRESS_DIALOG);
+            createDialog(PROGRESS_DIALOG);
 
             mDownloadFormsTask = new DownloadFormsTask();
             mDownloadFormsTask.setDownloaderListener(this);
@@ -568,7 +599,8 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         if (mDownloadFormsTask != null) {
             mDownloadFormsTask.setDownloaderListener(this);
         }
-        if (mAlertShowing) {
+        if (mAlertShowing)
+        {
             createAlertDialog(mAlertTitle, mAlertMsg, mShouldExit);
         }
         
@@ -593,11 +625,12 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
      */
     @Override
 	public void formListDownloadingComplete(HashMap<String, FormDetails> result) {
-        //this.dismissDialog(PROGRESS_DIALOG);
+    	dismissDialog();
         mDownloadFormListTask.setDownloaderListener(null);
         mDownloadFormListTask = null;
 
-        if (result == null) {
+        if (result == null)
+        {
             Log.e(t, "Formlist Downloading returned null.  That shouldn't happen");
             // Just displayes "error occured" to the user, but this should never happen.
             createAlertDialog(getString(R.string.load_remote_form_error),getString(R.string.error_occured), EXIT);
@@ -660,6 +693,8 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         	linearLayout_footer.setVisibility(View.GONE);
         else
         	linearLayout_footer.setVisibility(View.VISIBLE);
+        
+        
     }
 
 
@@ -737,8 +772,8 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
             	result.get(k));
             b.append("\n\n");
         }
-
-        createAlertDialog(getString(R.string.download_forms_result), b.toString().trim(), EXIT);
+       clearAllOption();
+       createAlertDialog(getString(R.string.download_forms_result), b.toString().trim(), EXIT);
     }
     
     private void setupSearchView(MenuItem searchItem)
@@ -811,7 +846,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 	        	startActivity(new Intent(this, PreferencesActivity.class));
 	        	return true;
 	        case R.id.menu_help:
-	        	Help.helpDialog(getApplicationContext(), 0);
+	        	Help.helpDialog(this, getString(R.string.help_download));
 	        	return true;
 	        case R.id.menu_about_us:
 	        	AboutUs.aboutUs(this);

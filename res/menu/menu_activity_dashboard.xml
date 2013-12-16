@@ -12,11 +12,6 @@
                 android:showAsAction="ifRoom|withText"
                 android:title="@string/settings"/>
             <item
-                android:id="@+id/menu_help"
-                android:icon="@drawable/actionbar_help"
-                android:showAsAction="ifRoom|withText"
-                android:title="@string/help"/>
-            <item
                 android:id="@+id/menu_about_us"
                 android:icon="@drawable/actionbar_about_us"
                 android:showAsAction="ifRoom|withText"

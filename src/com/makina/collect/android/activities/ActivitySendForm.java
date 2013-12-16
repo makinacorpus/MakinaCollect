@@ -45,6 +45,7 @@ import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.dialog.Help;
+import com.makina.collect.android.dialog.HelpWithConfirmation;
 import com.makina.collect.android.listeners.DeleteInstancesListener;
 import com.makina.collect.android.preferences.PreferencesActivity;
 import com.makina.collect.android.provider.InstanceProviderAPI;
@@ -123,7 +124,7 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 	        	startActivity(new Intent(this, PreferencesActivity.class));
 	        	return true;
 	        case R.id.menu_help:
-	        	Help.helpDialog(getApplicationContext(), 0);
+	        	Help.helpDialog(this, getString(R.string.help_send));
 	        	return true;
 	        case R.id.menu_about_us:
 	        	AboutUs.aboutUs(this);
@@ -154,6 +155,9 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
     	actionbarSubTitle.setTypeface(typeFace);
     	getSupportActionBar().setSubtitle(getString(R.string.send).toUpperCase());
         
+    	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_send", false))
+    		HelpWithConfirmation.helpDialog(this, getString(R.string.help_send));
+    	
         textView_pannier=(TextView)findViewById(R.id.textView_pannier);
         RelativeLayout relativeLayout_check_all=(RelativeLayout) findViewById(R.id.check_all);
         relativeLayout_check_all.setOnClickListener(new View.OnClickListener()

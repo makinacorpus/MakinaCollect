@@ -22,13 +22,11 @@ import com.WazaBe.HoloEverywhere.widget.View;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -41,6 +39,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -51,6 +50,7 @@ import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.dialog.Help;
+import com.makina.collect.android.dialog.HelpWithConfirmation;
 import com.makina.collect.android.listeners.DiskSyncListener;
 import com.makina.collect.android.preferences.PreferencesActivity;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
@@ -106,6 +106,9 @@ public class ActivityEditForm extends SherlockActivity implements DiskSyncListen
     	actionbarSubTitle.setTypeface(typeFace);
     	getSupportActionBar().setSubtitle(getString(R.string.form));
         
+    	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_edit", false))
+    		HelpWithConfirmation.helpDialog(this, getString(R.string.help_edit));
+    	
         empty_list=(ImageView)findViewById(R.id.empty_list);
         
         data = new ArrayList<FormItem>();
@@ -118,8 +121,8 @@ public class ActivityEditForm extends SherlockActivity implements DiskSyncListen
             swipeListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
                 @Override
-                public void onItemCheckedStateChanged(ActionMode mode, int position,
-                                                      long id, boolean checked) {
+                public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked)
+                {
                     mode.setTitle("Selected (" + swipeListView.getCountSelected() + ")");
                 }
              
@@ -130,9 +133,9 @@ public class ActivityEditForm extends SherlockActivity implements DiskSyncListen
                 }
 
 				@Override
-				public boolean onActionItemClicked(ActionMode arg0,
-						android.view.MenuItem arg1) {
+				public boolean onActionItemClicked(ActionMode arg0, android.view.MenuItem arg1) {
 					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "cliqué", Toast.LENGTH_SHORT).show();
 					return false;
 				}
 
@@ -338,7 +341,7 @@ public class ActivityEditForm extends SherlockActivity implements DiskSyncListen
 	        	startActivity(new Intent(this, PreferencesActivity.class));
 	        	return true;
 	        case R.id.menu_help:
-	        	Help.helpDialog(getApplicationContext(), 0);
+	        	Help.helpDialog(this, getString(R.string.help_edit));
 	        	return true;
 	        case R.id.menu_about_us:
 	        	AboutUs.aboutUs(this);

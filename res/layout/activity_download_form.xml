@@ -49,7 +49,7 @@ the License.
                 android:background="@drawable/pannier_blue"
                 android:gravity="center" >
 
-                <TextView
+                <com.makina.collect.android.views.CustomFontTextview
                     android:id="@+id/textView_pannier"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -71,7 +71,7 @@ the License.
                     android:layout_height="match_parent"
                     android:src="@drawable/case_off" />
 
-                <TextView
+                <com.makina.collect.android.views.CustomFontTextview
                     android:id="@+id/textView_check_all"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"

@@ -50,8 +50,16 @@
     <string name="box">Boite</string>
     <string name="send">d\'envoi</string>
     <string name="form">un formulaire</string>
-    
     <!--  FIN ActionBar Title-->
+    
+    <!-- Help -->
+    <string name="help_download">download Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir</string>
+    <string name="help_edit">edit  Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir</string>
+    <string name="help_saved">saved Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir</string>
+    <string name="help_send">send Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir</string>
+    <string name="help_form">form Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir</string>
+    <string name="help_confirmation">Ne plus afficher ce message</string>
+    <!--  FIN Help-->
     
     <string name="app_name" translatable="false">Makina Collect</string>
     <string name="protocol_odk_default" translatable="false">odk_default</string>

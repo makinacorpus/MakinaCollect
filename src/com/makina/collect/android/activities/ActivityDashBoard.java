@@ -114,9 +114,6 @@ public class ActivityDashBoard extends SherlockActivity {
 	        case R.id.menu_settings:
 	        	startActivity(new Intent(this, PreferencesActivity.class));
 	        	return true;
-	        case R.id.menu_help:
-	        	Help.helpDialog(getApplicationContext(), 0);
-	        	return true;
 	        case R.id.menu_about_us:
 	        	AboutUs.aboutUs(this);
 	        	return true;

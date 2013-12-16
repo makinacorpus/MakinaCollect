@@ -7,17 +7,18 @@
         android:id="@+id/back"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" >
+        android:padding="4dip"
+        android:background="@drawable/background_swipe_delete" >
 
         <ImageView
             android:id="@+id/imageView_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:src="@drawable/ic_delete" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/front"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/gris_background"
@@ -28,6 +29,7 @@
         android:paddingTop="4dip" >
 
         <RelativeLayout
+            android:id="@+id/front"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -41,19 +43,19 @@
                 android:src="@drawable/ic_edit" />
         </RelativeLayout>
 
-        <TextView
+        <com.makina.collect.android.views.CustomFontTextview
             android:id="@+id/text1"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:gravity="center_vertical"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@drawable/text_gris" />
 
-        <TextView
+        <com.makina.collect.android.views.CustomFontTextview
             android:id="@+id/text3"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/text1"
@@ -61,9 +63,9 @@
             android:textColor="@drawable/text_gris"
             android:visibility="gone" />
 
-        <TextView
+        <com.makina.collect.android.views.CustomFontTextview
             android:id="@+id/text2"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/text3"

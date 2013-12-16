@@ -80,6 +80,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
+import com.makina.collect.android.dialog.HelpWithConfirmation;
 import com.makina.collect.android.listeners.AdvanceToNextListener;
 import com.makina.collect.android.listeners.FormLoaderListener;
 import com.makina.collect.android.listeners.FormSavedListener;
@@ -228,6 +229,9 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		setContentView(R.layout.activity_form_entry);
 		setTitle(getString(R.string.loading_form));
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
+		if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_form", false))
+    		HelpWithConfirmation.helpDialog(this, getString(R.string.help_form));
 		
 		textView_quiz_question_number=(TextView)findViewById(R.id.textView_quiz_question_number);
 		

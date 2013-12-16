@@ -38,6 +38,7 @@ import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.dialog.Help;
+import com.makina.collect.android.dialog.HelpWithConfirmation;
 import com.makina.collect.android.preferences.PreferencesActivity;
 import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
@@ -85,7 +86,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 	        	startActivity(new Intent(this, PreferencesActivity.class));
 	        	return true;
 	        case R.id.menu_help:
-	        	Help.helpDialog(getApplicationContext(), 0);
+	        	Help.helpDialog(this, getString(R.string.help_saved));
 	        	return true;
 	        case R.id.menu_about_us:
 	        	AboutUs.aboutUs(this);
@@ -118,7 +119,9 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     	actionbarSubTitle.setTypeface(typeFace);
     	getSupportActionBar().setSubtitle(getString(R.string.saved).toUpperCase());
     	
-        
+    	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_saved", false))
+    		HelpWithConfirmation.helpDialog(this, getString(R.string.help_saved));
+    	
         /*TextView tv = (TextView) findViewById(R.id.status_text);
         tv.setVisibility(View.GONE);*/
         
