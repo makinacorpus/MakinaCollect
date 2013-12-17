@@ -131,7 +131,7 @@ License.
 <string name="please_wait">Veuillez patienter.</string>
 <string name="please_wait_long">Veuillez patienter. Cette action peut prendre quelques minutes.</string>
 <string name="quit_application">Sortir %s</string>
-<string name="quit_entry">Sauvegarder et sortir</string>
+<string name="quit_entry">Sauvegarder</string>
 <string name="refresh">Rafraîchir</string>
 <string name="replace_barcode">Remplacer le code-barre</string>
 <string name="replace_location">Remplacer le lieu</string>

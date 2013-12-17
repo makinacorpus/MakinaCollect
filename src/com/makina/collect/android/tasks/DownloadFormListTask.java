@@ -31,7 +31,7 @@ import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.FormListDownloaderListener;
 import com.makina.collect.android.logic.FormDetails;
-import com.makina.collect.android.preferences.PreferencesActivity;
+import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.utilities.DocumentFetchResult;
 import com.makina.collect.android.utilities.WebUtils;
 
@@ -66,11 +66,11 @@ public class DownloadFormListTask extends AsyncTask<Void, String, HashMap<String
         SharedPreferences settings =
             PreferenceManager.getDefaultSharedPreferences(Collect.getInstance().getBaseContext());
         String downloadListUrl =
-            settings.getString(PreferencesActivity.KEY_SERVER_URL,
+            settings.getString(ActivityPreferences.KEY_SERVER_URL,
                 Collect.getInstance().getString(R.string.default_server_url));
         // NOTE: /formlist must not be translated! It is the well-known path on the server.
         String formListUrl = Collect.getInstance().getApplicationContext().getString(R.string.default_odk_formlist);
-        String downloadPath = settings.getString(PreferencesActivity.KEY_FORMLIST_URL, formListUrl);
+        String downloadPath = settings.getString(ActivityPreferences.KEY_FORMLIST_URL, formListUrl);
         downloadListUrl += downloadPath;
 
     	Collect.getInstance().getActivityLogger().logAction(this, formListUrl, downloadListUrl);

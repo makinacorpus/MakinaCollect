@@ -318,6 +318,19 @@ public class InstanceProvider extends ContentProvider {
         return count;
     }
 
+    public static long getLastIdSaved()
+    {
+    	SQLiteDatabase db = mDbHelper.getWritableDatabase();
+    	long id=0;
+    	Cursor cursor = db.rawQuery( "SELECT MAX("+BaseColumns._ID+") FROM "+INSTANCES_TABLE_NAME, null);
+		if (cursor.moveToFirst()) 
+		{
+			id= cursor.getLong(0);
+		}
+		db.close();
+		return id;
+    }
+    
     public static void supprimerZgaw()
     {
     	SQLiteDatabase db = mDbHelper.getWritableDatabase();

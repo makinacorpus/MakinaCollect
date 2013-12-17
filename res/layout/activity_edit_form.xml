@@ -29,8 +29,8 @@ the License.
             android:layout_height="fill_parent"
             android:background="@drawable/linear_blue" />
 
-        <com.fortysevendeg.swipelistview.SwipeListView
-            android:id="@+id/listView"
+        <ListView
+            android:id="@android:id/list"
             style="@style/Collect.List"
             android:layout_toRightOf="@id/linear_blue"
             swipe:swipeBackView="@+id/back"
@@ -40,7 +40,7 @@ the License.
     </RelativeLayout>
 
     <ImageView
-        android:id="@+id/empty_list"
+        android:id="@android:id/empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

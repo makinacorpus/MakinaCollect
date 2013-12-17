@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.0" />
 
-        <TextView
+        <com.makina.collect.android.views.CustomFontTextview
             android:id="@+id/description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:textSize="21sp"
             android:textStyle="bold" />
 
-        <TextView
+        <com.makina.collect.android.views.CustomFontTextview
             android:id="@+id/save_form_as"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,14 +46,14 @@
             android:text="@string/save_form_as"
             android:textSize="21sp" />
 
-        <EditText
+        <com.makina.collect.android.views.CustomFontEditText
             android:id="@+id/save_name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
             android:textSize="21sp" />
 
-        <CheckBox
+        <com.makina.collect.android.views.CustomFontCheckBox
             android:id="@+id/mark_finished"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             android:text="@string/mark_finished"
             android:textSize="21sp" />
 
-        <Button
+        <com.makina.collect.android.views.CustomFontButton
             android:id="@+id/save_exit_button"
             style="@style/Collect.Button1"
             android:drawableLeft="@android:drawable/ic_menu_save"

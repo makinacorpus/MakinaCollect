@@ -71,7 +71,7 @@
     </style>
 
     <style name="CustomTitleColorBar" parent="@style/TextAppearance.Sherlock.Widget.ActionBar.Title">
-        <!-- <item name="android:textColor">@drawable/actionbarTitleColor</item>-->
+        <item name="android:textColor">@color/actionbarTitleColorBlueSend</item>
     </style>
     
     <style name="CustomSubTitleColorBar" parent="@style/TextAppearance.Sherlock.Widget.ActionBar.Title">

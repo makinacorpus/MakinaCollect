@@ -33,9 +33,12 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -58,7 +61,7 @@ import com.makina.collect.android.dialog.HelpWithConfirmation;
 import com.makina.collect.android.listeners.FormDownloaderListener;
 import com.makina.collect.android.listeners.FormListDownloaderListener;
 import com.makina.collect.android.logic.FormDetails;
-import com.makina.collect.android.preferences.PreferencesActivity;
+import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.tasks.DownloadFormListTask;
 import com.makina.collect.android.tasks.DownloadFormsTask;
 import com.makina.collect.android.utilities.Finish;
@@ -140,10 +143,10 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         
         createDialog(PROGRESS_DIALOG);
         textView_pannier=(CustomFontTextview)findViewById(R.id.textView_pannier);
-       // Finish.activityDownloadForm=this;
+        Finish.activityDownloadForm=this;
         
         
-        getSupportActionBar().setTitle(getString(R.string.download).toUpperCase());
+        getSupportActionBar().setTitle(getString(R.string.download_menu));
         int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
     	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGreenDownload));
@@ -438,20 +441,20 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
                 SharedPreferences settings =
                     PreferenceManager.getDefaultSharedPreferences(this.getBaseContext());
                 String server =
-                    settings.getString(PreferencesActivity.KEY_SERVER_URL,
+                    settings.getString(ActivityPreferences.KEY_SERVER_URL,
                         getString(R.string.default_server_url));
 
                 String formListUrl = getString(R.string.default_odk_formlist);
                 final String url =
-                    server + settings.getString(PreferencesActivity.KEY_FORMLIST_URL, formListUrl);
+                    server + settings.getString(ActivityPreferences.KEY_FORMLIST_URL, formListUrl);
                 Log.i(t, "Trying to get formList from: " + url);
 
                 EditText username = (EditText) dialogView.findViewById(R.id.username_edit);
-                String storedUsername = settings.getString(PreferencesActivity.KEY_USERNAME, null);
+                String storedUsername = settings.getString(ActivityPreferences.KEY_USERNAME, null);
                 username.setText(storedUsername);
 
                 EditText password = (EditText) dialogView.findViewById(R.id.password_edit);
-                String storedPassword = settings.getString(PreferencesActivity.KEY_PASSWORD, null);
+                String storedPassword = settings.getString(ActivityPreferences.KEY_PASSWORD, null);
                 password.setText(storedPassword);
 
                 b.setTitle(getString(R.string.server_requires_auth));
@@ -729,7 +732,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         };
         mAlertDialog.setCancelable(false);
         mAlertDialog.setButton(getString(R.string.ok), quitListener);
-        mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+        mAlertDialog.setIcon(R.drawable.actionbar_about_us);
         mAlertMsg = message;
         mAlertTitle = title;
         mAlertShowing = true;
@@ -825,6 +828,34 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         mSearchView = (SearchView) searchItem.getActionView();
         setupSearchView(searchItem);
+        
+        getLayoutInflater().setFactory(new LayoutInflater.Factory()
+        {
+            public View onCreateView(String name, Context context, AttributeSet attrs)
+            {
+            	if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")|| name.equalsIgnoreCase("TextView"))
+                {
+                    try
+                    {
+                        LayoutInflater li = LayoutInflater.from(context);
+                        final View view = li.createView(name, null, attrs);
+                        new Handler().post(new Runnable()
+                        {
+                            public void run()
+                            {
+                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                            }
+                        });
+                        return view;
+                    }
+                    catch (InflateException e){}
+                    catch (ClassNotFoundException e)
+                    {}
+                }
+                return null;
+            }
+        });
         return true;
     }
 
@@ -843,7 +874,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 	        	getFormsOption();
 	        return true;
 	        case R.id.menu_settings:
-	        	startActivity(new Intent(this, PreferencesActivity.class));
+	        	startActivity(new Intent(this, ActivityPreferences.class));
 	        	return true;
 	        case R.id.menu_help:
 	        	Help.helpDialog(this, getString(R.string.help_download));

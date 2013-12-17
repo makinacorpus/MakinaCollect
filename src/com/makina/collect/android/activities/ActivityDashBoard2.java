@@ -30,7 +30,7 @@ import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.dialog.Help;
-import com.makina.collect.android.preferences.PreferencesActivity;
+import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.utilities.Finish;
 
 public class ActivityDashBoard2 extends SherlockActivity {
@@ -111,7 +111,7 @@ public class ActivityDashBoard2 extends SherlockActivity {
     	switch(item.getItemId())
     	{
 	        case R.id.menu_settings:
-	        	startActivity(new Intent(this, PreferencesActivity.class));
+	        	startActivity(new Intent(this, ActivityPreferences.class));
 	        	return true;
 	        case R.id.menu_about_us:
 	        	AboutUs.aboutUs(this);

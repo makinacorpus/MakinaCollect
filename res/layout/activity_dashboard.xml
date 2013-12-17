@@ -15,106 +15,176 @@ License for the specific language governing permissions and limitations under
 the License.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/Collect.MainLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/bg_dashboard"
+    android:gravity="center"
     android:orientation="vertical" >
 
-    <!--
-        <ListView
-        android:id="@+id/listView"
-        style="@style/Collect.List" />
-    -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout_download"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dip"
-        android:layout_marginTop="50dip"
+        android:layout_marginRight="10dip"
+        android:layout_weight="1"
         android:gravity="center_horizontal" >
 
         <ImageView
             android:id="@+id/dashboard_download"
             android:layout_width="80dip"
             android:layout_height="80dip"
+            android:layout_centerVertical="true"
             android:src="@drawable/dashboard_download" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="30dip"
+            android:layout_marginLeft="10dip"
             android:layout_toRightOf="@id/dashboard_download"
-            android:text="Telecharger un formulaire" />
+            android:orientation="vertical" >
+
+            <com.makina.collect.android.views.CustomFontTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/download_menu"
+                android:textColor="@color/actionbarTitleColorGreenDownload"
+                android:textSize="19sp" />
+
+            <com.makina.collect.android.views.CustomFontTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/form"
+                android:textColor="@color/actionbarTitleColorGreenDownload"
+                android:textSize="19sp" />
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dip"
-        android:layout_marginTop="20dip"
+        android:layout_weight="1"
         android:gravity="center_horizontal" >
 
         <ImageView
             android:id="@+id/dashboard_edit"
             android:layout_width="80dip"
             android:layout_height="80dip"
+            android:layout_centerVertical="true"
             android:src="@drawable/dashboard_edit" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="30dip"
+            android:layout_marginLeft="10dip"
             android:layout_toRightOf="@id/dashboard_edit"
-            android:text="Remplir un formulaire" />
+            android:orientation="vertical" >
+
+            <com.makina.collect.android.views.CustomFontTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit"
+                android:textColor="@color/actionbarTitleColorGreenEdit"
+                android:textSize="19sp" />
+
+            <com.makina.collect.android.views.CustomFontTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/form"
+                android:textColor="@color/actionbarTitleColorGreenEdit"
+                android:textSize="19sp" />
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dip"
-        android:layout_marginTop="20dip"
+        android:layout_weight="1"
         android:gravity="center_horizontal" >
 
         <ImageView
             android:id="@+id/dashboard_save"
             android:layout_width="80dip"
             android:layout_height="80dip"
+            android:layout_centerVertical="true"
             android:src="@drawable/dashboard_saved" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="30dip"
+            android:layout_marginLeft="10dip"
             android:layout_toRightOf="@id/dashboard_save"
-            android:text="Sauvegarder mes formulaire" />
+            android:orientation="vertical" >
+
+            <com.makina.collect.android.views.CustomFontTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save"
+                android:textColor="@color/actionbarTitleColorBlueSave"
+                android:textSize="19sp" />
+
+            <com.makina.collect.android.views.CustomFontTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_forms"
+                android:textColor="@color/actionbarTitleColorBlueSave"
+                android:textSize="19sp" />
+        </LinearLayout>
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dip"
-        android:layout_marginTop="20dip"
+        android:layout_marginRight="10dip"
+        android:layout_weight="1"
         android:gravity="center_horizontal" >
 
         <ImageView
             android:id="@+id/dashboard_send"
             android:layout_width="80dip"
             android:layout_height="80dip"
+            android:layout_centerVertical="true"
             android:src="@drawable/dashboard_send" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="30dip"
+            android:layout_marginLeft="10dip"
             android:layout_toRightOf="@id/dashboard_send"
-            android:text="Mes formulaires à Envoer" />
+            android:orientation="vertical" >
+
+            <com.makina.collect.android.views.CustomFontTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_forms"
+                android:textColor="@color/actionbarTitleColorBlueSend"
+                android:textSize="19sp" />
+
+            <com.makina.collect.android.views.CustomFontTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/to_send"
+                android:textColor="@color/actionbarTitleColorBlueSend"
+                android:textSize="19sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
     </RelativeLayout>
 
 </LinearLayout>

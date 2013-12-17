@@ -113,7 +113,7 @@
 <string name="please_wait">"Por favor, espere un momento."</string>
 <string name="please_wait_long">Por favor espere. Esto podria demorarse unos minutos.</string>
 <string name="quit_application">Salir %s</string>
-<string name="quit_entry">Guardar Formulario y Salir</string>
+<string name="quit_entry">Guardar Formulario</string>
 <string name="refresh">Refrescar</string>
 <string name="replace_barcode">Reemplazar el Codigo de Barra</string>
 <string name="replace_location">Reemplazar la Ubicación</string>

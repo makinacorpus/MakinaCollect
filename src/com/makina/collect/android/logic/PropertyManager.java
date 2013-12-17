@@ -30,7 +30,7 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.makina.collect.android.preferences.PreferencesActivity;
+import com.makina.collect.android.preferences.ActivityPreferences;
 
 
 /**
@@ -133,12 +133,12 @@ public class PropertyManager implements IPropertyManager {
 
         // Get the username from the settings
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(mContext);
-        value = settings.getString(PreferencesActivity.KEY_USERNAME, null);
+        value = settings.getString(ActivityPreferences.KEY_USERNAME, null);
         if ( value != null ) {
         	mProperties.put(USERNAME, value);
         	mProperties.put(OR_USERNAME, "username:" + value);
         }
-        value = settings.getString(PreferencesActivity.KEY_SELECTED_GOOGLE_ACCOUNT, null);
+        value = settings.getString(ActivityPreferences.KEY_SELECTED_GOOGLE_ACCOUNT, null);
         if ( value != null ) {
         	mProperties.put(EMAIL, value);
         	mProperties.put(OR_EMAIL, "mailto:" + value);

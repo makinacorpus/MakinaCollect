@@ -17,9 +17,14 @@ package com.makina.collect.android.activities;
 import java.io.File;
 import java.io.FileFilter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Locale;
+import java.util.Set;
 
 import org.javarosa.core.model.FormIndex;
 import org.javarosa.core.model.data.IAnswerData;
@@ -37,16 +42,22 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.BaseColumns;
 import android.provider.MediaStore.MediaColumns;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -54,20 +65,17 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.Gravity;
+import android.view.InflateException;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -80,24 +88,33 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
+import com.makina.collect.android.dialog.AboutUs;
+import com.makina.collect.android.dialog.Help;
 import com.makina.collect.android.dialog.HelpWithConfirmation;
 import com.makina.collect.android.listeners.AdvanceToNextListener;
 import com.makina.collect.android.listeners.FormLoaderListener;
 import com.makina.collect.android.listeners.FormSavedListener;
+import com.makina.collect.android.listeners.InstanceUploaderListener;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.logic.FormController;
 import com.makina.collect.android.logic.FormController.FailedConstraint;
 import com.makina.collect.android.logic.PropertyManager;
 import com.makina.collect.android.preferences.AdminPreferencesActivity;
-import com.makina.collect.android.preferences.PreferencesActivity;
+import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.tasks.FormLoaderTask;
+import com.makina.collect.android.tasks.InstanceUploaderTask;
 import com.makina.collect.android.tasks.SaveToDiskTask;
 import com.makina.collect.android.utilities.FileUtils;
+import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.MediaUtils;
+import com.makina.collect.android.views.CustomFontCheckBox;
+import com.makina.collect.android.views.CustomFontEditText;
+import com.makina.collect.android.views.CustomFontTextview;
+import com.makina.collect.android.views.CustomFontButton;
 import com.makina.collect.android.views.ODKView;
 import com.makina.collect.android.widgets.QuestionWidget;
 
@@ -110,7 +127,7 @@ import com.makina.collect.android.widgets.QuestionWidget;
 
 public class ActivityForm extends SherlockActivity implements AnimationListener,
 		FormLoaderListener, FormSavedListener, AdvanceToNextListener,
-		OnGestureListener, WidgetAnsweredListener {
+		OnGestureListener, WidgetAnsweredListener, InstanceUploaderListener {
 	private static final String t = "FormEntryActivity";
 
 	// save with every swipe forward or back. Timings indicate this takes .25
@@ -201,7 +218,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	private boolean mAnswersChanged;
 	private boolean mToFormChooser;
 	private int size=0,current_page=1;
-	private TextView textView_quiz_question_number;
+	private CustomFontTextview textView_quiz_question_number;
 	
 	enum AnimationType {
 		LEFT, RIGHT, FADE, NONE
@@ -209,13 +226,22 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 
 	private SharedPreferences mAdminPreferences;
 	private Uri uri;
-	private TextView textView_quiz_name;
+	
+	private Long[] mInstancesToSend;
+	private String mAlertMsg;
+	 private final static int AUTH_DIALOG = 2;
+	 private HashMap<String, String> mUploadedInstances;
+	 private String mUrl;
+	 private boolean send=false,restart=false;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.i("FormEntryActivity", "onCreate");
+		
+		mUploadedInstances = new HashMap<String, String>();
+		Finish.activityForm=this;
 		
 		// must be at the beginning of any activity that can be called from an
 		// external intent
@@ -227,13 +253,14 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		}
 
 		setContentView(R.layout.activity_form_entry);
-		setTitle(getString(R.string.loading_form));
+		
+		int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
+    	TextView actionbarTitle = (TextView)findViewById(titleId);
+    	actionbarTitle.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
-		if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_form", false))
-    		HelpWithConfirmation.helpDialog(this, getString(R.string.help_form));
 		
-		textView_quiz_question_number=(TextView)findViewById(R.id.textView_quiz_question_number);
+		textView_quiz_question_number=(CustomFontTextview)findViewById(R.id.textView_quiz_question_number);
 		
 		
 		Intent intent = getIntent();
@@ -502,6 +529,10 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 				mFormLoaderTask.execute(mFormPath);
 			}
 		}
+		
+		if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_form", false))
+    		HelpWithConfirmation.helpDialog(this, getString(R.string.help_form));
+		
 	}
 
 	@Override
@@ -725,12 +756,40 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		super.onCreateOptionsMenu(menu);
 		getSupportMenuInflater().inflate(R.menu.menu_activity_form, menu);
 		
+		/*getLayoutInflater().setFactory(new LayoutInflater.Factory()
+        {
+            public View onCreateView(String name, Context context, AttributeSet attrs)
+            {
+            	if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")|| name.equalsIgnoreCase("TextView"))
+                {
+                    try
+                    {
+                        LayoutInflater li = LayoutInflater.from(context);
+                        final View view = li.createView(name, null, attrs);
+                        new Handler().post(new Runnable()
+                        {
+                            public void run()
+                            {
+                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                            }
+                        });
+                        return view;
+                    }
+                    catch (InflateException e){}
+                    catch (ClassNotFoundException e)
+                    {}
+                }
+                return null;
+            }
+        });*/
 		
-		this.menu = menu;
-		return super.onCreateOptionsMenu(menu);
+		return true;
 	}
 
 	@Override
@@ -751,6 +810,18 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		case R.id.menu_raz:
 			razConfirmation();
 		return true;
+		case R.id.menu_settings:
+			startActivity(new Intent(getApplicationContext(),ActivityPreferences.class));
+		return true;
+		case R.id.menu_help:
+			Help.helpDialog(getApplicationContext(), getString(R.string.help_form));
+			return true;
+		case R.id.menu_about_us:
+			AboutUs.aboutUs(getApplicationContext());
+			return true;
+		case R.id.menu_exit:
+			Finish.finish();
+			return true;
 		case android.R.id.home:
 	         // This is called when the Home (Up) button is pressed
 			// in the Action Bar.
@@ -878,9 +949,10 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		
 	
 		FormController formController = Collect.getInstance().getFormController();
-		TextView textView_quiz_name = ((TextView) findViewById(R.id.textView_quiz_name));
+		CustomFontTextview textView_quiz_name = ((CustomFontTextview) findViewById(R.id.textView_quiz_name));
 		textView_quiz_name.setText(formController.getFormTitle());
 		textView_quiz_question_number.setText(current_page+"/"+size);
+		setTitle(formController.getFormTitle());
 		
 		switch (event)
 		{
@@ -930,12 +1002,12 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			return startView;*/
 		case FormEntryController.EVENT_END_OF_FORM:
 			ScrollView endView = (ScrollView) View.inflate(this, R.layout.activity_form_entry_end, null);
-			((TextView) endView.findViewById(R.id.description))
+			((CustomFontTextview) endView.findViewById(R.id.description))
 					.setText(getString(R.string.save_enter_data_description,
 							formController.getFormTitle()));
 
 			// checkbox for if finished or ready to send
-			final CheckBox instanceComplete = ((CheckBox) endView.findViewById(R.id.mark_finished));
+			final CustomFontCheckBox instanceComplete = ((CustomFontCheckBox) endView.findViewById(R.id.mark_finished));
 			instanceComplete.setChecked(isInstanceComplete(true));
 
 			if (!mAdminPreferences.getBoolean(AdminPreferencesActivity.KEY_MARK_AS_FINALIZED, true)) {
@@ -943,7 +1015,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			}
 
 			// edittext to change the displayed name of the instance
-			final EditText saveAs = (EditText) endView.findViewById(R.id.save_name);
+			final CustomFontEditText saveAs = (CustomFontEditText) endView.findViewById(R.id.save_name);
 
 			// disallow carriage returns in the name
 			InputFilter returnFilter = new InputFilter() {
@@ -987,8 +1059,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 					}
 				}
 				// present the prompt to allow user to name the form
-				TextView sa = (TextView) endView
-						.findViewById(R.id.save_form_as);
+				CustomFontTextview sa = (CustomFontTextview) endView.findViewById(R.id.save_form_as);
 				sa.setVisibility(View.VISIBLE);
 				// TODO if savename != null don"t need to initialize it
 				if (saveName == null || saveName.length() == 0){
@@ -1001,8 +1072,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 				// if instanceName is defined in form, this is the name -- no
 				// revisions
 				// display only the name, not the prompt, and disable edits
-				TextView sa = (TextView) endView
-						.findViewById(R.id.save_form_as);
+				CustomFontTextview sa = (CustomFontTextview) endView.findViewById(R.id.save_form_as);
 				sa.setVisibility(View.GONE);
 				saveAs.setText(saveName);
 				saveAs.setEnabled(false);
@@ -1014,33 +1084,29 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			if (!mAdminPreferences.getBoolean(
 					AdminPreferencesActivity.KEY_SAVE_AS, true)) {
 				saveAs.setVisibility(View.GONE);
-				TextView sa = (TextView) endView
-						.findViewById(R.id.save_form_as);
+				CustomFontTextview sa = (CustomFontTextview) endView.findViewById(R.id.save_form_as);
 				sa.setVisibility(View.GONE);
 			}
 
 			// Create 'save' button
-			((Button) endView.findViewById(R.id.save_exit_button))
-					.setOnClickListener(new OnClickListener() {
+			((CustomFontButton) endView.findViewById(R.id.save_exit_button))
+					.setOnClickListener(new OnClickListener()
+					{
 						@Override
-						public void onClick(View v) {
-							Collect.getInstance()
-									.getActivityLogger()
-									.logInstanceAction(
-											this,
-											"createView.saveAndExit",
-											instanceComplete.isChecked() ? "saveAsComplete"
-													: "saveIncomplete");
+						public void onClick(View v)
+						{
+							Collect.getInstance().getActivityLogger().logInstanceAction(this,"createView.saveAndExit",instanceComplete.isChecked() ? "saveAsComplete": "saveIncomplete");
 							// Form is marked as 'saved' here.
-							if (saveAs.getText().length() < 1) {
-								Toast.makeText(ActivityForm.this,
-										R.string.save_as_error,
-										Toast.LENGTH_SHORT).show();
-							} else {
-								saveDataToDisk(EXIT, instanceComplete
-										.isChecked(), saveAs.getText()
-										.toString());
-								
+							if (saveAs.getText().length() < 1)
+							{
+								Toast.makeText(ActivityForm.this,R.string.save_as_error,Toast.LENGTH_SHORT).show();
+							}
+							else
+							{
+								if (!instanceComplete.isChecked())
+									saveDataToDisk(EXIT, instanceComplete.isChecked(), saveAs.getText().toString());
+								else
+									createSaveDialog(saveAs.getText().toString());							
 							}
 						}
 					});
@@ -1604,21 +1670,21 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 * instances as complete. If updatedSaveName is non-null, the instances
 	 * content provider is updated with the new name
 	 */
-	private boolean saveDataToDisk(boolean exit, boolean complete,
-			String updatedSaveName) {
+	private boolean saveDataToDisk(boolean exit, boolean complete,String updatedSaveName)
+	{
 		// save current answer
-		if (!saveAnswersForCurrentScreen(complete)) {
-			Toast.makeText(this, getString(R.string.data_saved_error),
-					Toast.LENGTH_SHORT).show();
+		if (!saveAnswersForCurrentScreen(complete))
+		{
+			Toast.makeText(this, getString(R.string.data_saved_error),Toast.LENGTH_SHORT).show();
 			return false;
 		}
 
-		mSaveToDiskTask = new SaveToDiskTask(getIntent().getData(), exit,
-				complete, updatedSaveName);
+		mSaveToDiskTask = new SaveToDiskTask(getIntent().getData(), exit,complete, updatedSaveName);
 		mSaveToDiskTask.setFormSavedListener(this);
 		showDialog(SAVING_DIALOG);
 		// show dialog before we execute...
 		mSaveToDiskTask.execute();
+		
 
 		return true;
 	}
@@ -1716,6 +1782,87 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		mAlertDialog.show();
 	}
 
+	
+	private void createSaveDialog(final String form_name) {
+		FormController formController = Collect.getInstance().getFormController();
+		
+		String[] items= { getString(R.string.to_not_send_form),getString(R.string.send_form),getString(R.string.send_form_and_restart) };
+		
+		Collect.getInstance().getActivityLogger().logInstanceAction(this, "createSaveDialog", "show");
+		mAlertDialog = new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_info)
+				.setTitle(getString(R.string.save,formController.getFormTitle()))
+				.setItems(items, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which)
+					{
+						ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+						NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
+						
+						switch (which)
+						{
+							case 0: // To not send the form
+								saveDataToDisk(true, true, form_name);
+							break;
+	
+							case 1: // send the form
+								if (ni == null || !ni.isConnected()) 
+								{
+									//no network connection
+									Toast.makeText(getApplicationContext(),R.string.no_connection, Toast.LENGTH_SHORT).show();
+									saveDataToDisk(false, true, form_name);
+								}
+								else
+								{
+									saveDataToDisk(false, true, form_name);
+									send=true;
+									
+								}
+							break;
+	
+							case 2:// Send the and restart the form
+								if (ni == null || !ni.isConnected()) 
+								{
+									//no network connection
+									Toast.makeText(getApplicationContext(),R.string.no_connection, Toast.LENGTH_SHORT).show();
+									saveDataToDisk(false, true, form_name);
+								}
+								else
+								{
+									saveDataToDisk(false, true, form_name);
+									send=true;
+									restart=true;
+								}
+							break;
+						}
+					}
+				}).create();
+		mAlertDialog.show();
+	}
+	
+	private void uploadFile() {
+		// send list of _IDs.
+		
+        mInstancesToSend = new Long[1];
+        mInstancesToSend[0]= InstanceProvider.getLastIdSaved();
+
+        InstanceUploaderTask mInstanceUploaderTask = (InstanceUploaderTask) getLastNonConfigurationInstance();
+        if (mInstanceUploaderTask == null)
+        {
+            // setup dialog and upload task
+            showDialog(PROGRESS_DIALOG);
+            mInstanceUploaderTask = new InstanceUploaderTask();
+            // register this activity with the new uploader task
+            mInstanceUploaderTask.setUploaderListener(ActivityForm.this);
+            mInstanceUploaderTask.execute(mInstancesToSend);
+        }
+        
+        if (mInstanceUploaderTask != null)
+        {
+            mInstanceUploaderTask.setUploaderListener(this);
+        }
+        
+        
+	}
 	/**
 	 * this method cleans up unneeded files when the user selects 'discard and
 	 * exit'
@@ -2047,9 +2194,9 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		// only check the buttons if it's enabled in preferences
 		SharedPreferences sharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		String navigation = sharedPreferences.getString(PreferencesActivity.KEY_NAVIGATION, PreferencesActivity.KEY_NAVIGATION);
+		String navigation = sharedPreferences.getString(ActivityPreferences.KEY_NAVIGATION, ActivityPreferences.KEY_NAVIGATION);
 		Boolean showButtons = false;
-		if (navigation.contains(PreferencesActivity.NAVIGATION_BUTTONS)) {
+		if (navigation.contains(ActivityPreferences.NAVIGATION_BUTTONS)) {
 			showButtons = true;
 		}
 
@@ -2313,17 +2460,16 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 * Called by SavetoDiskTask if everything saves correctly.
 	 */
 	@Override
-	public void savingComplete(int saveStatus) {
+	public void savingComplete(int saveStatus)
+	{
 		dismissDialog(SAVING_DIALOG);
 		switch (saveStatus) {
 		case SaveToDiskTask.SAVED:
-			Toast.makeText(this, getString(R.string.data_saved_ok),
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, getString(R.string.data_saved_ok),Toast.LENGTH_SHORT).show();
 			sendSavedBroadcast();
 			break;
 		case SaveToDiskTask.SAVED_AND_EXIT:
-			Toast.makeText(this, getString(R.string.data_saved_ok),
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, getString(R.string.data_saved_ok),Toast.LENGTH_SHORT).show();
 			sendSavedBroadcast();
 			finishReturnInstance();
 			break;
@@ -2339,6 +2485,9 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			next();
 			break;
 		}
+		if (send)
+			uploadFile();
+		
 	}
 
 	/**
@@ -2380,7 +2529,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			SharedPreferences sharedPreferences = PreferenceManager
 					.getDefaultSharedPreferences(this);
 			complete = sharedPreferences.getBoolean(
-					PreferencesActivity.KEY_COMPLETED_DEFAULT, true);
+					ActivityPreferences.KEY_COMPLETED_DEFAULT, true);
 		}
 
 		// Then see if we've already marked this form as complete before
@@ -2461,9 +2610,9 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		// only check the swipe if it's enabled in preferences
 		SharedPreferences sharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		String navigation = sharedPreferences.getString(PreferencesActivity.KEY_NAVIGATION, PreferencesActivity.NAVIGATION_SWIPE);
+		String navigation = sharedPreferences.getString(ActivityPreferences.KEY_NAVIGATION, ActivityPreferences.NAVIGATION_SWIPE);
 		Boolean doSwipe = false;
-		if (navigation.contains(PreferencesActivity.NAVIGATION_SWIPE)) {
+		if (navigation.contains(ActivityPreferences.NAVIGATION_SWIPE)) {
 			doSwipe = true;
 		}
 		if (doSwipe) {
@@ -2593,7 +2742,8 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		{
 			public void onClick(DialogInterface dialog,int which)
 			{
-				finish();
+				removeTempInstance();
+				finishReturnInstance();
 				Intent myIntent = new Intent(Intent.ACTION_EDIT, uri);
 				myIntent.putExtra("newForm", true);
 		        startActivity(myIntent);
@@ -2601,6 +2751,135 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		});
 		adb.setNegativeButton(getString(android.R.string.no), null);
 		adb.show();
+		
+	}
+
+	@Override
+	public void uploadingComplete(HashMap<String, String> result) {
+		// TODO Auto-generated method stub
+				try {
+		            dismissDialog(PROGRESS_DIALOG);
+		        } catch (Exception e) {
+		            // tried to close a dialog not open. don't care.
+		        }
+
+		        StringBuilder selection = new StringBuilder();
+		        Set<String> keys = result.keySet();
+		        Iterator<String> it = keys.iterator();
+
+		        String[] selectionArgs = new String[keys.size()];
+		        int i = 0;
+		        while (it.hasNext()) {
+		            String id = it.next();
+		            selection.append(BaseColumns._ID + "=?");
+		            selectionArgs[i++] = id;
+		            if (i != keys.size()) {
+		                selection.append(" or ");
+		            }
+		        }
+		        
+		        StringBuilder message = new StringBuilder();
+		        {
+		        	Cursor results = null;
+		        	try {
+		                results = getContentResolver().query(InstanceColumns.CONTENT_URI,
+		                		null, selection.toString(), selectionArgs, null);
+		                if (results.getCount() > 0) {
+		                    results.moveToPosition(-1);
+		                    while (results.moveToNext()) {
+		                        String name =
+		                            results.getString(results.getColumnIndex(InstanceColumns.DISPLAY_NAME));
+		                        String id = results.getString(results.getColumnIndex(BaseColumns._ID));
+		                        message.append(name + " - " + result.get(id) + "\n\n");
+		                    }
+		                } else {
+		                    message.append(getString(R.string.no_forms_uploaded));
+		                }
+		        	} finally {
+		        		if ( results != null ) {
+		        			results.close();
+		        		}
+		        	}
+		        }
+
+		        createAlertDialog(message.toString().trim());
+		
+	}
+
+	private void createAlertDialog(String message) {
+    	Collect.getInstance().getActivityLogger().logAction(this, "createAlertDialog", "show");
+
+        mAlertDialog = new AlertDialog.Builder(this).create();
+        mAlertDialog.setTitle(getString(R.string.upload_results));
+        mAlertDialog.setMessage(message);
+        DialogInterface.OnClickListener quitListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                switch (i) {
+                    case DialogInterface.BUTTON1: // ok
+                    	Collect.getInstance().getActivityLogger().logAction(this, "createAlertDialog", "OK");
+                        // always exit this activity since it has no interface
+                        finish();
+                        if (restart)
+                		{
+                			Intent myIntent = new Intent(Intent.ACTION_EDIT, uri);
+                			myIntent.putExtra("newForm", true);
+                	        startActivity(myIntent);
+                		}
+                    	break;
+                }
+            }
+        };
+        mAlertDialog.setCancelable(false);
+        mAlertDialog.setButton(getString(R.string.ok), quitListener);
+        mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+        mAlertMsg = message;
+        mAlertDialog.show();
+    }
+	@Override
+	public void progressUpdate(int progress, int total) {
+		// TODO Auto-generated method stub
+		mAlertMsg = getString(R.string.sending_items, progress, total);
+        mProgressDialog.setMessage(mAlertMsg);
+		
+	}
+
+	@Override
+	public void authRequest(Uri url, HashMap<String, String> doneSoFar) {
+		// TODO Auto-generated method stub
+		if (mProgressDialog.isShowing()) {
+            // should always be showing here
+            mProgressDialog.dismiss();
+        }
+
+        // add our list of completed uploads to "completed"
+        // and remove them from our toSend list.
+        ArrayList<Long> workingSet = new ArrayList<Long>();
+        Collections.addAll(workingSet, mInstancesToSend);
+        if (doneSoFar != null) {
+            Set<String> uploadedInstances = doneSoFar.keySet();
+            Iterator<String> itr = uploadedInstances.iterator();
+
+            while (itr.hasNext()) {
+                Long removeMe = Long.valueOf(itr.next());
+                boolean removed = workingSet.remove(removeMe);
+                if (removed) {
+                    Log.i(t, removeMe
+                            + " was already sent, removing from queue before restarting task");
+                }
+            }
+            mUploadedInstances.putAll(doneSoFar);
+        }
+
+        // and reconstruct the pending set of instances to send
+        Long[] updatedToSend = new Long[workingSet.size()];
+        for ( int i = 0 ; i < workingSet.size() ; ++i ) {
+        	updatedToSend[i] = workingSet.get(i);
+        }
+        mInstancesToSend = updatedToSend;
+
+        mUrl = url.toString();
+        showDialog(AUTH_DIALOG);
 		
 	}
 

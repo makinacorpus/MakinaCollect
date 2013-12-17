@@ -26,7 +26,7 @@ the License.
         android:paddingBottom="20dip"
         android:paddingTop="20dip" >
 
-        <TextView
+        <com.makina.collect.android.views.CustomFontTextview
             android:id="@+id/textView_quiz_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -36,7 +36,7 @@ the License.
             android:textStyle="bold"
             android:textSize="20dip"/>
 
-        <TextView
+        <com.makina.collect.android.views.CustomFontTextview
             android:id="@+id/textView_quiz_question_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

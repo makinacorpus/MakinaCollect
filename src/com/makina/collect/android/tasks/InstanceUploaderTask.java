@@ -54,7 +54,7 @@ import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.InstanceUploaderListener;
 import com.makina.collect.android.logic.PropertyManager;
-import com.makina.collect.android.preferences.PreferencesActivity;
+import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.utilities.WebUtils;
@@ -516,14 +516,14 @@ public class InstanceUploaderTask extends AsyncTask<Long, Integer, InstanceUploa
 	                if (urlString == null) {
 	                    SharedPreferences settings =
 	                        PreferenceManager.getDefaultSharedPreferences(Collect.getInstance());
-	                    urlString = settings.getString(PreferencesActivity.KEY_SERVER_URL,
+	                    urlString = settings.getString(ActivityPreferences.KEY_SERVER_URL,
 	                    				Collect.getInstance().getString(R.string.default_server_url));
 	                    if ( urlString.charAt(urlString.length()-1) == '/') {
 	                    	urlString = urlString.substring(0, urlString.length()-1);
 	                    }
 	                    // NOTE: /submission must not be translated! It is the well-known path on the server.
 	                    String submissionUrl =
-	                        settings.getString(PreferencesActivity.KEY_SUBMISSION_URL,
+	                        settings.getString(ActivityPreferences.KEY_SUBMISSION_URL,
 	                        		Collect.getInstance().getString(R.string.default_odk_submission));
 	                    if ( submissionUrl.charAt(0) != '/') {
 	                    	submissionUrl = "/" + submissionUrl;

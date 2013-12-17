@@ -22,11 +22,17 @@ import org.javarosa.form.api.FormEntryCaption;
 import org.javarosa.form.api.FormEntryController;
 import org.javarosa.form.api.FormEntryPrompt;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -34,12 +40,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.adapters.HierarchyListAdapter;
 import com.makina.collect.android.application.Collect;
+import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.logic.FormController;
 import com.makina.collect.android.logic.HierarchyElement;
+import com.makina.collect.android.preferences.ActivityPreferences;
+import com.makina.collect.android.utilities.Finish;
 
 public class ActivityFormHierarchy extends SherlockListActivity {
 
@@ -67,6 +77,8 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_form_hierarchy);
 
+		Finish.activityFormHierarchy=this;
+		
 		FormController formController = Collect.getInstance()
 				.getFormController();
 		Intent intent = getIntent();
@@ -149,34 +161,7 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 		super.onStop();
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			if (mIsSavedForm){
-				Log.e(getClass().getName(), "Back to List");
-				Intent i;
-				if (mToFormChooser){
-					i  = new Intent(this, ActivityDashBoard.class);
-					i.putExtra("drawerSelection", 0);
-				}else{
-					i  = new Intent(this, ActivityDashBoard.class);
-					i.putExtra("drawerSelection", 1);
-				}
-				startActivity(i);
-			}else{
-				Log.e(getClass().getName(), "Back to Form");
-				Collect.getInstance()
-				.getActivityLogger()
-				.logInstanceAction(this, "onOptionsItemSelected", "HOME",
-						mStartIndex);
-				Collect.getInstance().getFormController().jumpToIndex(mStartIndex);
-				finish();
-			}
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+	
 
 	private void goUpLevel() {
 		Collect.getInstance().getFormController().stepToOuterScreenEvent();
@@ -478,5 +463,86 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
+	
+	@Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        super.onCreateOptionsMenu(menu);
+        getSupportMenuInflater().inflate(R.menu.menu_activity_dashboard, menu);
+        
+        getLayoutInflater().setFactory(new LayoutInflater.Factory()
+        {
+            public View onCreateView(String name, Context context, AttributeSet attrs)
+            {
+            	if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")|| name.equalsIgnoreCase("TextView"))
+                {
+                    try
+                    {
+                        LayoutInflater li = LayoutInflater.from(context);
+                        final View view = li.createView(name, null, attrs);
+                        new Handler().post(new Runnable()
+                        {
+                            public void run()
+                            {
+                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                            }
+                        });
+                        return view;
+                    }
+                    catch (InflateException e){}
+                    catch (ClassNotFoundException e)
+                    {}
+                }
+                return null;
+            }
+        });
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        // The action bar home/up action should open or close the drawer.
+        // ActionBarDrawerToggle will take care of this.
+        // Handle action buttons for all fragments
+    	switch(item.getItemId())
+    	{
+	    	case android.R.id.home:
+		    	if (mIsSavedForm){
+					Log.e(getClass().getName(), "Back to List");
+					Intent i;
+					if (mToFormChooser){
+						i  = new Intent(this, ActivityDashBoard.class);
+						i.putExtra("drawerSelection", 0);
+					}else{
+						i  = new Intent(this, ActivityDashBoard.class);
+						i.putExtra("drawerSelection", 1);
+					}
+					startActivity(i);
+				}else{
+					Log.e(getClass().getName(), "Back to Form");
+					Collect.getInstance()
+					.getActivityLogger()
+					.logInstanceAction(this, "onOptionsItemSelected", "HOME",
+							mStartIndex);
+					Collect.getInstance().getFormController().jumpToIndex(mStartIndex);
+					finish();
+				}
+			return true;
+	        case R.id.menu_settings:
+	        	startActivity(new Intent(this, ActivityPreferences.class));
+	        	return true;
+	        case R.id.menu_about_us:
+	        	AboutUs.aboutUs(this);
+	        	return true;
+	        case R.id.menu_exit:
+	        	Finish.finish();
+	        	return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

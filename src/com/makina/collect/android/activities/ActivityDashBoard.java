@@ -14,11 +14,16 @@
 
 package com.makina.collect.android.activities;
 import ly.count.android.api.Countly;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Html;
+import android.util.AttributeSet;
+import android.view.InflateException;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,8 +34,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.AboutUs;
-import com.makina.collect.android.dialog.Help;
-import com.makina.collect.android.preferences.PreferencesActivity;
+import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.utilities.Finish;
 
 public class ActivityDashBoard extends SherlockActivity {
@@ -45,7 +49,6 @@ public class ActivityDashBoard extends SherlockActivity {
     	int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
     	actionbarTitle.setText(Html.fromHtml("<strong><font color=\"#C2EA60\">Makina</font> <font color=\"#1B8FAA\">Collect</font></strong>"));
-    	//actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
     	actionbarTitle.setTypeface(typeFace);
     	
         setContentView(R.layout.activity_dashboard);
@@ -99,6 +102,33 @@ public class ActivityDashBoard extends SherlockActivity {
         super.onCreateOptionsMenu(menu);
         getSupportMenuInflater().inflate(R.menu.menu_activity_dashboard, menu);
         
+        getLayoutInflater().setFactory(new LayoutInflater.Factory()
+        {
+            public View onCreateView(String name, Context context, AttributeSet attrs)
+            {
+            	if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")|| name.equalsIgnoreCase("TextView"))
+                {
+                    try
+                    {
+                        LayoutInflater li = LayoutInflater.from(context);
+                        final View view = li.createView(name, null, attrs);
+                        new Handler().post(new Runnable()
+                        {
+                            public void run()
+                            {
+                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                            }
+                        });
+                        return view;
+                    }
+                    catch (InflateException e){}
+                    catch (ClassNotFoundException e)
+                    {}
+                }
+                return null;
+            }
+        });
 
         return true;
     }
@@ -112,7 +142,7 @@ public class ActivityDashBoard extends SherlockActivity {
     	switch(item.getItemId())
     	{
 	        case R.id.menu_settings:
-	        	startActivity(new Intent(this, PreferencesActivity.class));
+	        	startActivity(new Intent(this, ActivityPreferences.class));
 	        	return true;
 	        case R.id.menu_about_us:
 	        	AboutUs.aboutUs(this);

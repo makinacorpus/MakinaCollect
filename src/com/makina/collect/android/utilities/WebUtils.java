@@ -66,7 +66,7 @@ import android.text.format.DateFormat;
 import android.util.Log;
 
 import com.makina.collect.android.application.Collect;
-import com.makina.collect.android.preferences.PreferencesActivity;
+import com.makina.collect.android.preferences.ActivityPreferences;
 
 /**
  * Common utility methods for managing the credentials associated with the
@@ -213,10 +213,10 @@ public final class WebUtils {
 	public static final void setGoogleHeaders(HttpRequest req) {
 		SharedPreferences settings =
                 PreferenceManager.getDefaultSharedPreferences(Collect.getInstance().getApplicationContext());
-		String protocol = settings.getString(PreferencesActivity.KEY_PROTOCOL, PreferencesActivity.PROTOCOL_ODK_DEFAULT);
+		String protocol = settings.getString(ActivityPreferences.KEY_PROTOCOL, ActivityPreferences.PROTOCOL_ODK_DEFAULT);
 
-		if ( protocol.equals(PreferencesActivity.PROTOCOL_GOOGLE) ) {
-	        String auth = settings.getString(PreferencesActivity.KEY_AUTH, "");
+		if ( protocol.equals(ActivityPreferences.PROTOCOL_GOOGLE) ) {
+	        String auth = settings.getString(ActivityPreferences.KEY_AUTH, "");
 			if ((auth != null) && (auth.length() > 0)) {
 				req.setHeader("Authorization", "GoogleLogin auth=" + auth);
 			}

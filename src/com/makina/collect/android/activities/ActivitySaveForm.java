@@ -17,6 +17,7 @@ package com.makina.collect.android.activities;
 import com.WazaBe.HoloEverywhere.app.AlertDialog;
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -24,7 +25,11 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.BaseColumns;
+import android.util.AttributeSet;
+import android.view.InflateException;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -39,7 +44,7 @@ import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.dialog.Help;
 import com.makina.collect.android.dialog.HelpWithConfirmation;
-import com.makina.collect.android.preferences.PreferencesActivity;
+import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.utilities.Finish;
@@ -64,10 +69,39 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         super.onCreateOptionsMenu(menu);
         getSupportMenuInflater().inflate(R.menu.menu_activity_edit_form, menu);
         
+        Finish.activitySaveForm=this;
         
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setOnQueryTextListener(this);
+        
+        getLayoutInflater().setFactory(new LayoutInflater.Factory()
+        {
+            public View onCreateView(String name, Context context, AttributeSet attrs)
+            {
+            	if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")|| name.equalsIgnoreCase("TextView"))
+                {
+                    try
+                    {
+                        LayoutInflater li = LayoutInflater.from(context);
+                        final View view = li.createView(name, null, attrs);
+                        new Handler().post(new Runnable()
+                        {
+                            public void run()
+                            {
+                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                            }
+                        });
+                        return view;
+                    }
+                    catch (InflateException e){}
+                    catch (ClassNotFoundException e)
+                    {}
+                }
+                return null;
+            }
+        });
         return true;
     }
 
@@ -83,7 +117,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 	        	finish();
 	        return true;
 	        case R.id.menu_settings:
-	        	startActivity(new Intent(this, PreferencesActivity.class));
+	        	startActivity(new Intent(this, ActivityPreferences.class));
 	        	return true;
 	        case R.id.menu_help:
 	        	Help.helpDialog(this, getString(R.string.help_saved));
@@ -117,7 +151,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     	TextView actionbarSubTitle = (TextView)findViewById(titleId);
     	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorBlueSave));
     	actionbarSubTitle.setTypeface(typeFace);
-    	getSupportActionBar().setSubtitle(getString(R.string.saved).toUpperCase());
+    	getSupportActionBar().setSubtitle(getString(R.string.saved));
     	
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_saved", false))
     		HelpWithConfirmation.helpDialog(this, getString(R.string.help_saved));

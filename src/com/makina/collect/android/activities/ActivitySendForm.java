@@ -15,20 +15,36 @@
 package com.makina.collect.android.activities;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+
 import com.WazaBe.HoloEverywhere.app.AlertDialog;
+import com.WazaBe.HoloEverywhere.app.Dialog;
+import com.WazaBe.HoloEverywhere.app.ProgressDialog;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.provider.BaseColumns;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.InflateException;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -47,12 +63,16 @@ import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.dialog.Help;
 import com.makina.collect.android.dialog.HelpWithConfirmation;
 import com.makina.collect.android.listeners.DeleteInstancesListener;
-import com.makina.collect.android.preferences.PreferencesActivity;
+import com.makina.collect.android.listeners.InstanceUploaderListener;
+import com.makina.collect.android.preferences.ActivityPreferences;
+import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.receivers.NetworkReceiver;
 import com.makina.collect.android.tasks.DeleteInstancesTask;
+import com.makina.collect.android.tasks.InstanceUploaderTask;
 import com.makina.collect.android.utilities.Finish;
+import com.makina.collect.android.utilities.WebUtils;
 
 /**
  * Responsible for displaying all the valid forms in the forms directory. Stores
@@ -63,7 +83,7 @@ import com.makina.collect.android.utilities.Finish;
  */
 
 @SuppressLint("NewApi")
-public class ActivitySendForm extends SherlockListActivity implements DeleteInstancesListener,SearchView.OnQueryTextListener  {
+public class ActivitySendForm extends SherlockListActivity implements DeleteInstancesListener,SearchView.OnQueryTextListener, InstanceUploaderListener  {
 
 	private static final String t = "InstanceUploaderList";
 	
@@ -72,6 +92,10 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 
 	private static final int MENU_PREFERENCES = Menu.FIRST;
 	private static final int INSTANCE_UPLOADER = 0;
+	
+	private ProgressDialog mProgressDialog;
+
+	private String mAlertMsg;
 
 	//private boolean mShowUnsent = true;
 	private SimpleCursorAdapter mInstances;
@@ -82,6 +106,19 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 	DeleteInstancesTask mDeleteInstancesTask = null;
 	private  SearchView mSearchView;
 	private TextView textView_pannier;
+	private final int PROGRESS_DIALOG=1;
+	
+	 private HashMap<String, String> mUploadedInstances;
+	 private final static int AUTH_DIALOG = 2;
+	 private String mUrl;
+	 private final static String AUTH_URI = "auth";
+	    private static final String ALERT_MSG = "alertmsg";
+	    private static final String ALERT_SHOWING = "alertshowing";
+	    private static final String TO_SEND = "tosend";
+	    private boolean mAlertShowing;
+	    private long[] instanceIDs;
+	    private Long[] mInstancesToSend;
+	    private InstanceUploaderTask mInstanceUploaderTask ;
 
 	public Cursor getAllCursor(String condition_search) {
 		// get all complete or failed submission instances
@@ -100,9 +137,41 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
         super.onCreateOptionsMenu(menu);
         getSupportMenuInflater().inflate(R.menu.menu_activity_send_form, menu);
         
+        mUploadedInstances = new HashMap<String, String>();
+        
+        Finish.activitySendForm=this;
+        
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setOnQueryTextListener(this);
+        
+        getLayoutInflater().setFactory(new LayoutInflater.Factory()
+        {
+            public View onCreateView(String name, Context context, AttributeSet attrs)
+            {
+            	if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")|| name.equalsIgnoreCase("TextView"))
+                {
+                    try
+                    {
+                        LayoutInflater li = LayoutInflater.from(context);
+                        final View view = li.createView(name, null, attrs);
+                        new Handler().post(new Runnable()
+                        {
+                            public void run()
+                            {
+                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                            }
+                        });
+                        return view;
+                    }
+                    catch (InflateException e){}
+                    catch (ClassNotFoundException e)
+                    {}
+                }
+                return null;
+            }
+        });
         return true;
     }
 
@@ -121,7 +190,7 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 	        	uploadInstancesOption();
 	        return true;
 	        case R.id.menu_settings:
-	        	startActivity(new Intent(this, PreferencesActivity.class));
+	        	startActivity(new Intent(this, ActivityPreferences.class));
 	        	return true;
 	        case R.id.menu_help:
 	        	Help.helpDialog(this, getString(R.string.help_send));
@@ -153,8 +222,10 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
     	TextView actionbarSubTitle = (TextView)findViewById(titleId);
     	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorBlueSend));
     	actionbarSubTitle.setTypeface(typeFace);
-    	getSupportActionBar().setSubtitle(getString(R.string.send).toUpperCase());
+    	getSupportActionBar().setSubtitle(getString(R.string.send));
         
+    	mProgressDialog = new ProgressDialog(this);
+    	
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_send", false))
     		HelpWithConfirmation.helpDialog(this, getString(R.string.help_send));
     	
@@ -187,6 +258,17 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 		});
        
 
+     // get any simple saved state...
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(ALERT_MSG)) {
+                mAlertMsg = savedInstanceState.getString(ALERT_MSG);
+            }
+            if (savedInstanceState.containsKey(ALERT_SHOWING)) {
+                mAlertShowing = savedInstanceState.getBoolean(ALERT_SHOWING, false);
+            }
+
+            mUrl = savedInstanceState.getString(AUTH_URI);
+        }
 		
 	}
 	
@@ -251,14 +333,42 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 
 	private void uploadSelectedFiles() {
 		// send list of _IDs.
-		long[] instanceIDs = new long[mSelected.size()];
-		for (int i = 0; i < mSelected.size(); i++) {
+		instanceIDs = new long[mSelected.size()];
+		for (int i = 0; i < mSelected.size(); i++)
+		{
 			instanceIDs[i] = mSelected.get(i);
 		}
 
-		Intent i = new Intent(this, InstanceUploaderActivity.class);
+		/*Intent i = new Intent(this, InstanceUploaderActivity.class);
 		i.putExtra(ActivityForm.KEY_INSTANCES, instanceIDs);
-		startActivityForResult(i, INSTANCE_UPLOADER);
+		startActivityForResult(i, INSTANCE_UPLOADER);*/
+		
+        
+		mInstancesToSend = new Long[(instanceIDs == null) ? 0 : instanceIDs.length];
+        if ( instanceIDs != null ) {
+        	for ( int i = 0 ; i < instanceIDs.length ; ++i ) {
+        		mInstancesToSend[i] = instanceIDs[i];
+        	}
+        }
+
+		mInstanceUploaderTask = (InstanceUploaderTask) getLastNonConfigurationInstance();
+        if (mInstanceUploaderTask == null) {
+            // setup dialog and upload task
+            showDialog(PROGRESS_DIALOG);
+            mInstanceUploaderTask = new InstanceUploaderTask();
+
+            // register this activity with the new uploader task
+            mInstanceUploaderTask.setUploaderListener(ActivitySendForm.this);
+
+            mInstanceUploaderTask.execute(mInstancesToSend);
+        }
+        
+        if (mInstanceUploaderTask != null) {
+            mInstanceUploaderTask.setUploaderListener(this);
+        }
+        if (mAlertShowing)
+        	createAlertDialog(mAlertMsg);
+        
 	}
 	
 	protected void selectAllOption (){
@@ -284,38 +394,39 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
 
-		if (NetworkReceiver.running == true) {
+		if (NetworkReceiver.running == true) 
+		{
 			//another upload is already running
 			Toast.makeText(this,"Background send running, please try again shortly",Toast.LENGTH_SHORT).show();
-		} else if (ni == null || !ni.isConnected()) {
+		} 
+		else if (ni == null || !ni.isConnected()) 
+		{
 			//no network connection
-			Collect.getInstance().getActivityLogger()
-					.logAction(this, "uploadButton", "noConnection");
-
+			Collect.getInstance().getActivityLogger().logAction(this, "uploadButton", "noConnection");
 			Toast.makeText(this,R.string.no_connection, Toast.LENGTH_SHORT).show();
-		} else {
-			Collect.getInstance()
-					.getActivityLogger()
-					.logAction(this, "uploadButton",
-							Integer.toString(mSelected.size()));
+		} 
+		else
+		{
+			Collect.getInstance().getActivityLogger().logAction(this, "uploadButton",Integer.toString(mSelected.size()));
 
-			if (mSelected.size() > 0) {
+			if (mSelected.size() > 0) 
+			{
 				// items selected
 				uploadSelectedFiles();
 				mToggled = false;
 				mSelected.clear();
 				ActivitySendForm.this.getListView().clearChoices();
-			} else {
+			}
+			else 
+			{
 				// no items selected
-				Toast.makeText(getApplicationContext(),
-						getString(R.string.noselect_error),
-						Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(),getString(R.string.noselect_error),Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
 
 	private void createPreferencesMenu() {
-		Intent i = new Intent(this, PreferencesActivity.class);
+		Intent i = new Intent(this, ActivityPreferences.class);
 		startActivity(i);
 	}
 	
@@ -477,5 +588,230 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public void uploadingComplete(HashMap<String, String> result)
+	{
+		// TODO Auto-generated method stub
+		try {
+            dismissDialog(PROGRESS_DIALOG);
+        } catch (Exception e) {
+            // tried to close a dialog not open. don't care.
+        }
+
+        StringBuilder selection = new StringBuilder();
+        Set<String> keys = result.keySet();
+        Iterator<String> it = keys.iterator();
+
+        String[] selectionArgs = new String[keys.size()];
+        int i = 0;
+        while (it.hasNext()) {
+            String id = it.next();
+            selection.append(BaseColumns._ID + "=?");
+            selectionArgs[i++] = id;
+            if (i != keys.size()) {
+                selection.append(" or ");
+            }
+        }
+        
+        StringBuilder message = new StringBuilder();
+        {
+        	Cursor results = null;
+        	try {
+                results = getContentResolver().query(InstanceColumns.CONTENT_URI,
+                		null, selection.toString(), selectionArgs, null);
+                if (results.getCount() > 0) {
+                    results.moveToPosition(-1);
+                    while (results.moveToNext()) {
+                        String name =
+                            results.getString(results.getColumnIndex(InstanceColumns.DISPLAY_NAME));
+                        String id = results.getString(results.getColumnIndex(BaseColumns._ID));
+                        message.append(name + " - " + result.get(id) + "\n\n");
+                    }
+                } else {
+                    message.append(getString(R.string.no_forms_uploaded));
+                }
+        	} finally {
+        		if ( results != null ) {
+        			results.close();
+        		}
+        	}
+        }
+
+        createAlertDialog(message.toString().trim());
+		
+	}
+
+	@Override
+	public void progressUpdate(int progress, int total) {
+		// TODO Auto-generated method stub
+		mAlertMsg = getString(R.string.sending_items, progress, total);
+        mProgressDialog.setMessage(mAlertMsg);
+		
+	}
+
+	@Override
+	public void authRequest(Uri url, HashMap<String, String> doneSoFar) {
+		// TODO Auto-generated method stub
+		if (mProgressDialog.isShowing()) {
+            // should always be showing here
+            mProgressDialog.dismiss();
+        }
+
+        // add our list of completed uploads to "completed"
+        // and remove them from our toSend list.
+        ArrayList<Long> workingSet = new ArrayList<Long>();
+        Collections.addAll(workingSet, mInstancesToSend);
+        if (doneSoFar != null) {
+            Set<String> uploadedInstances = doneSoFar.keySet();
+            Iterator<String> itr = uploadedInstances.iterator();
+
+            while (itr.hasNext()) {
+                Long removeMe = Long.valueOf(itr.next());
+                boolean removed = workingSet.remove(removeMe);
+                if (removed) {
+                    Log.i(t, removeMe
+                            + " was already sent, removing from queue before restarting task");
+                }
+            }
+            mUploadedInstances.putAll(doneSoFar);
+        }
+
+        // and reconstruct the pending set of instances to send
+        Long[] updatedToSend = new Long[workingSet.size()];
+        for ( int i = 0 ; i < workingSet.size() ; ++i ) {
+        	updatedToSend[i] = workingSet.get(i);
+        }
+        mInstancesToSend = updatedToSend;
+
+        mUrl = url.toString();
+        showDialog(AUTH_DIALOG);
+	}
+	
+	private void createAlertDialog(String message) {
+    	Collect.getInstance().getActivityLogger().logAction(this, "createAlertDialog", "show");
+
+        mAlertDialog = new AlertDialog.Builder(this).create();
+        mAlertDialog.setTitle(getString(R.string.upload_results));
+        mAlertDialog.setMessage(message);
+        DialogInterface.OnClickListener quitListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                switch (i) {
+                    case DialogInterface.BUTTON1: // ok
+                    	Collect.getInstance().getActivityLogger().logAction(this, "createAlertDialog", "OK");
+                        // always exit this activity since it has no interface
+                        mAlertShowing = false;
+                        textView_pannier.setText("0 formulaire(s) sŽlectionnŽs");
+                        break;
+                }
+            }
+        };
+        mAlertDialog.setCancelable(false);
+        mAlertDialog.setButton(getString(R.string.ok), quitListener);
+        mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+        mAlertShowing = true;
+        mAlertMsg = message;
+        mAlertDialog.show();
+    }
+	
+	@Override
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case PROGRESS_DIALOG:
+            	Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.PROGRESS_DIALOG", "show");
+
+                mProgressDialog = new ProgressDialog(this);
+                DialogInterface.OnClickListener loadingButtonListener =
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        	Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.PROGRESS_DIALOG", "cancel");
+                            dialog.dismiss();
+                            mInstanceUploaderTask.cancel(true);
+                            mInstanceUploaderTask.setUploaderListener(null);
+                            finish();
+                        }
+                    };
+                mProgressDialog.setTitle(getString(R.string.uploading_data));
+                mProgressDialog.setMessage(mAlertMsg);
+                mProgressDialog.setIndeterminate(true);
+                mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                mProgressDialog.setCancelable(false);
+                mProgressDialog.setButton(getString(R.string.cancel), loadingButtonListener);
+                return mProgressDialog;
+            case AUTH_DIALOG:
+                Log.i(t, "onCreateDialog(AUTH_DIALOG): for upload of " + mInstancesToSend.length + " instances!");
+            	Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.AUTH_DIALOG", "show");
+                AlertDialog.Builder b = new AlertDialog.Builder(this);
+
+                LayoutInflater factory = LayoutInflater.from(this);
+                final View dialogView = factory.inflate(R.layout.dialog_server_authentification, null);
+
+                // Get the server, username, and password from the settings
+                SharedPreferences settings =
+                    PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
+                String server = mUrl;
+                if (server == null) {
+                    Log.e(t, "onCreateDialog(AUTH_DIALOG): No failing mUrl specified for upload of " + mInstancesToSend.length + " instances!");
+                    // if the bundle is null, we're looking for a formlist
+                    String submissionUrl = getString(R.string.default_odk_submission);
+                    server =
+                        settings.getString(ActivityPreferences.KEY_SERVER_URL,
+                            getString(R.string.default_server_url))
+                                + settings.getString(ActivityPreferences.KEY_SUBMISSION_URL, submissionUrl);
+                }
+
+                final String url = server;
+
+                Log.i(t, "Trying connecting to: " + url);
+
+                EditText username = (EditText) dialogView.findViewById(R.id.username_edit);
+                String storedUsername = settings.getString(ActivityPreferences.KEY_USERNAME, null);
+                username.setText(storedUsername);
+
+                EditText password = (EditText) dialogView.findViewById(R.id.password_edit);
+                String storedPassword = settings.getString(ActivityPreferences.KEY_PASSWORD, null);
+                password.setText(storedPassword);
+
+                b.setTitle(getString(R.string.server_requires_auth));
+                b.setMessage(getString(R.string.server_auth_credentials, url));
+                b.setView(dialogView);
+                b.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    	Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.AUTH_DIALOG", "OK");
+                        EditText username = (EditText) dialogView.findViewById(R.id.username_edit);
+                        EditText password = (EditText) dialogView.findViewById(R.id.password_edit);
+
+                        Uri u = Uri.parse(url);
+                        WebUtils.addCredentials(username.getText().toString(), password.getText()
+                                .toString(), u.getHost());
+
+                        showDialog(PROGRESS_DIALOG);
+                        mInstanceUploaderTask = new InstanceUploaderTask();
+
+                        // register this activity with the new uploader task
+                        mInstanceUploaderTask.setUploaderListener(ActivitySendForm.this);
+
+                        mInstanceUploaderTask.execute(mInstancesToSend);
+                    }
+                });
+                b.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    	Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.AUTH_DIALOG", "cancel");
+                        finish();
+                    }
+                });
+
+                b.setCancelable(false);
+                return b.create();
+        }
+        return null;
+    }
+
 
 }

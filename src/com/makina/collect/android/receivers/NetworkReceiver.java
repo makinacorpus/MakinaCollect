@@ -15,7 +15,7 @@ import android.preference.PreferenceManager;
 import android.provider.BaseColumns;
 
 import com.makina.collect.android.listeners.InstanceUploaderListener;
-import com.makina.collect.android.preferences.PreferencesActivity;
+import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.tasks.InstanceUploaderTask;
@@ -61,9 +61,9 @@ public class NetworkReceiver extends BroadcastReceiver implements InstanceUpload
 		SharedPreferences sharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(context);
 		boolean sendwifi = sharedPreferences.getBoolean(
-				PreferencesActivity.KEY_AUTOSEND_WIFI, false);
+				ActivityPreferences.KEY_AUTOSEND_WIFI, false);
 		boolean sendnetwork = sharedPreferences.getBoolean(
-				PreferencesActivity.KEY_AUTOSEND_NETWORK, false);
+				ActivityPreferences.KEY_AUTOSEND_NETWORK, false);
 
 		return (currentNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI
 				&& sendwifi || currentNetworkInfo.getType() == ConnectivityManager.TYPE_MOBILE

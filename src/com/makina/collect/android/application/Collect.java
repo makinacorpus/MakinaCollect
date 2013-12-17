@@ -34,7 +34,7 @@ import com.makina.collect.android.R;
 import com.makina.collect.android.database.ActivityLogger;
 import com.makina.collect.android.logic.FormController;
 import com.makina.collect.android.logic.PropertyManager;
-import com.makina.collect.android.preferences.PreferencesActivity;
+import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.utilities.AgingCredentialsProvider;
 
 /**
@@ -86,7 +86,7 @@ public class Collect extends Application {
     public static int getQuestionFontsize() {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(Collect
                 .getInstance());
-        String question_font = settings.getString(PreferencesActivity.KEY_FONT_SIZE,
+        String question_font = settings.getString(ActivityPreferences.KEY_FONT_SIZE,
                 Collect.DEFAULT_FONTSIZE);
         int questionFontsize = Integer.valueOf(question_font);
         return questionFontsize;

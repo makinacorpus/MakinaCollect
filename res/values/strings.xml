@@ -120,7 +120,7 @@
     <string name="please_wait">Please wait a few moments.</string>
     <string name="please_wait_long">Please wait. This could take a few minutes.</string>
     <string name="quit_application">Exit %s</string>
-    <string name="quit_entry">Save Form and Exit</string>
+    <string name="quit_entry">Save Form</string>
     <string name="refresh">Refresh</string>
     <string name="replace_barcode">Replace Barcode</string>
     <string name="replace_location">Replace Location</string>

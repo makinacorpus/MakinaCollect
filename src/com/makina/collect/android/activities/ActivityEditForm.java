@@ -13,50 +13,43 @@
  */
 
 package com.makina.collect.android.activities;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.WazaBe.HoloEverywhere.app.AlertDialog;
-import com.WazaBe.HoloEverywhere.widget.View;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.ActionMode;
-import android.widget.AbsListView;
-import android.widget.ImageView;
+import android.view.InflateException;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-import com.fortysevendeg.swipelistview.BaseSwipeListViewListener;
-import com.fortysevendeg.swipelistview.SwipeListView;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.dialog.Help;
 import com.makina.collect.android.dialog.HelpWithConfirmation;
 import com.makina.collect.android.listeners.DiskSyncListener;
-import com.makina.collect.android.preferences.PreferencesActivity;
+import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
-import com.makina.collect.android.swipelistview.adapters.PackageAdapter;
-import com.makina.collect.android.swipelistview.adapters.FormItem;
-import com.makina.collect.android.swipelistview.utils.SettingsManager;
 import com.makina.collect.android.tasks.DiskSyncTask;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.VersionHidingCursorAdapter;
@@ -69,7 +62,7 @@ import com.makina.collect.android.utilities.VersionHidingCursorAdapter;
  * @author Carl Hartung (carlhartung@gmail.com)
  */
 @SuppressLint("NewApi")
-public class ActivityEditForm extends SherlockActivity implements DiskSyncListener, SearchView.OnQueryTextListener {
+public class ActivityEditForm extends SherlockListActivity implements DiskSyncListener, SearchView.OnQueryTextListener {
 
     private static final String t = "FormChooserList";
     private static final boolean EXIT = true;
@@ -81,11 +74,6 @@ public class ActivityEditForm extends SherlockActivity implements DiskSyncListen
     
     private String statusText;
     private SearchView mSearchView;
-    private PackageAdapter adapter;
-    private List<FormItem> data;
-
-    private SwipeListView swipeListView;
-    private ImageView empty_list;
     
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -94,8 +82,10 @@ public class ActivityEditForm extends SherlockActivity implements DiskSyncListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_form);
         
+        Finish.activityEditForm=this;
+        
         Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
-        getSupportActionBar().setTitle(getString(R.string.edit).toUpperCase());
+        getSupportActionBar().setTitle(getString(R.string.edit));
         int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
     	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGreenEdit));
@@ -109,153 +99,20 @@ public class ActivityEditForm extends SherlockActivity implements DiskSyncListen
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_edit", false))
     		HelpWithConfirmation.helpDialog(this, getString(R.string.help_edit));
     	
-        empty_list=(ImageView)findViewById(R.id.empty_list);
-        
-        data = new ArrayList<FormItem>();
-
-        swipeListView = (SwipeListView) findViewById(R.id.listView);
-        if (Build.VERSION.SDK_INT >= 11) {
-            swipeListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            swipeListView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
-
-                @Override
-                public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked)
-                {
-                    mode.setTitle("Selected (" + swipeListView.getCountSelected() + ")");
-                }
-             
-
-                @Override
-                public void onDestroyActionMode(ActionMode mode) {
-                    swipeListView.unselectedChoiceStates();
-                }
-
-				@Override
-				public boolean onActionItemClicked(ActionMode arg0, android.view.MenuItem arg1) {
-					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "cliqué", Toast.LENGTH_SHORT).show();
-					return false;
-				}
-
-				@Override
-				public boolean onCreateActionMode(ActionMode mode,
-						android.view.Menu menu) {
-					// TODO Auto-generated method stub
-					return false;
-				}
-
-				@Override
-				public boolean onPrepareActionMode(ActionMode mode,
-						android.view.Menu menu) {
-					// TODO Auto-generated method stub
-					return false;
-				}
-            });
-        }
-
-        swipeListView.setSwipeListViewListener(new BaseSwipeListViewListener() {
-            @Override
-            public void onOpened(int position, boolean toRight) {
-            }
-
-            @Override
-            public void onClosed(int position, boolean fromRight) {
-            }
-
-            @Override
-            public void onListChanged() {
-            }
-
-            @Override
-            public void onMove(int position, float x) {
-            }
-
-            @Override
-            public void onStartOpen(int position, int action, boolean right) {
-                Log.d("swipe", String.format("onStartOpen %d - action %d", position, action));
-            }
-
-            @Override
-            public void onStartClose(int position, boolean right) {
-                Log.d("swipe", String.format("onStartClose %d", position));
-            }
-
-            @Override
-            public void onClickFrontView(int position) {
-                Log.d("swipe", String.format("onClickFrontView %d", position));
-            }
-
-            @Override
-            public void onClickBackView(int position) {
-                Log.d("swipe", String.format("onClickBackView %d", position));
-            }
-
-            @Override
-            public void onDismiss(int[] reverseSortedPositions) {
-                for (int position : reverseSortedPositions) {
-                    data.remove(position);
-                }
-                adapter.notifyDataSetChanged();
-            }
-
-        });
-        
         //home button leads back to home
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         
         String sortOrder = FormsColumns.DISPLAY_NAME + " ASC, " + FormsColumns.JR_VERSION + " DESC";
         Cursor c = managedQuery(FormsColumns.CONTENT_URI, null, null, null, sortOrder);
-        
-        while (c.moveToNext())
-		{
-        	FormItem item = new FormItem();
-            item.setName(c.getString(12));
-            item.setDate("");
-            item.setVersion(getString(R.string.version)+" ");
-            data.add(item);
-		}
-        adapter = new PackageAdapter(this, data);
-        
-        swipeListView.setAdapter(adapter);
-        
-        reload();
-        
-        /*swipeListView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(android.view.View arg0) {
-				
-				long idFormsTable = ((SimpleCursorAdapter) getListAdapter()).getItemId(position);
-		        Uri formUri = ContentUris.withAppendedId(FormsColumns.CONTENT_URI, idFormsTable);
 
-				Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", formUri.toString());
-
-		        String action = getIntent().getAction();
-		        if (Intent.ACTION_PICK.equals(action)) {
-		            // caller is waiting on a picked form
-		            setResult(RESULT_OK, new Intent().setData(formUri));
-		        } else {
-		            // caller wants to view/edit a form, so launch formentryactivity
-		        	Intent i = new Intent(Intent.ACTION_EDIT, formUri);
-		        	i.putExtra("newForm", true);
-		            startActivity(i);
-		        }
-				
-			}
-		});*/
-        if (swipeListView.getCount()!=0)
-        	empty_list.setVisibility(View.GONE);
-
-        //reload();
-
-        /*String[] data = new String[]{ FormsColumns.DISPLAY_NAME, FormsColumns.DISPLAY_SUBTEXT, FormsColumns.JR_VERSION};
-        int[] view = new int[] { R.id.text1, R.id.text2, R.id.text3};
+        String[] data = new String[] {FormsColumns.DISPLAY_NAME, FormsColumns.DISPLAY_SUBTEXT, FormsColumns.JR_VERSION};
+        int[] view = new int[] {R.id.text1, R.id.text2, R.id.text3};
 
         // render total instance view
-        SimpleCursorAdapter instances = new VersionHidingCursorAdapter(FormsColumns.JR_VERSION, this, R.layout.listview_item_edit_form, c, data, view);
-        setListAdapter(instances);*/
-
+        SimpleCursorAdapter instances =new VersionHidingCursorAdapter(FormsColumns.JR_VERSION, getApplicationContext(), R.layout.listview_item_edit_form, c, data, view);
+        setListAdapter(instances);
+        
+        
         if (savedInstanceState != null && savedInstanceState.containsKey(syncMsgKey)) {
             statusText = savedInstanceState.getString(syncMsgKey);
         }
@@ -270,26 +127,8 @@ public class ActivityEditForm extends SherlockActivity implements DiskSyncListen
             mDiskSyncTask.execute((Void[]) null);
         }
         
-        
-        /*getListView().setLongClickable(true);
-        getListView().setOnItemLongClickListener(new OnItemLongClickListener() {
-             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
-             //Do some
-                 return true;
-             }
-         });*/
     }
     
-    private void reload() {
-        SettingsManager settings = SettingsManager.getInstance();
-        swipeListView.setSwipeMode(settings.getSwipeMode());
-        swipeListView.setSwipeActionLeft(settings.getSwipeActionLeft());
-        swipeListView.setSwipeActionRight(settings.getSwipeActionRight());
-        swipeListView.setOffsetLeft(convertDpToPixel(settings.getSwipeOffsetLeft()));
-        swipeListView.setOffsetRight(convertDpToPixel(settings.getSwipeOffsetRight()));
-        swipeListView.setAnimationTime(settings.getSwipeAnimationTime());
-        swipeListView.setSwipeOpenOnLongPress(settings.isSwipeOpenOnLongPress());
-    }
 
     public int convertDpToPixel(float dp) {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
@@ -297,6 +136,29 @@ public class ActivityEditForm extends SherlockActivity implements DiskSyncListen
         return (int) px;
     }
 
+    @Override
+   	public void onListItemClick(ListView listView, View view, int position, long id) {
+           // get uri to form
+       	long idFormsTable = ((SimpleCursorAdapter) getListAdapter()).getItemId(position);
+           Uri formUri = ContentUris.withAppendedId(FormsColumns.CONTENT_URI, idFormsTable);
+
+   		Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", formUri.toString());
+
+           String action = getIntent().getAction();
+           if (Intent.ACTION_PICK.equals(action)) {
+               // caller is waiting on a picked form
+               setResult(RESULT_OK, new Intent().setData(formUri));
+           } else {
+               // caller wants to view/edit a form, so launch formentryactivity
+           	Intent i = new Intent(Intent.ACTION_EDIT, formUri);
+           	i.putExtra("newForm", true);
+               startActivity(i);
+           }
+           
+           //TODO  
+           //getActivity().finish();
+       }
+       
     
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -307,6 +169,34 @@ public class ActivityEditForm extends SherlockActivity implements DiskSyncListen
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setOnQueryTextListener(this);
+        
+        getLayoutInflater().setFactory(new LayoutInflater.Factory()
+        {
+            public View onCreateView(String name, Context context, AttributeSet attrs)
+            {
+            	if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")|| name.equalsIgnoreCase("TextView"))
+                {
+                    try
+                    {
+                        LayoutInflater li = LayoutInflater.from(context);
+                        final View view = li.createView(name, null, attrs);
+                        new Handler().post(new Runnable()
+                        {
+                            public void run()
+                            {
+                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                            }
+                        });
+                        return view;
+                    }
+                    catch (InflateException e){}
+                    catch (ClassNotFoundException e)
+                    {}
+                }
+                return null;
+            }
+        });
         return true;
     }
 
@@ -322,7 +212,7 @@ public class ActivityEditForm extends SherlockActivity implements DiskSyncListen
 
         // render total instance view
         SimpleCursorAdapter instances = new VersionHidingCursorAdapter(FormsColumns.JR_VERSION, this, R.layout.listview_item_edit_form, c, data, view);
-        //setListAdapter(instances);
+        setListAdapter(instances);
         
         return false;
     }
@@ -338,7 +228,7 @@ public class ActivityEditForm extends SherlockActivity implements DiskSyncListen
 	        	finish();
 	        return true;
 	        case R.id.menu_settings:
-	        	startActivity(new Intent(this, PreferencesActivity.class));
+	        	startActivity(new Intent(this, ActivityPreferences.class));
 	        	return true;
 	        case R.id.menu_help:
 	        	Help.helpDialog(this, getString(R.string.help_edit));
