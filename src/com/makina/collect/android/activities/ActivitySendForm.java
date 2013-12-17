@@ -65,7 +65,6 @@ import com.makina.collect.android.dialog.HelpWithConfirmation;
 import com.makina.collect.android.listeners.DeleteInstancesListener;
 import com.makina.collect.android.listeners.InstanceUploaderListener;
 import com.makina.collect.android.preferences.ActivityPreferences;
-import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.receivers.NetworkReceiver;
@@ -413,9 +412,6 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 			{
 				// items selected
 				uploadSelectedFiles();
-				mToggled = false;
-				mSelected.clear();
-				ActivitySendForm.this.getListView().clearChoices();
 			}
 			else 
 			{
@@ -430,46 +426,8 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 		startActivity(i);
 	}
 	
-	protected void delete () {
-		Collect.getInstance().getActivityLogger().logAction(this, "deleteButton", Integer.toString(mSelected.size()));
-		if (mSelected.size() > 0) {
-			createDeleteInstancesDialog();
-		} else {
-			Toast.makeText(getApplicationContext(),
-					R.string.noselect_error, Toast.LENGTH_SHORT).show();
-		}
-	}
 	
-	private void createDeleteInstancesDialog() {
-        Collect.getInstance().getActivityLogger().logAction(this, "createDeleteInstancesDialog", "show");
-
-		mAlertDialog = new AlertDialog.Builder(this).create();
-		mAlertDialog.setTitle(getString(R.string.delete_file));
-		mAlertDialog.setMessage(getString(R.string.delete_confirm,
-				mSelected.size()));
-		DialogInterface.OnClickListener dialogYesNoListener = new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int i) {
-				switch (i) {
-				case DialogInterface.BUTTON1: // delete
-			    	Collect.getInstance().getActivityLogger().logAction(this, "createDeleteInstancesDialog", "delete");
-					deleteSelectedInstances();
-					break;
-				case DialogInterface.BUTTON2: // do nothing
-			    	Collect.getInstance().getActivityLogger().logAction(this, "createDeleteInstancesDialog", "cancel");
-					break;
-				}
-			}
-		};
-		mAlertDialog.setCancelable(false);
-		mAlertDialog.setButton(getString(R.string.delete_yes),
-				dialogYesNoListener);
-		mAlertDialog.setButton2(getString(R.string.delete_no),
-				dialogYesNoListener);
-		mAlertDialog.show();
-	}
-	
-	private void deleteSelectedInstances() {
+	private void deleteSelectedInstances(ArrayList<Long> mSelected) {
 		if (mDeleteInstancesTask == null) {
 			mDeleteInstancesTask = new DeleteInstancesTask();
 			mDeleteInstancesTask.setContentResolver(getContentResolver());
@@ -540,18 +498,7 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 	public void deleteComplete(int deletedInstances) {
 		Log.i(t, "Delete instances complete");
         Collect.getInstance().getActivityLogger().logAction(this, "deleteComplete", Integer.toString(deletedInstances));
-		if (deletedInstances == mSelected.size()) {
-			// all deletes were successful
-			Toast.makeText(this,getString(R.string.file_deleted_ok, deletedInstances),
-					Toast.LENGTH_SHORT).show();
-		} else {
-			// had some failures
-			Log.e(t, "Failed to delete "
-					+ (mSelected.size() - deletedInstances) + " instances");
-			Toast.makeText(this,getString(R.string.file_deleted_error, mSelected.size()
-							- deletedInstances, mSelected.size()),
-					Toast.LENGTH_LONG).show();
-		}
+		
 		mDeleteInstancesTask = null;
 		mSelected.clear();
 		getListView().clearChoices(); // doesn't unset the checkboxes
@@ -561,7 +508,8 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 	}
 
 	@Override
-	public boolean onQueryTextChange(String newText) {
+	public boolean onQueryTextChange(String newText)
+	{
 		// TODO Auto-generated method stub
 		Cursor c = getAllCursor(newText);
 
@@ -593,7 +541,8 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 	public void uploadingComplete(HashMap<String, String> result)
 	{
 		// TODO Auto-generated method stub
-		try {
+		try
+		{
             dismissDialog(PROGRESS_DIALOG);
         } catch (Exception e) {
             // tried to close a dialog not open. don't care.
@@ -639,7 +588,11 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
         }
 
         createAlertDialog(message.toString().trim());
-		
+        deleteSelectedInstances(mSelected);
+        
+        mToggled = false;
+		mSelected.clear();
+		ActivitySendForm.this.getListView().clearChoices();
 	}
 
 	@Override

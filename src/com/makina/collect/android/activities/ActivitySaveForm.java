@@ -220,6 +220,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
             	bundle.putLong("id", c.getLong(c.getColumnIndex(BaseColumns._ID)));
             	intent.putExtras(bundle);
             	startActivity(intent);
+            	
             }
         }
         //TODO 

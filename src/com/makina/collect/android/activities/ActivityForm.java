@@ -92,6 +92,7 @@ import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.dialog.Help;
 import com.makina.collect.android.dialog.HelpWithConfirmation;
 import com.makina.collect.android.listeners.AdvanceToNextListener;
+import com.makina.collect.android.listeners.DeleteInstancesListener;
 import com.makina.collect.android.listeners.FormLoaderListener;
 import com.makina.collect.android.listeners.FormSavedListener;
 import com.makina.collect.android.listeners.InstanceUploaderListener;
@@ -105,6 +106,7 @@ import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
+import com.makina.collect.android.tasks.DeleteInstancesTask;
 import com.makina.collect.android.tasks.FormLoaderTask;
 import com.makina.collect.android.tasks.InstanceUploaderTask;
 import com.makina.collect.android.tasks.SaveToDiskTask;
@@ -127,7 +129,7 @@ import com.makina.collect.android.widgets.QuestionWidget;
 
 public class ActivityForm extends SherlockActivity implements AnimationListener,
 		FormLoaderListener, FormSavedListener, AdvanceToNextListener,
-		OnGestureListener, WidgetAnsweredListener, InstanceUploaderListener {
+		OnGestureListener, WidgetAnsweredListener, InstanceUploaderListener, DeleteInstancesListener {
 	private static final String t = "FormEntryActivity";
 
 	// save with every swipe forward or back. Timings indicate this takes .25
@@ -2801,7 +2803,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		        		}
 		        	}
 		        }
-
+		        deleteSelectedInstances();
 		        createAlertDialog(message.toString().trim());
 		
 	}
@@ -2880,6 +2882,22 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 
         mUrl = url.toString();
         showDialog(AUTH_DIALOG);
+		
+	}
+
+	private void deleteSelectedInstances()
+	{
+		ArrayList<Long> mSelected=new ArrayList<Long>();
+		mSelected.add(mInstancesToSend[0]);
+		
+		DeleteInstancesTask mDeleteInstancesTask = new DeleteInstancesTask();
+		mDeleteInstancesTask.setContentResolver(getContentResolver());
+		mDeleteInstancesTask.setDeleteListener(this);
+		mDeleteInstancesTask.execute(mSelected.toArray(new Long[mSelected.size()]));
+	}
+	@Override
+	public void deleteComplete(int deletedInstances) {
+		// TODO Auto-generated method stub
 		
 	}
 

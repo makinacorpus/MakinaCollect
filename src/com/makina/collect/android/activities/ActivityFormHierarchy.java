@@ -79,8 +79,7 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 
 		Finish.activityFormHierarchy=this;
 		
-		FormController formController = Collect.getInstance()
-				.getFormController();
+		FormController formController = Collect.getInstance().getFormController();
 		Intent intent = getIntent();
 		
 		mIsSavedForm = (intent.hasExtra("isSavedForm")&&intent.getBooleanExtra("isSavedForm", false));
