@@ -17,8 +17,8 @@ the License.
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:swipe="http://schemas.android.com/apk/res-auto"
-    style="@style/Collect.MainLayout"
-    android:layout_alignParentTop="true"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/gris_background" >
 
     <RelativeLayout style="@style/Collect.MainLayout" >
@@ -39,11 +39,28 @@ the License.
             swipe:swipeMode="left" />
     </RelativeLayout>
 
-    <ImageView
+    <LinearLayout
         android:id="@android:id/empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:src="@drawable/no_list" />
+        android:orientation="vertical"
+         android:gravity="center_vertical"  >
+
+        <ImageView
+            android:id="@+id/imageview_no_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/no_list"
+            android:gravity="center_horizontal" />
+
+        <com.makina.collect.android.views.CustomFontTextview
+            android:id="@+id/textview_download_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clic_here_to_download"
+            android:textColor="@color/actionbarTitleColorGris"
+            android:textSize="26sp"
+            android:gravity="center_horizontal" />
+    </LinearLayout>
 
 </RelativeLayout>

@@ -28,12 +28,6 @@ the License.
             android:layout_height="fill_parent"
             android:background="@drawable/linear_blue" />
 
-        <ListView
-            android:id="@android:id/list"
-            style="@style/Collect.List"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@id/linear_blue" />
-
         <LinearLayout
             android:id="@+id/linearLayout_footer"
             android:layout_width="fill_parent"
@@ -83,6 +77,13 @@ the License.
                     android:textSize="20dip" />
             </RelativeLayout>
         </LinearLayout>
+
+        <ListView
+            android:id="@android:id/list"
+            style="@style/Collect.List"
+            android:layout_above="@id/linearLayout_footer"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/linear_blue" />
     </RelativeLayout>
 
     <RelativeLayout

@@ -12,6 +12,8 @@
 
     <!-- strings that should not be translated -->
 
+	<string name="clic_here_to_download">APPUEZ ICI POUR TÉLÉCHARGER UN FORMULAIRE</string>
+	
 	<!-- AboutUS -->
     <string name="textview_about_us1">The mobile application "Makina Collect" was developed by Makina Corpus</string>
     <string name="textview_about_us2">Développons de nouveaux horizons</string>

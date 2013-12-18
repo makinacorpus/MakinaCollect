@@ -53,6 +53,7 @@ import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.tasks.DiskSyncTask;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.VersionHidingCursorAdapter;
+import com.makina.collect.android.views.CustomFontTextview;
 
 /**
  * Responsible for displaying all the valid forms in the forms directory. Stores the path to
@@ -126,6 +127,16 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
             mDiskSyncTask.setDiskSyncListener(this);
             mDiskSyncTask.execute((Void[]) null);
         }
+        
+        CustomFontTextview textview_download_form=(CustomFontTextview) findViewById(R.id.textview_download_form);
+        textview_download_form.setOnClickListener(new View.OnClickListener()
+        {
+			@Override
+			public void onClick(View arg0)
+			{
+				startActivity(new Intent(getApplicationContext(), ActivityDownloadForm.class));
+			}
+		});
         
     }
     
