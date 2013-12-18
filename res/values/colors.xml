@@ -32,6 +32,10 @@ the License.
     <color name="actionbarTitleColorGreenEdit">#b8d754</color>
     <color name="actionbarTitleColorBlueSave">#1baac2</color>
     <color name="actionbarTitleColorBlueSend">#2bbccc</color>
+    <color name="actionbarTitleColorGreenDownload_on">#cded4c</color>
+    <color name="actionbarTitleColorGreenEdit_on">#b8d754</color>
+    <color name="actionbarTitleColorBlueSave_on">#1baac2</color>
+    <color name="actionbarTitleColorBlueSend_on">#2bbccc</color>
     <color name="actionbarTitleColorGris">#787c7d</color>
     
     <color name="about_us_blue">#073239</color>

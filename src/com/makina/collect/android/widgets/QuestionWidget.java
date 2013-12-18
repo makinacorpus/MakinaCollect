@@ -32,10 +32,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
+import com.makina.collect.android.views.CustomFontTextview;
 import com.makina.collect.android.views.MediaLayout;
 
 public abstract class QuestionWidget extends LinearLayout {
@@ -61,9 +61,9 @@ public abstract class QuestionWidget extends LinearLayout {
     protected final int mQuestionFontsize;
     protected final int mAnswerFontsize;
 
-    private TextView mQuestionText;
+    private CustomFontTextview mQuestionText;
     private MediaLayout mediaLayout;
-    private TextView mHelpText;
+    private CustomFontTextview mHelpText;
     protected WidgetAnsweredListener mAnswerListener;
 
 
@@ -175,7 +175,7 @@ public abstract class QuestionWidget extends LinearLayout {
         String bigImageURI = p.getSpecialFormQuestionText("big-image");
 
         // Add the text view. Textview always exists, regardless of whether there's text.
-        mQuestionText = new TextView(getContext());
+        mQuestionText = new CustomFontTextview(getContext());
         mQuestionText.setText(p.getLongText());
         mQuestionText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mQuestionFontsize);
         mQuestionText.setTypeface(null, Typeface.BOLD);
@@ -205,7 +205,7 @@ public abstract class QuestionWidget extends LinearLayout {
         String s = p.getHelpText();
 
         if (s != null && !s.equals("")) {
-            mHelpText = new TextView(getContext());
+            mHelpText = new CustomFontTextview(getContext());
             mHelpText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mQuestionFontsize - 3);
             mHelpText.setPadding(0, -5, 0, 7);
             // wrap to the widget of view

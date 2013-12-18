@@ -4,21 +4,6 @@
     android:layout_height="wrap_content" >
 
     <RelativeLayout
-        android:id="@+id/back"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="4dip"
-        android:background="@drawable/background_swipe_delete" >
-
-        <ImageView
-            android:id="@+id/imageView_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_delete" />
-    </RelativeLayout>
-
-    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/gris_background"

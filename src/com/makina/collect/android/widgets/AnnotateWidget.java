@@ -50,6 +50,7 @@ import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.utilities.FileUtils;
 import com.makina.collect.android.utilities.MediaUtils;
+import com.makina.collect.android.views.CustomFontButton;
 
 /**
  * Image widget that supports annotations on the image.
@@ -62,9 +63,9 @@ import com.makina.collect.android.utilities.MediaUtils;
 public class AnnotateWidget extends QuestionWidget implements IBinaryWidget {
 	private final static String t = "AnnotateWidget";
 
-	private Button mCaptureButton;
-	private Button mChooseButton;
-	private Button mAnnotateButton;
+	private CustomFontButton mCaptureButton;
+	private CustomFontButton mChooseButton;
+	private CustomFontButton mAnnotateButton;
 	private ImageView mImageView;
 
 	private String mBinaryName;
@@ -89,7 +90,7 @@ public class AnnotateWidget extends QuestionWidget implements IBinaryWidget {
 		mErrorTextView.setText("Selected file is not a valid image");
 
 		// setup capture button
-		mCaptureButton = (Button)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
+		mCaptureButton = (CustomFontButton)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
 		mCaptureButton.setId(QuestionWidget.newUniqueId());
 		mCaptureButton.setText(getContext().getString(R.string.capture_image));
 		mCaptureButton
@@ -141,7 +142,7 @@ public class AnnotateWidget extends QuestionWidget implements IBinaryWidget {
 		});
 
 		// setup chooser button
-		mChooseButton = (Button)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
+		mChooseButton = (CustomFontButton)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
 		mChooseButton.setId(QuestionWidget.newUniqueId());
 		mChooseButton.setText(getContext().getString(R.string.choose_image));
 		mChooseButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mAnswerFontsize);
@@ -180,7 +181,7 @@ public class AnnotateWidget extends QuestionWidget implements IBinaryWidget {
 		});
 
 		// setup Blank Image Button
-		mAnnotateButton = (Button)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
+		mAnnotateButton = (CustomFontButton)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
 		mAnnotateButton.setId(QuestionWidget.newUniqueId());
 		mAnnotateButton.setText(getContext().getString(R.string.markup_image));
 		mAnnotateButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP,

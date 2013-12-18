@@ -96,13 +96,11 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
     	actionbarSubTitle.setTypeface(typeFace);
     	getSupportActionBar().setSubtitle(getString(R.string.form));
-        
+    	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    	 
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_edit", false))
     		HelpWithConfirmation.helpDialog(this, getString(R.string.help_edit));
     	
-        //home button leads back to home
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        
         String sortOrder = FormsColumns.DISPLAY_NAME + " ASC, " + FormsColumns.JR_VERSION + " DESC";
         Cursor c = managedQuery(FormsColumns.CONTENT_URI, null, null, null, sortOrder);
 

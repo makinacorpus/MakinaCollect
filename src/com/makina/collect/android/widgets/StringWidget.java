@@ -35,6 +35,7 @@ import android.widget.TableLayout;
 
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
+import com.makina.collect.android.views.CustomFontEditText;
 
 /**
  * The most basic widget that allows for entry of any text.
@@ -46,7 +47,7 @@ public class StringWidget extends QuestionWidget implements OnFocusChangeListene
 	private static final String ROWS = "rows";
 
     boolean mReadOnly = false;
-    protected EditText mAnswer;
+    protected CustomFontEditText mAnswer;
     private boolean textChanged;
     private boolean isInit;
 
@@ -57,7 +58,7 @@ public class StringWidget extends QuestionWidget implements OnFocusChangeListene
 
     protected StringWidget(Context context, WidgetAnsweredListener widgetAnsweredListener, FormEntryPrompt prompt, boolean derived) {
         super(context, widgetAnsweredListener, prompt);
-        mAnswer = new EditText(context);
+        mAnswer = new CustomFontEditText(context);
         mAnswer.setId(QuestionWidget.newUniqueId());
         mReadOnly = prompt.isReadOnly();
         setupChangeListener();

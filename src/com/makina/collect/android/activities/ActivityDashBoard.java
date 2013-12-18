@@ -24,7 +24,9 @@ import android.text.Html;
 import android.util.AttributeSet;
 import android.view.InflateException;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -36,9 +38,10 @@ import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.utilities.Finish;
+import com.makina.collect.android.views.CustomFontTextview;
 
-public class ActivityDashBoard extends SherlockActivity {
-
+public class ActivityDashBoard extends SherlockActivity
+{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +67,9 @@ public class ActivityDashBoard extends SherlockActivity {
 				startActivity(new Intent(getApplicationContext(), ActivityDownloadForm.class));
 			}
 		});
+        
+        
+        
         
         RelativeLayout relativeLayout_edit=(RelativeLayout)findViewById(R.id.relativeLayout_edit);
         relativeLayout_edit.setOnClickListener(new View.OnClickListener()

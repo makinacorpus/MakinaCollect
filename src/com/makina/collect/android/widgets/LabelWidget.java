@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2011 University of Washington
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package com.makina.collect.android.widgets;
 
 import java.io.File;
@@ -37,11 +23,11 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.utilities.FileUtils;
+import com.makina.collect.android.views.CustomFontTextview;
 
 /**
  * The Label Widget does not return an answer. The purpose of this widget is to be the top entry in
@@ -58,10 +44,10 @@ public class LabelWidget extends QuestionWidget {
     LinearLayout questionLayout;
     Vector<SelectChoice> mItems;
 
-    private TextView mQuestionText;
-    private TextView mMissingImage;
+    private CustomFontTextview mQuestionText;
+    private CustomFontTextview mMissingImage;
     private ImageView mImageView;
-    private TextView label;
+    private CustomFontTextview label;
 
 
     public LabelWidget(Context context, WidgetAnsweredListener widgetAnsweredListener, FormEntryPrompt prompt) {
@@ -131,7 +117,7 @@ public class LabelWidget extends QuestionWidget {
                         if (errorMsg != null) {
                             // errorMsg is only set when an error has occured
                             Log.e(t, errorMsg);
-                            mMissingImage = new TextView(getContext());
+                            mMissingImage = new CustomFontTextview(getContext());
                             mMissingImage.setText(errorMsg);
 
                             mMissingImage.setPadding(2, 2, 2, 2);
@@ -147,7 +133,7 @@ public class LabelWidget extends QuestionWidget {
 
                 // build text label. Don't assign the text to the built in label to he
                 // button because it aligns horizontally, and we want the label on top
-                label = new TextView(getContext());
+                label = new CustomFontTextview(getContext());
                 label.setText(prompt.getSelectChoiceText(mItems.get(i)));
                 label.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mQuestionFontsize);
                 label.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -226,7 +212,7 @@ public class LabelWidget extends QuestionWidget {
 	protected void addQuestionText(FormEntryPrompt p) {
 
         // Add the text view. Textview always exists, regardless of whether there's text.
-        mQuestionText = new TextView(getContext());
+        mQuestionText = new CustomFontTextview(getContext());
         mQuestionText.setText(p.getLongText());
         mQuestionText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mQuestionFontsize);
         mQuestionText.setTypeface(null, Typeface.BOLD);

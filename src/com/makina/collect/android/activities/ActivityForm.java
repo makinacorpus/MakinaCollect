@@ -256,11 +256,18 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 
 		setContentView(R.layout.activity_form_entry);
 		
-		int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
+		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
+        getSupportActionBar().setTitle(getString(R.string.edit));
+        int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	actionbarTitle.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		
+    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGreenEdit));
+    	actionbarTitle.setTypeface(typeFace);
+    	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
+    	TextView actionbarSubTitle = (TextView)findViewById(titleId);
+    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+    	actionbarSubTitle.setTypeface(typeFace);
+    	getSupportActionBar().setSubtitle(getString(R.string.form));
+    	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		textView_quiz_question_number=(CustomFontTextview)findViewById(R.id.textView_quiz_question_number);
 		
@@ -951,13 +958,10 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 */
 	private ScrollView createView(int event, boolean advancingPage)
 	{
-		
-	
 		FormController formController = Collect.getInstance().getFormController();
 		CustomFontTextview textView_quiz_name = ((CustomFontTextview) findViewById(R.id.textView_quiz_name));
 		textView_quiz_name.setText(formController.getFormTitle());
 		textView_quiz_question_number.setText(current_page+"/"+size);
-		setTitle(formController.getFormTitle());
 		
 		switch (event)
 		{
@@ -1500,7 +1504,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		View view = inflater.inflate(R.layout.widget_toast, null);
 
 		// set the text in the view
-		TextView tv = (TextView) view.findViewById(R.id.message);
+		CustomFontTextview tv = (CustomFontTextview) view.findViewById(R.id.message);
 		tv.setText(message);
 
 		Toast t = new Toast(this);

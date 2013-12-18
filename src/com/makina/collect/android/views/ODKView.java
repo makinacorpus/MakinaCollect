@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2011 University of Washington
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package com.makina.collect.android.views;
 
 import java.util.ArrayList;
@@ -34,7 +20,6 @@ import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
@@ -195,7 +180,7 @@ public class ODKView extends ScrollView implements OnLongClickListener {
 
         // build view
         if (s.length() > 0) {
-            TextView tv = new TextView(getContext());
+        	CustomFontTextview tv = new CustomFontTextview(getContext());
             tv.setText(s.substring(0, s.length() - 3));
             int questionFontsize = Collect.getQuestionFontsize();
             tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, questionFontsize - 4);
