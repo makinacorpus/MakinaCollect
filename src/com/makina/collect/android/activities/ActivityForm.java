@@ -800,6 +800,9 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 				.getFormController();
 		switch (item.getItemId())
 		{
+		case R.id.menu_save:
+			saveDataToDisk(DO_NOT_EXIT, isInstanceComplete(false), null);
+		return true;
 		case R.id.menu_hierachy:
 			Collect.getInstance().getActivityLogger().logInstanceAction(this, "onOptionsItemSelected","MENU_HIERARCHY_VIEW");
 			if (formController.currentPromptIsQuestion())

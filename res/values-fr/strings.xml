@@ -71,7 +71,7 @@ License.
 <string name="discard_group">Enlever le groupe</string>
 <string name="download">Télécharger celui sélectionné</string>
 <string name="download_forms_result">Resultat du téléchargement</string>
-<string name="downloading_data">connexion au serveur…</string>
+<string name="downloading_data">Connexion au serveur…</string>
 <string name="do_not_change">Annuler</string>
 <string name="do_not_exit">Annuler</string>
 <string name="do_not_save">Ignorer les changements</string>

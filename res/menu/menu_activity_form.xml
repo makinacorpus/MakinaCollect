@@ -12,10 +12,15 @@
         android:showAsAction="always"
         android:title="@string/raz"/>
     <item
-         android:icon="@drawable/abs__ic_menu_moreoverflow_normal_holo_light"
+        android:icon="@drawable/abs__ic_menu_moreoverflow_normal_holo_light"
         android:orderInCategory="100"
         android:showAsAction="ifRoom|withText">
         <menu android:popupBackground="@drawable/white" >
+            <item
+                android:id="@+id/menu_save"
+                android:icon="@drawable/actionbar_save"
+                android:showAsAction="ifRoom|withText"
+                android:title="@string/save"/>
             <item
                 android:id="@+id/menu_settings"
                 android:icon="@drawable/actionbar_settings"

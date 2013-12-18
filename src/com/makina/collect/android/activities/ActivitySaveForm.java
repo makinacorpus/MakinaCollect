@@ -48,6 +48,7 @@ import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.utilities.Finish;
+import com.makina.collect.android.views.CustomFontTextview;
 /**
  * Responsible for displaying all the valid instances in the instance directory.
  * 
@@ -142,7 +143,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         
     	Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    	getSupportActionBar().setTitle(getString(R.string.my_forms));
+    	getSupportActionBar().setTitle(getString(R.string.my_forms_send));
     	int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
     	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
@@ -170,6 +171,16 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         // render total instance view
         SimpleCursorAdapter instances =new SimpleCursorAdapter(this, R.layout.listview_item_save_form, c, data, view);
         setListAdapter(instances);
+        
+        CustomFontTextview textview_download_form=(CustomFontTextview) findViewById(R.id.textview_download_form);
+        textview_download_form.setOnClickListener(new View.OnClickListener()
+        {
+			@Override
+			public void onClick(View arg0)
+			{
+				startActivity(new Intent(getApplicationContext(), ActivityDownloadForm.class));
+			}
+		});
     }
     
 

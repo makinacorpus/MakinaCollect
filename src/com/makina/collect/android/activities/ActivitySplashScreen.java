@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
@@ -41,6 +42,7 @@ public class ActivitySplashScreen extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash_screen);
         
+        Toast.makeText(getApplicationContext(), getString(R.string.size), Toast.LENGTH_SHORT).show();
         Countly.sharedInstance().init(getApplicationContext(), "http://countly.makina-corpus.net", "279676abcbba16c3ee5e2b113a990fe579ddc527");
         
         // must be at the beginning of any activity that can be called from an external intent
