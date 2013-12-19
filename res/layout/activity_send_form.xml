@@ -85,11 +85,27 @@ the License.
             android:layout_toRightOf="@id/linear_blue" />
     </RelativeLayout>
 
-    <ImageView
+    <LinearLayout
         android:id="@android:id/empty"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:src="@drawable/no_list" />
+        android:layout_centerVertical="true"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/no_list" />
+
+        <com.makina.collect.android.views.CustomFontTextview
+            android:id="@+id/textview_download_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/clic_here_to_download"
+            android:textColor="@color/actionbarTitleColorGris"
+            android:textSize="22sp" />
+    </LinearLayout>
 
 </RelativeLayout>

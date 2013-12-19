@@ -498,7 +498,8 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 							// see if any of these savepoints are for a
 							// filled-in form that has never been
 							// explicitly saved by the user...
-							for (int i = 0; i < files.length; ++i) {
+							for (int i = 0; i < files.length; ++i)
+							{
 								File candidate = files[i];
 								String instanceDirName = candidate.getName()
 										.substring(
@@ -2227,23 +2228,20 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			createQuitDialog();
 			return true;
 		case KeyEvent.KEYCODE_DPAD_RIGHT:
-			if (event.isAltPressed() && !mBeenSwiped) {
+			if (event.isAltPressed() && !mBeenSwiped)
+			{
 				mBeenSwiped = true;
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(this,
-								"onKeyDown.KEYCODE_DPAD_RIGHT", "showNext");
+				Collect.getInstance().getActivityLogger().logInstanceAction(this,"onKeyDown.KEYCODE_DPAD_RIGHT", "showNext");
 				showNextView();
+				
 				return true;
 			}
 			break;
 		case KeyEvent.KEYCODE_DPAD_LEFT:
-			if (event.isAltPressed() && !mBeenSwiped) {
+			if (event.isAltPressed() && !mBeenSwiped)
+			{
 				mBeenSwiped = true;
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(this, "onKeyDown.KEYCODE_DPAD_LEFT",
-								"showPrevious");
+				Collect.getInstance().getActivityLogger().logInstanceAction(this, "onKeyDown.KEYCODE_DPAD_LEFT","showPrevious");
 				showPreviousView();
 				return true;
 			}
@@ -2647,38 +2645,35 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 				return false;
 			}
 
-			if ((Math.abs(e1.getX() - e2.getX()) > xPixelLimit && Math.abs(e1
-					.getY() - e2.getY()) < yPixelLimit)
-					|| Math.abs(e1.getX() - e2.getX()) > xPixelLimit * 2) {
+			if ((Math.abs(e1.getX() - e2.getX()) > xPixelLimit && Math.abs(e1.getY() - e2.getY()) < yPixelLimit)|| Math.abs(e1.getX() - e2.getX()) > xPixelLimit * 2)
+			{
 				mBeenSwiped = true;
-				if (velocityX > 0) {
-					if (e1.getX() > e2.getX()) {
-						Log.e(t,
-								"showNextView VelocityX is bogus! " + e1.getX()
-										+ " > " + e2.getX());
-						Collect.getInstance().getActivityLogger()
-								.logInstanceAction(this, "onFling", "showNext");
+				if (velocityX > 0)
+				{
+					if (e1.getX() > e2.getX())
+					{
+						Collect.getInstance().getActivityLogger().logInstanceAction(this, "onFling", "showNext");
 						showNextView();
-					} else {
-						Collect.getInstance()
-								.getActivityLogger()
-								.logInstanceAction(this, "onFling",
-										"showPrevious");
+					}
+					else if (current_page>1)
+					{
+						Collect.getInstance().getActivityLogger().logInstanceAction(this, "onFling","showPrevious");
 						showPreviousView();
 					}
-				} else {
-					if (e1.getX() < e2.getX()) {
-						Log.e(t,
-								"showPreviousView VelocityX is bogus! "
-										+ e1.getX() + " < " + e2.getX());
-						Collect.getInstance()
-								.getActivityLogger()
-								.logInstanceAction(this, "onFling",
-										"showPrevious");
+				}
+				else
+				{
+					if (e1.getX() < e2.getX())
+					{
+						if (current_page>1) 
+						{
+						Collect.getInstance().getActivityLogger().logInstanceAction(this, "onFling","showPrevious");
 						showPreviousView();
-					} else {
-						Collect.getInstance().getActivityLogger()
-								.logInstanceAction(this, "onFling", "showNext");
+						}
+					}
+					else
+					{
+						Collect.getInstance().getActivityLogger().logInstanceAction(this, "onFling", "showNext");
 						showNextView();
 					}
 				}
