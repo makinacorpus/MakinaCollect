@@ -178,8 +178,12 @@ public class FormsProvider extends ContentProvider {
         }
     }
 
-    private DatabaseHelper mDbHelper;
+    private static DatabaseHelper mDbHelper;
 
+    public FormsProvider()
+    {
+    	mDbHelper = new DatabaseHelper(DATABASE_NAME);
+    }
 
     @Override
     public boolean onCreate() {
@@ -330,7 +334,7 @@ public class FormsProvider extends ContentProvider {
     }
 
 
-    private void deleteFileOrDir(String fileName) {
+    public static void deleteFileOrDir(String fileName) {
         File file = new File(fileName);
         if (file.exists()) {
             if (file.isDirectory()) {
@@ -561,6 +565,12 @@ public class FormsProvider extends ContentProvider {
         return count;
     }
 
+    public static void deleteForm(String form_name)
+    {
+    	mDbHelper=new DatabaseHelper(DATABASE_NAME);
+    	SQLiteDatabase db = mDbHelper.getWritableDatabase();
+    	db.delete(FORMS_TABLE_NAME, FormsColumns.DISPLAY_NAME +"='"+form_name+"'", null);
+    }
     static {
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         sUriMatcher.addURI(FormsProviderAPI.AUTHORITY, "forms", FORMS);

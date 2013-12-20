@@ -14,6 +14,8 @@
 
 package com.makina.collect.android.activities;
 
+import java.io.File;
+
 import com.WazaBe.HoloEverywhere.app.AlertDialog;
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
@@ -25,16 +27,20 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.BaseColumns;
 import android.util.AttributeSet;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter; 
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
@@ -45,10 +51,17 @@ import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.dialog.Help;
 import com.makina.collect.android.dialog.HelpWithConfirmation;
 import com.makina.collect.android.preferences.ActivityPreferences;
+import com.makina.collect.android.provider.FormsProvider;
+import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.provider.InstanceProviderAPI;
+import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.views.CustomFontTextview;
+
+import de.timroes.swipetodismiss.SwipeDismissList;
+import de.timroes.swipetodismiss.SwipeDismissList.UndoMode;
+import de.timroes.swipetodismiss.SwipeDismissList.Undoable;
 /**
  * Responsible for displaying all the valid instances in the instance directory.
  * 
@@ -57,11 +70,11 @@ import com.makina.collect.android.views.CustomFontTextview;
  */
 public class ActivitySaveForm extends SherlockListActivity implements SearchView.OnQueryTextListener{
 
-    private static final boolean EXIT = true;
-    private static final boolean DO_NOT_EXIT = false;
-    private AlertDialog mAlertDialog;
+	private AlertDialog mAlertDialog;
     private Cursor c;
     private  SearchView mSearchView;
+    private int titleId,subTitleId;
+    private SimpleCursorAdapter instances;
     
     @SuppressLint("NewApi")
 	@Override
@@ -141,37 +154,29 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         super.onCreate(savedInstanceState);
     	setContentView(R.layout.activity_save_form);
         
-    	Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    	getSupportActionBar().setTitle(getString(R.string.my_forms_send));
-    	int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
-    	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
-    	actionbarTitle.setTypeface(typeFace);
-    	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-    	TextView actionbarSubTitle = (TextView)findViewById(titleId);
-    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorBlueSave));
-    	actionbarSubTitle.setTypeface(typeFace);
-    	getSupportActionBar().setSubtitle(getString(R.string.saved));
-    	
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_saved", false))
     		HelpWithConfirmation.helpDialog(this, getString(R.string.help_saved));
     	
-        /*TextView tv = (TextView) findViewById(R.id.status_text);
-        tv.setVisibility(View.GONE);*/
-        
-    	String selectionArgs[] = { InstanceProviderAPI.STATUS_INCOMPLETE};
-        String selection = InstanceColumns.STATUS + " = ?";
-        //String[] selectionArgs = {InstanceProviderAPI.STATUS_SUBMITTED};
-        String sortOrder = InstanceColumns.STATUS + " DESC, " + InstanceColumns.DISPLAY_NAME + " ASC";
-        Cursor c = managedQuery(InstanceColumns.CONTENT_URI, null, selection, selectionArgs, sortOrder);
-
-        String[] data = new String[] {InstanceColumns.DISPLAY_NAME, InstanceColumns.DISPLAY_SUBTEXT};
-        int[] view = new int[] { R.id.text1, R.id.text2 };
-
-        // render total instance view
-        SimpleCursorAdapter instances =new SimpleCursorAdapter(this, R.layout.listview_item_save_form, c, data, view);
-        setListAdapter(instances);
+    	Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    	getSupportActionBar().setTitle(getString(R.string.my_forms_send));
+    	titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
+    	TextView actionbarTitle = (TextView)findViewById(titleId);
+    	if (actionbarTitle!=null)
+    	{
+	    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+	    	actionbarTitle.setTypeface(typeFace);
+    	}
+    	subTitleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
+    	TextView actionbarSubTitle = (TextView)findViewById(subTitleId);
+    	if (actionbarSubTitle!=null)
+    	{
+	    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorBlueSave));
+	    	actionbarSubTitle.setTypeface(typeFace);
+    	}
+    	getSupportActionBar().setSubtitle(getString(R.string.saved));
+    	
+    	loadListView();
         
         CustomFontTextview textview_download_form=(CustomFontTextview) findViewById(R.id.textview_download_form);
         textview_download_form.setOnClickListener(new View.OnClickListener()
@@ -182,9 +187,67 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 				startActivity(new Intent(getApplicationContext(), ActivityDownloadForm.class));
 			}
 		});
+        
+        getListView().setOnItemLongClickListener(new OnItemLongClickListener()
+        {
+        	@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int position, long arg3)
+			{
+				// TODO Auto-generated method stub
+        		createDialogDelete(position);
+        		return false;
+			}
+		});
+        
+        SwipeDismissList.OnDismissCallback callback = new SwipeDismissList.OnDismissCallback()
+        {
+            @Override
+			public Undoable onDismiss(AbsListView listView, int position)
+			{
+				// TODO Auto-generated method stub
+				createDialogDelete(position);
+				return null;
+			}
+        };
+        UndoMode mode = SwipeDismissList.UndoMode.SINGLE_UNDO;
+        SwipeDismissList swipeList = new SwipeDismissList(getListView(), callback, mode);
     }
     
+    private void createDialogDelete(int position)
+    {
+    	final Cursor c=instances.getCursor();
+		c.moveToPosition(position);
+		AlertDialog.Builder adb = new AlertDialog.Builder(ActivitySaveForm.this);
+		adb.setTitle("Suppression");
+		adb.setMessage("Voulez-vous vraiment supprimer "+c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))+" ?");
+		adb.setNegativeButton(getString(android.R.string.cancel),null);
 
+		adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
+		{
+			public void onClick(DialogInterface dialog,int which)
+			{
+				InstanceProvider.deleteInstance(c.getLong(c.getColumnIndex(BaseColumns._ID)));
+				loadListView();
+			}
+		});
+		adb.show();
+    }
+    private void loadListView()
+    {
+    	String selectionArgs[] = { InstanceProviderAPI.STATUS_INCOMPLETE};
+        String selection = InstanceColumns.STATUS + " = ?";
+        //String[] selectionArgs = {InstanceProviderAPI.STATUS_SUBMITTED};
+        String sortOrder = InstanceColumns.STATUS + " DESC, " + InstanceColumns.DISPLAY_NAME + " ASC";
+        Cursor c = managedQuery(InstanceColumns.CONTENT_URI, null, selection, selectionArgs, sortOrder);
+
+        String[] data = new String[] {InstanceColumns.DISPLAY_NAME, InstanceColumns.DISPLAY_SUBTEXT};
+        int[] view = new int[] { R.id.text1, R.id.text2 };
+
+        // render total instance view
+        instances =new SimpleCursorAdapter(this, R.layout.listview_item_save_form, c, data, view);
+        setListAdapter(instances);
+    }
+    
     @Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
@@ -198,43 +261,15 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 	public void onListItemClick(ListView listView, View view, int position, long id) {
         c = (Cursor) getListAdapter().getItem(position);
         startManagingCursor(c);
-        Uri instanceUri =
-            ContentUris.withAppendedId(InstanceColumns.CONTENT_URI,
-                c.getLong(c.getColumnIndex(BaseColumns._ID)));
+        Uri instanceUri =ContentUris.withAppendedId(InstanceColumns.CONTENT_URI,c.getLong(c.getColumnIndex(BaseColumns._ID)));
 
         Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", instanceUri.toString());
 
-        String action = getIntent().getAction();
-        if (Intent.ACTION_PICK.equals(action))
-        {
-            // caller is waiting on a picked form
-            setResult(RESULT_OK, new Intent().setData(instanceUri));
-        }
-        else
-        {
-            // the form can be edited if it is incomplete or if, when it was
-            // marked as complete, it was determined that it could be edited
-            // later.
-            String status = c.getString(c.getColumnIndex(InstanceColumns.STATUS));
-            String strCanEditWhenComplete = c.getString(c.getColumnIndex(InstanceColumns.CAN_EDIT_WHEN_COMPLETE));
-
-            boolean canEdit = status.equals(InstanceProviderAPI.STATUS_INCOMPLETE) || Boolean.parseBoolean(strCanEditWhenComplete);
-            if (!canEdit)
-            {
-            	createErrorDialog(getString(R.string.cannot_edit_completed_form), DO_NOT_EXIT);
-            	return;
-            }
-            else
-            {
-            // caller wants to view/edit a form, so launch formentryactivity
-            	Intent intent=new Intent(Intent.ACTION_EDIT, instanceUri);
-            	Bundle bundle=new Bundle();
-            	bundle.putLong("id", c.getLong(c.getColumnIndex(BaseColumns._ID)));
-            	intent.putExtras(bundle);
-            	startActivity(intent);
-            	
-            }
-        }
+        Intent intent=new Intent(Intent.ACTION_EDIT, instanceUri);
+    	Bundle bundle=new Bundle();
+    	bundle.putLong("id", c.getLong(c.getColumnIndex(BaseColumns._ID)));
+    	intent.putExtras(bundle);
+    	startActivity(intent);
         //TODO 
         //getActivity().finish();
     }
@@ -305,7 +340,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 	public boolean onQueryTextSubmit(String query) {
 		// TODO Auto-generated method stub
 		return false;
-	}  
+	}
 
 
 }

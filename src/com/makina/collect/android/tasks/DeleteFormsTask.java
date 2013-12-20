@@ -63,7 +63,7 @@ public class DeleteFormsTask extends AsyncTask<Long, Void, Integer> {
 	            
 	            if (wasDeleted > 0)
 	            {
-	            	InstanceProvider.supprimerZgaw(params[i]);
+	            	InstanceProvider.deleteInstance(params[i]);
 	            	Collect.getInstance().getActivityLogger().logAction(this, "delete", deleteForm.toString());
 	            }
 			} catch ( Exception ex ) {

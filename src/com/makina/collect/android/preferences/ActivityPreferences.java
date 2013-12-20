@@ -175,7 +175,8 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 		setTitle(getString(R.string.settings));
 		int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	actionbarTitle.setTypeface(typeFace);
+    	if (actionbarTitle!=null)
+    		actionbarTitle.setTypeface(typeFace);
 		
 		// not super safe, but we're just putting in this mode to help
 		// administrate

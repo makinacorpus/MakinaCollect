@@ -331,14 +331,14 @@ public class InstanceProvider extends ContentProvider {
 		return id;
     }
     
-    public static void supprimerZgaw()
+    public static void deleteAllInstances()
     {
     	SQLiteDatabase db = mDbHelper.getWritableDatabase();
     	db.delete(INSTANCES_TABLE_NAME, null, null);
     	db.close();
     }
     
-    public static void supprimerZgaw(long id)
+    public static void deleteInstance(long id)
     {
     	SQLiteDatabase db = mDbHelper.getWritableDatabase();
     	db.delete(INSTANCES_TABLE_NAME,  BaseColumns._ID+"="+id, null);

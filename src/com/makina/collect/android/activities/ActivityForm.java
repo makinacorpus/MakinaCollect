@@ -51,13 +51,11 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.provider.BaseColumns;
 import android.provider.MediaStore.MediaColumns;
 import android.text.InputFilter;
 import android.text.Spanned;
-import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -65,7 +63,6 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.Gravity;
-import android.view.InflateException;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -181,8 +178,6 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	public static final String KEY_XPATH = "xpath";
 	public static final String KEY_XPATH_WAITING_FOR_DATA = "xpathwaiting";
 
-	private static final int MENU_HIERARCHY_VIEW = Menu.FIRST + 1;
-	private static final int MENU_SAVE = Menu.FIRST + 2;
 
 	private static final int PROGRESS_DIALOG = 1;
 	private static final int SAVING_DIALOG = 2;
@@ -203,7 +198,6 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	private AlertDialog mAlertDialog;
 	private ProgressDialog mProgressDialog;
 	private String mErrorMessage;
-	private Menu menu;
 	private int mY;
 
 	// used to limit forward/backward swipes to one per question
@@ -218,8 +212,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	private ImageView mBackButton;
 	
 	private boolean mAnswersChanged;
-	private boolean mToFormChooser;
-	private int size=0,current_page=1;
+	private int size=0;
 	private CustomFontTextview textView_quiz_question_number;
 	
 	enum AnimationType {
@@ -233,7 +226,6 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	private String mAlertMsg;
 	 private final static int AUTH_DIALOG = 2;
 	 private HashMap<String, String> mUploadedInstances;
-	 private String mUrl;
 	 private boolean send=false,restart=false;
 
 	/** Called when the activity is first created. */
@@ -247,9 +239,12 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		
 		// must be at the beginning of any activity that can be called from an
 		// external intent
-		try {
+		try
+		{
 			Collect.createODKDirs();
-		} catch (RuntimeException e) {
+		}
+		catch (RuntimeException e)
+		{
 			createErrorDialog(e.getMessage(), EXIT);
 			return;
 		}
@@ -260,12 +255,18 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
         getSupportActionBar().setTitle(getString(R.string.edit));
         int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGreenEdit));
-    	actionbarTitle.setTypeface(typeFace);
+    	if (actionbarTitle!=null)
+    	{
+	    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGreenEdit));
+	    	actionbarTitle.setTypeface(typeFace);
+    	}
     	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
     	TextView actionbarSubTitle = (TextView)findViewById(titleId);
-    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
-    	actionbarSubTitle.setTypeface(typeFace);
+    	if (actionbarSubTitle!=null)
+    	{
+	    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+	    	actionbarSubTitle.setTypeface(typeFace);
+    	}
     	getSupportActionBar().setSubtitle(getString(R.string.form));
     	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
@@ -274,13 +275,6 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		
 		Intent intent = getIntent();
 		
-		if (intent != null && intent.getExtras() != null) {
-			if (intent.hasExtra("newForm")){
-				mToFormChooser = true;
-			}
-		}else{
-			mToFormChooser = false;
-		}
 		
 		mBeenSwiped = false;
 		mAlertDialog = null;
@@ -347,7 +341,8 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 
 		// If a parse error message is showing then nothing else is loaded
 		// Dialogs mid form just disappear on rotation.
-		if (mErrorMessage != null) {
+		if (mErrorMessage != null)
+		{
 			createErrorDialog(mErrorMessage, EXIT);
 			return;
 		}
@@ -758,7 +753,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			Bundle extra = getIntent().getExtras();
 			if (extra!=null)
 			{
-				InstanceProvider.supprimerZgaw(extra.getLong("id"));
+				InstanceProvider.deleteInstance(extra.getLong("id"));
 			}
 		}
 	}
@@ -962,55 +957,11 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		FormController formController = Collect.getInstance().getFormController();
 		CustomFontTextview textView_quiz_name = ((CustomFontTextview) findViewById(R.id.textView_quiz_name));
 		textView_quiz_name.setText(formController.getFormTitle());
-		textView_quiz_question_number.setText(current_page+"/"+size);
+		textView_quiz_question_number.setText("1/"+size);
 		
 		switch (event)
 		{
-		/*case FormEntryController.EVENT_BEGINNING_OF_FORM:
-			ScrollView startView = (ScrollView) View.inflate(this, R.layout.activity_form_entry_start, null);
-			setTitle(getString(R.string.app_name) + " > "+ formController.getFormTitle());
-
-			Drawable image = null;
-			File mediaFolder = formController.getMediaFolder();
-			String mediaDir = mediaFolder.getAbsolutePath();
-			BitmapDrawable bitImage = null;
-			// attempt to load the form-specific logo...
-			// this is arbitrarily silly
-			bitImage = new BitmapDrawable(mediaDir + File.separator+ "form_logo.png");
-
-			if (bitImage != null && bitImage.getBitmap() != null
-					&& bitImage.getIntrinsicHeight() > 0
-					&& bitImage.getIntrinsicWidth() > 0) {
-				image = bitImage;
-			}
-
-			if (image == null) {
-				// show the opendatakit zig...
-				// image =
-				// getResources().getDrawable(R.drawable.opendatakit_zig);
-				((ImageView) startView.findViewById(R.id.form_start_bling))
-						.setVisibility(View.GONE);
-			} else {
-				ImageView v = ((ImageView) startView
-						.findViewById(R.id.form_start_bling));
-				v.setImageDrawable(image);
-				v.setContentDescription(formController.getFormTitle());
-			}
-
-			// change start screen based on navigation prefs
-			String navigationChoice = PreferenceManager.getDefaultSharedPreferences(this).getString(PreferencesActivity.KEY_NAVIGATION, PreferencesActivity.KEY_NAVIGATION);
-			
-			ImageView ia = ((ImageView) startView.findViewById(R.id.image_advance));
-			
-
-
-			mBackButton.setVisibility(View.GONE);
-			mNextButton.setVisibility(View.VISIBLE);
-			
-			textView_quiz_name=(TextView)findViewById(R.id.textView_quiz_name);
-			textView_quiz_name.setText(formController.getFormTitle());
-			return startView;*/
-		case FormEntryController.EVENT_END_OF_FORM:
+			case FormEntryController.EVENT_END_OF_FORM:
 			ScrollView endView = (ScrollView) View.inflate(this, R.layout.activity_form_entry_end, null);
 			((CustomFontTextview) endView.findViewById(R.id.description))
 					.setText(getString(R.string.save_enter_data_description,
@@ -1203,14 +1154,14 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	
 		ScrollView next;
 		int event = formController.stepToNextScreenEvent();
-		if (current_page<size)
+		/*if (current_page<size)
 		{
 			current_page++;
 			mBackButton.setVisibility(View.VISIBLE);
 		}
 		else
-			mNextButton.setVisibility(View.GONE);
-		textView_quiz_question_number.setText(current_page+"/"+size);
+			mNextButton.setVisibility(View.GONE);*/
+		//textView_quiz_question_number.setText(current_page+"/"+size);
 		switch (event) {
 		case FormEntryController.EVENT_QUESTION:
 		case FormEntryController.EVENT_GROUP:
@@ -1229,9 +1180,9 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			break;
 		case FormEntryController.EVENT_PROMPT_NEW_REPEAT:
 			createRepeatDialog();
-			if (current_page!=1)
+			/*if (current_page!=1)
 				current_page--;
-			textView_quiz_question_number.setText(current_page+"/"+size);
+			textView_quiz_question_number.setText(current_page+"/"+size);*/
 			break;
 		case FormEntryController.EVENT_REPEAT_JUNCTURE:
 			Log.i(t, "repeat juncture: "
@@ -1300,7 +1251,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 */
 	private void showPreviousView() {
 		FormController formController = Collect.getInstance().getFormController();
-		if (current_page>2)
+		/*if (current_page>2)
 		{
 			current_page--;
 			mNextButton.setVisibility(View.VISIBLE);
@@ -1312,7 +1263,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		}
 		else
 			mBackButton.setVisibility(View.GONE);
-		textView_quiz_question_number.setText(current_page+"/"+size);
+		textView_quiz_question_number.setText(current_page+"/"+size);*/
 		// The answer is saved on a back swipe, but question constraints are
 		// ignored.
 		if (formController.currentPromptIsQuestion()) {
@@ -1520,7 +1471,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 * repeat of the current group.
 	 */
 	private void createRepeatDialog() {
-		current_page++;
+		//current_page++;
 		FormController formController = Collect.getInstance()
 				.getFormController();
 		Collect.getInstance().getActivityLogger()
@@ -2195,8 +2146,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		if (mSaveToDiskTask != null) {
 			mSaveToDiskTask.setFormSavedListener(this);
 		}
-		if (mErrorMessage != null
-				&& (mAlertDialog != null && !mAlertDialog.isShowing())) {
+		if (mErrorMessage != null && (mAlertDialog != null && !mAlertDialog.isShowing())) {
 			createErrorDialog(mErrorMessage, EXIT);
 			return;
 		}
@@ -2655,21 +2605,21 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 						Collect.getInstance().getActivityLogger().logInstanceAction(this, "onFling", "showNext");
 						showNextView();
 					}
-					else if (current_page>1)
-					{
+					/*else if (current_page>1)
+					{*/
 						Collect.getInstance().getActivityLogger().logInstanceAction(this, "onFling","showPrevious");
 						showPreviousView();
-					}
+					//}
 				}
 				else
 				{
 					if (e1.getX() < e2.getX())
 					{
-						if (current_page>1) 
-						{
+						/*if (current_page>1) 
+						{*/
 						Collect.getInstance().getActivityLogger().logInstanceAction(this, "onFling","showPrevious");
 						showPreviousView();
-						}
+						//}
 					}
 					else
 					{
@@ -2882,7 +2832,6 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
         }
         mInstancesToSend = updatedToSend;
 
-        mUrl = url.toString();
         showDialog(AUTH_DIALOG);
 		
 	}

@@ -24,9 +24,7 @@ import android.text.Html;
 import android.util.AttributeSet;
 import android.view.InflateException;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -38,21 +36,23 @@ import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.utilities.Finish;
-import com.makina.collect.android.views.CustomFontTextview;
 
 public class ActivityDashBoard extends SherlockActivity
 {
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        // this splash screen should be a blank slate
         
         Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
         getSupportActionBar().setTitle(getString(R.string.app_name));
     	int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	actionbarTitle.setText(Html.fromHtml("<strong><font color=\"#C2EA60\">Makina</font> <font color=\"#1B8FAA\">Collect</font></strong>"));
-    	actionbarTitle.setTypeface(typeFace);
+    	if (actionbarTitle!=null)
+    	{
+	    	actionbarTitle.setText(Html.fromHtml("<strong><font color=\"#C2EA60\">Makina</font> <font color=\"#1B8FAA\">Collect</font></strong>"));
+	    	actionbarTitle.setTypeface(typeFace);
+    	}
     	
         setContentView(R.layout.activity_dashboard);
         Finish.activityDashBoard=this;

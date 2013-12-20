@@ -44,6 +44,8 @@ import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -53,6 +55,7 @@ import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
@@ -65,7 +68,9 @@ import com.makina.collect.android.dialog.HelpWithConfirmation;
 import com.makina.collect.android.listeners.DeleteInstancesListener;
 import com.makina.collect.android.listeners.InstanceUploaderListener;
 import com.makina.collect.android.preferences.ActivityPreferences;
+import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.provider.InstanceProviderAPI;
+import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.receivers.NetworkReceiver;
 import com.makina.collect.android.tasks.DeleteInstancesTask;
@@ -73,6 +78,10 @@ import com.makina.collect.android.tasks.InstanceUploaderTask;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.WebUtils;
 import com.makina.collect.android.views.CustomFontTextview;
+
+import de.timroes.swipetodismiss.SwipeDismissList;
+import de.timroes.swipetodismiss.SwipeDismissList.UndoMode;
+import de.timroes.swipetodismiss.SwipeDismissList.Undoable;
 
 /**
  * Responsible for displaying all the valid forms in the forms directory. Stores
@@ -89,8 +98,6 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 	
 	private static final String BUNDLE_SELECTED_ITEMS_KEY = "selected_items";
 	private static final String BUNDLE_TOGGLED_KEY = "toggled";
-
-	private static final int MENU_PREFERENCES = Menu.FIRST;
 	private static final int INSTANCE_UPLOADER = 0;
 	
 	private ProgressDialog mProgressDialog;
@@ -108,17 +115,16 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 	private TextView textView_pannier;
 	private final int PROGRESS_DIALOG=1;
 	
-	 private HashMap<String, String> mUploadedInstances;
-	 private final static int AUTH_DIALOG = 2;
-	 private String mUrl;
-	 private final static String AUTH_URI = "auth";
-	    private static final String ALERT_MSG = "alertmsg";
-	    private static final String ALERT_SHOWING = "alertshowing";
-	    private static final String TO_SEND = "tosend";
-	    private boolean mAlertShowing;
-	    private long[] instanceIDs;
-	    private Long[] mInstancesToSend;
-	    private InstanceUploaderTask mInstanceUploaderTask ;
+	private HashMap<String, String> mUploadedInstances;
+	private final static int AUTH_DIALOG = 2;
+	private String mUrl;
+	private final static String AUTH_URI = "auth";
+    private static final String ALERT_MSG = "alertmsg";
+    private static final String ALERT_SHOWING = "alertshowing";
+    private boolean mAlertShowing;
+    private long[] instanceIDs;
+    private Long[] mInstancesToSend;
+    private InstanceUploaderTask mInstanceUploaderTask ;
 
 	public Cursor getAllCursor(String condition_search) {
 		// get all complete or failed submission instances
@@ -216,12 +222,18 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
     	getSupportActionBar().setTitle(getString(R.string.box));
     	int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
+    	if (actionbarTitle!=null)
+    	{
     	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
     	actionbarTitle.setTypeface(typeFace);
+    	}
     	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
     	TextView actionbarSubTitle = (TextView)findViewById(titleId);
-    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorBlueSend));
-    	actionbarSubTitle.setTypeface(typeFace);
+    	if (actionbarSubTitle!=null)
+    	{
+	    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorBlueSend));
+	    	actionbarSubTitle.setTypeface(typeFace);
+    	}
     	getSupportActionBar().setSubtitle(getString(R.string.send));
         
     	mProgressDialog = new ProgressDialog(this);
@@ -280,12 +292,53 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 			}
 		});
 		
+        getListView().setOnItemLongClickListener(new OnItemLongClickListener()
+        {
+        	@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int position, long arg3)
+			{
+				// TODO Auto-generated method stub
+        		createDialogDelete(position);
+        		return false;
+			}
+		});
+        
+        SwipeDismissList.OnDismissCallback callback = new SwipeDismissList.OnDismissCallback()
+        {
+            @Override
+			public Undoable onDismiss(AbsListView listView, int position)
+			{
+				// TODO Auto-generated method stub
+				createDialogDelete(position);
+				return null;
+			}
+        };
+        UndoMode mode = SwipeDismissList.UndoMode.SINGLE_UNDO;
+        SwipeDismissList swipeList = new SwipeDismissList(getListView(), callback, mode);
 	}
 	
-	
+	private void createDialogDelete(int position)
+    {
+    	final Cursor c=mInstances.getCursor();
+		c.moveToPosition(position);
+		AlertDialog.Builder adb = new AlertDialog.Builder(ActivitySendForm.this);
+		adb.setTitle("Suppression");
+		adb.setMessage("Voulez-vous vraiment supprimer "+c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))+" ?");
+		adb.setNegativeButton(getString(android.R.string.cancel),null);
 
-	@Override
-	public void onResume() {
+		adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
+		{
+			public void onClick(DialogInterface dialog,int which)
+			{
+				InstanceProvider.deleteInstance(c.getLong(c.getColumnIndex(BaseColumns._ID)));
+				loadListView();
+			}
+		});
+		adb.show();
+    }
+
+	private void loadListView()
+	{
 		Cursor c = getAllCursor("");
 
 		String[] data = new String[] { InstanceColumns.DISPLAY_NAME,InstanceColumns.DISPLAY_SUBTEXT };
@@ -297,8 +350,6 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 		setListAdapter(mInstances);
 		getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 		getListView().setItemsCanFocus(false);
-
-		
 
 		// if current activity is being reinitialized due to changing
 		// orientation restore all check
@@ -326,6 +377,10 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
         	linearLayout_footer.setVisibility(View.GONE);
         else
         	linearLayout_footer.setVisibility(View.VISIBLE);
+	}
+	@Override
+	public void onResume() {
+		loadListView();
 		super.onResume();
 	}
 

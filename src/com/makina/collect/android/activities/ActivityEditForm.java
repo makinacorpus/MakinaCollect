@@ -13,6 +13,9 @@
  */
 
 package com.makina.collect.android.activities;
+import java.io.File;
+import java.util.ArrayList;
+
 import com.WazaBe.HoloEverywhere.app.AlertDialog;
 
 import android.annotation.SuppressLint;
@@ -28,6 +31,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -35,10 +39,15 @@ import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -47,13 +56,19 @@ import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.dialog.Help;
 import com.makina.collect.android.dialog.HelpWithConfirmation;
+import com.makina.collect.android.listeners.DeleteInstancesListener;
 import com.makina.collect.android.listeners.DiskSyncListener;
 import com.makina.collect.android.preferences.ActivityPreferences;
+import com.makina.collect.android.provider.FormsProvider;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.tasks.DiskSyncTask;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.VersionHidingCursorAdapter;
 import com.makina.collect.android.views.CustomFontTextview;
+
+import de.timroes.swipetodismiss.SwipeDismissList;
+import de.timroes.swipetodismiss.SwipeDismissList.UndoMode;
+import de.timroes.swipetodismiss.SwipeDismissList.Undoable;
 
 /**
  * Responsible for displaying all the valid forms in the forms directory. Stores the path to
@@ -63,10 +78,9 @@ import com.makina.collect.android.views.CustomFontTextview;
  * @author Carl Hartung (carlhartung@gmail.com)
  */
 @SuppressLint("NewApi")
-public class ActivityEditForm extends SherlockListActivity implements DiskSyncListener, SearchView.OnQueryTextListener {
+public class ActivityEditForm extends SherlockListActivity implements DiskSyncListener, SearchView.OnQueryTextListener, DeleteInstancesListener {
 
     private static final String t = "FormChooserList";
-    private static final boolean EXIT = true;
     private static final String syncMsgKey = "syncmsgkey";
 
     private DiskSyncTask mDiskSyncTask;
@@ -75,6 +89,8 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     
     private String statusText;
     private SearchView mSearchView;
+    private ArrayList<Long> mSelected;
+    private SimpleCursorAdapter instances;
     
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -89,28 +105,25 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         getSupportActionBar().setTitle(getString(R.string.edit));
         int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGreenEdit));
-    	actionbarTitle.setTypeface(typeFace);
+    	if (actionbarTitle!=null)
+    	{
+	    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGreenEdit));
+	    	actionbarTitle.setTypeface(typeFace);
+    	}
     	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
     	TextView actionbarSubTitle = (TextView)findViewById(titleId);
-    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
-    	actionbarSubTitle.setTypeface(typeFace);
+    	if (actionbarSubTitle!=null)
+    	{
+	    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+	    	actionbarSubTitle.setTypeface(typeFace);
+    	}
     	getSupportActionBar().setSubtitle(getString(R.string.form));
     	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     	 
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_edit", false))
     		HelpWithConfirmation.helpDialog(this, getString(R.string.help_edit));
     	
-        String sortOrder = FormsColumns.DISPLAY_NAME + " ASC, " + FormsColumns.JR_VERSION + " DESC";
-        Cursor c = managedQuery(FormsColumns.CONTENT_URI, null, null, null, sortOrder);
-
-        String[] data = new String[] {FormsColumns.DISPLAY_NAME, FormsColumns.DISPLAY_SUBTEXT, FormsColumns.JR_VERSION};
-        int[] view = new int[] {R.id.text1, R.id.text2, R.id.text3};
-
-        // render total instance view
-        SimpleCursorAdapter instances =new VersionHidingCursorAdapter(FormsColumns.JR_VERSION, getApplicationContext(), R.layout.listview_item_edit_form, c, data, view);
-        setListAdapter(instances);
-        
+        loadListView();
         
         if (savedInstanceState != null && savedInstanceState.containsKey(syncMsgKey)) {
             statusText = savedInstanceState.getString(syncMsgKey);
@@ -136,9 +149,67 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
 			}
 		});
         
+        getListView().setOnItemLongClickListener(new OnItemLongClickListener()
+        {
+        	@Override
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int position, long arg3)
+			{
+				// TODO Auto-generated method stub
+        		createDialogDelete(position);
+        		return false;
+			}
+		});
+        
+        SwipeDismissList.OnDismissCallback callback = new SwipeDismissList.OnDismissCallback()
+        {
+            @Override
+			public Undoable onDismiss(AbsListView listView, int position)
+			{
+				// TODO Auto-generated method stub
+            	createDialogDelete(position);
+				return null;
+			}
+        };
+        UndoMode mode = SwipeDismissList.UndoMode.SINGLE_UNDO;
+        SwipeDismissList swipeList = new SwipeDismissList(getListView(), callback, mode);
+        
     }
     
+    private void createDialogDelete(int position)
+    {
+    	final Cursor c=instances.getCursor();
+		c.moveToPosition(position);
+		AlertDialog.Builder adb = new AlertDialog.Builder(ActivityEditForm.this);
+		adb.setTitle("Suppression");
+		adb.setMessage("Voulez-vous vraiment supprimer "+c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))+" ?");
+		adb.setNegativeButton(getString(android.R.string.cancel),null);
 
+		adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
+		{
+			public void onClick(DialogInterface dialog,int which)
+			{
+				FormsProvider.deleteFileOrDir(Environment.getExternalStorageDirectory()+ File.separator + "odk/forms/"+(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)).replace("_", " ")).replace("-", " ")+".xml");
+        		FormsProvider.deleteForm(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)));
+        		loadListView();
+			}
+		});
+		adb.show();
+    }
+    
+    private void loadListView()
+    {
+    	String sortOrder = FormsColumns.DISPLAY_NAME + " ASC, " + FormsColumns.JR_VERSION + " DESC";
+        Cursor c = managedQuery(FormsColumns.CONTENT_URI, null, null, null, sortOrder);
+
+        String[] data = new String[] {FormsColumns.DISPLAY_NAME, FormsColumns.DISPLAY_SUBTEXT, FormsColumns.JR_VERSION};
+        int[] view = new int[] {R.id.text1, R.id.text2, R.id.text3};
+
+        // render total instance view
+        instances =new VersionHidingCursorAdapter(FormsColumns.JR_VERSION, getApplicationContext(), R.layout.listview_item_edit_form, c, data, view);
+        setListAdapter(instances);
+        
+    }
+    
     public int convertDpToPixel(float dp) {
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         float px = dp * (metrics.densityDpi / 160f);
@@ -146,10 +217,11 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     }
 
     @Override
-   	public void onListItemClick(ListView listView, View view, int position, long id) {
+   	public void onListItemClick(ListView listView, View view, int position, long id)
+    {
            // get uri to form
        	long idFormsTable = ((SimpleCursorAdapter) getListAdapter()).getItemId(position);
-           Uri formUri = ContentUris.withAppendedId(FormsColumns.CONTENT_URI, idFormsTable);
+         Uri formUri = ContentUris.withAppendedId(FormsColumns.CONTENT_URI, idFormsTable);
 
    		Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", formUri.toString());
 
@@ -220,9 +292,8 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         int[] view = new int[] { R.id.text1, R.id.text2, R.id.text3};
 
         // render total instance view
-        SimpleCursorAdapter instances = new VersionHidingCursorAdapter(FormsColumns.JR_VERSION, this, R.layout.listview_item_edit_form, c, data, view);
+        instances = new VersionHidingCursorAdapter(FormsColumns.JR_VERSION, this, R.layout.listview_item_edit_form, c, data, view);
         setListAdapter(instances);
-        
         return false;
     }
     @Override
@@ -382,6 +453,19 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
 	public boolean onQueryTextSubmit(String query) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+
+	@Override
+	public void deleteComplete(int deletedInstances) {
+		// TODO Auto-generated method stub
+		if (deletedInstances == mSelected.size()) {
+			// all deletes were successful
+			Toast.makeText(getApplicationContext(),getString(R.string.file_deleted_ok, deletedInstances),Toast.LENGTH_SHORT).show();
+		} else {
+			// had some failures
+			Toast.makeText(getApplicationContext(),getString(R.string.file_deleted_error, mSelected.size()- deletedInstances, mSelected.size()),Toast.LENGTH_LONG).show();
+		}
 	}
 
 

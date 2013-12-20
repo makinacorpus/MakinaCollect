@@ -90,7 +90,6 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 
     private static final int PROGRESS_DIALOG = 1;
     private static final int AUTH_DIALOG = 2;
-    private static final int MENU_PREFERENCES = Menu.FIRST;
 
     private static final String BUNDLE_TOGGLED_KEY = "toggled";
     private static final String BUNDLE_SELECTED_COUNT = "selectedcount";
@@ -121,7 +120,6 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
     private ArrayList<HashMap<String, String>> mFormList;
 
     private boolean mToggled = false;
-    private int mSelectedCount = 0;
 
     private static final boolean EXIT = true;
     private static final boolean DO_NOT_EXIT = false;
@@ -149,12 +147,18 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         getSupportActionBar().setTitle(getString(R.string.download_menu));
         int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGreenDownload));
-    	actionbarTitle.setTypeface(typeFace);
+    	if (actionbarTitle!=null)
+    	{
+    		actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGreenDownload));
+    		actionbarTitle.setTypeface(typeFace);
+    	}
     	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
     	TextView actionbarSubTitle = (TextView)findViewById(titleId);
-    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
-    	actionbarSubTitle.setTypeface(typeFace);
+    	if (actionbarSubTitle!=null)
+    	{
+	    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+	    	actionbarSubTitle.setTypeface(typeFace);
+    	}
     	getSupportActionBar().setSubtitle(getString(R.string.form));
         
         
@@ -178,12 +182,6 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
             // indicating whether or not select-all is on or off.
             if (savedInstanceState.containsKey(BUNDLE_TOGGLED_KEY)) {
                 mToggled = savedInstanceState.getBoolean(BUNDLE_TOGGLED_KEY);
-            }
-
-            // how many items we've selected
-            // Android should keep track of this, but broken on rotate...
-            if (savedInstanceState.containsKey(BUNDLE_SELECTED_COUNT)) {
-                mSelectedCount = savedInstanceState.getInt(BUNDLE_SELECTED_COUNT);
             }
 
             // to restore alert dialog.
