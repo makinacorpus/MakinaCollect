@@ -16,7 +16,8 @@ the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl"
-    style="@style/Collect.MainLayout" >
+    style="@style/Collect.MainLayout"
+    android:background="@drawable/bg_list">
 
     <RelativeLayout
         android:id="@+id/relativeLayout_informations"
@@ -72,8 +73,7 @@ the License.
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:contentDescription="@string/form_backward"
-            android:src="@drawable/ic_back_selector"
-            android:visibility="gone" />
+            android:src="@drawable/ic_back_selector"/>
 
         <ImageView
             android:id="@+id/form_forward_button"

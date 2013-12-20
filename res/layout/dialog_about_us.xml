@@ -43,7 +43,6 @@
                 android:id="@+id/logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textview_about_us1"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dip"
                 android:src="@drawable/logo_makina_corpus" />
@@ -52,17 +51,16 @@
                 android:id="@+id/textview_about_us2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/logo"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dip"
                 android:text="@string/textview_about_us2"
-                android:textSize="25dip" />
+                android:gravity="center_horizontal"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textview_about_us3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textview_about_us2"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dip"
                 android:text="@string/textview_about_us3" />
@@ -71,18 +69,11 @@
                 android:id="@+id/textview_about_us4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textview_about_us3"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dip"
                 android:layout_marginTop="10dip"
                 android:text="@string/textview_about_us4" />
 
-            <!--
-            <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/ic_about_us" /> -->
 
         </LinearLayout>
     </ScrollView>

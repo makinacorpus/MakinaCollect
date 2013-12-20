@@ -690,10 +690,17 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         }
         
         LinearLayout linearLayout_footer=(LinearLayout) findViewById(R.id.linearLayout_footer);
+        RelativeLayout empty=(RelativeLayout)findViewById(R.id.empty);
         if ( (mFormList==null) || (mFormList.size()==0) )
+        {
         	linearLayout_footer.setVisibility(View.GONE);
+        	empty.setVisibility(View.VISIBLE);
+        }
         else
+        {
         	linearLayout_footer.setVisibility(View.VISIBLE);
+        	empty.setVisibility(View.GONE);
+        }
         
         
     }

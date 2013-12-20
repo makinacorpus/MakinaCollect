@@ -20,7 +20,9 @@ the License.
     android:layout_height="fill_parent"
     android:background="@drawable/gris_background" >
 
-    <RelativeLayout style="@style/Collect.MainLayout" >
+    <RelativeLayout
+        android:id="@+id/relative"
+        style="@style/Collect.MainLayout" >
 
         <LinearLayout
             android:id="@+id/linear_blue"
@@ -48,13 +50,25 @@ the License.
             android:src="@drawable/no_list" />
 
         <com.makina.collect.android.views.CustomFontTextview
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/empty_list"
+            android:textColor="@color/color_emty_list"
+            android:textSize="30sp" />
+
+        <com.makina.collect.android.views.CustomFontTextview
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
             android:id="@+id/textview_download_form"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dip"
+            android:gravity="center_horizontal"
             android:text="@string/clic_here_to_download"
             android:textColor="@color/actionbarTitleColorGris"
-            android:textSize="22sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
 </RelativeLayout>

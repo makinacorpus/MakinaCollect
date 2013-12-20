@@ -39,5 +39,6 @@ the License.
     <color name="actionbarTitleColorGris">#787c7d</color>
     
     <color name="about_us_blue">#073239</color>
+    <color name="color_emty_list">#149eb5</color>
     
 </resources>

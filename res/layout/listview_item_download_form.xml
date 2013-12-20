@@ -11,28 +11,24 @@
 <com.makina.collect.android.views.TwoItemMultipleChoiceView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:paddingBottom="8dip"
-    android:paddingLeft="8dip"
-    android:paddingRight="8dip"
-    android:paddingTop="4dip" >
+    android:orientation="horizontal" >
 
     <CheckBox
         android:id="@+id/checkbox"
         android:layout_width="60dip"
-        android:layout_height="wrap_content"
+        android:layout_height="60dip"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="10dip"
         android:button="@drawable/checkbox_selector"
         android:clickable="false"
         android:focusable="false" />
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_toRightOf="@id/checkbox"
-        android:paddingLeft="15dip" >
+        android:layout_centerVertical="true">
 
         <com.makina.collect.android.views.CustomFontTextview
             android:id="@+id/text1"

@@ -87,15 +87,25 @@ the License.
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@android:id/empty"
+        android:id="@+id/empty"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:visibility="gone" >
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:src="@drawable/no_list" />
+
+        <com.makina.collect.android.views.CustomFontTextview
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dip"
+            android:text="@string/empty_list"
+            android:textColor="@color/color_emty_list"
+            android:textSize="30sp" />
     </RelativeLayout>
 
 </RelativeLayout>
