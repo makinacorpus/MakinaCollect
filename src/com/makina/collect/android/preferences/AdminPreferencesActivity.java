@@ -68,8 +68,6 @@ public class AdminPreferencesActivity extends PreferenceActivity {
     public static String KEY_AUTOSEND_WIFI = "autosend_wifi";
     public static String KEY_AUTOSEND_NETWORK = "autosend_network";
     
-    public static String KEY_NAVIGATION = "navigation";
-    
     private static final int SAVE_PREFS_MENU = Menu.FIRST;
 
     @Override

@@ -34,8 +34,6 @@ import android.view.InflateException;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -62,7 +60,6 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 
 	private static final String mIndent = "     ";
 
-	private Button jumpPreviousButton;
 	
 	private boolean mIsSavedForm;
 	private boolean mToFormChooser;
@@ -92,41 +89,6 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 
 		mPath = (TextView) findViewById(R.id.pathtext);
 
-		jumpPreviousButton = (Button) findViewById(R.id.jumpPreviousButton);
-		jumpPreviousButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Collect.getInstance().getActivityLogger()
-						.logInstanceAction(this, "goUpLevelButton", "click");
-				goUpLevel();
-			}
-		});
-
-		Button jumpBeginningButton = (Button) findViewById(R.id.jumpBeginningButton);
-		jumpBeginningButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Collect.getInstance().getActivityLogger()
-						.logInstanceAction(this, "jumpToBeginning", "click");
-				Collect.getInstance().getFormController()
-						.jumpToIndex(FormIndex.createBeginningOfFormIndex());
-				setResult(RESULT_OK);
-				finish();
-			}
-		});
-
-		Button jumpEndButton = (Button) findViewById(R.id.jumpEndButton);
-		jumpEndButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Collect.getInstance().getActivityLogger()
-						.logInstanceAction(this, "jumpToEnd", "click");
-				Collect.getInstance().getFormController()
-						.jumpToIndex(FormIndex.createEndOfFormIndex());
-				setResult(RESULT_OK);
-				finish();
-			}
-		});
 
 		// kinda slow, but works.
 		// this scrolls to the last question the user was looking at
@@ -243,11 +205,9 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 			// The beginning of form has no valid prompt to display.
 			formController.stepToNextEvent(FormController.STEP_INTO_GROUP);
 			mPath.setVisibility(View.GONE);
-			jumpPreviousButton.setEnabled(false);
 		} else {
 			mPath.setVisibility(View.VISIBLE);
 			mPath.setText(getCurrentPath());
-			jumpPreviousButton.setEnabled(true);
 		}
 
 		// Refresh the current event in case we did step forward.

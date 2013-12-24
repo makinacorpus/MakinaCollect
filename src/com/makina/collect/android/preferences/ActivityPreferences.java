@@ -110,9 +110,6 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 
 	public static final String KEY_FORMLIST_URL = "formlist_url";
 	public static final String KEY_SUBMISSION_URL = "submission_url";
-
-	public static final String KEY_COMPLETED_DEFAULT = "default_completed";
-
 	public static final String KEY_AUTH = "auth";
 
 	public static final String KEY_AUTOSEND_WIFI = "autosend_wifi";
@@ -134,7 +131,6 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 	private ListPreference mThemePreference;
 	private ListPreference mSelectedGoogleAccountPreference;
 	private ListPreference mFontSizePreference;
-	private ListPreference mNavigationPreference;
 
 	private CheckBoxPreference mAutosendWifiPreference;
 	private CheckBoxPreference mAutosendNetworkPreference;
@@ -532,8 +528,6 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 
 		PreferenceCategory clientCategory = (PreferenceCategory) findPreference(getString(R.string.client));
 
-		boolean navigationAvailable = mAdminPreferences.getBoolean(
-				AdminPreferencesActivity.KEY_NAVIGATION, true);
 		
 		mThemePreference = (ListPreference) findPreference(KEY_THEME);
 		mThemePreference.setSummary(mThemePreference.getEntry());
@@ -556,25 +550,6 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 			}
 		});
 		
-		mNavigationPreference = (ListPreference) findPreference(KEY_NAVIGATION);
-		mNavigationPreference.setSummary(mNavigationPreference.getEntry());
-		mNavigationPreference
-				.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-					@Override
-					public boolean onPreferenceChange(Preference preference,
-							Object newValue) {
-						int index = ((ListPreference) preference)
-								.findIndexOfValue(newValue.toString());
-						String entry = (String) ((ListPreference) preference)
-								.getEntries()[index];
-						((ListPreference) preference).setSummary(entry);
-						return true;
-					}
-				});
-		if (!(navigationAvailable || adminMode)) {
-			clientCategory.removePreference(mNavigationPreference);
-		}
 		
 		boolean fontAvailable = mAdminPreferences.getBoolean(
 				AdminPreferencesActivity.KEY_CHANGE_FONT_SIZE, true);
@@ -601,10 +576,6 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 		boolean defaultAvailable = mAdminPreferences.getBoolean(
 				AdminPreferencesActivity.KEY_DEFAULT_TO_FINALIZED, true);
 
-		Preference defaultFinalized = findPreference(KEY_COMPLETED_DEFAULT);
-		if (!(defaultAvailable || adminMode)) {
-			clientCategory.removePreference(defaultFinalized);
-		}
 
 		mSplashPathPreference = (PreferenceScreen) findPreference(KEY_SPLASH_PATH);
 		mSplashPathPreference
@@ -677,11 +648,6 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 			clientCategory.removePreference(mSplashPathPreference);
 		}
 
-		if (!(fontAvailable || defaultAvailable
-				|| showSplashAvailable || navigationAvailable || adminMode)) {
-			getPreferenceScreen().removePreference(clientCategory);
-		}
-		
 		//Advanced settings are just useless here
 		PreferenceCategory advancedCategory = (PreferenceCategory)findPreference(getString((R.string.advanced_pref)));
 		getPreferenceScreen().removePreference(advancedCategory);

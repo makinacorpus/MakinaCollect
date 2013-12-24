@@ -14,8 +14,6 @@
 
 package com.makina.collect.android.activities;
 
-import java.io.File;
-
 import com.WazaBe.HoloEverywhere.app.AlertDialog;
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
@@ -27,7 +25,6 @@ import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.provider.BaseColumns;
 import android.util.AttributeSet;
@@ -51,7 +48,6 @@ import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.dialog.Help;
 import com.makina.collect.android.dialog.HelpWithConfirmation;
 import com.makina.collect.android.preferences.ActivityPreferences;
-import com.makina.collect.android.provider.FormsProvider;
 import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;

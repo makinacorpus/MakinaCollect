@@ -26,39 +26,11 @@ the License.
 		seem to work properly in RelativeLayout
     -->
 
-    <LinearLayout
-        android:id="@+id/buttonholder"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="3dp"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/jumpPreviousButton"
-            style="@style/Collect.Button2"
-            android:layout_weight="1"
-            android:text="@string/jump_to_previous" />
-
-        <Button
-            android:id="@+id/jumpBeginningButton"
-            style="@style/Collect.Button2"
-            android:layout_weight="1"
-            android:text="@string/jump_to_beginning" />
-
-        <Button
-            android:id="@+id/jumpEndButton"
-            style="@style/Collect.Button2"
-            android:layout_weight="1"
-            android:text="@string/jump_to_end" />
-    </LinearLayout>
-
     <ListView
         android:id="@android:id/list"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@id/buttonholder"
-        android:layout_below="@id/pathtext"/>
+        android:layout_below="@id/pathtext" />
 
     <TextView
         android:id="@android:id/empty"

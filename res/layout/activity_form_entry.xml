@@ -17,7 +17,7 @@ the License.
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl"
     style="@style/Collect.MainLayout"
-    android:background="@drawable/bg_list">
+    android:background="@drawable/bg_list" >
 
     <RelativeLayout
         android:id="@+id/relativeLayout_informations"
@@ -34,8 +34,8 @@ the License.
             android:layout_alignParentLeft="true"
             android:paddingLeft="20dip"
             android:textColor="@drawable/linear_blue"
-            android:textStyle="bold"
-            android:textSize="20dip"/>
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <com.makina.collect.android.views.CustomFontTextview
             android:id="@+id/textView_quiz_question_number"
@@ -44,8 +44,8 @@ the License.
             android:layout_alignParentRight="true"
             android:paddingRight="20dip"
             android:textColor="@drawable/linear_blue"
-            android:textStyle="bold"
-            android:textSize="20dip"/>
+            android:textSize="35sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <LinearLayout
@@ -73,7 +73,8 @@ the License.
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:contentDescription="@string/form_backward"
-            android:src="@drawable/ic_back_selector"/>
+            android:src="@drawable/ic_back_selector"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/form_forward_button"
@@ -82,6 +83,25 @@ the License.
             android:layout_alignParentRight="true"
             android:contentDescription="@string/form_forward"
             android:src="@drawable/ic_next_selector" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/save"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/check_all_selector"
+        android:gravity="center" >
+
+        <com.makina.collect.android.views.CustomFontTextview
+            android:id="@+id/textView_check_all"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dip"
+            android:text="@string/ok"
+            android:textColor="@drawable/white"
+            android:textSize="20dip" />
     </RelativeLayout>
 
 </RelativeLayout>

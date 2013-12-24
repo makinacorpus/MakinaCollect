@@ -82,6 +82,8 @@ public class Collect extends Application {
     public void setFormController(FormController controller) {
         mFormController = controller;
     }
+    
+    
 
     public static int getQuestionFontsize() {
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(Collect

@@ -129,7 +129,7 @@ the License.
             <com.makina.collect.android.views.CustomFontTextview
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/save_dashboard"
+                android:text="@string/finalize"
                 android:textColor="@drawable/actionbar_title_color_blue_save_selector"
                 android:textSize="19sp" />
 
