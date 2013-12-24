@@ -43,6 +43,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.makina.collect.android.activities.ActivityForm;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.FormLoaderListener;
 import com.makina.collect.android.logic.FileReferenceFactory;
@@ -191,6 +192,7 @@ public class FormLoaderTask extends AsyncTask<String, String, FormLoaderTask.FEC
 
 		// create FormEntryController from formdef
         FormEntryModel fem = new FormEntryModel(fd);
+        ActivityForm.size=fem.getNumQuestions();
         fec = new FormEntryController(fem);
 
         boolean usedSavepoint = false;

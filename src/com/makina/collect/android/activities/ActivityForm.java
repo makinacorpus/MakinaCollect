@@ -206,7 +206,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	private ImageView mBackButton;
 	
 	private boolean mAnswersChanged;
-	private int size=0;
+	public static int size=0;
 	private CustomFontTextview textView_quiz_question_number;
 	
 	enum AnimationType {
@@ -486,7 +486,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 									return name.startsWith(filePrefix) && name.endsWith(fileSuffix);
 								}
 							});
-							size=files.length-1;
+							//size=files.length+1;
 							// see if any of these savepoints are for a
 							// filled-in form that has never been
 							// explicitly saved by the user...
