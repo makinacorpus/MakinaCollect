@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.makina.collect.android.R;
+import com.makina.collect.android.views.CustomFontTextview;
 
 public class DrawerAdapter extends ArrayAdapter<String>{
 	
@@ -26,7 +27,7 @@ public class DrawerAdapter extends ArrayAdapter<String>{
 	  LayoutInflater inflater = (LayoutInflater) mContext
 	      .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	  View rowView = inflater.inflate(R.layout.drawer_list_item, parent, false);
-	  TextView textView = (TextView) rowView.findViewById(R.id.part_name);
+	  CustomFontTextview textView = (CustomFontTextview) rowView.findViewById(R.id.part_name);
 	  ImageView imageView = (ImageView) rowView.findViewById(R.id.action_icon);
 	  textView.setText(mNames[position]);
 	  switch (position) {

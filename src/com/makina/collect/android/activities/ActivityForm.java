@@ -109,6 +109,7 @@ import com.makina.collect.android.tasks.SaveToDiskTask;
 import com.makina.collect.android.utilities.FileUtils;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.MediaUtils;
+import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontEditText;
 import com.makina.collect.android.views.CustomFontTextview;
 import com.makina.collect.android.views.ODKView;
@@ -221,7 +222,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	private final static int AUTH_DIALOG = 2;
 	private HashMap<String, String> mUploadedInstances;
 	private boolean send=false,restart=false;
-	private int current_page=1;
+	public static int current_page=1;
 	private CheckBox checkBox1,checkBox2,checkBox3;
 	private int event;
 	/** Called when the activity is first created. */
@@ -248,30 +249,18 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 
 		setContentView(R.layout.activity_form_entry);
 		
-		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
-        getSupportActionBar().setTitle(getString(R.string.edit));
+		getSupportActionBar().setTitle(getString(R.string.edit));
+		getSupportActionBar().setSubtitle(getString(R.string.form));
+    	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	if (actionbarTitle!=null)
-    	{
-	    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGreenEdit));
-	    	actionbarTitle.setTypeface(typeFace);
-    	}
     	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
     	TextView actionbarSubTitle = (TextView)findViewById(titleId);
-    	if (actionbarSubTitle!=null)
-    	{
-	    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
-	    	actionbarSubTitle.setTypeface(typeFace);
-    	}
-    	getSupportActionBar().setSubtitle(getString(R.string.form));
-    	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		
+    	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
+    	
 		textView_quiz_question_number=(CustomFontTextview)findViewById(R.id.textView_quiz_question_number);
 		
-		
 		Intent intent = getIntent();
-		
 		
 		mAlertDialog = null;
 		mCurrentView = null;
@@ -1205,7 +1194,6 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 				showView(next, AnimationType.RIGHT);
 				break;
 			case FormEntryController.EVENT_END_OF_FORM:
-				mNextButton.setVisibility(View.GONE);
 			case FormEntryController.EVENT_REPEAT:
 				next = createView(event, true);
 				showView(next, AnimationType.RIGHT);

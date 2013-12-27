@@ -41,6 +41,7 @@ import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.AdvanceToNextListener;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
+import com.makina.collect.android.views.CustomFontRadioButton;
 import com.makina.collect.android.views.MediaLayout;
 
 /**
@@ -83,7 +84,7 @@ public class SelectOneAutoAdvanceWidget extends QuestionWidget implements OnChec
                 LinearLayout questionLayout = (LinearLayout) thisParentLayout.getChildAt(0);
                 ImageView rightArrow = (ImageView) thisParentLayout.getChildAt(1);
 
-                RadioButton r = new RadioButton(getContext());
+                CustomFontRadioButton r = new CustomFontRadioButton(getContext());
                 r.setText(prompt.getSelectChoiceText(mItems.get(i)));
                 r.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mAnswerFontsize);
                 r.setTag(Integer.valueOf(i));

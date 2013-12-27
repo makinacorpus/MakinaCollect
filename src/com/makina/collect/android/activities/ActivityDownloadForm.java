@@ -66,6 +66,7 @@ import com.makina.collect.android.tasks.DownloadFormListTask;
 import com.makina.collect.android.tasks.DownloadFormsTask;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.WebUtils;
+import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
 
 import android.widget.SearchView;
@@ -135,33 +136,20 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         super.onCreate(savedInstanceState);
     	
         setContentView(R.layout.activity_download_form);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        
-        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
-        
+       
         createDialog(PROGRESS_DIALOG);
         textView_pannier=(CustomFontTextview)findViewById(R.id.textView_pannier);
         Finish.activityDownloadForm=this;
         
-        
         getSupportActionBar().setTitle(getString(R.string.download_menu));
+        getSupportActionBar().setSubtitle(getString(R.string.form));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	if (actionbarTitle!=null)
-    	{
-    		actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGreenDownload));
-    		actionbarTitle.setTypeface(typeFace);
-    	}
     	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
     	TextView actionbarSubTitle = (TextView)findViewById(titleId);
-    	if (actionbarSubTitle!=null)
-    	{
-	    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
-	    	actionbarSubTitle.setTypeface(typeFace);
-    	}
-    	getSupportActionBar().setSubtitle(getString(R.string.form));
-        
-        
+    	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenDownload), getResources().getColor(R.color.actionbarTitleColorGris));
+    	
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_download", false))
     		HelpWithConfirmation.helpDialog(this, getString(R.string.help_download));
 		

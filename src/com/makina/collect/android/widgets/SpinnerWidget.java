@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2009 University of Washington
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package com.makina.collect.android.widgets;
 
 import java.util.Vector;
@@ -36,7 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
+import com.makina.collect.android.views.CustomFontTextview;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
@@ -191,7 +177,7 @@ public class SpinnerWidget extends QuestionWidget implements OnFocusChangeListen
                 convertView = inflater.inflate(R.layout.widget_spinner_item, parent, false);
             }
 
-            TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
+            CustomFontTextview tv = (CustomFontTextview) convertView.findViewById(android.R.id.text1);
             tv.setTextSize(textUnit, textSize);
             tv.setBackgroundColor(Color.DKGRAY);
         	tv.setPadding(10, 10, 10, 10); // Are these values OK?
@@ -221,7 +207,7 @@ public class SpinnerWidget extends QuestionWidget implements OnFocusChangeListen
                 convertView = inflater.inflate(android.R.layout.simple_spinner_item, parent, false);
             }
 
-            TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
+            CustomFontTextview tv = (CustomFontTextview) convertView.findViewById(android.R.id.text1);
             tv.setText(items[position]);
             tv.setTextSize(textUnit, textSize);
             tv.setTextColor(Color.CYAN);

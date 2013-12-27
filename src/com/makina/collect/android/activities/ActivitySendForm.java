@@ -77,6 +77,7 @@ import com.makina.collect.android.tasks.DeleteInstancesTask;
 import com.makina.collect.android.tasks.InstanceUploaderTask;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.WebUtils;
+import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
 
 import de.timroes.swipetodismiss.SwipeDismissList;
@@ -217,26 +218,15 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
         setContentView(R.layout.activity_send_form);
         
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     	getSupportActionBar().setTitle(getString(R.string.box));
+    	getSupportActionBar().setSubtitle(getString(R.string.send));
     	int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	if (actionbarTitle!=null)
-    	{
-    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
-    	actionbarTitle.setTypeface(typeFace);
-    	}
     	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
     	TextView actionbarSubTitle = (TextView)findViewById(titleId);
-    	if (actionbarSubTitle!=null)
-    	{
-	    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorBlueSend));
-	    	actionbarSubTitle.setTypeface(typeFace);
-    	}
-    	getSupportActionBar().setSubtitle(getString(R.string.send));
-        
-    	mProgressDialog = new ProgressDialog(this);
+    	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGris), getResources().getColor(R.color.actionbarTitleColorBlueSend));
+    	
+        mProgressDialog = new ProgressDialog(this);
     	
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_send", false))
     		HelpWithConfirmation.helpDialog(this, getString(R.string.help_send));

@@ -30,7 +30,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.TableLayout;
 
 import com.makina.collect.android.application.Collect;

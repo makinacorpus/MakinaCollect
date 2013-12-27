@@ -35,6 +35,7 @@ import android.widget.RadioButton;
 
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
+import com.makina.collect.android.views.CustomFontRadioButton;
 import com.makina.collect.android.views.MediaLayout;
 
 /**
@@ -69,7 +70,7 @@ public class SelectOneWidget extends QuestionWidget implements
 
 		if (mItems != null) {
 			for (int i = 0; i < mItems.size(); i++) {
-				RadioButton r = new RadioButton(getContext());
+				CustomFontRadioButton r = new CustomFontRadioButton(getContext());
 				r.setText(prompt.getSelectChoiceText(mItems.get(i)));
 				r.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mAnswerFontsize);
 				r.setTag(Integer.valueOf(i));

@@ -53,6 +53,7 @@ import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.utilities.Finish;
+import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
 
 import de.timroes.swipetodismiss.SwipeDismissList;
@@ -69,7 +70,6 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 	private AlertDialog mAlertDialog;
     private Cursor c;
     private  SearchView mSearchView;
-    private int titleId,subTitleId;
     private SimpleCursorAdapter instances;
     
     @SuppressLint("NewApi")
@@ -153,24 +153,14 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_saved", false))
     		HelpWithConfirmation.helpDialog(this, getString(R.string.help_saved));
     	
-    	Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     	getSupportActionBar().setTitle(getString(R.string.my_forms_send));
-    	titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
-    	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	if (actionbarTitle!=null)
-    	{
-	    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
-	    	actionbarTitle.setTypeface(typeFace);
-    	}
-    	subTitleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-    	TextView actionbarSubTitle = (TextView)findViewById(subTitleId);
-    	if (actionbarSubTitle!=null)
-    	{
-	    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorBlueSave));
-	    	actionbarSubTitle.setTypeface(typeFace);
-    	}
     	getSupportActionBar().setSubtitle(getString(R.string.saved));
+    	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    	int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
+    	TextView actionbarTitle = (TextView)findViewById(titleId);
+    	int subTitleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
+    	TextView actionbarSubTitle = (TextView)findViewById(subTitleId);
+    	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGris), getResources().getColor(R.color.actionbarTitleColorBlueSave));
     	
     	loadListView();
         

@@ -34,6 +34,7 @@ import android.widget.LinearLayout;
 
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
+import com.makina.collect.android.views.CustomFontCheckBox;
 import com.makina.collect.android.views.MediaLayout;
 
 /**
@@ -66,7 +67,7 @@ public class SelectMultiWidget extends QuestionWidget {
         if (mItems != null) {
             for (int i = 0; i < mItems.size(); i++) {
                 // no checkbox group so id by answer + offset
-                CheckBox c = new CheckBox(getContext());
+                CustomFontCheckBox c = new CustomFontCheckBox(getContext());
                 c.setTag(Integer.valueOf(i));
                 c.setId(QuestionWidget.newUniqueId());
                 c.setText(prompt.getSelectChoiceText(mItems.get(i)));

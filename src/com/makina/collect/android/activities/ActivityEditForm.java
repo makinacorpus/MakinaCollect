@@ -20,6 +20,7 @@ import com.WazaBe.HoloEverywhere.app.AlertDialog;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.ActionBar.LayoutParams;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -42,6 +43,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
@@ -64,6 +66,7 @@ import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.tasks.DiskSyncTask;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.VersionHidingCursorAdapter;
+import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
 
 import de.timroes.swipetodismiss.SwipeDismissList;
@@ -101,25 +104,15 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         
         Finish.activityEditForm=this;
         
-        Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
         getSupportActionBar().setTitle(getString(R.string.edit));
+        getSupportActionBar().setSubtitle(getString(R.string.form));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	if (actionbarTitle!=null)
-    	{
-	    	actionbarTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGreenEdit));
-	    	actionbarTitle.setTypeface(typeFace);
-    	}
     	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
     	TextView actionbarSubTitle = (TextView)findViewById(titleId);
-    	if (actionbarSubTitle!=null)
-    	{
-	    	actionbarSubTitle.setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
-	    	actionbarSubTitle.setTypeface(typeFace);
-    	}
-    	getSupportActionBar().setSubtitle(getString(R.string.form));
-    	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    	 
+    	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
+    	
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_edit", false))
     		HelpWithConfirmation.helpDialog(this, getString(R.string.help_edit));
     	
@@ -219,6 +212,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     @Override
    	public void onListItemClick(ListView listView, View view, int position, long id)
     {
+    	ActivityForm.current_page=1;
            // get uri to form
        	long idFormsTable = ((SimpleCursorAdapter) getListAdapter()).getItemId(position);
          Uri formUri = ContentUris.withAppendedId(FormsColumns.CONTENT_URI, idFormsTable);
@@ -226,14 +220,17 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
    		Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", formUri.toString());
 
            String action = getIntent().getAction();
-           if (Intent.ACTION_PICK.equals(action)) {
+           if (Intent.ACTION_PICK.equals(action))
+           {
                // caller is waiting on a picked form
                setResult(RESULT_OK, new Intent().setData(formUri));
-           } else {
+           }
+           else
+           {
                // caller wants to view/edit a form, so launch formentryactivity
            	Intent i = new Intent(Intent.ACTION_EDIT, formUri);
            	i.putExtra("newForm", true);
-               startActivity(i);
+            startActivity(i);
            }
            
            //TODO  

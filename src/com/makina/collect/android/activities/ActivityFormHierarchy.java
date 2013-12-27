@@ -97,8 +97,7 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 			public void run() {
 				int position = 0;
 				for (int i = 0; i < getListAdapter().getCount(); i++) {
-					HierarchyElement he = (HierarchyElement) getListAdapter()
-							.getItem(i);
+					HierarchyElement he = formList.get(i);
 					if (mStartIndex.equals(he.getFormIndex())) {
 						position = i;
 						break;
@@ -320,8 +319,10 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 	}
 
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		HierarchyElement h = (HierarchyElement) l.getItemAtPosition(position);
+	protected void onListItemClick(ListView l, View v, int position, long id)
+	{
+		ActivityForm.current_page=position+1;
+		HierarchyElement h = formList.get(position);
 		FormIndex index = h.getFormIndex();
 		if (index == null) {
 			goUpLevel();

@@ -40,7 +40,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
-import android.widget.TextView;
+import com.makina.collect.android.views.CustomFontTextview;
 import android.widget.Toast;
 
 import com.makina.collect.android.R;
@@ -64,7 +64,7 @@ public class SignatureWidget extends QuestionWidget implements IBinaryWidget {
     private String mBinaryName;
     private String mInstanceFolder;
     private ImageView mImageView;
-    private TextView mErrorTextView;
+    private CustomFontTextview mErrorTextView;
 
 	public SignatureWidget(Activity activity, WidgetAnsweredListener widgetAnsweredListener, FormEntryPrompt prompt) {
 		super(activity, widgetAnsweredListener, prompt);
@@ -77,7 +77,7 @@ public class SignatureWidget extends QuestionWidget implements IBinaryWidget {
 		TableLayout.LayoutParams params = new TableLayout.LayoutParams();
         params.setMargins(7, 5, 7, 5);
 		
-        mErrorTextView = new TextView(activity);
+        mErrorTextView = new CustomFontTextview(activity);
         mErrorTextView.setId(QuestionWidget.newUniqueId());
         mErrorTextView.setText("Selected file is not a valid image");
 

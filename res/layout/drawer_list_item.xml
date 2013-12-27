@@ -27,7 +27,7 @@
         android:layout_gravity="center_vertical"
         android:paddingLeft="8dp" />
 
-    <TextView
+    <com.makina.collect.android.views.CustomFontTextview
         android:id="@+id/part_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
