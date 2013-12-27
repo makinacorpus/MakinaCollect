@@ -12,11 +12,11 @@
 
     <!-- strings that should not be translated -->
 
-	<string name="clic_here_to_download">APPUYEZ ICI POUR TÉLÉCHARGER UN FORMULAIRE</string>
-	<string name="no_form_not_finalled">PAS DE FORMULAIRE NON FINALISÉ</string>
-	<string name="no_form_finalled">PAS DE FORMULAIRE FINALISÉ</string>
-	<string name="empty_list">Liste vide</string>
-	<!-- AboutUS -->
+    <string name="clic_here_to_download">APPUYEZ ICI POUR TÉLÉCHARGER UN FORMULAIRE</string>
+    <string name="no_form_not_finalled">PAS DE FORMULAIRE NON FINALISÉ</string>
+    <string name="no_form_finalled">PAS DE FORMULAIRE FINALISÉ</string>
+    <string name="empty_list">Liste vide</string>
+    <!-- AboutUS -->
     <string name="textview_about_us1">The mobile application "Makina Collect" was developed by Makina Corpus</string>
     <string name="textview_about_us2">Développons de nouveaux horizons</string>
     <string name="textview_about_us3">www.makina-corpus.com</string>
@@ -24,7 +24,8 @@
     <string name="web_site">http://www.makina-corpus.com/</string>
     <!-- END AboutUs -->
 
-	<!-- Preferences -->
+
+    <!-- Preferences -->
     <string name="language">Langage</string>
     <string name="current_language">English</string>
     <string name="language_preferences">language_preferences</string>
@@ -34,8 +35,9 @@
     <string name="theme2">Thème2</string>
     <string name="luminosity">Luminosité</string>
     <!-- END- Preferences -->
-    
-    <!--  ActionBar -->
+
+
+    <!-- ActionBar -->
     <string name="search">Recherche</string>
     <string name="settings">Paramètres</string>
     <string name="help">Aide</string>
@@ -44,10 +46,14 @@
     <string name="upload">Upload</string>
     <string name="raz">RAZ</string>
     <string name="hierarchy">Hierarchy</string>
-    <!--  FIN ActionBar -->
-    
-    <!--  ActionBar Title -->
-    <string name="download_menu">TÉLÉCHARGER</string>
+    <!-- FIN ActionBar -->
+
+
+    <!-- ActionBar Title -->
+    <string name="download_menu">TÉLÉCHARGER \nun formulaire</string>
+    <string name="edit_menu">REMPLIR   \nun formulaire</string>
+    <string name="save_menu">SAUVEGARDER \nmes formulaires</string>
+    <string name="send_menu">Mes formulaires \nA ENVOYER</string>
     <string name="edit">REMPLIR</string>
     <string name="my_forms">mes formulaires</string>
     <string name="my_forms_send">Mes formulaires</string>
@@ -59,8 +65,9 @@
     <string name="finalize">FINALISER</string>
     <string name="to_send">A ENVOYER</string>
     <string name="form">un formulaire</string>
-    <!--  FIN ActionBar Title-->
-    
+    <!-- FIN ActionBar Title -->
+
+
     <!-- Help -->
     <string name="help_download">download Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir</string>
     <string name="help_edit">edit  Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir</string>
@@ -68,14 +75,15 @@
     <string name="help_send">send Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir</string>
     <string name="help_form">form Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir Remplir</string>
     <string name="help_confirmation">Ne plus afficher ce message</string>
-    <!--  FIN Help-->
-    
+    <!-- FIN Help -->
+
+
     <!-- FORM SAVING -->
     <string name="to_not_send_form">Ne pas envoyer le formulaire</string>
     <string name="send_form">Envoyer le formulaire</string>
     <string name="send_form_and_restart">Envoyer le formulaire et le recommencer</string>
     <!-- END FORM SAVING -->
-    
+
     <string name="app_name" translatable="false">Makina Collect</string>
     <string name="protocol_odk_default" translatable="false">odk_default</string>
     <string name="protocol_google" translatable="false">google</string>

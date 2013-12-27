@@ -18,173 +18,67 @@ the License.
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/bg_dashboard"
-    android:gravity="center"
+    android:gravity="center_vertical|left"
     android:orientation="vertical" >
 
-    <RelativeLayout
+    <Button
+        android:id="@+id/dashboard_download"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1" >
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout_download"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dip"
+        android:layout_marginLeft="30dip"
         android:layout_marginRight="10dip"
+        android:layout_marginTop="65dip"
         android:layout_weight="1"
-        android:gravity="center_horizontal" >
+        android:background="@color/transparent"
+        android:drawableLeft="@drawable/dashboard_download_selector"
+        android:gravity="center_vertical|left"
+        android:text="@string/download_menu"
+        android:textColor="#cfea60" />
 
-        <ImageView
-            android:id="@+id/dashboard_download"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/dashboard_download_selector" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dip"
-            android:layout_toRightOf="@id/dashboard_download"
-            android:orientation="vertical" >
-
-            <com.makina.collect.android.views.CustomFontTextview
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/download_menu"
-                android:textColor="@drawable/actionbar_title_color_green_download_selector"
-                android:textSize="19sp" />
-
-            <com.makina.collect.android.views.CustomFontTextview
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/form"
-                android:textColor="@drawable/actionbar_title_color_green_download_selector"
-                android:textSize="19sp" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout_edit"
+    <Button
+        android:id="@+id/dashboard_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center_horizontal" >
-
-        <ImageView
-            android:id="@+id/dashboard_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/dashboard_edit_selector" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dip"
-            android:layout_toRightOf="@id/dashboard_edit"
-            android:orientation="vertical" >
-
-            <com.makina.collect.android.views.CustomFontTextview
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/edit"
-                android:textColor="@drawable/actionbar_title_color_green_edit_selector"
-                android:textSize="19sp" />
-
-            <com.makina.collect.android.views.CustomFontTextview
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/form"
-                android:textColor="@drawable/actionbar_title_color_green_edit_selector"
-                android:textSize="19sp" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center_horizontal" >
-
-        <ImageView
-            android:id="@+id/dashboard_save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/dashboard_saved_selector" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dip"
-            android:layout_toRightOf="@id/dashboard_save"
-            android:orientation="vertical" >
-
-            <com.makina.collect.android.views.CustomFontTextview
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/finalize"
-                android:textColor="@drawable/actionbar_title_color_blue_save_selector"
-                android:textSize="19sp" />
-
-            <com.makina.collect.android.views.CustomFontTextview
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/my_forms"
-                android:textColor="@drawable/actionbar_title_color_blue_save_selector"
-                android:textSize="19sp" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dip"
+        android:layout_marginLeft="110dip"
         android:layout_marginRight="10dip"
+        android:layout_marginTop="2dip"
         android:layout_weight="1"
-        android:gravity="center_horizontal" >
+        android:background="@color/transparent"
+        android:drawableLeft="@drawable/dashboard_edit_selector"
+        android:gravity="center_vertical|left"
+        android:text="@string/edit_menu"
+        android:textColor="#b8d754" />
 
-        <ImageView
-            android:id="@+id/dashboard_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@drawable/dashboard_send_selector" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dip"
-            android:layout_toRightOf="@id/dashboard_send"
-            android:orientation="vertical" >
-
-            <com.makina.collect.android.views.CustomFontTextview
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/my_forms_send"
-                android:textColor="@drawable/actionbar_title_color_blue_send_selector"
-                android:textSize="19sp" />
-
-            <com.makina.collect.android.views.CustomFontTextview
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/to_send"
-                android:textColor="@drawable/actionbar_title_color_blue_send_selector"
-                android:textSize="19sp" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
+    <Button
+        android:id="@+id/dashboard_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1" >
-    </RelativeLayout>
+        android:layout_marginBottom="2dip"
+        android:layout_marginLeft="110dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="2dip"
+        android:layout_weight="1"
+        android:background="@color/transparent"
+        android:drawableLeft="@drawable/dashboard_saved_selector"
+        android:gravity="center_vertical|left"
+        android:text="@string/save_menu"
+        android:textColor="#1baac2" />
+
+    <Button
+        android:id="@+id/dashboard_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="130dip"
+        android:layout_marginLeft="30dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="2dip"
+        android:layout_weight="1"
+        android:background="@color/transparent"
+        android:drawableLeft="@drawable/dashboard_send_selector"
+        android:gravity="center_vertical|left"
+        android:text="@string/send_menu"
+        android:textColor="#2bbccc" />
 
 </LinearLayout>
