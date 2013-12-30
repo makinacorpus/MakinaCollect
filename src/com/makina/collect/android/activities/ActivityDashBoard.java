@@ -98,8 +98,6 @@ public class ActivityDashBoard extends SherlockActivity implements
 			break;
 		}
 
-		startActivity(new Intent(getApplicationContext(),
-				ActivityDownloadForm.class));
 	}
 
 	@Override
