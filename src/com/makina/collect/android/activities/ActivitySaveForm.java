@@ -65,6 +65,7 @@ import de.timroes.swipetodismiss.SwipeDismissList.Undoable;
  * @author Yaw Anokwa (yanokwa@gmail.com)
  * @author Carl Hartung (carlhartung@gmail.com)
  */
+@SuppressLint("NewApi")
 public class ActivitySaveForm extends SherlockListActivity implements SearchView.OnQueryTextListener{
 
 	private AlertDialog mAlertDialog;
