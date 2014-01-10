@@ -2980,7 +2980,7 @@ containing a value of this type.
         public static final int altitude=0x7f090044;
         /**  fin - DOWNLOAD FORM 
          */
-        public static final int app_name=0x7f09016f;
+        public static final int app_name=0x7f090170;
         public static final int app_url=0x7f0900cf;
         public static final int audio_file_error=0x7f090045;
         public static final int audio_file_invalid=0x7f090046;
@@ -3019,6 +3019,7 @@ containing a value of this type.
         public static final int change_username=0x7f090054;
         public static final int change_username_default=0x7f090110;
         public static final int change_view=0x7f0900f8;
+        public static final int checkbox_error=0x7f09016a;
         public static final int choose_image=0x7f0900e9;
         public static final int choose_sound=0x7f0900e7;
         public static final int choose_video=0x7f0900e8;
@@ -3092,9 +3093,9 @@ containing a value of this type.
         public static final int date_time_set=0x7f09002a;
         public static final int default_completed=0x7f09005d;
         public static final int default_completed_summary=0x7f09005e;
-        public static final int default_odk_formlist=0x7f090174;
-        public static final int default_odk_submission=0x7f090175;
-        public static final int default_server_url=0x7f090173;
+        public static final int default_odk_formlist=0x7f090175;
+        public static final int default_odk_submission=0x7f090176;
+        public static final int default_server_url=0x7f090174;
         public static final int default_splash_path=0x7f0900ca;
         public static final int delete_confirm=0x7f09005f;
         public static final int delete_file=0x7f090060;
@@ -3104,7 +3105,7 @@ containing a value of this type.
         public static final int delete_repeat_confirm=0x7f090064;
         public static final int delete_repeat_no=0x7f090065;
         public static final int delete_yes=0x7f090066;
-        public static final int deselect_all=0x7f09016b;
+        public static final int deselect_all=0x7f09016c;
         public static final int discard_answer=0x7f090067;
         public static final int discard_group=0x7f090068;
         public static final int do_not_change=0x7f09006c;
@@ -3177,10 +3178,10 @@ containing a value of this type.
         public static final int form_download_progress=0x7f0900e0;
         public static final int form_forward=0x7f090127;
         public static final int form_scan_starting=0x7f0900da;
-        public static final int form_selected=0x7f09016d;
+        public static final int form_selected=0x7f09016e;
         public static final int formlist_url=0x7f0900d6;
         public static final int forms=0x7f09007d;
-        public static final int forms_selected=0x7f09016e;
+        public static final int forms_selected=0x7f09016f;
         public static final int found_at_end=0x7f090124;
         public static final int found_in_main=0x7f090122;
         public static final int found_in_menu=0x7f09011c;
@@ -3244,7 +3245,7 @@ containing a value of this type.
         public static final int no_connexion=0x7f090139;
         public static final int no_form_finalled=0x7f09013d;
         public static final int no_form_not_finalled=0x7f09013c;
-        public static final int no_form_selected=0x7f09016c;
+        public static final int no_form_selected=0x7f09016d;
         public static final int no_forms_uploaded=0x7f0900e4;
         public static final int no_items_display=0x7f090098;
         public static final int no_items_display_forms=0x7f090099;
@@ -3268,9 +3269,9 @@ containing a value of this type.
         public static final int please_wait=0x7f0900a4;
         public static final int please_wait_long=0x7f0900a5;
         public static final int protocol=0x7f0900d3;
-        public static final int protocol_google=0x7f090171;
-        public static final int protocol_odk_default=0x7f090170;
-        public static final int protocol_other=0x7f090172;
+        public static final int protocol_google=0x7f090172;
+        public static final int protocol_odk_default=0x7f090171;
+        public static final int protocol_other=0x7f090173;
         public static final int provider_disabled_error=0x7f090082;
         public static final int quit_application=0x7f0900a6;
         public static final int quit_entry=0x7f0900a7;
@@ -3327,7 +3328,7 @@ containing a value of this type.
         /**  END FORM SAVING 
  DOWNLOAD FORM 
          */
-        public static final int select_all=0x7f09016a;
+        public static final int select_all=0x7f09016b;
         public static final int select_another_image=0x7f0900cb;
         public static final int select_answer=0x7f0900eb;
         public static final int select_drawing_color=0x7f09010c;

@@ -43,7 +43,6 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -222,7 +221,7 @@ public class ActivityForm extends SherlockActivity implements
 	private final static int AUTH_DIALOG = 2;
 	private HashMap<String, String> mUploadedInstances;
 	private boolean send = false, restart = false;
-	public static int current_page = 1;
+	public static int current_page;
 	private CheckBox checkBox1, checkBox2, checkBox3;
 	private int event;
 
@@ -232,6 +231,8 @@ public class ActivityForm extends SherlockActivity implements
 		super.onCreate(savedInstanceState);
 		Log.i("FormEntryActivity", "onCreate");
 
+		current_page=1;
+		
 		mUploadedInstances = new HashMap<String, String>();
 		Finish.activityForm = this;
 
@@ -1062,7 +1063,9 @@ public class ActivityForm extends SherlockActivity implements
 
 								}
 
-							} else if (checkBox3.isChecked()) {
+							}
+							else if (checkBox3.isChecked())
+							{
 								if (saveAs.getText().length() < 1) {
 									Toast.makeText(ActivityForm.this,
 											R.string.save_as_error,
@@ -1079,9 +1082,9 @@ public class ActivityForm extends SherlockActivity implements
 									send = true;
 									restart = true;
 								}
-							} else
-								Toast.makeText(getApplicationContext(), "",
-										Toast.LENGTH_SHORT).show();
+							}
+							else
+								Toast.makeText(getApplicationContext(), getString(R.string.checkbox_error),Toast.LENGTH_SHORT).show();
 						}
 					});
 

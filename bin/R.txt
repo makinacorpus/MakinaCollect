@@ -1343,7 +1343,7 @@ int string admin_preferences 0x7f090111
 int string advance 0x7f090043
 int string advanced_pref 0x7f090133
 int string altitude 0x7f090044
-int string app_name 0x7f09016f
+int string app_name 0x7f090170
 int string app_url 0x7f0900cf
 int string audio_file_error 0x7f090045
 int string audio_file_invalid 0x7f090046
@@ -1382,6 +1382,7 @@ int string change_url_default 0x7f090130
 int string change_username 0x7f090054
 int string change_username_default 0x7f090110
 int string change_view 0x7f0900f8
+int string checkbox_error 0x7f09016a
 int string choose_image 0x7f0900e9
 int string choose_sound 0x7f0900e7
 int string choose_video 0x7f0900e8
@@ -1419,9 +1420,9 @@ int string date_time_done 0x7f090029
 int string date_time_set 0x7f09002a
 int string default_completed 0x7f09005d
 int string default_completed_summary 0x7f09005e
-int string default_odk_formlist 0x7f090174
-int string default_odk_submission 0x7f090175
-int string default_server_url 0x7f090173
+int string default_odk_formlist 0x7f090175
+int string default_odk_submission 0x7f090176
+int string default_server_url 0x7f090174
 int string default_splash_path 0x7f0900ca
 int string delete_confirm 0x7f09005f
 int string delete_file 0x7f090060
@@ -1431,7 +1432,7 @@ int string delete_repeat_ask 0x7f090063
 int string delete_repeat_confirm 0x7f090064
 int string delete_repeat_no 0x7f090065
 int string delete_yes 0x7f090066
-int string deselect_all 0x7f09016b
+int string deselect_all 0x7f09016c
 int string discard_answer 0x7f090067
 int string discard_group 0x7f090068
 int string do_not_change 0x7f09006c
@@ -1481,10 +1482,10 @@ int string form_backward 0x7f090128
 int string form_download_progress 0x7f0900e0
 int string form_forward 0x7f090127
 int string form_scan_starting 0x7f0900da
-int string form_selected 0x7f09016d
+int string form_selected 0x7f09016e
 int string formlist_url 0x7f0900d6
 int string forms 0x7f09007d
-int string forms_selected 0x7f09016e
+int string forms_selected 0x7f09016f
 int string found_at_end 0x7f090124
 int string found_in_main 0x7f090122
 int string found_in_menu 0x7f09011c
@@ -1542,7 +1543,7 @@ int string no_connection 0x7f090097
 int string no_connexion 0x7f090139
 int string no_form_finalled 0x7f09013d
 int string no_form_not_finalled 0x7f09013c
-int string no_form_selected 0x7f09016c
+int string no_form_selected 0x7f09016d
 int string no_forms_uploaded 0x7f0900e4
 int string no_items_display 0x7f090098
 int string no_items_display_forms 0x7f090099
@@ -1566,9 +1567,9 @@ int string play_video 0x7f0900a3
 int string please_wait 0x7f0900a4
 int string please_wait_long 0x7f0900a5
 int string protocol 0x7f0900d3
-int string protocol_google 0x7f090171
-int string protocol_odk_default 0x7f090170
-int string protocol_other 0x7f090172
+int string protocol_google 0x7f090172
+int string protocol_odk_default 0x7f090171
+int string protocol_other 0x7f090173
 int string provider_disabled_error 0x7f090082
 int string quit_application 0x7f0900a6
 int string quit_entry 0x7f0900a7
@@ -1601,7 +1602,7 @@ int string saved_on_date_at_time 0x7f0900fc
 int string savepoint_used 0x7f090105
 int string saving_form 0x7f0900b1
 int string search 0x7f09014a
-int string select_all 0x7f09016a
+int string select_all 0x7f09016b
 int string select_another_image 0x7f0900cb
 int string select_answer 0x7f0900eb
 int string select_drawing_color 0x7f09010c
