@@ -28,8 +28,8 @@
                 android:id="@+id/save_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="text"
                 android:textColor="@color/actionbarTitleColorBlueSend"
+                android:inputType="textNoSuggestions"
                 android:textSize="21sp" />
 
             <com.makina.collect.android.views.CustomFontTextview
