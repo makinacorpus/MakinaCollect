@@ -724,10 +724,8 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
                         Collect.getInstance().getActivityLogger().logAction(this, "createAlertDialog", "OK");
                         // just close the dialog
                         mAlertShowing = false;
-                        // successful download, so quit
-                        /*if (shouldExit) {
-                            this.finish();
-                        }*/
+                        finish();
+                        startActivity(new Intent(getApplicationContext(), ActivityEditForm.class));
                         break;
                 }
             }
