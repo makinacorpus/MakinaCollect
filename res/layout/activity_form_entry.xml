@@ -32,7 +32,9 @@ the License.
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:paddingLeft="20dip"
+            android:layout_centerVertical="true"
+            android:paddingLeft="10dip"
+            android:paddingRight="65dip"
             android:textColor="@drawable/linear_blue"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -42,7 +44,8 @@ the License.
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:paddingRight="20dip"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dip"
             android:textColor="@drawable/linear_blue"
             android:textSize="35sp"
             android:textStyle="bold" />
