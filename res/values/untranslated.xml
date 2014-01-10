@@ -13,7 +13,7 @@
     <!-- strings that should not be translated -->
 
     <string name="clic_here_to_download">APPUYEZ ICI POUR TÉLÉCHARGER UN FORMULAIRE</string>
-    <string name="no_form_not_finalled">PAS DE FORMULAIRE NON FINALISÉ</string>
+    <string name="no_form_not_finalled">VOUS N\'AVEZ AUCUN FORMULAIRE NON FINALISÉ</string>
     <string name="no_form_finalled">PAS DE FORMULAIRE FINALISÉ</string>
     <string name="empty_list">Liste vide</string>
     <!-- AboutUS -->
