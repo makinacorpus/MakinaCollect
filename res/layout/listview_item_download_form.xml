@@ -37,7 +37,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@drawable/text_gris" />
 
-        <com.makina.collect.android.views.CustomFontTextview
+        <!--<com.makina.collect.android.views.CustomFontTextview
             android:id="@+id/text3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/text3"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@drawable/text_gris" />
+            android:textColor="@drawable/text_gris" />-->
     </RelativeLayout>
 
 </com.makina.collect.android.views.TwoItemMultipleChoiceView>

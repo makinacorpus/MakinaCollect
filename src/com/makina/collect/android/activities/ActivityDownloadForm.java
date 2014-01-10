@@ -785,8 +785,8 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
     		if (this.mFormList.get(i).get(FORMNAME).toUpperCase().contains(newText.toUpperCase()))
     			mFormList.add(this.mFormList.get(i));
     	
-    	String[] data = new String[] {FORMNAME, FORMID_DISPLAY, FORMDETAIL_KEY};
-        int[] view = new int[] {R.id.text1, R.id.text2};
+    	String[] data = new String[] {FORMNAME, FORMDETAIL_KEY};
+        int[] view = new int[] {R.id.text1};
         
     	 mFormListAdapter =new SimpleAdapter(this, mFormList, R.layout.listview_item_download_form, data, view);
          setListAdapter(mFormListAdapter);
