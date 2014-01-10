@@ -52,7 +52,7 @@
     <!-- ActionBar Title -->
     <string name="download_menu">TÉLÉCHARGER \nun formulaire</string>
     <string name="edit_menu">REMPLIR   \nun formulaire</string>
-    <string name="save_menu">SAUVEGARDER \nmes formulaires</string>
+    <string name="save_menu">FINALISER \nmes formulaires</string>
     <string name="send_menu">Mes formulaires \nA ENVOYER</string>
     <string name="edit">REMPLIR</string>
     <string name="my_forms">mes formulaires</string>

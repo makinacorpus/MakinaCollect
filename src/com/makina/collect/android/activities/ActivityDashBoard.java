@@ -93,10 +93,6 @@ public class ActivityDashBoard extends SherlockActivity implements
 					ActivitySendForm.class));
 			break;
 		}
-<<<<<<< HEAD
-=======
-
->>>>>>> 8dd77270da906e2fe10e7a67d1343f9be601b0e0
 	}
 
 	@Override

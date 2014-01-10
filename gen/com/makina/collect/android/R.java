@@ -185,28 +185,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
         public static final int activityChooserViewStyle=0x7f010046;
-        /** 
-    The size of the ad. It must be one of BANNER, FULL_BANNER, LEADERBOARD,
-    MEDIUM_RECTANGLE, SMART_BANNER, WIDE_SKYSCRAPER, or
-    &lt;width&gt;x&lt;height&gt;.
-    
-         <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int adSize=0x7f0100f0;
-        /**  The ad unit ID. 
-         <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int adUnitId=0x7f0100f1;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -366,7 +344,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int cameraBearing=0x7f0100f3;
+        public static final int cameraBearing=0x7f0100f1;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -374,7 +352,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int cameraTargetLat=0x7f0100f4;
+        public static final int cameraTargetLat=0x7f0100f2;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -382,7 +360,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int cameraTargetLng=0x7f0100f5;
+        public static final int cameraTargetLng=0x7f0100f3;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -390,7 +368,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int cameraTilt=0x7f0100f6;
+        public static final int cameraTilt=0x7f0100f4;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -398,7 +376,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int cameraZoom=0x7f0100f7;
+        public static final int cameraZoom=0x7f0100f5;
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
@@ -909,10 +887,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>normal</code></td><td>1</td><td></td></tr>
 <tr><td><code>satellite</code></td><td>2</td><td></td></tr>
 <tr><td><code>terrain</code></td><td>3</td><td></td></tr>
-<tr><td><code>hybrid</code></td><td>4</td><td></td></tr>
 </table>
          */
-        public static final int mapType=0x7f0100f2;
+        public static final int mapType=0x7f0100f0;
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -1593,7 +1570,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int uiCompass=0x7f0100f8;
+        public static final int uiCompass=0x7f0100f6;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -1601,7 +1578,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int uiRotateGestures=0x7f0100f9;
+        public static final int uiRotateGestures=0x7f0100f7;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -1609,7 +1586,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int uiScrollGestures=0x7f0100fa;
+        public static final int uiScrollGestures=0x7f0100f8;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -1617,7 +1594,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int uiTiltGestures=0x7f0100fb;
+        public static final int uiTiltGestures=0x7f0100f9;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -1625,7 +1602,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int uiZoomControls=0x7f0100fc;
+        public static final int uiZoomControls=0x7f0100fa;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -1633,7 +1610,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int uiZoomGestures=0x7f0100fd;
+        public static final int uiZoomGestures=0x7f0100fb;
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
@@ -1647,7 +1624,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int useViewLifecycle=0x7f0100fe;
+        public static final int useViewLifecycle=0x7f0100fc;
         /**  Default vertical divider between menu items. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -1767,7 +1744,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int zOrderOnTop=0x7f0100ff;
+        public static final int zOrderOnTop=0x7f0100fd;
     }
     public static final class bool {
         public static final int abs__action_bar_embed_tabs=0x7f0c0000;
@@ -1793,26 +1770,26 @@ containing a value of this type.
         public static final int preferences_prefer_dual_pane=0x7f0c0006;
     }
     public static final class color {
-        public static final int about_us_blue=0x7f08004a;
+        public static final int about_us_blue=0x7f080040;
         public static final int abs__background_holo_dark=0x7f080006;
         public static final int abs__background_holo_light=0x7f080007;
         public static final int abs__bright_foreground_disabled_holo_dark=0x7f08000a;
         public static final int abs__bright_foreground_disabled_holo_light=0x7f08000b;
         public static final int abs__bright_foreground_holo_dark=0x7f080008;
         public static final int abs__bright_foreground_holo_light=0x7f080009;
-        public static final int abs__primary_text_disable_only_holo_dark=0x7f08004c;
-        public static final int abs__primary_text_disable_only_holo_light=0x7f08004d;
-        public static final int abs__primary_text_holo_dark=0x7f08004e;
-        public static final int abs__primary_text_holo_light=0x7f08004f;
-        public static final int actionbarTitleColorBlueSave=0x7f080043;
-        public static final int actionbarTitleColorBlueSave_on=0x7f080047;
-        public static final int actionbarTitleColorBlueSend=0x7f080044;
-        public static final int actionbarTitleColorBlueSend_on=0x7f080048;
-        public static final int actionbarTitleColorGreenDownload=0x7f080041;
-        public static final int actionbarTitleColorGreenDownload_on=0x7f080045;
-        public static final int actionbarTitleColorGreenEdit=0x7f080042;
-        public static final int actionbarTitleColorGreenEdit_on=0x7f080046;
-        public static final int actionbarTitleColorGris=0x7f080049;
+        public static final int abs__primary_text_disable_only_holo_dark=0x7f080042;
+        public static final int abs__primary_text_disable_only_holo_light=0x7f080043;
+        public static final int abs__primary_text_holo_dark=0x7f080044;
+        public static final int abs__primary_text_holo_light=0x7f080045;
+        public static final int actionbarTitleColorBlueSave=0x7f080039;
+        public static final int actionbarTitleColorBlueSave_on=0x7f08003d;
+        public static final int actionbarTitleColorBlueSend=0x7f08003a;
+        public static final int actionbarTitleColorBlueSend_on=0x7f08003e;
+        public static final int actionbarTitleColorGreenDownload=0x7f080037;
+        public static final int actionbarTitleColorGreenDownload_on=0x7f08003b;
+        public static final int actionbarTitleColorGreenEdit=0x7f080038;
+        public static final int actionbarTitleColorGreenEdit_on=0x7f08003c;
+        public static final int actionbarTitleColorGris=0x7f08003f;
         public static final int background_dark=0x7f080017;
         public static final int background_holo_dark=0x7f080021;
         public static final int background_holo_light=0x7f080022;
@@ -1832,21 +1809,7 @@ containing a value of this type.
         public static final int btn_focused=0x7f080001;
         public static final int btn_normal=0x7f080002;
         public static final int btn_pressed=0x7f080000;
-        public static final int color_emty_list=0x7f08004b;
-        public static final int common_action_bar_splitter=0x7f080040;
-        /**  Sign-in Button Colors 
-         */
-        public static final int common_signin_btn_dark_text_default=0x7f080037;
-        public static final int common_signin_btn_dark_text_disabled=0x7f080039;
-        public static final int common_signin_btn_dark_text_focused=0x7f08003a;
-        public static final int common_signin_btn_dark_text_pressed=0x7f080038;
-        public static final int common_signin_btn_default_background=0x7f08003f;
-        public static final int common_signin_btn_light_text_default=0x7f08003b;
-        public static final int common_signin_btn_light_text_disabled=0x7f08003d;
-        public static final int common_signin_btn_light_text_focused=0x7f08003e;
-        public static final int common_signin_btn_light_text_pressed=0x7f08003c;
-        public static final int common_signin_btn_text_dark=0x7f080050;
-        public static final int common_signin_btn_text_light=0x7f080051;
+        public static final int color_emty_list=0x7f080041;
         public static final int dim_foreground_dark=0x7f08001f;
         public static final int dim_foreground_dark_inverse=0x7f080020;
         public static final int dim_foreground_disabled_holo_dark=0x7f08002a;
@@ -1895,19 +1858,19 @@ containing a value of this type.
         public static final int link_text_holo_light=0x7f080036;
         public static final int popup_bg_color=0x7f080003;
         public static final int popup_text_color=0x7f080005;
-        public static final int primary_text_disable_only_holo_dark=0x7f080052;
-        public static final int primary_text_disable_only_holo_light=0x7f080053;
-        public static final int primary_text_holo_dark=0x7f080054;
-        public static final int primary_text_holo_light=0x7f080055;
-        public static final int primary_text_nodisable_holo_dark=0x7f080056;
-        public static final int primary_text_nodisable_holo_light=0x7f080057;
-        public static final int secondary_text_holo_dark=0x7f080058;
-        public static final int secondary_text_holo_light=0x7f080059;
-        public static final int secondary_text_nodisable_holo_dark=0x7f08005a;
-        public static final int secondary_text_nodisable_holo_light=0x7f08005b;
+        public static final int primary_text_disable_only_holo_dark=0x7f080046;
+        public static final int primary_text_disable_only_holo_light=0x7f080047;
+        public static final int primary_text_holo_dark=0x7f080048;
+        public static final int primary_text_holo_light=0x7f080049;
+        public static final int primary_text_nodisable_holo_dark=0x7f08004a;
+        public static final int primary_text_nodisable_holo_light=0x7f08004b;
+        public static final int secondary_text_holo_dark=0x7f08004c;
+        public static final int secondary_text_holo_light=0x7f08004d;
+        public static final int secondary_text_nodisable_holo_dark=0x7f08004e;
+        public static final int secondary_text_nodisable_holo_light=0x7f08004f;
         public static final int separator_color=0x7f080004;
-        public static final int tertiary_text_holo_dark=0x7f08005c;
-        public static final int tertiary_text_holo_light=0x7f08005d;
+        public static final int tertiary_text_holo_dark=0x7f080050;
+        public static final int tertiary_text_holo_light=0x7f080051;
         public static final int transparent=0x7f080016;
     }
     public static final class dimen {
@@ -2167,10 +2130,10 @@ containing a value of this type.
         public static final int background=0x7f020083;
         public static final int background_cache_hint_selector_holo_dark=0x7f020084;
         public static final int background_cache_hint_selector_holo_light=0x7f020085;
-        public static final int background_drawer_list=0x7f020215;
+        public static final int background_drawer_list=0x7f0201f9;
         public static final int background_holo_dark=0x7f020086;
         public static final int background_holo_light=0x7f020087;
-        public static final int background_swipe_delete=0x7f02021d;
+        public static final int background_swipe_delete=0x7f020201;
         public static final int backup=0x7f020088;
         public static final int beginform=0x7f020089;
         public static final int bg_dashboard=0x7f02008a;
@@ -2304,320 +2267,291 @@ containing a value of this type.
         public static final int btn_toggle_on_pressed_holo_light=0x7f02010a;
         public static final int case_off=0x7f02010b;
         public static final int case_on=0x7f02010c;
-        public static final int check_all=0x7f020219;
-        public static final int check_all_on=0x7f02021a;
+        public static final int check_all=0x7f0201fd;
+        public static final int check_all_on=0x7f0201fe;
         public static final int check_all_selector=0x7f02010d;
         public static final int checkbox_selector=0x7f02010e;
         public static final int close=0x7f02010f;
-        public static final int common_signin_btn_icon_dark=0x7f020110;
-        public static final int common_signin_btn_icon_disabled_dark=0x7f020111;
-        public static final int common_signin_btn_icon_disabled_focus_dark=0x7f020112;
-        public static final int common_signin_btn_icon_disabled_focus_light=0x7f020113;
-        public static final int common_signin_btn_icon_disabled_light=0x7f020114;
-        public static final int common_signin_btn_icon_focus_dark=0x7f020115;
-        public static final int common_signin_btn_icon_focus_light=0x7f020116;
-        public static final int common_signin_btn_icon_light=0x7f020117;
-        public static final int common_signin_btn_icon_normal_dark=0x7f020118;
-        public static final int common_signin_btn_icon_normal_light=0x7f020119;
-        public static final int common_signin_btn_icon_pressed_dark=0x7f02011a;
-        public static final int common_signin_btn_icon_pressed_light=0x7f02011b;
-        public static final int common_signin_btn_text_dark=0x7f02011c;
-        public static final int common_signin_btn_text_disabled_dark=0x7f02011d;
-        public static final int common_signin_btn_text_disabled_focus_dark=0x7f02011e;
-        public static final int common_signin_btn_text_disabled_focus_light=0x7f02011f;
-        public static final int common_signin_btn_text_disabled_light=0x7f020120;
-        public static final int common_signin_btn_text_focus_dark=0x7f020121;
-        public static final int common_signin_btn_text_focus_light=0x7f020122;
-        public static final int common_signin_btn_text_light=0x7f020123;
-        public static final int common_signin_btn_text_normal_dark=0x7f020124;
-        public static final int common_signin_btn_text_normal_light=0x7f020125;
-        public static final int common_signin_btn_text_pressed_dark=0x7f020126;
-        public static final int common_signin_btn_text_pressed_light=0x7f020127;
-        public static final int dashboard_download=0x7f020128;
-        public static final int dashboard_download_on=0x7f020129;
-        public static final int dashboard_download_selector=0x7f02012a;
-        public static final int dashboard_edit=0x7f02012b;
-        public static final int dashboard_edit_on=0x7f02012c;
-        public static final int dashboard_edit_selector=0x7f02012d;
-        public static final int dashboard_saved=0x7f02012e;
-        public static final int dashboard_saved_on=0x7f02012f;
-        public static final int dashboard_saved_selector=0x7f020130;
-        public static final int dashboard_send=0x7f020131;
-        public static final int dashboard_send_on=0x7f020132;
-        public static final int dashboard_send_selector=0x7f020133;
-        public static final int day_picker_week_view_dayline_holo=0x7f020134;
-        public static final int dialog_bottom_holo_dark=0x7f020135;
-        public static final int dialog_bottom_holo_light=0x7f020136;
-        public static final int dialog_divider_horizontal_holo_dark=0x7f020137;
-        public static final int dialog_divider_horizontal_holo_light=0x7f020138;
-        public static final int dialog_full_holo_dark=0x7f020139;
-        public static final int dialog_full_holo_light=0x7f02013a;
-        public static final int dialog_middle_holo=0x7f02013b;
-        public static final int dialog_middle_holo_dark=0x7f02013c;
-        public static final int dialog_middle_holo_light=0x7f02013d;
-        public static final int dialog_top_holo_dark=0x7f02013e;
-        public static final int dialog_top_holo_light=0x7f02013f;
-        public static final int drawer_item_background=0x7f020140;
-        public static final int drawer_shadow=0x7f020141;
-        public static final int edit_text_holo_dark=0x7f020142;
-        public static final int edit_text_holo_light=0x7f020143;
-        public static final int expander_close_holo_dark=0x7f020144;
-        public static final int expander_close_holo_light=0x7f020145;
-        public static final int expander_group=0x7f020146;
-        public static final int expander_group_holo_dark=0x7f020147;
-        public static final int expander_group_holo_light=0x7f020148;
-        public static final int expander_ic_maximized=0x7f020149;
-        public static final int expander_ic_minimized=0x7f02014a;
-        public static final int expander_ic_right=0x7f02014b;
-        public static final int expander_open_holo_dark=0x7f02014c;
-        public static final int expander_open_holo_light=0x7f02014d;
-        public static final int gradient1=0x7f02014e;
-        public static final int gris_background=0x7f02021e;
-        public static final int ic_about_us=0x7f02014f;
-        public static final int ic_action_undo=0x7f020150;
-        public static final int ic_back=0x7f020151;
-        public static final int ic_back_on=0x7f020152;
-        public static final int ic_back_selector=0x7f020153;
-        public static final int ic_delete=0x7f020154;
-        public static final int ic_drawer=0x7f020155;
-        public static final int ic_edit=0x7f020156;
-        public static final int ic_maps_indicator_current_position=0x7f020157;
-        public static final int ic_menu_add=0x7f020158;
-        public static final int ic_menu_archive=0x7f020159;
-        public static final int ic_menu_back=0x7f02015a;
-        public static final int ic_menu_backward=0x7f02015b;
-        public static final int ic_menu_barcode=0x7f02015c;
-        public static final int ic_menu_clear_playlist=0x7f02015d;
-        public static final int ic_menu_forward=0x7f02015e;
-        public static final int ic_menu_goto=0x7f02015f;
-        public static final int ic_menu_login=0x7f020160;
-        public static final int ic_menu_mark=0x7f020161;
-        public static final int ic_menu_moreoverflow=0x7f020162;
-        public static final int ic_menu_mylocation=0x7f020163;
-        public static final int ic_menu_play_clip=0x7f020164;
-        public static final int ic_menu_refresh=0x7f020165;
-        public static final int ic_menu_save=0x7f020166;
-        public static final int ic_menu_selectall_holo_dark=0x7f020167;
-        public static final int ic_menu_send=0x7f020168;
-        public static final int ic_menu_start_conversation=0x7f020169;
-        public static final int ic_next=0x7f02016a;
-        public static final int ic_next_on=0x7f02016b;
-        public static final int ic_next_selector=0x7f02016c;
-        public static final int ic_plusone_medium_off_client=0x7f02016d;
-        public static final int ic_plusone_small_off_client=0x7f02016e;
-        public static final int ic_plusone_standard_off_client=0x7f02016f;
-        public static final int ic_plusone_tall_off_client=0x7f020170;
-        public static final int item_background_holo_dark=0x7f020171;
-        public static final int item_background_holo_light=0x7f020172;
-        public static final int left_arrow=0x7f020173;
-        public static final int linear_blue=0x7f020216;
-        public static final int linear_green=0x7f02021c;
-        public static final int list_activated_holo=0x7f020174;
-        public static final int list_divider_holo_dark=0x7f020175;
-        public static final int list_divider_holo_light=0x7f020176;
-        public static final int list_focused_holo=0x7f020177;
-        public static final int list_longpressed_holo=0x7f020178;
-        public static final int list_pressed_holo_dark=0x7f020179;
-        public static final int list_pressed_holo_light=0x7f02017a;
-        public static final int list_section_divider_holo_dark=0x7f02017b;
-        public static final int list_section_divider_holo_light=0x7f02017c;
-        public static final int list_selector_background_transition_holo_dark=0x7f02017d;
-        public static final int list_selector_background_transition_holo_light=0x7f02017e;
-        public static final int list_selector_disabled_holo_dark=0x7f02017f;
-        public static final int list_selector_disabled_holo_light=0x7f020180;
-        public static final int list_selector_holo_dark=0x7f020181;
-        public static final int list_selector_holo_light=0x7f020182;
-        public static final int logo=0x7f020183;
-        public static final int logo_makina_corpus=0x7f020184;
-        public static final int main_background=0x7f020185;
-        public static final int menu_dropdown_panel_holo_dark=0x7f020186;
-        public static final int menu_dropdown_panel_holo_light=0x7f020187;
-        public static final int no_list=0x7f020188;
-        public static final int numberpicker_selection_divider=0x7f020189;
-        public static final int odk_base_4=0x7f02018a;
-        public static final int old_switch_inner_holo_dark=0x7f02018b;
-        public static final int old_switch_inner_holo_light=0x7f02018c;
-        public static final int old_switch_thumb_activated_holo_dark=0x7f02018d;
-        public static final int old_switch_thumb_activated_holo_light=0x7f02018e;
-        public static final int old_switch_thumb_disabled_holo_dark=0x7f02018f;
-        public static final int old_switch_thumb_disabled_holo_light=0x7f020190;
-        public static final int old_switch_thumb_holo_dark=0x7f020191;
-        public static final int old_switch_thumb_holo_light=0x7f020192;
-        public static final int old_switch_thumb_pressed_holo_dark=0x7f020193;
-        public static final int old_switch_thumb_pressed_holo_light=0x7f020194;
-        public static final int overscroll_edge=0x7f020195;
-        public static final int overscroll_glow=0x7f020196;
-        public static final int pannier_blue=0x7f020218;
-        public static final int popup_bg=0x7f020197;
-        public static final int progress_bg_holo_dark=0x7f020198;
-        public static final int progress_bg_holo_light=0x7f020199;
-        public static final int progress_horizontal_holo_dark=0x7f02019a;
-        public static final int progress_horizontal_holo_light=0x7f02019b;
-        public static final int progress_indeterminate_horizontal_holo=0x7f02019c;
-        public static final int progress_large_holo=0x7f02019d;
-        public static final int progress_medium_holo=0x7f02019e;
-        public static final int progress_primary_holo_dark=0x7f02019f;
-        public static final int progress_primary_holo_light=0x7f0201a0;
-        public static final int progress_secondary_holo_dark=0x7f0201a1;
-        public static final int progress_secondary_holo_light=0x7f0201a2;
-        public static final int progress_small_holo=0x7f0201a3;
-        public static final int progressbar_indeterminate_holo1=0x7f0201a4;
-        public static final int progressbar_indeterminate_holo2=0x7f0201a5;
-        public static final int progressbar_indeterminate_holo3=0x7f0201a6;
-        public static final int progressbar_indeterminate_holo4=0x7f0201a7;
-        public static final int progressbar_indeterminate_holo5=0x7f0201a8;
-        public static final int progressbar_indeterminate_holo6=0x7f0201a9;
-        public static final int progressbar_indeterminate_holo7=0x7f0201aa;
-        public static final int progressbar_indeterminate_holo8=0x7f0201ab;
-        public static final int rate_star_big_half_holo_dark=0x7f0201ac;
-        public static final int rate_star_big_half_holo_light=0x7f0201ad;
-        public static final int rate_star_big_off_holo_dark=0x7f0201ae;
-        public static final int rate_star_big_off_holo_light=0x7f0201af;
-        public static final int rate_star_big_on_holo_dark=0x7f0201b0;
-        public static final int rate_star_big_on_holo_light=0x7f0201b1;
-        public static final int rate_star_small_half_holo_dark=0x7f0201b2;
-        public static final int rate_star_small_half_holo_light=0x7f0201b3;
-        public static final int rate_star_small_off_holo_dark=0x7f0201b4;
-        public static final int rate_star_small_off_holo_light=0x7f0201b5;
-        public static final int rate_star_small_on_holo_dark=0x7f0201b6;
-        public static final int rate_star_small_on_holo_light=0x7f0201b7;
-        public static final int ratingbar_full_empty_holo_dark=0x7f0201b8;
-        public static final int ratingbar_full_empty_holo_light=0x7f0201b9;
-        public static final int ratingbar_full_filled_holo_dark=0x7f0201ba;
-        public static final int ratingbar_full_filled_holo_light=0x7f0201bb;
-        public static final int ratingbar_full_holo_dark=0x7f0201bc;
-        public static final int ratingbar_full_holo_light=0x7f0201bd;
-        public static final int ratingbar_holo_dark=0x7f0201be;
-        public static final int ratingbar_holo_light=0x7f0201bf;
-        public static final int ratingbar_small_holo_dark=0x7f0201c0;
-        public static final int ratingbar_small_holo_light=0x7f0201c1;
-        public static final int scrollbar_handle_holo_dark=0x7f0201c2;
-        public static final int scrollbar_handle_holo_light=0x7f0201c3;
-        public static final int scrubber_control_disabled_holo=0x7f0201c4;
-        public static final int scrubber_control_focused_holo=0x7f0201c5;
-        public static final int scrubber_control_normal_holo=0x7f0201c6;
-        public static final int scrubber_control_pressed_holo=0x7f0201c7;
-        public static final int scrubber_control_selector_holo=0x7f0201c8;
-        public static final int scrubber_primary_holo=0x7f0201c9;
-        public static final int scrubber_progress_horizontal_holo_dark=0x7f0201ca;
-        public static final int scrubber_progress_horizontal_holo_light=0x7f0201cb;
-        public static final int scrubber_secondary_holo=0x7f0201cc;
-        public static final int scrubber_track_holo_dark=0x7f0201cd;
-        public static final int scrubber_track_holo_light=0x7f0201ce;
-        public static final int spinner_16_inner_holo=0x7f0201cf;
-        public static final int spinner_16_outer_holo=0x7f0201d0;
-        public static final int spinner_20_inner_holo=0x7f0201d1;
-        public static final int spinner_20_outer_holo=0x7f0201d2;
-        public static final int spinner_48_inner_holo=0x7f0201d3;
-        public static final int spinner_48_outer_holo=0x7f0201d4;
-        public static final int spinner_76_inner_holo=0x7f0201d5;
-        public static final int spinner_76_outer_holo=0x7f0201d6;
-        public static final int spinner_background_holo_dark=0x7f0201d7;
-        public static final int spinner_background_holo_light=0x7f0201d8;
-        public static final int spinner_default_holo_dark=0x7f0201d9;
-        public static final int spinner_default_holo_light=0x7f0201da;
-        public static final int spinner_disabled_holo_dark=0x7f0201db;
-        public static final int spinner_disabled_holo_light=0x7f0201dc;
-        public static final int spinner_focused_holo_dark=0x7f0201dd;
-        public static final int spinner_focused_holo_light=0x7f0201de;
-        public static final int spinner_pressed_holo_dark=0x7f0201df;
-        public static final int spinner_pressed_holo_light=0x7f0201e0;
-        public static final int splash_screen=0x7f0201e1;
-        public static final int stat_sys_download_anim0=0x7f0201e2;
-        public static final int strocke_about_us=0x7f020214;
-        public static final int switch_bg_disabled_holo_dark=0x7f0201e3;
-        public static final int switch_bg_disabled_holo_light=0x7f0201e4;
-        public static final int switch_bg_focused_holo_dark=0x7f0201e5;
-        public static final int switch_bg_focused_holo_light=0x7f0201e6;
-        public static final int switch_bg_holo_dark=0x7f0201e7;
-        public static final int switch_bg_holo_light=0x7f0201e8;
-        public static final int switch_inner_holo_dark=0x7f0201e9;
-        public static final int switch_inner_holo_light=0x7f0201ea;
-        public static final int switch_thumb_activated_holo_dark=0x7f0201eb;
-        public static final int switch_thumb_activated_holo_light=0x7f0201ec;
-        public static final int switch_thumb_disabled_holo_dark=0x7f0201ed;
-        public static final int switch_thumb_disabled_holo_light=0x7f0201ee;
-        public static final int switch_thumb_holo_dark=0x7f0201ef;
-        public static final int switch_thumb_holo_light=0x7f0201f0;
-        public static final int switch_thumb_pressed_holo_dark=0x7f0201f1;
-        public static final int switch_thumb_pressed_holo_light=0x7f0201f2;
-        public static final int switch_track_holo_dark=0x7f0201f3;
-        public static final int switch_track_holo_light=0x7f0201f4;
-        public static final int text_gris=0x7f020217;
-        public static final int textfield_activated_holo_dark=0x7f0201f5;
-        public static final int textfield_activated_holo_light=0x7f0201f6;
-        public static final int textfield_bg_activated_holo_dark=0x7f0201f7;
-        public static final int textfield_bg_default_holo_dark=0x7f0201f8;
-        public static final int textfield_bg_disabled_focused_holo_dark=0x7f0201f9;
-        public static final int textfield_bg_disabled_holo_dark=0x7f0201fa;
-        public static final int textfield_bg_focused_holo_dark=0x7f0201fb;
-        public static final int textfield_default_holo_dark=0x7f0201fc;
-        public static final int textfield_default_holo_light=0x7f0201fd;
-        public static final int textfield_disabled_focused_holo_dark=0x7f0201fe;
-        public static final int textfield_disabled_focused_holo_light=0x7f0201ff;
-        public static final int textfield_disabled_holo_dark=0x7f020200;
-        public static final int textfield_disabled_holo_light=0x7f020201;
-        public static final int textfield_focused_holo_dark=0x7f020202;
-        public static final int textfield_focused_holo_light=0x7f020203;
-        public static final int textfield_multiline_activated_holo_dark=0x7f020204;
-        public static final int textfield_multiline_activated_holo_light=0x7f020205;
-        public static final int textfield_multiline_default_holo_dark=0x7f020206;
-        public static final int textfield_multiline_default_holo_light=0x7f020207;
-        public static final int textfield_multiline_disabled_focused_holo_dark=0x7f020208;
-        public static final int textfield_multiline_disabled_focused_holo_light=0x7f020209;
-        public static final int textfield_multiline_disabled_holo_dark=0x7f02020a;
-        public static final int textfield_multiline_disabled_holo_light=0x7f02020b;
-        public static final int textfield_multiline_focused_holo_dark=0x7f02020c;
-        public static final int textfield_multiline_focused_holo_light=0x7f02020d;
-        public static final int thumb=0x7f02020e;
-        public static final int toast_frame=0x7f02020f;
-        public static final int transparent=0x7f020210;
-        public static final int undo_btn_bg=0x7f020211;
-        public static final int undo_btn_bg_focused=0x7f020212;
-        public static final int undo_btn_bg_pressed=0x7f020213;
-        public static final int white=0x7f02021b;
+        public static final int dashboard_download=0x7f020110;
+        public static final int dashboard_download_on=0x7f020111;
+        public static final int dashboard_download_selector=0x7f020112;
+        public static final int dashboard_edit=0x7f020113;
+        public static final int dashboard_edit_on=0x7f020114;
+        public static final int dashboard_edit_selector=0x7f020115;
+        public static final int dashboard_saved=0x7f020116;
+        public static final int dashboard_saved_on=0x7f020117;
+        public static final int dashboard_saved_selector=0x7f020118;
+        public static final int dashboard_send=0x7f020119;
+        public static final int dashboard_send_on=0x7f02011a;
+        public static final int dashboard_send_selector=0x7f02011b;
+        public static final int day_picker_week_view_dayline_holo=0x7f02011c;
+        public static final int dialog_bottom_holo_dark=0x7f02011d;
+        public static final int dialog_bottom_holo_light=0x7f02011e;
+        public static final int dialog_divider_horizontal_holo_dark=0x7f02011f;
+        public static final int dialog_divider_horizontal_holo_light=0x7f020120;
+        public static final int dialog_full_holo_dark=0x7f020121;
+        public static final int dialog_full_holo_light=0x7f020122;
+        public static final int dialog_middle_holo=0x7f020123;
+        public static final int dialog_middle_holo_dark=0x7f020124;
+        public static final int dialog_middle_holo_light=0x7f020125;
+        public static final int dialog_top_holo_dark=0x7f020126;
+        public static final int dialog_top_holo_light=0x7f020127;
+        public static final int drawer_item_background=0x7f020128;
+        public static final int drawer_shadow=0x7f020129;
+        public static final int edit_text_holo_dark=0x7f02012a;
+        public static final int edit_text_holo_light=0x7f02012b;
+        public static final int expander_close_holo_dark=0x7f02012c;
+        public static final int expander_close_holo_light=0x7f02012d;
+        public static final int expander_group=0x7f02012e;
+        public static final int expander_group_holo_dark=0x7f02012f;
+        public static final int expander_group_holo_light=0x7f020130;
+        public static final int expander_ic_maximized=0x7f020131;
+        public static final int expander_ic_minimized=0x7f020132;
+        public static final int expander_ic_right=0x7f020133;
+        public static final int expander_open_holo_dark=0x7f020134;
+        public static final int expander_open_holo_light=0x7f020135;
+        public static final int gradient1=0x7f020136;
+        public static final int gris_background=0x7f020202;
+        public static final int ic_about_us=0x7f020137;
+        public static final int ic_action_undo=0x7f020138;
+        public static final int ic_back=0x7f020139;
+        public static final int ic_back_on=0x7f02013a;
+        public static final int ic_back_selector=0x7f02013b;
+        public static final int ic_delete=0x7f02013c;
+        public static final int ic_drawer=0x7f02013d;
+        public static final int ic_edit=0x7f02013e;
+        public static final int ic_maps_indicator_current_position=0x7f02013f;
+        public static final int ic_menu_add=0x7f020140;
+        public static final int ic_menu_archive=0x7f020141;
+        public static final int ic_menu_back=0x7f020142;
+        public static final int ic_menu_backward=0x7f020143;
+        public static final int ic_menu_barcode=0x7f020144;
+        public static final int ic_menu_clear_playlist=0x7f020145;
+        public static final int ic_menu_forward=0x7f020146;
+        public static final int ic_menu_goto=0x7f020147;
+        public static final int ic_menu_login=0x7f020148;
+        public static final int ic_menu_mark=0x7f020149;
+        public static final int ic_menu_moreoverflow=0x7f02014a;
+        public static final int ic_menu_mylocation=0x7f02014b;
+        public static final int ic_menu_play_clip=0x7f02014c;
+        public static final int ic_menu_refresh=0x7f02014d;
+        public static final int ic_menu_save=0x7f02014e;
+        public static final int ic_menu_selectall_holo_dark=0x7f02014f;
+        public static final int ic_menu_send=0x7f020150;
+        public static final int ic_menu_start_conversation=0x7f020151;
+        public static final int ic_next=0x7f020152;
+        public static final int ic_next_on=0x7f020153;
+        public static final int ic_next_selector=0x7f020154;
+        public static final int item_background_holo_dark=0x7f020155;
+        public static final int item_background_holo_light=0x7f020156;
+        public static final int left_arrow=0x7f020157;
+        public static final int linear_blue=0x7f0201fa;
+        public static final int linear_green=0x7f020200;
+        public static final int list_activated_holo=0x7f020158;
+        public static final int list_divider_holo_dark=0x7f020159;
+        public static final int list_divider_holo_light=0x7f02015a;
+        public static final int list_focused_holo=0x7f02015b;
+        public static final int list_longpressed_holo=0x7f02015c;
+        public static final int list_pressed_holo_dark=0x7f02015d;
+        public static final int list_pressed_holo_light=0x7f02015e;
+        public static final int list_section_divider_holo_dark=0x7f02015f;
+        public static final int list_section_divider_holo_light=0x7f020160;
+        public static final int list_selector_background_transition_holo_dark=0x7f020161;
+        public static final int list_selector_background_transition_holo_light=0x7f020162;
+        public static final int list_selector_disabled_holo_dark=0x7f020163;
+        public static final int list_selector_disabled_holo_light=0x7f020164;
+        public static final int list_selector_holo_dark=0x7f020165;
+        public static final int list_selector_holo_light=0x7f020166;
+        public static final int logo=0x7f020167;
+        public static final int logo_makina_corpus=0x7f020168;
+        public static final int main_background=0x7f020169;
+        public static final int menu_dropdown_panel_holo_dark=0x7f02016a;
+        public static final int menu_dropdown_panel_holo_light=0x7f02016b;
+        public static final int no_list=0x7f02016c;
+        public static final int numberpicker_selection_divider=0x7f02016d;
+        public static final int odk_base_4=0x7f02016e;
+        public static final int old_switch_inner_holo_dark=0x7f02016f;
+        public static final int old_switch_inner_holo_light=0x7f020170;
+        public static final int old_switch_thumb_activated_holo_dark=0x7f020171;
+        public static final int old_switch_thumb_activated_holo_light=0x7f020172;
+        public static final int old_switch_thumb_disabled_holo_dark=0x7f020173;
+        public static final int old_switch_thumb_disabled_holo_light=0x7f020174;
+        public static final int old_switch_thumb_holo_dark=0x7f020175;
+        public static final int old_switch_thumb_holo_light=0x7f020176;
+        public static final int old_switch_thumb_pressed_holo_dark=0x7f020177;
+        public static final int old_switch_thumb_pressed_holo_light=0x7f020178;
+        public static final int overscroll_edge=0x7f020179;
+        public static final int overscroll_glow=0x7f02017a;
+        public static final int pannier_blue=0x7f0201fc;
+        public static final int popup_bg=0x7f02017b;
+        public static final int progress_bg_holo_dark=0x7f02017c;
+        public static final int progress_bg_holo_light=0x7f02017d;
+        public static final int progress_horizontal_holo_dark=0x7f02017e;
+        public static final int progress_horizontal_holo_light=0x7f02017f;
+        public static final int progress_indeterminate_horizontal_holo=0x7f020180;
+        public static final int progress_large_holo=0x7f020181;
+        public static final int progress_medium_holo=0x7f020182;
+        public static final int progress_primary_holo_dark=0x7f020183;
+        public static final int progress_primary_holo_light=0x7f020184;
+        public static final int progress_secondary_holo_dark=0x7f020185;
+        public static final int progress_secondary_holo_light=0x7f020186;
+        public static final int progress_small_holo=0x7f020187;
+        public static final int progressbar_indeterminate_holo1=0x7f020188;
+        public static final int progressbar_indeterminate_holo2=0x7f020189;
+        public static final int progressbar_indeterminate_holo3=0x7f02018a;
+        public static final int progressbar_indeterminate_holo4=0x7f02018b;
+        public static final int progressbar_indeterminate_holo5=0x7f02018c;
+        public static final int progressbar_indeterminate_holo6=0x7f02018d;
+        public static final int progressbar_indeterminate_holo7=0x7f02018e;
+        public static final int progressbar_indeterminate_holo8=0x7f02018f;
+        public static final int rate_star_big_half_holo_dark=0x7f020190;
+        public static final int rate_star_big_half_holo_light=0x7f020191;
+        public static final int rate_star_big_off_holo_dark=0x7f020192;
+        public static final int rate_star_big_off_holo_light=0x7f020193;
+        public static final int rate_star_big_on_holo_dark=0x7f020194;
+        public static final int rate_star_big_on_holo_light=0x7f020195;
+        public static final int rate_star_small_half_holo_dark=0x7f020196;
+        public static final int rate_star_small_half_holo_light=0x7f020197;
+        public static final int rate_star_small_off_holo_dark=0x7f020198;
+        public static final int rate_star_small_off_holo_light=0x7f020199;
+        public static final int rate_star_small_on_holo_dark=0x7f02019a;
+        public static final int rate_star_small_on_holo_light=0x7f02019b;
+        public static final int ratingbar_full_empty_holo_dark=0x7f02019c;
+        public static final int ratingbar_full_empty_holo_light=0x7f02019d;
+        public static final int ratingbar_full_filled_holo_dark=0x7f02019e;
+        public static final int ratingbar_full_filled_holo_light=0x7f02019f;
+        public static final int ratingbar_full_holo_dark=0x7f0201a0;
+        public static final int ratingbar_full_holo_light=0x7f0201a1;
+        public static final int ratingbar_holo_dark=0x7f0201a2;
+        public static final int ratingbar_holo_light=0x7f0201a3;
+        public static final int ratingbar_small_holo_dark=0x7f0201a4;
+        public static final int ratingbar_small_holo_light=0x7f0201a5;
+        public static final int scrollbar_handle_holo_dark=0x7f0201a6;
+        public static final int scrollbar_handle_holo_light=0x7f0201a7;
+        public static final int scrubber_control_disabled_holo=0x7f0201a8;
+        public static final int scrubber_control_focused_holo=0x7f0201a9;
+        public static final int scrubber_control_normal_holo=0x7f0201aa;
+        public static final int scrubber_control_pressed_holo=0x7f0201ab;
+        public static final int scrubber_control_selector_holo=0x7f0201ac;
+        public static final int scrubber_primary_holo=0x7f0201ad;
+        public static final int scrubber_progress_horizontal_holo_dark=0x7f0201ae;
+        public static final int scrubber_progress_horizontal_holo_light=0x7f0201af;
+        public static final int scrubber_secondary_holo=0x7f0201b0;
+        public static final int scrubber_track_holo_dark=0x7f0201b1;
+        public static final int scrubber_track_holo_light=0x7f0201b2;
+        public static final int spinner_16_inner_holo=0x7f0201b3;
+        public static final int spinner_16_outer_holo=0x7f0201b4;
+        public static final int spinner_20_inner_holo=0x7f0201b5;
+        public static final int spinner_20_outer_holo=0x7f0201b6;
+        public static final int spinner_48_inner_holo=0x7f0201b7;
+        public static final int spinner_48_outer_holo=0x7f0201b8;
+        public static final int spinner_76_inner_holo=0x7f0201b9;
+        public static final int spinner_76_outer_holo=0x7f0201ba;
+        public static final int spinner_background_holo_dark=0x7f0201bb;
+        public static final int spinner_background_holo_light=0x7f0201bc;
+        public static final int spinner_default_holo_dark=0x7f0201bd;
+        public static final int spinner_default_holo_light=0x7f0201be;
+        public static final int spinner_disabled_holo_dark=0x7f0201bf;
+        public static final int spinner_disabled_holo_light=0x7f0201c0;
+        public static final int spinner_focused_holo_dark=0x7f0201c1;
+        public static final int spinner_focused_holo_light=0x7f0201c2;
+        public static final int spinner_pressed_holo_dark=0x7f0201c3;
+        public static final int spinner_pressed_holo_light=0x7f0201c4;
+        public static final int splash_screen=0x7f0201c5;
+        public static final int stat_sys_download_anim0=0x7f0201c6;
+        public static final int strocke_about_us=0x7f0201f8;
+        public static final int switch_bg_disabled_holo_dark=0x7f0201c7;
+        public static final int switch_bg_disabled_holo_light=0x7f0201c8;
+        public static final int switch_bg_focused_holo_dark=0x7f0201c9;
+        public static final int switch_bg_focused_holo_light=0x7f0201ca;
+        public static final int switch_bg_holo_dark=0x7f0201cb;
+        public static final int switch_bg_holo_light=0x7f0201cc;
+        public static final int switch_inner_holo_dark=0x7f0201cd;
+        public static final int switch_inner_holo_light=0x7f0201ce;
+        public static final int switch_thumb_activated_holo_dark=0x7f0201cf;
+        public static final int switch_thumb_activated_holo_light=0x7f0201d0;
+        public static final int switch_thumb_disabled_holo_dark=0x7f0201d1;
+        public static final int switch_thumb_disabled_holo_light=0x7f0201d2;
+        public static final int switch_thumb_holo_dark=0x7f0201d3;
+        public static final int switch_thumb_holo_light=0x7f0201d4;
+        public static final int switch_thumb_pressed_holo_dark=0x7f0201d5;
+        public static final int switch_thumb_pressed_holo_light=0x7f0201d6;
+        public static final int switch_track_holo_dark=0x7f0201d7;
+        public static final int switch_track_holo_light=0x7f0201d8;
+        public static final int text_gris=0x7f0201fb;
+        public static final int textfield_activated_holo_dark=0x7f0201d9;
+        public static final int textfield_activated_holo_light=0x7f0201da;
+        public static final int textfield_bg_activated_holo_dark=0x7f0201db;
+        public static final int textfield_bg_default_holo_dark=0x7f0201dc;
+        public static final int textfield_bg_disabled_focused_holo_dark=0x7f0201dd;
+        public static final int textfield_bg_disabled_holo_dark=0x7f0201de;
+        public static final int textfield_bg_focused_holo_dark=0x7f0201df;
+        public static final int textfield_default_holo_dark=0x7f0201e0;
+        public static final int textfield_default_holo_light=0x7f0201e1;
+        public static final int textfield_disabled_focused_holo_dark=0x7f0201e2;
+        public static final int textfield_disabled_focused_holo_light=0x7f0201e3;
+        public static final int textfield_disabled_holo_dark=0x7f0201e4;
+        public static final int textfield_disabled_holo_light=0x7f0201e5;
+        public static final int textfield_focused_holo_dark=0x7f0201e6;
+        public static final int textfield_focused_holo_light=0x7f0201e7;
+        public static final int textfield_multiline_activated_holo_dark=0x7f0201e8;
+        public static final int textfield_multiline_activated_holo_light=0x7f0201e9;
+        public static final int textfield_multiline_default_holo_dark=0x7f0201ea;
+        public static final int textfield_multiline_default_holo_light=0x7f0201eb;
+        public static final int textfield_multiline_disabled_focused_holo_dark=0x7f0201ec;
+        public static final int textfield_multiline_disabled_focused_holo_light=0x7f0201ed;
+        public static final int textfield_multiline_disabled_holo_dark=0x7f0201ee;
+        public static final int textfield_multiline_disabled_holo_light=0x7f0201ef;
+        public static final int textfield_multiline_focused_holo_dark=0x7f0201f0;
+        public static final int textfield_multiline_focused_holo_light=0x7f0201f1;
+        public static final int thumb=0x7f0201f2;
+        public static final int toast_frame=0x7f0201f3;
+        public static final int transparent=0x7f0201f4;
+        public static final int undo_btn_bg=0x7f0201f5;
+        public static final int undo_btn_bg_focused=0x7f0201f6;
+        public static final int undo_btn_bg_pressed=0x7f0201f7;
+        public static final int white=0x7f0201ff;
     }
     public static final class id {
-        public static final int abs__action_bar=0x7f0b0047;
-        public static final int abs__action_bar_container=0x7f0b0046;
-        public static final int abs__action_bar_subtitle=0x7f0b0038;
-        public static final int abs__action_bar_title=0x7f0b0037;
-        public static final int abs__action_context_bar=0x7f0b0048;
+        public static final int abs__action_bar=0x7f0b0046;
+        public static final int abs__action_bar_container=0x7f0b0045;
+        public static final int abs__action_bar_subtitle=0x7f0b0037;
+        public static final int abs__action_bar_title=0x7f0b0036;
+        public static final int abs__action_context_bar=0x7f0b0047;
         public static final int abs__action_menu_divider=0x7f0b000c;
         public static final int abs__action_menu_presenter=0x7f0b000d;
-        public static final int abs__action_mode_bar=0x7f0b004c;
-        public static final int abs__action_mode_bar_stub=0x7f0b004b;
-        public static final int abs__action_mode_close_button=0x7f0b003b;
-        public static final int abs__activity_chooser_view_content=0x7f0b003c;
-        public static final int abs__checkbox=0x7f0b0043;
-        public static final int abs__content=0x7f0b0049;
-        public static final int abs__default_activity_button=0x7f0b003f;
-        public static final int abs__expand_activities_button=0x7f0b003d;
+        public static final int abs__action_mode_bar=0x7f0b004b;
+        public static final int abs__action_mode_bar_stub=0x7f0b004a;
+        public static final int abs__action_mode_close_button=0x7f0b003a;
+        public static final int abs__activity_chooser_view_content=0x7f0b003b;
+        public static final int abs__checkbox=0x7f0b0042;
+        public static final int abs__content=0x7f0b0048;
+        public static final int abs__default_activity_button=0x7f0b003e;
+        public static final int abs__expand_activities_button=0x7f0b003c;
         public static final int abs__home=0x7f0b000a;
-        public static final int abs__icon=0x7f0b0041;
-        public static final int abs__image=0x7f0b003e;
-        public static final int abs__imageButton=0x7f0b0039;
-        public static final int abs__list_item=0x7f0b0040;
+        public static final int abs__icon=0x7f0b0040;
+        public static final int abs__image=0x7f0b003d;
+        public static final int abs__imageButton=0x7f0b0038;
+        public static final int abs__list_item=0x7f0b003f;
         public static final int abs__progress_circular=0x7f0b000e;
         public static final int abs__progress_horizontal=0x7f0b000f;
-        public static final int abs__radio=0x7f0b0045;
-        public static final int abs__search_badge=0x7f0b004f;
-        public static final int abs__search_bar=0x7f0b004e;
-        public static final int abs__search_button=0x7f0b0050;
-        public static final int abs__search_close_btn=0x7f0b0055;
-        public static final int abs__search_edit_frame=0x7f0b0051;
-        public static final int abs__search_go_btn=0x7f0b0057;
-        public static final int abs__search_mag_icon=0x7f0b0052;
-        public static final int abs__search_plate=0x7f0b0053;
-        public static final int abs__search_src_text=0x7f0b0054;
-        public static final int abs__search_voice_btn=0x7f0b0058;
-        public static final int abs__shortcut=0x7f0b0044;
-        public static final int abs__split_action_bar=0x7f0b004a;
-        public static final int abs__submit_area=0x7f0b0056;
-        public static final int abs__textButton=0x7f0b003a;
-        public static final int abs__title=0x7f0b0042;
+        public static final int abs__radio=0x7f0b0044;
+        public static final int abs__search_badge=0x7f0b004e;
+        public static final int abs__search_bar=0x7f0b004d;
+        public static final int abs__search_button=0x7f0b004f;
+        public static final int abs__search_close_btn=0x7f0b0054;
+        public static final int abs__search_edit_frame=0x7f0b0050;
+        public static final int abs__search_go_btn=0x7f0b0056;
+        public static final int abs__search_mag_icon=0x7f0b0051;
+        public static final int abs__search_plate=0x7f0b0052;
+        public static final int abs__search_src_text=0x7f0b0053;
+        public static final int abs__search_voice_btn=0x7f0b0057;
+        public static final int abs__shortcut=0x7f0b0043;
+        public static final int abs__split_action_bar=0x7f0b0049;
+        public static final int abs__submit_area=0x7f0b0055;
+        public static final int abs__textButton=0x7f0b0039;
+        public static final int abs__title=0x7f0b0041;
         public static final int abs__up=0x7f0b000b;
-<<<<<<< HEAD
         public static final int accept_location=0x7f0b0079;
         public static final int access_settings=0x7f0b00ef;
         public static final int action_icon=0x7f0b00b8;
@@ -2689,84 +2623,10 @@ containing a value of this type.
         public static final int edit_saved=0x7f0b00e0;
         public static final int edittext_container=0x7f0b00c7;
         public static final int empty=0x7f0b0063;
-=======
-        public static final int accept_location=0x7f0b007b;
-        public static final int access_settings=0x7f0b00f1;
-        public static final int action_icon=0x7f0b00ba;
-        public static final int admin_pw=0x7f0b00e1;
-        public static final int alarm=0x7f0b0020;
-        public static final int alertTitle=0x7f0b0086;
-        public static final int all=0x7f0b0021;
-        public static final int amPm=0x7f0b00d9;
-        public static final int autosend_network=0x7f0b00ec;
-        public static final int autosend_wifi=0x7f0b00eb;
-        public static final int back_button=0x7f0b00d0;
-        public static final int beginning=0x7f0b0027;
-        public static final int bottom=0x7f0b0011;
-        public static final int brightbar=0x7f0b00ae;
-        public static final int btnCancelDraw=0x7f0b00b9;
-        public static final int btnFinishDraw=0x7f0b00b7;
-        public static final int btnResetDraw=0x7f0b00b8;
-        public static final int btnSelectColor=0x7f0b00b6;
-        public static final int button1=0x7f0b0091;
-        public static final int button2=0x7f0b008f;
-        public static final int button3=0x7f0b0090;
-        public static final int buttonPanel=0x7f0b008d;
-        public static final int buttonPanelTopDivivder=0x7f0b008e;
-        public static final int button_bar=0x7f0b00cf;
-        public static final int buttonholder=0x7f0b006c;
-        public static final int calendar_view=0x7f0b009e;
-        public static final int cancel_location=0x7f0b007a;
-        public static final int center=0x7f0b0018;
-        public static final int center_horizontal=0x7f0b0016;
-        public static final int center_vertical=0x7f0b0014;
-        public static final int change_font_size=0x7f0b00ee;
-        public static final int change_google_account=0x7f0b00e9;
-        public static final int change_language=0x7f0b00f2;
-        public static final int change_password=0x7f0b00e8;
-        public static final int change_server=0x7f0b00ea;
-        public static final int change_url=0x7f0b00e6;
-        public static final int change_username=0x7f0b00e7;
-        public static final int check_all=0x7f0b0061;
-        public static final int checkbox=0x7f0b00c0;
-        public static final int checkbox1=0x7f0b0071;
-        public static final int checkbox2=0x7f0b0072;
-        public static final int checkbox3=0x7f0b0073;
-        public static final int checkbox_help=0x7f0b00a6;
-        public static final int clip_horizontal=0x7f0b001b;
-        public static final int clip_vertical=0x7f0b001a;
-        public static final int contentPanel=0x7f0b0088;
-        public static final int content_frame=0x7f0b007f;
-        public static final int custom=0x7f0b008c;
-        public static final int customPanel=0x7f0b008b;
-        public static final int dashboard_download=0x7f0b0059;
-        public static final int dashboard_edit=0x7f0b005a;
-        public static final int dashboard_save=0x7f0b005b;
-        public static final int dashboard_send=0x7f0b005c;
-        public static final int datePicker=0x7f0b0099;
-        public static final int day=0x7f0b009c;
-        public static final int day_names=0x7f0b0097;
-        public static final int decrement=0x7f0b0032;
-        public static final int default_to_finalized=0x7f0b00ef;
-        public static final int delete_saved=0x7f0b00e5;
-        public static final int dialog=0x7f0b0029;
-        public static final int disableHome=0x7f0b0009;
-        public static final int divider=0x7f0b00d7;
-        public static final int drawViewLayout=0x7f0b00b5;
-        public static final int draw_relative_layout=0x7f0b00b4;
-        public static final int drawer_layout=0x7f0b007e;
-        public static final int dropdown=0x7f0b002a;
-        public static final int edit=0x7f0b002d;
-        public static final int edit_query=0x7f0b004d;
-        public static final int edit_saved=0x7f0b00e2;
-        public static final int edittext_container=0x7f0b00c9;
-        public static final int empty=0x7f0b0064;
->>>>>>> 8dd77270da906e2fe10e7a67d1343f9be601b0e0
         public static final int end=0x7f0b001d;
         public static final int fill=0x7f0b0019;
         public static final int fill_horizontal=0x7f0b0017;
         public static final int fill_vertical=0x7f0b0015;
-<<<<<<< HEAD
         public static final int font_size=0x7f0b00fb;
         public static final int form_back_button=0x7f0b006c;
         public static final int form_forward_button=0x7f0b006d;
@@ -2851,99 +2711,10 @@ containing a value of this type.
         public static final int refresh_location=0x7f0b007b;
         public static final int relative=0x7f0b0064;
         public static final int relativeLayout_informations=0x7f0b0067;
-=======
-        public static final int font_size=0x7f0b00fd;
-        public static final int form_back_button=0x7f0b006d;
-        public static final int form_forward_button=0x7f0b006e;
-        public static final int formlist_url=0x7f0b0102;
-        public static final int get_blank=0x7f0b00e4;
-        public static final int get_position=0x7f0b00dc;
-        public static final int headers=0x7f0b00cb;
-        public static final int homeAsUp=0x7f0b0006;
-        public static final int hour=0x7f0b00d6;
-        public static final int hybrid=0x7f0b0035;
-        public static final int icon=0x7f0b0085;
-        public static final int imageView_check_all=0x7f0b0062;
-        public static final int increment=0x7f0b0031;
-        public static final int internalEmpty=0x7f0b00bf;
-        public static final int jump_to=0x7f0b00f3;
-        public static final int key_offline_mode=0x7f0b00ff;
-        public static final int key_use_maps=0x7f0b00fe;
-        public static final int langue=0x7f0b00fa;
-        public static final int layoutRoot=0x7f0b00ad;
-        public static final int left=0x7f0b0012;
-        public static final int leftSpacer=0x7f0b002e;
-        public static final int left_drawer=0x7f0b0080;
-        public static final int left_icon=0x7f0b00bc;
-        public static final int linearLayout_footer=0x7f0b005e;
-        public static final int linear_blue=0x7f0b005d;
-        public static final int linearlayout_ok=0x7f0b00a5;
-        public static final int list=0x7f0b0098;
-        public static final int listContainer=0x7f0b00be;
-        public static final int listMode=0x7f0b0002;
-        public static final int list_footer=0x7f0b00cc;
-        public static final int location_buttons=0x7f0b0077;
-        public static final int location_status=0x7f0b0078;
-        public static final int logo=0x7f0b00a0;
-        public static final int luminosity=0x7f0b00fc;
-        public static final int mainlayout=0x7f0b0076;
-        public static final int map=0x7f0b0079;
-        public static final int mapview=0x7f0b0036;
-        public static final int mark_as_finalized=0x7f0b00f6;
-        public static final int menu_about_us=0x7f0b0107;
-        public static final int menu_download=0x7f0b010a;
-        public static final int menu_exit=0x7f0b0108;
-        public static final int menu_help=0x7f0b010b;
-        public static final int menu_hierachy=0x7f0b010c;
-        public static final int menu_raz=0x7f0b010d;
-        public static final int menu_save=0x7f0b010e;
-        public static final int menu_search=0x7f0b0109;
-        public static final int menu_send=0x7f0b010f;
-        public static final int menu_settings=0x7f0b0106;
-        public static final int message=0x7f0b008a;
-        public static final int middle=0x7f0b0028;
-        public static final int minute=0x7f0b00d8;
-        public static final int month=0x7f0b009b;
-        public static final int month_name=0x7f0b0096;
-        public static final int music=0x7f0b0025;
-        public static final int navigation=0x7f0b00ed;
-        public static final int negative_button=0x7f0b00ac;
-        public static final int next_button=0x7f0b00d2;
-        public static final int none=0x7f0b0026;
-        public static final int normal=0x7f0b0001;
-        public static final int notification=0x7f0b001f;
-        public static final int numberpicker_input=0x7f0b00c6;
-        public static final int pannier=0x7f0b005f;
-        public static final int parentPanel=0x7f0b0081;
-        public static final int part_name=0x7f0b00bb;
-        public static final int password=0x7f0b00f9;
-        public static final int password_edit=0x7f0b00b3;
-        public static final int password_view=0x7f0b00b2;
-        public static final int pathtext=0x7f0b0074;
-        public static final int pickers=0x7f0b009a;
-        public static final int positive_button=0x7f0b00ab;
-        public static final int prefs=0x7f0b00ce;
-        public static final int prefs_frame=0x7f0b00cd;
-        public static final int progress=0x7f0b002b;
-        public static final int progressContainer=0x7f0b00bd;
-        public static final int progress_number=0x7f0b0093;
-        public static final int progress_percent=0x7f0b0092;
-        public static final int protocol=0x7f0b0101;
-        public static final int pwd_field=0x7f0b00a8;
-        public static final int pwd_label=0x7f0b00a7;
-        public static final int questionholder=0x7f0b006b;
-        public static final int quick_select=0x7f0b00de;
-        public static final int quick_select_question=0x7f0b00df;
-        public static final int quick_select_right_arrow=0x7f0b00e0;
-        public static final int refresh_location=0x7f0b007d;
-        public static final int relative=0x7f0b0065;
-        public static final int relativeLayout_informations=0x7f0b0068;
->>>>>>> 8dd77270da906e2fe10e7a67d1343f9be601b0e0
         public static final int right=0x7f0b0013;
         public static final int rightSpacer=0x7f0b002f;
         public static final int ring=0x7f0b0024;
         public static final int ringtone=0x7f0b001e;
-<<<<<<< HEAD
         public static final int rl=0x7f0b0066;
         public static final int satellite=0x7f0b0033;
         public static final int save=0x7f0b006e;
@@ -3012,76 +2783,6 @@ containing a value of this type.
         public static final int widget_frame=0x7f0b00c6;
         public static final int wrap_content=0x7f0b0000;
         public static final int year=0x7f0b009b;
-=======
-        public static final int rl=0x7f0b0067;
-        public static final int satellite=0x7f0b0033;
-        public static final int save=0x7f0b006f;
-        public static final int save_as=0x7f0b00f5;
-        public static final int save_mid=0x7f0b00f4;
-        public static final int save_name=0x7f0b0070;
-        public static final int scrollView=0x7f0b0089;
-        public static final int secondaryProgress=0x7f0b002c;
-        public static final int seekbar=0x7f0b00ca;
-        public static final int select_dialog_listview=0x7f0b00d4;
-        public static final int selected_google_account=0x7f0b0100;
-        public static final int send_finalized=0x7f0b00e3;
-        public static final int server_url=0x7f0b00f7;
-        public static final int showCustom=0x7f0b0008;
-        public static final int showHome=0x7f0b0005;
-        public static final int showTitle=0x7f0b0007;
-        public static final int show_location=0x7f0b007c;
-        public static final int show_position=0x7f0b00dd;
-        public static final int show_splash=0x7f0b0104;
-        public static final int show_splash_screen=0x7f0b00f0;
-        public static final int skip_button=0x7f0b00d1;
-        public static final int splash_path=0x7f0b0105;
-        public static final int start=0x7f0b001c;
-        public static final int status_text=0x7f0b0075;
-        public static final int submission_url=0x7f0b0103;
-        public static final int summary=0x7f0b00c7;
-        public static final int switchWidget=0x7f0b00d3;
-        public static final int system=0x7f0b0023;
-        public static final int tabMode=0x7f0b0003;
-        public static final int terrain=0x7f0b0034;
-        public static final int text=0x7f0b00da;
-        public static final int text1=0x7f0b00c1;
-        public static final int text2=0x7f0b00c3;
-        public static final int text3=0x7f0b00c2;
-        public static final int textView_check_all=0x7f0b0063;
-        public static final int textView_pannier=0x7f0b0060;
-        public static final int textView_quiz_name=0x7f0b0069;
-        public static final int textView_quiz_question_number=0x7f0b006a;
-        public static final int textview_about_us1=0x7f0b009f;
-        public static final int textview_about_us2=0x7f0b00a1;
-        public static final int textview_about_us3=0x7f0b00a2;
-        public static final int textview_about_us4=0x7f0b00a3;
-        public static final int textview_download_form=0x7f0b0066;
-        public static final int textview_help=0x7f0b00a4;
-        public static final int textview_hierarchy_question=0x7f0b00c4;
-        public static final int textview_hierarchy_response=0x7f0b00c5;
-        public static final int theme=0x7f0b00fb;
-        public static final int timePicker=0x7f0b00d5;
-        public static final int title=0x7f0b0095;
-        public static final int titleDivider=0x7f0b0087;
-        public static final int titleDividerTop=0x7f0b0083;
-        public static final int title_container=0x7f0b0094;
-        public static final int title_template=0x7f0b0084;
-        public static final int top=0x7f0b0010;
-        public static final int topPanel=0x7f0b0082;
-        public static final int txtPercentage=0x7f0b00af;
-        public static final int typeface=0x7f0b0030;
-        public static final int undo=0x7f0b00db;
-        public static final int useLogo=0x7f0b0004;
-        public static final int username=0x7f0b00f8;
-        public static final int username_edit=0x7f0b00b1;
-        public static final int username_view=0x7f0b00b0;
-        public static final int verify_field=0x7f0b00aa;
-        public static final int verify_label=0x7f0b00a9;
-        public static final int voice=0x7f0b0022;
-        public static final int widget_frame=0x7f0b00c8;
-        public static final int wrap_content=0x7f0b0000;
-        public static final int year=0x7f0b009d;
->>>>>>> 8dd77270da906e2fe10e7a67d1343f9be601b0e0
     }
     public static final class integer {
         public static final int abs__max_action_buttons=0x7f0e0000;
@@ -3090,7 +2791,6 @@ containing a value of this type.
         public static final int config_longAnimTime=0x7f0e0005;
         public static final int config_mediumAnimTime=0x7f0e0004;
         public static final int config_shortAnimTime=0x7f0e0003;
-        public static final int google_play_services_version=0x7f0e000a;
         /**  outsideOverlay 
          */
         public static final int preference_fragment_scrollbarStyle=0x7f0e0007;
@@ -3217,7 +2917,7 @@ containing a value of this type.
         public static final int roboto_regular=0x7f070003;
     }
     public static final class string {
-        public static final int about_us=0x7f09015c;
+        public static final int about_us=0x7f09014d;
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
          */
         public static final int abs__action_bar_home_description=0x7f090002;
@@ -3259,28 +2959,27 @@ containing a value of this type.
         public static final int abs__shareactionprovider_share_with_application=0x7f090009;
         /**  END Message d'erreur liste vide 
          */
-        public static final int accept_location=0x7f09004a;
-        public static final int access_error=0x7f0900ea;
-        public static final int accuracy=0x7f09004b;
-        public static final int activity_not_found=0x7f09004c;
-        public static final int add_another=0x7f09004d;
-        public static final int add_another_repeat=0x7f09004e;
-        public static final int add_more=0x7f09004f;
-        public static final int add_repeat=0x7f090050;
-        public static final int add_repeat_no=0x7f090051;
-        public static final int added_on_date_at_time=0x7f09010a;
-        public static final int admin_access_settings=0x7f090121;
-        public static final int admin_password_changed=0x7f090126;
-        public static final int admin_password_disabled=0x7f090127;
-        public static final int admin_password_incorrect=0x7f090129;
-        public static final int admin_password_mismatch=0x7f090128;
-        public static final int admin_preferences=0x7f090120;
-        public static final int advance=0x7f090052;
-        public static final int advanced_pref=0x7f090142;
-        public static final int altitude=0x7f090053;
+        public static final int accept_location=0x7f09003b;
+        public static final int access_error=0x7f0900db;
+        public static final int accuracy=0x7f09003c;
+        public static final int activity_not_found=0x7f09003d;
+        public static final int add_another=0x7f09003e;
+        public static final int add_another_repeat=0x7f09003f;
+        public static final int add_more=0x7f090040;
+        public static final int add_repeat=0x7f090041;
+        public static final int add_repeat_no=0x7f090042;
+        public static final int added_on_date_at_time=0x7f0900fb;
+        public static final int admin_access_settings=0x7f090112;
+        public static final int admin_password_changed=0x7f090117;
+        public static final int admin_password_disabled=0x7f090118;
+        public static final int admin_password_incorrect=0x7f09011a;
+        public static final int admin_password_mismatch=0x7f090119;
+        public static final int admin_preferences=0x7f090111;
+        public static final int advance=0x7f090043;
+        public static final int advanced_pref=0x7f090133;
+        public static final int altitude=0x7f090044;
         /**  END FORM SAVING 
          */
-<<<<<<< HEAD
         public static final int app_name=0x7f09016a;
         public static final int app_url=0x7f0900cf;
         public static final int audio_file_error=0x7f090045;
@@ -3300,85 +2999,41 @@ containing a value of this type.
         public static final int cancel_loading_form=0x7f09004a;
         public static final int cancel_location=0x7f09004b;
         public static final int cancel_saving_form=0x7f09004c;
-=======
-        public static final int app_name=0x7f090179;
-        public static final int app_url=0x7f0900de;
-        public static final int audio_file_error=0x7f090054;
-        public static final int audio_file_invalid=0x7f090055;
-        /**   Title for notification shown when GooglePlayServices needs to be
-        enabled for a application to work. [CHAR LIMIT=70] 
-         */
-        public static final int auth_client_needs_enabling_title=0x7f090045;
-        /**   Title for notification shown when GooglePlayServices needs to be
-        installed for a application to work. [CHAR LIMIT=70] 
-         */
-        public static final int auth_client_needs_installation_title=0x7f090046;
-        /**   Title for notification shown when GooglePlayServices needs to be
-        udpated for a application to work. [CHAR LIMIT=70] 
-         */
-        public static final int auth_client_needs_update_title=0x7f090047;
-        /**   Title for notification shown when GooglePlayServices is unavailable [CHAR LIMIT=42] 
-         */
-        public static final int auth_client_play_services_err_notification_msg=0x7f090048;
-        /**   Requested by string saying which app requested the notification. [CHAR LIMIT=42] 
-         */
-        public static final int auth_client_requested_by_msg=0x7f090049;
-        /**   Title for notification shown when a bad version of GooglePlayServices
-        has been installed and needs correction for an application to work.
-        [CHAR LIMIT=70] 
-         */
-        public static final int auth_client_using_bad_version_title=0x7f090044;
-        public static final int autosend=0x7f09012c;
-        public static final int autosend_network=0x7f09012f;
-        public static final int autosend_network_summary=0x7f090130;
-        public static final int autosend_wifi=0x7f09012d;
-        public static final int autosend_wifi_summary=0x7f09012e;
-        public static final int back_button_label=0x7f09000f;
-        public static final int backup=0x7f090056;
-        public static final int barcode_scanner_error=0x7f090057;
-        public static final int box=0x7f090169;
-        public static final int buttons_instructions=0x7f09013d;
-        public static final int buttons_navigation=0x7f09013a;
-        public static final int cancel=0x7f090058;
-        public static final int cancel_loading_form=0x7f090059;
-        public static final int cancel_location=0x7f09005a;
-        public static final int cancel_saving_form=0x7f09005b;
->>>>>>> 8dd77270da906e2fe10e7a67d1343f9be601b0e0
         public static final int candidates_style=0x7f090015;
-        public static final int cannot_edit_completed_form=0x7f09005c;
+        public static final int cannot_edit_completed_form=0x7f09004d;
         public static final int capital_off=0x7f090014;
         public static final int capital_on=0x7f090013;
-        public static final int capture_audio=0x7f09005d;
-        public static final int capture_image=0x7f09005e;
-        public static final int capture_video=0x7f09005f;
-        public static final int change_font_size=0x7f0900e8;
-        public static final int change_formlist_url=0x7f0900e1;
-        public static final int change_language=0x7f090060;
-        public static final int change_password=0x7f090061;
-        public static final int change_protocol=0x7f0900e3;
-        public static final int change_server=0x7f09011e;
-        public static final int change_server_url=0x7f090062;
-        public static final int change_splash_path=0x7f0900dc;
-        public static final int change_submission_url=0x7f0900e4;
-        public static final int change_url_default=0x7f09013f;
-        public static final int change_username=0x7f090063;
-        public static final int change_username_default=0x7f09011f;
-        public static final int change_view=0x7f090107;
-        public static final int choose_image=0x7f0900f8;
-        public static final int choose_sound=0x7f0900f6;
-        public static final int choose_video=0x7f0900f7;
-        public static final int clear_answer=0x7f090065;
-        public static final int clear_answer_ask=0x7f090066;
-        public static final int clear_answer_no=0x7f090067;
-        public static final int clearanswer_confirm=0x7f090064;
+        public static final int capture_audio=0x7f09004e;
+        public static final int capture_image=0x7f09004f;
+        public static final int capture_video=0x7f090050;
+        public static final int change_font_size=0x7f0900d9;
+        public static final int change_formlist_url=0x7f0900d2;
+        public static final int change_language=0x7f090051;
+        public static final int change_password=0x7f090052;
+        public static final int change_protocol=0x7f0900d4;
+        public static final int change_server=0x7f09010f;
+        public static final int change_server_url=0x7f090053;
+        public static final int change_splash_path=0x7f0900cd;
+        public static final int change_submission_url=0x7f0900d5;
+        public static final int change_url_default=0x7f090130;
+        public static final int change_username=0x7f090054;
+        public static final int change_username_default=0x7f090110;
+        public static final int change_view=0x7f0900f8;
+        public static final int choose_image=0x7f0900e9;
+        public static final int choose_sound=0x7f0900e7;
+        public static final int choose_video=0x7f0900e8;
+        public static final int clear_answer=0x7f090056;
+        public static final int clear_answer_ask=0x7f090057;
+        public static final int clear_answer_no=0x7f090058;
+        public static final int clearanswer_confirm=0x7f090055;
         /**  strings that should not be translated 
          */
-        public static final int clic_here_to_download=0x7f09014a;
-        public static final int click_to_web=0x7f0900d4;
-        public static final int client=0x7f0900d5;
+        public static final int clic_here_to_download=0x7f09013b;
+        public static final int click_to_web=0x7f0900c5;
+        public static final int client=0x7f0900c6;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
-        can enable it [CHAR LIMIT=40] 
+        can enable it [CHAR LIMIT=30] 
          */
         public static final int common_google_play_services_enable_button=0x7f090036;
         /**  Message in confirmation dialog informing user they need to enable
@@ -3389,7 +3044,7 @@ containing a value of this type.
         Google Play services in application settings [CHAR LIMIT=40] 
          */
         public static final int common_google_play_services_enable_title=0x7f090034;
-        /**  Button in confirmation dialog for installing Google Play services [CHAR LIMIT=40] 
+        /**  Button in confirmation dialog for installing Google Play services [CHAR LIMIT=30] 
          */
         public static final int common_google_play_services_install_button=0x7f090033;
         /**  (For phones) Message in confirmation dialog informing user that
@@ -3404,35 +3059,13 @@ containing a value of this type.
         Google Play services (from Play Store) [CHAR LIMIT=40] 
          */
         public static final int common_google_play_services_install_title=0x7f090030;
-        /**  Message in confirmation dialog informing the user that they provided an invalid account. [CHAR LIMIT=NONE] 
-         */
-        public static final int common_google_play_services_invalid_account_text=0x7f09003c;
-        /**  Title of confirmation dialog informing the user that they provided an invalid account. [CHAR LIMIT=40] 
-         */
-        public static final int common_google_play_services_invalid_account_title=0x7f09003b;
-        /**  Message in confirmation dialog informing the user that a network error occurred. [CHAR LIMIT=NONE] 
-         */
-        public static final int common_google_play_services_network_error_text=0x7f09003a;
-        /**  Title of confirmation dialog informing the user that a network error occurred. [CHAR LIMIT=40] 
-         */
-        public static final int common_google_play_services_network_error_title=0x7f090039;
-        /**  Message in confirmation dialog informing user there is an unknown issue in Google Play
+        /**  Message in confirmation dialog informing user there is an unknow issue in Google Player
         services [CHAR LIMIT=NONE] 
          */
-        public static final int common_google_play_services_unknown_issue=0x7f09003d;
-        /**  Message in confirmation dialog informing user that date on the device is not correct,
-    causing certificate checks to fail. [CHAR LIMIT=NONE] 
+        public static final int common_google_play_services_unknown_issue=0x7f090039;
+        /**  Button in confirmation dialog for updating Google Play services [CHAR LIMIT=20] 
          */
-        public static final int common_google_play_services_unsupported_date_text=0x7f090040;
-        /**  Message in confirmation dialog informing user that Google Play services is not supported on their device [CHAR LIMIT=NONE] 
-         */
-        public static final int common_google_play_services_unsupported_text=0x7f09003f;
-        /**  Title of confirmation dialog informing user that Google Play services is not supported on their device [CHAR LIMIT=40] 
-         */
-        public static final int common_google_play_services_unsupported_title=0x7f09003e;
-        /**  Button in confirmation dialog for updating Google Play services [CHAR LIMIT=40] 
-         */
-        public static final int common_google_play_services_update_button=0x7f090041;
+        public static final int common_google_play_services_update_button=0x7f09003a;
         /**  Message in confirmation dialog informing user that they need to update
         Google Play services (from Play Store) [CHAR LIMIT=NONE] 
          */
@@ -3441,19 +3074,13 @@ containing a value of this type.
         Google Play services (from Play Store) [CHAR LIMIT=40] 
          */
         public static final int common_google_play_services_update_title=0x7f090037;
-        /**  Sign-in button text [CHAR LIMIT=15] 
-         */
-        public static final int common_signin_button_text=0x7f090042;
-        /**  Long form sign-in button text [CHAR LIMIT=30] 
-         */
-        public static final int common_signin_button_text_long=0x7f090043;
-        public static final int completed_data=0x7f090068;
+        public static final int completed_data=0x7f090059;
         /**  END AboutUs 
          */
-        public static final int current_language=0x7f090144;
-        public static final int data=0x7f090069;
-        public static final int data_saved_error=0x7f09006a;
-        public static final int data_saved_ok=0x7f09006b;
+        public static final int current_language=0x7f090135;
+        public static final int data=0x7f09005a;
+        public static final int data_saved_error=0x7f09005b;
+        public static final int data_saved_ok=0x7f09005c;
         public static final int date_picker_decrement_day_button=0x7f090024;
         public static final int date_picker_decrement_month_button=0x7f090026;
         public static final int date_picker_decrement_year_button=0x7f090028;
@@ -3463,7 +3090,6 @@ containing a value of this type.
         public static final int date_picker_increment_year_button=0x7f090027;
         public static final int date_time_done=0x7f090029;
         public static final int date_time_set=0x7f09002a;
-<<<<<<< HEAD
         public static final int default_completed=0x7f09005d;
         public static final int default_completed_summary=0x7f09005e;
         public static final int default_odk_formlist=0x7f09016f;
@@ -3519,63 +3145,6 @@ containing a value of this type.
         public static final int file_invalid=0x7f09007a;
         public static final int file_missing=0x7f09007b;
         public static final int finalize=0x7f09015e;
-=======
-        public static final int default_completed=0x7f09006c;
-        public static final int default_completed_summary=0x7f09006d;
-        public static final int default_odk_formlist=0x7f09017e;
-        public static final int default_odk_submission=0x7f09017f;
-        public static final int default_server_url=0x7f09017d;
-        public static final int default_splash_path=0x7f0900d9;
-        public static final int delete_confirm=0x7f09006e;
-        public static final int delete_file=0x7f09006f;
-        public static final int delete_no=0x7f090070;
-        public static final int delete_repeat=0x7f090071;
-        public static final int delete_repeat_ask=0x7f090072;
-        public static final int delete_repeat_confirm=0x7f090073;
-        public static final int delete_repeat_no=0x7f090074;
-        public static final int delete_yes=0x7f090075;
-        public static final int discard_answer=0x7f090076;
-        public static final int discard_group=0x7f090077;
-        public static final int do_not_change=0x7f09007b;
-        public static final int do_not_exit=0x7f09007c;
-        public static final int do_not_save=0x7f09007d;
-        public static final int download=0x7f090078;
-        public static final int download_forms_result=0x7f090079;
-        /**  FIN ActionBar 
- ActionBar Title 
-         */
-        public static final int download_menu=0x7f090161;
-        public static final int downloading_data=0x7f09007a;
-        public static final int draw_image=0x7f090118;
-        public static final int drawer_close=0x7f09007f;
-        public static final int drawer_open=0x7f09007e;
-        public static final int edit=0x7f090165;
-        public static final int edit_menu=0x7f090162;
-        public static final int edit_prompt=0x7f0900fd;
-        public static final int empty_list=0x7f09014d;
-        /**  Message d'erreur liste vide 
-         */
-        public static final int empty_list_blank_form=0x7f090145;
-        public static final int empty_list_finalized_form=0x7f090147;
-        public static final int empty_list_saved_form=0x7f090146;
-        public static final int enter_admin_password=0x7f09012a;
-        public static final int enter_data=0x7f090082;
-        public static final int enter_data_button=0x7f090083;
-        public static final int enter_new_password=0x7f090124;
-        public static final int entering_repeat=0x7f090080;
-        public static final int entering_repeat_ask=0x7f090081;
-        public static final int error_occured=0x7f090084;
-        public static final int exit=0x7f09015d;
-        public static final int fetching_file=0x7f090085;
-        public static final int fetching_manifest=0x7f0900f1;
-        public static final int file_delete_in_progress=0x7f090088;
-        public static final int file_deleted_error=0x7f090086;
-        public static final int file_deleted_ok=0x7f090087;
-        public static final int file_fetch_failed=0x7f0900f0;
-        public static final int file_invalid=0x7f090089;
-        public static final int file_missing=0x7f09008a;
-        public static final int finalize=0x7f09016d;
->>>>>>> 8dd77270da906e2fe10e7a67d1343f9be601b0e0
         /**  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
@@ -3594,7 +3163,6 @@ containing a value of this type.
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
          */
-<<<<<<< HEAD
         public static final int finalized_on_date_at_time=0x7f0900fd;
         public static final int finished_disk_scan=0x7f09007c;
         public static final int font_size=0x7f0900d8;
@@ -3636,63 +3204,19 @@ containing a value of this type.
         public static final int jump_to_end=0x7f090085;
         public static final int jump_to_previous=0x7f090086;
         public static final int keep_changes=0x7f0900d0;
-=======
-        public static final int finalized_on_date_at_time=0x7f09010c;
-        public static final int finished_disk_scan=0x7f09008b;
-        public static final int font_size=0x7f0900e7;
-        public static final int font_size_extra_large=0x7f090102;
-        public static final int font_size_extra_small=0x7f090106;
-        public static final int font_size_large=0x7f090103;
-        public static final int font_size_medium=0x7f090104;
-        public static final int font_size_small=0x7f090105;
-        public static final int form=0x7f09016f;
-        public static final int form_backward=0x7f090137;
-        public static final int form_download_progress=0x7f0900ef;
-        public static final int form_forward=0x7f090136;
-        public static final int form_scan_starting=0x7f0900e9;
-        public static final int formlist_url=0x7f0900e5;
-        public static final int forms=0x7f09008c;
-        public static final int found_at_end=0x7f090133;
-        public static final int found_in_main=0x7f090131;
-        public static final int found_in_menu=0x7f09012b;
-        public static final int found_in_settings=0x7f090132;
-        public static final int general_preferences=0x7f0900d3;
-        public static final int get_barcode=0x7f09008e;
-        public static final int get_forms=0x7f09008f;
-        public static final int get_location=0x7f090090;
-        public static final int getting_location=0x7f09008d;
-        public static final int go_to_location=0x7f0900e0;
-        public static final int help=0x7f09015b;
-        public static final int help_confirmation=0x7f090175;
-        /**  FIN ActionBar Title 
- Help 
-         */
-        public static final int help_download=0x7f090170;
-        public static final int help_edit=0x7f090171;
-        public static final int help_form=0x7f090174;
-        public static final int help_saved=0x7f090172;
-        public static final int help_send=0x7f090173;
-        public static final int hierarchy=0x7f090160;
-        public static final int invalid_answer_error=0x7f090092;
-        public static final int jump_to_beginning=0x7f090093;
-        public static final int jump_to_end=0x7f090094;
-        public static final int jump_to_previous=0x7f090095;
-        public static final int keep_changes=0x7f0900df;
->>>>>>> 8dd77270da906e2fe10e7a67d1343f9be601b0e0
         /**  END AboutUs 
  Preferences 
          */
-        public static final int language=0x7f090152;
-        public static final int language_preferences=0x7f090153;
-        public static final int latitude=0x7f090096;
-        public static final int launch_app=0x7f090111;
-        public static final int launch_printer=0x7f090140;
-        public static final int leave_repeat_yes=0x7f090097;
-        public static final int leaving_repeat_ask=0x7f090098;
-        public static final int list_failed_with_error=0x7f090099;
-        public static final int load_remote_form_error=0x7f09009b;
+        public static final int language=0x7f090143;
+        public static final int language_preferences=0x7f090144;
+        public static final int latitude=0x7f090087;
+        public static final int launch_app=0x7f090102;
+        public static final int launch_printer=0x7f090131;
+        public static final int leave_repeat_yes=0x7f090088;
+        public static final int leaving_repeat_ask=0x7f090089;
+        public static final int list_failed_with_error=0x7f09008a;
+        public static final int load_remote_form_error=0x7f09008c;
         public static final int loading=0x7f090012;
-<<<<<<< HEAD
         public static final int loading_form=0x7f09008b;
         public static final int location_accuracy=0x7f09008e;
         public static final int location_provider_accuracy=0x7f09008d;
@@ -3710,43 +3234,23 @@ containing a value of this type.
         public static final int my_forms=0x7f090157;
         public static final int my_forms_send=0x7f090158;
         public static final int navigation=0x7f090129;
-=======
-        public static final int loading_form=0x7f09009a;
-        public static final int location_accuracy=0x7f09009d;
-        public static final int location_provider_accuracy=0x7f09009c;
-        public static final int longitude=0x7f09009e;
-        public static final int luminosity=0x7f090158;
-        public static final int main_menu=0x7f09009f;
-        public static final int main_menu_details=0x7f0900a0;
-        public static final int manage_files=0x7f0900a1;
-        public static final int manifest_server_error=0x7f0900eb;
-        public static final int manifest_tag_error=0x7f0900ee;
-        public static final int mark_finished=0x7f0900a4;
-        public static final int marker_create=0x7f0900a2;
-        public static final int marker_draggable=0x7f0900a3;
-        public static final int markup_image=0x7f090117;
-        public static final int my_forms=0x7f090166;
-        public static final int my_forms_send=0x7f090167;
-        public static final int navigation=0x7f090138;
->>>>>>> 8dd77270da906e2fe10e7a67d1343f9be601b0e0
         public static final int next_button_label=0x7f090011;
-        public static final int no_account=0x7f090134;
-        public static final int no_app=0x7f090112;
-        public static final int no_connection=0x7f0900a6;
-        public static final int no_connexion=0x7f090148;
-        public static final int no_form_finalled=0x7f09014c;
-        public static final int no_form_not_finalled=0x7f09014b;
-        public static final int no_forms_uploaded=0x7f0900f3;
-        public static final int no_items_display=0x7f0900a7;
-        public static final int no_items_display_forms=0x7f0900a8;
-        public static final int no_items_display_instances=0x7f0900a9;
-        public static final int no_printer=0x7f090141;
-        public static final int noselect_error=0x7f0900a5;
+        public static final int no_account=0x7f090125;
+        public static final int no_app=0x7f090103;
+        public static final int no_connection=0x7f090097;
+        public static final int no_connexion=0x7f090139;
+        public static final int no_form_finalled=0x7f09013d;
+        public static final int no_form_not_finalled=0x7f09013c;
+        public static final int no_forms_uploaded=0x7f0900e4;
+        public static final int no_items_display=0x7f090098;
+        public static final int no_items_display_forms=0x7f090099;
+        public static final int no_items_display_instances=0x7f09009a;
+        public static final int no_printer=0x7f090132;
+        public static final int noselect_error=0x7f090096;
         public static final int number_picker_decrement_button=0x7f090019;
         public static final int number_picker_increment_button=0x7f090018;
         public static final int number_picker_increment_scroll_action=0x7f090017;
         public static final int number_picker_increment_scroll_mode=0x7f090016;
-<<<<<<< HEAD
         public static final int offline_mode=0x7f09009b;
         public static final int offline_mode_summary=0x7f09009c;
         public static final int ok=0x7f09009d;
@@ -3791,52 +3295,6 @@ containing a value of this type.
         public static final int save_preferences=0x7f090126;
         public static final int saved=0x7f090159;
         public static final int saved_data=0x7f0900ae;
-=======
-        public static final int offline_mode=0x7f0900aa;
-        public static final int offline_mode_summary=0x7f0900ab;
-        public static final int ok=0x7f0900ac;
-        public static final int parent_form_not_present=0x7f090110;
-        public static final int parse_error=0x7f0900ad;
-        public static final int parse_legacy_formlist_failed=0x7f0900ae;
-        public static final int parse_openrosa_formlist_failed=0x7f0900af;
-        public static final int password=0x7f0900b0;
-        public static final int play_audio=0x7f0900b1;
-        public static final int play_video=0x7f0900b2;
-        public static final int please_wait=0x7f0900b3;
-        public static final int please_wait_long=0x7f0900b4;
-        public static final int protocol=0x7f0900e2;
-        public static final int protocol_google=0x7f09017b;
-        public static final int protocol_odk_default=0x7f09017a;
-        public static final int protocol_other=0x7f09017c;
-        public static final int provider_disabled_error=0x7f090091;
-        public static final int quit_application=0x7f0900b5;
-        public static final int quit_entry=0x7f0900b6;
-        public static final int raz=0x7f09015f;
-        public static final int refresh=0x7f0900b7;
-        public static final int replace_barcode=0x7f0900b8;
-        public static final int replace_location=0x7f0900b9;
-        public static final int required_answer_error=0x7f0900ba;
-        public static final int reset_image=0x7f090119;
-        public static final int review_data=0x7f0900bb;
-        public static final int review_data_button=0x7f0900bc;
-        public static final int ringtone_default=0x7f09002c;
-        public static final int ringtone_picker_title=0x7f09002b;
-        public static final int ringtone_silent=0x7f09002d;
-        public static final int root_element_error=0x7f0900ec;
-        public static final int root_namespace_error=0x7f0900ed;
-        public static final int save=0x7f09016b;
-        public static final int save_all_answers=0x7f0900be;
-        public static final int save_and_close=0x7f090115;
-        public static final int save_as_error=0x7f0900fc;
-        public static final int save_dashboard=0x7f09016c;
-        public static final int save_enter_data_description=0x7f0900bf;
-        public static final int save_form_as=0x7f0900fb;
-        public static final int save_menu=0x7f090163;
-        public static final int save_mid=0x7f090123;
-        public static final int save_preferences=0x7f090135;
-        public static final int saved=0x7f090168;
-        public static final int saved_data=0x7f0900bd;
->>>>>>> 8dd77270da906e2fe10e7a67d1343f9be601b0e0
         /**  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
@@ -3855,13 +3313,12 @@ containing a value of this type.
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
          */
-        public static final int saved_on_date_at_time=0x7f09010b;
-        public static final int savepoint_used=0x7f090114;
-        public static final int saving_form=0x7f0900c0;
+        public static final int saved_on_date_at_time=0x7f0900fc;
+        public static final int savepoint_used=0x7f090105;
+        public static final int saving_form=0x7f0900b1;
         /**  END- Preferences 
  ActionBar 
          */
-<<<<<<< HEAD
         public static final int search=0x7f09014a;
         public static final int select_another_image=0x7f0900cb;
         public static final int select_answer=0x7f0900eb;
@@ -3876,22 +3333,6 @@ containing a value of this type.
         public static final int send_form_and_restart=0x7f090169;
         public static final int send_menu=0x7f090155;
         public static final int send_selected_data=0x7f0900b5;
-=======
-        public static final int search=0x7f090159;
-        public static final int select_another_image=0x7f0900da;
-        public static final int select_answer=0x7f0900fa;
-        public static final int select_drawing_color=0x7f09011b;
-        public static final int select_one=0x7f090113;
-        public static final int selected=0x7f0900f9;
-        public static final int selected_google_account_text=0x7f0900fe;
-        public static final int send=0x7f09016a;
-        public static final int send_data=0x7f0900c2;
-        public static final int send_data_button=0x7f0900c3;
-        public static final int send_form=0x7f090177;
-        public static final int send_form_and_restart=0x7f090178;
-        public static final int send_menu=0x7f090164;
-        public static final int send_selected_data=0x7f0900c4;
->>>>>>> 8dd77270da906e2fe10e7a67d1343f9be601b0e0
         /**  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
@@ -3910,8 +3351,8 @@ containing a value of this type.
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
          */
-        public static final int sending_failed_on_date_at_time=0x7f09010e;
-        public static final int sending_items=0x7f0900c1;
+        public static final int sending_failed_on_date_at_time=0x7f0900ff;
+        public static final int sending_items=0x7f0900b2;
         /**  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
@@ -3930,50 +3371,50 @@ containing a value of this type.
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
          */
-        public static final int sent_on_date_at_time=0x7f09010d;
-        public static final int server_auth_credentials=0x7f0900c5;
-        public static final int server_platform_google_forms=0x7f090100;
-        public static final int server_platform_odk_aggregate=0x7f0900ff;
-        public static final int server_platform_other=0x7f090101;
-        public static final int server_preferences=0x7f0900c8;
-        public static final int server_requires_auth=0x7f0900c6;
-        public static final int server_url=0x7f0900c7;
-        public static final int set_color=0x7f09011a;
-        public static final int settings=0x7f09015a;
-        public static final int show_location=0x7f0900dd;
-        public static final int show_sent_and_unsent_forms=0x7f090108;
-        public static final int show_splash=0x7f0900d6;
-        public static final int show_splash_summary=0x7f0900d7;
-        public static final int show_unsent_forms=0x7f090109;
-        public static final int sign_button=0x7f090116;
+        public static final int sent_on_date_at_time=0x7f0900fe;
+        public static final int server_auth_credentials=0x7f0900b6;
+        public static final int server_platform_google_forms=0x7f0900f1;
+        public static final int server_platform_odk_aggregate=0x7f0900f0;
+        public static final int server_platform_other=0x7f0900f2;
+        public static final int server_preferences=0x7f0900b9;
+        public static final int server_requires_auth=0x7f0900b7;
+        public static final int server_url=0x7f0900b8;
+        public static final int set_color=0x7f09010b;
+        public static final int settings=0x7f09014b;
+        public static final int show_location=0x7f0900ce;
+        public static final int show_sent_and_unsent_forms=0x7f0900f9;
+        public static final int show_splash=0x7f0900c7;
+        public static final int show_splash_summary=0x7f0900c8;
+        public static final int show_unsent_forms=0x7f0900fa;
+        public static final int sign_button=0x7f090107;
         /**  strings that should not be translated 
  strings that should not be translated 
  strings that should not be translated 
  strings that should not be translated 
  strings that should not be translated 
          */
-        public static final int size=0x7f090149;
+        public static final int size=0x7f09013a;
         public static final int skip_button_label=0x7f090010;
-        public static final int splash_path=0x7f0900d8;
-        public static final int submission_url=0x7f0900e6;
-        public static final int success=0x7f0900f2;
-        public static final int swipe_buttons_instructions=0x7f09013e;
-        public static final int swipe_buttons_navigation=0x7f09013b;
-        public static final int swipe_instructions=0x7f09013c;
-        public static final int swipe_navigation=0x7f090139;
+        public static final int splash_path=0x7f0900c9;
+        public static final int submission_url=0x7f0900d7;
+        public static final int success=0x7f0900e3;
+        public static final int swipe_buttons_instructions=0x7f09012f;
+        public static final int swipe_buttons_navigation=0x7f09012c;
+        public static final int swipe_instructions=0x7f09012d;
+        public static final int swipe_navigation=0x7f09012a;
         public static final int switch_off=0x7f09002f;
         public static final int switch_on=0x7f09002e;
         /**  AboutUS 
  AboutUS 
          */
-        public static final int textview_about_us1=0x7f090143;
-        public static final int textview_about_us2=0x7f09014e;
-        public static final int textview_about_us3=0x7f09014f;
-        public static final int textview_about_us4=0x7f090150;
-        public static final int theme=0x7f090154;
-        public static final int theme1=0x7f090156;
-        public static final int theme2=0x7f090157;
-        public static final int theme_preferences=0x7f090155;
+        public static final int textview_about_us1=0x7f090134;
+        public static final int textview_about_us2=0x7f09013f;
+        public static final int textview_about_us3=0x7f090140;
+        public static final int textview_about_us4=0x7f090141;
+        public static final int theme=0x7f090145;
+        public static final int theme1=0x7f090147;
+        public static final int theme2=0x7f090148;
+        public static final int theme_preferences=0x7f090146;
         public static final int time_picker_decrement_hour_button=0x7f09001e;
         public static final int time_picker_decrement_minute_button=0x7f09001c;
         public static final int time_picker_decrement_set_am_button=0x7f090020;
@@ -3985,34 +3426,26 @@ containing a value of this type.
         /**  FIN Help 
  FORM SAVING 
          */
-<<<<<<< HEAD
         public static final int to_not_send_form=0x7f090167;
         public static final int to_send=0x7f09015f;
         public static final int toggle_selected=0x7f0900ba;
         public static final int trigger=0x7f0900bb;
         public static final int two_item_icon=0x7f0900bc;
-=======
-        public static final int to_not_send_form=0x7f090176;
-        public static final int to_send=0x7f09016e;
-        public static final int toggle_selected=0x7f0900c9;
-        public static final int trigger=0x7f0900ca;
-        public static final int two_item_icon=0x7f0900cb;
->>>>>>> 8dd77270da906e2fe10e7a67d1343f9be601b0e0
         public static final int undo=0x7f090000;
         public static final int undoall=0x7f090001;
-        public static final int upload=0x7f09015e;
-        public static final int upload_results=0x7f0900f4;
-        public static final int uploading_data=0x7f0900cc;
-        public static final int url_error=0x7f0900cd;
-        public static final int use_gps=0x7f0900cf;
-        public static final int use_maps=0x7f0900d0;
-        public static final int use_maps_summary=0x7f0900d1;
-        public static final int use_odk_default=0x7f0900db;
-        public static final int user_access_form_entry=0x7f090122;
-        public static final int user_access_main_menu=0x7f09011c;
-        public static final int user_access_preferences=0x7f09011d;
-        public static final int username=0x7f0900ce;
-        public static final int verify_new_password=0x7f090125;
+        public static final int upload=0x7f09014f;
+        public static final int upload_results=0x7f0900e5;
+        public static final int uploading_data=0x7f0900bd;
+        public static final int url_error=0x7f0900be;
+        public static final int use_gps=0x7f0900c0;
+        public static final int use_maps=0x7f0900c1;
+        public static final int use_maps_summary=0x7f0900c2;
+        public static final int use_odk_default=0x7f0900cc;
+        public static final int user_access_form_entry=0x7f090113;
+        public static final int user_access_main_menu=0x7f09010d;
+        public static final int user_access_preferences=0x7f09010e;
+        public static final int username=0x7f0900bf;
+        public static final int verify_new_password=0x7f090116;
         /**  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
@@ -4031,10 +3464,10 @@ containing a value of this type.
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
          */
-        public static final int version=0x7f09010f;
-        public static final int view_hierarchy=0x7f0900d2;
-        public static final int web_site=0x7f090151;
-        public static final int xform_parse_error=0x7f0900f5;
+        public static final int version=0x7f090100;
+        public static final int view_hierarchy=0x7f0900c3;
+        public static final int web_site=0x7f090142;
+        public static final int xform_parse_error=0x7f0900e6;
     }
     public static final class style {
         /** 
@@ -4048,8 +3481,19 @@ containing a value of this type.
         res/values-v11/styles.xml on API 14+ devices.
     
  API 14 theme customizations can go here. 
+
+        Base application theme for API 11+. This theme completely replaces
+        AppBaseTheme from res/values/styles.xml on API 11+ devices.
+    
+ API 11 theme customizations can go here. 
+
+        Base application theme for API 14+. This theme completely replaces
+        AppBaseTheme from BOTH res/values/styles.xml and
+        res/values-v11/styles.xml on API 14+ devices.
+    
+ API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f0a00f3;
+        public static final int AppBaseTheme=0x7f0a0001;
         /** 
         <item name="mainLayout">@style/Collect.MainLayout</item>
 	    <item name="button1">@style/Collect.Button1</item>
@@ -4068,258 +3512,258 @@ containing a value of this type.
         public static final int Collect_MainLayout=0x7f0a00f6;
         public static final int CustomSubTitleColorBar=0x7f0a00fd;
         public static final int CustomTitleColorBar=0x7f0a00fc;
-        public static final int Holo=0x7f0a005d;
-        public static final int Holo_AlertDialog=0x7f0a0064;
-        public static final int Holo_AlertDialog_Light=0x7f0a0065;
-        public static final int Holo_Animation=0x7f0a00a1;
-        public static final int Holo_Animation_Dialog=0x7f0a00a2;
-        public static final int Holo_Animation_DropDownDown=0x7f0a00ab;
-        public static final int Holo_Animation_DropDownUp=0x7f0a00ac;
-        public static final int Holo_Animation_PopupWindow=0x7f0a00bf;
-        public static final int Holo_AutoCompleteTextView=0x7f0a00b5;
-        public static final int Holo_AutoCompleteTextView_Light=0x7f0a00b6;
-        public static final int Holo_Button=0x7f0a0066;
-        public static final int Holo_Button_Borderless=0x7f0a006a;
-        public static final int Holo_Button_Borderless_Light=0x7f0a006b;
-        public static final int Holo_Button_Borderless_Small=0x7f0a006c;
-        public static final int Holo_Button_Borderless_Small_Light=0x7f0a006d;
-        public static final int Holo_Button_Light=0x7f0a0067;
-        public static final int Holo_Button_Small=0x7f0a006e;
-        public static final int Holo_Button_Small_Light=0x7f0a006f;
-        public static final int Holo_Button_Toggle=0x7f0a0068;
-        public static final int Holo_Button_Toggle_Light=0x7f0a0069;
-        public static final int Holo_ButtonBar=0x7f0a009d;
-        public static final int Holo_ButtonBar_AlertDialog=0x7f0a009e;
-        public static final int Holo_CalendarView=0x7f0a005a;
-        public static final int Holo_CalendarView_Light=0x7f0a005b;
-        public static final int Holo_CalendarViewTextAppearanceWeekDayView=0x7f0a005c;
-        public static final int Holo_CompoundButton=0x7f0a0074;
-        public static final int Holo_CompoundButton_CheckBox=0x7f0a0077;
-        public static final int Holo_CompoundButton_CheckBox_Light=0x7f0a0078;
-        public static final int Holo_CompoundButton_RadioButton=0x7f0a0075;
-        public static final int Holo_CompoundButton_RadioButton_Light=0x7f0a0076;
-        public static final int Holo_DatePicker=0x7f0a00af;
-        public static final int Holo_DialogWindowTitle=0x7f0a00a3;
-        public static final int Holo_DialogWindowTitle_Light=0x7f0a00a4;
-        public static final int Holo_DropDownItem=0x7f0a00b7;
-        public static final int Holo_EditText=0x7f0a0072;
-        public static final int Holo_EditText_Light=0x7f0a0073;
-        public static final int Holo_EditText_NumberPickerInputText=0x7f0a00ae;
-        public static final int Holo_ExpandableListView=0x7f0a0062;
-        public static final int Holo_ExpandableListView_Light=0x7f0a0063;
-        public static final int Holo_ImageButton=0x7f0a0070;
-        public static final int Holo_ImageButton_Light=0x7f0a0071;
-        public static final int Holo_ListPopupWindow=0x7f0a00b3;
-        public static final int Holo_ListPopupWindow_Light=0x7f0a00b4;
-        public static final int Holo_ListView=0x7f0a005e;
-        public static final int Holo_ListView_DropDown=0x7f0a0060;
-        public static final int Holo_ListView_DropDown_Light=0x7f0a0061;
-        public static final int Holo_ListView_Light=0x7f0a005f;
-        public static final int Holo_NumberPicker=0x7f0a00ad;
-        public static final int Holo_PopupWindow=0x7f0a00b1;
-        public static final int Holo_PopupWindow_Light=0x7f0a00b2;
-        public static final int Holo_Preference=0x7f0a008d;
-        public static final int Holo_PreferenceCategory=0x7f0a0091;
-        public static final int Holo_PreferenceCheckBox=0x7f0a0093;
-        public static final int Holo_PreferenceDialog=0x7f0a0094;
-        public static final int Holo_PreferenceDialog_EditTextPreference=0x7f0a0096;
-        public static final int Holo_PreferenceDialog_NumberPickerPreference=0x7f0a0098;
-        public static final int Holo_PreferenceDialog_SeekBarDialogPreference=0x7f0a0097;
-        public static final int Holo_PreferenceDialog_YesNoPreference=0x7f0a0095;
-        public static final int Holo_PreferenceFragment=0x7f0a0090;
-        public static final int Holo_PreferenceFrameLayout=0x7f0a008e;
-        public static final int Holo_PreferenceInformation=0x7f0a0092;
-        public static final int Holo_PreferencePanel=0x7f0a009a;
-        public static final int Holo_PreferenceRingtone=0x7f0a0099;
-        public static final int Holo_PreferenceScreen=0x7f0a008f;
-        public static final int Holo_PreferenceSeekBar=0x7f0a009c;
-        public static final int Holo_PreferenceSwitch=0x7f0a009b;
-        public static final int Holo_ProgressBar=0x7f0a007b;
-        public static final int Holo_ProgressBar_Horizontal=0x7f0a007c;
-        public static final int Holo_ProgressBar_Horizontal_Light=0x7f0a007d;
-        public static final int Holo_ProgressBar_Large=0x7f0a007f;
-        public static final int Holo_ProgressBar_Small=0x7f0a007e;
-        public static final int Holo_RatingBar=0x7f0a0087;
-        public static final int Holo_RatingBar_Indicator=0x7f0a008b;
-        public static final int Holo_RatingBar_Indicator_Light=0x7f0a008c;
-        public static final int Holo_RatingBar_Light=0x7f0a0088;
-        public static final int Holo_RatingBar_Small=0x7f0a0089;
-        public static final int Holo_RatingBar_Small_Light=0x7f0a008a;
-        public static final int Holo_SeekBar=0x7f0a0079;
-        public static final int Holo_SeekBar_Light=0x7f0a007a;
-        public static final int Holo_SegmentedButton=0x7f0a009f;
-        public static final int Holo_SegmentedButton_Light=0x7f0a00a0;
-        public static final int Holo_Spinner=0x7f0a0080;
-        public static final int Holo_Spinner_Light=0x7f0a0081;
-        public static final int Holo_Switch=0x7f0a00ef;
-        public static final int Holo_Switch_Light=0x7f0a00f0;
-        public static final int Holo_Switch_Light_Old=0x7f0a00f2;
-        public static final int Holo_Switch_Old=0x7f0a00f1;
-        public static final int Holo_Switch_TextAppearance=0x7f0a00ed;
-        public static final int Holo_Switch_TextAppearance_Light=0x7f0a00ee;
+        public static final int Holo=0x7f0a005e;
+        public static final int Holo_AlertDialog=0x7f0a0065;
+        public static final int Holo_AlertDialog_Light=0x7f0a0066;
+        public static final int Holo_Animation=0x7f0a00a2;
+        public static final int Holo_Animation_Dialog=0x7f0a00a3;
+        public static final int Holo_Animation_DropDownDown=0x7f0a00ac;
+        public static final int Holo_Animation_DropDownUp=0x7f0a00ad;
+        public static final int Holo_Animation_PopupWindow=0x7f0a00c0;
+        public static final int Holo_AutoCompleteTextView=0x7f0a00b6;
+        public static final int Holo_AutoCompleteTextView_Light=0x7f0a00b7;
+        public static final int Holo_Button=0x7f0a0067;
+        public static final int Holo_Button_Borderless=0x7f0a006b;
+        public static final int Holo_Button_Borderless_Light=0x7f0a006c;
+        public static final int Holo_Button_Borderless_Small=0x7f0a006d;
+        public static final int Holo_Button_Borderless_Small_Light=0x7f0a006e;
+        public static final int Holo_Button_Light=0x7f0a0068;
+        public static final int Holo_Button_Small=0x7f0a006f;
+        public static final int Holo_Button_Small_Light=0x7f0a0070;
+        public static final int Holo_Button_Toggle=0x7f0a0069;
+        public static final int Holo_Button_Toggle_Light=0x7f0a006a;
+        public static final int Holo_ButtonBar=0x7f0a009e;
+        public static final int Holo_ButtonBar_AlertDialog=0x7f0a009f;
+        public static final int Holo_CalendarView=0x7f0a005b;
+        public static final int Holo_CalendarView_Light=0x7f0a005c;
+        public static final int Holo_CalendarViewTextAppearanceWeekDayView=0x7f0a005d;
+        public static final int Holo_CompoundButton=0x7f0a0075;
+        public static final int Holo_CompoundButton_CheckBox=0x7f0a0078;
+        public static final int Holo_CompoundButton_CheckBox_Light=0x7f0a0079;
+        public static final int Holo_CompoundButton_RadioButton=0x7f0a0076;
+        public static final int Holo_CompoundButton_RadioButton_Light=0x7f0a0077;
+        public static final int Holo_DatePicker=0x7f0a00b0;
+        public static final int Holo_DialogWindowTitle=0x7f0a00a4;
+        public static final int Holo_DialogWindowTitle_Light=0x7f0a00a5;
+        public static final int Holo_DropDownItem=0x7f0a00b8;
+        public static final int Holo_EditText=0x7f0a0073;
+        public static final int Holo_EditText_Light=0x7f0a0074;
+        public static final int Holo_EditText_NumberPickerInputText=0x7f0a00af;
+        public static final int Holo_ExpandableListView=0x7f0a0063;
+        public static final int Holo_ExpandableListView_Light=0x7f0a0064;
+        public static final int Holo_ImageButton=0x7f0a0071;
+        public static final int Holo_ImageButton_Light=0x7f0a0072;
+        public static final int Holo_ListPopupWindow=0x7f0a00b4;
+        public static final int Holo_ListPopupWindow_Light=0x7f0a00b5;
+        public static final int Holo_ListView=0x7f0a005f;
+        public static final int Holo_ListView_DropDown=0x7f0a0061;
+        public static final int Holo_ListView_DropDown_Light=0x7f0a0062;
+        public static final int Holo_ListView_Light=0x7f0a0060;
+        public static final int Holo_NumberPicker=0x7f0a00ae;
+        public static final int Holo_PopupWindow=0x7f0a00b2;
+        public static final int Holo_PopupWindow_Light=0x7f0a00b3;
+        public static final int Holo_Preference=0x7f0a008e;
+        public static final int Holo_PreferenceCategory=0x7f0a0092;
+        public static final int Holo_PreferenceCheckBox=0x7f0a0094;
+        public static final int Holo_PreferenceDialog=0x7f0a0095;
+        public static final int Holo_PreferenceDialog_EditTextPreference=0x7f0a0097;
+        public static final int Holo_PreferenceDialog_NumberPickerPreference=0x7f0a0099;
+        public static final int Holo_PreferenceDialog_SeekBarDialogPreference=0x7f0a0098;
+        public static final int Holo_PreferenceDialog_YesNoPreference=0x7f0a0096;
+        public static final int Holo_PreferenceFragment=0x7f0a0091;
+        public static final int Holo_PreferenceFrameLayout=0x7f0a008f;
+        public static final int Holo_PreferenceInformation=0x7f0a0093;
+        public static final int Holo_PreferencePanel=0x7f0a009b;
+        public static final int Holo_PreferenceRingtone=0x7f0a009a;
+        public static final int Holo_PreferenceScreen=0x7f0a0090;
+        public static final int Holo_PreferenceSeekBar=0x7f0a009d;
+        public static final int Holo_PreferenceSwitch=0x7f0a009c;
+        public static final int Holo_ProgressBar=0x7f0a007c;
+        public static final int Holo_ProgressBar_Horizontal=0x7f0a007d;
+        public static final int Holo_ProgressBar_Horizontal_Light=0x7f0a007e;
+        public static final int Holo_ProgressBar_Large=0x7f0a0080;
+        public static final int Holo_ProgressBar_Small=0x7f0a007f;
+        public static final int Holo_RatingBar=0x7f0a0088;
+        public static final int Holo_RatingBar_Indicator=0x7f0a008c;
+        public static final int Holo_RatingBar_Indicator_Light=0x7f0a008d;
+        public static final int Holo_RatingBar_Light=0x7f0a0089;
+        public static final int Holo_RatingBar_Small=0x7f0a008a;
+        public static final int Holo_RatingBar_Small_Light=0x7f0a008b;
+        public static final int Holo_SeekBar=0x7f0a007a;
+        public static final int Holo_SeekBar_Light=0x7f0a007b;
+        public static final int Holo_SegmentedButton=0x7f0a00a0;
+        public static final int Holo_SegmentedButton_Light=0x7f0a00a1;
+        public static final int Holo_Spinner=0x7f0a0081;
+        public static final int Holo_Spinner_Light=0x7f0a0082;
+        public static final int Holo_Switch=0x7f0a00f0;
+        public static final int Holo_Switch_Light=0x7f0a00f1;
+        public static final int Holo_Switch_Light_Old=0x7f0a00f3;
+        public static final int Holo_Switch_Old=0x7f0a00f2;
+        public static final int Holo_Switch_TextAppearance=0x7f0a00ee;
+        public static final int Holo_Switch_TextAppearance_Light=0x7f0a00ef;
         /**  Text colors 
          */
-        public static final int Holo_TextAppearance=0x7f0a00d8;
-        public static final int Holo_TextAppearance_DialogWindowTitle=0x7f0a00e8;
-        public static final int Holo_TextAppearance_DialogWindowTitle_Light=0x7f0a00e9;
-        public static final int Holo_TextAppearance_DropDownItem=0x7f0a00b8;
-        public static final int Holo_TextAppearance_Inverse=0x7f0a00da;
-        public static final int Holo_TextAppearance_Inverse_Light=0x7f0a00db;
-        public static final int Holo_TextAppearance_Large=0x7f0a00dc;
-        public static final int Holo_TextAppearance_Large_Inverse=0x7f0a00de;
-        public static final int Holo_TextAppearance_Large_Inverse_Light=0x7f0a00df;
-        public static final int Holo_TextAppearance_Large_Light=0x7f0a00dd;
-        public static final int Holo_TextAppearance_Light=0x7f0a00d9;
-        public static final int Holo_TextAppearance_Medium=0x7f0a00e0;
-        public static final int Holo_TextAppearance_Medium_Inverse=0x7f0a00e2;
-        public static final int Holo_TextAppearance_Medium_Inverse_Light=0x7f0a00e3;
-        public static final int Holo_TextAppearance_Medium_Light=0x7f0a00e1;
-        public static final int Holo_TextAppearance_PopupMenu=0x7f0a00b9;
-        public static final int Holo_TextAppearance_PopupMenu_Large=0x7f0a00ba;
-        public static final int Holo_TextAppearance_PopupMenu_Light=0x7f0a00bc;
-        public static final int Holo_TextAppearance_PopupMenu_Light_Large=0x7f0a00bd;
-        public static final int Holo_TextAppearance_PopupMenu_Light_Small=0x7f0a00be;
-        public static final int Holo_TextAppearance_PopupMenu_Small=0x7f0a00bb;
-        public static final int Holo_TextAppearance_Small=0x7f0a00e4;
-        public static final int Holo_TextAppearance_Small_Inverse=0x7f0a00e6;
-        public static final int Holo_TextAppearance_Small_Inverse_Light=0x7f0a00e7;
-        public static final int Holo_TextAppearance_Small_Light=0x7f0a00e5;
-        public static final int Holo_TextAppearance_TextView=0x7f0a00ea;
-        public static final int Holo_TextAppearance_TextView_SpinnerItem=0x7f0a00eb;
-        public static final int Holo_TextAppearance_TextView_SpinnerItem_Light=0x7f0a00ec;
-        public static final int Holo_TextView=0x7f0a0082;
-        public static final int Holo_TextView_ListSeparator=0x7f0a00a9;
-        public static final int Holo_TextView_ListSeparator_Light=0x7f0a00aa;
-        public static final int Holo_TextView_SpinnerItem=0x7f0a0083;
-        public static final int Holo_TextView_SpinnerItem_DropDown=0x7f0a0085;
-        public static final int Holo_TextView_SpinnerItem_DropDown_Light=0x7f0a0086;
-        public static final int Holo_TextView_SpinnerItem_Light=0x7f0a0084;
+        public static final int Holo_TextAppearance=0x7f0a00d9;
+        public static final int Holo_TextAppearance_DialogWindowTitle=0x7f0a00e9;
+        public static final int Holo_TextAppearance_DialogWindowTitle_Light=0x7f0a00ea;
+        public static final int Holo_TextAppearance_DropDownItem=0x7f0a00b9;
+        public static final int Holo_TextAppearance_Inverse=0x7f0a00db;
+        public static final int Holo_TextAppearance_Inverse_Light=0x7f0a00dc;
+        public static final int Holo_TextAppearance_Large=0x7f0a00dd;
+        public static final int Holo_TextAppearance_Large_Inverse=0x7f0a00df;
+        public static final int Holo_TextAppearance_Large_Inverse_Light=0x7f0a00e0;
+        public static final int Holo_TextAppearance_Large_Light=0x7f0a00de;
+        public static final int Holo_TextAppearance_Light=0x7f0a00da;
+        public static final int Holo_TextAppearance_Medium=0x7f0a00e1;
+        public static final int Holo_TextAppearance_Medium_Inverse=0x7f0a00e3;
+        public static final int Holo_TextAppearance_Medium_Inverse_Light=0x7f0a00e4;
+        public static final int Holo_TextAppearance_Medium_Light=0x7f0a00e2;
+        public static final int Holo_TextAppearance_PopupMenu=0x7f0a00ba;
+        public static final int Holo_TextAppearance_PopupMenu_Large=0x7f0a00bb;
+        public static final int Holo_TextAppearance_PopupMenu_Light=0x7f0a00bd;
+        public static final int Holo_TextAppearance_PopupMenu_Light_Large=0x7f0a00be;
+        public static final int Holo_TextAppearance_PopupMenu_Light_Small=0x7f0a00bf;
+        public static final int Holo_TextAppearance_PopupMenu_Small=0x7f0a00bc;
+        public static final int Holo_TextAppearance_Small=0x7f0a00e5;
+        public static final int Holo_TextAppearance_Small_Inverse=0x7f0a00e7;
+        public static final int Holo_TextAppearance_Small_Inverse_Light=0x7f0a00e8;
+        public static final int Holo_TextAppearance_Small_Light=0x7f0a00e6;
+        public static final int Holo_TextAppearance_TextView=0x7f0a00eb;
+        public static final int Holo_TextAppearance_TextView_SpinnerItem=0x7f0a00ec;
+        public static final int Holo_TextAppearance_TextView_SpinnerItem_Light=0x7f0a00ed;
+        public static final int Holo_TextView=0x7f0a0083;
+        public static final int Holo_TextView_ListSeparator=0x7f0a00aa;
+        public static final int Holo_TextView_ListSeparator_Light=0x7f0a00ab;
+        public static final int Holo_TextView_SpinnerItem=0x7f0a0084;
+        public static final int Holo_TextView_SpinnerItem_DropDown=0x7f0a0086;
+        public static final int Holo_TextView_SpinnerItem_DropDown_Light=0x7f0a0087;
+        public static final int Holo_TextView_SpinnerItem_Light=0x7f0a0085;
         /**  Standart themes 
  Dark themes 
          */
-        public static final int Holo_Theme=0x7f0a00cc;
-        public static final int Holo_Theme_Dialog=0x7f0a00a5;
-        public static final int Holo_Theme_Dialog_Alert=0x7f0a00a7;
-        public static final int Holo_Theme_Dialog_Alert_Light=0x7f0a00a8;
-        public static final int Holo_Theme_Dialog_Light=0x7f0a00a6;
-        public static final int Holo_Theme_Fullscreen=0x7f0a00cf;
+        public static final int Holo_Theme=0x7f0a00cd;
+        public static final int Holo_Theme_Dialog=0x7f0a00a6;
+        public static final int Holo_Theme_Dialog_Alert=0x7f0a00a8;
+        public static final int Holo_Theme_Dialog_Alert_Light=0x7f0a00a9;
+        public static final int Holo_Theme_Dialog_Light=0x7f0a00a7;
+        public static final int Holo_Theme_Fullscreen=0x7f0a00d0;
         /**  Light themes 
          */
-        public static final int Holo_Theme_Light=0x7f0a00d0;
-        public static final int Holo_Theme_Light_DarkActionBar=0x7f0a00d4;
-        public static final int Holo_Theme_Light_DarkActionBar_Fullscreen=0x7f0a00d7;
-        public static final int Holo_Theme_Light_DarkActionBar_NoActionBar=0x7f0a00d5;
-        public static final int Holo_Theme_Light_DarkActionBar_NoActionBar_Fullscreen=0x7f0a00d6;
-        public static final int Holo_Theme_Light_Fullscreen=0x7f0a00d3;
-        public static final int Holo_Theme_Light_NoActionBar=0x7f0a00d1;
-        public static final int Holo_Theme_Light_NoActionBar_Fullscreen=0x7f0a00d2;
-        public static final int Holo_Theme_NoActionBar=0x7f0a00cd;
-        public static final int Holo_Theme_NoActionBar_Fullscreen=0x7f0a00ce;
+        public static final int Holo_Theme_Light=0x7f0a00d1;
+        public static final int Holo_Theme_Light_DarkActionBar=0x7f0a00d5;
+        public static final int Holo_Theme_Light_DarkActionBar_Fullscreen=0x7f0a00d8;
+        public static final int Holo_Theme_Light_DarkActionBar_NoActionBar=0x7f0a00d6;
+        public static final int Holo_Theme_Light_DarkActionBar_NoActionBar_Fullscreen=0x7f0a00d7;
+        public static final int Holo_Theme_Light_Fullscreen=0x7f0a00d4;
+        public static final int Holo_Theme_Light_NoActionBar=0x7f0a00d2;
+        public static final int Holo_Theme_Light_NoActionBar_Fullscreen=0x7f0a00d3;
+        public static final int Holo_Theme_NoActionBar=0x7f0a00ce;
+        public static final int Holo_Theme_NoActionBar_Fullscreen=0x7f0a00cf;
         /**  Sherlock themes 
          */
-        public static final int Holo_Theme_Sherlock=0x7f0a00c0;
-        public static final int Holo_Theme_Sherlock_Fullscreen=0x7f0a00c3;
-        public static final int Holo_Theme_Sherlock_Light=0x7f0a00c4;
-        public static final int Holo_Theme_Sherlock_Light_DarkActionBar=0x7f0a00c8;
-        public static final int Holo_Theme_Sherlock_Light_DarkActionBar_Fullscreen=0x7f0a00cb;
-        public static final int Holo_Theme_Sherlock_Light_DarkActionBar_NoActionBar=0x7f0a00c9;
-        public static final int Holo_Theme_Sherlock_Light_DarkActionBar_NoActionBar_Fullscreen=0x7f0a00ca;
-        public static final int Holo_Theme_Sherlock_Light_Fullscreen=0x7f0a00c7;
-        public static final int Holo_Theme_Sherlock_Light_NoActionBar=0x7f0a00c5;
-        public static final int Holo_Theme_Sherlock_Light_NoActionBar_Fullscreen=0x7f0a00c6;
-        public static final int Holo_Theme_Sherlock_NoActionBar=0x7f0a00c1;
-        public static final int Holo_Theme_Sherlock_NoActionBar_Fullscreen=0x7f0a00c2;
-        public static final int Holo_TimePicker=0x7f0a00b0;
-        public static final int Sherlock___TextAppearance_Small=0x7f0a0047;
-        public static final int Sherlock___Theme=0x7f0a0052;
-        public static final int Sherlock___Theme_DarkActionBar=0x7f0a0054;
-        public static final int Sherlock___Theme_Light=0x7f0a0053;
-        public static final int Sherlock___Widget_ActionBar=0x7f0a0002;
-        public static final int Sherlock___Widget_ActionMode=0x7f0a0017;
-        public static final int Sherlock___Widget_ActivityChooserView=0x7f0a001f;
-        public static final int Sherlock___Widget_Holo_DropDownItem=0x7f0a002a;
-        public static final int Sherlock___Widget_Holo_ListView=0x7f0a0027;
-        public static final int Sherlock___Widget_Holo_Spinner=0x7f0a0024;
-        public static final int Sherlock___Widget_SearchAutoCompleteTextView=0x7f0a0034;
-        public static final int TextAppearance_Sherlock=0x7f0a004b;
-        public static final int TextAppearance_Sherlock_Light_SearchResult=0x7f0a004f;
-        public static final int TextAppearance_Sherlock_Light_SearchResult_Subtitle=0x7f0a0051;
-        public static final int TextAppearance_Sherlock_Light_SearchResult_Title=0x7f0a0050;
-        public static final int TextAppearance_Sherlock_Light_Small=0x7f0a0049;
-        public static final int TextAppearance_Sherlock_Light_Widget_PopupMenu_Large=0x7f0a0042;
-        public static final int TextAppearance_Sherlock_Light_Widget_PopupMenu_Small=0x7f0a0044;
-        public static final int TextAppearance_Sherlock_SearchResult=0x7f0a004c;
-        public static final int TextAppearance_Sherlock_SearchResult_Subtitle=0x7f0a004e;
-        public static final int TextAppearance_Sherlock_SearchResult_Title=0x7f0a004d;
-        public static final int TextAppearance_Sherlock_Small=0x7f0a0048;
-        public static final int TextAppearance_Sherlock_Widget_ActionBar_Menu=0x7f0a0037;
-        public static final int TextAppearance_Sherlock_Widget_ActionBar_Subtitle=0x7f0a003a;
-        public static final int TextAppearance_Sherlock_Widget_ActionBar_Subtitle_Inverse=0x7f0a003b;
-        public static final int TextAppearance_Sherlock_Widget_ActionBar_Title=0x7f0a0038;
-        public static final int TextAppearance_Sherlock_Widget_ActionBar_Title_Inverse=0x7f0a0039;
-        public static final int TextAppearance_Sherlock_Widget_ActionMode_Subtitle=0x7f0a003e;
-        public static final int TextAppearance_Sherlock_Widget_ActionMode_Subtitle_Inverse=0x7f0a003f;
-        public static final int TextAppearance_Sherlock_Widget_ActionMode_Title=0x7f0a003c;
-        public static final int TextAppearance_Sherlock_Widget_ActionMode_Title_Inverse=0x7f0a003d;
-        public static final int TextAppearance_Sherlock_Widget_DropDownHint=0x7f0a004a;
-        public static final int TextAppearance_Sherlock_Widget_DropDownItem=0x7f0a0046;
-        public static final int TextAppearance_Sherlock_Widget_PopupMenu=0x7f0a0040;
-        public static final int TextAppearance_Sherlock_Widget_PopupMenu_Large=0x7f0a0041;
-        public static final int TextAppearance_Sherlock_Widget_PopupMenu_Small=0x7f0a0043;
-        public static final int TextAppearance_Sherlock_Widget_TextView_SpinnerItem=0x7f0a0045;
-        public static final int Theme_Sherlock=0x7f0a0055;
-        public static final int Theme_Sherlock_Light=0x7f0a0056;
-        public static final int Theme_Sherlock_Light_DarkActionBar=0x7f0a0057;
-        public static final int Theme_Sherlock_Light_NoActionBar=0x7f0a0059;
-        public static final int Theme_Sherlock_NoActionBar=0x7f0a0058;
-        public static final int Widget=0x7f0a0001;
+        public static final int Holo_Theme_Sherlock=0x7f0a00c1;
+        public static final int Holo_Theme_Sherlock_Fullscreen=0x7f0a00c4;
+        public static final int Holo_Theme_Sherlock_Light=0x7f0a00c5;
+        public static final int Holo_Theme_Sherlock_Light_DarkActionBar=0x7f0a00c9;
+        public static final int Holo_Theme_Sherlock_Light_DarkActionBar_Fullscreen=0x7f0a00cc;
+        public static final int Holo_Theme_Sherlock_Light_DarkActionBar_NoActionBar=0x7f0a00ca;
+        public static final int Holo_Theme_Sherlock_Light_DarkActionBar_NoActionBar_Fullscreen=0x7f0a00cb;
+        public static final int Holo_Theme_Sherlock_Light_Fullscreen=0x7f0a00c8;
+        public static final int Holo_Theme_Sherlock_Light_NoActionBar=0x7f0a00c6;
+        public static final int Holo_Theme_Sherlock_Light_NoActionBar_Fullscreen=0x7f0a00c7;
+        public static final int Holo_Theme_Sherlock_NoActionBar=0x7f0a00c2;
+        public static final int Holo_Theme_Sherlock_NoActionBar_Fullscreen=0x7f0a00c3;
+        public static final int Holo_TimePicker=0x7f0a00b1;
+        public static final int Sherlock___TextAppearance_Small=0x7f0a0048;
+        public static final int Sherlock___Theme=0x7f0a0053;
+        public static final int Sherlock___Theme_DarkActionBar=0x7f0a0055;
+        public static final int Sherlock___Theme_Light=0x7f0a0054;
+        public static final int Sherlock___Widget_ActionBar=0x7f0a0003;
+        public static final int Sherlock___Widget_ActionMode=0x7f0a0018;
+        public static final int Sherlock___Widget_ActivityChooserView=0x7f0a0020;
+        public static final int Sherlock___Widget_Holo_DropDownItem=0x7f0a002b;
+        public static final int Sherlock___Widget_Holo_ListView=0x7f0a0028;
+        public static final int Sherlock___Widget_Holo_Spinner=0x7f0a0025;
+        public static final int Sherlock___Widget_SearchAutoCompleteTextView=0x7f0a0035;
+        public static final int TextAppearance_Sherlock=0x7f0a004c;
+        public static final int TextAppearance_Sherlock_Light_SearchResult=0x7f0a0050;
+        public static final int TextAppearance_Sherlock_Light_SearchResult_Subtitle=0x7f0a0052;
+        public static final int TextAppearance_Sherlock_Light_SearchResult_Title=0x7f0a0051;
+        public static final int TextAppearance_Sherlock_Light_Small=0x7f0a004a;
+        public static final int TextAppearance_Sherlock_Light_Widget_PopupMenu_Large=0x7f0a0043;
+        public static final int TextAppearance_Sherlock_Light_Widget_PopupMenu_Small=0x7f0a0045;
+        public static final int TextAppearance_Sherlock_SearchResult=0x7f0a004d;
+        public static final int TextAppearance_Sherlock_SearchResult_Subtitle=0x7f0a004f;
+        public static final int TextAppearance_Sherlock_SearchResult_Title=0x7f0a004e;
+        public static final int TextAppearance_Sherlock_Small=0x7f0a0049;
+        public static final int TextAppearance_Sherlock_Widget_ActionBar_Menu=0x7f0a0038;
+        public static final int TextAppearance_Sherlock_Widget_ActionBar_Subtitle=0x7f0a003b;
+        public static final int TextAppearance_Sherlock_Widget_ActionBar_Subtitle_Inverse=0x7f0a003c;
+        public static final int TextAppearance_Sherlock_Widget_ActionBar_Title=0x7f0a0039;
+        public static final int TextAppearance_Sherlock_Widget_ActionBar_Title_Inverse=0x7f0a003a;
+        public static final int TextAppearance_Sherlock_Widget_ActionMode_Subtitle=0x7f0a003f;
+        public static final int TextAppearance_Sherlock_Widget_ActionMode_Subtitle_Inverse=0x7f0a0040;
+        public static final int TextAppearance_Sherlock_Widget_ActionMode_Title=0x7f0a003d;
+        public static final int TextAppearance_Sherlock_Widget_ActionMode_Title_Inverse=0x7f0a003e;
+        public static final int TextAppearance_Sherlock_Widget_DropDownHint=0x7f0a004b;
+        public static final int TextAppearance_Sherlock_Widget_DropDownItem=0x7f0a0047;
+        public static final int TextAppearance_Sherlock_Widget_PopupMenu=0x7f0a0041;
+        public static final int TextAppearance_Sherlock_Widget_PopupMenu_Large=0x7f0a0042;
+        public static final int TextAppearance_Sherlock_Widget_PopupMenu_Small=0x7f0a0044;
+        public static final int TextAppearance_Sherlock_Widget_TextView_SpinnerItem=0x7f0a0046;
+        public static final int Theme_Sherlock=0x7f0a0056;
+        public static final int Theme_Sherlock_Light=0x7f0a0057;
+        public static final int Theme_Sherlock_Light_DarkActionBar=0x7f0a0058;
+        public static final int Theme_Sherlock_Light_NoActionBar=0x7f0a005a;
+        public static final int Theme_Sherlock_NoActionBar=0x7f0a0059;
+        public static final int Widget=0x7f0a0002;
         public static final int Widget_Collect_ActionBar=0x7f0a00fb;
-        public static final int Widget_Sherlock_ActionBar=0x7f0a0003;
-        public static final int Widget_Sherlock_ActionBar_Solid=0x7f0a0004;
-        public static final int Widget_Sherlock_ActionBar_TabBar=0x7f0a000b;
-        public static final int Widget_Sherlock_ActionBar_TabText=0x7f0a000e;
-        public static final int Widget_Sherlock_ActionBar_TabView=0x7f0a0008;
-        public static final int Widget_Sherlock_ActionButton=0x7f0a0011;
-        public static final int Widget_Sherlock_ActionButton_CloseMode=0x7f0a0013;
-        public static final int Widget_Sherlock_ActionButton_Overflow=0x7f0a0015;
-        public static final int Widget_Sherlock_ActionMode=0x7f0a0018;
-        public static final int Widget_Sherlock_ActivityChooserView=0x7f0a0020;
-        public static final int Widget_Sherlock_Button_Small=0x7f0a0022;
-        public static final int Widget_Sherlock_DropDownItem_Spinner=0x7f0a002b;
-        public static final int Widget_Sherlock_Light_ActionBar=0x7f0a0005;
-        public static final int Widget_Sherlock_Light_ActionBar_Solid=0x7f0a0006;
-        public static final int Widget_Sherlock_Light_ActionBar_Solid_Inverse=0x7f0a0007;
-        public static final int Widget_Sherlock_Light_ActionBar_TabBar=0x7f0a000c;
-        public static final int Widget_Sherlock_Light_ActionBar_TabBar_Inverse=0x7f0a000d;
-        public static final int Widget_Sherlock_Light_ActionBar_TabText=0x7f0a000f;
-        public static final int Widget_Sherlock_Light_ActionBar_TabText_Inverse=0x7f0a0010;
-        public static final int Widget_Sherlock_Light_ActionBar_TabView=0x7f0a0009;
-        public static final int Widget_Sherlock_Light_ActionBar_TabView_Inverse=0x7f0a000a;
-        public static final int Widget_Sherlock_Light_ActionButton=0x7f0a0012;
-        public static final int Widget_Sherlock_Light_ActionButton_CloseMode=0x7f0a0014;
-        public static final int Widget_Sherlock_Light_ActionButton_Overflow=0x7f0a0016;
-        public static final int Widget_Sherlock_Light_ActionMode=0x7f0a0019;
-        public static final int Widget_Sherlock_Light_ActionMode_Inverse=0x7f0a001a;
-        public static final int Widget_Sherlock_Light_ActivityChooserView=0x7f0a0021;
-        public static final int Widget_Sherlock_Light_Button_Small=0x7f0a0023;
-        public static final int Widget_Sherlock_Light_DropDownItem_Spinner=0x7f0a002c;
-        public static final int Widget_Sherlock_Light_ListPopupWindow=0x7f0a001c;
-        public static final int Widget_Sherlock_Light_ListView_DropDown=0x7f0a0029;
-        public static final int Widget_Sherlock_Light_PopupMenu=0x7f0a001e;
-        public static final int Widget_Sherlock_Light_PopupWindow_ActionMode=0x7f0a002e;
-        public static final int Widget_Sherlock_Light_ProgressBar=0x7f0a0030;
-        public static final int Widget_Sherlock_Light_ProgressBar_Horizontal=0x7f0a0032;
-        public static final int Widget_Sherlock_Light_SearchAutoCompleteTextView=0x7f0a0036;
-        public static final int Widget_Sherlock_Light_Spinner_DropDown_ActionBar=0x7f0a0026;
-        public static final int Widget_Sherlock_ListPopupWindow=0x7f0a001b;
-        public static final int Widget_Sherlock_ListView_DropDown=0x7f0a0028;
-        public static final int Widget_Sherlock_PopupMenu=0x7f0a001d;
-        public static final int Widget_Sherlock_PopupWindow_ActionMode=0x7f0a002d;
-        public static final int Widget_Sherlock_ProgressBar=0x7f0a002f;
-        public static final int Widget_Sherlock_ProgressBar_Horizontal=0x7f0a0031;
-        public static final int Widget_Sherlock_SearchAutoCompleteTextView=0x7f0a0035;
-        public static final int Widget_Sherlock_Spinner_DropDown_ActionBar=0x7f0a0025;
-        public static final int Widget_Sherlock_TextView_SpinnerItem=0x7f0a0033;
+        public static final int Widget_Sherlock_ActionBar=0x7f0a0004;
+        public static final int Widget_Sherlock_ActionBar_Solid=0x7f0a0005;
+        public static final int Widget_Sherlock_ActionBar_TabBar=0x7f0a000c;
+        public static final int Widget_Sherlock_ActionBar_TabText=0x7f0a000f;
+        public static final int Widget_Sherlock_ActionBar_TabView=0x7f0a0009;
+        public static final int Widget_Sherlock_ActionButton=0x7f0a0012;
+        public static final int Widget_Sherlock_ActionButton_CloseMode=0x7f0a0014;
+        public static final int Widget_Sherlock_ActionButton_Overflow=0x7f0a0016;
+        public static final int Widget_Sherlock_ActionMode=0x7f0a0019;
+        public static final int Widget_Sherlock_ActivityChooserView=0x7f0a0021;
+        public static final int Widget_Sherlock_Button_Small=0x7f0a0023;
+        public static final int Widget_Sherlock_DropDownItem_Spinner=0x7f0a002c;
+        public static final int Widget_Sherlock_Light_ActionBar=0x7f0a0006;
+        public static final int Widget_Sherlock_Light_ActionBar_Solid=0x7f0a0007;
+        public static final int Widget_Sherlock_Light_ActionBar_Solid_Inverse=0x7f0a0008;
+        public static final int Widget_Sherlock_Light_ActionBar_TabBar=0x7f0a000d;
+        public static final int Widget_Sherlock_Light_ActionBar_TabBar_Inverse=0x7f0a000e;
+        public static final int Widget_Sherlock_Light_ActionBar_TabText=0x7f0a0010;
+        public static final int Widget_Sherlock_Light_ActionBar_TabText_Inverse=0x7f0a0011;
+        public static final int Widget_Sherlock_Light_ActionBar_TabView=0x7f0a000a;
+        public static final int Widget_Sherlock_Light_ActionBar_TabView_Inverse=0x7f0a000b;
+        public static final int Widget_Sherlock_Light_ActionButton=0x7f0a0013;
+        public static final int Widget_Sherlock_Light_ActionButton_CloseMode=0x7f0a0015;
+        public static final int Widget_Sherlock_Light_ActionButton_Overflow=0x7f0a0017;
+        public static final int Widget_Sherlock_Light_ActionMode=0x7f0a001a;
+        public static final int Widget_Sherlock_Light_ActionMode_Inverse=0x7f0a001b;
+        public static final int Widget_Sherlock_Light_ActivityChooserView=0x7f0a0022;
+        public static final int Widget_Sherlock_Light_Button_Small=0x7f0a0024;
+        public static final int Widget_Sherlock_Light_DropDownItem_Spinner=0x7f0a002d;
+        public static final int Widget_Sherlock_Light_ListPopupWindow=0x7f0a001d;
+        public static final int Widget_Sherlock_Light_ListView_DropDown=0x7f0a002a;
+        public static final int Widget_Sherlock_Light_PopupMenu=0x7f0a001f;
+        public static final int Widget_Sherlock_Light_PopupWindow_ActionMode=0x7f0a002f;
+        public static final int Widget_Sherlock_Light_ProgressBar=0x7f0a0031;
+        public static final int Widget_Sherlock_Light_ProgressBar_Horizontal=0x7f0a0033;
+        public static final int Widget_Sherlock_Light_SearchAutoCompleteTextView=0x7f0a0037;
+        public static final int Widget_Sherlock_Light_Spinner_DropDown_ActionBar=0x7f0a0027;
+        public static final int Widget_Sherlock_ListPopupWindow=0x7f0a001c;
+        public static final int Widget_Sherlock_ListView_DropDown=0x7f0a0029;
+        public static final int Widget_Sherlock_PopupMenu=0x7f0a001e;
+        public static final int Widget_Sherlock_PopupWindow_ActionMode=0x7f0a002e;
+        public static final int Widget_Sherlock_ProgressBar=0x7f0a0030;
+        public static final int Widget_Sherlock_ProgressBar_Horizontal=0x7f0a0032;
+        public static final int Widget_Sherlock_SearchAutoCompleteTextView=0x7f0a0036;
+        public static final int Widget_Sherlock_Spinner_DropDown_ActionBar=0x7f0a0026;
+        public static final int Widget_Sherlock_TextView_SpinnerItem=0x7f0a0034;
         public static final int fade_animation=0x7f0a0000;
         public static final int light=0x7f0a00f5;
     }
@@ -4334,7 +3778,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #AbsSpinner_android_entries android:entries}</code></td><td></td></tr>
+           <tr><td><code>{@link #AbsSpinner_android_entries com.makina.collect.android:android_entries}</code></td><td></td></tr>
            </table>
            @see #AbsSpinner_android_entries
          */
@@ -4342,63 +3786,11 @@ containing a value of this type.
             0x010100b2
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#entries}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_entries}
           attribute's value can be found in the {@link #AbsSpinner} array.
-          @attr name android:entries
+          @attr name android:android_entries
         */
         public static final int AbsSpinner_android_entries = 0;
-        /** Attributes that can be used with a AdsAttrs.
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #AdsAttrs_adSize com.makina.collect.android:adSize}</code></td><td>
-    The size of the ad.</td></tr>
-           <tr><td><code>{@link #AdsAttrs_adUnitId com.makina.collect.android:adUnitId}</code></td><td> The ad unit ID.</td></tr>
-           </table>
-           @see #AdsAttrs_adSize
-           @see #AdsAttrs_adUnitId
-         */
-        public static final int[] AdsAttrs = {
-            0x7f0100f0, 0x7f0100f1
-        };
-        /**
-          <p>
-          @attr description
-          
-    The size of the ad. It must be one of BANNER, FULL_BANNER, LEADERBOARD,
-    MEDIUM_RECTANGLE, SMART_BANNER, WIDE_SKYSCRAPER, or
-    &lt;width&gt;x&lt;height&gt;.
-    
-
-
-          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.makina.collect.android:adSize
-        */
-        public static final int AdsAttrs_adSize = 0;
-        /**
-          <p>
-          @attr description
-           The ad unit ID. 
-
-
-          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          <p>This is a private symbol.
-          @attr name com.makina.collect.android:adUnitId
-        */
-        public static final int AdsAttrs_adUnitId = 1;
         /** Attributes that can be used with a AlertDialog.
            <p>Includes the following attributes:</p>
            <table>
@@ -4470,7 +3862,7 @@ some parent container.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:alpha
+          @attr name android:alpha
         */
         public static final int AlertDialog_alpha = 19;
         /**
@@ -4482,7 +3874,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:bottomBright
+          @attr name android:bottomBright
         */
         public static final int AlertDialog_bottomBright = 8;
         /**
@@ -4494,7 +3886,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:bottomDark
+          @attr name android:bottomDark
         */
         public static final int AlertDialog_bottomDark = 4;
         /**
@@ -4506,7 +3898,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:bottomMedium
+          @attr name android:bottomMedium
         */
         public static final int AlertDialog_bottomMedium = 9;
         /**
@@ -4518,7 +3910,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:centerBright
+          @attr name android:centerBright
         */
         public static final int AlertDialog_centerBright = 7;
         /**
@@ -4530,7 +3922,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:centerDark
+          @attr name android:centerDark
         */
         public static final int AlertDialog_centerDark = 3;
         /**
@@ -4542,7 +3934,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:centerMedium
+          @attr name android:centerMedium
         */
         public static final int AlertDialog_centerMedium = 10;
         /**
@@ -4556,7 +3948,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:dimEnable
+          @attr name android:dimEnable
         */
         public static final int AlertDialog_dimEnable = 17;
         /**
@@ -4572,7 +3964,7 @@ some parent container.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:dimFraction
+          @attr name android:dimFraction
         */
         public static final int AlertDialog_dimFraction = 18;
         /**
@@ -4584,7 +3976,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:fullBright
+          @attr name android:fullBright
         */
         public static final int AlertDialog_fullBright = 5;
         /**
@@ -4596,7 +3988,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:fullDark
+          @attr name android:fullDark
         */
         public static final int AlertDialog_fullDark = 1;
         /**
@@ -4625,7 +4017,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>start</code></td><td>0x00800003</td><td></td></tr>
 <tr><td><code>end</code></td><td>0x00800005</td><td></td></tr>
 </table>
-          @attr name com.makina.collect.android:gravity
+          @attr name android:gravity
         */
         public static final int AlertDialog_gravity = 0;
         /**
@@ -4635,7 +4027,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:horizontalProgressLayout
+          @attr name android:horizontalProgressLayout
         */
         public static final int AlertDialog_horizontalProgressLayout = 16;
         /**
@@ -4645,7 +4037,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:layout
+          @attr name android:layout
         */
         public static final int AlertDialog_layout = 20;
         /**
@@ -4655,7 +4047,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:listItemLayout
+          @attr name android:listItemLayout
         */
         public static final int AlertDialog_listItemLayout = 14;
         /**
@@ -4665,7 +4057,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:listLayout
+          @attr name android:listLayout
         */
         public static final int AlertDialog_listLayout = 11;
         /**
@@ -4675,7 +4067,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:multiChoiceItemLayout
+          @attr name android:multiChoiceItemLayout
         */
         public static final int AlertDialog_multiChoiceItemLayout = 12;
         /**
@@ -4685,7 +4077,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:progressLayout
+          @attr name android:progressLayout
         */
         public static final int AlertDialog_progressLayout = 15;
         /**
@@ -4695,7 +4087,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:singleChoiceItemLayout
+          @attr name android:singleChoiceItemLayout
         */
         public static final int AlertDialog_singleChoiceItemLayout = 13;
         /**
@@ -4707,7 +4099,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:topBright
+          @attr name android:topBright
         */
         public static final int AlertDialog_topBright = 6;
         /**
@@ -4719,7 +4111,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:topDark
+          @attr name android:topDark
         */
         public static final int AlertDialog_topDark = 2;
         /** Attributes that can be used with a AutoCompleteTextView.
@@ -4728,15 +4120,15 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #AutoCompleteTextView_android_completionHint android:completionHint}</code></td><td></td></tr>
-           <tr><td><code>{@link #AutoCompleteTextView_android_completionHintView android:completionHintView}</code></td><td></td></tr>
-           <tr><td><code>{@link #AutoCompleteTextView_android_completionThreshold android:completionThreshold}</code></td><td></td></tr>
-           <tr><td><code>{@link #AutoCompleteTextView_android_dropDownAnchor android:dropDownAnchor}</code></td><td></td></tr>
-           <tr><td><code>{@link #AutoCompleteTextView_android_dropDownHeight android:dropDownHeight}</code></td><td></td></tr>
-           <tr><td><code>{@link #AutoCompleteTextView_android_dropDownSelector android:dropDownSelector}</code></td><td></td></tr>
-           <tr><td><code>{@link #AutoCompleteTextView_android_dropDownWidth android:dropDownWidth}</code></td><td></td></tr>
-           <tr><td><code>{@link #AutoCompleteTextView_android_entries android:entries}</code></td><td></td></tr>
-           <tr><td><code>{@link #AutoCompleteTextView_android_inputType android:inputType}</code></td><td></td></tr>
+           <tr><td><code>{@link #AutoCompleteTextView_android_completionHint com.makina.collect.android:android_completionHint}</code></td><td></td></tr>
+           <tr><td><code>{@link #AutoCompleteTextView_android_completionHintView com.makina.collect.android:android_completionHintView}</code></td><td></td></tr>
+           <tr><td><code>{@link #AutoCompleteTextView_android_completionThreshold com.makina.collect.android:android_completionThreshold}</code></td><td></td></tr>
+           <tr><td><code>{@link #AutoCompleteTextView_android_dropDownAnchor com.makina.collect.android:android_dropDownAnchor}</code></td><td></td></tr>
+           <tr><td><code>{@link #AutoCompleteTextView_android_dropDownHeight com.makina.collect.android:android_dropDownHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #AutoCompleteTextView_android_dropDownSelector com.makina.collect.android:android_dropDownSelector}</code></td><td></td></tr>
+           <tr><td><code>{@link #AutoCompleteTextView_android_dropDownWidth com.makina.collect.android:android_dropDownWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #AutoCompleteTextView_android_entries com.makina.collect.android:android_entries}</code></td><td></td></tr>
+           <tr><td><code>{@link #AutoCompleteTextView_android_inputType com.makina.collect.android:android_inputType}</code></td><td></td></tr>
            <tr><td><code>{@link #AutoCompleteTextView_dropDownHorizontalOffset com.makina.collect.android:dropDownHorizontalOffset}</code></td><td></td></tr>
            <tr><td><code>{@link #AutoCompleteTextView_dropDownVerticalOffset com.makina.collect.android:dropDownVerticalOffset}</code></td><td></td></tr>
            </table>
@@ -4758,57 +4150,57 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x01010283, 0x7f0100c8, 0x7f0100c9
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#completionHint}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_completionHint}
           attribute's value can be found in the {@link #AutoCompleteTextView} array.
-          @attr name android:completionHint
+          @attr name android:android_completionHint
         */
         public static final int AutoCompleteTextView_android_completionHint = 1;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#completionHintView}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_completionHintView}
           attribute's value can be found in the {@link #AutoCompleteTextView} array.
-          @attr name android:completionHintView
+          @attr name android:android_completionHintView
         */
         public static final int AutoCompleteTextView_android_completionHintView = 2;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#completionThreshold}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_completionThreshold}
           attribute's value can be found in the {@link #AutoCompleteTextView} array.
-          @attr name android:completionThreshold
+          @attr name android:android_completionThreshold
         */
         public static final int AutoCompleteTextView_android_completionThreshold = 3;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#dropDownAnchor}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_dropDownAnchor}
           attribute's value can be found in the {@link #AutoCompleteTextView} array.
-          @attr name android:dropDownAnchor
+          @attr name android:android_dropDownAnchor
         */
         public static final int AutoCompleteTextView_android_dropDownAnchor = 7;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#dropDownHeight}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_dropDownHeight}
           attribute's value can be found in the {@link #AutoCompleteTextView} array.
-          @attr name android:dropDownHeight
+          @attr name android:android_dropDownHeight
         */
         public static final int AutoCompleteTextView_android_dropDownHeight = 8;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#dropDownSelector}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_dropDownSelector}
           attribute's value can be found in the {@link #AutoCompleteTextView} array.
-          @attr name android:dropDownSelector
+          @attr name android:android_dropDownSelector
         */
         public static final int AutoCompleteTextView_android_dropDownSelector = 4;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#dropDownWidth}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_dropDownWidth}
           attribute's value can be found in the {@link #AutoCompleteTextView} array.
-          @attr name android:dropDownWidth
+          @attr name android:android_dropDownWidth
         */
         public static final int AutoCompleteTextView_android_dropDownWidth = 6;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#entries}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_entries}
           attribute's value can be found in the {@link #AutoCompleteTextView} array.
-          @attr name android:entries
+          @attr name android:android_entries
         */
         public static final int AutoCompleteTextView_android_entries = 0;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#inputType}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_inputType}
           attribute's value can be found in the {@link #AutoCompleteTextView} array.
-          @attr name android:inputType
+          @attr name android:android_inputType
         */
         public static final int AutoCompleteTextView_android_inputType = 5;
         /**
@@ -4824,7 +4216,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:dropDownHorizontalOffset
+          @attr name android:dropDownHorizontalOffset
         */
         public static final int AutoCompleteTextView_dropDownHorizontalOffset = 10;
         /**
@@ -4840,7 +4232,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:dropDownVerticalOffset
+          @attr name android:dropDownVerticalOffset
         */
         public static final int AutoCompleteTextView_dropDownVerticalOffset = 9;
         /** Attributes that can be used with a CalendarView.
@@ -4890,7 +4282,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:dateTextAppearance
+          @attr name android:dateTextAppearance
         */
         public static final int CalendarView_dateTextAppearance = 12;
         /**
@@ -4904,7 +4296,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:firstDayOfWeek
+          @attr name android:firstDayOfWeek
         */
         public static final int CalendarView_firstDayOfWeek = 0;
         /**
@@ -4916,7 +4308,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:focusedMonthDateColor
+          @attr name android:focusedMonthDateColor
         */
         public static final int CalendarView_focusedMonthDateColor = 6;
         /**
@@ -4927,7 +4319,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-          @attr name com.makina.collect.android:maxDate
+          @attr name android:maxDate
         */
         public static final int CalendarView_maxDate = 3;
         /**
@@ -4938,7 +4330,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-          @attr name com.makina.collect.android:minDate
+          @attr name android:minDate
         */
         public static final int CalendarView_minDate = 2;
         /**
@@ -4948,7 +4340,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:selectedDateVerticalBar
+          @attr name android:selectedDateVerticalBar
         */
         public static final int CalendarView_selectedDateVerticalBar = 10;
         /**
@@ -4960,7 +4352,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:selectedWeekBackgroundColor
+          @attr name android:selectedWeekBackgroundColor
         */
         public static final int CalendarView_selectedWeekBackgroundColor = 5;
         /**
@@ -4974,7 +4366,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:showWeekNumber
+          @attr name android:showWeekNumber
         */
         public static final int CalendarView_showWeekNumber = 1;
         /**
@@ -4988,7 +4380,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:shownWeekCount
+          @attr name android:shownWeekCount
         */
         public static final int CalendarView_shownWeekCount = 4;
         /**
@@ -5000,7 +4392,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:unfocusedMonthDateColor
+          @attr name android:unfocusedMonthDateColor
         */
         public static final int CalendarView_unfocusedMonthDateColor = 7;
         /**
@@ -5010,7 +4402,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:weekDayTextAppearance
+          @attr name android:weekDayTextAppearance
         */
         public static final int CalendarView_weekDayTextAppearance = 11;
         /**
@@ -5022,7 +4414,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:weekNumberColor
+          @attr name android:weekNumberColor
         */
         public static final int CalendarView_weekNumberColor = 8;
         /**
@@ -5034,7 +4426,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:weekSeparatorLineColor
+          @attr name android:weekSeparatorLineColor
         */
         public static final int CalendarView_weekSeparatorLineColor = 9;
         /** Attributes that can be used with a CheckBoxPreference.
@@ -5065,7 +4457,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:disableDependentsState
+          @attr name android:disableDependentsState
         */
         public static final int CheckBoxPreference_disableDependentsState = 2;
         /**
@@ -5079,7 +4471,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:summaryOff
+          @attr name android:summaryOff
         */
         public static final int CheckBoxPreference_summaryOff = 1;
         /**
@@ -5093,7 +4485,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:summaryOn
+          @attr name android:summaryOn
         */
         public static final int CheckBoxPreference_summaryOn = 0;
         /** Attributes that can be used with a DatePicker.
@@ -5135,7 +4527,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:calendarViewShown
+          @attr name android:calendarViewShown
         */
         public static final int DatePicker_calendarViewShown = 3;
         /**
@@ -5149,7 +4541,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:endYear
+          @attr name android:endYear
         */
         public static final int DatePicker_endYear = 1;
         /**
@@ -5163,7 +4555,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:forceShownState
+          @attr name android:forceShownState
         */
         public static final int DatePicker_forceShownState = 5;
         /**
@@ -5173,7 +4565,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:internalLayout
+          @attr name android:internalLayout
         */
         public static final int DatePicker_internalLayout = 4;
         /**
@@ -5184,7 +4576,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-          @attr name com.makina.collect.android:maxDate
+          @attr name android:maxDate
         */
         public static final int DatePicker_maxDate = 7;
         /**
@@ -5195,7 +4587,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-          @attr name com.makina.collect.android:minDate
+          @attr name android:minDate
         */
         public static final int DatePicker_minDate = 6;
         /**
@@ -5209,7 +4601,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:spinnersShown
+          @attr name android:spinnersShown
         */
         public static final int DatePicker_spinnersShown = 2;
         /**
@@ -5223,7 +4615,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:startYear
+          @attr name android:startYear
         */
         public static final int DatePicker_startYear = 0;
         /** Attributes that can be used with a DialogButtonBar_LayoutParams.
@@ -5232,7 +4624,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #DialogButtonBar_LayoutParams_android_hint android:hint}</code></td><td></td></tr>
+           <tr><td><code>{@link #DialogButtonBar_LayoutParams_android_hint com.makina.collect.android:android_hint}</code></td><td></td></tr>
            </table>
            @see #DialogButtonBar_LayoutParams_android_hint
          */
@@ -5240,9 +4632,9 @@ containing a value of this type.
             0x01010150
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#hint}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_hint}
           attribute's value can be found in the {@link #DialogButtonBar_LayoutParams} array.
-          @attr name android:hint
+          @attr name android:android_hint
         */
         public static final int DialogButtonBar_LayoutParams_android_hint = 0;
         /** Attributes that can be used with a DialogPreference.
@@ -5276,7 +4668,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:dialogIcon
+          @attr name android:dialogIcon
         */
         public static final int DialogPreference_dialogIcon = 2;
         /**
@@ -5286,7 +4678,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:dialogLayout
+          @attr name android:dialogLayout
         */
         public static final int DialogPreference_dialogLayout = 5;
         /**
@@ -5300,7 +4692,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:dialogMessage
+          @attr name android:dialogMessage
         */
         public static final int DialogPreference_dialogMessage = 1;
         /**
@@ -5314,7 +4706,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:dialogTitle
+          @attr name android:dialogTitle
         */
         public static final int DialogPreference_dialogTitle = 0;
         /**
@@ -5328,7 +4720,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:negativeButtonText
+          @attr name android:negativeButtonText
         */
         public static final int DialogPreference_negativeButtonText = 4;
         /**
@@ -5342,7 +4734,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:positiveButtonText
+          @attr name android:positiveButtonText
         */
         public static final int DialogPreference_positiveButtonText = 3;
         /** Attributes that can be used with a Divider.
@@ -5351,7 +4743,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #Divider_android_orientation android:orientation}</code></td><td></td></tr>
+           <tr><td><code>{@link #Divider_android_orientation com.makina.collect.android:android_orientation}</code></td><td></td></tr>
            </table>
            @see #Divider_android_orientation
          */
@@ -5359,9 +4751,9 @@ containing a value of this type.
             0x010100c4
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#orientation}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_orientation}
           attribute's value can be found in the {@link #Divider} array.
-          @attr name android:orientation
+          @attr name android:android_orientation
         */
         public static final int Divider_android_orientation = 0;
         /** Attributes that can be used with a LinearLayout.
@@ -5370,9 +4762,9 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #LinearLayout_android_divider android:divider}</code></td><td></td></tr>
-           <tr><td><code>{@link #LinearLayout_android_dividerPadding android:dividerPadding}</code></td><td></td></tr>
-           <tr><td><code>{@link #LinearLayout_android_showDividers android:showDividers}</code></td><td></td></tr>
+           <tr><td><code>{@link #LinearLayout_android_divider com.makina.collect.android:android_divider}</code></td><td></td></tr>
+           <tr><td><code>{@link #LinearLayout_android_dividerPadding com.makina.collect.android:android_dividerPadding}</code></td><td></td></tr>
+           <tr><td><code>{@link #LinearLayout_android_showDividers com.makina.collect.android:android_showDividers}</code></td><td></td></tr>
            <tr><td><code>{@link #LinearLayout_dividerPadding com.makina.collect.android:dividerPadding}</code></td><td></td></tr>
            <tr><td><code>{@link #LinearLayout_showDividers com.makina.collect.android:showDividers}</code></td><td></td></tr>
            </table>
@@ -5387,21 +4779,21 @@ containing a value of this type.
             0x7f0100c5
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#divider}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_divider}
           attribute's value can be found in the {@link #LinearLayout} array.
-          @attr name android:divider
+          @attr name android:android_divider
         */
         public static final int LinearLayout_android_divider = 0;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#dividerPadding}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_dividerPadding}
           attribute's value can be found in the {@link #LinearLayout} array.
-          @attr name android:dividerPadding
+          @attr name android:android_dividerPadding
         */
         public static final int LinearLayout_android_dividerPadding = 2;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#showDividers}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_showDividers}
           attribute's value can be found in the {@link #LinearLayout} array.
-          @attr name android:showDividers
+          @attr name android:android_showDividers
         */
         public static final int LinearLayout_android_showDividers = 1;
         /**
@@ -5417,7 +4809,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:dividerPadding
+          @attr name android:dividerPadding
         */
         public static final int LinearLayout_dividerPadding = 4;
         /**
@@ -5437,7 +4829,7 @@ containing a value of this type.
 <tr><td><code>end</code></td><td>4</td><td></td></tr>
 <tr><td><code>all</code></td><td>7</td><td></td></tr>
 </table>
-          @attr name com.makina.collect.android:showDividers
+          @attr name android:showDividers
         */
         public static final int LinearLayout_showDividers = 3;
         /** Attributes that can be used with a ListPreference.
@@ -5462,7 +4854,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:entries
+          @attr name android:entries
         */
         public static final int ListPreference_entries = 0;
         /**
@@ -5472,7 +4864,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:entryValues
+          @attr name android:entryValues
         */
         public static final int ListPreference_entryValues = 1;
         /** Attributes that can be used with a MapAttrs.
@@ -5512,10 +4904,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            @see #MapAttrs_zOrderOnTop
          */
         public static final int[] MapAttrs = {
-            0x7f0100f2, 0x7f0100f3, 0x7f0100f4, 0x7f0100f5,
-            0x7f0100f6, 0x7f0100f7, 0x7f0100f8, 0x7f0100f9,
-            0x7f0100fa, 0x7f0100fb, 0x7f0100fc, 0x7f0100fd,
-            0x7f0100fe, 0x7f0100ff
+            0x7f0100f0, 0x7f0100f1, 0x7f0100f2, 0x7f0100f3,
+            0x7f0100f4, 0x7f0100f5, 0x7f0100f6, 0x7f0100f7,
+            0x7f0100f8, 0x7f0100f9, 0x7f0100fa, 0x7f0100fb,
+            0x7f0100fc, 0x7f0100fd
         };
         /**
           <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#cameraBearing}
@@ -5528,7 +4920,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:cameraBearing
+          @attr name android:cameraBearing
         */
         public static final int MapAttrs_cameraBearing = 1;
         /**
@@ -5542,7 +4934,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:cameraTargetLat
+          @attr name android:cameraTargetLat
         */
         public static final int MapAttrs_cameraTargetLat = 2;
         /**
@@ -5556,7 +4948,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:cameraTargetLng
+          @attr name android:cameraTargetLng
         */
         public static final int MapAttrs_cameraTargetLng = 3;
         /**
@@ -5570,7 +4962,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:cameraTilt
+          @attr name android:cameraTilt
         */
         public static final int MapAttrs_cameraTilt = 4;
         /**
@@ -5584,7 +4976,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:cameraZoom
+          @attr name android:cameraZoom
         */
         public static final int MapAttrs_cameraZoom = 5;
         /**
@@ -5602,9 +4994,8 @@ containing a value of this type.
 <tr><td><code>normal</code></td><td>1</td><td></td></tr>
 <tr><td><code>satellite</code></td><td>2</td><td></td></tr>
 <tr><td><code>terrain</code></td><td>3</td><td></td></tr>
-<tr><td><code>hybrid</code></td><td>4</td><td></td></tr>
 </table>
-          @attr name com.makina.collect.android:mapType
+          @attr name android:mapType
         */
         public static final int MapAttrs_mapType = 0;
         /**
@@ -5618,7 +5009,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:uiCompass
+          @attr name android:uiCompass
         */
         public static final int MapAttrs_uiCompass = 6;
         /**
@@ -5632,7 +5023,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:uiRotateGestures
+          @attr name android:uiRotateGestures
         */
         public static final int MapAttrs_uiRotateGestures = 7;
         /**
@@ -5646,7 +5037,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:uiScrollGestures
+          @attr name android:uiScrollGestures
         */
         public static final int MapAttrs_uiScrollGestures = 8;
         /**
@@ -5660,7 +5051,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:uiTiltGestures
+          @attr name android:uiTiltGestures
         */
         public static final int MapAttrs_uiTiltGestures = 9;
         /**
@@ -5674,7 +5065,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:uiZoomControls
+          @attr name android:uiZoomControls
         */
         public static final int MapAttrs_uiZoomControls = 10;
         /**
@@ -5688,7 +5079,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:uiZoomGestures
+          @attr name android:uiZoomGestures
         */
         public static final int MapAttrs_uiZoomGestures = 11;
         /**
@@ -5702,7 +5093,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:useViewLifecycle
+          @attr name android:useViewLifecycle
         */
         public static final int MapAttrs_useViewLifecycle = 12;
         /**
@@ -5716,7 +5107,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:zOrderOnTop
+          @attr name android:zOrderOnTop
         */
         public static final int MapAttrs_zOrderOnTop = 13;
         /** Attributes that can be used with a NumberPicker.
@@ -5725,13 +5116,13 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #NumberPicker_android_fadingEdgeLength android:fadingEdgeLength}</code></td><td></td></tr>
-           <tr><td><code>{@link #NumberPicker_android_layout android:layout}</code></td><td></td></tr>
-           <tr><td><code>{@link #NumberPicker_android_maxHeight android:maxHeight}</code></td><td></td></tr>
-           <tr><td><code>{@link #NumberPicker_android_maxWidth android:maxWidth}</code></td><td></td></tr>
-           <tr><td><code>{@link #NumberPicker_android_minHeight android:minHeight}</code></td><td></td></tr>
-           <tr><td><code>{@link #NumberPicker_android_minWidth android:minWidth}</code></td><td></td></tr>
-           <tr><td><code>{@link #NumberPicker_android_orientation android:orientation}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberPicker_android_fadingEdgeLength com.makina.collect.android:android_fadingEdgeLength}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberPicker_android_layout com.makina.collect.android:android_layout}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberPicker_android_maxHeight com.makina.collect.android:android_maxHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberPicker_android_maxWidth com.makina.collect.android:android_maxWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberPicker_android_minHeight com.makina.collect.android:android_minHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberPicker_android_minWidth com.makina.collect.android:android_minWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #NumberPicker_android_orientation com.makina.collect.android:android_orientation}</code></td><td></td></tr>
            <tr><td><code>{@link #NumberPicker_flingable com.makina.collect.android:flingable}</code></td><td></td></tr>
            <tr><td><code>{@link #NumberPicker_selectionDivider com.makina.collect.android:selectionDivider}</code></td><td></td></tr>
            <tr><td><code>{@link #NumberPicker_selectionDividerHeight com.makina.collect.android:selectionDividerHeight}</code></td><td></td></tr>
@@ -5760,45 +5151,45 @@ containing a value of this type.
             0x7f0100d1
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#fadingEdgeLength}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_fadingEdgeLength}
           attribute's value can be found in the {@link #NumberPicker} array.
-          @attr name android:fadingEdgeLength
+          @attr name android:android_fadingEdgeLength
         */
         public static final int NumberPicker_android_fadingEdgeLength = 1;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#layout}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_layout}
           attribute's value can be found in the {@link #NumberPicker} array.
-          @attr name android:layout
+          @attr name android:android_layout
         */
         public static final int NumberPicker_android_layout = 2;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#maxHeight}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_maxHeight}
           attribute's value can be found in the {@link #NumberPicker} array.
-          @attr name android:maxHeight
+          @attr name android:android_maxHeight
         */
         public static final int NumberPicker_android_maxHeight = 4;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#maxWidth}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_maxWidth}
           attribute's value can be found in the {@link #NumberPicker} array.
-          @attr name android:maxWidth
+          @attr name android:android_maxWidth
         */
         public static final int NumberPicker_android_maxWidth = 3;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#minHeight}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_minHeight}
           attribute's value can be found in the {@link #NumberPicker} array.
-          @attr name android:minHeight
+          @attr name android:android_minHeight
         */
         public static final int NumberPicker_android_minHeight = 6;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#minWidth}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_minWidth}
           attribute's value can be found in the {@link #NumberPicker} array.
-          @attr name android:minWidth
+          @attr name android:android_minWidth
         */
         public static final int NumberPicker_android_minWidth = 5;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#orientation}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_orientation}
           attribute's value can be found in the {@link #NumberPicker} array.
-          @attr name android:orientation
+          @attr name android:android_orientation
         */
         public static final int NumberPicker_android_orientation = 0;
         /**
@@ -5812,7 +5203,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:flingable
+          @attr name android:flingable
         */
         public static final int NumberPicker_flingable = 8;
         /**
@@ -5822,7 +5213,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:selectionDivider
+          @attr name android:selectionDivider
         */
         public static final int NumberPicker_selectionDivider = 10;
         /**
@@ -5838,7 +5229,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:selectionDividerHeight
+          @attr name android:selectionDividerHeight
         */
         public static final int NumberPicker_selectionDividerHeight = 11;
         /**
@@ -5854,7 +5245,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:selectionDividersDistance
+          @attr name android:selectionDividersDistance
         */
         public static final int NumberPicker_selectionDividersDistance = 12;
         /**
@@ -5866,7 +5257,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
-          @attr name com.makina.collect.android:solidColor
+          @attr name android:solidColor
         */
         public static final int NumberPicker_solidColor = 7;
         /**
@@ -5876,7 +5267,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:virtualButtonPressedDrawable
+          @attr name android:virtualButtonPressedDrawable
         */
         public static final int NumberPicker_virtualButtonPressedDrawable = 9;
         /** Attributes that can be used with a NumberPickerPreference.
@@ -5907,7 +5298,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:max
+          @attr name android:max
         */
         public static final int NumberPickerPreference_max = 1;
         /**
@@ -5921,7 +5312,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:min
+          @attr name android:min
         */
         public static final int NumberPickerPreference_min = 0;
         /**
@@ -5935,7 +5326,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:wrapSelectorWheel
+          @attr name android:wrapSelectorWheel
         */
         public static final int NumberPickerPreference_wrapSelectorWheel = 2;
         /** Attributes that can be used with a Preference.
@@ -5995,7 +5386,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be an integer value, such as "<code>100</code>".
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>May be a floating point value, such as "<code>1.2</code>".
-          @attr name com.makina.collect.android:defaultValue
+          @attr name android:defaultValue
         */
         public static final int Preference_defaultValue = 10;
         /**
@@ -6009,7 +5400,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:dependency
+          @attr name android:dependency
         */
         public static final int Preference_dependency = 8;
         /**
@@ -6023,7 +5414,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:enabled
+          @attr name android:enabled
         */
         public static final int Preference_enabled = 6;
         /**
@@ -6037,7 +5428,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:fragment
+          @attr name android:fragment
         */
         public static final int Preference_fragment = 13;
         /**
@@ -6053,7 +5444,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:icon
+          @attr name android:icon
         */
         public static final int Preference_icon = 1;
         /**
@@ -6067,7 +5458,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:key
+          @attr name android:key
         */
         public static final int Preference_key = 2;
         /**
@@ -6077,7 +5468,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:layout
+          @attr name android:layout
         */
         public static final int Preference_layout = 4;
         /**
@@ -6091,7 +5482,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:order
+          @attr name android:order
         */
         public static final int Preference_order = 3;
         /**
@@ -6105,7 +5496,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:persistent
+          @attr name android:persistent
         */
         public static final int Preference_persistent = 9;
         /**
@@ -6119,7 +5510,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:selectable
+          @attr name android:selectable
         */
         public static final int Preference_selectable = 7;
         /**
@@ -6133,7 +5524,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:shouldDisableView
+          @attr name android:shouldDisableView
         */
         public static final int Preference_shouldDisableView = 11;
         /**
@@ -6147,7 +5538,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:summary
+          @attr name android:summary
         */
         public static final int Preference_summary = 12;
         /**
@@ -6163,7 +5554,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:title
+          @attr name android:title
         */
         public static final int Preference_title = 0;
         /**
@@ -6173,7 +5564,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:widgetLayout
+          @attr name android:widgetLayout
         */
         public static final int Preference_widgetLayout = 5;
         /** Attributes that can be used with a PreferenceFrameLayout.
@@ -6208,7 +5599,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:borderBottom
+          @attr name android:borderBottom
         */
         public static final int PreferenceFrameLayout_borderBottom = 1;
         /**
@@ -6224,7 +5615,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:borderLeft
+          @attr name android:borderLeft
         */
         public static final int PreferenceFrameLayout_borderLeft = 2;
         /**
@@ -6240,7 +5631,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:borderRight
+          @attr name android:borderRight
         */
         public static final int PreferenceFrameLayout_borderRight = 3;
         /**
@@ -6256,7 +5647,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:borderTop
+          @attr name android:borderTop
         */
         public static final int PreferenceFrameLayout_borderTop = 0;
         /** Attributes that can be used with a PreferenceFrameLayout_Layout.
@@ -6283,7 +5674,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:layout_removeBorders
+          @attr name android:layout_removeBorders
         */
         public static final int PreferenceFrameLayout_Layout_layout_removeBorders = 0;
         /** Attributes that can be used with a PreferenceGroup.
@@ -6310,7 +5701,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:orderingFromXml
+          @attr name android:orderingFromXml
         */
         public static final int PreferenceGroup_orderingFromXml = 0;
         /** Attributes that can be used with a PreferenceHeader.
@@ -6350,7 +5741,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:breadCrumbShortTitle
+          @attr name android:breadCrumbShortTitle
         */
         public static final int PreferenceHeader_breadCrumbShortTitle = 5;
         /**
@@ -6364,7 +5755,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:breadCrumbTitle
+          @attr name android:breadCrumbTitle
         */
         public static final int PreferenceHeader_breadCrumbTitle = 4;
         /**
@@ -6378,7 +5769,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:fragment
+          @attr name android:fragment
         */
         public static final int PreferenceHeader_fragment = 6;
         /**
@@ -6390,7 +5781,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:icon
+          @attr name android:icon
         */
         public static final int PreferenceHeader_icon = 1;
         /**
@@ -6400,7 +5791,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:id
+          @attr name android:id
         */
         public static final int PreferenceHeader_id = 2;
         /**
@@ -6414,7 +5805,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:summary
+          @attr name android:summary
         */
         public static final int PreferenceHeader_summary = 3;
         /**
@@ -6430,7 +5821,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:title
+          @attr name android:title
         */
         public static final int PreferenceHeader_title = 0;
         /** Attributes that can be used with a ProgressBar.
@@ -6439,21 +5830,21 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #ProgressBar_android_animationResolution android:animationResolution}</code></td><td></td></tr>
-           <tr><td><code>{@link #ProgressBar_android_indeterminate android:indeterminate}</code></td><td></td></tr>
-           <tr><td><code>{@link #ProgressBar_android_indeterminateBehavior android:indeterminateBehavior}</code></td><td></td></tr>
-           <tr><td><code>{@link #ProgressBar_android_indeterminateDrawable android:indeterminateDrawable}</code></td><td></td></tr>
-           <tr><td><code>{@link #ProgressBar_android_indeterminateDuration android:indeterminateDuration}</code></td><td></td></tr>
-           <tr><td><code>{@link #ProgressBar_android_indeterminateOnly android:indeterminateOnly}</code></td><td></td></tr>
-           <tr><td><code>{@link #ProgressBar_android_interpolator android:interpolator}</code></td><td></td></tr>
-           <tr><td><code>{@link #ProgressBar_android_max android:max}</code></td><td></td></tr>
-           <tr><td><code>{@link #ProgressBar_android_maxHeight android:maxHeight}</code></td><td></td></tr>
-           <tr><td><code>{@link #ProgressBar_android_maxWidth android:maxWidth}</code></td><td></td></tr>
-           <tr><td><code>{@link #ProgressBar_android_minHeight android:minHeight}</code></td><td></td></tr>
-           <tr><td><code>{@link #ProgressBar_android_minWidth android:minWidth}</code></td><td></td></tr>
-           <tr><td><code>{@link #ProgressBar_android_progress android:progress}</code></td><td></td></tr>
-           <tr><td><code>{@link #ProgressBar_android_progressDrawable android:progressDrawable}</code></td><td></td></tr>
-           <tr><td><code>{@link #ProgressBar_android_secondaryProgress android:secondaryProgress}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_animationResolution com.makina.collect.android:android_animationResolution}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_indeterminate com.makina.collect.android:android_indeterminate}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_indeterminateBehavior com.makina.collect.android:android_indeterminateBehavior}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_indeterminateDrawable com.makina.collect.android:android_indeterminateDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_indeterminateDuration com.makina.collect.android:android_indeterminateDuration}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_indeterminateOnly com.makina.collect.android:android_indeterminateOnly}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_interpolator com.makina.collect.android:android_interpolator}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_max com.makina.collect.android:android_max}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_maxHeight com.makina.collect.android:android_maxHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_maxWidth com.makina.collect.android:android_maxWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_minHeight com.makina.collect.android:android_minHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_minWidth com.makina.collect.android:android_minWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_progress com.makina.collect.android:android_progress}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_progressDrawable com.makina.collect.android:android_progressDrawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressBar_android_secondaryProgress com.makina.collect.android:android_secondaryProgress}</code></td><td></td></tr>
            </table>
            @see #ProgressBar_android_animationResolution
            @see #ProgressBar_android_indeterminate
@@ -6478,93 +5869,93 @@ containing a value of this type.
             0x01010140, 0x01010141, 0x0101031a
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#animationResolution}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_animationResolution}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:animationResolution
+          @attr name android:android_animationResolution
         */
         public static final int ProgressBar_android_animationResolution = 14;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#indeterminate}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_indeterminate}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:indeterminate
+          @attr name android:android_indeterminate
         */
         public static final int ProgressBar_android_indeterminate = 5;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#indeterminateBehavior}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_indeterminateBehavior}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:indeterminateBehavior
+          @attr name android:android_indeterminateBehavior
         */
         public static final int ProgressBar_android_indeterminateBehavior = 10;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#indeterminateDrawable}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_indeterminateDrawable}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:indeterminateDrawable
+          @attr name android:android_indeterminateDrawable
         */
         public static final int ProgressBar_android_indeterminateDrawable = 7;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#indeterminateDuration}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_indeterminateDuration}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:indeterminateDuration
+          @attr name android:android_indeterminateDuration
         */
         public static final int ProgressBar_android_indeterminateDuration = 9;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#indeterminateOnly}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_indeterminateOnly}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:indeterminateOnly
+          @attr name android:android_indeterminateOnly
         */
         public static final int ProgressBar_android_indeterminateOnly = 6;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#interpolator}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_interpolator}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:interpolator
+          @attr name android:android_interpolator
         */
         public static final int ProgressBar_android_interpolator = 13;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#max}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_max}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:max
+          @attr name android:android_max
         */
         public static final int ProgressBar_android_max = 2;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#maxHeight}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_maxHeight}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:maxHeight
+          @attr name android:android_maxHeight
         */
         public static final int ProgressBar_android_maxHeight = 1;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#maxWidth}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_maxWidth}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:maxWidth
+          @attr name android:android_maxWidth
         */
         public static final int ProgressBar_android_maxWidth = 0;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#minHeight}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_minHeight}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:minHeight
+          @attr name android:android_minHeight
         */
         public static final int ProgressBar_android_minHeight = 12;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#minWidth}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_minWidth}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:minWidth
+          @attr name android:android_minWidth
         */
         public static final int ProgressBar_android_minWidth = 11;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#progress}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_progress}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:progress
+          @attr name android:android_progress
         */
         public static final int ProgressBar_android_progress = 3;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#progressDrawable}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_progressDrawable}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:progressDrawable
+          @attr name android:android_progressDrawable
         */
         public static final int ProgressBar_android_progressDrawable = 8;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#secondaryProgress}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_secondaryProgress}
           attribute's value can be found in the {@link #ProgressBar} array.
-          @attr name android:secondaryProgress
+          @attr name android:android_secondaryProgress
         */
         public static final int ProgressBar_android_secondaryProgress = 4;
         /** Attributes that can be used with a RingtonePreference.
@@ -6600,7 +5991,7 @@ containing a value of this type.
 <tr><td><code>alarm</code></td><td>4</td><td></td></tr>
 <tr><td><code>all</code></td><td>7</td><td></td></tr>
 </table>
-          @attr name com.makina.collect.android:ringtoneType
+          @attr name android:ringtoneType
         */
         public static final int RingtonePreference_ringtoneType = 0;
         /**
@@ -6614,7 +6005,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:showDefault
+          @attr name android:showDefault
         */
         public static final int RingtonePreference_showDefault = 1;
         /**
@@ -6628,7 +6019,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:showSilent
+          @attr name android:showSilent
         */
         public static final int RingtonePreference_showSilent = 2;
         /** Attributes that can be used with a RotateDrawable.
@@ -6637,12 +6028,12 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #RotateDrawable_android_drawable android:drawable}</code></td><td></td></tr>
-           <tr><td><code>{@link #RotateDrawable_android_fromDegrees android:fromDegrees}</code></td><td></td></tr>
-           <tr><td><code>{@link #RotateDrawable_android_pivotX android:pivotX}</code></td><td></td></tr>
-           <tr><td><code>{@link #RotateDrawable_android_pivotY android:pivotY}</code></td><td></td></tr>
-           <tr><td><code>{@link #RotateDrawable_android_toDegrees android:toDegrees}</code></td><td></td></tr>
-           <tr><td><code>{@link #RotateDrawable_android_visible android:visible}</code></td><td></td></tr>
+           <tr><td><code>{@link #RotateDrawable_android_drawable com.makina.collect.android:android_drawable}</code></td><td></td></tr>
+           <tr><td><code>{@link #RotateDrawable_android_fromDegrees com.makina.collect.android:android_fromDegrees}</code></td><td></td></tr>
+           <tr><td><code>{@link #RotateDrawable_android_pivotX com.makina.collect.android:android_pivotX}</code></td><td></td></tr>
+           <tr><td><code>{@link #RotateDrawable_android_pivotY com.makina.collect.android:android_pivotY}</code></td><td></td></tr>
+           <tr><td><code>{@link #RotateDrawable_android_toDegrees com.makina.collect.android:android_toDegrees}</code></td><td></td></tr>
+           <tr><td><code>{@link #RotateDrawable_android_visible com.makina.collect.android:android_visible}</code></td><td></td></tr>
            </table>
            @see #RotateDrawable_android_drawable
            @see #RotateDrawable_android_fromDegrees
@@ -6656,39 +6047,39 @@ containing a value of this type.
             0x010101b5, 0x010101b6
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#drawable}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_drawable}
           attribute's value can be found in the {@link #RotateDrawable} array.
-          @attr name android:drawable
+          @attr name android:android_drawable
         */
         public static final int RotateDrawable_android_drawable = 1;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#fromDegrees}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_fromDegrees}
           attribute's value can be found in the {@link #RotateDrawable} array.
-          @attr name android:fromDegrees
+          @attr name android:android_fromDegrees
         */
         public static final int RotateDrawable_android_fromDegrees = 2;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#pivotX}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_pivotX}
           attribute's value can be found in the {@link #RotateDrawable} array.
-          @attr name android:pivotX
+          @attr name android:android_pivotX
         */
         public static final int RotateDrawable_android_pivotX = 4;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#pivotY}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_pivotY}
           attribute's value can be found in the {@link #RotateDrawable} array.
-          @attr name android:pivotY
+          @attr name android:android_pivotY
         */
         public static final int RotateDrawable_android_pivotY = 5;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#toDegrees}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_toDegrees}
           attribute's value can be found in the {@link #RotateDrawable} array.
-          @attr name android:toDegrees
+          @attr name android:android_toDegrees
         */
         public static final int RotateDrawable_android_toDegrees = 3;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#visible}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_visible}
           attribute's value can be found in the {@link #RotateDrawable} array.
-          @attr name android:visible
+          @attr name android:android_visible
         */
         public static final int RotateDrawable_android_visible = 0;
         /** Attributes that can be used with a SeekBar.
@@ -6697,9 +6088,9 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SeekBar_android_disabledAlpha android:disabledAlpha}</code></td><td></td></tr>
-           <tr><td><code>{@link #SeekBar_android_thumb android:thumb}</code></td><td></td></tr>
-           <tr><td><code>{@link #SeekBar_android_thumbOffset android:thumbOffset}</code></td><td></td></tr>
+           <tr><td><code>{@link #SeekBar_android_disabledAlpha com.makina.collect.android:android_disabledAlpha}</code></td><td></td></tr>
+           <tr><td><code>{@link #SeekBar_android_thumb com.makina.collect.android:android_thumb}</code></td><td></td></tr>
+           <tr><td><code>{@link #SeekBar_android_thumbOffset com.makina.collect.android:android_thumbOffset}</code></td><td></td></tr>
            </table>
            @see #SeekBar_android_disabledAlpha
            @see #SeekBar_android_thumb
@@ -6709,21 +6100,21 @@ containing a value of this type.
             0x01010033, 0x01010142, 0x01010143
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#disabledAlpha}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_disabledAlpha}
           attribute's value can be found in the {@link #SeekBar} array.
-          @attr name android:disabledAlpha
+          @attr name android:android_disabledAlpha
         */
         public static final int SeekBar_android_disabledAlpha = 0;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#thumb}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_thumb}
           attribute's value can be found in the {@link #SeekBar} array.
-          @attr name android:thumb
+          @attr name android:android_thumb
         */
         public static final int SeekBar_android_thumb = 1;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#thumbOffset}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_thumbOffset}
           attribute's value can be found in the {@link #SeekBar} array.
-          @attr name android:thumbOffset
+          @attr name android:android_thumbOffset
         */
         public static final int SeekBar_android_thumbOffset = 2;
         /** Attributes that can be used with a SeekBarDialogPreference.
@@ -6750,7 +6141,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:max
+          @attr name android:max
         */
         public static final int SeekBarDialogPreference_max = 0;
         /** Attributes that can be used with a SeekBarPreference.
@@ -6777,7 +6168,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:max
+          @attr name android:max
         */
         public static final int SeekBarPreference_max = 0;
         /**  Attributes used to style the Action Bar. 
@@ -6845,7 +6236,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:background
+          @attr name android:background
         */
         public static final int SherlockActionBar_background = 2;
         /**
@@ -6859,7 +6250,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:backgroundSplit
+          @attr name android:backgroundSplit
         */
         public static final int SherlockActionBar_backgroundSplit = 3;
         /**
@@ -6873,7 +6264,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:backgroundStacked
+          @attr name android:backgroundStacked
         */
         public static final int SherlockActionBar_backgroundStacked = 12;
         /**
@@ -6885,7 +6276,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:customNavigationLayout
+          @attr name android:customNavigationLayout
         */
         public static final int SherlockActionBar_customNavigationLayout = 13;
         /**
@@ -6908,7 +6299,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>disableHome</code></td><td>0x20</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:displayOptions
+          @attr name android:displayOptions
         */
         public static final int SherlockActionBar_displayOptions = 7;
         /**
@@ -6920,7 +6311,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:divider
+          @attr name android:divider
         */
         public static final int SherlockActionBar_divider = 5;
         /**
@@ -6938,7 +6329,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:height
+          @attr name android:height
         */
         public static final int SherlockActionBar_height = 4;
         /**
@@ -6950,7 +6341,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:homeLayout
+          @attr name android:homeLayout
         */
         public static final int SherlockActionBar_homeLayout = 14;
         /**
@@ -6962,7 +6353,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:icon
+          @attr name android:icon
         */
         public static final int SherlockActionBar_icon = 10;
         /**
@@ -6974,7 +6365,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:indeterminateProgressStyle
+          @attr name android:indeterminateProgressStyle
         */
         public static final int SherlockActionBar_indeterminateProgressStyle = 16;
         /**
@@ -6993,7 +6384,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:itemPadding
+          @attr name android:itemPadding
         */
         public static final int SherlockActionBar_itemPadding = 18;
         /**
@@ -7005,7 +6396,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:logo
+          @attr name android:logo
         */
         public static final int SherlockActionBar_logo = 11;
         /**
@@ -7025,7 +6416,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>tabMode</code></td><td>2</td><td> The action bar will use a series of horizontal tabs for navigation. </td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:navigationMode
+          @attr name android:navigationMode
         */
         public static final int SherlockActionBar_navigationMode = 6;
         /**
@@ -7043,7 +6434,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:progressBarPadding
+          @attr name android:progressBarPadding
         */
         public static final int SherlockActionBar_progressBarPadding = 17;
         /**
@@ -7055,7 +6446,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:progressBarStyle
+          @attr name android:progressBarStyle
         */
         public static final int SherlockActionBar_progressBarStyle = 15;
         /**
@@ -7071,7 +6462,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:subtitle
+          @attr name android:subtitle
         */
         public static final int SherlockActionBar_subtitle = 9;
         /**
@@ -7083,7 +6474,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:subtitleTextStyle
+          @attr name android:subtitleTextStyle
         */
         public static final int SherlockActionBar_subtitleTextStyle = 1;
         /**
@@ -7099,7 +6490,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:title
+          @attr name android:title
         */
         public static final int SherlockActionBar_title = 8;
         /**
@@ -7111,7 +6502,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:titleTextStyle
+          @attr name android:titleTextStyle
         */
         public static final int SherlockActionBar_titleTextStyle = 0;
         /** Attributes that can be used with a SherlockActionMenuItemView.
@@ -7120,7 +6511,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockActionMenuItemView_android_minWidth android:minWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #SherlockActionMenuItemView_android_minWidth com.makina.collect.android:android_minWidth}</code></td><td></td></tr>
            </table>
            @see #SherlockActionMenuItemView_android_minWidth
          */
@@ -7128,9 +6519,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x0101013f
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#minWidth}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_minWidth}
           attribute's value can be found in the {@link #SherlockActionMenuItemView} array.
-          @attr name android:minWidth
+          @attr name android:android_minWidth
         */
         public static final int SherlockActionMenuItemView_android_minWidth = 0;
         /** Attributes that can be used with a SherlockActionMode.
@@ -7166,7 +6557,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:background
+          @attr name android:background
         */
         public static final int SherlockActionMode_background = 2;
         /**
@@ -7180,7 +6571,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:backgroundSplit
+          @attr name android:backgroundSplit
         */
         public static final int SherlockActionMode_backgroundSplit = 3;
         /**
@@ -7198,7 +6589,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:height
+          @attr name android:height
         */
         public static final int SherlockActionMode_height = 4;
         /**
@@ -7210,7 +6601,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:subtitleTextStyle
+          @attr name android:subtitleTextStyle
         */
         public static final int SherlockActionMode_subtitleTextStyle = 1;
         /**
@@ -7222,7 +6613,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:titleTextStyle
+          @attr name android:titleTextStyle
         */
         public static final int SherlockActionMode_titleTextStyle = 0;
         /** Attributes that can be used with a SherlockActivityChooserView.
@@ -7231,7 +6622,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockActivityChooserView_android_background android:background}</code></td><td></td></tr>
+           <tr><td><code>{@link #SherlockActivityChooserView_android_background com.makina.collect.android:android_background}</code></td><td></td></tr>
            <tr><td><code>{@link #SherlockActivityChooserView_expandActivityOverflowButtonDrawable com.makina.collect.android:expandActivityOverflowButtonDrawable}</code></td><td> The drawable to show in the button for expanding the activities overflow popup.</td></tr>
            <tr><td><code>{@link #SherlockActivityChooserView_initialActivityCount com.makina.collect.android:initialActivityCount}</code></td><td> The maximal number of items initially shown in the activity list.</td></tr>
            </table>
@@ -7243,9 +6634,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x010100d4, 0x7f01005e, 0x7f01005f
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#background}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_background}
           attribute's value can be found in the {@link #SherlockActivityChooserView} array.
-          @attr name android:background
+          @attr name android:android_background
         */
         public static final int SherlockActivityChooserView_android_background = 0;
         /**
@@ -7262,7 +6653,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:expandActivityOverflowButtonDrawable
+          @attr name android:expandActivityOverflowButtonDrawable
         */
         public static final int SherlockActivityChooserView_expandActivityOverflowButtonDrawable = 2;
         /**
@@ -7278,7 +6669,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:initialActivityCount
+          @attr name android:initialActivityCount
         */
         public static final int SherlockActivityChooserView_initialActivityCount = 1;
         /**  Base attributes that are available to all groups. 
@@ -7287,12 +6678,12 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_checkableBehavior android:checkableBehavior}</code></td><td> Whether the items are capable of displaying a check mark.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_enabled android:enabled}</code></td><td> Whether the items are enabled.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_id android:id}</code></td><td> The ID of the group.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_menuCategory android:menuCategory}</code></td><td> The category applied to all items within this group.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_orderInCategory android:orderInCategory}</code></td><td> The order within the category applied to all items within this group.</td></tr>
-           <tr><td><code>{@link #SherlockMenuGroup_android_visible android:visible}</code></td><td> Whether the items are shown/visible.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_checkableBehavior com.makina.collect.android:android_checkableBehavior}</code></td><td> Whether the items are capable of displaying a check mark.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_enabled com.makina.collect.android:android_enabled}</code></td><td> Whether the items are enabled.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_id com.makina.collect.android:android_id}</code></td><td> The ID of the group.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_menuCategory com.makina.collect.android:android_menuCategory}</code></td><td> The category applied to all items within this group.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_orderInCategory com.makina.collect.android:android_orderInCategory}</code></td><td> The order within the category applied to all items within this group.</td></tr>
+           <tr><td><code>{@link #SherlockMenuGroup_android_visible com.makina.collect.android:android_visible}</code></td><td> Whether the items are shown/visible.</td></tr>
            </table>
            @see #SherlockMenuGroup_android_checkableBehavior
            @see #SherlockMenuGroup_android_enabled
@@ -7309,27 +6700,24 @@ containing a value of this type.
           <p>
           @attr description
            Whether the items are capable of displaying a check mark. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#checkableBehavior}.
-          @attr name android:checkableBehavior
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_checkableBehavior}.
+          @attr name android:android_checkableBehavior
         */
         public static final int SherlockMenuGroup_android_checkableBehavior = 5;
         /**
           <p>
           @attr description
            Whether the items are enabled. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#enabled}.
-          @attr name android:enabled
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_enabled}.
+          @attr name android:android_enabled
         */
         public static final int SherlockMenuGroup_android_enabled = 0;
         /**
           <p>
           @attr description
            The ID of the group. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#id}.
-          @attr name android:id
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_id}.
+          @attr name android:android_id
         */
         public static final int SherlockMenuGroup_android_id = 1;
         /**
@@ -7337,9 +6725,8 @@ containing a value of this type.
           @attr description
            The category applied to all items within this group.
              (This will be or'ed with the orderInCategory attribute.) 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#menuCategory}.
-          @attr name android:menuCategory
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_menuCategory}.
+          @attr name android:android_menuCategory
         */
         public static final int SherlockMenuGroup_android_menuCategory = 3;
         /**
@@ -7347,18 +6734,16 @@ containing a value of this type.
           @attr description
            The order within the category applied to all items within this group.
              (This will be or'ed with the category attribute.) 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#orderInCategory}.
-          @attr name android:orderInCategory
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_orderInCategory}.
+          @attr name android:android_orderInCategory
         */
         public static final int SherlockMenuGroup_android_orderInCategory = 4;
         /**
           <p>
           @attr description
            Whether the items are shown/visible. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#visible}.
-          @attr name android:visible
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_visible}.
+          @attr name android:android_visible
         */
         public static final int SherlockMenuGroup_android_visible = 2;
         /**  Base attributes that are available to all Item objects. 
@@ -7367,26 +6752,26 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_actionLayout android:actionLayout}</code></td><td> An optional layout to be used as an action view.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_actionProviderClass android:actionProviderClass}</code></td><td> The name of an optional ActionProvider class to instantiate an action view
+           <tr><td><code>{@link #SherlockMenuItem_android_actionLayout com.makina.collect.android:android_actionLayout}</code></td><td> An optional layout to be used as an action view.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_actionProviderClass com.makina.collect.android:android_actionProviderClass}</code></td><td> The name of an optional ActionProvider class to instantiate an action view
              and perform operations such as default action for that menu item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_actionViewClass android:actionViewClass}</code></td><td> The name of an optional View class to instantiate and use as an
+           <tr><td><code>{@link #SherlockMenuItem_android_actionViewClass com.makina.collect.android:android_actionViewClass}</code></td><td> The name of an optional View class to instantiate and use as an
              action view.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_alphabeticShortcut android:alphabeticShortcut}</code></td><td> The alphabetic shortcut key.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_checkable android:checkable}</code></td><td> Whether the item is capable of displaying a check mark.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_checked android:checked}</code></td><td> Whether the item is checked.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_enabled android:enabled}</code></td><td> Whether the item is enabled.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_icon android:icon}</code></td><td> The icon associated with this item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_id android:id}</code></td><td> The ID of the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_menuCategory android:menuCategory}</code></td><td> The category applied to the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_numericShortcut android:numericShortcut}</code></td><td> The numeric shortcut key.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_onClick android:onClick}</code></td><td> Name of a method on the Context used to inflate the menu that will be
+           <tr><td><code>{@link #SherlockMenuItem_android_alphabeticShortcut com.makina.collect.android:android_alphabeticShortcut}</code></td><td> The alphabetic shortcut key.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_checkable com.makina.collect.android:android_checkable}</code></td><td> Whether the item is capable of displaying a check mark.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_checked com.makina.collect.android:android_checked}</code></td><td> Whether the item is checked.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_enabled com.makina.collect.android:android_enabled}</code></td><td> Whether the item is enabled.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_icon com.makina.collect.android:android_icon}</code></td><td> The icon associated with this item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_id com.makina.collect.android:android_id}</code></td><td> The ID of the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_menuCategory com.makina.collect.android:android_menuCategory}</code></td><td> The category applied to the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_numericShortcut com.makina.collect.android:android_numericShortcut}</code></td><td> The numeric shortcut key.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_onClick com.makina.collect.android:android_onClick}</code></td><td> Name of a method on the Context used to inflate the menu that will be
              called when the item is clicked.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_orderInCategory android:orderInCategory}</code></td><td> The order within the category applied to the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_showAsAction android:showAsAction}</code></td><td> How this item should display in the Action Bar, if present.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_title android:title}</code></td><td> The title associated with the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_titleCondensed android:titleCondensed}</code></td><td> The condensed title associated with the item.</td></tr>
-           <tr><td><code>{@link #SherlockMenuItem_android_visible android:visible}</code></td><td> Whether the item is shown/visible.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_orderInCategory com.makina.collect.android:android_orderInCategory}</code></td><td> The order within the category applied to the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_showAsAction com.makina.collect.android:android_showAsAction}</code></td><td> How this item should display in the Action Bar, if present.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_title com.makina.collect.android:android_title}</code></td><td> The title associated with the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_titleCondensed com.makina.collect.android:android_titleCondensed}</code></td><td> The condensed title associated with the item.</td></tr>
+           <tr><td><code>{@link #SherlockMenuItem_android_visible com.makina.collect.android:android_visible}</code></td><td> Whether the item is shown/visible.</td></tr>
            </table>
            @see #SherlockMenuItem_android_actionLayout
            @see #SherlockMenuItem_android_actionProviderClass
@@ -7419,9 +6804,8 @@ containing a value of this type.
            An optional layout to be used as an action view.
              See {@link android.view.MenuItem#setActionView(android.view.View)}
              for more info. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#actionLayout}.
-          @attr name android:actionLayout
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_actionLayout}.
+          @attr name android:android_actionLayout
         */
         public static final int SherlockMenuItem_android_actionLayout = 14;
         /**
@@ -7431,9 +6815,8 @@ containing a value of this type.
              and perform operations such as default action for that menu item.
              See {@link android.view.MenuItem#setActionProvider(android.view.ActionProvider)}
              for more info. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#actionProviderClass}.
-          @attr name android:actionProviderClass
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_actionProviderClass}.
+          @attr name android:android_actionProviderClass
         */
         public static final int SherlockMenuItem_android_actionProviderClass = 16;
         /**
@@ -7442,9 +6825,8 @@ containing a value of this type.
            The name of an optional View class to instantiate and use as an
              action view. See {@link android.view.MenuItem#setActionView(android.view.View)}
              for more info. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#actionViewClass}.
-          @attr name android:actionViewClass
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_actionViewClass}.
+          @attr name android:android_actionViewClass
         */
         public static final int SherlockMenuItem_android_actionViewClass = 15;
         /**
@@ -7452,18 +6834,16 @@ containing a value of this type.
           @attr description
            The alphabetic shortcut key.  This is the shortcut when using a keyboard
              with alphabetic keys. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#alphabeticShortcut}.
-          @attr name android:alphabeticShortcut
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_alphabeticShortcut}.
+          @attr name android:android_alphabeticShortcut
         */
         public static final int SherlockMenuItem_android_alphabeticShortcut = 9;
         /**
           <p>
           @attr description
            Whether the item is capable of displaying a check mark. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#checkable}.
-          @attr name android:checkable
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_checkable}.
+          @attr name android:android_checkable
         */
         public static final int SherlockMenuItem_android_checkable = 11;
         /**
@@ -7471,18 +6851,16 @@ containing a value of this type.
           @attr description
            Whether the item is checked.  Note that you must first have enabled checking with
              the checkable attribute or else the check mark will not appear. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#checked}.
-          @attr name android:checked
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_checked}.
+          @attr name android:android_checked
         */
         public static final int SherlockMenuItem_android_checked = 3;
         /**
           <p>
           @attr description
            Whether the item is enabled. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#enabled}.
-          @attr name android:enabled
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_enabled}.
+          @attr name android:android_enabled
         */
         public static final int SherlockMenuItem_android_enabled = 1;
         /**
@@ -7490,18 +6868,16 @@ containing a value of this type.
           @attr description
            The icon associated with this item.  This icon will not always be shown, so
              the title should be sufficient in describing this item. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#icon}.
-          @attr name android:icon
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_icon}.
+          @attr name android:android_icon
         */
         public static final int SherlockMenuItem_android_icon = 0;
         /**
           <p>
           @attr description
            The ID of the item. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#id}.
-          @attr name android:id
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_id}.
+          @attr name android:android_id
         */
         public static final int SherlockMenuItem_android_id = 2;
         /**
@@ -7509,9 +6885,8 @@ containing a value of this type.
           @attr description
            The category applied to the item.
              (This will be or'ed with the orderInCategory attribute.) 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#menuCategory}.
-          @attr name android:menuCategory
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_menuCategory}.
+          @attr name android:android_menuCategory
         */
         public static final int SherlockMenuItem_android_menuCategory = 5;
         /**
@@ -7519,9 +6894,8 @@ containing a value of this type.
           @attr description
            The numeric shortcut key.  This is the shortcut when using a numeric (e.g., 12-key)
              keyboard. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#numericShortcut}.
-          @attr name android:numericShortcut
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_numericShortcut}.
+          @attr name android:android_numericShortcut
         */
         public static final int SherlockMenuItem_android_numericShortcut = 10;
         /**
@@ -7529,9 +6903,8 @@ containing a value of this type.
           @attr description
            Name of a method on the Context used to inflate the menu that will be
              called when the item is clicked. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#onClick}.
-          @attr name android:onClick
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_onClick}.
+          @attr name android:android_onClick
         */
         public static final int SherlockMenuItem_android_onClick = 12;
         /**
@@ -7539,27 +6912,24 @@ containing a value of this type.
           @attr description
            The order within the category applied to the item.
              (This will be or'ed with the category attribute.) 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#orderInCategory}.
-          @attr name android:orderInCategory
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_orderInCategory}.
+          @attr name android:android_orderInCategory
         */
         public static final int SherlockMenuItem_android_orderInCategory = 6;
         /**
           <p>
           @attr description
            How this item should display in the Action Bar, if present. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#showAsAction}.
-          @attr name android:showAsAction
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_showAsAction}.
+          @attr name android:android_showAsAction
         */
         public static final int SherlockMenuItem_android_showAsAction = 13;
         /**
           <p>
           @attr description
            The title associated with the item. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#title}.
-          @attr name android:title
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_title}.
+          @attr name android:android_title
         */
         public static final int SherlockMenuItem_android_title = 7;
         /**
@@ -7567,18 +6937,16 @@ containing a value of this type.
           @attr description
            The condensed title associated with the item.  This is used in situations where the
              normal title may be too long to be displayed. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#titleCondensed}.
-          @attr name android:titleCondensed
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_titleCondensed}.
+          @attr name android:android_titleCondensed
         */
         public static final int SherlockMenuItem_android_titleCondensed = 8;
         /**
           <p>
           @attr description
            Whether the item is shown/visible. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#visible}.
-          @attr name android:visible
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_visible}.
+          @attr name android:android_visible
         */
         public static final int SherlockMenuItem_android_visible = 4;
         /** Attributes that can be used with a SherlockMenuView.
@@ -7620,7 +6988,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:headerBackground
+          @attr name android:headerBackground
         */
         public static final int SherlockMenuView_headerBackground = 3;
         /**
@@ -7632,7 +7000,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:horizontalDivider
+          @attr name android:horizontalDivider
         */
         public static final int SherlockMenuView_horizontalDivider = 1;
         /**
@@ -7646,7 +7014,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:itemBackground
+          @attr name android:itemBackground
         */
         public static final int SherlockMenuView_itemBackground = 4;
         /**
@@ -7662,7 +7030,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:itemIconDisabledAlpha
+          @attr name android:itemIconDisabledAlpha
         */
         public static final int SherlockMenuView_itemIconDisabledAlpha = 6;
         /**
@@ -7674,7 +7042,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:itemTextAppearance
+          @attr name android:itemTextAppearance
         */
         public static final int SherlockMenuView_itemTextAppearance = 0;
         /**
@@ -7690,7 +7058,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:preserveIconSpacing
+          @attr name android:preserveIconSpacing
         */
         public static final int SherlockMenuView_preserveIconSpacing = 7;
         /**
@@ -7702,7 +7070,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:verticalDivider
+          @attr name android:verticalDivider
         */
         public static final int SherlockMenuView_verticalDivider = 2;
         /**
@@ -7714,7 +7082,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:windowAnimationStyle
+          @attr name android:windowAnimationStyle
         */
         public static final int SherlockMenuView_windowAnimationStyle = 5;
         /** Attributes that can be used with a SherlockSearchView.
@@ -7723,9 +7091,9 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockSearchView_android_imeOptions android:imeOptions}</code></td><td> The IME options to set on the query text field.</td></tr>
-           <tr><td><code>{@link #SherlockSearchView_android_inputType android:inputType}</code></td><td> The input type to set on the query text field.</td></tr>
-           <tr><td><code>{@link #SherlockSearchView_android_maxWidth android:maxWidth}</code></td><td> An optional maximum width of the SearchView.</td></tr>
+           <tr><td><code>{@link #SherlockSearchView_android_imeOptions com.makina.collect.android:android_imeOptions}</code></td><td> The IME options to set on the query text field.</td></tr>
+           <tr><td><code>{@link #SherlockSearchView_android_inputType com.makina.collect.android:android_inputType}</code></td><td> The input type to set on the query text field.</td></tr>
+           <tr><td><code>{@link #SherlockSearchView_android_maxWidth com.makina.collect.android:android_maxWidth}</code></td><td> An optional maximum width of the SearchView.</td></tr>
            <tr><td><code>{@link #SherlockSearchView_iconifiedByDefault com.makina.collect.android:iconifiedByDefault}</code></td><td> The default state of the SearchView.</td></tr>
            <tr><td><code>{@link #SherlockSearchView_queryHint com.makina.collect.android:queryHint}</code></td><td> An optional query hint string to be displayed in the empty query field.</td></tr>
            </table>
@@ -7743,27 +7111,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>
           @attr description
            The IME options to set on the query text field. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#imeOptions}.
-          @attr name android:imeOptions
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_imeOptions}.
+          @attr name android:android_imeOptions
         */
         public static final int SherlockSearchView_android_imeOptions = 2;
         /**
           <p>
           @attr description
            The input type to set on the query text field. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#inputType}.
-          @attr name android:inputType
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_inputType}.
+          @attr name android:android_inputType
         */
         public static final int SherlockSearchView_android_inputType = 1;
         /**
           <p>
           @attr description
            An optional maximum width of the SearchView. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#maxWidth}.
-          @attr name android:maxWidth
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_maxWidth}.
+          @attr name android:android_maxWidth
         */
         public static final int SherlockSearchView_android_maxWidth = 0;
         /**
@@ -7780,7 +7145,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:iconifiedByDefault
+          @attr name android:iconifiedByDefault
         */
         public static final int SherlockSearchView_iconifiedByDefault = 3;
         /**
@@ -7796,7 +7161,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:queryHint
+          @attr name android:queryHint
         */
         public static final int SherlockSearchView_queryHint = 4;
         /** Attributes that can be used with a SherlockSpinner.
@@ -7805,17 +7170,17 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_dropDownHorizontalOffset android:dropDownHorizontalOffset}</code></td><td> Horizontal offset from the spinner widget for positioning the dropdown
+           <tr><td><code>{@link #SherlockSpinner_android_dropDownHorizontalOffset com.makina.collect.android:android_dropDownHorizontalOffset}</code></td><td> Horizontal offset from the spinner widget for positioning the dropdown
              in spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_dropDownSelector android:dropDownSelector}</code></td><td> List selector to use for spinnerMode="dropdown" display.</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_dropDownVerticalOffset android:dropDownVerticalOffset}</code></td><td> Vertical offset from the spinner widget for positioning the dropdown in
+           <tr><td><code>{@link #SherlockSpinner_android_dropDownSelector com.makina.collect.android:android_dropDownSelector}</code></td><td> List selector to use for spinnerMode="dropdown" display.</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_dropDownVerticalOffset com.makina.collect.android:android_dropDownVerticalOffset}</code></td><td> Vertical offset from the spinner widget for positioning the dropdown in
              spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_dropDownWidth android:dropDownWidth}</code></td><td> Width of the dropdown in spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_gravity android:gravity}</code></td><td> Gravity setting for positioning the currently selected item.</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_popupBackground android:popupBackground}</code></td><td> Background drawable to use for the dropdown in spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_popupPromptView android:popupPromptView}</code></td><td> Reference to a layout to use for displaying a prompt in the dropdown for
+           <tr><td><code>{@link #SherlockSpinner_android_dropDownWidth com.makina.collect.android:android_dropDownWidth}</code></td><td> Width of the dropdown in spinnerMode="dropdown".</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_gravity com.makina.collect.android:android_gravity}</code></td><td> Gravity setting for positioning the currently selected item.</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_popupBackground com.makina.collect.android:android_popupBackground}</code></td><td> Background drawable to use for the dropdown in spinnerMode="dropdown".</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_popupPromptView com.makina.collect.android:android_popupPromptView}</code></td><td> Reference to a layout to use for displaying a prompt in the dropdown for
              spinnerMode="dropdown".</td></tr>
-           <tr><td><code>{@link #SherlockSpinner_android_prompt android:prompt}</code></td><td> The prompt to display when the spinner's dialog is shown.</td></tr>
+           <tr><td><code>{@link #SherlockSpinner_android_prompt com.makina.collect.android:android_prompt}</code></td><td> The prompt to display when the spinner's dialog is shown.</td></tr>
            </table>
            @see #SherlockSpinner_android_dropDownHorizontalOffset
            @see #SherlockSpinner_android_dropDownSelector
@@ -7828,25 +7193,23 @@ containing a value of this type.
          */
         public static final int[] SherlockSpinner = {
             0x010100af, 0x01010175, 0x01010176, 0x0101017b,
-            0x01010262, 0x010102ac, 0x010102ad, 0x0101043a
+            0x01010262, 0x010102ac, 0x010102ad, 0x01010411
         };
         /**
           <p>
           @attr description
            Horizontal offset from the spinner widget for positioning the dropdown
              in spinnerMode="dropdown". 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#dropDownHorizontalOffset}.
-          @attr name android:dropDownHorizontalOffset
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_dropDownHorizontalOffset}.
+          @attr name android:android_dropDownHorizontalOffset
         */
         public static final int SherlockSpinner_android_dropDownHorizontalOffset = 5;
         /**
           <p>
           @attr description
            List selector to use for spinnerMode="dropdown" display. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#dropDownSelector}.
-          @attr name android:dropDownSelector
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_dropDownSelector}.
+          @attr name android:android_dropDownSelector
         */
         public static final int SherlockSpinner_android_dropDownSelector = 1;
         /**
@@ -7854,36 +7217,32 @@ containing a value of this type.
           @attr description
            Vertical offset from the spinner widget for positioning the dropdown in
              spinnerMode="dropdown". 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#dropDownVerticalOffset}.
-          @attr name android:dropDownVerticalOffset
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_dropDownVerticalOffset}.
+          @attr name android:android_dropDownVerticalOffset
         */
         public static final int SherlockSpinner_android_dropDownVerticalOffset = 6;
         /**
           <p>
           @attr description
            Width of the dropdown in spinnerMode="dropdown". 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#dropDownWidth}.
-          @attr name android:dropDownWidth
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_dropDownWidth}.
+          @attr name android:android_dropDownWidth
         */
         public static final int SherlockSpinner_android_dropDownWidth = 4;
         /**
           <p>
           @attr description
            Gravity setting for positioning the currently selected item. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#gravity}.
-          @attr name android:gravity
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_gravity}.
+          @attr name android:android_gravity
         */
         public static final int SherlockSpinner_android_gravity = 0;
         /**
           <p>
           @attr description
            Background drawable to use for the dropdown in spinnerMode="dropdown". 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#popupBackground}.
-          @attr name android:popupBackground
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_popupBackground}.
+          @attr name android:android_popupBackground
         */
         public static final int SherlockSpinner_android_popupBackground = 2;
         /**
@@ -7893,16 +7252,15 @@ containing a value of this type.
              spinnerMode="dropdown". This layout must contain a TextView with the id
              @android:id/text1 to be populated with the prompt text. 
           <p>This is a private symbol.
-          @attr name android:popupPromptView
+          @attr name android:android_popupPromptView
         */
         public static final int SherlockSpinner_android_popupPromptView = 7;
         /**
           <p>
           @attr description
            The prompt to display when the spinner's dialog is shown. 
-          <p>This corresponds to the global attribute
-          resource symbol {@link android.R.attr#prompt}.
-          @attr name android:prompt
+          <p>This corresponds to the global attribute          resource symbol {@link com.makina.collect.android.R.attr#android_prompt}.
+          @attr name android:android_prompt
         */
         public static final int SherlockSpinner_android_prompt = 3;
         /** Attributes that can be used with a SherlockTheme.
@@ -8079,7 +7437,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:actionBarDivider
+          @attr name android:actionBarDivider
         */
         public static final int SherlockTheme_actionBarDivider = 8;
         /**
@@ -8091,7 +7449,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:actionBarItemBackground
+          @attr name android:actionBarItemBackground
         */
         public static final int SherlockTheme_actionBarItemBackground = 9;
         /**
@@ -8118,7 +7476,7 @@ containing a value of this type.
 <tr><td><code>wrap_content</code></td><td>0</td><td></td></tr>
 </table>
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:actionBarSize
+          @attr name android:actionBarSize
         */
         public static final int SherlockTheme_actionBarSize = 7;
         /**
@@ -8133,7 +7491,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:actionBarSplitStyle
+          @attr name android:actionBarSplitStyle
         */
         public static final int SherlockTheme_actionBarSplitStyle = 5;
         /**
@@ -8145,7 +7503,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:actionBarStyle
+          @attr name android:actionBarStyle
         */
         public static final int SherlockTheme_actionBarStyle = 4;
         /**
@@ -8155,7 +7513,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:actionBarTabBarStyle
+          @attr name android:actionBarTabBarStyle
         */
         public static final int SherlockTheme_actionBarTabBarStyle = 1;
         /**
@@ -8167,7 +7525,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:actionBarTabStyle
+          @attr name android:actionBarTabStyle
         */
         public static final int SherlockTheme_actionBarTabStyle = 0;
         /**
@@ -8177,7 +7535,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:actionBarTabTextStyle
+          @attr name android:actionBarTabTextStyle
         */
         public static final int SherlockTheme_actionBarTabTextStyle = 2;
         /**
@@ -8195,7 +7553,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:actionBarWidgetTheme
+          @attr name android:actionBarWidgetTheme
         */
         public static final int SherlockTheme_actionBarWidgetTheme = 6;
         /**
@@ -8205,7 +7563,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:actionButtonStyle
+          @attr name android:actionButtonStyle
         */
         public static final int SherlockTheme_actionButtonStyle = 52;
         /**
@@ -8215,7 +7573,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:actionDropDownStyle
+          @attr name android:actionDropDownStyle
         */
         public static final int SherlockTheme_actionDropDownStyle = 51;
         /**
@@ -8228,7 +7586,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:actionMenuTextAppearance
+          @attr name android:actionMenuTextAppearance
         */
         public static final int SherlockTheme_actionMenuTextAppearance = 10;
         /**
@@ -8242,7 +7600,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:actionMenuTextColor
+          @attr name android:actionMenuTextColor
         */
         public static final int SherlockTheme_actionMenuTextColor = 11;
         /**
@@ -8254,7 +7612,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:actionModeBackground
+          @attr name android:actionModeBackground
         */
         public static final int SherlockTheme_actionModeBackground = 14;
         /**
@@ -8264,7 +7622,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:actionModeCloseButtonStyle
+          @attr name android:actionModeCloseButtonStyle
         */
         public static final int SherlockTheme_actionModeCloseButtonStyle = 13;
         /**
@@ -8276,7 +7634,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:actionModeCloseDrawable
+          @attr name android:actionModeCloseDrawable
         */
         public static final int SherlockTheme_actionModeCloseDrawable = 16;
         /**
@@ -8288,7 +7646,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:actionModePopupWindowStyle
+          @attr name android:actionModePopupWindowStyle
         */
         public static final int SherlockTheme_actionModePopupWindowStyle = 18;
         /**
@@ -8300,7 +7658,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:actionModeShareDrawable
+          @attr name android:actionModeShareDrawable
         */
         public static final int SherlockTheme_actionModeShareDrawable = 17;
         /**
@@ -8312,7 +7670,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:actionModeSplitBackground
+          @attr name android:actionModeSplitBackground
         */
         public static final int SherlockTheme_actionModeSplitBackground = 15;
         /**
@@ -8322,7 +7680,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:actionModeStyle
+          @attr name android:actionModeStyle
         */
         public static final int SherlockTheme_actionModeStyle = 12;
         /**
@@ -8332,7 +7690,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:actionOverflowButtonStyle
+          @attr name android:actionOverflowButtonStyle
         */
         public static final int SherlockTheme_actionOverflowButtonStyle = 3;
         /**
@@ -8342,7 +7700,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:actionSpinnerItemStyle
+          @attr name android:actionSpinnerItemStyle
         */
         public static final int SherlockTheme_actionSpinnerItemStyle = 57;
         /**
@@ -8354,7 +7712,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:activatedBackgroundIndicator
+          @attr name android:activatedBackgroundIndicator
         */
         public static final int SherlockTheme_activatedBackgroundIndicator = 65;
         /**
@@ -8366,7 +7724,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:activityChooserViewStyle
+          @attr name android:activityChooserViewStyle
         */
         public static final int SherlockTheme_activityChooserViewStyle = 64;
         /**
@@ -8378,7 +7736,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:buttonStyleSmall
+          @attr name android:buttonStyleSmall
         */
         public static final int SherlockTheme_buttonStyleSmall = 19;
         /**
@@ -8390,7 +7748,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:dividerVertical
+          @attr name android:dividerVertical
         */
         public static final int SherlockTheme_dividerVertical = 50;
         /**
@@ -8400,7 +7758,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:dropDownHintAppearance
+          @attr name android:dropDownHintAppearance
         */
         public static final int SherlockTheme_dropDownHintAppearance = 66;
         /**
@@ -8410,7 +7768,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:dropDownListViewStyle
+          @attr name android:dropDownListViewStyle
         */
         public static final int SherlockTheme_dropDownListViewStyle = 54;
         /**
@@ -8426,7 +7784,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:dropdownListPreferredItemHeight
+          @attr name android:dropdownListPreferredItemHeight
         */
         public static final int SherlockTheme_dropdownListPreferredItemHeight = 56;
         /**
@@ -8436,7 +7794,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:homeAsUpIndicator
+          @attr name android:homeAsUpIndicator
         */
         public static final int SherlockTheme_homeAsUpIndicator = 53;
         /**
@@ -8446,7 +7804,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:listPopupWindowStyle
+          @attr name android:listPopupWindowStyle
         */
         public static final int SherlockTheme_listPopupWindowStyle = 63;
         /**
@@ -8464,7 +7822,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:listPreferredItemHeightSmall
+          @attr name android:listPreferredItemHeightSmall
         */
         public static final int SherlockTheme_listPreferredItemHeightSmall = 44;
         /**
@@ -8482,7 +7840,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:listPreferredItemPaddingLeft
+          @attr name android:listPreferredItemPaddingLeft
         */
         public static final int SherlockTheme_listPreferredItemPaddingLeft = 45;
         /**
@@ -8500,7 +7858,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:listPreferredItemPaddingRight
+          @attr name android:listPreferredItemPaddingRight
         */
         public static final int SherlockTheme_listPreferredItemPaddingRight = 46;
         /**
@@ -8510,7 +7868,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:popupMenuStyle
+          @attr name android:popupMenuStyle
         */
         public static final int SherlockTheme_popupMenuStyle = 55;
         /**
@@ -8522,7 +7880,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:searchAutoCompleteTextView
+          @attr name android:searchAutoCompleteTextView
         */
         public static final int SherlockTheme_searchAutoCompleteTextView = 30;
         /**
@@ -8534,7 +7892,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:searchDropdownBackground
+          @attr name android:searchDropdownBackground
         */
         public static final int SherlockTheme_searchDropdownBackground = 31;
         /**
@@ -8552,7 +7910,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:searchResultListItemHeight
+          @attr name android:searchResultListItemHeight
         */
         public static final int SherlockTheme_searchResultListItemHeight = 41;
         /**
@@ -8564,7 +7922,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:searchViewCloseIcon
+          @attr name android:searchViewCloseIcon
         */
         public static final int SherlockTheme_searchViewCloseIcon = 32;
         /**
@@ -8576,7 +7934,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:searchViewEditQuery
+          @attr name android:searchViewEditQuery
         */
         public static final int SherlockTheme_searchViewEditQuery = 36;
         /**
@@ -8588,7 +7946,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:searchViewEditQueryBackground
+          @attr name android:searchViewEditQueryBackground
         */
         public static final int SherlockTheme_searchViewEditQueryBackground = 37;
         /**
@@ -8600,7 +7958,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:searchViewGoIcon
+          @attr name android:searchViewGoIcon
         */
         public static final int SherlockTheme_searchViewGoIcon = 33;
         /**
@@ -8612,7 +7970,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:searchViewSearchIcon
+          @attr name android:searchViewSearchIcon
         */
         public static final int SherlockTheme_searchViewSearchIcon = 34;
         /**
@@ -8624,7 +7982,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:searchViewTextField
+          @attr name android:searchViewTextField
         */
         public static final int SherlockTheme_searchViewTextField = 38;
         /**
@@ -8636,7 +7994,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:searchViewTextFieldRight
+          @attr name android:searchViewTextFieldRight
         */
         public static final int SherlockTheme_searchViewTextFieldRight = 39;
         /**
@@ -8648,7 +8006,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:searchViewVoiceIcon
+          @attr name android:searchViewVoiceIcon
         */
         public static final int SherlockTheme_searchViewVoiceIcon = 35;
         /**
@@ -8660,7 +8018,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:selectableItemBackground
+          @attr name android:selectableItemBackground
         */
         public static final int SherlockTheme_selectableItemBackground = 20;
         /**
@@ -8670,7 +8028,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:spinnerDropDownItemStyle
+          @attr name android:spinnerDropDownItemStyle
         */
         public static final int SherlockTheme_spinnerDropDownItemStyle = 29;
         /**
@@ -8680,7 +8038,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:spinnerItemStyle
+          @attr name android:spinnerItemStyle
         */
         public static final int SherlockTheme_spinnerItemStyle = 28;
         /**
@@ -8692,7 +8050,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:textAppearanceLargePopupMenu
+          @attr name android:textAppearanceLargePopupMenu
         */
         public static final int SherlockTheme_textAppearanceLargePopupMenu = 22;
         /**
@@ -8704,7 +8062,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:textAppearanceListItemSmall
+          @attr name android:textAppearanceListItemSmall
         */
         public static final int SherlockTheme_textAppearanceListItemSmall = 47;
         /**
@@ -8716,7 +8074,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:textAppearanceSearchResultSubtitle
+          @attr name android:textAppearanceSearchResultSubtitle
         */
         public static final int SherlockTheme_textAppearanceSearchResultSubtitle = 43;
         /**
@@ -8728,7 +8086,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:textAppearanceSearchResultTitle
+          @attr name android:textAppearanceSearchResultTitle
         */
         public static final int SherlockTheme_textAppearanceSearchResultTitle = 42;
         /**
@@ -8740,7 +8098,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:textAppearanceSmall
+          @attr name android:textAppearanceSmall
         */
         public static final int SherlockTheme_textAppearanceSmall = 24;
         /**
@@ -8752,7 +8110,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:textAppearanceSmallPopupMenu
+          @attr name android:textAppearanceSmallPopupMenu
         */
         public static final int SherlockTheme_textAppearanceSmallPopupMenu = 23;
         /**
@@ -8767,7 +8125,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:textColorPrimary
+          @attr name android:textColorPrimary
         */
         public static final int SherlockTheme_textColorPrimary = 25;
         /**
@@ -8782,7 +8140,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:textColorPrimaryDisableOnly
+          @attr name android:textColorPrimaryDisableOnly
         */
         public static final int SherlockTheme_textColorPrimaryDisableOnly = 26;
         /**
@@ -8797,7 +8155,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:textColorPrimaryInverse
+          @attr name android:textColorPrimaryInverse
         */
         public static final int SherlockTheme_textColorPrimaryInverse = 27;
         /**
@@ -8811,7 +8169,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:textColorSearchUrl
+          @attr name android:textColorSearchUrl
         */
         public static final int SherlockTheme_textColorSearchUrl = 40;
         /**
@@ -8825,7 +8183,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:windowActionBar
+          @attr name android:windowActionBar
         */
         public static final int SherlockTheme_windowActionBar = 59;
         /**
@@ -8839,7 +8197,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:windowActionBarOverlay
+          @attr name android:windowActionBarOverlay
         */
         public static final int SherlockTheme_windowActionBarOverlay = 60;
         /**
@@ -8853,7 +8211,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:windowActionModeOverlay
+          @attr name android:windowActionModeOverlay
         */
         public static final int SherlockTheme_windowActionModeOverlay = 61;
         /**
@@ -8866,7 +8224,7 @@ containing a value of this type.
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           <p>This is a private symbol.
-          @attr name com.makina.collect.android:windowContentOverlay
+          @attr name android:windowContentOverlay
         */
         public static final int SherlockTheme_windowContentOverlay = 21;
         /**
@@ -8882,7 +8240,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:windowMinWidthMajor
+          @attr name android:windowMinWidthMajor
         */
         public static final int SherlockTheme_windowMinWidthMajor = 48;
         /**
@@ -8898,7 +8256,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:windowMinWidthMinor
+          @attr name android:windowMinWidthMinor
         */
         public static final int SherlockTheme_windowMinWidthMinor = 49;
         /**
@@ -8912,7 +8270,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:windowNoTitle
+          @attr name android:windowNoTitle
         */
         public static final int SherlockTheme_windowNoTitle = 58;
         /**
@@ -8926,7 +8284,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:windowSplitActionBar
+          @attr name android:windowSplitActionBar
         */
         public static final int SherlockTheme_windowSplitActionBar = 62;
         /** Attributes that can be used with a SherlockView.
@@ -8935,7 +8293,7 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #SherlockView_android_focusable android:focusable}</code></td><td></td></tr>
+           <tr><td><code>{@link #SherlockView_android_focusable com.makina.collect.android:android_focusable}</code></td><td></td></tr>
            </table>
            @see #SherlockView_android_focusable
          */
@@ -8943,9 +8301,9 @@ containing a value of this type.
             0x010100da
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#focusable}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_focusable}
           attribute's value can be found in the {@link #SherlockView} array.
-          @attr name android:focusable
+          @attr name android:android_focusable
         */
         public static final int SherlockView_android_focusable = 0;
         /** Attributes that can be used with a Spinner.
@@ -8954,11 +8312,11 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #Spinner_android_dropDownSelector android:dropDownSelector}</code></td><td></td></tr>
-           <tr><td><code>{@link #Spinner_android_dropDownWidth android:dropDownWidth}</code></td><td></td></tr>
-           <tr><td><code>{@link #Spinner_android_gravity android:gravity}</code></td><td></td></tr>
-           <tr><td><code>{@link #Spinner_android_popupBackground android:popupBackground}</code></td><td></td></tr>
-           <tr><td><code>{@link #Spinner_android_prompt android:prompt}</code></td><td></td></tr>
+           <tr><td><code>{@link #Spinner_android_dropDownSelector com.makina.collect.android:android_dropDownSelector}</code></td><td></td></tr>
+           <tr><td><code>{@link #Spinner_android_dropDownWidth com.makina.collect.android:android_dropDownWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #Spinner_android_gravity com.makina.collect.android:android_gravity}</code></td><td></td></tr>
+           <tr><td><code>{@link #Spinner_android_popupBackground com.makina.collect.android:android_popupBackground}</code></td><td></td></tr>
+           <tr><td><code>{@link #Spinner_android_prompt com.makina.collect.android:android_prompt}</code></td><td></td></tr>
            <tr><td><code>{@link #Spinner_disableChildrenWhenDisabled com.makina.collect.android:disableChildrenWhenDisabled}</code></td><td></td></tr>
            <tr><td><code>{@link #Spinner_dropDownHorizontalOffset com.makina.collect.android:dropDownHorizontalOffset}</code></td><td></td></tr>
            <tr><td><code>{@link #Spinner_dropDownVerticalOffset com.makina.collect.android:dropDownVerticalOffset}</code></td><td></td></tr>
@@ -8982,33 +8340,33 @@ containing a value of this type.
             0x7f0100ca, 0x7f0100cb
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#dropDownSelector}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_dropDownSelector}
           attribute's value can be found in the {@link #Spinner} array.
-          @attr name android:dropDownSelector
+          @attr name android:android_dropDownSelector
         */
         public static final int Spinner_android_dropDownSelector = 1;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#dropDownWidth}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_dropDownWidth}
           attribute's value can be found in the {@link #Spinner} array.
-          @attr name android:dropDownWidth
+          @attr name android:android_dropDownWidth
         */
         public static final int Spinner_android_dropDownWidth = 4;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#gravity}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_gravity}
           attribute's value can be found in the {@link #Spinner} array.
-          @attr name android:gravity
+          @attr name android:android_gravity
         */
         public static final int Spinner_android_gravity = 0;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#popupBackground}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_popupBackground}
           attribute's value can be found in the {@link #Spinner} array.
-          @attr name android:popupBackground
+          @attr name android:android_popupBackground
         */
         public static final int Spinner_android_popupBackground = 2;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#prompt}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_prompt}
           attribute's value can be found in the {@link #Spinner} array.
-          @attr name android:prompt
+          @attr name android:android_prompt
         */
         public static final int Spinner_android_prompt = 3;
         /**
@@ -9022,7 +8380,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:disableChildrenWhenDisabled
+          @attr name android:disableChildrenWhenDisabled
         */
         public static final int Spinner_disableChildrenWhenDisabled = 9;
         /**
@@ -9038,7 +8396,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:dropDownHorizontalOffset
+          @attr name android:dropDownHorizontalOffset
         */
         public static final int Spinner_dropDownHorizontalOffset = 7;
         /**
@@ -9054,7 +8412,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:dropDownVerticalOffset
+          @attr name android:dropDownVerticalOffset
         */
         public static final int Spinner_dropDownVerticalOffset = 6;
         /**
@@ -9064,7 +8422,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:popupPromptView
+          @attr name android:popupPromptView
         */
         public static final int Spinner_popupPromptView = 8;
         /**
@@ -9081,7 +8439,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>dialog</code></td><td>0</td><td></td></tr>
 <tr><td><code>dropdown</code></td><td>1</td><td></td></tr>
 </table>
-          @attr name com.makina.collect.android:spinnerMode
+          @attr name android:spinnerMode
         */
         public static final int Spinner_spinnerMode = 5;
         /** Attributes that can be used with a Switch.
@@ -9125,7 +8483,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:switchMinWidth
+          @attr name android:switchMinWidth
         */
         public static final int Switch_switchMinWidth = 3;
         /**
@@ -9141,7 +8499,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:switchPadding
+          @attr name android:switchPadding
         */
         public static final int Switch_switchPadding = 4;
         /**
@@ -9151,7 +8509,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:switchTextAppearance
+          @attr name android:switchTextAppearance
         */
         public static final int Switch_switchTextAppearance = 2;
         /**
@@ -9162,7 +8520,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-          @attr name com.makina.collect.android:textOff
+          @attr name android:textOff
         */
         public static final int Switch_textOff = 6;
         /**
@@ -9173,7 +8531,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
-          @attr name com.makina.collect.android:textOn
+          @attr name android:textOn
         */
         public static final int Switch_textOn = 5;
         /**
@@ -9183,7 +8541,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:thumb
+          @attr name android:thumb
         */
         public static final int Switch_thumb = 7;
         /**
@@ -9199,7 +8557,7 @@ in (inches), mm (millimeters).
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:thumbTextPadding
+          @attr name android:thumbTextPadding
         */
         public static final int Switch_thumbTextPadding = 1;
         /**
@@ -9209,7 +8567,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:track
+          @attr name android:track
         */
         public static final int Switch_track = 0;
         /** Attributes that can be used with a SwitchPreference.
@@ -9245,7 +8603,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:disableDependentsState
+          @attr name android:disableDependentsState
         */
         public static final int SwitchPreference_disableDependentsState = 2;
         /**
@@ -9259,7 +8617,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:summaryOff
+          @attr name android:summaryOff
         */
         public static final int SwitchPreference_summaryOff = 1;
         /**
@@ -9273,7 +8631,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:summaryOn
+          @attr name android:summaryOn
         */
         public static final int SwitchPreference_summaryOn = 0;
         /**
@@ -9287,7 +8645,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:switchTextOff
+          @attr name android:switchTextOff
         */
         public static final int SwitchPreference_switchTextOff = 4;
         /**
@@ -9301,7 +8659,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:switchTextOn
+          @attr name android:switchTextOn
         */
         public static final int SwitchPreference_switchTextOn = 3;
         /** Attributes that can be used with a TextAppearance.
@@ -9310,14 +8668,14 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #TextAppearance_android_textAllCaps android:textAllCaps}</code></td><td></td></tr>
-           <tr><td><code>{@link #TextAppearance_android_textColor android:textColor}</code></td><td></td></tr>
-           <tr><td><code>{@link #TextAppearance_android_textColorHighlight android:textColorHighlight}</code></td><td></td></tr>
-           <tr><td><code>{@link #TextAppearance_android_textColorHint android:textColorHint}</code></td><td></td></tr>
-           <tr><td><code>{@link #TextAppearance_android_textColorLink android:textColorLink}</code></td><td></td></tr>
-           <tr><td><code>{@link #TextAppearance_android_textSize android:textSize}</code></td><td></td></tr>
-           <tr><td><code>{@link #TextAppearance_android_textStyle android:textStyle}</code></td><td></td></tr>
-           <tr><td><code>{@link #TextAppearance_android_typeface android:typeface}</code></td><td></td></tr>
+           <tr><td><code>{@link #TextAppearance_android_textAllCaps com.makina.collect.android:android_textAllCaps}</code></td><td></td></tr>
+           <tr><td><code>{@link #TextAppearance_android_textColor com.makina.collect.android:android_textColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #TextAppearance_android_textColorHighlight com.makina.collect.android:android_textColorHighlight}</code></td><td></td></tr>
+           <tr><td><code>{@link #TextAppearance_android_textColorHint com.makina.collect.android:android_textColorHint}</code></td><td></td></tr>
+           <tr><td><code>{@link #TextAppearance_android_textColorLink com.makina.collect.android:android_textColorLink}</code></td><td></td></tr>
+           <tr><td><code>{@link #TextAppearance_android_textSize com.makina.collect.android:android_textSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #TextAppearance_android_textStyle com.makina.collect.android:android_textStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #TextAppearance_android_typeface com.makina.collect.android:android_typeface}</code></td><td></td></tr>
            </table>
            @see #TextAppearance_android_textAllCaps
            @see #TextAppearance_android_textColor
@@ -9333,51 +8691,51 @@ containing a value of this type.
             0x01010099, 0x0101009a, 0x0101009b, 0x0101038c
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#textAllCaps}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_textAllCaps}
           attribute's value can be found in the {@link #TextAppearance} array.
-          @attr name android:textAllCaps
+          @attr name android:android_textAllCaps
         */
         public static final int TextAppearance_android_textAllCaps = 7;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#textColor}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_textColor}
           attribute's value can be found in the {@link #TextAppearance} array.
-          @attr name android:textColor
+          @attr name android:android_textColor
         */
         public static final int TextAppearance_android_textColor = 3;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#textColorHighlight}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_textColorHighlight}
           attribute's value can be found in the {@link #TextAppearance} array.
-          @attr name android:textColorHighlight
+          @attr name android:android_textColorHighlight
         */
         public static final int TextAppearance_android_textColorHighlight = 4;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#textColorHint}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_textColorHint}
           attribute's value can be found in the {@link #TextAppearance} array.
-          @attr name android:textColorHint
+          @attr name android:android_textColorHint
         */
         public static final int TextAppearance_android_textColorHint = 5;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#textColorLink}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_textColorLink}
           attribute's value can be found in the {@link #TextAppearance} array.
-          @attr name android:textColorLink
+          @attr name android:android_textColorLink
         */
         public static final int TextAppearance_android_textColorLink = 6;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#textSize}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_textSize}
           attribute's value can be found in the {@link #TextAppearance} array.
-          @attr name android:textSize
+          @attr name android:android_textSize
         */
         public static final int TextAppearance_android_textSize = 0;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#textStyle}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_textStyle}
           attribute's value can be found in the {@link #TextAppearance} array.
-          @attr name android:textStyle
+          @attr name android:android_textStyle
         */
         public static final int TextAppearance_android_textStyle = 2;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#typeface}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_typeface}
           attribute's value can be found in the {@link #TextAppearance} array.
-          @attr name android:typeface
+          @attr name android:android_typeface
         */
         public static final int TextAppearance_android_typeface = 1;
         /** Attributes that can be used with a TextView.
@@ -9386,8 +8744,8 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #TextView_android_text android:text}</code></td><td></td></tr>
-           <tr><td><code>{@link #TextView_android_textAllCaps android:textAllCaps}</code></td><td></td></tr>
+           <tr><td><code>{@link #TextView_android_text com.makina.collect.android:android_text}</code></td><td></td></tr>
+           <tr><td><code>{@link #TextView_android_textAllCaps com.makina.collect.android:android_textAllCaps}</code></td><td></td></tr>
            <tr><td><code>{@link #TextView_textAllCaps com.makina.collect.android:textAllCaps}</code></td><td></td></tr>
            </table>
            @see #TextView_android_text
@@ -9398,15 +8756,15 @@ containing a value of this type.
             0x0101014f, 0x0101038c, 0x7f0100c6
         };
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#text}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_text}
           attribute's value can be found in the {@link #TextView} array.
-          @attr name android:text
+          @attr name android:android_text
         */
         public static final int TextView_android_text = 0;
         /**
-          <p>This symbol is the offset where the {@link android.R.attr#textAllCaps}
+          <p>This symbol is the offset where the {@link com.makina.collect.android.R.attr#android_textAllCaps}
           attribute's value can be found in the {@link #TextView} array.
-          @attr name android:textAllCaps
+          @attr name android:android_textAllCaps
         */
         public static final int TextView_android_textAllCaps = 1;
         /**
@@ -9420,7 +8778,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name com.makina.collect.android:textAllCaps
+          @attr name android:textAllCaps
         */
         public static final int TextView_textAllCaps = 2;
         /** Attributes that can be used with a TimePicker.
@@ -9443,7 +8801,7 @@ containing a value of this type.
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.makina.collect.android:internalLayout
+          @attr name android:internalLayout
         */
         public static final int TimePicker_internalLayout = 0;
         /** Attributes that can be used with a VolumePreference.
@@ -9476,7 +8834,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>music</code></td><td>3</td><td></td></tr>
 <tr><td><code>alarm</code></td><td>4</td><td></td></tr>
 </table>
-          @attr name com.makina.collect.android:streamType
+          @attr name android:streamType
         */
         public static final int VolumePreference_streamType = 0;
     };
