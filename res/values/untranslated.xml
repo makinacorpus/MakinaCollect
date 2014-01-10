@@ -82,7 +82,7 @@
     <string name="to_not_send_form">Ne pas envoyer le formulaire</string>
     <string name="send_form">Envoyer le formulaire</string>
     <string name="send_form_and_restart">Envoyer le formulaire et le recommencer</string>
-    <string name="checkbox_error">Vous devez au moins faire un choix.</string>
+    <string name="checkbox_error">Merci de sélectionner une réponse</string>
     <!-- END FORM SAVING -->
     
     <!-- DOWNLOAD FORM -->
