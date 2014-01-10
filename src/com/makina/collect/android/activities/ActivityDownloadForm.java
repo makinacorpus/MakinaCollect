@@ -767,14 +767,9 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 
         Set<FormDetails> keys = result.keySet();
         StringBuilder b = new StringBuilder();
-        for (FormDetails k : keys) {
-            b.append(k.formName +
-            	" (" +
-            	((k.formVersion != null) ?
-            			(this.getString(R.string.version) + ": " + k.formVersion + " ")
-            			: "") +
-            	"ID: " + k.formID + ") - " +
-            	result.get(k));
+        for (FormDetails k : keys)
+        {
+            b.append(k.formName +" - " +result.get(k));
             b.append("\n\n");
         }
        clearAllOption();

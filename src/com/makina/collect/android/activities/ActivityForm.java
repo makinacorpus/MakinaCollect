@@ -1704,8 +1704,7 @@ public class ActivityForm extends SherlockActivity implements
 		mAlertDialog = new AlertDialog.Builder(this)
 				.setIcon(android.R.drawable.ic_dialog_info)
 				.setTitle(
-						getString(R.string.quit_application,
-								formController.getFormTitle()))
+						getString(R.string.quit_application))
 				.setNeutralButton(getString(R.string.do_not_exit),
 						new DialogInterface.OnClickListener() {
 							@Override
