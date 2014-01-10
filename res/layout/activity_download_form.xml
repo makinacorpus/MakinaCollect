@@ -47,7 +47,7 @@ the License.
                     android:id="@+id/textView_pannier"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 formulaire sélectionné"
+                    android:text="@string/no_form_selected"
                     android:textColor="@drawable/white"
                     android:textSize="20dip" />
             </RelativeLayout>
@@ -72,7 +72,7 @@ the License.
                     android:layout_toRightOf="@id/imageView_check_all"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dip"
-                    android:text="TOUT SÉLECTIONNER"
+                    android:text="@string/select_all"
                     android:textColor="@drawable/white"
                     android:textSize="20dip" />
             </RelativeLayout>

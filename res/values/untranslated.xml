@@ -83,7 +83,16 @@
     <string name="send_form">Envoyer le formulaire</string>
     <string name="send_form_and_restart">Envoyer le formulaire et le recommencer</string>
     <!-- END FORM SAVING -->
-
+    
+    <!-- DOWNLOAD FORM -->
+    <string name="select_all">TOUT SÉLECTIONNER</string>
+    <string name="deselect_all">TOUT DÉSÉLECTIONNER</string>
+    <string name="no_form_selected">Aucun formulaire sélectionné</string>
+    <string name="form_selected">1 formulaire sélectionné</string>
+    <string name="forms_selected">formulaires sélectionnés</string>
+    
+	<!-- fin - DOWNLOAD FORM -->
+	
     <string name="app_name" translatable="false">Makina Collect</string>
     <string name="protocol_odk_default" translatable="false">odk_default</string>
     <string name="protocol_google" translatable="false">google</string>

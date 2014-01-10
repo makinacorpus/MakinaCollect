@@ -206,7 +206,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 					ImageView imageView_check_all=(ImageView)findViewById(R.id.imageView_check_all);
 					imageView_check_all.setImageResource(R.drawable.case_off);
 					CustomFontTextview textView_check_all=(CustomFontTextview)findViewById(R.id.textView_check_all);
-					textView_check_all.setText("TOUT SÉLECTIONNER");
+					textView_check_all.setText(getString(R.string.select_all));
 					
 				}
 				else
@@ -215,8 +215,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 					ImageView imageView_check_all=(ImageView)findViewById(R.id.imageView_check_all);
 					imageView_check_all.setImageResource(R.drawable.case_on);
 					CustomFontTextview textView_check_all=(CustomFontTextview)findViewById(R.id.textView_check_all);
-					textView_check_all.setText("TOUT DÉSÉLECTIONNER");
-					
+					textView_check_all.setText(getString(R.string.deselect_all));
 				}
 			}
 		});
@@ -257,7 +256,12 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         
         Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", detail.downloadUrl);
         
-        textView_pannier.setText(mSelected.size()+" formulaire(s) s�lectionn�(s)");
+        if (mSelected.size()==0)
+        	textView_pannier.setText(getString(R.string.no_form_selected));
+        else if (mSelected.size()==1)
+        	textView_pannier.setText(getString(R.string.form_selected));
+        else if (mSelected.size()>1)
+        	textView_pannier.setText(mSelected.size()+" "+getString(R.string.forms_selected));
         
     }
 
@@ -358,8 +362,13 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 	            ls.setItemChecked(pos, mToggled);
 	        }
         }
-        textView_pannier.setText(mSelected.size()+" formulaire(s) sélectionné(s)");
-   }
+        if (mSelected.size()==0)
+        	textView_pannier.setText(getString(R.string.no_form_selected));
+        else if (mSelected.size()==1)
+        	textView_pannier.setText(getString(R.string.form_selected));
+        else if (mSelected.size()>1)
+        	textView_pannier.setText(mSelected.size()+" "+getString(R.string.forms_selected));
+    }
     
     protected void clearAllOption()
     {
@@ -372,8 +381,8 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
             ls.setItemChecked(pos, mToggled);
         }
         
-        textView_pannier.setText(mSelected.size()+" formulaire(s) sélectionné(s)");
-   }
+    	textView_pannier.setText(getString(R.string.no_form_selected));
+    }
 
     private void dismissDialog()
     {
