@@ -1740,6 +1740,7 @@ public class ActivityForm extends SherlockActivity implements
 												"createQuitDialog",
 												"saveAndExit");
 								saveDataToDisk(EXIT, true, null);
+								
 							} else {
 								Collect.getInstance()
 										.getActivityLogger()
@@ -2309,23 +2310,21 @@ public class ActivityForm extends SherlockActivity implements
 		dismissDialog(SAVING_DIALOG);
 		switch (saveStatus) {
 		case SaveToDiskTask.SAVED:
-			Toast.makeText(this, getString(R.string.data_saved_ok),
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, getString(R.string.data_saved_ok),Toast.LENGTH_SHORT).show();
 			sendSavedBroadcast();
 			break;
 		case SaveToDiskTask.SAVED_AND_EXIT:
-			Toast.makeText(this, getString(R.string.data_saved_ok),
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, getString(R.string.data_saved_ok),Toast.LENGTH_SHORT).show();
 			sendSavedBroadcast();
 			finishReturnInstance();
 			break;
 		case SaveToDiskTask.SAVE_ERROR:
-			Toast.makeText(this, getString(R.string.data_saved_error),
-					Toast.LENGTH_LONG).show();
+			Toast.makeText(this, getString(R.string.data_saved_error),Toast.LENGTH_LONG).show();
 			break;
 		case FormEntryController.ANSWER_CONSTRAINT_VIOLATED:
 		case FormEntryController.ANSWER_REQUIRED_BUT_EMPTY:
 			refreshCurrentView();
+			current_page--;
 			// an answer constraint was violated, so do a 'swipe' to the next
 			// question to display the proper toast(s)
 			next();
@@ -2524,8 +2523,8 @@ public class ActivityForm extends SherlockActivity implements
 	private void razConfirmation() {
 
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		adb.setTitle("Remise √† z√©ro");
-		adb.setMessage("Voulez-vous vraiment remettre √† z√©ro?");
+		adb.setTitle("Remise à zéro");
+		adb.setMessage("Voulez-vous vraiment remettre à zéro?");
 		adb.setPositiveButton(getString(android.R.string.yes),new AlertDialog.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog,int which)
