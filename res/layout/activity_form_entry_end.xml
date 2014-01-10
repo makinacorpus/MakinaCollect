@@ -28,8 +28,8 @@
                 android:id="@+id/save_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/actionbarTitleColorBlueSend"
                 android:inputType="textNoSuggestions"
+                android:textColor="@color/actionbarTitleColorBlueSend"
                 android:textSize="21sp" />
 
             <com.makina.collect.android.views.CustomFontTextview
@@ -102,8 +102,8 @@
                 <com.makina.collect.android.views.CustomFontTextview
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dip"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dip"
                     android:layout_toRightOf="@id/checkbox3"
                     android:text="@string/send_form_and_restart"
                     android:textColor="@color/actionbarTitleColorBlueSend"
@@ -111,7 +111,6 @@
             </RelativeLayout>
         </LinearLayout>
 
-        
     </RelativeLayout>
 
 </ScrollView>
