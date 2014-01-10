@@ -206,7 +206,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 					ImageView imageView_check_all=(ImageView)findViewById(R.id.imageView_check_all);
 					imageView_check_all.setImageResource(R.drawable.case_off);
 					CustomFontTextview textView_check_all=(CustomFontTextview)findViewById(R.id.textView_check_all);
-					textView_check_all.setText("TOUT SÉLECTIONNER");
+					textView_check_all.setText("TOUT S√âLECTIONNER");
 					
 				}
 				else
@@ -215,7 +215,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 					ImageView imageView_check_all=(ImageView)findViewById(R.id.imageView_check_all);
 					imageView_check_all.setImageResource(R.drawable.case_on);
 					CustomFontTextview textView_check_all=(CustomFontTextview)findViewById(R.id.textView_check_all);
-					textView_check_all.setText("TOUT DÉSÉLECTIONNER");
+					textView_check_all.setText("TOUT D√âS√âLECTIONNER");
 					
 				}
 			}
@@ -257,7 +257,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         
         Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", detail.downloadUrl);
         
-        textView_pannier.setText(mSelected.size()+" formulaire(s) sélectionné(s)");
+        textView_pannier.setText(mSelected.size()+" formulaire(s) sÔøΩlectionnÔøΩ(s)");
         
     }
 
@@ -358,7 +358,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 	            ls.setItemChecked(pos, mToggled);
 	        }
         }
-        textView_pannier.setText(mSelected.size()+" formulaire(s) sélectionné(s)");
+        textView_pannier.setText(mSelected.size()+" formulaire(s) s√©lectionn√©(s)");
    }
     
     protected void clearAllOption()
@@ -372,7 +372,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
             ls.setItemChecked(pos, mToggled);
         }
         
-        textView_pannier.setText(mSelected.size()+" formulaire(s) sélectionné(s)");
+        textView_pannier.setText(mSelected.size()+" formulaire(s) s√©lectionn√©(s)");
    }
 
     private void dismissDialog()

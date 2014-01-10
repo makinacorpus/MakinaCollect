@@ -118,13 +118,14 @@ import com.makina.collect.android.widgets.QuestionWidget;
 /**
  * FormEntryActivity is responsible for displaying questions, animating
  * transitions between questions, and allowing the user to enter data.
- *
+ * 
  * @author Carl Hartung (carlhartung@gmail.com)
- */ 
+ */
 
-public class ActivityForm extends SherlockActivity implements AnimationListener,
-		FormLoaderListener, FormSavedListener, AdvanceToNextListener,
-		OnGestureListener, WidgetAnsweredListener, InstanceUploaderListener, DeleteInstancesListener {
+public class ActivityForm extends SherlockActivity implements
+		AnimationListener, FormLoaderListener, FormSavedListener,
+		AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener,
+		InstanceUploaderListener, DeleteInstancesListener {
 	private static final String t = "FormEntryActivity";
 
 	// save with every swipe forward or back. Timings indicate this takes .25
@@ -176,7 +177,6 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	public static final String KEY_XPATH = "xpath";
 	public static final String KEY_XPATH_WAITING_FOR_DATA = "xpathwaiting";
 
-
 	private static final int PROGRESS_DIALOG = 1;
 	private static final int SAVING_DIALOG = 2;
 
@@ -205,63 +205,64 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 
 	private ImageView mNextButton;
 	private ImageView mBackButton;
-	
+
 	private boolean mAnswersChanged;
-	public static int size=0;
+	public static int size = 0;
 	private CustomFontTextview textView_quiz_question_number;
-	
+
 	enum AnimationType {
 		LEFT, RIGHT, FADE, NONE
 	}
 
 	private SharedPreferences mAdminPreferences;
 	private Uri uri;
-	
+
 	private Long[] mInstancesToSend;
 	private String mAlertMsg;
 	private final static int AUTH_DIALOG = 2;
 	private HashMap<String, String> mUploadedInstances;
-	private boolean send=false,restart=false;
-	public static int current_page=1;
-	private CheckBox checkBox1,checkBox2,checkBox3;
+	private boolean send = false, restart = false;
+	public static int current_page = 1;
+	private CheckBox checkBox1, checkBox2, checkBox3;
 	private int event;
+
 	/** Called when the activity is first created. */
 	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.i("FormEntryActivity", "onCreate");
-		
+
 		mUploadedInstances = new HashMap<String, String>();
-		Finish.activityForm=this;
-		
+		Finish.activityForm = this;
+
 		// must be at the beginning of any activity that can be called from an
 		// external intent
-		try
-		{
+		try {
 			Collect.createODKDirs();
-		}
-		catch (RuntimeException e)
-		{
+		} catch (RuntimeException e) {
 			createErrorDialog(e.getMessage(), EXIT);
 			return;
 		}
 
 		setContentView(R.layout.activity_form_entry);
-		
+
 		getSupportActionBar().setTitle(getString(R.string.edit));
 		getSupportActionBar().setSubtitle(getString(R.string.form));
-    	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
-    	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-    	TextView actionbarSubTitle = (TextView)findViewById(titleId);
-    	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
-    	
-		textView_quiz_question_number=(CustomFontTextview)findViewById(R.id.textView_quiz_question_number);
-		
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		int titleId = Resources.getSystem().getIdentifier("action_bar_title",
+				"id", "android");
+		TextView actionbarTitle = (TextView) findViewById(titleId);
+		titleId = Resources.getSystem().getIdentifier("action_bar_subtitle",
+				"id", "android");
+		TextView actionbarSubTitle = (TextView) findViewById(titleId);
+		CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle,
+				getResources().getColor(R.color.actionbarTitleColorGreenEdit),
+				getResources().getColor(R.color.actionbarTitleColorGris));
+
+		textView_quiz_question_number = (CustomFontTextview) findViewById(R.id.textView_quiz_question_number);
+
 		Intent intent = getIntent();
-		
+
 		mAlertDialog = null;
 		mCurrentView = null;
 		mInAnimation = null;
@@ -270,13 +271,13 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		mQuestionHolder = (LinearLayout) findViewById(R.id.questionholder);
 
 		// get admin preference settings
-		mAdminPreferences = getSharedPreferences(AdminPreferencesActivity.ADMIN_PREFERENCES, 0);
+		mAdminPreferences = getSharedPreferences(
+				AdminPreferencesActivity.ADMIN_PREFERENCES, 0);
 
 		mNextButton = (ImageView) findViewById(R.id.form_forward_button);
 		mNextButton.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v)
-			{
+			public void onClick(View v) {
 				showNextView();
 			}
 		});
@@ -284,9 +285,8 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		mBackButton = (ImageView) findViewById(R.id.form_back_button);
 		mBackButton.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v)
-			{
-				if (current_page!=1)
+			public void onClick(View v) {
+				if (current_page != 1)
 					showPreviousView();
 			}
 		});
@@ -295,7 +295,8 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		new XFormsModule().registerModule();
 
 		// needed to override rms property manager
-		org.javarosa.core.services.PropertyManager.setPropertyManager(new PropertyManager(getApplicationContext()));
+		org.javarosa.core.services.PropertyManager
+				.setPropertyManager(new PropertyManager(getApplicationContext()));
 
 		String startingXPath = null;
 		String waitingXPath = null;
@@ -313,7 +314,8 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 				Log.i(t, "startingXPath is: " + startingXPath);
 			}
 			if (savedInstanceState.containsKey(KEY_XPATH_WAITING_FOR_DATA)) {
-				waitingXPath = savedInstanceState.getString(KEY_XPATH_WAITING_FOR_DATA);
+				waitingXPath = savedInstanceState
+						.getString(KEY_XPATH_WAITING_FOR_DATA);
 				Log.i(t, "waitingXPath is: " + waitingXPath);
 			}
 			if (savedInstanceState.containsKey(NEWFORM)) {
@@ -322,13 +324,12 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			if (savedInstanceState.containsKey(KEY_ERROR)) {
 				mErrorMessage = savedInstanceState.getString(KEY_ERROR);
 			}
-			
+
 		}
 
 		// If a parse error message is showing then nothing else is loaded
 		// Dialogs mid form just disappear on rotation.
-		if (mErrorMessage != null)
-		{
+		if (mErrorMessage != null) {
 			createErrorDialog(mErrorMessage, EXIT);
 			return;
 		}
@@ -347,8 +348,10 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 					Log.w(t, "Reloading form and restoring state.");
 					// we need to launch the form loader to load the form
 					// controller...
-					mFormLoaderTask = new FormLoaderTask(instancePath,startingXPath, waitingXPath);
-					Collect.getInstance().getActivityLogger().logAction(this, "formReloaded", mFormPath);
+					mFormLoaderTask = new FormLoaderTask(instancePath,
+							startingXPath, waitingXPath);
+					Collect.getInstance().getActivityLogger()
+							.logAction(this, "formReloaded", mFormPath);
 					// TODO: this doesn' work (dialog does not get removed):
 					// showDialog(PROGRESS_DIALOG);
 					// show dialog before we execute...
@@ -360,40 +363,42 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			// Not a restart from a screen orientation change (or other).
 			Collect.getInstance().setFormController(null);
 
-			
-			if (intent != null)
-			{
+			if (intent != null) {
 				uri = intent.getData();
-				
-				if (getContentResolver().getType(uri) == InstanceColumns.CONTENT_ITEM_TYPE)
-				{
+
+				if (getContentResolver().getType(uri) == InstanceColumns.CONTENT_ITEM_TYPE) {
 					// get the formId and version for this instance...
 					String jrFormId = null;
 					String jrVersion = null;
 					{
 						Cursor instanceCursor = null;
-						try
-						{
-							instanceCursor = getContentResolver().query(uri,null, null, null, null);
-							if (instanceCursor.getCount() != 1)
-							{
+						try {
+							instanceCursor = getContentResolver().query(uri,
+									null, null, null, null);
+							if (instanceCursor.getCount() != 1) {
 								this.createErrorDialog("Bad URI: " + uri, EXIT);
 								return;
-							}
-							else
-							{
+							} else {
 								instanceCursor.moveToFirst();
-								instancePath = instanceCursor.getString(instanceCursor.getColumnIndex(InstanceColumns.INSTANCE_FILE_PATH));
-								Collect.getInstance().getActivityLogger().logAction(this, "instanceLoaded",instancePath);
+								instancePath = instanceCursor
+										.getString(instanceCursor
+												.getColumnIndex(InstanceColumns.INSTANCE_FILE_PATH));
+								Collect.getInstance()
+										.getActivityLogger()
+										.logAction(this, "instanceLoaded",
+												instancePath);
 
-								jrFormId = instanceCursor.getString(instanceCursor.getColumnIndex(InstanceColumns.JR_FORM_ID));
-								int idxJrVersion = instanceCursor.getColumnIndex(InstanceColumns.JR_VERSION);
+								jrFormId = instanceCursor
+										.getString(instanceCursor
+												.getColumnIndex(InstanceColumns.JR_FORM_ID));
+								int idxJrVersion = instanceCursor
+										.getColumnIndex(InstanceColumns.JR_VERSION);
 
-								jrVersion = instanceCursor.isNull(idxJrVersion) ? null: instanceCursor.getString(idxJrVersion);
+								jrVersion = instanceCursor.isNull(idxJrVersion) ? null
+										: instanceCursor
+												.getString(idxJrVersion);
 							}
-						}
-						finally
-						{
+						} finally {
 							if (instanceCursor != null) {
 								instanceCursor.close();
 							}
@@ -416,14 +421,24 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 					{
 						Cursor formCursor = null;
 						try {
-							formCursor = getContentResolver().query(FormsColumns.CONTENT_URI, null, selection,selectionArgs, null);
-							if (formCursor.getCount() == 1)
-							{
+							formCursor = getContentResolver().query(
+									FormsColumns.CONTENT_URI, null, selection,
+									selectionArgs, null);
+							if (formCursor.getCount() == 1) {
 								formCursor.moveToFirst();
-								mFormPath = formCursor.getString(formCursor.getColumnIndex(FormsColumns.FORM_FILE_PATH));
-							} else if (formCursor.getCount() < 1)
-							{
-								this.createErrorDialog(getString(R.string.parent_form_not_present,jrFormId)+ ((jrVersion == null) ? "": "\n"+ getString(R.string.version)+ " "+ jrVersion),
+								mFormPath = formCursor
+										.getString(formCursor
+												.getColumnIndex(FormsColumns.FORM_FILE_PATH));
+							} else if (formCursor.getCount() < 1) {
+								this.createErrorDialog(
+										getString(
+												R.string.parent_form_not_present,
+												jrFormId)
+												+ ((jrVersion == null) ? ""
+														: "\n"
+																+ getString(R.string.version)
+																+ " "
+																+ jrVersion),
 										EXIT);
 								return;
 							} else if (formCursor.getCount() > 1) {
@@ -432,27 +447,32 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 								// user will need to hand-edit the SQLite
 								// database to fix it.
 								formCursor.moveToFirst();
-								mFormPath = formCursor.getString(formCursor.getColumnIndex(FormsColumns.FORM_FILE_PATH));
-								this.createErrorDialog("Multiple matching form definitions exist",DO_NOT_EXIT);
+								mFormPath = formCursor
+										.getString(formCursor
+												.getColumnIndex(FormsColumns.FORM_FILE_PATH));
+								this.createErrorDialog(
+										"Multiple matching form definitions exist",
+										DO_NOT_EXIT);
 							}
-						}
-						finally {
+						} finally {
 							if (formCursor != null) {
 								formCursor.close();
 							}
 						}
 					}
-				}
-				else if (getContentResolver().getType(uri) == FormsColumns.CONTENT_ITEM_TYPE) {
+				} else if (getContentResolver().getType(uri) == FormsColumns.CONTENT_ITEM_TYPE) {
 					Cursor c = null;
 					try {
-						c = getContentResolver().query(uri, null, null, null,null);
+						c = getContentResolver().query(uri, null, null, null,
+								null);
 						if (c.getCount() != 1) {
 							this.createErrorDialog("Bad URI: " + uri, EXIT);
 							return;
 						} else {
 							c.moveToFirst();
-							mFormPath = c.getString(c.getColumnIndex(FormsColumns.FORM_FILE_PATH));
+							mFormPath = c
+									.getString(c
+											.getColumnIndex(FormsColumns.FORM_FILE_PATH));
 							// This is the fill-blank-form code path.
 							// See if there is a savepoint for this form that
 							// has never been
@@ -465,22 +485,25 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 							// when that
 							// explicitly saved instance is edited via
 							// edit-saved-form.
-							final String filePrefix = mFormPath.substring(mFormPath.lastIndexOf('/') + 1,mFormPath.lastIndexOf('.'))+ "_";
+							final String filePrefix = mFormPath.substring(
+									mFormPath.lastIndexOf('/') + 1,
+									mFormPath.lastIndexOf('.'))
+									+ "_";
 							final String fileSuffix = ".xml.save";
 							File cacheDir = new File(Collect.CACHE_PATH);
 							File[] files = cacheDir.listFiles(new FileFilter() {
 								@Override
 								public boolean accept(File pathname) {
 									String name = pathname.getName();
-									return name.startsWith(filePrefix) && name.endsWith(fileSuffix);
+									return name.startsWith(filePrefix)
+											&& name.endsWith(fileSuffix);
 								}
 							});
-							//size=files.length+1;
+							// size=files.length+1;
 							// see if any of these savepoints are for a
 							// filled-in form that has never been
 							// explicitly saved by the user...
-							for (int i = 0; i < files.length; ++i)
-							{
+							for (int i = 0; i < files.length; ++i) {
 								File candidate = files[i];
 								String instanceDirName = candidate.getName()
 										.substring(
@@ -514,18 +537,19 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 				}
 
 				mFormLoaderTask = new FormLoaderTask(instancePath, null, null);
-				Collect.getInstance().getActivityLogger().logAction(this, "formLoaded", mFormPath);
+				Collect.getInstance().getActivityLogger()
+						.logAction(this, "formLoaded", mFormPath);
 				showDialog(PROGRESS_DIALOG);
 				// show dialog before we execute...
 				mFormLoaderTask.execute(mFormPath);
 			}
 		}
-		
-		if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_form", false))
-    		HelpWithConfirmation.helpDialog(this, getString(R.string.help_form));
-		
-		
-		
+
+		if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean(
+				"help_form", false))
+			HelpWithConfirmation
+					.helpDialog(this, getString(R.string.help_form));
+
 	}
 
 	@Override
@@ -552,9 +576,11 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	}
 
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode,Intent intent) {
+	protected void onActivityResult(int requestCode, int resultCode,
+			Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
-		FormController formController = Collect.getInstance().getFormController();
+		FormController formController = Collect.getInstance()
+				.getFormController();
 		if (formController == null) {
 			// we must be in the midst of a reload of the FormController.
 			// try to save this callback data to the FormLoaderTask
@@ -562,9 +588,9 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 					&& mFormLoaderTask.getStatus() != AsyncTask.Status.FINISHED) {
 				mFormLoaderTask.setActivityResult(requestCode, resultCode,
 						intent);
-			}
-			else {
-				Log.e(t,"Got an activityResult without any pending form loader");
+			} else {
+				Log.e(t,
+						"Got an activityResult without any pending form loader");
 			}
 			return;
 		}
@@ -612,8 +638,10 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			// The intent is empty, but we know we saved the image to the temp
 			// file
 			File fi = new File(Collect.TMPFILE_PATH);
-			String mInstanceFolder = formController.getInstancePath().getParent();
-			String s = mInstanceFolder + File.separator+ System.currentTimeMillis() + ".jpg";
+			String mInstanceFolder = formController.getInstancePath()
+					.getParent();
+			String s = mInstanceFolder + File.separator
+					+ System.currentTimeMillis() + ".jpg";
 
 			File nf = new File(s);
 			if (!fi.renameTo(nf)) {
@@ -670,7 +698,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 
 			((ODKView) mCurrentView).setBinaryData(newImage);
 			saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
-			if (formController.indexIsInFieldList()){
+			if (formController.indexIsInFieldList()) {
 				updateView();
 			}
 			break;
@@ -685,7 +713,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			Uri media = intent.getData();
 			((ODKView) mCurrentView).setBinaryData(media);
 			saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
-			if (formController.indexIsInFieldList()){
+			if (formController.indexIsInFieldList()) {
 				updateView();
 			}
 			break;
@@ -709,44 +737,43 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 * changes, so they're resynchronized here.
 	 */
 	public void refreshCurrentView() {
-		FormController formController = Collect.getInstance().getFormController();
-		if (formController!=null)
-		{
+		FormController formController = Collect.getInstance()
+				.getFormController();
+		if (formController != null) {
 			event = formController.getEvent();
-	
-			// When we refresh, repeat dialog state isn't maintained, so step back
+
+			// When we refresh, repeat dialog state isn't maintained, so step
+			// back
 			// to the previous
 			// question.
-			// Also, if we're within a group labeled 'field list', step back to the
+			// Also, if we're within a group labeled 'field list', step back to
+			// the
 			// beginning of that
 			// group.
 			// That is, skip backwards over repeat prompts, groups that are not
 			// field-lists,
-			// repeat events, and indexes in field-lists that is not the containing
+			// repeat events, and indexes in field-lists that is not the
+			// containing
 			// group.
 			if (event == FormEntryController.EVENT_PROMPT_NEW_REPEAT) {
 				createRepeatDialog();
 			} else {
 				ScrollView current = createView(event, false);
-				
+
 				showView(current, AnimationType.FADE);
 			}
-			//update menu cause of sherlock bar
+			// update menu cause of sherlock bar
 			supportInvalidateOptionsMenu();
-		}
-		else
-		{
+		} else {
 			Bundle extra = getIntent().getExtras();
-			if (extra!=null)
-			{
+			if (extra != null) {
 				InstanceProvider.deleteInstance(extra.getLong("id"));
 			}
 		}
 	}
-	
+
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
+	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		getSupportMenuInflater().inflate(R.menu.menu_activity_form, menu);
 		return true;
@@ -754,16 +781,18 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		FormController formController = Collect.getInstance().getFormController();
-		switch (item.getItemId())
-		{
+		FormController formController = Collect.getInstance()
+				.getFormController();
+		switch (item.getItemId()) {
 		case R.id.menu_save:
 			saveDataToDisk(DO_NOT_EXIT, true, null);
-		return true;
+			return true;
 		case R.id.menu_hierachy:
-			Collect.getInstance().getActivityLogger().logInstanceAction(this, "onOptionsItemSelected","MENU_HIERARCHY_VIEW");
-			if (formController.currentPromptIsQuestion())
-			{
+			Collect.getInstance()
+					.getActivityLogger()
+					.logInstanceAction(this, "onOptionsItemSelected",
+							"MENU_HIERARCHY_VIEW");
+			if (formController.currentPromptIsQuestion()) {
 				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
 			}
 			Intent i = new Intent(this, ActivityFormHierarchy.class);
@@ -771,12 +800,14 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			return true;
 		case R.id.menu_raz:
 			razConfirmation();
-		return true;
+			return true;
 		case R.id.menu_settings:
-			startActivity(new Intent(getApplicationContext(),ActivityPreferences.class));
-		return true;
+			startActivity(new Intent(getApplicationContext(),
+					ActivityPreferences.class));
+			return true;
 		case R.id.menu_help:
-			Help.helpDialog(getApplicationContext(), getString(R.string.help_form));
+			Help.helpDialog(getApplicationContext(),
+					getString(R.string.help_form));
 			return true;
 		case R.id.menu_about_us:
 			AboutUs.aboutUs(getApplicationContext());
@@ -785,9 +816,10 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			Finish.finish();
 			return true;
 		case android.R.id.home:
-	         // This is called when the Home (Up) button is pressed
+			// This is called when the Home (Up) button is pressed
 			// in the Action Bar.
-			Collect.getInstance().getActivityLogger().logInstanceAction(this, "onKeyDown.KEYCODE_BACK", "quit");
+			Collect.getInstance().getActivityLogger()
+					.logInstanceAction(this, "onKeyDown.KEYCODE_BACK", "quit");
 			createQuitDialog();
 			return true;
 		}
@@ -797,7 +829,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	/**
 	 * Attempt to save the answer(s) in the current screen to into the data
 	 * model.
-	 *
+	 * 
 	 * @param evaluateConstraints
 	 * @return false if any error occurs while saving (constraint violated,
 	 *         etc...), true otherwise.
@@ -824,7 +856,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 * Clears the answer on the screen.
 	 */
 	private void clearAnswer(QuestionWidget qw) {
-		if ( qw.getAnswer() != null) {
+		if (qw.getAnswer() != null) {
 			qw.clearAnswer();
 		}
 	}
@@ -844,8 +876,6 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		}
 		menu.setHeaderTitle(getString(R.string.edit_prompt));
 	}
-	
-	
 
 	@Override
 	public boolean onContextItemSelected(android.view.MenuItem item) {
@@ -900,229 +930,220 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 
 	/**
 	 * Creates a view given the View type and an event
-	 *
+	 * 
 	 * @param event
 	 * @param advancingPage
 	 *            -- true if this results from advancing through the form
 	 * @return newly created View
 	 */
-	private ScrollView createView(int event, boolean advancingPage)
-	{
-		FormController formController = Collect.getInstance().getFormController();
+	private ScrollView createView(int event, boolean advancingPage) {
+		FormController formController = Collect.getInstance()
+				.getFormController();
 		CustomFontTextview textView_quiz_name = ((CustomFontTextview) findViewById(R.id.textView_quiz_name));
 		textView_quiz_name.setText(formController.getFormTitle());
-		textView_quiz_question_number.setText(current_page+"/"+size);
-		findViewById(R.id.relativeLayout_informations).setVisibility(View.VISIBLE);
+		textView_quiz_question_number.setText(current_page + "/" + size);
+		findViewById(R.id.relativeLayout_informations).setVisibility(
+				View.VISIBLE);
 		findViewById(R.id.buttonholder).setVisibility(View.VISIBLE);
 		findViewById(R.id.save).setVisibility(View.GONE);
-		switch (event)
-		{
-			case FormEntryController.EVENT_END_OF_FORM:
-				findViewById(R.id.relativeLayout_informations).setVisibility(View.GONE);
-				findViewById(R.id.buttonholder).setVisibility(View.GONE);
-				findViewById(R.id.save).setVisibility(View.VISIBLE);
-				ScrollView endView = (ScrollView) View.inflate(this, R.layout.activity_form_entry_end, null);
-				final CustomFontEditText saveAs = (CustomFontEditText) endView.findViewById(R.id.save_name);
+		switch (event) {
+		case FormEntryController.EVENT_END_OF_FORM:
+			findViewById(R.id.relativeLayout_informations).setVisibility(
+					View.GONE);
+			findViewById(R.id.buttonholder).setVisibility(View.GONE);
+			findViewById(R.id.save).setVisibility(View.VISIBLE);
+			ScrollView endView = (ScrollView) View.inflate(this,
+					R.layout.activity_form_entry_end, null);
+			final CustomFontEditText saveAs = (CustomFontEditText) endView
+					.findViewById(R.id.save_name);
 
-				// disallow carriage returns in the name
-				InputFilter returnFilter = new InputFilter() {
-					@Override
-					public CharSequence filter(CharSequence source, int start,
-							int end, Spanned dest, int dstart, int dend) {
-						for (int i = start; i < end; i++) {
-							if (Character.getType((source.charAt(i))) == Character.CONTROL) {
-								return "";
-							}
-						}
-						return null;
-					}
-				};
-				saveAs.setFilters(new InputFilter[] { returnFilter });
-				String saveName = formController.getSubmissionMetadata().instanceName;
-			
-				if (saveName == null)
-				{
-					//TODO Default saveAs text should be previous save name
-					// no meta/instanceName field in the form -- see if we have a
-					// name for this instance from a previous save attempt...
-					if (getContentResolver().getType(getIntent().getData()) == InstanceColumns.CONTENT_ITEM_TYPE) {
-						Uri instanceUri = getIntent().getData();
-						Cursor instance = null;
-						try
-						{
-							instance = getContentResolver().query(instanceUri,null, null, null, null);
-							if (instance.getCount() == 1)
-							{
-								instance.moveToFirst();
-								saveName = instance.getString(instance.getColumnIndex(InstanceColumns.DISPLAY_NAME));
-							}
-						}
-						finally
-						{
-							if (instance != null)
-							{
-								instance.close();
-							}
+			// disallow carriage returns in the name
+			InputFilter returnFilter = new InputFilter() {
+				@Override
+				public CharSequence filter(CharSequence source, int start,
+						int end, Spanned dest, int dstart, int dend) {
+					for (int i = start; i < end; i++) {
+						if (Character.getType((source.charAt(i))) == Character.CONTROL) {
+							return "";
 						}
 					}
-					// present the prompt to allow user to name the form
-					//CustomFontTextview sa = (CustomFontTextview) endView.findViewById(R.id.save_form_as);
-					//sa.setVisibility(View.VISIBLE);
-					// TODO if savename != null don"t need to initialize it
-					if (saveName == null || saveName.length() == 0)
-					{
-						saveName = formController.getFormTitle();
+					return null;
+				}
+			};
+			saveAs.setFilters(new InputFilter[] { returnFilter });
+			String saveName = formController.getSubmissionMetadata().instanceName;
+
+			if (saveName == null) {
+				// TODO Default saveAs text should be previous save name
+				// no meta/instanceName field in the form -- see if we have a
+				// name for this instance from a previous save attempt...
+				if (getContentResolver().getType(getIntent().getData()) == InstanceColumns.CONTENT_ITEM_TYPE) {
+					Uri instanceUri = getIntent().getData();
+					Cursor instance = null;
+					try {
+						instance = getContentResolver().query(instanceUri,
+								null, null, null, null);
+						if (instance.getCount() == 1) {
+							instance.moveToFirst();
+							saveName = instance
+									.getString(instance
+											.getColumnIndex(InstanceColumns.DISPLAY_NAME));
+						}
+					} finally {
+						if (instance != null) {
+							instance.close();
+						}
 					}
-					saveAs.setText(saveName);
-					saveAs.setEnabled(true);
-					saveAs.setVisibility(View.VISIBLE);
 				}
-				else
-				{
-					// if instanceName is defined in form, this is the name -- no
-					// revisions
-					// display only the name, not the prompt, and disable edits
-					//CustomFontTextview sa = (CustomFontTextview) endView.findViewById(R.id.save_form_as);
-					//sa.setVisibility(View.GONE);
-					saveAs.setText(saveName);
-					saveAs.setEnabled(false);
-					saveAs.setBackgroundColor(Color.WHITE);
-					saveAs.setVisibility(View.VISIBLE);
+				// present the prompt to allow user to name the form
+				// CustomFontTextview sa = (CustomFontTextview)
+				// endView.findViewById(R.id.save_form_as);
+				// sa.setVisibility(View.VISIBLE);
+				// TODO if savename != null don"t need to initialize it
+				if (saveName == null || saveName.length() == 0) {
+					saveName = formController.getFormTitle();
 				}
+				saveAs.setText(saveName);
+				saveAs.setEnabled(true);
+				saveAs.setVisibility(View.VISIBLE);
+			} else {
+				// if instanceName is defined in form, this is the name -- no
+				// revisions
+				// display only the name, not the prompt, and disable edits
+				// CustomFontTextview sa = (CustomFontTextview)
+				// endView.findViewById(R.id.save_form_as);
+				// sa.setVisibility(View.GONE);
+				saveAs.setText(saveName);
+				saveAs.setEnabled(false);
+				saveAs.setBackgroundColor(Color.WHITE);
+				saveAs.setVisibility(View.VISIBLE);
+			}
 
-				// override the visibility settings based upon admin preferences
-				if (!mAdminPreferences.getBoolean(AdminPreferencesActivity.KEY_SAVE_AS, true))
-				{
-					saveAs.setVisibility(View.GONE);
-				}
+			// override the visibility settings based upon admin preferences
+			if (!mAdminPreferences.getBoolean(
+					AdminPreferencesActivity.KEY_SAVE_AS, true)) {
+				saveAs.setVisibility(View.GONE);
+			}
 
-				// Create 'save' button
-				((RelativeLayout) findViewById(R.id.save))
-						.setOnClickListener(new OnClickListener()
-						{
-							@Override
-							public void onClick(View v)
-							{
-								ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-								NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
-								
-								if (checkBox1.isChecked())
-								{
-									if (saveAs.getText().length() < 1)
-									{
-										Toast.makeText(ActivityForm.this,R.string.save_as_error,Toast.LENGTH_SHORT).show();
-									}
-									else
-										saveDataToDisk(true, true, saveAs.getText().toString());
-										
+			// Create 'save' button
+			((RelativeLayout) findViewById(R.id.save))
+					.setOnClickListener(new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+							NetworkInfo ni = connectivityManager
+									.getActiveNetworkInfo();
+
+							if (checkBox1.isChecked()) {
+								if (saveAs.getText().length() < 1) {
+									Toast.makeText(ActivityForm.this,
+											R.string.save_as_error,
+											Toast.LENGTH_SHORT).show();
+								} else
+									saveDataToDisk(true, true, saveAs.getText()
+											.toString());
+
+							} else if (checkBox2.isChecked()) {
+								if (saveAs.getText().length() < 1) {
+									Toast.makeText(ActivityForm.this,
+											R.string.save_as_error,
+											Toast.LENGTH_SHORT).show();
+								} else if (ni == null || !ni.isConnected()) {
+									// no network connection
+									Toast.makeText(getApplicationContext(),
+											R.string.no_connection,
+											Toast.LENGTH_SHORT).show();
+									saveDataToDisk(false, true, saveAs
+											.getText().toString());
+								} else {
+									saveDataToDisk(false, true, saveAs
+											.getText().toString());
+									send = true;
+
 								}
-								else if (checkBox2.isChecked())
-								{
-									if (saveAs.getText().length() < 1)
-									{
-										Toast.makeText(ActivityForm.this,R.string.save_as_error,Toast.LENGTH_SHORT).show();
-									}
-									else if (ni == null || !ni.isConnected()) 
-									{
-										//no network connection
-										Toast.makeText(getApplicationContext(),R.string.no_connection, Toast.LENGTH_SHORT).show();
-										saveDataToDisk(false, true, saveAs.getText().toString());
-									}
-									else
-									{
-										saveDataToDisk(false, true, saveAs.getText().toString());
-										send=true;
-										
-									}
-										
-								}
-								else if (checkBox3.isChecked())
-								{
-									if (saveAs.getText().length() < 1)
-									{
-										Toast.makeText(ActivityForm.this,R.string.save_as_error,Toast.LENGTH_SHORT).show();
-									}
-									else if (ni == null || !ni.isConnected()) 
-									{
-										Toast.makeText(getApplicationContext(),R.string.no_connection, Toast.LENGTH_SHORT).show();
-										saveDataToDisk(false, true, saveAs.getText().toString());
-									}
-									else
-									{
-										saveDataToDisk(false, true, saveAs.getText().toString());
-										send=true;
-										restart=true;
-									}
-								}
-								else
-									Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
-							}
-						});
-			
-				if (mBackButton.isShown())
-				{
-					mBackButton.setEnabled(true);
-				}
-				if (mNextButton.isShown())
-				{
-					mNextButton.setEnabled(false);
-				}
 
-				checkBox1=(CheckBox)endView.findViewById(R.id.checkbox1);
-				checkBox2=(CheckBox)endView.findViewById(R.id.checkbox2);
-				checkBox3=(CheckBox)endView.findViewById(R.id.checkbox3);
-				checkBox1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-				{
-					@Override
-					public void onCheckedChanged(CompoundButton arg0, boolean status)
-					{
-						// TODO Auto-generated method stub
-						if (status)
-						{
-							checkBox2.setChecked(false);
-							checkBox3.setChecked(false);
+							} else if (checkBox3.isChecked()) {
+								if (saveAs.getText().length() < 1) {
+									Toast.makeText(ActivityForm.this,
+											R.string.save_as_error,
+											Toast.LENGTH_SHORT).show();
+								} else if (ni == null || !ni.isConnected()) {
+									Toast.makeText(getApplicationContext(),
+											R.string.no_connection,
+											Toast.LENGTH_SHORT).show();
+									saveDataToDisk(false, true, saveAs
+											.getText().toString());
+								} else {
+									saveDataToDisk(false, true, saveAs
+											.getText().toString());
+									send = true;
+									restart = true;
+								}
+							} else
+								Toast.makeText(getApplicationContext(), "",
+										Toast.LENGTH_SHORT).show();
 						}
-					}
-				});
-				checkBox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-				{
-					@Override
-					public void onCheckedChanged(CompoundButton arg0, boolean status)
-					{
-						// TODO Auto-generated method stub
-						if (status)
-						{
-							checkBox1.setChecked(false);
-							checkBox3.setChecked(false);
+					});
+
+			if (mBackButton.isShown()) {
+				mBackButton.setEnabled(true);
+			}
+			if (mNextButton.isShown()) {
+				mNextButton.setEnabled(false);
+			}
+
+			checkBox1 = (CheckBox) endView.findViewById(R.id.checkbox1);
+			checkBox2 = (CheckBox) endView.findViewById(R.id.checkbox2);
+			checkBox3 = (CheckBox) endView.findViewById(R.id.checkbox3);
+			checkBox1
+					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+						@Override
+						public void onCheckedChanged(CompoundButton arg0,
+								boolean status) {
+							// TODO Auto-generated method stub
+							if (status) {
+								checkBox2.setChecked(false);
+								checkBox3.setChecked(false);
+							}
 						}
-					}
-				});
-				checkBox3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-				{
-					@Override
-					public void onCheckedChanged(CompoundButton arg0, boolean status)
-					{
-						// TODO Auto-generated method stub
-						if (status)
-						{
-							checkBox1.setChecked(false);
-							checkBox2.setChecked(false);
+					});
+			checkBox2
+					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+						@Override
+						public void onCheckedChanged(CompoundButton arg0,
+								boolean status) {
+							// TODO Auto-generated method stub
+							if (status) {
+								checkBox1.setChecked(false);
+								checkBox3.setChecked(false);
+							}
 						}
-					}
-				});
-		return endView;
+					});
+			checkBox3
+					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+						@Override
+						public void onCheckedChanged(CompoundButton arg0,
+								boolean status) {
+							// TODO Auto-generated method stub
+							if (status) {
+								checkBox1.setChecked(false);
+								checkBox2.setChecked(false);
+							}
+						}
+					});
+			return endView;
 		case FormEntryController.EVENT_QUESTION:
 		case FormEntryController.EVENT_GROUP:
 		case FormEntryController.EVENT_REPEAT:
 			ODKView odkv = null;
 			// should only be a group here if the event_group is a field-list
-			try
-			{
-				FormEntryCaption[] groups = formController.getGroupsForCurrentIndex();
-				odkv = new ODKView(this, this, formController.getQuestionPrompts(),groups, advancingPage);
-			}
-			catch (RuntimeException e)
-			{
+			try {
+				FormEntryCaption[] groups = formController
+						.getGroupsForCurrentIndex();
+				odkv = new ODKView(this, this,
+						formController.getQuestionPrompts(), groups,
+						advancingPage);
+			} catch (RuntimeException e) {
 				createErrorDialog(e.getMessage(), EXIT);
 				// this is badness to avoid a crash.
 				event = formController.stepToNextScreenEvent();
@@ -1130,10 +1151,8 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			}
 
 			// Makes a "clear answer" menu pop up on long-click
-			for (QuestionWidget qw : odkv.getWidgets())
-			{
-				if (!qw.getPrompt().isReadOnly())
-				{
+			for (QuestionWidget qw : odkv.getWidgets()) {
+				if (!qw.getPrompt().isReadOnly()) {
 					registerForContextMenu(qw);
 				}
 			}
@@ -1165,59 +1184,57 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 * a question, an ask repeat dialog, or the submit screen. Also saves
 	 * answers to the data model after checking constraints.
 	 */
-	private void showNextView()
-	{
-		FormController formController = Collect.getInstance().getFormController();
-		
+	private void showNextView() {
+		FormController formController = Collect.getInstance()
+				.getFormController();
+
 		ScrollView next;
 		event = formController.stepToNextScreenEvent();
 		current_page++;
 		mBackButton.setVisibility(View.VISIBLE);
-		/*if (current_page<size)
-		{
-			current_page++;
-			mBackButton.setVisibility(View.VISIBLE);
+		/*
+		 * if (current_page<size) { current_page++;
+		 * mBackButton.setVisibility(View.VISIBLE); } else
+		 * mNextButton.setVisibility(View.GONE);
+		 */
+		// textView_quiz_question_number.setText(current_page+"/"+size);
+		switch (event) {
+		case FormEntryController.EVENT_QUESTION:
+		case FormEntryController.EVENT_GROUP:
+			// create a savepoint
+			if ((++viewCount) % SAVEPOINT_INTERVAL == 0) {
+				SaveToDiskTask.blockingExportTempData();
+			}
+			next = createView(event, true);
+			showView(next, AnimationType.RIGHT);
+			break;
+		case FormEntryController.EVENT_END_OF_FORM:
+		case FormEntryController.EVENT_REPEAT:
+			next = createView(event, true);
+			showView(next, AnimationType.RIGHT);
+			break;
+		case FormEntryController.EVENT_PROMPT_NEW_REPEAT:
+			createRepeatDialog();
+			/*
+			 * if (current_page!=1) current_page--;
+			 * textView_quiz_question_number.setText(current_page+"/"+size);
+			 */
+			break;
+		case FormEntryController.EVENT_REPEAT_JUNCTURE:
+			break;
+		default:
+			break;
 		}
-		else
-			mNextButton.setVisibility(View.GONE);*/
-		//textView_quiz_question_number.setText(current_page+"/"+size);
-		switch (event)
-		{
-			case FormEntryController.EVENT_QUESTION:
-			case FormEntryController.EVENT_GROUP:
-				// create a savepoint
-				if ((++viewCount) % SAVEPOINT_INTERVAL == 0)
-				{
-					SaveToDiskTask.blockingExportTempData();
-				}
-				next = createView(event, true);
-				showView(next, AnimationType.RIGHT);
-				break;
-			case FormEntryController.EVENT_END_OF_FORM:
-			case FormEntryController.EVENT_REPEAT:
-				next = createView(event, true);
-				showView(next, AnimationType.RIGHT);
-				break;
-			case FormEntryController.EVENT_PROMPT_NEW_REPEAT:
-				createRepeatDialog();
-				/*if (current_page!=1)
-					current_page--;
-				textView_quiz_question_number.setText(current_page+"/"+size);*/
-				break;
-			case FormEntryController.EVENT_REPEAT_JUNCTURE:
-				break;
-			default:
-				break;
-		}
-		
+
 	}
-	
+
 	@Override
 	public void updateView() {
-		Log.i(getClass().getName(), "UpdateView " + Boolean.toString(mAnswersChanged));
+		Log.i(getClass().getName(),
+				"UpdateView " + Boolean.toString(mAnswersChanged));
 		FormController formController = Collect.getInstance()
 				.getFormController();
-		if (formController.indexIsInFieldList()&&mAnswersChanged){
+		if (formController.indexIsInFieldList() && mAnswersChanged) {
 			if (formController.currentPromptIsQuestion()) {
 				if (!saveAnswersForCurrentScreen(EVALUATE_CONSTRAINTS)) {
 					// A constraint was violated so a dialog should be showing.
@@ -1264,23 +1281,22 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 * screen and displays the appropriate view. Also saves answers to the data
 	 * model without checking constraints.
 	 */
-	private void showPreviousView()
-	{
+	private void showPreviousView() {
 		current_page--;
-		if (current_page==1)
+		if (current_page == 1)
 			mBackButton.setVisibility(View.GONE);
 		mNextButton.setVisibility(View.VISIBLE);
-		FormController formController = Collect.getInstance().getFormController();
-		textView_quiz_question_number.setText(current_page+"/"+size);
-		
+		FormController formController = Collect.getInstance()
+				.getFormController();
+		textView_quiz_question_number.setText(current_page + "/" + size);
+
 		// The answer is saved on a back swipe, but question constraints are
 		// ignored.
 		if (formController.currentPromptIsQuestion()) {
 			saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
 		}
 
-		if (formController.getEvent() != FormEntryController.EVENT_BEGINNING_OF_FORM)
-		{
+		if (formController.getEvent() != FormEntryController.EVENT_BEGINNING_OF_FORM) {
 			event = formController.stepToPreviousScreenEvent();
 
 			if (event == FormEntryController.EVENT_BEGINNING_OF_FORM
@@ -1302,8 +1318,8 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 * the progress bar.
 	 */
 	public void showView(ScrollView next, AnimationType from) {
-		
-		if (from != AnimationType.NONE){
+
+		if (from != AnimationType.NONE) {
 			// disable notifications...
 			if (mInAnimation != null) {
 				mInAnimation.setAnimationListener(null);
@@ -1311,8 +1327,9 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			if (mOutAnimation != null) {
 				mOutAnimation.setAnimationListener(null);
 			}
-	
-			// logging of the view being shown is already done, as this was handled
+
+			// logging of the view being shown is already done, as this was
+			// handled
 			// by createView()
 			switch (from) {
 			case RIGHT:
@@ -1328,15 +1345,17 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 						R.anim.push_right_out);
 				break;
 			case FADE:
-				mInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-				mOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+				mInAnimation = AnimationUtils.loadAnimation(this,
+						R.anim.fade_in);
+				mOutAnimation = AnimationUtils.loadAnimation(this,
+						R.anim.fade_out);
 				break;
 			}
-	
+
 			// complete setup for animations...
 			mInAnimation.setAnimationListener(this);
 			mOutAnimation.setAnimationListener(this);
-		}else{
+		} else {
 			mInAnimation = null;
 			mOutAnimation = null;
 		}
@@ -1344,7 +1363,8 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		// drop keyboard before transition...
 		if (mCurrentView != null) {
 			InputMethodManager inputManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-			inputManager.hideSoftInputFromWindow(mCurrentView.getWindowToken(),0);
+			inputManager.hideSoftInputFromWindow(mCurrentView.getWindowToken(),
+					0);
 		}
 
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
@@ -1357,7 +1377,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		mAnimationCompletionSet = 0;
 
 		if (mStaleView != null) {
-			if (from != AnimationType.NONE){
+			if (from != AnimationType.NONE) {
 				// start OutAnimation for transition...
 				mStaleView.startAnimation(mOutAnimation);
 			}
@@ -1367,10 +1387,10 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			mAnimationCompletionSet = 2;
 		}
 		// start InAnimation for transition...
-		if (from != AnimationType.NONE){
+		if (from != AnimationType.NONE) {
 			mCurrentView.startAnimation(mInAnimation);
 		}
-		
+
 		String logString = "";
 		switch (from) {
 		case RIGHT:
@@ -1386,20 +1406,21 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			logString = "update";
 			break;
 		}
-		Log.e("FormEntryActivity", "scroll y : "+mY);
-		mCurrentView.post(new Runnable()
-		{ 
-	        public void run()
-	        { 
-	             mCurrentView.scrollTo(0, mY);
-	        } 
+		Log.e("FormEntryActivity", "scroll y : " + mY);
+		mCurrentView.post(new Runnable() {
+			public void run() {
+				mCurrentView.scrollTo(0, mY);
+			}
 		});
 		Collect.getInstance().getActivityLogger()
 				.logInstanceAction(this, "showView", logString);
-		
-		/*InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(mCurrentView.getWindowToken(), 0);*/
-		
+
+		/*
+		 * InputMethodManager imm =
+		 * (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+		 * imm.hideSoftInputFromWindow(mCurrentView.getWindowToken(), 0);
+		 */
+
 	}
 
 	// Hopefully someday we can use managed dialogs when the bugs are fixed
@@ -1455,7 +1476,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 
 	/**
 	 * Creates a toast with the specified message.
-	 *
+	 * 
 	 * @param message
 	 */
 	private void showCustomToast(String message, int duration) {
@@ -1464,7 +1485,8 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		View view = inflater.inflate(R.layout.widget_toast, null);
 
 		// set the text in the view
-		CustomFontTextview tv = (CustomFontTextview) view.findViewById(R.id.message);
+		CustomFontTextview tv = (CustomFontTextview) view
+				.findViewById(R.id.message);
 		tv.setText(message);
 
 		Toast t = new Toast(this);
@@ -1479,7 +1501,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 * repeat of the current group.
 	 */
 	private void createRepeatDialog() {
-		//current_page++;
+		// current_page++;
 		FormController formController = Collect.getInstance()
 				.getFormController();
 		Collect.getInstance().getActivityLogger()
@@ -1500,8 +1522,8 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 					try {
 						formController.newRepeat();
 					} catch (XPathTypeMismatchException e) {
-						ActivityForm.this.createErrorDialog(
-								e.getMessage(), EXIT);
+						ActivityForm.this.createErrorDialog(e.getMessage(),
+								EXIT);
 						return;
 					}
 					if (!formController.indexIsInFieldList()) {
@@ -1637,21 +1659,21 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 * instances as complete. If updatedSaveName is non-null, the instances
 	 * content provider is updated with the new name
 	 */
-	private boolean saveDataToDisk(boolean exit, boolean complete,String updatedSaveName)
-	{
+	private boolean saveDataToDisk(boolean exit, boolean complete,
+			String updatedSaveName) {
 		// save current answer
-		if (!saveAnswersForCurrentScreen(complete))
-		{
-			Toast.makeText(this, getString(R.string.data_saved_error),Toast.LENGTH_SHORT).show();
+		if (!saveAnswersForCurrentScreen(complete)) {
+			Toast.makeText(this, getString(R.string.data_saved_error),
+					Toast.LENGTH_SHORT).show();
 			return false;
 		}
 
-		mSaveToDiskTask = new SaveToDiskTask(getIntent().getData(), exit,complete, updatedSaveName);
+		mSaveToDiskTask = new SaveToDiskTask(getIntent().getData(), exit,
+				complete, updatedSaveName);
 		mSaveToDiskTask.setFormSavedListener(this);
 		showDialog(SAVING_DIALOG);
 		// show dialog before we execute...
 		mSaveToDiskTask.execute();
-		
 
 		return true;
 	}
@@ -1714,7 +1736,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 										.logInstanceAction(this,
 												"createQuitDialog",
 												"saveAndExit");
-								saveDataToDisk(EXIT, true,null);
+								saveDataToDisk(EXIT, true, null);
 							} else {
 								Collect.getInstance()
 										.getActivityLogger()
@@ -1748,32 +1770,28 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		mAlertDialog.show();
 	}
 
-	
-	
 	private void uploadFile() {
 		// send list of _IDs.
-		
-        mInstancesToSend = new Long[1];
-        mInstancesToSend[0]= InstanceProvider.getLastIdSaved();
 
-        InstanceUploaderTask mInstanceUploaderTask = (InstanceUploaderTask) getLastNonConfigurationInstance();
-        if (mInstanceUploaderTask == null)
-        {
-            // setup dialog and upload task
-            showDialog(PROGRESS_DIALOG);
-            mInstanceUploaderTask = new InstanceUploaderTask();
-            // register this activity with the new uploader task
-            mInstanceUploaderTask.setUploaderListener(ActivityForm.this);
-            mInstanceUploaderTask.execute(mInstancesToSend);
-        }
-        
-        if (mInstanceUploaderTask != null)
-        {
-            mInstanceUploaderTask.setUploaderListener(this);
-        }
-        
-        
+		mInstancesToSend = new Long[1];
+		mInstancesToSend[0] = InstanceProvider.getLastIdSaved();
+
+		InstanceUploaderTask mInstanceUploaderTask = (InstanceUploaderTask) getLastNonConfigurationInstance();
+		if (mInstanceUploaderTask == null) {
+			// setup dialog and upload task
+			showDialog(PROGRESS_DIALOG);
+			mInstanceUploaderTask = new InstanceUploaderTask();
+			// register this activity with the new uploader task
+			mInstanceUploaderTask.setUploaderListener(ActivityForm.this);
+			mInstanceUploaderTask.execute(mInstancesToSend);
+		}
+
+		if (mInstanceUploaderTask != null) {
+			mInstanceUploaderTask.setUploaderListener(this);
+		}
+
 	}
+
 	/**
 	 * this method cleans up unneeded files when the user selects 'discard and
 	 * exit'
@@ -1891,7 +1909,6 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		mAlertDialog.show();
 	}
 
-	
 	/**
 	 * We use Android's dialog management for loading/saving progress dialogs
 	 */
@@ -2022,7 +2039,8 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		if (mSaveToDiskTask != null) {
 			mSaveToDiskTask.setFormSavedListener(this);
 		}
-		if (mErrorMessage != null && (mAlertDialog != null && !mAlertDialog.isShowing())) {
+		if (mErrorMessage != null
+				&& (mAlertDialog != null && !mAlertDialog.isShowing())) {
 			createErrorDialog(mErrorMessage, EXIT);
 			return;
 		}
@@ -2030,19 +2048,20 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		// only check the buttons if it's enabled in preferences
 		SharedPreferences sharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(this);
-		String navigation = sharedPreferences.getString(ActivityPreferences.KEY_NAVIGATION, ActivityPreferences.KEY_NAVIGATION);
+		String navigation = sharedPreferences.getString(
+				ActivityPreferences.KEY_NAVIGATION,
+				ActivityPreferences.KEY_NAVIGATION);
 		Boolean showButtons = false;
 		if (navigation.contains(ActivityPreferences.NAVIGATION_BUTTONS)) {
 			showButtons = true;
 		}
 
-		/*if (showButtons) {
-			mBackButton.setVisibility(View.VISIBLE);
-			mNextButton.setVisibility(View.VISIBLE);
-		} else {
-			mBackButton.setVisibility(View.GONE);
-			mNextButton.setVisibility(View.GONE);
-		}*/
+		/*
+		 * if (showButtons) { mBackButton.setVisibility(View.VISIBLE);
+		 * mNextButton.setVisibility(View.VISIBLE); } else {
+		 * mBackButton.setVisibility(View.GONE);
+		 * mNextButton.setVisibility(View.GONE); }
+		 */
 	}
 
 	@Override
@@ -2054,18 +2073,22 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			createQuitDialog();
 			return true;
 		case KeyEvent.KEYCODE_DPAD_RIGHT:
-			if (event.isAltPressed())
-			{
-				Collect.getInstance().getActivityLogger().logInstanceAction(this,"onKeyDown.KEYCODE_DPAD_RIGHT", "showNext");
+			if (event.isAltPressed()) {
+				Collect.getInstance()
+						.getActivityLogger()
+						.logInstanceAction(this,
+								"onKeyDown.KEYCODE_DPAD_RIGHT", "showNext");
 				showNextView();
-				
+
 				return true;
 			}
 			break;
 		case KeyEvent.KEYCODE_DPAD_LEFT:
-			if (event.isAltPressed())
-			{
-				Collect.getInstance().getActivityLogger().logInstanceAction(this, "onKeyDown.KEYCODE_DPAD_LEFT","showPrevious");
+			if (event.isAltPressed()) {
+				Collect.getInstance()
+						.getActivityLogger()
+						.logInstanceAction(this, "onKeyDown.KEYCODE_DPAD_LEFT",
+								"showPrevious");
 				showPreviousView();
 				return true;
 			}
@@ -2158,8 +2181,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 * loading a form.
 	 */
 	@Override
-	public void loadingComplete(FormLoaderTask task)
-	{
+	public void loadingComplete(FormLoaderTask task) {
 		dismissDialog(PROGRESS_DIALOG);
 
 		FormController formController = task.getFormController();
@@ -2177,8 +2199,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		t.cancel(true);
 		t.destroy();
 		Collect.getInstance().setFormController(formController);
-		//updateMenu
-		
+		// updateMenu
 
 		// Set the language if one has already been set in the past
 		String[] languageTest = formController.getLanguages();
@@ -2227,16 +2248,13 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		// returned to ODK Collect and chose Edit Saved Form, but that the
 		// savepoint for that
 		// form is newer than the last saved version of their form data.
-		/*if (hasUsedSavepoint) {
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(ActivityForm.this,
-							getString(R.string.savepoint_used),
-							Toast.LENGTH_LONG).show();
-				}
-			});
-		}*/
+		/*
+		 * if (hasUsedSavepoint) { runOnUiThread(new Runnable() {
+		 * 
+		 * @Override public void run() { Toast.makeText(ActivityForm.this,
+		 * getString(R.string.savepoint_used), Toast.LENGTH_LONG).show(); } });
+		 * }
+		 */
 
 		// Set saved answer path
 		if (formController.getInstancePath() == null) {
@@ -2252,23 +2270,17 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 				formController.setInstancePath(new File(path + File.separator
 						+ file + "_" + time + ".xml"));
 			}
-		} /*else {
-			Intent reqIntent = getIntent();
-			boolean showFirst = reqIntent.getBooleanExtra("start", false);
-
-			if (!showFirst) {
-				// we've just loaded a saved form, so start in the hierarchy
-				// view
-				Intent i = new Intent(this, ActivityFormHierarchy.class);
-				i.putExtra("isSavedForm", true);
-				if (mToFormChooser){
-					i.putExtra("toFormChooser", true);
-				}
-				startActivity(i);
-				return; // so we don't show the intro screen before jumping to
-						// the hierarchy
-			}
-		}*/
+		} /*
+		 * else { Intent reqIntent = getIntent(); boolean showFirst =
+		 * reqIntent.getBooleanExtra("start", false);
+		 * 
+		 * if (!showFirst) { // we've just loaded a saved form, so start in the
+		 * hierarchy // view Intent i = new Intent(this,
+		 * ActivityFormHierarchy.class); i.putExtra("isSavedForm", true); if
+		 * (mToFormChooser){ i.putExtra("toFormChooser", true); }
+		 * startActivity(i); return; // so we don't show the intro screen before
+		 * jumping to // the hierarchy } }
+		 */
 
 		refreshCurrentView();
 	}
@@ -2290,16 +2302,17 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 * Called by SavetoDiskTask if everything saves correctly.
 	 */
 	@Override
-	public void savingComplete(int saveStatus)
-	{
+	public void savingComplete(int saveStatus) {
 		dismissDialog(SAVING_DIALOG);
 		switch (saveStatus) {
 		case SaveToDiskTask.SAVED:
-			Toast.makeText(this, getString(R.string.data_saved_ok),Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, getString(R.string.data_saved_ok),
+					Toast.LENGTH_SHORT).show();
 			sendSavedBroadcast();
 			break;
 		case SaveToDiskTask.SAVED_AND_EXIT:
-			Toast.makeText(this, getString(R.string.data_saved_ok),Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, getString(R.string.data_saved_ok),
+					Toast.LENGTH_SHORT).show();
 			sendSavedBroadcast();
 			finishReturnInstance();
 			break;
@@ -2317,12 +2330,12 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 		}
 		if (send)
 			uploadFile();
-		
+
 	}
 
 	/**
 	 * Attempts to save an answer to the specified index.
-	 *
+	 * 
 	 * @param answer
 	 * @param index
 	 * @param evaluateConstraints
@@ -2344,13 +2357,11 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	 * Checks the database to determine if the current instance being edited has
 	 * already been 'marked completed'. A form can be 'unmarked' complete and
 	 * then resaved.
-	 *
+	 * 
 	 * @return true if form has been marked completed, false otherwise.
 	 */
-	
 
-	public void next()
-	{
+	public void next() {
 		showNextView();
 	}
 
@@ -2375,8 +2386,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 				if (c.getCount() > 0) {
 					// should only be one...
 					c.moveToFirst();
-					String id = c.getString(c
-							.getColumnIndex(BaseColumns._ID));
+					String id = c.getString(c.getColumnIndex(BaseColumns._ID));
 					Uri instance = Uri.withAppendedPath(
 							InstanceColumns.CONTENT_URI, id);
 					setResult(RESULT_OK, new Intent().setData(instance));
@@ -2396,7 +2406,8 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	}
 
 	@Override
-	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,float velocityY) {
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+			float velocityY) {
 		// only check the swipe if it's enabled in preferences
 		// Looks for user swipes. If the user has swiped, move to the
 		// appropriate screen.
@@ -2416,39 +2427,34 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 			}
 		}
 
-		if ((Math.abs(e1.getX() - e2.getX()) > xPixelLimit && Math.abs(e1.getY() - e2.getY()) < yPixelLimit)|| Math.abs(e1.getX() - e2.getX()) > xPixelLimit * 2)
-		{
-			if (velocityX > 0)
-			{
-				if (e1.getX() > e2.getX())
-				{
-					if (event!=FormEntryController.EVENT_END_OF_FORM)
-					{
-						Collect.getInstance().getActivityLogger().logInstanceAction(this, "onFling", "showNext");
+		if ((Math.abs(e1.getX() - e2.getX()) > xPixelLimit && Math.abs(e1
+				.getY() - e2.getY()) < yPixelLimit)
+				|| Math.abs(e1.getX() - e2.getX()) > xPixelLimit * 2) {
+			if (velocityX > 0) {
+				if (e1.getX() > e2.getX()) {
+					if (event != FormEntryController.EVENT_END_OF_FORM) {
+						Collect.getInstance().getActivityLogger()
+								.logInstanceAction(this, "onFling", "showNext");
 						showNextView();
 					}
-				}
-				else if (current_page>1)
-				{
-					Collect.getInstance().getActivityLogger().logInstanceAction(this, "onFling","showPrevious");
+				} else if (current_page > 1) {
+					Collect.getInstance().getActivityLogger()
+							.logInstanceAction(this, "onFling", "showPrevious");
 					showPreviousView();
 				}
-			}
-			else
-			{
-				if (e1.getX() < e2.getX())
-				{
-					if (current_page>1) 
-					{
-						Collect.getInstance().getActivityLogger().logInstanceAction(this, "onFling","showPrevious");
+			} else {
+				if (e1.getX() < e2.getX()) {
+					if (current_page > 1) {
+						Collect.getInstance()
+								.getActivityLogger()
+								.logInstanceAction(this, "onFling",
+										"showPrevious");
 						showPreviousView();
 					}
-				}
-				else
-				{
-					if (event!=FormEntryController.EVENT_END_OF_FORM)
-					{
-						Collect.getInstance().getActivityLogger().logInstanceAction(this, "onFling", "showNext");
+				} else {
+					if (event != FormEntryController.EVENT_END_OF_FORM) {
+						Collect.getInstance().getActivityLogger()
+								.logInstanceAction(this, "onFling", "showNext");
 						showNextView();
 					}
 				}
@@ -2507,16 +2513,16 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 
 	@Override
 	public void setAnswerChange(boolean hasChanged) {
-		Log.i(getClass().getName(), "setAnswerChange " + Boolean.toString(hasChanged));
+		Log.i(getClass().getName(),
+				"setAnswerChange " + Boolean.toString(hasChanged));
 		mAnswersChanged = hasChanged;
 	}
-	
-	private void razConfirmation()
-	{
-		
+
+	private void razConfirmation() {
+
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		adb.setTitle("Remise à zéro");
-		adb.setMessage("Voulez-vous vraiment remettre à zéro?");
+		adb.setTitle("Remise √† z√©ro");
+		adb.setMessage("Voulez-vous vraiment remettre √† z√©ro?");
 		adb.setPositiveButton(getString(android.R.string.yes),new AlertDialog.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog,int which)
@@ -2664,7 +2670,7 @@ public class ActivityForm extends SherlockActivity implements AnimationListener,
 	private void deleteSelectedInstances()
 	{
 		ArrayList<Long> mSelected=new ArrayList<Long>();
-		mSelected.add(mInstancesToSend[0]);
+		mSelected.add(mInstancesToSend[0]); 
 		
 		DeleteInstancesTask mDeleteInstancesTask = new DeleteInstancesTask();
 		mDeleteInstancesTask.setContentResolver(getContentResolver());
