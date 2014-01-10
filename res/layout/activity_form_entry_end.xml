@@ -102,6 +102,7 @@
                 <com.makina.collect.android.views.CustomFontTextview
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/checkbox3"
                     android:text="@string/send_form_and_restart"

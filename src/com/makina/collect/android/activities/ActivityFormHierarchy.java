@@ -24,6 +24,7 @@ import org.javarosa.form.api.FormEntryPrompt;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ import android.view.InflateException;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -48,8 +50,9 @@ import com.makina.collect.android.logic.FormController;
 import com.makina.collect.android.logic.HierarchyElement;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.utilities.Finish;
+import com.makina.collect.android.views.CustomActionBar;
 
-public class ActivityFormHierarchy extends SherlockListActivity {
+public class ActivityFormHierarchy extends SherlockListActivity implements OnClickListener{
 
 	private static final String t = "FormHierarchyActivity";
 
@@ -65,7 +68,6 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 	private boolean mToFormChooser;
 
 	List<HierarchyElement> formList;
-	TextView mPath;
 
 	FormIndex mStartIndex;
 
@@ -84,13 +86,16 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 		// We use a static FormEntryController to make jumping faster.
 		mStartIndex = formController.getFormIndex();
 
-		setTitle(formController.getFormTitle());
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-		mPath = (TextView) findViewById(R.id.pathtext);
-
-
-		// kinda slow, but works.
+		getSupportActionBar().setTitle(getString(R.string.edit));
+        getSupportActionBar().setSubtitle(getString(R.string.form));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
+    	TextView actionbarTitle = (TextView)findViewById(titleId);
+    	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
+    	TextView actionbarSubTitle = (TextView)findViewById(titleId);
+    	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
+    	
+    	// kinda slow, but works.
 		// this scrolls to the last question the user was looking at
 		getListView().post(new Runnable() {
 			@Override
@@ -107,6 +112,9 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 			}
 		});
 		refreshView();
+		
+		 
+		findViewById(R.id.linearLayout_footer).setOnClickListener(this);
 	}
 
 	@Override
@@ -126,27 +134,6 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 	private void goUpLevel() {
 		Collect.getInstance().getFormController().stepToOuterScreenEvent();
 		refreshView();
-	}
-
-	private String getCurrentPath() {
-		FormController formController = Collect.getInstance()
-				.getFormController();
-		FormIndex index = formController.getFormIndex();
-		// move to enclosing group...
-		index = formController.stepIndexOut(index);
-
-		String path = "";
-		while (index != null) {
-
-			path = formController.getCaptionPrompt(index).getLongText()
-					+ " ("
-					+ (formController.getCaptionPrompt(index).getMultiplicity() + 1)
-					+ ") > " + path;
-
-			index = formController.stepIndexOut(index);
-		}
-		// return path?
-		return path.substring(0, path.length() - 2);
 	}
 
 	public void refreshView() {
@@ -203,10 +190,6 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 		if (event == FormEntryController.EVENT_BEGINNING_OF_FORM) {
 			// The beginning of form has no valid prompt to display.
 			formController.stepToNextEvent(FormController.STEP_INTO_GROUP);
-			mPath.setVisibility(View.GONE);
-		} else {
-			mPath.setVisibility(View.VISIBLE);
-			mPath.setText(getCurrentPath());
 		}
 
 		// Refresh the current event in case we did step forward.
@@ -504,5 +487,15 @@ public class ActivityFormHierarchy extends SherlockListActivity {
 	            return super.onOptionsItemSelected(item);
         }
     }
+
+	@Override
+	public void onClick(View v)
+	{
+		switch (v.getId()) {
+		case R.id.linearLayout_footer:
+			finish();
+			break;
+		}
+	}
 
 }

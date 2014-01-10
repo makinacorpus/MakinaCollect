@@ -20,7 +20,6 @@ import com.WazaBe.HoloEverywhere.app.AlertDialog;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.ActionBar.LayoutParams;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -43,7 +42,6 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;

@@ -28,7 +28,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockActivity;
@@ -81,25 +80,19 @@ public class ActivityDashBoard extends SherlockActivity implements
 
 		switch (v.getId()) {
 		case R.id.dashboard_download:
-			startActivity(new Intent(getApplicationContext(),
-					ActivityDownloadForm.class));
+			startActivity(new Intent(getApplicationContext(),ActivityDownloadForm.class));
 			break;
 		case R.id.dashboard_edit:
-			startActivity(new Intent(getApplicationContext(),
-					ActivityEditForm.class));
+			startActivity(new Intent(getApplicationContext(),ActivityEditForm.class));
 			break;
 		case R.id.dashboard_save:
-			startActivity(new Intent(getApplicationContext(),
-					ActivitySaveForm.class));
+			startActivity(new Intent(getApplicationContext(),ActivitySaveForm.class));
 			break;
 		case R.id.dashboard_send:
 			startActivity(new Intent(getApplicationContext(),
 					ActivitySendForm.class));
 			break;
 		}
-
-		startActivity(new Intent(getApplicationContext(),
-				ActivityDownloadForm.class));
 	}
 
 	@Override
