@@ -48,7 +48,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
@@ -66,8 +65,11 @@ import com.makina.collect.android.tasks.DownloadFormListTask;
 import com.makina.collect.android.tasks.DownloadFormsTask;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.WebUtils;
+import com.makina.collect.android.views.CroutonView;
 import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
+
+import de.keyboardsurfer.mobile.app.android.widget.crouton.Style;
 
 import android.widget.SearchView;
 /**
@@ -274,8 +276,8 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
 
         if (ni == null || !ni.isConnected()) {
-            Toast.makeText(getApplicationContext(), R.string.no_connection, Toast.LENGTH_SHORT).show();
-        } else {
+        	CroutonView.showBuiltInCrouton(ActivityDownloadForm.this, getString(R.string.no_connection), Style.ALERT);
+		} else {
 
             mFormNamesAndURLs = new HashMap<String, FormDetails>();
             if (mProgressDialog != null) {
@@ -514,8 +516,8 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
             mDownloadFormsTask.setDownloaderListener(this);
             mDownloadFormsTask.execute(filesToDownload);
         } else {
-            Toast.makeText(this.getApplicationContext(), R.string.noselect_error, Toast.LENGTH_SHORT)
-                    .show();
+        	CroutonView.showBuiltInCrouton(ActivityDownloadForm.this, getString(R.string.noselect_error), Style.ALERT);
+    		
         }
     }
 

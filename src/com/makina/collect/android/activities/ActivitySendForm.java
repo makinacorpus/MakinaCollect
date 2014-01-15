@@ -54,7 +54,6 @@ import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 import com.actionbarsherlock.app.SherlockListActivity;
@@ -77,9 +76,11 @@ import com.makina.collect.android.tasks.DeleteInstancesTask;
 import com.makina.collect.android.tasks.InstanceUploaderTask;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.WebUtils;
+import com.makina.collect.android.views.CroutonView;
 import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
 
+import de.keyboardsurfer.mobile.app.android.widget.crouton.Style;
 import de.timroes.swipetodismiss.SwipeDismissList;
 import de.timroes.swipetodismiss.SwipeDismissList.UndoMode;
 import de.timroes.swipetodismiss.SwipeDismissList.Undoable;
@@ -452,14 +453,15 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 		if (NetworkReceiver.running == true) 
 		{
 			//another upload is already running
-			Toast.makeText(this,"Background send running, please try again shortly",Toast.LENGTH_SHORT).show();
+			CroutonView.showBuiltInCrouton(ActivitySendForm.this, "Background send running, please try again shortly", Style.ALERT);
+    		
 		} 
 		else if (ni == null || !ni.isConnected()) 
 		{
 			//no network connection
 			Collect.getInstance().getActivityLogger().logAction(this, "uploadButton", "noConnection");
-			Toast.makeText(this,R.string.no_connection, Toast.LENGTH_SHORT).show();
-		} 
+			CroutonView.showBuiltInCrouton(ActivitySendForm.this, getString(R.string.no_connection), Style.ALERT);
+    	} 
 		else
 		{
 			Collect.getInstance().getActivityLogger().logAction(this, "uploadButton",Integer.toString(mSelected.size()));
@@ -472,8 +474,8 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 			else 
 			{
 				// no items selected
-				Toast.makeText(getApplicationContext(),getString(R.string.noselect_error),Toast.LENGTH_SHORT).show();
-			}
+				CroutonView.showBuiltInCrouton(ActivitySendForm.this, getString(R.string.noselect_error), Style.ALERT);
+	    	}
 		}
 	}
 
@@ -491,8 +493,8 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 			mDeleteInstancesTask.execute(mSelected.toArray(new Long[mSelected
 					.size()]));
 		} else {
-			Toast.makeText(this, getString(R.string.file_delete_in_progress),
-					Toast.LENGTH_LONG).show();
+			CroutonView.showBuiltInCrouton(ActivitySendForm.this, getString(R.string.file_delete_in_progress), Style.ALERT);
+	    	
 		}
 	}
 

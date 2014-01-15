@@ -60,9 +60,7 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -213,7 +211,6 @@ InstanceUploaderListener, DeleteInstancesListener {
 	private CustomFontTextview textView_quiz_question_number,textView_quiz_name;
 	
 	private boolean mAnswersChanged;
-	private boolean mToFormChooser;
 	
 	enum AnimationType {
 		LEFT, RIGHT, FADE, NONE
@@ -223,6 +220,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 	
 	public static int current_page,size;
 	private CheckBox checkBox1, checkBox2, checkBox3;
+	private RelativeLayout relativelayout_checkbox1, relativelayout_checkbox2, relativelayout_checkbox3;
 	private int event;
 	private boolean send = false, restart = false;
 	private HashMap<String, String> mUploadedInstances;
@@ -267,8 +265,6 @@ InstanceUploaderListener, DeleteInstancesListener {
 				getResources().getColor(R.color.actionbarTitleColorGris));
 		
 		Intent intent = getIntent();
-		
-		mToFormChooser = true;
 		
 		mAlertDialog = null;
 		mCurrentView = null;
@@ -1166,6 +1162,57 @@ InstanceUploaderListener, DeleteInstancesListener {
 			checkBox1 = (CheckBox) endView.findViewById(R.id.checkbox1);
 			checkBox2 = (CheckBox) endView.findViewById(R.id.checkbox2);
 			checkBox3 = (CheckBox) endView.findViewById(R.id.checkbox3);
+			relativelayout_checkbox1 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox1);
+			relativelayout_checkbox2 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox2);
+			relativelayout_checkbox3 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox3);
+			
+			relativelayout_checkbox1.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					if (checkBox1.isChecked())
+						checkBox1.setChecked(false);
+					else
+					{
+						checkBox1.setChecked(true);
+						checkBox2.setChecked(false);
+						checkBox3.setChecked(false);
+					}
+				}
+			});
+			
+			relativelayout_checkbox2.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					if (checkBox2.isChecked())
+						checkBox2.setChecked(false);
+					else
+					{
+						checkBox2.setChecked(true);
+						checkBox1.setChecked(false);
+						checkBox3.setChecked(false);
+					}
+				}
+			});
+			
+			relativelayout_checkbox3.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					if (checkBox3.isChecked())
+						checkBox3.setChecked(false);
+					else
+					{
+						checkBox3.setChecked(true);
+						checkBox1.setChecked(false);
+						checkBox2.setChecked(false);
+					}
+				}
+			});
 			checkBox1
 					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 						@Override
