@@ -33,6 +33,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter; 
@@ -70,7 +71,6 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 
 	private AlertDialog mAlertDialog;
     private Cursor c;
-    private  SearchView mSearchView;
     private SimpleCursorAdapter instances;
     
     @SuppressLint("NewApi")
@@ -83,7 +83,11 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         Finish.activitySaveForm=this;
         
         MenuItem searchItem = menu.findItem(R.id.menu_search);
-        mSearchView = (SearchView) searchItem.getActionView();
+        final SearchView mSearchView = (SearchView) searchItem.getActionView();
+        int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
+        ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
+        if (searchButton!=null)
+        	searchButton.setImageResource(R.drawable.actionbar_search); 
         mSearchView.setOnQueryTextListener(this);
         
         getLayoutInflater().setFactory(new LayoutInflater.Factory()

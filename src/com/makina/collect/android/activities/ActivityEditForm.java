@@ -42,6 +42,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
@@ -89,7 +90,6 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     private AlertDialog mAlertDialog;
     
     private String statusText;
-    private SearchView mSearchView;
     private ArrayList<Long> mSelected;
     private SimpleCursorAdapter instances;
     
@@ -243,7 +243,11 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         getSupportMenuInflater().inflate(R.menu.menu_activity_edit_form, menu);
         
         MenuItem searchItem = menu.findItem(R.id.menu_search);
-        mSearchView = (SearchView) searchItem.getActionView();
+        final SearchView mSearchView = (SearchView) searchItem.getActionView();
+        int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
+        ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
+        if (searchButton!=null)
+        	searchButton.setImageResource(R.drawable.actionbar_search); 
         mSearchView.setOnQueryTextListener(this);
         
         getLayoutInflater().setFactory(new LayoutInflater.Factory()
