@@ -14,17 +14,17 @@ public final class R {
 		public static final int normal = 0x7f0b0001;
 	}
 	public static final class string {
-		public static final int common_google_play_services_update_text = 0x7f090038;
-		public static final int common_google_play_services_install_button = 0x7f090033;
-		public static final int common_google_play_services_install_title = 0x7f090030;
-		public static final int common_google_play_services_install_text_phone = 0x7f090031;
-		public static final int common_google_play_services_update_button = 0x7f09003a;
-		public static final int common_google_play_services_enable_title = 0x7f090034;
-		public static final int common_google_play_services_install_text_tablet = 0x7f090032;
-		public static final int common_google_play_services_unknown_issue = 0x7f090039;
-		public static final int common_google_play_services_enable_button = 0x7f090036;
-		public static final int common_google_play_services_update_title = 0x7f090037;
-		public static final int common_google_play_services_enable_text = 0x7f090035;
+		public static final int common_google_play_services_update_text = 0x7f0a0038;
+		public static final int common_google_play_services_install_button = 0x7f0a0033;
+		public static final int common_google_play_services_install_title = 0x7f0a0030;
+		public static final int common_google_play_services_install_text_phone = 0x7f0a0031;
+		public static final int common_google_play_services_update_button = 0x7f0a003a;
+		public static final int common_google_play_services_enable_title = 0x7f0a0034;
+		public static final int common_google_play_services_install_text_tablet = 0x7f0a0032;
+		public static final int common_google_play_services_unknown_issue = 0x7f0a0039;
+		public static final int common_google_play_services_enable_button = 0x7f0a0036;
+		public static final int common_google_play_services_update_title = 0x7f0a0037;
+		public static final int common_google_play_services_enable_text = 0x7f0a0035;
 	}
 	public static final class styleable {
 		public static final int MapAttrs_uiCompass = 6;

@@ -50,7 +50,6 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.provider.BaseColumns;
 import android.provider.MediaStore.MediaColumns;
 import android.text.InputFilter;
@@ -72,7 +71,6 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -81,7 +79,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -112,10 +109,14 @@ import com.makina.collect.android.tasks.SaveToDiskTask;
 import com.makina.collect.android.utilities.FileUtils;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.MediaUtils;
+import com.makina.collect.android.views.CroutonView;
 import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
 import com.makina.collect.android.views.ODKView;
 import com.makina.collect.android.widgets.QuestionWidget;
+
+import de.keyboardsurfer.mobile.app.android.widget.crouton.Style;
+
 
 /**
  * FormEntryActivity is responsible for displaying questions, animating
@@ -1109,7 +1110,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 						public void onClick(View v) {
 							// Form is marked as 'saved' here.
 							if (saveAs.getText().length() < 1)
-								Toast.makeText(ActivityForm.this,R.string.save_as_error,Toast.LENGTH_SHORT).show();
+								CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.save_as_error), Style.ALERT);
 							else
 							{
 								Boolean instanceComplete=true;
@@ -1124,7 +1125,8 @@ InstanceUploaderListener, DeleteInstancesListener {
 									if (ni == null || !ni.isConnected())
 									{
 										// no network connection
-										Toast.makeText(getApplicationContext(),R.string.no_connection,Toast.LENGTH_SHORT).show();
+										CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.no_connection), Style.ALERT);
+										
 										saveDataToDisk(false, true, saveAs.getText().toString());
 									}
 									else
@@ -1139,7 +1141,6 @@ InstanceUploaderListener, DeleteInstancesListener {
 									NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
 									if (ni == null || !ni.isConnected())
 									{
-										Toast.makeText(getApplicationContext(),R.string.no_connection,Toast.LENGTH_SHORT).show();
 										saveDataToDisk(false, true, saveAs.getText().toString());
 									}
 									else
@@ -1150,7 +1151,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 									}
 								}
 								else
-									Toast.makeText(getApplicationContext(), getString(R.string.checkbox_error),Toast.LENGTH_SHORT).show();
+									CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.checkbox_error), Style.ALERT);
 							}
 						}
 					});
@@ -1535,8 +1536,9 @@ InstanceUploaderListener, DeleteInstancesListener {
 			}
 			break;
 		}
-
-		showCustomToast(constraintText, Toast.LENGTH_SHORT);
+		
+		CroutonView.showBuiltInCrouton(ActivityForm.this, constraintText, Style.ALERT);
+		
 	}
 
 	/**
@@ -1544,7 +1546,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 	 *
 	 * @param message
 	 */
-	private void showCustomToast(String message, int duration) {
+	/*private void showCustomToast(String message, int duration) {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		View view = inflater.inflate(R.layout.widget_toast, null);
@@ -1558,7 +1560,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 		t.setDuration(duration);
 		t.setGravity(Gravity.CENTER, 0, 0);
 		t.show();
-	}
+	}*/
 
 	/**
 	 * Creates and displays a dialog asking the user if they'd like to create a
@@ -1726,8 +1728,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 			String updatedSaveName) {
 		// save current answer
 		if (!saveAnswersForCurrentScreen(complete)) {
-			Toast.makeText(this, getString(R.string.data_saved_error),
-					Toast.LENGTH_SHORT).show();
+			CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.data_saved_error), Style.ALERT);
 			return false;
 		}
 
@@ -2386,19 +2387,14 @@ InstanceUploaderListener, DeleteInstancesListener {
 		dismissDialog(SAVING_DIALOG);
 		switch (saveStatus) {
 		case SaveToDiskTask.SAVED:
-			Toast.makeText(this, getString(R.string.data_saved_ok),
-					Toast.LENGTH_SHORT).show();
 			sendSavedBroadcast();
 			break;
 		case SaveToDiskTask.SAVED_AND_EXIT:
-			Toast.makeText(this, getString(R.string.data_saved_ok),
-					Toast.LENGTH_SHORT).show();
 			sendSavedBroadcast();
 			finishReturnInstance();
 			break;
 		case SaveToDiskTask.SAVE_ERROR:
-			Toast.makeText(this, getString(R.string.data_saved_error),
-					Toast.LENGTH_LONG).show();
+			CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.data_saved_error), Style.ALERT);
 			break;
 		case FormEntryController.ANSWER_CONSTRAINT_VIOLATED:
 		case FormEntryController.ANSWER_REQUIRED_BUT_EMPTY:
@@ -2797,5 +2793,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 
         showDialog(AUTH_DIALOG);
 	}
+	
+	
 
 }
