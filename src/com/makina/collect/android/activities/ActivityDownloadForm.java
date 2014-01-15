@@ -129,7 +129,6 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
     private boolean mShouldExit;
     private static final String SHOULD_EXIT = "shouldexit";
     private CustomFontTextview textView_pannier;
-    private SearchView mSearchView;
     private ArrayList<String> mSelected = new ArrayList<String>();
 
     @SuppressWarnings("unchecked")
@@ -496,14 +495,8 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         int totalCount = 0;
         ArrayList<FormDetails> filesToDownload = new ArrayList<FormDetails>();
 
-        SparseBooleanArray sba = getListView().getCheckedItemPositions();
-        for (int i = 0; i < getListView().getCount(); i++) {
-            if (sba.get(i, false)) {
-                HashMap<String, String> item =
-                    (HashMap<String, String>) getListAdapter().getItem(i);
-                filesToDownload.add(mFormNamesAndURLs.get(item.get(FORMDETAIL_KEY)));
-            }
-        }
+        for (int i = 0; i < mSelected.size(); i++)
+            filesToDownload.add(mFormNamesAndURLs.get(mSelected.get(i)));
         totalCount = filesToDownload.size();
 
         Collect.getInstance().getActivityLogger().logAction(this, "downloadSelectedFiles", Integer.toString(totalCount));
@@ -776,11 +769,6 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
        createAlertDialog(getString(R.string.download_forms_result), b.toString().trim(), EXIT);
     }
     
-    private void setupSearchView(MenuItem searchItem)
-    {
-    	mSearchView.setOnQueryTextListener(this);
-    }
- 
     public boolean onQueryTextChange(String newText){
     	ArrayList<HashMap<String, String>> mFormList=new ArrayList<HashMap<String,String>>();
     	for (int i=0; i<this.mFormList.size();i++)
@@ -793,8 +781,6 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
     	 mFormListAdapter =new SimpleAdapter(this, mFormList, R.layout.listview_item_download_form, data, view);
          setListAdapter(mFormListAdapter);
          
-        /* ListView ls = new ListView(getApplicationContext());
-         ls.setAdapter(mFormListAdapter);*/
          for (int i=0;i<mFormList.size();i++)
          {
         	 if (mSelected.contains(mFormList.get(i).get(FORMDETAIL_KEY)))
@@ -805,6 +791,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
     }
  
     public boolean onQueryTextSubmit(String query) {
+    	getFormsOption();
         return false;
     }
  
@@ -823,8 +810,13 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         getSupportMenuInflater().inflate(R.menu.menu_activity_download_form, menu);
         
         MenuItem searchItem = menu.findItem(R.id.menu_search);
-        mSearchView = (SearchView) searchItem.getActionView();
-        setupSearchView(searchItem);
+        final SearchView mSearchView = (SearchView) searchItem.getActionView();
+        int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
+        ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
+        if (searchButton!=null)
+        	searchButton.setImageResource(R.drawable.actionbar_search); 
+        mSearchView.setMaxWidth(300);
+        mSearchView.setOnQueryTextListener(this);
         
         getLayoutInflater().setFactory(new LayoutInflater.Factory()
         {

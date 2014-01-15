@@ -113,7 +113,6 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 	private boolean mToggled = false;
 	private AlertDialog mAlertDialog;
 	DeleteInstancesTask mDeleteInstancesTask = null;
-	private  SearchView mSearchView;
 	private TextView textView_pannier;
 	private final int PROGRESS_DIALOG=1;
 	
@@ -150,9 +149,14 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
         Finish.activitySendForm=this;
         
         MenuItem searchItem = menu.findItem(R.id.menu_search);
-        mSearchView = (SearchView) searchItem.getActionView();
+        final SearchView mSearchView = (SearchView) searchItem.getActionView();
+        int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
+        ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
+        if (searchButton!=null)
+        	searchButton.setImageResource(R.drawable.actionbar_search);
+        mSearchView.setMaxWidth(300);
         mSearchView.setOnQueryTextListener(this);
-        
+       
         getLayoutInflater().setFactory(new LayoutInflater.Factory()
         {
             public View onCreateView(String name, Context context, AttributeSet attrs)
