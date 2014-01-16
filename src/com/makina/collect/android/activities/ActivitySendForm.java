@@ -223,8 +223,8 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
         setContentView(R.layout.activity_send_form);
         
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    	getSupportActionBar().setTitle(getString(R.string.box));
-    	getSupportActionBar().setSubtitle(getString(R.string.send));
+    	getSupportActionBar().setTitle(getString(R.string.my_forms_send));
+    	getSupportActionBar().setSubtitle(getString(R.string.to_send));
     	int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);
     	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");

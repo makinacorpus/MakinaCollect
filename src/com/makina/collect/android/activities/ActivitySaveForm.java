@@ -158,8 +158,8 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_saved", false))
     		HelpWithConfirmation.helpDialog(this, getString(R.string.help_saved));
     	
-    	getSupportActionBar().setTitle(getString(R.string.my_forms_send));
-    	getSupportActionBar().setSubtitle(getString(R.string.saved));
+    	getSupportActionBar().setTitle(getString(R.string.finalize));
+    	getSupportActionBar().setSubtitle(getString(R.string.my_forms));
     	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     	int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
     	TextView actionbarTitle = (TextView)findViewById(titleId);

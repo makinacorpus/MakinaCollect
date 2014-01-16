@@ -15,6 +15,6 @@
   -->
 
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/actionbarTitleColorGreenEdit_on" />
-    <item android:drawable="@drawable/selectable_item_background" />
+    <item android:drawable="@color/actionbarTitleColorGreenEdit" />
+    <item android:drawable="@color/actionbarTitleColorGreenDownload" />
 </layer-list>
