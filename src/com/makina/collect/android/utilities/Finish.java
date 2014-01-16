@@ -5,6 +5,7 @@ import com.makina.collect.android.activities.ActivityDownloadForm;
 import com.makina.collect.android.activities.ActivityEditForm;
 import com.makina.collect.android.activities.ActivityForm;
 import com.makina.collect.android.activities.ActivityFormHierarchy;
+import com.makina.collect.android.activities.ActivityHelp;
 import com.makina.collect.android.activities.ActivitySaveForm;
 import com.makina.collect.android.activities.ActivitySendForm;
 import com.makina.collect.android.preferences.ActivityPreferences;
@@ -19,6 +20,7 @@ public class Finish
 	public static ActivityForm activityForm;
 	public static ActivityFormHierarchy activityFormHierarchy;
 	public static ActivityPreferences activityPreferences;
+	public static ActivityHelp activityHelp;
 	
 	public static void finish()
 	{
@@ -30,5 +32,6 @@ public class Finish
 		if(activityForm != null) activityForm.finish();
 		if(activityFormHierarchy != null) activityFormHierarchy.finish();
 		if(activityPreferences != null) activityPreferences.finish();
+		if(activityHelp != null) activityHelp.finish();
 	}
 }

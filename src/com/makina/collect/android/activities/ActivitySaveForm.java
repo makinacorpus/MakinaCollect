@@ -45,9 +45,8 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
-import com.makina.collect.android.dialog.AboutUs;
-import com.makina.collect.android.dialog.Help;
-import com.makina.collect.android.dialog.HelpWithConfirmation;
+import com.makina.collect.android.dialog.DialogAboutUs;
+import com.makina.collect.android.dialog.DialogHelpWithConfirmation;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.provider.InstanceProviderAPI;
@@ -135,10 +134,10 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 	        	startActivity(new Intent(this, ActivityPreferences.class));
 	        	return true;
 	        case R.id.menu_help:
-	        	Help.helpDialog(this, getString(R.string.help_saved));
+	        	startActivity(new Intent(this, ActivityHelp.class));
 	        	return true;
 	        case R.id.menu_about_us:
-	        	AboutUs.aboutUs(this);
+	        	DialogAboutUs.aboutUs(this);
 	        	return true;
 	        case R.id.menu_exit:
 	        	Finish.finish();
@@ -156,7 +155,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     	setContentView(R.layout.activity_save_form);
         
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_saved", false))
-    		HelpWithConfirmation.helpDialog(this, getString(R.string.help_saved));
+    		DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_save));
     	
     	getSupportActionBar().setTitle(getString(R.string.finalize));
     	getSupportActionBar().setSubtitle(getString(R.string.my_forms));

@@ -1,59 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="30dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="30dp" >
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="50dip"
-        android:background="@color/about_us_blue" >
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="62dip"
+        android:background="@color/white"
+        app:pstsDividerColor="#00000000"
+        app:pstsIndicatorColor="#FF33B5E6"
+        app:pstsTabPaddingLeftRight="14dip"
+        app:pstsUnderlineColor="#FF33B5E6" />
 
-        <com.makina.collect.android.views.CustomFontTextview
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="@string/help"
-            android:textColor="@drawable/white"
-            android:textSize="25sp" />
-    </RelativeLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tabs" />
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <com.makina.collect.android.views.CustomFontTextview
-                android:id="@+id/textview_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:layout_marginLeft="7dip"
-                android:layout_marginRight="7dip" />
-
-            <LinearLayout
-                android:id="@+id/linearlayout_ok"
-                android:layout_width="fill_parent"
-                android:layout_height="60dip"
-                android:layout_marginTop="10dip"
-                android:background="@drawable/check_all_selector"
-                android:gravity="center"
-                android:orientation="vertical" >
-
-                <com.makina.collect.android.views.CustomFontTextview
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dip"
-                    android:text="@string/ok"
-                    android:textColor="@drawable/white"
-                    android:textSize="25sp" />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
-</LinearLayout>
+</RelativeLayout>

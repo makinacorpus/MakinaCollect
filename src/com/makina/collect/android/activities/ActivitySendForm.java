@@ -61,9 +61,8 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
-import com.makina.collect.android.dialog.AboutUs;
-import com.makina.collect.android.dialog.Help;
-import com.makina.collect.android.dialog.HelpWithConfirmation;
+import com.makina.collect.android.dialog.DialogAboutUs;
+import com.makina.collect.android.dialog.DialogHelpWithConfirmation;
 import com.makina.collect.android.listeners.DeleteInstancesListener;
 import com.makina.collect.android.listeners.InstanceUploaderListener;
 import com.makina.collect.android.preferences.ActivityPreferences;
@@ -205,10 +204,10 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 	        	startActivity(new Intent(this, ActivityPreferences.class));
 	        	return true;
 	        case R.id.menu_help:
-	        	Help.helpDialog(this, getString(R.string.help_send));
+	        	startActivity(new Intent(this, ActivityHelp.class));
 	        	return true;
 	        case R.id.menu_about_us:
-	        	AboutUs.aboutUs(this);
+	        	DialogAboutUs.aboutUs(this);
 	        	return true;
 	        case R.id.menu_exit:
 	        	Finish.finish();
@@ -234,7 +233,7 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
         mProgressDialog = new ProgressDialog(this);
     	
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_send", false))
-    		HelpWithConfirmation.helpDialog(this, getString(R.string.help_send));
+    		DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_send));
     	
         textView_pannier=(TextView)findViewById(R.id.textView_pannier);
         RelativeLayout relativeLayout_check_all=(RelativeLayout) findViewById(R.id.check_all);

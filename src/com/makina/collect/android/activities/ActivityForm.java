@@ -88,8 +88,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.adapters.HierarchyListAdapter;
 import com.makina.collect.android.application.Collect;
-import com.makina.collect.android.dialog.AboutUs;
-import com.makina.collect.android.dialog.Help;
+import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.listeners.AdvanceToNextListener;
 import com.makina.collect.android.listeners.DeleteInstancesListener;
 import com.makina.collect.android.listeners.FormLoaderListener;
@@ -853,10 +852,10 @@ InstanceUploaderListener, DeleteInstancesListener {
 			startActivity(pref);
 			return true;
 		case R.id.menu_help:
-			Help.helpDialog(this,getString(R.string.help_form));
+			startActivity(new Intent(this, ActivityHelp.class));
 			return true;
 		case R.id.menu_about_us:
-			AboutUs.aboutUs(this);
+			DialogAboutUs.aboutUs(this);
 			return true;
 		case R.id.menu_exit:
 			Finish.finish();

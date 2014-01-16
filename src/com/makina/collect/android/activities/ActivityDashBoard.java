@@ -35,7 +35,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
-import com.makina.collect.android.dialog.AboutUs;
+import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.utilities.Finish;
 
@@ -140,8 +140,11 @@ public class ActivityDashBoard extends SherlockActivity implements
 		case R.id.menu_settings:
 			startActivity(new Intent(this, ActivityPreferences.class));
 			return true;
+		 case R.id.menu_help:
+			 startActivity(new Intent(this, ActivityHelp.class));
+			 return true;
 		case R.id.menu_about_us:
-			AboutUs.aboutUs(this);
+			DialogAboutUs.aboutUs(this);
 			return true;
 		case R.id.menu_exit:
 			Finish.finish();

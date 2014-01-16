@@ -45,7 +45,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.adapters.HierarchyListAdapter;
 import com.makina.collect.android.application.Collect;
-import com.makina.collect.android.dialog.AboutUs;
+import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.logic.FormController;
 import com.makina.collect.android.logic.HierarchyElement;
 import com.makina.collect.android.preferences.ActivityPreferences;
@@ -478,7 +478,7 @@ public class ActivityFormHierarchy extends SherlockListActivity implements OnCli
 	        	startActivity(new Intent(this, ActivityPreferences.class));
 	        	return true;
 	        case R.id.menu_about_us:
-	        	AboutUs.aboutUs(this);
+	        	DialogAboutUs.aboutUs(this);
 	        	return true;
 	        case R.id.menu_exit:
 	        	Finish.finish();

@@ -16,6 +16,9 @@ the License.
 -->
 <resources>
 
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="background_window">#FFE5E5E5</color>
     <drawable name="strocke_about_us">#b8d754</drawable>
     <drawable name="background_drawer_list">#2fffffff</drawable>
     <drawable name="linear_blue">#2bbccc</drawable>

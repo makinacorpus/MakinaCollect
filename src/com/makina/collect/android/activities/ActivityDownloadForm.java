@@ -54,9 +54,8 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
-import com.makina.collect.android.dialog.AboutUs;
-import com.makina.collect.android.dialog.Help;
-import com.makina.collect.android.dialog.HelpWithConfirmation;
+import com.makina.collect.android.dialog.DialogAboutUs;
+import com.makina.collect.android.dialog.DialogHelpWithConfirmation;
 import com.makina.collect.android.listeners.FormDownloaderListener;
 import com.makina.collect.android.listeners.FormListDownloaderListener;
 import com.makina.collect.android.logic.FormDetails;
@@ -152,7 +151,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
     	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenDownload), getResources().getColor(R.color.actionbarTitleColorGris));
     	
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_download", false))
-    		HelpWithConfirmation.helpDialog(this, getString(R.string.help_download));
+    		DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_download));
 		
     	
     	
@@ -866,10 +865,10 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 	        	startActivity(new Intent(this, ActivityPreferences.class));
 	        	return true;
 	        case R.id.menu_help:
-	        	Help.helpDialog(this, getString(R.string.help_download));
+	        	startActivity(new Intent(getApplicationContext(), ActivityHelp.class));
 	        	return true;
 	        case R.id.menu_about_us:
-	        	AboutUs.aboutUs(this);
+	        	DialogAboutUs.aboutUs(this);
 	        	return true;
 	        case R.id.menu_exit:
 	        	Finish.finish();

@@ -54,9 +54,8 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
-import com.makina.collect.android.dialog.AboutUs;
-import com.makina.collect.android.dialog.Help;
-import com.makina.collect.android.dialog.HelpWithConfirmation;
+import com.makina.collect.android.dialog.DialogAboutUs;
+import com.makina.collect.android.dialog.DialogHelpWithConfirmation;
 import com.makina.collect.android.listeners.DeleteInstancesListener;
 import com.makina.collect.android.listeners.DiskSyncListener;
 import com.makina.collect.android.preferences.ActivityPreferences;
@@ -112,7 +111,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
     	
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_edit", false))
-    		HelpWithConfirmation.helpDialog(this, getString(R.string.help_edit));
+    		DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_edit));
     	
         loadListView();
         
@@ -310,10 +309,10 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
 	        	startActivity(new Intent(this, ActivityPreferences.class));
 	        	return true;
 	        case R.id.menu_help:
-	        	Help.helpDialog(this, getString(R.string.help_edit));
+	        	startActivity(new Intent(this, ActivityHelp.class));
 	        	return true;
 	        case R.id.menu_about_us:
-	        	AboutUs.aboutUs(this);
+	        	DialogAboutUs.aboutUs(this);
 	        	return true;
 	        case R.id.menu_exit:
 	        	Finish.finish();
@@ -358,7 +357,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     }*/
     
     //TODO Back to previous task
-    /*public boolean onOptionsItemSelected(MenuItem item) {
+   /* public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 	        case android.R.id.home:
 	            // This is called when the Home (Up) button is pressed

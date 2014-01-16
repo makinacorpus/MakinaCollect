@@ -69,7 +69,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.activities.ActivityDashBoard;
 import com.makina.collect.android.application.Collect;
-import com.makina.collect.android.dialog.AboutUs;
+import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.UrlUtils;
@@ -831,7 +831,7 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 	        	startActivity(new Intent(getApplicationContext(), ActivityDashBoard.class));
 	        return true;
 	        case R.id.menu_about_us:
-	        	AboutUs.aboutUs(this);
+	        	DialogAboutUs.aboutUs(this);
 	        	return true;
 	        case R.id.menu_exit:
 	        	Finish.finish();
