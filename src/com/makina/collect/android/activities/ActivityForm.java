@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -69,11 +70,14 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -82,6 +86,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
+import com.makina.collect.android.adapters.HierarchyListAdapter;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.AboutUs;
 import com.makina.collect.android.dialog.Help;
@@ -92,6 +97,7 @@ import com.makina.collect.android.listeners.FormSavedListener;
 import com.makina.collect.android.listeners.InstanceUploaderListener;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.logic.FormController;
+import com.makina.collect.android.logic.HierarchyElement;
 import com.makina.collect.android.logic.FormController.FailedConstraint;
 import com.makina.collect.android.logic.PropertyManager;
 import com.makina.collect.android.preferences.AdminPreferencesActivity;
@@ -173,13 +179,10 @@ InstanceUploaderListener, DeleteInstancesListener {
 	// these are only processed if we shut down and are restoring after an
 	// external intent fires
 
-	public static final String KEY_INSTANCEPATH = "instancepath";
-	public static final String KEY_XPATH = "xpath";
-	public static final String KEY_XPATH_WAITING_FOR_DATA = "xpathwaiting";
+	private static final String KEY_INSTANCEPATH = "instancepath";
+	private static final String KEY_XPATH = "xpath";
+	private static final String KEY_XPATH_WAITING_FOR_DATA = "xpathwaiting";
 
-	private static final int MENU_LANGUAGES = Menu.FIRST;
-	private static final int MENU_HIERARCHY_VIEW = Menu.FIRST + 1;
-	private static final int MENU_SAVE = Menu.FIRST + 2;
 
 	private static final int PROGRESS_DIALOG = 1;
 	private static final int SAVING_DIALOG = 2;
@@ -207,7 +210,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 	private FormLoaderTask mFormLoaderTask;
 	private SaveToDiskTask mSaveToDiskTask;
 
-	private ImageView mNextButton,mBackButton;
+	private Button mNextButton,mBackButton;
 	private CustomFontTextview textView_quiz_question_number,textView_quiz_name;
 	
 	private boolean mAnswersChanged;
@@ -228,14 +231,22 @@ InstanceUploaderListener, DeleteInstancesListener {
 	private String mAlertMsg;
 	private Uri uri;
 	private final static int AUTH_DIALOG = 2;
+	private EditText saveAs ;
+	private List<HierarchyElement> formList;
+	private ListView hierarchyList;
+	private static final int CHILD = 1;
+	private static final int COLLAPSED = 3;
+	private static final int QUESTION = 4;
+	private boolean test_finish=true;
 
+	private static final String mIndent = "     ";
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.i("FormEntryActivity", "onCreate");
 		
-		Finish.activityForm = this;
+		//Finish.ActivityForm = this;
 		current_page=1;
 		
 		// must be at the beginning of any activity that can be called from an
@@ -247,7 +258,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 			return;
 		}
 
-		setContentView(R.layout.activity_form_entry2);
+		setContentView(R.layout.activity_form_entry);
 		textView_quiz_question_number = (CustomFontTextview) findViewById(R.id.textView_quiz_question_number);
 		textView_quiz_name = ((CustomFontTextview) findViewById(R.id.textView_quiz_name));
 		
@@ -277,15 +288,25 @@ InstanceUploaderListener, DeleteInstancesListener {
 		mAdminPreferences = getSharedPreferences(
 				AdminPreferencesActivity.ADMIN_PREFERENCES, 0);
 
-		mNextButton = (ImageView) findViewById(R.id.form_forward_button);
+		mNextButton = (Button) findViewById(R.id.next_button);
 		mNextButton.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v) {
-				showNextView();
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				test_finish=true;
+				if (mNextButton.getText().equals(getString(R.string.finish)))
+				{
+					test_finish=false;
+					showNextView();
+				}
+				else if (mNextButton.getText().equals(getString(R.string.save)))
+					saveForm(saveAs.getText().toString());
+				else
+					showNextView();
 			}
 		});
 
-		mBackButton = (ImageView) findViewById(R.id.form_back_button);
+		mBackButton = (Button) findViewById(R.id.prev_button);
 		mBackButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -785,33 +806,6 @@ InstanceUploaderListener, DeleteInstancesListener {
 		return true;
 	}
 
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		
-
-		FormController formController = Collect.getInstance()
-				.getFormController();
-
-		Collect.getInstance().getActivityLogger()
-				.logInstanceAction(this, "onPrepareOptionsMenu", "show");
-
-		menu.removeItem(MENU_LANGUAGES);
-		menu.removeItem(MENU_HIERARCHY_VIEW);
-		menu.removeItem(MENU_SAVE);
-		
-	
-		if (mAdminPreferences.getBoolean(
-				AdminPreferencesActivity.KEY_CHANGE_LANGUAGE, true)) {
-			boolean enabled = false;
-			if (formController != null)
-				enabled = (formController.getLanguages() == null || formController
-						.getLanguages().length == 1) ? false : true;
-			menu.add(0, MENU_LANGUAGES, 0, getString(R.string.change_language))
-					.setIcon(R.drawable.ic_menu_start_conversation)
-					.setEnabled(enabled);
-		}
-		return true;
-	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -1014,284 +1008,283 @@ InstanceUploaderListener, DeleteInstancesListener {
 	private ScrollView createView(int event, boolean advancingPage) {
 		
 		
-		FormController formController = Collect.getInstance().getFormController();
+		final FormController formController = Collect.getInstance().getFormController();
 		textView_quiz_name.setText(formController.getFormTitle());
 		textView_quiz_question_number.setText(current_page + "/" + size);
 		findViewById(R.id.relativeLayout_informations).setVisibility(View.VISIBLE);
 		findViewById(R.id.buttonholder).setVisibility(View.VISIBLE);
-		findViewById(R.id.save).setVisibility(View.GONE);
-		switch (event) {
-		case FormEntryController.EVENT_END_OF_FORM:
+		if ( (FormEntryController.EVENT_END_OF_FORM==event) && (test_finish))
+		{
 			findViewById(R.id.relativeLayout_informations).setVisibility(View.GONE);
-			findViewById(R.id.buttonholder).setVisibility(View.GONE);
-			findViewById(R.id.save).setVisibility(View.VISIBLE);
-			ScrollView endView = (ScrollView) View.inflate(this, R.layout.activity_form_entry_end, null);
-			
-			
-
-			// edittext to change the displayed name of the instance
-			final EditText saveAs = (EditText) endView
-					.findViewById(R.id.save_name);
-
-			// disallow carriage returns in the name
-			InputFilter returnFilter = new InputFilter() {
+			ScrollView endView = (ScrollView) View.inflate(this, R.layout.fragment_form_hierarchy, null);
+			mNextButton.setText(getString(R.string.finish));
+			mNextButton.setBackgroundResource(R.drawable.finish_background);
+			hierarchyList=(ListView) endView.findViewById(R.id.hierarchyList);
+			hierarchyList.post(new Runnable() {
 				@Override
-				public CharSequence filter(CharSequence source, int start,
-						int end, Spanned dest, int dstart, int dend) {
-					for (int i = start; i < end; i++) {
-						if (Character.getType((source.charAt(i))) == Character.CONTROL) {
-							return "";
+				public void run() {
+					int position = 0;
+					for (int i = 0; i < hierarchyList.getAdapter().getCount(); i++) {
+						HierarchyElement he = formList.get(i);
+						if (formController.getFormIndex().equals(he.getFormIndex())) {
+							position = i;
+							break;
 						}
 					}
-					return null;
+					hierarchyList.setSelection(position);
 				}
-			};
-			saveAs.setFilters(new InputFilter[] { returnFilter });
-
-			String saveName = formController.getSubmissionMetadata().instanceName;
-			
-			
-			
-			if (saveName == null) {
-				//TODO Default saveAs text should be previous save name
-				// no meta/instanceName field in the form -- see if we have a
-				// name for this instance from a previous save attempt...
-				if (getContentResolver().getType(getIntent().getData()) == InstanceColumns.CONTENT_ITEM_TYPE) {
-					Uri instanceUri = getIntent().getData();
-					Cursor instance = null;
-					try {
-						instance = getContentResolver().query(instanceUri,
-								null, null, null, null);
-						if (instance.getCount() == 1) {
-							instance.moveToFirst();
-							saveName = instance
-									.getString(instance
-											.getColumnIndex(InstanceColumns.DISPLAY_NAME));
-						}
-					} finally {
-						if (instance != null) {
-							instance.close();
-						}
-					}
-				}
-				// present the prompt to allow user to name the form
-				// TODO if savename != null don"t need to initialize it
-				if (saveName == null || saveName.length() == 0){
-					saveName = formController.getFormTitle();
-				}
-				saveAs.setText(saveName);
-				saveAs.setEnabled(true);
-				saveAs.setVisibility(View.VISIBLE);
-			} else {
-				// if instanceName is defined in form, this is the name -- no
-				// revisions
-				// display only the name, not the prompt, and disable edits
-				
-				saveAs.setText(saveName);
-				saveAs.setEnabled(false);
-				saveAs.setBackgroundColor(Color.WHITE);
-				saveAs.setVisibility(View.VISIBLE);
-			}
-
-			// override the visibility settings based upon admin preferences
-			if (!mAdminPreferences.getBoolean(
-					AdminPreferencesActivity.KEY_SAVE_AS, true)) {
-				saveAs.setVisibility(View.GONE);
-			}
-
-			// Create 'save' button
-			((RelativeLayout) findViewById(R.id.save))
-					.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							// Form is marked as 'saved' here.
-							if (saveAs.getText().length() < 1)
-								CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.save_as_error), Style.ALERT);
-							else
-							{
-								Boolean instanceComplete=true;
-								if (checkBox1.isChecked())
-								{
-									saveDataToDisk(EXIT, instanceComplete, saveAs.getText().toString());
-								}
-								else if (checkBox2.isChecked())
-								{
-									ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-									NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
-									if (ni == null || !ni.isConnected())
-									{
-										// no network connection
-										CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.no_connection), Style.ALERT);
-										
-										saveDataToDisk(false, true, saveAs.getText().toString());
-									}
-									else
-									{
-										saveDataToDisk(false, true, saveAs.getText().toString());
-										send = true;
-									}
-								}
-								else if (checkBox3.isChecked())
-								{
-									ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-									NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
-									if (ni == null || !ni.isConnected())
-									{
-										saveDataToDisk(false, true, saveAs.getText().toString());
-									}
-									else
-									{
-										saveDataToDisk(false, true, saveAs.getText().toString());
-										send = true;
-										restart = true;
-									}
-								}
-								else
-									CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.checkbox_error), Style.ALERT);
-							}
-						}
-					});
-			
-			if (mBackButton.isShown()) {
-				mBackButton.setEnabled(true);
-			}
-			if (mNextButton.isShown()) {
-				mNextButton.setEnabled(false);
-			}
-
-			checkBox1 = (CheckBox) endView.findViewById(R.id.checkbox1);
-			checkBox2 = (CheckBox) endView.findViewById(R.id.checkbox2);
-			checkBox3 = (CheckBox) endView.findViewById(R.id.checkbox3);
-			relativelayout_checkbox1 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox1);
-			relativelayout_checkbox2 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox2);
-			relativelayout_checkbox3 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox3);
-			
-			relativelayout_checkbox1.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					// TODO Auto-generated method stub
-					if (checkBox1.isChecked())
-						checkBox1.setChecked(false);
-					else
-					{
-						checkBox1.setChecked(true);
-						checkBox2.setChecked(false);
-						checkBox3.setChecked(false);
-					}
+			});
+			hierarchyList.setOnItemClickListener(new OnItemClickListener()
+			{
+				public void onItemClick(AdapterView<?> a, View v, int position, long id)
+				{
+					HierarchyElement h = formList.get(position);
+					FormIndex index = h.getFormIndex();
+					showPreviousViewFromHierarchy(position, index);
 				}
 			});
 			
-			relativelayout_checkbox2.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					// TODO Auto-generated method stub
-					if (checkBox2.isChecked())
-						checkBox2.setChecked(false);
-					else
-					{
-						checkBox2.setChecked(true);
-						checkBox1.setChecked(false);
-						checkBox3.setChecked(false);
-					}
-				}
-			});
-			
-			relativelayout_checkbox3.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					// TODO Auto-generated method stub
-					if (checkBox3.isChecked())
-						checkBox3.setChecked(false);
-					else
-					{
-						checkBox3.setChecked(true);
-						checkBox1.setChecked(false);
-						checkBox2.setChecked(false);
-					}
-				}
-			});
-			checkBox1
-					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-						@Override
-						public void onCheckedChanged(CompoundButton arg0,
-								boolean status) {
-							// TODO Auto-generated method stub
-							if (status) {
-								checkBox2.setChecked(false);
-								checkBox3.setChecked(false);
-							}
-						}
-					});
-			checkBox2
-					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-						@Override
-						public void onCheckedChanged(CompoundButton arg0,
-								boolean status) {
-							// TODO Auto-generated method stub
-							if (status) {
-								checkBox1.setChecked(false);
-								checkBox3.setChecked(false);
-							}
-						}
-					});
-			checkBox3
-					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-						@Override
-						public void onCheckedChanged(CompoundButton arg0,
-								boolean status) {
-							// TODO Auto-generated method stub
-							if (status) {
-								checkBox1.setChecked(false);
-								checkBox2.setChecked(false);
-							}
-						}
-					});
+			refreshViewHierarchy();
+			/*int totalHeight = 10;
+            for (int i = 0; i < hierarchyList.getAdapter().getCount(); i++) {
+                View listItem = hierarchyList.getAdapter().getView(i, null, hierarchyList);
+                if (listItem!=null)
+                {
+                	listItem.measure(0, 0);
+                	totalHeight += listItem.getMeasuredHeight();
+                }
+                
+            }
+
+            ViewGroup.LayoutParams params = hierarchyList.getLayoutParams();
+            params.height = totalHeight + (hierarchyList.getDividerHeight() * (hierarchyList.getAdapter().getCount() - 1));
+            hierarchyList.setLayoutParams(params);*/
 			return endView;
-		case FormEntryController.EVENT_QUESTION:
-		case FormEntryController.EVENT_GROUP:
-		case FormEntryController.EVENT_REPEAT:
-			ODKView odkv = null;
-			// should only be a group here if the event_group is a field-list
-			try {
-				FormEntryPrompt[] prompts = formController.getQuestionPrompts();
-				FormEntryCaption[] groups = formController
-						.getGroupsForCurrentIndex();
-				odkv = new ODKView(this, this, formController.getQuestionPrompts(),
-						groups, advancingPage);
-				Log.i(t,
-						"created view for group "
-								+ (groups.length > 0 ? groups[groups.length - 1]
-										.getLongText() : "[top]")
-								+ " "
-								+ (prompts.length > 0 ? prompts[0]
-										.getQuestionText() : "[no question]"));
-			} catch (RuntimeException e) {
-				createErrorDialog(e.getMessage(), EXIT);
-				e.printStackTrace();
+		}
+		else
+		{	
+			switch (event)
+			{
+			
+			case FormEntryController.EVENT_END_OF_FORM:
+				findViewById(R.id.relativeLayout_informations).setVisibility(View.GONE);
+				test_finish=true;
+				ScrollView endView;
+				mNextButton.setText(getString(R.string.save));
+				mNextButton.setBackgroundResource(R.drawable.finish_background);
+				endView = (ScrollView) View.inflate(this, R.layout.activity_form_entry_end, null);
+				
+				
+
+				// edittext to change the displayed name of the instance
+				saveAs = (EditText) endView
+						.findViewById(R.id.save_name);
+
+				// disallow carriage returns in the name
+				InputFilter returnFilter = new InputFilter() {
+					@Override
+					public CharSequence filter(CharSequence source, int start,
+							int end, Spanned dest, int dstart, int dend) {
+						for (int i = start; i < end; i++) {
+							if (Character.getType((source.charAt(i))) == Character.CONTROL) {
+								return "";
+							}
+						}
+						return null;
+					}
+				};
+				saveAs.setFilters(new InputFilter[] { returnFilter });
+
+				String saveName = formController.getSubmissionMetadata().instanceName;
+				
+				
+				
+				if (saveName == null) {
+					//TODO Default saveAs text should be previous save name
+					// no meta/instanceName field in the form -- see if we have a
+					// name for this instance from a previous save attempt...
+					if (getContentResolver().getType(getIntent().getData()) == InstanceColumns.CONTENT_ITEM_TYPE) {
+						Uri instanceUri = getIntent().getData();
+						Cursor instance = null;
+						try {
+							instance = getContentResolver().query(instanceUri,
+									null, null, null, null);
+							if (instance.getCount() == 1) {
+								instance.moveToFirst();
+								saveName = instance
+										.getString(instance
+												.getColumnIndex(InstanceColumns.DISPLAY_NAME));
+							}
+						} finally {
+							if (instance != null) {
+								instance.close();
+							}
+						}
+					}
+					// present the prompt to allow user to name the form
+					// TODO if savename != null don"t need to initialize it
+					if (saveName == null || saveName.length() == 0){
+						saveName = formController.getFormTitle();
+					}
+					saveAs.setText(saveName);
+					saveAs.setEnabled(true);
+					saveAs.setVisibility(View.VISIBLE);
+				}
+				else
+				{
+					// if instanceName is defined in form, this is the name -- no
+					// revisions
+					// display only the name, not the prompt, and disable edits
+					
+					saveAs.setText(saveName);
+					saveAs.setEnabled(false);
+					saveAs.setBackgroundColor(Color.WHITE);
+					saveAs.setVisibility(View.VISIBLE);
+				}
+
+				// override the visibility settings based upon admin preferences
+				if (!mAdminPreferences.getBoolean(
+						AdminPreferencesActivity.KEY_SAVE_AS, true)) {
+					saveAs.setVisibility(View.GONE);
+				}
+
+				
+					checkBox1 = (CheckBox) endView.findViewById(R.id.checkbox1);
+					checkBox2 = (CheckBox) endView.findViewById(R.id.checkbox2);
+					checkBox3 = (CheckBox) endView.findViewById(R.id.checkbox3);
+					relativelayout_checkbox1 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox1);
+					relativelayout_checkbox2 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox2);
+					relativelayout_checkbox3 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox3);
+				
+				relativelayout_checkbox1.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View arg0) {
+						// TODO Auto-generated method stub
+						if (checkBox1.isChecked())
+							checkBox1.setChecked(false);
+						else
+						{
+							checkBox1.setChecked(true);
+							checkBox2.setChecked(false);
+							checkBox3.setChecked(false);
+						}
+					}
+				});
+				
+				relativelayout_checkbox2.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View arg0) {
+						// TODO Auto-generated method stub
+						if (checkBox2.isChecked())
+							checkBox2.setChecked(false);
+						else
+						{
+							checkBox2.setChecked(true);
+							checkBox1.setChecked(false);
+							checkBox3.setChecked(false);
+						}
+					}
+				});
+				
+				relativelayout_checkbox3.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View arg0) {
+						// TODO Auto-generated method stub
+						if (checkBox3.isChecked())
+							checkBox3.setChecked(false);
+						else
+						{
+							checkBox3.setChecked(true);
+							checkBox1.setChecked(false);
+							checkBox2.setChecked(false);
+						}
+					}
+				});
+				checkBox1
+						.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+							@Override
+							public void onCheckedChanged(CompoundButton arg0,
+									boolean status) {
+								// TODO Auto-generated method stub
+								if (status) {
+									checkBox2.setChecked(false);
+									checkBox3.setChecked(false);
+								}
+							}
+						});
+				checkBox2
+						.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+							@Override
+							public void onCheckedChanged(CompoundButton arg0,
+									boolean status) {
+								// TODO Auto-generated method stub
+								if (status) {
+									checkBox1.setChecked(false);
+									checkBox3.setChecked(false);
+								}
+							}
+						});
+				checkBox3
+						.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+							@Override
+							public void onCheckedChanged(CompoundButton arg0,
+									boolean status) {
+								// TODO Auto-generated method stub
+								if (status) {
+									checkBox1.setChecked(false);
+									checkBox2.setChecked(false);
+								}
+							}
+						});
+			
+				
+				return endView;
+			case FormEntryController.EVENT_QUESTION:
+			case FormEntryController.EVENT_GROUP:
+			case FormEntryController.EVENT_REPEAT:
+				ODKView odkv = null;
+				// should only be a group here if the event_group is a field-list
+				try {
+					FormEntryPrompt[] prompts = formController.getQuestionPrompts();
+					FormEntryCaption[] groups = formController
+							.getGroupsForCurrentIndex();
+					odkv = new ODKView(this, this, formController.getQuestionPrompts(),
+							groups, advancingPage);
+					Log.i(t,
+							"created view for group "
+									+ (groups.length > 0 ? groups[groups.length - 1]
+											.getLongText() : "[top]")
+									+ " "
+									+ (prompts.length > 0 ? prompts[0]
+											.getQuestionText() : "[no question]"));
+				} catch (RuntimeException e) {
+					createErrorDialog(e.getMessage(), EXIT);
+					e.printStackTrace();
+					// this is badness to avoid a crash.
+					event = formController.stepToNextScreenEvent();
+					return createView(event, advancingPage);
+				}
+	
+				// Makes a "clear answer" menu pop up on long-click
+				for (QuestionWidget qw : odkv.getWidgets()) {
+					if (!qw.getPrompt().isReadOnly()) {
+						registerForContextMenu(qw);
+					}
+				}
+	
+				if (mBackButton.isShown() && mNextButton.isShown()) {
+					mBackButton.setEnabled(true);
+					mNextButton.setEnabled(true);
+				}
+				return odkv;
+			default:
 				// this is badness to avoid a crash.
 				event = formController.stepToNextScreenEvent();
 				return createView(event, advancingPage);
 			}
-
-			// Makes a "clear answer" menu pop up on long-click
-			for (QuestionWidget qw : odkv.getWidgets()) {
-				if (!qw.getPrompt().isReadOnly()) {
-					registerForContextMenu(qw);
-				}
-			}
-
-			if (mBackButton.isShown() && mNextButton.isShown()) {
-				mBackButton.setEnabled(true);
-				mNextButton.setEnabled(true);
-			}
-			return odkv;
-		default:
-			// this is badness to avoid a crash.
-			event = formController.stepToNextScreenEvent();
-			return createView(event, advancingPage);
 		}
 	}
 
@@ -1407,10 +1400,14 @@ InstanceUploaderListener, DeleteInstancesListener {
 	 * model without checking constraints.
 	 */
 	private void showPreviousView() {
+		if (mNextButton.getText().toString().equals(getString(R.string.save)))
+			mNextButton.setText(getString(R.string.finish));
+		else
+			mNextButton.setText(getString(R.string.next));
+		test_finish=true;
 		current_page--;
-		if (current_page == 1)
-			mBackButton.setVisibility(View.GONE);
-		mNextButton.setVisibility(View.VISIBLE);
+		mNextButton.setBackgroundResource(R.drawable.selectable_item_background);
+		mBackButton.setVisibility(current_page <= 1 ? View.INVISIBLE : View.VISIBLE);
 		FormController formController = Collect.getInstance()
 				.getFormController();
 		textView_quiz_question_number.setText(current_page + "/" + size);
@@ -1421,8 +1418,10 @@ InstanceUploaderListener, DeleteInstancesListener {
 		}
 
 		if (formController.getEvent() != FormEntryController.EVENT_BEGINNING_OF_FORM) {
-			int event = formController.stepToPreviousScreenEvent();
-
+			
+			if (mNextButton.getText().toString().equals(getString(R.string.next)))
+				event = formController.stepToPreviousScreenEvent();
+			
 			if (event == FormEntryController.EVENT_BEGINNING_OF_FORM
 					|| event == FormEntryController.EVENT_GROUP
 					|| event == FormEntryController.EVENT_QUESTION) {
@@ -1434,6 +1433,30 @@ InstanceUploaderListener, DeleteInstancesListener {
 			ScrollView next = createView(event, false);
 			showView(next, AnimationType.LEFT);
 		}
+	}
+	
+	private void showPreviousViewFromHierarchy(int position, FormIndex index)
+	{
+		mNextButton.setText(getString(R.string.next));
+		current_page=position+1;
+		mNextButton.setBackgroundResource(R.drawable.selectable_item_background);
+		mBackButton.setVisibility(current_page <= 1 ? View.INVISIBLE : View.VISIBLE);
+		FormController formController = Collect.getInstance().getFormController();
+		formController.jumpToIndex(index);
+		textView_quiz_question_number.setText(current_page + "/" + size);
+		// The answer is saved on a back swipe, but question constraints are
+		// ignored.
+		event=formController.getEvent();
+		if (event == FormEntryController.EVENT_BEGINNING_OF_FORM
+				|| event == FormEntryController.EVENT_GROUP
+				|| event == FormEntryController.EVENT_QUESTION) {
+			// create savepoint
+			if ((++viewCount) % SAVEPOINT_INTERVAL == 0) {
+				SaveToDiskTask.blockingExportTempData();
+			}
+		}
+		ScrollView next = createView(event, false);
+		showView(next, AnimationType.LEFT);
 	}
 
 	/**
@@ -1514,7 +1537,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 		String logString = "";
 		switch (from) {
 		case RIGHT:
-			logString = "next";
+			logString = getString(R.string.next);
 			break;
 		case LEFT:
 			logString = "previous";
@@ -1550,7 +1573,8 @@ InstanceUploaderListener, DeleteInstancesListener {
 	/**
 	 * Creates and displays a dialog displaying the violated constraint.
 	 */
-	private void createConstraintToast(FormIndex index, int saveStatus) {
+	private void createConstraintToast(FormIndex index, int saveStatus)
+	{
 		FormController formController = Collect.getInstance()
 				.getFormController();
 		String constraintText = formController.getQuestionPrompt(index)
@@ -1576,9 +1600,8 @@ InstanceUploaderListener, DeleteInstancesListener {
 					.logInstanceAction(this,
 							"createConstraintToast.ANSWER_REQUIRED_BUT_EMPTY",
 							"show", index);
-			constraintText = formController.getQuestionPrompt(index)
-					.getSpecialFormQuestionText("requiredMsg");
-			if (constraintText == null) {
+			constraintText = formController.getQuestionPrompt(index).getSpecialFormQuestionText("requiredMsg");
+			if (constraintText == null){
 				constraintText = getString(R.string.required_answer_error);
 			}
 			break;
@@ -2209,6 +2232,16 @@ InstanceUploaderListener, DeleteInstancesListener {
 			createErrorDialog(mErrorMessage, EXIT);
 			return;
 		}
+		if (formController!=null)
+			event=formController.getEvent();
+		if (event != FormEntryController.EVENT_END_OF_FORM)
+		{
+			mNextButton.setText(getString(R.string.next));
+			mNextButton.setBackgroundResource(R.drawable.selectable_item_background);
+			test_finish=true;
+		}
+		if (current_page==1)
+			mBackButton.setVisibility(View.INVISIBLE);
 	}
 
 	@Override
@@ -2611,11 +2644,15 @@ InstanceUploaderListener, DeleteInstancesListener {
 				|| Math.abs(e1.getX() - e2.getX()) > xPixelLimit * 2) {
 			if (velocityX > 0) {
 				if (e1.getX() > e2.getX()) {
-					if (event != FormEntryController.EVENT_END_OF_FORM) {
-						Collect.getInstance().getActivityLogger()
-								.logInstanceAction(this, "onFling", "showNext");
+					test_finish=true;
+					if (mNextButton.getText().equals(getString(R.string.finish)))
+					{
+						test_finish=false;
 						showNextView();
 					}
+					else if (!mNextButton.getText().equals(getString(R.string.save)))
+						showNextView();
+					
 				} else if (current_page > 1) {
 					Collect.getInstance().getActivityLogger()
 							.logInstanceAction(this, "onFling", "showPrevious");
@@ -2631,11 +2668,14 @@ InstanceUploaderListener, DeleteInstancesListener {
 						showPreviousView();
 					}
 				} else {
-					if (event != FormEntryController.EVENT_END_OF_FORM) {
-						Collect.getInstance().getActivityLogger()
-								.logInstanceAction(this, "onFling", "showNext");
+					test_finish=true;
+					if (mNextButton.getText().equals(getString(R.string.finish)))
+					{
+						test_finish=false;
 						showNextView();
 					}
+					else if (!mNextButton.getText().equals(getString(R.string.save)))
+						showNextView();
 				}
 			}
 			return true;
@@ -2841,6 +2881,218 @@ InstanceUploaderListener, DeleteInstancesListener {
         showDialog(AUTH_DIALOG);
 	}
 	
+	private void saveForm(String save_as)
+	{
+		if (save_as.length() < 1)
+			CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.save_as_error), Style.ALERT);
+		else
+		{
+			Boolean instanceComplete=true;
+			if (checkBox1.isChecked())
+			{
+				saveDataToDisk(EXIT, instanceComplete, save_as.toString());
+			}
+			else if (checkBox2.isChecked())
+			{
+				ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+				NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
+				if (ni == null || !ni.isConnected())
+				{
+					// no network connection
+					CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.no_connection), Style.ALERT);
+					
+					saveDataToDisk(false, true, save_as.toString());
+				}
+				else
+				{
+					saveDataToDisk(false, true, save_as.toString());
+					send = true;
+				}
+			}
+			else if (checkBox3.isChecked())
+			{
+				ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+				NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
+				if (ni == null || !ni.isConnected())
+				{
+					saveDataToDisk(false, true, save_as.toString());
+				}
+				else
+				{
+					saveDataToDisk(false, true, save_as.toString());
+					send = true;
+					restart = true;
+				}
+			}
+			else
+				CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.checkbox_error), Style.ALERT);
+		}
+	}
 	
+	public void refreshViewHierarchy() {
+		FormController formController = Collect.getInstance()
+				.getFormController();
+		// Record the current index so we can return to the same place if the
+		// user hits 'back'.
+		FormIndex currentIndex = formController.getFormIndex();
+
+		// If we're not at the first level, we're inside a repeated group so we
+		// want to only display
+		// everything enclosed within that group.
+		String enclosingGroupRef = "";
+		formList = new ArrayList<HierarchyElement>();
+
+		// If we're currently at a repeat node, record the name of the node and
+		// step to the next
+		// node to display.
+		if (formController.getEvent() == FormEntryController.EVENT_REPEAT) {
+			enclosingGroupRef = formController.getFormIndex().getReference()
+					.toString(false);
+			formController.stepToNextEvent(FormController.STEP_INTO_GROUP);
+		} else {
+			FormIndex startTest = formController.stepIndexOut(currentIndex);
+			// If we have a 'group' tag, we want to step back until we hit a
+			// repeat or the
+			// beginning.
+			while (startTest != null
+					&& formController.getEvent(startTest) == FormEntryController.EVENT_GROUP) {
+				startTest = formController.stepIndexOut(startTest);
+			}
+			if (startTest == null) {
+				// check to see if the question is at the first level of the
+				// hierarchy. If it is,
+				// display the root level from the beginning.
+				formController.jumpToIndex(FormIndex
+						.createBeginningOfFormIndex());
+			} else {
+				// otherwise we're at a repeated group
+				formController.jumpToIndex(startTest);
+			}
+
+			// now test again for repeat. This should be true at this point or
+			// we're at the
+			// beginning
+			if (formController.getEvent() == FormEntryController.EVENT_REPEAT) {
+				enclosingGroupRef = formController.getFormIndex()
+						.getReference().toString(false);
+				formController.stepToNextEvent(FormController.STEP_INTO_GROUP);
+			}
+		}
+
+		int event = formController.getEvent();
+		if (event == FormEntryController.EVENT_BEGINNING_OF_FORM) {
+			// The beginning of form has no valid prompt to display.
+			formController.stepToNextEvent(FormController.STEP_INTO_GROUP);
+		}
+
+		// Refresh the current event in case we did step forward.
+		event = formController.getEvent();
+
+		// There may be repeating Groups at this level of the hierarchy, we use
+		// this variable to
+		// keep track of them.
+		String repeatedGroupRef = "";
+
+		event_search: while (event != FormEntryController.EVENT_END_OF_FORM) {
+			switch (event) {
+			case FormEntryController.EVENT_QUESTION:
+				if (!repeatedGroupRef.equalsIgnoreCase("")) {
+					// We're in a repeating group, so skip this question and
+					// move to the next
+					// index.
+					event = formController
+							.stepToNextEvent(FormController.STEP_INTO_GROUP);
+					continue;
+				}
+
+				FormEntryPrompt fp = formController.getQuestionPrompt();
+				String label = fp.getLongText();
+				if (!fp.isReadOnly() || (label != null && label.length() > 0)) {
+					// show the question if it is an editable field.
+					// or if it is read-only and the label is not blank.
+					formList.add(new HierarchyElement(fp.getLongText(), fp
+							.getAnswerText(), null,
+							R.drawable.abs__ab_bottom_solid_dark_holo,
+							QUESTION, fp.getIndex()));
+				}
+				break;
+			case FormEntryController.EVENT_GROUP:
+				// ignore group events
+				break;
+			case FormEntryController.EVENT_PROMPT_NEW_REPEAT:
+				if (enclosingGroupRef.compareTo(formController.getFormIndex()
+						.getReference().toString(false)) == 0) {
+					// We were displaying a set of questions inside of a
+					// repeated group. This is
+					// the end of that group.
+					break event_search;
+				}
+
+				if (repeatedGroupRef.compareTo(formController.getFormIndex()
+						.getReference().toString(false)) != 0) {
+					// We're in a repeating group, so skip this repeat prompt
+					// and move to the
+					// next event.
+					event = formController
+							.stepToNextEvent(FormController.STEP_INTO_GROUP);
+					continue;
+				}
+
+				if (repeatedGroupRef.compareTo(formController.getFormIndex()
+						.getReference().toString(false)) == 0) {
+					// This is the end of the current repeating group, so we
+					// reset the
+					// repeatedGroupName variable
+					repeatedGroupRef = "";
+				}
+				break;
+			case FormEntryController.EVENT_REPEAT:
+				FormEntryCaption fc = formController.getCaptionPrompt();
+				if (enclosingGroupRef.compareTo(formController.getFormIndex()
+						.getReference().toString(false)) == 0) {
+					// We were displaying a set of questions inside a repeated
+					// group. This is
+					// the end of that group.
+					break event_search;
+				}
+				if (repeatedGroupRef.equalsIgnoreCase("")
+						&& fc.getMultiplicity() == 0) {
+					// This is the start of a repeating group. We only want to
+					// display
+					// "Group #", so we mark this as the beginning and skip all
+					// of its children
+					HierarchyElement group = new HierarchyElement(
+							fc.getLongText(), null, getResources().getDrawable(
+									R.drawable.expander_ic_minimized),
+							Color.BLACK, COLLAPSED, fc.getIndex());
+					repeatedGroupRef = formController.getFormIndex()
+							.getReference().toString(false);
+					formList.add(group);
+				}
+
+				if (repeatedGroupRef.compareTo(formController.getFormIndex()
+						.getReference().toString(false)) == 0) {
+					// Add this group name to the drop down list for this
+					// repeating group.
+					HierarchyElement h = formList.get(formList.size() - 1);
+					h.addChild(new HierarchyElement(mIndent + fc.getLongText()
+							+ " " + (fc.getMultiplicity() + 1), null, null,
+							Color.BLACK, CHILD, fc.getIndex()));
+				}
+				break;
+			}
+			event = formController
+					.stepToNextEvent(FormController.STEP_INTO_GROUP);
+		}
+
+		HierarchyListAdapter itla = new HierarchyListAdapter(this);
+		itla.setListItems(formList);
+		hierarchyList.setAdapter(itla);
+
+		// set the controller back to the current index in case the user hits
+		// 'back'
+		formController.jumpToIndex(currentIndex);
+	}
 
 }
+

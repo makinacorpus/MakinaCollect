@@ -11,7 +11,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- strings that should not be translated -->
-
+	<string name="next">Suivant</string>
+	<string name="back">Précédent</string>
+	<string name="finish">Terminer</string>
+	<string name="save">Sauvegarder</string>
     <string name="clic_here_to_download">APPUYEZ ICI POUR TÉLÉCHARGER UN FORMULAIRE</string>
     <string name="no_form_not_finalled">VOUS N\'AVEZ AUCUN FORMULAIRE NON FINALISÉ</string>
     <string name="no_form_finalled">PAS DE FORMULAIRE FINALISÉ</string>
