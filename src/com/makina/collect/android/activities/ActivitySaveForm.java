@@ -165,7 +165,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     	TextView actionbarTitle = (TextView)findViewById(titleId);
     	int subTitleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
     	TextView actionbarSubTitle = (TextView)findViewById(subTitleId);
-    	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGris), getResources().getColor(R.color.actionbarTitleColorBlueSave));
+    	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorBlueSave), getResources().getColor(R.color.actionbarTitleColorGris));
     	
     	loadListView();
         

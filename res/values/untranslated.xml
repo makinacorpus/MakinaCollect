@@ -11,6 +11,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- strings that should not be translated -->
+    <string name="name">Nom</string>
 	<string name="next">Suivant</string>
 	<string name="back">Précédent</string>
 	<string name="finish">Terminer</string>

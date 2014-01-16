@@ -13,24 +13,38 @@
     style="@style/Collect.MainLayout"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        style="@style/Collect.MainLayout" >
+    <RelativeLayout style="@style/Collect.MainLayout" >
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
             android:orientation="vertical"
-            android:paddingLeft="20dp" 
-            android:paddingRight="20dp"
-            android:paddingBottom="20dp">
+            android:paddingBottom="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp" >
 
-            <com.makina.collect.android.views.CustomFontEditText
-                android:id="@+id/save_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="textNoSuggestions"
-                android:textColor="@color/actionbarTitleColorBlueSend"
-                android:textSize="21sp" />
+            <RelativeLayout
+                android:id="@+id/relativelayout_checkbox1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <com.makina.collect.android.views.CustomFonttext
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/actionbarTitleColorGris"
+                    android:text="@string/name"
+                    android:textSize="21sp" />
+                
+                <com.makina.collect.android.views.CustomFontEditText
+                    android:id="@+id/save_name"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textNoSuggestions"
+                    android:textColor="@color/actionbarTitleColorBlueSend"
+                    android:textSize="21sp" />
+            </RelativeLayout>
 
             <com.makina.collect.android.views.CustomFontTextview
                 android:layout_width="wrap_content"
@@ -113,7 +127,6 @@
                     android:textSize="19sp" />
             </RelativeLayout>
         </LinearLayout>
-
     </RelativeLayout>
 
 </ScrollView>
