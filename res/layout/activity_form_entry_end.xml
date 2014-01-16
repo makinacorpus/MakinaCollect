@@ -13,120 +13,121 @@
     style="@style/Collect.MainLayout"
     android:orientation="vertical" >
 
-    <RelativeLayout style="@style/Collect.MainLayout" >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dip"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" >
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/relativelayout_checkbox1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <com.makina.collect.android.views.CustomFontTextview
+                android:id="@+id/form_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/name"
+                android:textColor="@color/actionbarTitleColorGris"
+                android:textSize="21sp" />
+
+            <com.makina.collect.android.views.CustomFontEditText
+                android:id="@+id/save_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/form_name"
+                android:inputType="textNoSuggestions"
+                android:textColor="@color/actionbarTitleColorBlueSend"
+                android:textSize="21sp" />
+        </RelativeLayout>
+
+        <com.makina.collect.android.views.CustomFontTextview
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:text="Ce formulaire est maintenant complété.\nQue souhaitez-vous faire?"
+            android:textColor="@color/actionbarTitleColorGris"
+            android:textSize="21sp" />
+
+        <RelativeLayout
+            android:id="@+id/relativelayout_checkbox1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dip"
-            android:orientation="vertical"
-            android:paddingBottom="20dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp" >
+            android:layout_marginTop="20dip"
+            android:orientation="horizontal" >
 
-            <RelativeLayout
-                android:id="@+id/relativelayout_checkbox1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
-
-                <com.makina.collect.android.views.CustomFonttext
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/actionbarTitleColorGris"
-                    android:text="@string/name"
-                    android:textSize="21sp" />
-                
-                <com.makina.collect.android.views.CustomFontEditText
-                    android:id="@+id/save_name"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="textNoSuggestions"
-                    android:textColor="@color/actionbarTitleColorBlueSend"
-                    android:textSize="21sp" />
-            </RelativeLayout>
+            <CheckBox
+                android:id="@+id/checkbox1"
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:layout_centerVertical="true"
+                android:button="@drawable/checkbox_selector" />
 
             <com.makina.collect.android.views.CustomFontTextview
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
-                android:text="Ce formulaire est maintenant complété.\nQue souhaitez-vous faire?"
-                android:textColor="@color/actionbarTitleColorGris"
-                android:textSize="21sp" />
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@id/checkbox1"
+                android:text="@string/to_not_send_form"
+                android:textColor="@color/actionbarTitleColorBlueSend"
+                android:textSize="19sp" />
+        </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/relativelayout_checkbox1"
-                android:layout_width="fill_parent"
+        <RelativeLayout
+            android:id="@+id/relativelayout_checkbox2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <CheckBox
+                android:id="@+id/checkbox2"
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:layout_centerVertical="true"
+                android:button="@drawable/checkbox_selector" />
+
+            <com.makina.collect.android.views.CustomFontTextview
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
-                android:orientation="horizontal" >
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@id/checkbox2"
+                android:text="@string/send_form"
+                android:textColor="@color/actionbarTitleColorBlueSend"
+                android:textSize="19sp" />
+        </RelativeLayout>
 
-                <CheckBox
-                    android:id="@+id/checkbox1"
-                    android:layout_width="60dip"
-                    android:layout_height="60dip"
-                    android:layout_centerVertical="true"
-                    android:button="@drawable/checkbox_selector" />
+        <RelativeLayout
+            android:id="@+id/relativelayout_checkbox3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
 
-                <com.makina.collect.android.views.CustomFontTextview
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dip"
-                    android:layout_toRightOf="@id/checkbox1"
-                    android:text="@string/to_not_send_form"
-                    android:textColor="@color/actionbarTitleColorBlueSend"
-                    android:textSize="19sp" />
-            </RelativeLayout>
+            <CheckBox
+                android:id="@+id/checkbox3"
+                android:layout_width="60dip"
+                android:layout_height="60dip"
+                android:layout_centerVertical="true"
+                android:button="@drawable/checkbox_selector" />
 
-            <RelativeLayout
-                android:id="@+id/relativelayout_checkbox2"
-                android:layout_width="fill_parent"
+            <com.makina.collect.android.views.CustomFontTextview
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <CheckBox
-                    android:id="@+id/checkbox2"
-                    android:layout_width="60dip"
-                    android:layout_height="60dip"
-                    android:layout_centerVertical="true"
-                    android:button="@drawable/checkbox_selector" />
-
-                <com.makina.collect.android.views.CustomFontTextview
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dip"
-                    android:layout_toRightOf="@id/checkbox2"
-                    android:text="@string/send_form"
-                    android:textColor="@color/actionbarTitleColorBlueSend"
-                    android:textSize="19sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/relativelayout_checkbox3"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <CheckBox
-                    android:id="@+id/checkbox3"
-                    android:layout_width="60dip"
-                    android:layout_height="60dip"
-                    android:layout_centerVertical="true"
-                    android:button="@drawable/checkbox_selector" />
-
-                <com.makina.collect.android.views.CustomFontTextview
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dip"
-                    android:layout_toRightOf="@id/checkbox3"
-                    android:text="@string/send_form_and_restart"
-                    android:textColor="@color/actionbarTitleColorBlueSend"
-                    android:textSize="19sp" />
-            </RelativeLayout>
-        </LinearLayout>
-    </RelativeLayout>
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dip"
+                android:layout_toRightOf="@id/checkbox3"
+                android:text="@string/send_form_and_restart"
+                android:textColor="@color/actionbarTitleColorBlueSend"
+                android:textSize="19sp" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </ScrollView>

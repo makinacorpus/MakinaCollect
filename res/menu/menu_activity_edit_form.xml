@@ -9,7 +9,7 @@
     <item
          android:icon="@drawable/actionbar_menu"
         android:orderInCategory="100"
-        android:showAsAction="ifRoom|withText">
+        android:showAsAction="always">
         <menu android:popupBackground="@drawable/white" >
             <item
                 android:id="@+id/menu_settings"
