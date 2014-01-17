@@ -7,13 +7,12 @@
     android:background="@color/background_window"
     android:padding="15dp" >
 
-    <TextView
+    <com.makina.collect.android.views.CustomFontTextview
         android:id="@+id/textview_help"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:autoLink="all"
         android:linksClickable="true"
-        android:textColor="@color/black"
-        />
+        android:textColor="@color/black" />
 
 </ScrollView>

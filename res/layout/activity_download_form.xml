@@ -79,33 +79,33 @@ the License.
         </LinearLayout>
 
         <ListView
-            android:id="@android:id/list"
+            android:id="@+id/listView"
             style="@style/Collect.List"
             android:layout_above="@id/linearLayout_footer"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/linear_blue" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/empty"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:visibility="gone" >
+        android:visibility="gone"
+        android:gravity="center"
+        android:orientation="vertical" >
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:src="@drawable/no_list" />
 
         <com.makina.collect.android.views.CustomFontTextview
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dip"
             android:text="@string/empty_list"
             android:textColor="@color/color_emty_list"
             android:textSize="30sp" />
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

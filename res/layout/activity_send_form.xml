@@ -16,11 +16,13 @@ the License.
 -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/Collect.MainLayout"
-    android:layout_alignParentTop="true"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/bg_list" >
 
-    <RelativeLayout style="@style/Collect.MainLayout" >
+    <RelativeLayout
+        android:id="@+id/linear"
+        style="@style/Collect.MainLayout" >
 
         <LinearLayout
             android:id="@+id/linear_blue"
@@ -46,7 +48,7 @@ the License.
                     android:id="@+id/textView_pannier"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 formulaire sélectionné"
+                    android:text="@string/no_form_selected"
                     android:textColor="@drawable/white"
                     android:textSize="20dip" />
             </RelativeLayout>
@@ -71,14 +73,14 @@ the License.
                     android:layout_toRightOf="@id/imageView_check_all"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dip"
-                    android:text="TOUT SÉLECTIONNER"
+                    android:text="@string/select_all"
                     android:textColor="@drawable/white"
                     android:textSize="20dip" />
             </RelativeLayout>
         </LinearLayout>
 
         <ListView
-            android:id="@android:id/list"
+            android:id="@+id/listView"
             style="@style/Collect.List"
             android:layout_above="@id/linearLayout_footer"
             android:layout_alignParentTop="true"
@@ -86,11 +88,12 @@ the License.
     </RelativeLayout>
 
     <LinearLayout
-        android:id="@android:id/empty"
+        android:id="@+id/empty"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:orientation="vertical" >
+        android:orientation="vertical" 
+        android:visibility="gone" >
 
         <ImageView
             android:layout_width="wrap_content"
@@ -101,19 +104,16 @@ the License.
         <com.makina.collect.android.views.CustomFontTextview
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:layout_marginTop="10dip"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/empty_list"
+            android:text="@string/no_form_selected"
             android:textColor="@color/color_emty_list"
-            android:textSize="30sp" />
+            android:textSize="27sp" />
 
         <com.makina.collect.android.views.CustomFontTextview
-            android:paddingLeft="10dip"
-            android:paddingRight="10dip"
             android:id="@+id/textview_download_form"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
             android:layout_gravity="center_horizontal"
             android:text="@string/no_form_finalled"
             android:textColor="@color/actionbarTitleColorGris"

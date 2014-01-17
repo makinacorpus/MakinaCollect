@@ -41,15 +41,16 @@ import android.util.SparseBooleanArray;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
@@ -86,7 +87,7 @@ import android.widget.SearchView;
  * @author Carl Hartung (carlhartung@gmail.com)
  */
 @SuppressLint("NewApi")
-public class ActivityDownloadForm extends SherlockListActivity implements FormListDownloaderListener,
+public class ActivityDownloadForm extends SherlockActivity implements FormListDownloaderListener,
         FormDownloaderListener,SearchView.OnQueryTextListener {
     private static final String t = "RemoveFileManageList";
 
@@ -129,6 +130,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
     private static final String SHOULD_EXIT = "shouldexit";
     private CustomFontTextview textView_pannier;
     private ArrayList<String> mSelected = new ArrayList<String>();
+    private ListView listView;
 
     @SuppressWarnings("unchecked")
     @Override
@@ -140,6 +142,8 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         createDialog(PROGRESS_DIALOG);
         textView_pannier=(CustomFontTextview)findViewById(R.id.textView_pannier);
         Finish.activityDownloadForm=this;
+        
+        listView=(ListView)findViewById(R.id.listView);
         
         getSupportActionBar().setTitle(getString(R.string.download_menu));
         getSupportActionBar().setSubtitle(getString(R.string.form));
@@ -219,6 +223,31 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
 				}
 			}
 		});
+        
+        listView.setOnItemClickListener(new OnItemClickListener()
+		{
+			public void onItemClick(AdapterView<?> a, View v, int position, long id)
+			{
+				Object o = listView.getAdapter().getItem(position);
+				HashMap<String, String> item = (HashMap<String, String>) o;
+		        FormDetails detail = mFormNamesAndURLs.get(item.get(FORMDETAIL_KEY));
+		        
+		        if (mSelected.contains(detail.formID))
+		        	mSelected.remove(mSelected.indexOf(detail.formID));
+		        else
+		        	mSelected.add(detail.formID);
+		        
+		        Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", detail.downloadUrl);
+		        
+		        if (mSelected.size()==0)
+		        	textView_pannier.setText(getString(R.string.no_form_selected));
+		        else if (mSelected.size()==1)
+		        	textView_pannier.setText(getString(R.string.form_selected));
+		        else if (mSelected.size()>1)
+		        	textView_pannier.setText(mSelected.size()+" "+getString(R.string.forms_selected));
+		    }
+		});
+		
     }
 
 
@@ -235,33 +264,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
     }
 
     private void clearChoices() {
-        ActivityDownloadForm.this.getListView().clearChoices();
-        
-    }
-
-
-    @Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-
-		Object o = getListAdapter().getItem(position);
-		@SuppressWarnings("unchecked")
-		HashMap<String, String> item = (HashMap<String, String>) o;
-        FormDetails detail = mFormNamesAndURLs.get(item.get(FORMDETAIL_KEY));
-        
-        if (mSelected.contains(detail.formID))
-        	mSelected.remove(mSelected.indexOf(detail.formID));
-        else
-        	mSelected.add(detail.formID);
-        
-        Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", detail.downloadUrl);
-        
-        if (mSelected.size()==0)
-        	textView_pannier.setText(getString(R.string.no_form_selected));
-        else if (mSelected.size()==1)
-        	textView_pannier.setText(getString(R.string.form_selected));
-        else if (mSelected.size()>1)
-        	textView_pannier.setText(mSelected.size()+" "+getString(R.string.forms_selected));
+    	listView.clearChoices();
         
     }
 
@@ -273,7 +276,10 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         ConnectivityManager connectivityManager =(ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
 
-        if (ni == null || !ni.isConnected()) {
+        if (ni == null || !ni.isConnected())
+        {
+        	findViewById(R.id.empty).setVisibility(View.VISIBLE);
+        	mProgressDialog.dismiss();
         	CroutonView.showBuiltInCrouton(ActivityDownloadForm.this, getString(R.string.no_connection), Style.ALERT);
 		} else {
 
@@ -321,8 +327,8 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
      */
     private int selectedItemCount() {
         int count = 0;
-        SparseBooleanArray sba = getListView().getCheckedItemPositions();
-        for (int i = 0; i < getListView().getCount(); i++) {
+        SparseBooleanArray sba = listView.getCheckedItemPositions();
+        for (int i = 0; i < listView.getCount(); i++) {
             if (sba.get(i, false)) {
                 count++;
             }
@@ -334,7 +340,7 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
     	Collect.getInstance().getActivityLogger().logAction(this, "refreshForms", "");
         mToggled = false;
         downloadFormList();
-        ActivityDownloadForm.this.getListView().clearChoices();
+        listView.clearChoices();
         clearChoices();
     }
     
@@ -345,21 +351,20 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
     }
     
     protected void selectAllOption(){
-    	ListView ls = getListView();
         mToggled = !mToggled;
         Collect.getInstance().getActivityLogger().logAction(this, "toggleFormCheckbox", Boolean.toString(mToggled));
         mSelected.clear();
         if (mToggled)
-	        for (int pos = 0; pos < ls.getCount(); pos++)
+	        for (int pos = 0; pos < listView.getCount(); pos++)
 	        {
-	            ls.setItemChecked(pos, mToggled);
+	        	listView.setItemChecked(pos, mToggled);
 	            mSelected.add(mFormList.get(pos).get(FORMDETAIL_KEY));
 	        }
         else
         {
-        	for (int pos = 0; pos < ls.getCount(); pos++)
+        	for (int pos = 0; pos < listView.getCount(); pos++)
         	{
-	            ls.setItemChecked(pos, mToggled);
+        		listView.setItemChecked(pos, mToggled);
 	        }
         }
         if (mSelected.size()==0)
@@ -372,13 +377,12 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
     
     protected void clearAllOption()
     {
-    	ListView ls = getListView();
-        mToggled = false;
+    	mToggled = false;
         mSelected.clear();
         
-    	for (int pos = 0; pos < ls.getCount(); pos++)
+    	for (int pos = 0; pos < listView.getCount(); pos++)
     	{
-            ls.setItemChecked(pos, mToggled);
+    		listView.setItemChecked(pos, mToggled);
         }
         
     	textView_pannier.setText(getString(R.string.no_form_selected));
@@ -581,9 +585,9 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         int[] view = new int[] {R.id.text1, R.id.text2};
 
         mFormListAdapter =new SimpleAdapter(this, mFormList, R.layout.listview_item_download_form, data, view);
-        getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        getListView().setItemsCanFocus(false);
-        setListAdapter(mFormListAdapter);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        listView.setItemsCanFocus(false);
+        listView.setAdapter(mFormListAdapter);
         
         if (mDownloadFormListTask != null) {
             mDownloadFormListTask.setDownloaderListener(this);
@@ -680,20 +684,16 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
             mFormListAdapter.notifyDataSetChanged();
         }
         
-        LinearLayout linearLayout_footer=(LinearLayout) findViewById(R.id.linearLayout_footer);
-        RelativeLayout empty=(RelativeLayout)findViewById(R.id.empty);
         if ( (mFormList==null) || (mFormList.size()==0) )
         {
-        	linearLayout_footer.setVisibility(View.GONE);
-        	empty.setVisibility(View.VISIBLE);
+        	findViewById(R.id.linearLayout_footer).setVisibility(View.GONE);
+        	findViewById(R.id.empty).setVisibility(View.VISIBLE);
         }
         else
         {
-        	linearLayout_footer.setVisibility(View.VISIBLE);
-        	empty.setVisibility(View.GONE);
+        	findViewById(R.id.linearLayout_footer).setVisibility(View.VISIBLE);
+        	findViewById(R.id.empty).setVisibility(View.GONE);
         }
-        
-        
     }
 
 
@@ -778,12 +778,12 @@ public class ActivityDownloadForm extends SherlockListActivity implements FormLi
         int[] view = new int[] {R.id.text1};
         
     	 mFormListAdapter =new SimpleAdapter(this, mFormList, R.layout.listview_item_download_form, data, view);
-         setListAdapter(mFormListAdapter);
+    	 listView.setAdapter(mFormListAdapter);
          
          for (int i=0;i<mFormList.size();i++)
          {
         	 if (mSelected.contains(mFormList.get(i).get(FORMDETAIL_KEY)))
-        		 getListView().setItemChecked(i, true);
+        		 listView.setItemChecked(i, true);
          }
     	
         return false;

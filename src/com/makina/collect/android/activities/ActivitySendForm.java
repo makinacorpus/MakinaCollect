@@ -48,15 +48,15 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
-import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
@@ -93,13 +93,12 @@ import de.timroes.swipetodismiss.SwipeDismissList.Undoable;
  */
 
 @SuppressLint("NewApi")
-public class ActivitySendForm extends SherlockListActivity implements DeleteInstancesListener,SearchView.OnQueryTextListener, InstanceUploaderListener  {
+public class ActivitySendForm extends SherlockActivity implements DeleteInstancesListener,SearchView.OnQueryTextListener, InstanceUploaderListener  {
 
 	private static final String t = "InstanceUploaderList";
 	
 	private static final String BUNDLE_SELECTED_ITEMS_KEY = "selected_items";
 	private static final String BUNDLE_TOGGLED_KEY = "toggled";
-	private static final int INSTANCE_UPLOADER = 0;
 	
 	private ProgressDialog mProgressDialog;
 
@@ -125,6 +124,7 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
     private long[] instanceIDs;
     private Long[] mInstancesToSend;
     private InstanceUploaderTask mInstanceUploaderTask ;
+    private ListView listView;
 
 	public Cursor getAllCursor(String condition_search) {
 		// get all complete or failed submission instances
@@ -221,6 +221,8 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_form);
         
+        listView=(ListView) findViewById(R.id.listView);
+        
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     	getSupportActionBar().setTitle(getString(R.string.my_forms_send));
     	getSupportActionBar().setSubtitle(getString(R.string.to_send));
@@ -286,7 +288,7 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 			}
 		});
 		
-        getListView().setOnItemLongClickListener(new OnItemLongClickListener()
+        listView.setOnItemLongClickListener(new OnItemLongClickListener()
         {
         	@Override
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int position, long arg3)
@@ -294,6 +296,32 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 				// TODO Auto-generated method stub
         		createDialogDelete(position);
         		return false;
+			}
+		});
+        
+        listView.setOnItemClickListener(new OnItemClickListener()
+		{
+			public void onItemClick(AdapterView<?> a, View v, int position, long id)
+			{
+				// get row id from db
+				Cursor c = (Cursor) listView.getAdapter().getItem(position);
+				long k = c.getLong(c.getColumnIndex(BaseColumns._ID));
+
+				Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", Long.toString(k));
+
+				// add/remove from selected list
+				if (mSelected.contains(k))
+					mSelected.remove(k);
+				else
+					mSelected.add(k);
+				
+				if (mSelected.size()==0)
+		        	textView_pannier.setText(getString(R.string.no_form_selected));
+		        else if (mSelected.size()==1)
+		        	textView_pannier.setText(getString(R.string.form_selected));
+		        else if (mSelected.size()>1)
+		        	textView_pannier.setText(mSelected.size()+" "+getString(R.string.forms_selected));
+
 			}
 		});
         
@@ -308,7 +336,7 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 			}
         };
         UndoMode mode = SwipeDismissList.UndoMode.SINGLE_UNDO;
-        SwipeDismissList swipeList = new SwipeDismissList(getListView(), callback, mode);
+        new SwipeDismissList(listView, callback, mode);
 	}
 	
 	private void createDialogDelete(int position)
@@ -341,23 +369,21 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 		// render total instance view
 		mInstances = new SimpleCursorAdapter(this,R.layout.listview_item_send_form, c, data, view);
 		
-		setListAdapter(mInstances);
-		getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-		getListView().setItemsCanFocus(false);
+		listView.setAdapter(mInstances);
+		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		listView.setItemsCanFocus(false);
 
 		// if current activity is being reinitialized due to changing
 		// orientation restore all check
 		// marks for ones selected
 		if (mRestored)
 		{
-			ListView ls = getListView();
-			
 			for (long id : mSelected)
 			{
-				for (int pos = 0; pos < ls.getCount(); pos++)
+				for (int pos = 0; pos < listView.getCount(); pos++)
 				{
-					if (id == ls.getItemIdAtPosition(pos)) {
-						ls.setItemChecked(pos, true);
+					if (id == listView.getItemIdAtPosition(pos)) {
+						listView.setItemChecked(pos, true);
 						break;
 					}
 				}
@@ -366,16 +392,21 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 			mRestored = false;
 		}
 		 
-		LinearLayout linearLayout_footer=(LinearLayout) findViewById(R.id.linearLayout_footer);
-        if ( (getListView()==null) || (getListView().getCount()==0) )
-        	linearLayout_footer.setVisibility(View.GONE);
+		if ( (listView==null) || (listView.getCount()==0) )
+		{
+        	findViewById(R.id.linearLayout_footer).setVisibility(View.GONE);
+        	findViewById(R.id.empty).setVisibility(View.VISIBLE);
+		}
         else
-        	linearLayout_footer.setVisibility(View.VISIBLE);
+        {
+        	findViewById(R.id.linearLayout_footer).setVisibility(View.VISIBLE);
+        	findViewById(R.id.empty).setVisibility(View.GONE);
+        }
 	}
 	@Override
 	public void onResume() {
-		loadListView();
 		super.onResume();
+		loadListView();
 	}
 
 	@Override
@@ -398,11 +429,6 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 			instanceIDs[i] = mSelected.get(i);
 		}
 
-		/*Intent i = new Intent(this, InstanceUploaderActivity.class);
-		i.putExtra(ActivityForm.KEY_INSTANCES, instanceIDs);
-		startActivityForResult(i, INSTANCE_UPLOADER);*/
-		
-        
 		mInstancesToSend = new Long[(instanceIDs == null) ? 0 : instanceIDs.length];
         if ( instanceIDs != null ) {
         	for ( int i = 0 ; i < instanceIDs.length ; ++i ) {
@@ -432,7 +458,6 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 	
 	protected void selectAllOption (){
 		// toggle selections of items to all or none
-		ListView ls = getListView();
 		mToggled = !mToggled;
 
 		Collect.getInstance()
@@ -441,15 +466,20 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 		Boolean.toString(mToggled));
 		// remove all items from selected list
 		mSelected.clear();
-		for (int pos = 0; pos < ls.getCount(); pos++) {
-			ls.setItemChecked(pos, mToggled);
+		for (int pos = 0; pos < listView.getCount(); pos++) {
+			listView.setItemChecked(pos, mToggled);
 			// add all items if mToggled sets to select all
-			if (mToggled) mSelected.add(ls.getItemIdAtPosition(pos));
+			if (mToggled) mSelected.add(listView.getItemIdAtPosition(pos));
 		}
-		textView_pannier.setText(mSelected.size()+" formulaire(s) sélectionné(s)");
+		if (mSelected.size()==0)
+        	textView_pannier.setText(getString(R.string.no_form_selected));
+        else if (mSelected.size()==1)
+        	textView_pannier.setText(getString(R.string.form_selected));
+        else if (mSelected.size()>1)
+        	textView_pannier.setText(mSelected.size()+" "+getString(R.string.forms_selected));
 	}
 	
-	protected void uploadInstancesOption (){
+	protected void uploadInstancesOption(){
 		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
 
@@ -464,7 +494,7 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 			//no network connection
 			Collect.getInstance().getActivityLogger().logAction(this, "uploadButton", "noConnection");
 			CroutonView.showBuiltInCrouton(ActivitySendForm.this, getString(R.string.no_connection), Style.ALERT);
-    	} 
+		} 
 		else
 		{
 			Collect.getInstance().getActivityLogger().logAction(this, "uploadButton",Integer.toString(mSelected.size()));
@@ -481,12 +511,6 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 	    	}
 		}
 	}
-
-	private void createPreferencesMenu() {
-		Intent i = new Intent(this, ActivityPreferences.class);
-		startActivity(i);
-	}
-	
 	
 	private void deleteSelectedInstances(ArrayList<Long> mSelected) {
 		if (mDeleteInstancesTask == null) {
@@ -501,26 +525,6 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 		}
 	}
 
-	@Override
-	public void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
-
-		// get row id from db
-		Cursor c = (Cursor) getListAdapter().getItem(position);
-		long k = c.getLong(c.getColumnIndex(BaseColumns._ID));
-
-		Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", Long.toString(k));
-
-		// add/remove from selected list
-		if (mSelected.contains(k))
-			mSelected.remove(k);
-		else
-			mSelected.add(k);
-		
-		textView_pannier.setText(mSelected.size()+" formulaire(s) sélectionné(s)");
-		
-	}
-
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
@@ -533,40 +537,19 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 	}
 
 	@Override
-	public void onActivityResult(int requestCode, int resultCode,
-			Intent intent) {
-		if (resultCode == RESULT_CANCELED) {
-			return;
-		}
-		switch (requestCode) {
-		// returns with a form path, start entry
-		case INSTANCE_UPLOADER:
-			if (intent.getBooleanExtra(ActivityForm.KEY_SUCCESS, false)) {
-				mSelected.clear();
-				getListView().clearChoices();
-				/*if (mInstances.isEmpty()) {
-					getActivity().finish();
-				}*/
-			}
-			break;
-		default:
-			break;
-		}
-		super.onActivityResult(requestCode, resultCode, intent);
-	}
-
-	@Override
 	public void deleteComplete(int deletedInstances) {
 		Log.i(t, "Delete instances complete");
         Collect.getInstance().getActivityLogger().logAction(this, "deleteComplete", Integer.toString(deletedInstances));
 		
 		mDeleteInstancesTask = null;
 		mSelected.clear();
-		getListView().clearChoices(); // doesn't unset the checkboxes
-		for ( int i = 0 ; i < getListView().getCount() ; ++i ) {
-			getListView().setItemChecked(i, false);
+		listView.clearChoices(); // doesn't unset the checkboxes
+		for ( int i = 0 ; i < listView.getCount() ; ++i ) {
+			listView.setItemChecked(i, false);
 		}
-	}
+		
+		textView_pannier.setText(getString(R.string.no_form_selected));
+    }
 
 	@Override
 	public boolean onQueryTextChange(String newText)
@@ -580,13 +563,11 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
 		// render total instance view
 		mInstances = new SimpleCursorAdapter(this,R.layout.listview_item_send_form, c, data, view);
 		
-		setListAdapter(mInstances);
-         
-        ListView ls = getListView();
-        for (int i=0;i<ls.getCount();i++)
+		listView.setAdapter(mInstances);
+        for (int i=0;i<listView.getCount();i++)
         {
-        	if (mSelected.contains(ls.getItemIdAtPosition(i)))
-        		getListView().setItemChecked(i, true);
+        	if (mSelected.contains(listView.getItemIdAtPosition(i)))
+        		listView.setItemChecked(i, true);
         }
     	
 		return false;
@@ -653,7 +634,24 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
         
         mToggled = false;
 		mSelected.clear();
-		ActivitySendForm.this.getListView().clearChoices();
+		listView.clearChoices();
+		if (mSelected.size()==0)
+        	textView_pannier.setText(getString(R.string.no_form_selected));
+        else if (mSelected.size()==1)
+        	textView_pannier.setText(getString(R.string.form_selected));
+        else if (mSelected.size()>1)
+        	textView_pannier.setText(mSelected.size()+" "+getString(R.string.forms_selected));
+	
+		if ( (listView==null) || (listView.getCount()==0) )
+		{
+        	findViewById(R.id.linearLayout_footer).setVisibility(View.GONE);
+        	findViewById(R.id.empty).setVisibility(View.VISIBLE);
+		}
+        else
+        {
+        	findViewById(R.id.linearLayout_footer).setVisibility(View.VISIBLE);
+        	findViewById(R.id.empty).setVisibility(View.GONE);
+        }
 	}
 
 	@Override
@@ -716,7 +714,7 @@ public class ActivitySendForm extends SherlockListActivity implements DeleteInst
                     	Collect.getInstance().getActivityLogger().logAction(this, "createAlertDialog", "OK");
                         // always exit this activity since it has no interface
                         mAlertShowing = false;
-                        textView_pannier.setText("0 formulaire(s) sélectionnés");
+                        textView_pannier.setText(getString(R.string.no_form_selected));
                         break;
                 }
             }
