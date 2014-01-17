@@ -477,6 +477,13 @@ public class ActivityFormHierarchy extends SherlockListActivity implements OnCli
 	        case R.id.menu_settings:
 	        	startActivity(new Intent(this, ActivityPreferences.class));
 	        	return true;
+	        case R.id.menu_help:
+	        	Intent mIntent=new Intent(this, ActivityHelp.class);
+	        	Bundle mBundle=new Bundle();
+	        	mBundle.putInt("position", 1);
+	        	mIntent.putExtras(mBundle);
+	        	startActivity(mIntent);
+	        	return true;
 	        case R.id.menu_about_us:
 	        	DialogAboutUs.aboutUs(this);
 	        	return true;
