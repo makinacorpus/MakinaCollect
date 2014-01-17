@@ -865,7 +865,11 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
 	        	startActivity(new Intent(this, ActivityPreferences.class));
 	        	return true;
 	        case R.id.menu_help:
-	        	startActivity(new Intent(getApplicationContext(), ActivityHelp.class));
+	        	Intent mIntent=new Intent(this, ActivityHelp.class);
+	        	Bundle mBundle=new Bundle();
+	        	mBundle.putInt("position", 0);
+	        	mIntent.putExtras(mBundle);
+	        	startActivity(mIntent);
 	        	return true;
 	        case R.id.menu_about_us:
 	        	DialogAboutUs.aboutUs(this);

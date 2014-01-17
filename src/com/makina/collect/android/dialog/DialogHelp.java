@@ -19,16 +19,18 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.astuetz.PagerSlidingTabStrip.IconTabProvider;
 import com.makina.collect.android.R;
 import com.makina.collect.android.utilities.Finish;
-@SuppressLint("NewApi")
+
+@SuppressLint({ "NewApi", "ValidFragment" })
 public class DialogHelp extends DialogFragment {
 
 	private PagerSlidingTabStrip tabs;
 	private ViewPager pager;
 	private ContactPagerAdapter adapter;
+	private int position;
 
-	public static DialogHelp newInstance() {
-		DialogHelp f = new DialogHelp();
-		return f;
+	public DialogHelp(int position) {
+		super();
+		this.position=position;
 	}
 
 	@Override
@@ -46,7 +48,7 @@ public class DialogHelp extends DialogFragment {
 		adapter = new ContactPagerAdapter();
 
 		pager.setAdapter(adapter);
-
+		pager.setCurrentItem(position);
 		tabs.setViewPager(pager);
 
 		return root;
@@ -129,7 +131,6 @@ public class DialogHelp extends DialogFragment {
 		}
 
 	}
-	
 
 	@Override
 	public void onDestroy() {

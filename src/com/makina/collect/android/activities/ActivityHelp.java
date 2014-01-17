@@ -15,7 +15,7 @@ public class ActivityHelp extends FragmentActivity {
 		setContentView(R.layout.activity_help);
 		
 		Finish.activityHelp=this;
-		DialogHelp dialog = new DialogHelp();
+		DialogHelp dialog = new DialogHelp(getIntent().getExtras().getInt("position"));
 		dialog.show(getSupportFragmentManager(), "");
 		dialog.setTargetFragment(dialog.getTargetFragment(),DIALOG_RESULT);
 		

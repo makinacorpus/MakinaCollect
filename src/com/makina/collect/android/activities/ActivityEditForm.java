@@ -309,7 +309,11 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
 	        	startActivity(new Intent(this, ActivityPreferences.class));
 	        	return true;
 	        case R.id.menu_help:
-	        	startActivity(new Intent(this, ActivityHelp.class));
+	        	Intent mIntent=new Intent(this, ActivityHelp.class);
+	        	Bundle mBundle=new Bundle();
+	        	mBundle.putInt("position", 1);
+	        	mIntent.putExtras(mBundle);
+	        	startActivity(mIntent);
 	        	return true;
 	        case R.id.menu_about_us:
 	        	DialogAboutUs.aboutUs(this);
