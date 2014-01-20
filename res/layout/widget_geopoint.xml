@@ -6,12 +6,12 @@
 
     <Button
         android:id="@+id/get_position"
-        style="@style/Collect.Button1"
+        style="@style/CollectThemeLight.Button1"
         android:drawableLeft="@drawable/ic_menu_save" />
 
     <Button
         android:id="@+id/show_position"
-        style="@style/Collect.Button1"
+        style="@style/CollectThemeLight.Button1"
         android:drawableLeft="@drawable/ic_menu_mylocation" />
 
 </LinearLayout>

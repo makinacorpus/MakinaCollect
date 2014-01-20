@@ -16,69 +16,74 @@ the License.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/bg_dashboard"
-    android:gravity="center_vertical|left"
-    android:orientation="vertical" >
+    android:layout_height="fill_parent">
 
-    <Button
-        android:id="@+id/dashboard_download"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dip"
-        android:layout_marginLeft="30dip"
-        android:layout_marginRight="10dip"
-        android:layout_marginTop="65dip"
-        android:layout_weight="1"
-        android:background="@color/transparent"
-        android:drawableLeft="@drawable/dashboard_download_selector"
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:gravity="center_vertical|left"
-        android:text="@string/download_menu"
-        android:textColor="#cfea60" />
+        android:orientation="vertical"
+        android:background="@drawable/bg_dashboard">
 
-    <Button
-        android:id="@+id/dashboard_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dip"
-        android:layout_marginLeft="110dip"
-        android:layout_marginRight="10dip"
-        android:layout_marginTop="2dip"
-        android:layout_weight="1"
-        android:background="@color/transparent"
-        android:drawableLeft="@drawable/dashboard_edit_selector"
-        android:gravity="center_vertical|left"
-        android:text="@string/edit_menu"
-        android:textColor="#b8d754" />
+        <Button
+            android:id="@+id/dashboard_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dip"
+            android:layout_marginLeft="30dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="65dip"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:drawableLeft="@drawable/dashboard_download_selector"
+            android:gravity="center_vertical|left"
+            android:text="@string/download_menu"
+            android:textColor="#cfea60" />
 
-    <Button
-        android:id="@+id/dashboard_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dip"
-        android:layout_marginLeft="110dip"
-        android:layout_marginRight="10dip"
-        android:layout_marginTop="2dip"
-        android:layout_weight="1"
-        android:background="@color/transparent"
-        android:drawableLeft="@drawable/dashboard_saved_selector"
-        android:gravity="center_vertical|left"
-        android:text="@string/save_menu"
-        android:textColor="#1baac2" />
+        <Button
+            android:id="@+id/dashboard_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dip"
+            android:layout_marginLeft="110dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="2dip"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:drawableLeft="@drawable/dashboard_edit_selector"
+            android:gravity="center_vertical|left"
+            android:text="@string/edit_menu"
+            android:textColor="#b8d754" />
 
-    <Button
-        android:id="@+id/dashboard_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="130dip"
-        android:layout_marginLeft="30dip"
-        android:layout_marginRight="10dip"
-        android:layout_marginTop="2dip"
-        android:layout_weight="1"
-        android:background="@color/transparent"
-        android:drawableLeft="@drawable/dashboard_send_selector"
-        android:gravity="center_vertical|left"
-        android:text="@string/send_menu"
-        android:textColor="#2bbccc" />
+        <Button
+            android:id="@+id/dashboard_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dip"
+            android:layout_marginLeft="110dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="2dip"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:drawableLeft="@drawable/dashboard_saved_selector"
+            android:gravity="center_vertical|left"
+            android:text="@string/save_menu"
+            android:textColor="#1baac2" />
+
+        <Button
+            android:id="@+id/dashboard_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="130dip"
+            android:layout_marginLeft="30dip"
+            android:layout_marginRight="10dip"
+            android:layout_marginTop="2dip"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:drawableLeft="@drawable/dashboard_send_selector"
+            android:gravity="center_vertical|left"
+            android:text="@string/send_menu"
+            android:textColor="#2bbccc" />
+    </LinearLayout>
 
 </LinearLayout>

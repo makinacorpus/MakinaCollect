@@ -9,6 +9,7 @@ import android.view.Window;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.provider.InstanceProvider;
+import com.makina.collect.android.theme.Theme;
 
 public class ActivitySplashScreen extends Activity {
 
@@ -18,10 +19,10 @@ public class ActivitySplashScreen extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Theme.changeTheme(this);
         // this splash screen should be a blank slate
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash_screen);
-        
         Countly.sharedInstance().init(getApplicationContext(), "http://countly.makina-corpus.net", "279676abcbba16c3ee5e2b113a990fe579ddc527");
         
         // must be at the beginning of any activity that can be called from an external intent

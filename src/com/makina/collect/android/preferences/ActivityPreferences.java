@@ -163,9 +163,7 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 		
 		Finish.activityPreferences=this;
 		
-		String themeChoice = PreferenceManager.getDefaultSharedPreferences(this).getString(ActivityPreferences.KEY_THEME, ActivityPreferences.KEY_THEME);
-		if ( (themeChoice != null) && (themeChoice.contains(getString(R.string.theme2))) )
-			setTheme(R.style.light);
+		
 		
 		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
 		setTitle(getString(R.string.settings));
@@ -540,12 +538,13 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 				String entry = (String) ((ListPreference) preference).getEntries()[index];
 				((ListPreference) preference).setSummary(entry);
 				
-				if (index==0)
+				/*if (index==0)
 				{
 					Theme.changeToTheme(ActivityPreferences.this, Theme.THEME_DARK);
 				}
 				else
 					Theme.changeToTheme(ActivityPreferences.this, Theme.THEME_LIGHT);
+				*/
 				return true;
 			}
 		});

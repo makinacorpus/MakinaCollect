@@ -73,6 +73,7 @@ import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.receivers.NetworkReceiver;
 import com.makina.collect.android.tasks.DeleteInstancesTask;
 import com.makina.collect.android.tasks.InstanceUploaderTask;
+import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.WebUtils;
 import com.makina.collect.android.views.CroutonView;
@@ -170,8 +171,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
                         {
                             public void run()
                             {
-                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
-                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                            	((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
                             }
                         });
                         return view;
@@ -223,6 +223,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Theme.changeTheme(this);
         setContentView(R.layout.activity_send_form);
         
         listView=(ListView) findViewById(R.id.listView);
@@ -552,7 +553,17 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 			listView.setItemChecked(i, false);
 		}
 		
-		textView_pannier.setText(getString(R.string.no_form_selected));
+		if ( (listView==null) || (listView.getCount()==0) )
+		{
+			findViewById(R.id.linearLayout_footer).setVisibility(View.GONE);
+        	findViewById(R.id.empty).setVisibility(View.VISIBLE);
+		}
+        else
+        {
+        	findViewById(R.id.linearLayout_footer).setVisibility(View.VISIBLE);
+        	findViewById(R.id.empty).setVisibility(View.GONE);
+        }
+		
     }
 
 	@Override
@@ -633,7 +644,6 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
         	}
         }
 
-        createAlertDialog(message.toString().trim());
         deleteSelectedInstances(mSelected);
         
         mToggled = false;
@@ -648,7 +658,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 	
 		if ( (listView==null) || (listView.getCount()==0) )
 		{
-        	findViewById(R.id.linearLayout_footer).setVisibility(View.GONE);
+			findViewById(R.id.linearLayout_footer).setVisibility(View.GONE);
         	findViewById(R.id.empty).setVisibility(View.VISIBLE);
 		}
         else
@@ -656,6 +666,8 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
         	findViewById(R.id.linearLayout_footer).setVisibility(View.VISIBLE);
         	findViewById(R.id.empty).setVisibility(View.GONE);
         }
+		
+		createAlertDialog(message.toString().trim());
 	}
 
 	@Override

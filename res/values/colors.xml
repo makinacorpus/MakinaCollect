@@ -16,6 +16,10 @@ the License.
 -->
 <resources>
 
+    <color name="dark_color">#073239</color>
+    <color name="light_color">#fff</color>
+    <drawable name="bleu_help_footer">#26d1ed</drawable>
+    <drawable name="bleu_help_footer_on">#24c3dd</drawable>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="background_window">#FFE5E5E5</color>

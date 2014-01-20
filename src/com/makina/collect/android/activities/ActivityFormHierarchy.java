@@ -36,10 +36,12 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
-import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
@@ -49,10 +51,12 @@ import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.logic.FormController;
 import com.makina.collect.android.logic.HierarchyElement;
 import com.makina.collect.android.preferences.ActivityPreferences;
+import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.views.CustomActionBar;
+import com.makina.collect.android.views.CustomFontTextview;
 
-public class ActivityFormHierarchy extends SherlockListActivity implements OnClickListener{
+public class ActivityFormHierarchy extends SherlockActivity implements OnClickListener{
 
 	private static final String t = "FormHierarchyActivity";
 
@@ -70,10 +74,12 @@ public class ActivityFormHierarchy extends SherlockListActivity implements OnCli
 	List<HierarchyElement> formList;
 
 	FormIndex mStartIndex;
+	private ListView listView_hierarchy;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Theme.changeTheme(this);
 		setContentView(R.layout.activity_form_hierarchy);
 
 		Finish.activityFormHierarchy=this;
@@ -95,24 +101,101 @@ public class ActivityFormHierarchy extends SherlockListActivity implements OnCli
     	TextView actionbarSubTitle = (TextView)findViewById(titleId);
     	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
     	
+    	listView_hierarchy=(ListView)findViewById(R.id.listView_hierarchy);
+    	
     	// kinda slow, but works.
 		// this scrolls to the last question the user was looking at
-		getListView().post(new Runnable() {
+    	listView_hierarchy.post(new Runnable() {
 			@Override
 			public void run() {
 				int position = 0;
-				for (int i = 0; i < getListAdapter().getCount(); i++) {
+				for (int i = 0; i < listView_hierarchy.getAdapter().getCount(); i++) {
 					HierarchyElement he = formList.get(i);
 					if (mStartIndex.equals(he.getFormIndex())) {
 						position = i;
 						break;
 					}
 				}
-				getListView().setSelection(position);
+				listView_hierarchy.setSelection(position);
 			}
 		});
 		refreshView();
 		
+		listView_hierarchy.setOnItemClickListener(new OnItemClickListener()
+		{
+			public void onItemClick(AdapterView<?> a, View v, int position, long id)
+			{
+				ActivityForm.current_page=position+1;
+				HierarchyElement h = formList.get(position);
+				FormIndex index = h.getFormIndex();
+				if (index == null) {
+					goUpLevel();
+					return;
+				}
+
+				switch (h.getType()) {
+				case EXPANDED:
+					Collect.getInstance()
+							.getActivityLogger()
+							.logInstanceAction(this, "onListItemClick", "COLLAPSED",
+									h.getFormIndex());
+					h.setType(COLLAPSED);
+					ArrayList<HierarchyElement> children = h.getChildren();
+					for (int i = 0; i < children.size(); i++) {
+						formList.remove(position + 1);
+					}
+					h.setIcon(getResources().getDrawable(
+							R.drawable.expander_ic_minimized));
+					h.setColor(Color.BLACK);
+					break;
+				case COLLAPSED:
+					Collect.getInstance()
+							.getActivityLogger()
+							.logInstanceAction(this, "onListItemClick", "EXPANDED",
+									h.getFormIndex());
+					h.setType(EXPANDED);
+					ArrayList<HierarchyElement> children1 = h.getChildren();
+					for (int i = 0; i < children1.size(); i++) {
+						Log.i(t, "adding child: " + children1.get(i).getFormIndex());
+						formList.add(position + 1 + i, children1.get(i));
+
+					}
+					h.setIcon(getResources().getDrawable(
+							R.drawable.expander_ic_maximized));
+					h.setColor(Color.BLACK);
+					break;
+				case QUESTION:
+					Collect.getInstance()
+							.getActivityLogger()
+							.logInstanceAction(this, "onListItemClick",
+									"QUESTION-JUMP", index);
+					Collect.getInstance().getFormController().jumpToIndex(index);
+					if (Collect.getInstance().getFormController().indexIsInFieldList()) {
+						Collect.getInstance().getFormController()
+								.stepToPreviousScreenEvent();
+					}
+					setResult(RESULT_OK);
+					finish();
+					return;
+				case CHILD:
+					Collect.getInstance()
+							.getActivityLogger()
+							.logInstanceAction(this, "onListItemClick", "REPEAT-JUMP",
+									h.getFormIndex());
+					Collect.getInstance().getFormController()
+							.jumpToIndex(h.getFormIndex());
+					setResult(RESULT_OK);
+					refreshView();
+					return;
+				}
+
+				// Should only get here if we've expanded or collapsed a group
+				HierarchyListAdapter itla = new HierarchyListAdapter(ActivityFormHierarchy.this);
+				itla.setListItems(formList);
+				listView_hierarchy.setAdapter(itla);
+				listView_hierarchy.setSelection(position);
+			}
+		});
 		 
 		findViewById(R.id.linearLayout_footer).setOnClickListener(this);
 	}
@@ -141,6 +224,7 @@ public class ActivityFormHierarchy extends SherlockListActivity implements OnCli
 				.getFormController();
 		// Record the current index so we can return to the same place if the
 		// user hits 'back'.
+		((CustomFontTextview)findViewById(R.id.textview_form_title)).setText(formController.getFormTitle());
 		FormIndex currentIndex = formController.getFormIndex();
 
 		// If we're not at the first level, we're inside a repeated group so we
@@ -294,87 +378,14 @@ public class ActivityFormHierarchy extends SherlockListActivity implements OnCli
 
 		HierarchyListAdapter itla = new HierarchyListAdapter(this);
 		itla.setListItems(formList);
-		setListAdapter(itla);
+		listView_hierarchy.setAdapter(itla);
 
 		// set the controller back to the current index in case the user hits
 		// 'back'
 		formController.jumpToIndex(currentIndex);
 	}
 
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id)
-	{
-		ActivityForm.current_page=position+1;
-		HierarchyElement h = formList.get(position);
-		FormIndex index = h.getFormIndex();
-		if (index == null) {
-			goUpLevel();
-			return;
-		}
-
-		switch (h.getType()) {
-		case EXPANDED:
-			Collect.getInstance()
-					.getActivityLogger()
-					.logInstanceAction(this, "onListItemClick", "COLLAPSED",
-							h.getFormIndex());
-			h.setType(COLLAPSED);
-			ArrayList<HierarchyElement> children = h.getChildren();
-			for (int i = 0; i < children.size(); i++) {
-				formList.remove(position + 1);
-			}
-			h.setIcon(getResources().getDrawable(
-					R.drawable.expander_ic_minimized));
-			h.setColor(Color.BLACK);
-			break;
-		case COLLAPSED:
-			Collect.getInstance()
-					.getActivityLogger()
-					.logInstanceAction(this, "onListItemClick", "EXPANDED",
-							h.getFormIndex());
-			h.setType(EXPANDED);
-			ArrayList<HierarchyElement> children1 = h.getChildren();
-			for (int i = 0; i < children1.size(); i++) {
-				Log.i(t, "adding child: " + children1.get(i).getFormIndex());
-				formList.add(position + 1 + i, children1.get(i));
-
-			}
-			h.setIcon(getResources().getDrawable(
-					R.drawable.expander_ic_maximized));
-			h.setColor(Color.BLACK);
-			break;
-		case QUESTION:
-			Collect.getInstance()
-					.getActivityLogger()
-					.logInstanceAction(this, "onListItemClick",
-							"QUESTION-JUMP", index);
-			Collect.getInstance().getFormController().jumpToIndex(index);
-			if (Collect.getInstance().getFormController().indexIsInFieldList()) {
-				Collect.getInstance().getFormController()
-						.stepToPreviousScreenEvent();
-			}
-			setResult(RESULT_OK);
-			finish();
-			return;
-		case CHILD:
-			Collect.getInstance()
-					.getActivityLogger()
-					.logInstanceAction(this, "onListItemClick", "REPEAT-JUMP",
-							h.getFormIndex());
-			Collect.getInstance().getFormController()
-					.jumpToIndex(h.getFormIndex());
-			setResult(RESULT_OK);
-			refreshView();
-			return;
-		}
-
-		// Should only get here if we've expanded or collapsed a group
-		HierarchyListAdapter itla = new HierarchyListAdapter(this);
-		itla.setListItems(formList);
-		setListAdapter(itla);
-		getListView().setSelection(position);
-	}
-
+	
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		switch (keyCode) {

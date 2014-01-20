@@ -63,6 +63,7 @@ import com.makina.collect.android.logic.FormDetails;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.tasks.DownloadFormListTask;
 import com.makina.collect.android.tasks.DownloadFormsTask;
+import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.WebUtils;
 import com.makina.collect.android.views.CroutonView;
@@ -136,7 +137,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    	
+        Theme.changeTheme(this);
         setContentView(R.layout.activity_download_form);
        
         createDialog(PROGRESS_DIALOG);
@@ -831,8 +832,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
                         {
                             public void run()
                             {
-                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
-                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                            	((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
                             }
                         });
                         return view;

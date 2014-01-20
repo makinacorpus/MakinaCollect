@@ -37,6 +37,7 @@ import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.preferences.ActivityPreferences;
+import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 
 public class ActivityDashBoard extends SherlockActivity implements
@@ -44,7 +45,7 @@ public class ActivityDashBoard extends SherlockActivity implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		Theme.changeTheme(this);
 		Typeface typeFace = Typeface.createFromAsset(getAssets(),
 				"fonts/avenir.ttc");
 		getSupportActionBar().setTitle(getString(R.string.app_name));
@@ -58,7 +59,6 @@ public class ActivityDashBoard extends SherlockActivity implements
 							.fromHtml("<strong><font color=\"#C2EA60\">Makina</font> <font color=\"#1B8FAA\">Collect</font></strong>"));
 			actionbarTitle.setTypeface(typeFace);
 		}
-
 		setContentView(R.layout.activity_dashboard);
 		Finish.activityDashBoard = this;
 		Countly.sharedInstance().init(getApplicationContext(),
@@ -110,10 +110,6 @@ public class ActivityDashBoard extends SherlockActivity implements
 						final View view = li.createView(name, null, attrs);
 						new Handler().post(new Runnable() {
 							public void run() {
-								((TextView) view)
-										.setTextColor(getResources()
-												.getColor(
-														R.color.actionbarTitleColorGris));
 								((TextView) view).setTypeface(Typeface
 										.createFromAsset(getAssets(),
 												"fonts/avenir.ttc"));

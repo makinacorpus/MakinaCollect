@@ -62,6 +62,7 @@ import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.FormsProvider;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.tasks.DiskSyncTask;
+import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.VersionHidingCursorAdapter;
 import com.makina.collect.android.views.CustomActionBar;
@@ -97,6 +98,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        Theme.changeTheme(this);
         setContentView(R.layout.activity_edit_form);
         
         Finish.activityEditForm=this;
@@ -263,8 +265,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
                         {
                             public void run()
                             {
-                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
-                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                            	((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
                             }
                         });
                         return view;

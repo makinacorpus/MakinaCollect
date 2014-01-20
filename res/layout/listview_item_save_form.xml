@@ -28,8 +28,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:gravity="center_vertical"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@drawable/text_gris" />
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <com.makina.collect.android.views.CustomFontTextview
         android:id="@+id/text2"

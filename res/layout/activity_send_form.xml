@@ -22,7 +22,8 @@ the License.
 
     <RelativeLayout
         android:id="@+id/linear"
-        style="@style/Collect.MainLayout" >
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
         <LinearLayout
             android:id="@+id/linear_blue"
@@ -81,7 +82,8 @@ the License.
 
         <ListView
             android:id="@+id/listView"
-            style="@style/Collect.List"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_above="@id/linearLayout_footer"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/linear_blue" />
@@ -92,7 +94,7 @@ the License.
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:orientation="vertical" 
+        android:orientation="vertical"
         android:visibility="gone" >
 
         <ImageView
@@ -104,8 +106,8 @@ the License.
         <com.makina.collect.android.views.CustomFontTextview
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:layout_marginTop="10dip"
+            android:gravity="center_horizontal"
             android:text="@string/no_form_selected"
             android:textColor="@color/color_emty_list"
             android:textSize="27sp" />
@@ -116,7 +118,6 @@ the License.
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/no_form_finalled"
-            android:textColor="@color/actionbarTitleColorGris"
             android:textSize="20sp" />
     </LinearLayout>
 

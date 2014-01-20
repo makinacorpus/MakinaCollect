@@ -52,6 +52,7 @@ import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
+import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
@@ -103,8 +104,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
                         {
                             public void run()
                             {
-                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
-                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                            	((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
                             }
                         });
                         return view;
@@ -156,6 +156,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        Theme.changeTheme(this);
     	setContentView(R.layout.activity_save_form);
         
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_saved", false))

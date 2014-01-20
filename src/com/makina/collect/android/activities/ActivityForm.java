@@ -109,6 +109,7 @@ import com.makina.collect.android.tasks.DeleteInstancesTask;
 import com.makina.collect.android.tasks.FormLoaderTask;
 import com.makina.collect.android.tasks.InstanceUploaderTask;
 import com.makina.collect.android.tasks.SaveToDiskTask;
+import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.FileUtils;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.MediaUtils;
@@ -243,6 +244,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Theme.changeTheme(this);
 		Log.i("FormEntryActivity", "onCreate");
 		
 		//Finish.ActivityForm = this;
@@ -854,7 +856,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 		case R.id.menu_help:
 			Intent mIntent=new Intent(this, ActivityHelp.class);
         	Bundle mBundle=new Bundle();
-        	mBundle.putInt("position", 0);
+        	mBundle.putInt("position", 2);
         	mIntent.putExtras(mBundle);
         	startActivity(mIntent);
 			return true;
@@ -1022,6 +1024,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 			ScrollView endView = (ScrollView) View.inflate(this, R.layout.fragment_form_hierarchy, null);
 			mNextButton.setText(getString(R.string.finish));
 			mNextButton.setBackgroundResource(R.drawable.finish_background);
+			((CustomFontTextview) endView.findViewById(R.id.textview_form_title)).setText(formController.getFormTitle());
 			hierarchyList=(ListView) endView.findViewById(R.id.hierarchyList);
 			hierarchyList.post(new Runnable() {
 				@Override
@@ -1048,20 +1051,6 @@ InstanceUploaderListener, DeleteInstancesListener {
 			});
 			
 			refreshViewHierarchy();
-			/*int totalHeight = 10;
-            for (int i = 0; i < hierarchyList.getAdapter().getCount(); i++) {
-                View listItem = hierarchyList.getAdapter().getView(i, null, hierarchyList);
-                if (listItem!=null)
-                {
-                	listItem.measure(0, 0);
-                	totalHeight += listItem.getMeasuredHeight();
-                }
-                
-            }
-
-            ViewGroup.LayoutParams params = hierarchyList.getLayoutParams();
-            params.height = totalHeight + (hierarchyList.getDividerHeight() * (hierarchyList.getAdapter().getCount() - 1));
-            hierarchyList.setLayoutParams(params);*/
 			return endView;
 		}
 		else
@@ -1836,7 +1825,6 @@ InstanceUploaderListener, DeleteInstancesListener {
 		Collect.getInstance().getActivityLogger()
 				.logInstanceAction(this, "createQuitDialog", "show");
 		mAlertDialog = new AlertDialog.Builder(this)
-				.setIcon(android.R.drawable.ic_dialog_info)
 				.setTitle(
 						getString(R.string.quit_application,
 								formController.getFormTitle()))

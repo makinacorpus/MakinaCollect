@@ -16,11 +16,14 @@ the License.
 -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/Collect.MainLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:layout_alignParentTop="true"
     android:background="@drawable/bg_list" >
 
-    <RelativeLayout style="@style/Collect.MainLayout" >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
         <LinearLayout
             android:id="@+id/linear_blue"
@@ -78,9 +81,13 @@ the License.
             </RelativeLayout>
         </LinearLayout>
 
+        
         <ListView
             android:id="@+id/listView"
-            style="@style/Collect.List"
+            android:divider="@drawable/linear_blue"
+            android:dividerHeight="1dip"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:layout_above="@id/linearLayout_footer"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/linear_blue" />
@@ -90,9 +97,9 @@ the License.
         android:id="@+id/empty"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:visibility="gone"
         android:gravity="center"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:visibility="gone" >
 
         <ImageView
             android:layout_width="wrap_content"
@@ -104,7 +111,6 @@ the License.
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:text="@string/empty_list"
-            android:textColor="@color/color_emty_list"
             android:textSize="30sp" />
     </LinearLayout>
 
