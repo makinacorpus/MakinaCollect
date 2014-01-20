@@ -1634,7 +1634,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 		Collect.getInstance().getActivityLogger()
 				.logInstanceAction(this, "createRepeatDialog", "show");
 		mAlertDialog = new AlertDialog.Builder(this).create();
-		mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+		mAlertDialog.setIcon(R.drawable.actionbar_about_us);
 		DialogInterface.OnClickListener repeatListener = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int i) {
@@ -1708,7 +1708,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 						"show." + Boolean.toString(shouldExit));
 		mErrorMessage = errorMsg;
 		mAlertDialog = new AlertDialog.Builder(this).create();
-		mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+		mAlertDialog.setIcon(R.drawable.actionbar_about_us);
 		mAlertDialog.setTitle(getString(R.string.error_occured));
 		mAlertDialog.setMessage(errorMsg);
 		DialogInterface.OnClickListener errorListener = new DialogInterface.OnClickListener() {
@@ -1741,7 +1741,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 		FormController formController = Collect.getInstance()
 				.getFormController();
 		mAlertDialog = new AlertDialog.Builder(this).create();
-		mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+		mAlertDialog.setIcon(R.drawable.actionbar_about_us);
 		String name = formController.getLastRepeatedGroupName();
 		int repeatcount = formController.getLastRepeatedGroupRepeatCount();
 		if (repeatcount != -1) {
@@ -1968,7 +1968,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 				.logInstanceAction(this, "createClearDialog", "show",
 						qw.getPrompt().getIndex());
 		mAlertDialog = new AlertDialog.Builder(this).create();
-		mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+		mAlertDialog.setIcon(R.drawable.actionbar_about_us);
 
 		mAlertDialog.setTitle(getString(R.string.clear_answer_ask));
 
@@ -2117,7 +2117,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 					finish();
 				}
 			};
-			mProgressDialog.setIcon(android.R.drawable.ic_dialog_info);
+			mProgressDialog.setIcon(R.drawable.actionbar_about_us);
 			mProgressDialog.setTitle(getString(R.string.loading_form));
 			mProgressDialog.setMessage(getString(R.string.please_wait));
 			mProgressDialog.setIndeterminate(true);
@@ -2145,7 +2145,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 					t.cancel(true);
 				}
 			};
-			mProgressDialog.setIcon(android.R.drawable.ic_dialog_info);
+			mProgressDialog.setIcon(R.drawable.actionbar_about_us);
 			mProgressDialog.setTitle(getString(R.string.saving_form));
 			mProgressDialog.setMessage(getString(R.string.please_wait));
 			mProgressDialog.setIndeterminate(true);
@@ -2811,7 +2811,7 @@ InstanceUploaderListener, DeleteInstancesListener {
         };
         mAlertDialog.setCancelable(false);
         mAlertDialog.setButton(getString(R.string.ok), quitListener);
-        mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+        mAlertDialog.setIcon(R.drawable.actionbar_about_us);
         mAlertMsg = message;
         mAlertDialog.show();
     }

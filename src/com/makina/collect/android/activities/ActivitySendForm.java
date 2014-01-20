@@ -737,7 +737,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
         };
         mAlertDialog.setCancelable(false);
         mAlertDialog.setButton(getString(R.string.ok), quitListener);
-        mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+        mAlertDialog.setIcon(R.drawable.actionbar_about_us);
         mAlertShowing = true;
         mAlertMsg = message;
         mAlertDialog.show();
