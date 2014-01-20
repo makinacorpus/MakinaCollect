@@ -35,7 +35,9 @@ the License.
             android:id="@android:id/list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/linear_blue" />
+            android:layout_toRightOf="@id/linear_blue"
+            android:divider="@drawable/linear_blue"
+            android:dividerHeight="1dip" />
     </RelativeLayout>
 
     <LinearLayout

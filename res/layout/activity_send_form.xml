@@ -86,7 +86,9 @@ the License.
             android:layout_height="fill_parent"
             android:layout_above="@id/linearLayout_footer"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@id/linear_blue" />
+            android:layout_toRightOf="@id/linear_blue"
+            android:divider="@drawable/linear_blue"
+            android:dividerHeight="1dip" />
     </RelativeLayout>
 
     <LinearLayout
