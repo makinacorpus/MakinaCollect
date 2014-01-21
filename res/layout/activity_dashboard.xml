@@ -16,14 +16,14 @@ the License.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent" >
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:background="@drawable/bg_dashboard"
         android:gravity="center_vertical|left"
-        android:orientation="vertical"
-        android:background="@drawable/bg_dashboard">
+        android:orientation="vertical" >
 
         <com.makina.collect.android.views.CustomFontButton
             android:id="@+id/dashboard_download"
@@ -36,6 +36,7 @@ the License.
             android:layout_weight="1"
             android:background="@color/transparent"
             android:drawableLeft="@drawable/dashboard_download_selector"
+            android:drawablePadding="10dip"
             android:gravity="center_vertical|left"
             android:text="@string/download_menu"
             android:textColor="#cfea60" />
@@ -51,6 +52,7 @@ the License.
             android:layout_weight="1"
             android:background="@color/transparent"
             android:drawableLeft="@drawable/dashboard_edit_selector"
+            android:drawablePadding="10dip"
             android:gravity="center_vertical|left"
             android:text="@string/edit_menu"
             android:textColor="#b8d754" />
@@ -66,6 +68,7 @@ the License.
             android:layout_weight="1"
             android:background="@color/transparent"
             android:drawableLeft="@drawable/dashboard_saved_selector"
+            android:drawablePadding="10dip"
             android:gravity="center_vertical|left"
             android:text="@string/save_menu"
             android:textColor="#1baac2" />
@@ -81,6 +84,7 @@ the License.
             android:layout_weight="1"
             android:background="@color/transparent"
             android:drawableLeft="@drawable/dashboard_send_selector"
+            android:drawablePadding="10dip"
             android:gravity="center_vertical|left"
             android:text="@string/send_menu"
             android:textColor="#2bbccc" />
