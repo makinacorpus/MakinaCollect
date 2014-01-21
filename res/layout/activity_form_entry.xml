@@ -24,11 +24,10 @@
 
             <Button
                 android:id="@+id/prev_button"
-                style="@style/ButtonBarButton"
+                style="@style/ButtonNext"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/selectable_item_background"
                 android:text="@string/back"
                 android:visibility="invisible" />
 
@@ -39,11 +38,9 @@
 
             <Button
                 android:id="@+id/next_button"
-                style="@style/ButtonBarButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/selectable_item_background"
                 android:text="@string/next" />
         </LinearLayout>
     </LinearLayout>

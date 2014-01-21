@@ -38,6 +38,7 @@ import org.javarosa.xpath.XPathTypeMismatchException;
 import com.WazaBe.HoloEverywhere.app.AlertDialog;
 import com.WazaBe.HoloEverywhere.app.Dialog;
 import com.WazaBe.HoloEverywhere.app.ProgressDialog;
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -46,6 +47,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -129,6 +131,7 @@ import de.keyboardsurfer.mobile.app.android.widget.crouton.Style;
  * @author Carl Hartung (carlhartung@gmail.com)
  */ 
 
+@SuppressLint("NewApi")
 public class ActivityForm extends SherlockActivity implements AnimationListener, FormLoaderListener, FormSavedListener,
 AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener,
 InstanceUploaderListener, DeleteInstancesListener {
@@ -856,7 +859,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 		case R.id.menu_help:
 			Intent mIntent=new Intent(this, ActivityHelp.class);
         	Bundle mBundle=new Bundle();
-        	mBundle.putInt("position", 2);
+        	mBundle.putInt("position", 0);
         	mIntent.putExtras(mBundle);
         	startActivity(mIntent);
 			return true;
@@ -1022,8 +1025,9 @@ InstanceUploaderListener, DeleteInstancesListener {
 		{
 			findViewById(R.id.relativeLayout_informations).setVisibility(View.GONE);
 			ScrollView endView = (ScrollView) View.inflate(this, R.layout.fragment_form_hierarchy, null);
-			mNextButton.setText(getString(R.string.finish));
-			mNextButton.setBackgroundResource(R.drawable.finish_background);
+			
+			changeButtonNext(getResources().getDrawable(R.drawable.finish_background),R.style.ButtonFinishSave, getString(R.string.finish));
+			
 			((CustomFontTextview) endView.findViewById(R.id.textview_form_title)).setText(formController.getFormTitle());
 			hierarchyList=(ListView) endView.findViewById(R.id.hierarchyList);
 			hierarchyList.post(new Runnable() {
@@ -1062,12 +1066,10 @@ InstanceUploaderListener, DeleteInstancesListener {
 				findViewById(R.id.relativeLayout_informations).setVisibility(View.GONE);
 				test_finish=true;
 				ScrollView endView;
-				mNextButton.setText(getString(R.string.save));
-				mNextButton.setBackgroundResource(R.drawable.finish_background);
+				changeButtonNext(getResources().getDrawable(R.drawable.finish_background),R.style.ButtonFinishSave, getString(R.string.save));
+				
 				endView = (ScrollView) View.inflate(this, R.layout.activity_form_entry_end, null);
 				
-				
-
 				// edittext to change the displayed name of the instance
 				saveAs = (EditText) endView
 						.findViewById(R.id.save_name);
@@ -1393,12 +1395,12 @@ InstanceUploaderListener, DeleteInstancesListener {
 	 */
 	private void showPreviousView() {
 		if (mNextButton.getText().toString().equals(getString(R.string.save)))
-			mNextButton.setText(getString(R.string.finish));
+			changeButtonNext(getResources().getDrawable(R.drawable.finish_background),R.style.ButtonFinishSave, getString(R.string.finish));
 		else
-			mNextButton.setText(getString(R.string.next));
+			changeButtonNext(getResources().getDrawable(R.drawable.selectable_item_background),R.style.ButtonNext, getString(R.string.next));
+		
 		test_finish=true;
 		current_page--;
-		mNextButton.setBackgroundResource(R.drawable.selectable_item_background);
 		mBackButton.setVisibility(current_page <= 1 ? View.INVISIBLE : View.VISIBLE);
 		FormController formController = Collect.getInstance()
 				.getFormController();
@@ -1429,9 +1431,9 @@ InstanceUploaderListener, DeleteInstancesListener {
 	
 	private void showPreviousViewFromHierarchy(int position, FormIndex index)
 	{
-		mNextButton.setText(getString(R.string.next));
+		changeButtonNext(getResources().getDrawable(R.drawable.selectable_item_background),R.style.ButtonNext, getString(R.string.next));
+		
 		current_page=position+1;
-		mNextButton.setBackgroundResource(R.drawable.selectable_item_background);
 		mBackButton.setVisibility(current_page <= 1 ? View.INVISIBLE : View.VISIBLE);
 		FormController formController = Collect.getInstance().getFormController();
 		formController.jumpToIndex(index);
@@ -2227,8 +2229,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 			event=formController.getEvent();
 		if (event != FormEntryController.EVENT_END_OF_FORM)
 		{
-			mNextButton.setText(getString(R.string.next));
-			mNextButton.setBackgroundResource(R.drawable.selectable_item_background);
+			changeButtonNext(getResources().getDrawable(R.drawable.selectable_item_background),R.style.ButtonNext, getString(R.string.next));
 			test_finish=true;
 		}
 		if (current_page==1)
@@ -3083,6 +3084,13 @@ InstanceUploaderListener, DeleteInstancesListener {
 		// set the controller back to the current index in case the user hits
 		// 'back'
 		formController.jumpToIndex(currentIndex);
+	}
+	
+	private void changeButtonNext(Drawable background, int id_style, String value)
+	{
+		mNextButton.setBackground(background);
+		mNextButton.setTextAppearance(this, id_style);
+		mNextButton.setText(value);
 	}
 
 }

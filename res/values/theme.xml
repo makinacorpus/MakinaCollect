@@ -10,7 +10,7 @@
         <item name="android:actionBarStyle">@style/Widget.CollectThemeLight.ActionBar</item>
         <item name="android:windowBackground">@color/light_color</item>
         <item name="android:textColor">@drawable/text_gris</item>
-   </style>
+    </style>
 
     <style name="CollectThemeDark" parent="@style/Holo.Theme.Sherlock">
         <item name="android:scrollbarThumbHorizontal">@drawable/thumb</item>
@@ -21,8 +21,18 @@
         <item name="android:actionBarStyle">@style/Widget.CollectThemeLight.ActionBar</item>
         <item name="android:windowBackground">@color/dark_color</item>
         <item name="android:textColor">@color/light_color</item>
-        <item name="android:panelFullBackground">@color/light_color</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <item name="android:homeAsUpIndicator">@drawable/abs__ic_ab_back_holo_light</item>
     </style>
 
+    <style name="PopupMenu" parent="android:Widget.Holo.Light.ListPopupWindow">
+        <item name="android:gestureColor">@drawable/text_gris</item>
+    </style>
+
+    <style name="CollectThemeLight.List">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:divider">@drawable/linear_blue</item>
+        <item name="android:dividerHeight">1dip</item>
+    </style>
 </resources>

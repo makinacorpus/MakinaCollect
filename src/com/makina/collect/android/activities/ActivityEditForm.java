@@ -107,14 +107,14 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         getSupportActionBar().setSubtitle(getString(R.string.form));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
-    	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-    	TextView actionbarSubTitle = (TextView)findViewById(titleId);
-    	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
-    	
-    	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_edit", false))
-    		DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_edit));
-    	
+            TextView actionbarTitle = (TextView)findViewById(titleId);
+            titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
+            TextView actionbarSubTitle = (TextView)findViewById(titleId);
+            CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
+            
+            if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_edit", false))
+                    DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_edit));
+            
         loadListView();
         
         if (savedInstanceState != null && savedInstanceState.containsKey(syncMsgKey)) {
@@ -134,33 +134,33 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         CustomFontTextview textview_download_form=(CustomFontTextview) findViewById(R.id.textview_download_form);
         textview_download_form.setOnClickListener(new View.OnClickListener()
         {
-			@Override
-			public void onClick(View arg0)
-			{
-				startActivity(new Intent(getApplicationContext(), ActivityDownloadForm.class));
-			}
-		});
+                        @Override
+                        public void onClick(View arg0)
+                        {
+                                startActivity(new Intent(getApplicationContext(), ActivityDownloadForm.class));
+                        }
+                });
         
         getListView().setOnItemLongClickListener(new OnItemLongClickListener()
         {
-        	@Override
-			public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int position, long arg3)
-			{
-				// TODO Auto-generated method stub
-        		createDialogDelete(position);
-        		return false;
-			}
-		});
+                @Override
+                        public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int position, long arg3)
+                        {
+                                // TODO Auto-generated method stub
+                        createDialogDelete(position);
+                        return false;
+                        }
+                });
         
         SwipeDismissList.OnDismissCallback callback = new SwipeDismissList.OnDismissCallback()
         {
             @Override
-			public Undoable onDismiss(AbsListView listView, int position)
-			{
-				// TODO Auto-generated method stub
-            	createDialogDelete(position);
-				return null;
-			}
+                        public Undoable onDismiss(AbsListView listView, int position)
+                        {
+                                // TODO Auto-generated method stub
+                    createDialogDelete(position);
+                                return null;
+                        }
         };
         UndoMode mode = SwipeDismissList.UndoMode.SINGLE_UNDO;
         SwipeDismissList swipeList = new SwipeDismissList(getListView(), callback, mode);
@@ -169,28 +169,28 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     
     private void createDialogDelete(int position)
     {
-    	final Cursor c=instances.getCursor();
-		c.moveToPosition(position);
-		AlertDialog.Builder adb = new AlertDialog.Builder(ActivityEditForm.this);
-		adb.setTitle("Suppression");
-		adb.setMessage("Voulez-vous vraiment supprimer "+c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))+" ?");
-		adb.setNegativeButton(getString(android.R.string.cancel),null);
+            final Cursor c=instances.getCursor();
+                c.moveToPosition(position);
+                AlertDialog.Builder adb = new AlertDialog.Builder(ActivityEditForm.this);
+                adb.setTitle("Suppression");
+                adb.setMessage("Voulez-vous vraiment supprimer "+c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))+" ?");
+                adb.setNegativeButton(getString(android.R.string.cancel),null);
 
-		adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
-		{
-			public void onClick(DialogInterface dialog,int which)
-			{
-				FormsProvider.deleteFileOrDir(Environment.getExternalStorageDirectory()+ File.separator + "odk/forms/"+(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)).replace("_", " ")).replace("-", " ")+".xml");
-        		FormsProvider.deleteForm(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)));
-        		loadListView();
-			}
-		});
-		adb.show();
+                adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
+                {
+                        public void onClick(DialogInterface dialog,int which)
+                        {
+                                FormsProvider.deleteFileOrDir(Environment.getExternalStorageDirectory()+ File.separator + "odk/forms/"+(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)).replace("_", " ")).replace("-", " ")+".xml");
+                        FormsProvider.deleteForm(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)));
+                        loadListView();
+                        }
+                });
+                adb.show();
     }
     
     private void loadListView()
     {
-    	String sortOrder = FormsColumns.DISPLAY_NAME + " ASC, " + FormsColumns.JR_VERSION + " DESC";
+            String sortOrder = FormsColumns.DISPLAY_NAME + " ASC, " + FormsColumns.JR_VERSION + " DESC";
         Cursor c = managedQuery(FormsColumns.CONTENT_URI, null, null, null, sortOrder);
 
         String[] data = new String[] {FormsColumns.DISPLAY_NAME, FormsColumns.DISPLAY_SUBTEXT, FormsColumns.JR_VERSION};
@@ -209,14 +209,14 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     }
 
     @Override
-   	public void onListItemClick(ListView listView, View view, int position, long id)
+           public void onListItemClick(ListView listView, View view, int position, long id)
     {
-    	ActivityForm.current_page=1;
+            ActivityForm.current_page=1;
            // get uri to form
-       	long idFormsTable = ((SimpleCursorAdapter) getListAdapter()).getItemId(position);
+               long idFormsTable = ((SimpleCursorAdapter) getListAdapter()).getItemId(position);
          Uri formUri = ContentUris.withAppendedId(FormsColumns.CONTENT_URI, idFormsTable);
 
-   		Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", formUri.toString());
+                   Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", formUri.toString());
 
            String action = getIntent().getAction();
            if (Intent.ACTION_PICK.equals(action))
@@ -227,8 +227,8 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
            else
            {
                // caller wants to view/edit a form, so launch formentryactivity
-           	Intent i = new Intent(Intent.ACTION_EDIT, formUri);
-           	i.putExtra("newForm", true);
+                   Intent i = new Intent(Intent.ACTION_EDIT, formUri);
+                   i.putExtra("newForm", true);
             startActivity(i);
            }
            
@@ -248,14 +248,14 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
         ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
         if (searchButton!=null)
-        	searchButton.setImageResource(R.drawable.actionbar_search); 
+                searchButton.setImageResource(R.drawable.actionbar_search); 
         mSearchView.setOnQueryTextListener(this);
         
         getLayoutInflater().setFactory(new LayoutInflater.Factory()
         {
             public View onCreateView(String name, Context context, AttributeSet attrs)
             {
-            	if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")|| name.equalsIgnoreCase("TextView"))
+                    if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")|| name.equalsIgnoreCase("TextView"))
                 {
                     try
                     {
@@ -265,7 +265,8 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
                         {
                             public void run()
                             {
-                            	((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                                    ((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
                             }
                         });
                         return view;
@@ -283,9 +284,9 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     @Override
     public boolean onQueryTextChange(String newText)
     {
-    	String sortOrder = FormsColumns.DISPLAY_NAME + " ASC, " + FormsColumns.JR_VERSION + " DESC";
-    	String condition=FormsColumns.DISPLAY_NAME+" LIKE '%"+newText+"%'";
-    	Cursor c = managedQuery(FormsColumns.CONTENT_URI, null, condition, null, sortOrder);
+            String sortOrder = FormsColumns.DISPLAY_NAME + " ASC, " + FormsColumns.JR_VERSION + " DESC";
+            String condition=FormsColumns.DISPLAY_NAME+" LIKE '%"+newText+"%'";
+            Cursor c = managedQuery(FormsColumns.CONTENT_URI, null, condition, null, sortOrder);
         
         String[] data = new String[]{ FormsColumns.DISPLAY_NAME, FormsColumns.DISPLAY_SUBTEXT, FormsColumns.JR_VERSION};
         int[] view = new int[] { R.id.text1, R.id.text2, R.id.text3};
@@ -301,34 +302,34 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         // The action bar home/up action should open or close the drawer.
         // ActionBarDrawerToggle will take care of this.
         // Handle action buttons for all fragments
-    	switch(item.getItemId())
-    	{
-	        case android.R.id.home:
-	        	finish();
-	        return true;
-	        case R.id.menu_settings:
-	        	startActivity(new Intent(this, ActivityPreferences.class));
-	        	return true;
-	        case R.id.menu_help:
-	        	Intent mIntent=new Intent(this, ActivityHelp.class);
-	        	Bundle mBundle=new Bundle();
-	        	mBundle.putInt("position", 1);
-	        	mIntent.putExtras(mBundle);
-	        	startActivity(mIntent);
-	        	return true;
-	        case R.id.menu_about_us:
-	        	DialogAboutUs.aboutUs(this);
-	        	return true;
-	        case R.id.menu_exit:
-	        	Finish.finish();
-	        	return true;
-	        default:
-	            return super.onOptionsItemSelected(item);
+            switch(item.getItemId())
+            {
+                case android.R.id.home:
+                        finish();
+                return true;
+                case R.id.menu_settings:
+                	startActivity(new Intent(getApplicationContext(), ActivityPreferences.class));
+                	return true;
+                case R.id.menu_help:
+                	Intent mIntent=new Intent(this, ActivityHelp.class);
+                	Bundle mBundle=new Bundle();
+                	mBundle.putInt("position", 1);
+                	mIntent.putExtras(mBundle);
+                	startActivity(mIntent);
+                	return true;
+                case R.id.menu_about_us:
+                        DialogAboutUs.aboutUs(this);
+                        return true;
+                case R.id.menu_exit:
+                        Finish.finish();
+                        return true;
+                default:
+                    return super.onOptionsItemSelected(item);
         }
     }
 
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
+        @Override
+        public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(syncMsgKey, statusText);
     }
@@ -337,14 +338,14 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     /**
      * Stores the path of selected form and finishes.
      */
-	
-	/*@Override
-	public void onListItemClick(ListView listView, View view, int position, long id) {
+        
+        /*@Override
+        public void onListItemClick(ListView listView, View view, int position, long id) {
         // get uri to form
-    	long idFormsTable = ((SimpleCursorAdapter) getListAdapter()).getItemId(position);
+            long idFormsTable = ((SimpleCursorAdapter) getListAdapter()).getItemId(position);
         Uri formUri = ContentUris.withAppendedId(FormsColumns.CONTENT_URI, idFormsTable);
 
-		Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", formUri.toString());
+                Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", formUri.toString());
 
         String action = getIntent().getAction();
         if (Intent.ACTION_PICK.equals(action)) {
@@ -352,8 +353,8 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
             setResult(RESULT_OK, new Intent().setData(formUri));
         } else {
             // caller wants to view/edit a form, so launch formentryactivity
-        	Intent i = new Intent(Intent.ACTION_EDIT, formUri);
-        	i.putExtra("newForm", true);
+                Intent i = new Intent(Intent.ACTION_EDIT, formUri);
+                i.putExtra("newForm", true);
             startActivity(i);
         }
         
@@ -362,50 +363,50 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     }*/
     
     //TODO Back to previous task
-   /* public boolean onOptionsItemSelected(MenuItem item) {
+    /*public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-	        case android.R.id.home:
-	            // This is called when the Home (Up) button is pressed
-	            // in the Action Bar.
-	            Intent parentActivityIntent = new Intent(this, MainMenuActivity.class);
-	            parentActivityIntent.addFlags(
-	                    Intent.FLAG_ACTIVITY_CLEAR_TOP |
-	                    Intent.FLAG_ACTIVITY_NEW_TASK);
-	            startActivity(parentActivityIntent);
-	            finish();
-	            return true;
+                case android.R.id.home:
+                    // This is called when the Home (Up) button is pressed
+                    // in the Action Bar.
+                    Intent parentActivityIntent = new Intent(this, MainMenuActivity.class);
+                    parentActivityIntent.addFlags(
+                            Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                            Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(parentActivityIntent);
+                    finish();
+                    return true;
         }
         return super.onOptionsItemSelected(item);
     }*/
 
     @Override
-	public void onResume() {
+        public void onResume() {
         mDiskSyncTask.setDiskSyncListener(this);
         super.onResume();
 
         if (mDiskSyncTask.getStatus() == AsyncTask.Status.FINISHED) {
-        	SyncComplete(mDiskSyncTask.getStatusMessage());
+                SyncComplete(mDiskSyncTask.getStatusMessage());
         }
     }
 
 
     @Override
-	public void onPause() {
+        public void onPause() {
         mDiskSyncTask.setDiskSyncListener(null);
         super.onPause();
     }
 
 
     @Override
-	public void onStart() {
-    	super.onStart();
-		Collect.getInstance().getActivityLogger().logOnStart(this); 
+        public void onStart() {
+            super.onStart();
+                Collect.getInstance().getActivityLogger().logOnStart(this); 
     }
     
     @Override
-	public void onStop() {
-		Collect.getInstance().getActivityLogger().logOnStop(this); 
-    	super.onStop();
+        public void onStop() {
+                Collect.getInstance().getActivityLogger().logOnStop(this); 
+            super.onStop();
     }
     
     
@@ -428,7 +429,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
      */
     private void createErrorDialog(String errorMsg, final boolean shouldExit) {
 
-    	Collect.getInstance().getActivityLogger().logAction(this, "createErrorDialog", "show");
+            Collect.getInstance().getActivityLogger().logAction(this, "createErrorDialog", "show");
 
         mAlertDialog = new AlertDialog.Builder(this).create();
         mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
@@ -438,10 +439,10 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
             public void onClick(DialogInterface dialog, int i) {
                 switch (i) {
                     case DialogInterface.BUTTON1:
-                    	Collect.getInstance().getActivityLogger().logAction(this, "createErrorDialog", 
-                    			shouldExit ? "exitApplication" : "OK");
+                            Collect.getInstance().getActivityLogger().logAction(this, "createErrorDialog", 
+                                            shouldExit ? "exitApplication" : "OK");
                         if (shouldExit) {
-                        	finish();
+                                finish();
                         }
                         break;
                 }
@@ -452,24 +453,24 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         mAlertDialog.show();
     }
 
-	@Override
-	public boolean onQueryTextSubmit(String query) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+                // TODO Auto-generated method stub
+                return false;
+        }
 
 
-	@Override
-	public void deleteComplete(int deletedInstances) {
-		// TODO Auto-generated method stub
-		if (deletedInstances == mSelected.size()) {
-			// all deletes were successful
-			Toast.makeText(getApplicationContext(),getString(R.string.file_deleted_ok, deletedInstances),Toast.LENGTH_SHORT).show();
-		} else {
-			// had some failures
-			Toast.makeText(getApplicationContext(),getString(R.string.file_deleted_error, mSelected.size()- deletedInstances, mSelected.size()),Toast.LENGTH_LONG).show();
-		}
-	}
+        @Override
+        public void deleteComplete(int deletedInstances) {
+                // TODO Auto-generated method stub
+                if (deletedInstances == mSelected.size()) {
+                        // all deletes were successful
+                        Toast.makeText(getApplicationContext(),getString(R.string.file_deleted_ok, deletedInstances),Toast.LENGTH_SHORT).show();
+                } else {
+                        // had some failures
+                        Toast.makeText(getApplicationContext(),getString(R.string.file_deleted_error, mSelected.size()- deletedInstances, mSelected.size()),Toast.LENGTH_LONG).show();
+                }
+        }
 
 
 

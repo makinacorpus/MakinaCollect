@@ -14,7 +14,9 @@
   limitations under the License.
   -->
 
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/actionbarTitleColorGreenEdit" />
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/actionbarTitleColorGreenEdit" android:state_pressed="true" />
+    <item android:drawable="@color/actionbarTitleColorGreenEdit" android:state_focused="true" />
+    <item android:drawable="@color/actionbarTitleColorGreenEdit" android:state_selected="true" />
     <item android:drawable="@color/actionbarTitleColorGreenDownload" />
-</layer-list>
+</selector>

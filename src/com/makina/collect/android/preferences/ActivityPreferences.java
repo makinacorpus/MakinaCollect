@@ -827,7 +827,6 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
     	{
 	        case android.R.id.home:
 	        	finish();
-	        	startActivity(new Intent(getApplicationContext(), ActivityDashBoard.class));
 	        return true;
 	        case R.id.menu_about_us:
 	        	DialogAboutUs.aboutUs(this);

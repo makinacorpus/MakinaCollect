@@ -39,6 +39,7 @@ import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
+import com.makina.collect.android.views.CustomFontButton;
 
 public class ActivityDashBoard extends SherlockActivity implements
 		OnClickListener {
@@ -65,13 +66,13 @@ public class ActivityDashBoard extends SherlockActivity implements
 				"http://countly.makina-corpus.net",
 				"279676abcbba16c3ee5e2b113a990fe579ddc527");
 
-		Button btnDownload = (Button) findViewById(R.id.dashboard_download);
+		CustomFontButton btnDownload = (CustomFontButton) findViewById(R.id.dashboard_download);
 		btnDownload.setOnClickListener(this);
-		Button btnEdit = (Button) findViewById(R.id.dashboard_edit);
+		CustomFontButton btnEdit = (CustomFontButton) findViewById(R.id.dashboard_edit);
 		btnEdit.setOnClickListener(this);
-		Button btnSave = (Button) findViewById(R.id.dashboard_save);
+		CustomFontButton btnSave = (CustomFontButton) findViewById(R.id.dashboard_save);
 		btnSave.setOnClickListener(this);
-		Button btnSend = (Button) findViewById(R.id.dashboard_send);
+		CustomFontButton btnSend = (CustomFontButton) findViewById(R.id.dashboard_send);
 		btnSend.setOnClickListener(this);
 	}
 
