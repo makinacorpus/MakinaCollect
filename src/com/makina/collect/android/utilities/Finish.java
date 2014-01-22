@@ -34,4 +34,16 @@ public class Finish
 		if(activityPreferences != null) activityPreferences.finish();
 		if(activityHelp != null) activityHelp.finish();
 	}
+	
+	public static void finishHome()
+	{
+		if(activityDownloadForm != null) activityDownloadForm.finish();
+		if(activityEditForm != null) activityEditForm.finish();
+		if(activitySaveForm != null) activitySaveForm.finish();
+		if(activitySendForm != null) activitySendForm.finish();
+		if(activityForm != null) activityForm.finish();
+		if(activityFormHierarchy != null) activityFormHierarchy.finish();
+		if(activityPreferences != null) activityPreferences.finish();
+		if(activityHelp != null) activityHelp.finish();
+	}
 }

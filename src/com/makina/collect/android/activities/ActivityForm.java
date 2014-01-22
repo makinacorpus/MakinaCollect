@@ -83,8 +83,6 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -246,6 +244,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 
 	private static final String mIndent = "     ";
 	private Menu menu;
+	private boolean exit_to_home=false;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -877,7 +876,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 			// in the Action Bar.
 			Collect.getInstance().getActivityLogger()
 					.logInstanceAction(this, "onKeyDown.KEYCODE_BACK", "quit");
-			createQuitDialog();
+			createQuitDialog(true);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -893,7 +892,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 			public void onClick(DialogInterface dialog,int which)
 			{
 				removeTempInstance();
-				finishReturnInstance();
+				finishReturnInstance(false);
 				Intent myIntent = new Intent(Intent.ACTION_EDIT, uri);
 				myIntent.putExtra("newForm", true);
 		        startActivity(myIntent);
@@ -1813,7 +1812,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 	 * Create a dialog with options to save and exit, save, or quit without
 	 * saving
 	 */
-	private void createQuitDialog() {
+	private void createQuitDialog(final boolean test) {
 		FormController formController = Collect.getInstance()
 				.getFormController();
 		String[] items;
@@ -1866,6 +1865,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 										.logInstanceAction(this,
 												"createQuitDialog",
 												"saveAndExit");
+								exit_to_home=true;
 								saveDataToDisk(EXIT, isInstanceComplete(false),
 										null);
 							} else {
@@ -1875,7 +1875,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 												"createQuitDialog",
 												"discardAndExit");
 								removeTempInstance();
-								finishReturnInstance();
+								finishReturnInstance(test);
 							}
 							break;
 
@@ -1886,7 +1886,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 											"createQuitDialog",
 											"discardAndExit");
 							removeTempInstance();
-							finishReturnInstance();
+							finishReturnInstance(test);
 							break;
 
 						case 2:// do nothing
@@ -2245,7 +2245,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 		case KeyEvent.KEYCODE_BACK:
 			Collect.getInstance().getActivityLogger()
 					.logInstanceAction(this, "onKeyDown.KEYCODE_BACK", "quit");
-			createQuitDialog();
+			createQuitDialog(false);
 			return true;
 		case KeyEvent.KEYCODE_DPAD_RIGHT:
 			if (event.isAltPressed()) {
@@ -2466,7 +2466,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 			break;
 		case SaveToDiskTask.SAVED_AND_EXIT:
 			sendSavedBroadcast();
-			finishReturnInstance();
+			finishReturnInstance(exit_to_home);
 			break;
 		case SaveToDiskTask.SAVE_ERROR:
 			CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.data_saved_error), Style.ALERT);
@@ -2575,7 +2575,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 	 * Returns the instance that was just filled out to the calling activity, if
 	 * requested.
 	 */
-	private void finishReturnInstance() {
+	private void finishReturnInstance(boolean test) {
 		FormController formController = Collect.getInstance()
 				.getFormController();
 		String action = getIntent().getAction();
@@ -2604,7 +2604,10 @@ InstanceUploaderListener, DeleteInstancesListener {
 				}
 			}
 		}
-		finish();
+		if (test)
+			Finish.finishHome();
+		else
+			finish();
 	}
 
 	@Override

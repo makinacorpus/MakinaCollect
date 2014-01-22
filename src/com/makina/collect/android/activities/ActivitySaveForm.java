@@ -57,7 +57,6 @@ import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
-import com.makina.collect.android.utilities.FinishHome;
 import com.makina.collect.android.views.CustomActionBar;
 
 import de.timroes.swipetodismiss.SwipeDismissList;
@@ -133,7 +132,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     	switch(item.getItemId())
     	{
 	        case android.R.id.home:
-	        	FinishHome.goToHome(getApplicationContext());
+	        	Finish.finishHome();
 	        return true;
 	        case R.id.menu_settings:
 	        	startActivity(new Intent(this, ActivityPreferences.class));

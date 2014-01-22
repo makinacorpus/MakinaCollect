@@ -67,7 +67,6 @@ import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.tasks.DiskSyncTask;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
-import com.makina.collect.android.utilities.FinishHome;
 import com.makina.collect.android.utilities.VersionHidingCursorAdapter;
 import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
@@ -311,7 +310,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
             switch(item.getItemId())
             {
                 case android.R.id.home:
-                	FinishHome.goToHome(getApplicationContext());
+                	Finish.finishHome();
                 return true;
                 case R.id.menu_settings:
                 	startActivity(new Intent(getApplicationContext(), ActivityPreferences.class));
