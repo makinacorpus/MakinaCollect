@@ -45,6 +45,7 @@ import com.makina.collect.android.views.CustomFontButton;
 public class ActivityDashBoard extends SherlockActivity implements
                 OnClickListener {
 	private Menu menu;
+	private final int RESULT_PREFERENCES=1;
         @Override
         public void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
@@ -138,7 +139,7 @@ public class ActivityDashBoard extends SherlockActivity implements
                 // Handle action buttons for all fragments
                 switch (item.getItemId()) {
                 case R.id.menu_settings:
-                        startActivity(new Intent(this, ActivityPreferences.class));
+                        startActivityForResult((new Intent(this, ActivityPreferences.class)),RESULT_PREFERENCES);
                         return true;
                  case R.id.menu_help:
                         Intent mIntent=new Intent(this, ActivityHelp.class);
@@ -179,5 +180,16 @@ public class ActivityDashBoard extends SherlockActivity implements
             super.onKeyUp(keyCode, event);
             return true;
          }
+        
+        
+        protected void onActivityResult(int requestCode, int resultCode, Intent data)
+        {
+        	if (requestCode == RESULT_PREFERENCES)
+        	{
+        		Intent i = getIntent();
+				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(i);
+        	}
+        }
 
 }

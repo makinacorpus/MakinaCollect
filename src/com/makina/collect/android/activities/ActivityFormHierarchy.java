@@ -77,7 +77,8 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 	FormIndex mStartIndex;
 	private ListView listView_hierarchy;
 	private Menu menu;
-	    
+	private final int RESULT_PREFERENCES=1;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -488,7 +489,7 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 				}
 			return true;
 	        case R.id.menu_settings:
-	        	startActivity(new Intent(this, ActivityPreferences.class));
+	        	startActivityForResult((new Intent(this, ActivityPreferences.class)),RESULT_PREFERENCES);
 	        	return true;
 	        case R.id.menu_help:
 	        	Intent mIntent=new Intent(this, ActivityHelp.class);
@@ -525,4 +526,14 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
         super.onKeyUp(keyCode, event);
         return true;
      }
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+    	if (requestCode == RESULT_PREFERENCES)
+    	{
+    		Intent i = getIntent();
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(i);
+    	}
+    }
 }

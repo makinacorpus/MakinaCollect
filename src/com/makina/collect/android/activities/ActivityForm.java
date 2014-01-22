@@ -245,6 +245,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 	private static final String mIndent = "     ";
 	private Menu menu;
 	private boolean exit_to_home=false;
+	private final int RESULT_PREFERENCES=1;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -607,157 +608,166 @@ InstanceUploaderListener, DeleteInstancesListener {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode,
 			Intent intent) {
-		super.onActivityResult(requestCode, resultCode, intent);
-		FormController formController = Collect.getInstance()
-				.getFormController();
-		if (formController == null) {
-			// we must be in the midst of a reload of the FormController.
-			// try to save this callback data to the FormLoaderTask
-			if (mFormLoaderTask != null
-					&& mFormLoaderTask.getStatus() != AsyncTask.Status.FINISHED) {
-				mFormLoaderTask.setActivityResult(requestCode, resultCode,
-						intent);
-			} else {
-				Log.e(t,
-						"Got an activityResult without any pending form loader");
+		if (requestCode == RESULT_PREFERENCES)
+    	{
+    		Intent i = getIntent();
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(i);
+    	}
+		else
+		{
+			super.onActivityResult(requestCode, resultCode, intent);
+			FormController formController = Collect.getInstance()
+					.getFormController();
+			if (formController == null) {
+				// we must be in the midst of a reload of the FormController.
+				// try to save this callback data to the FormLoaderTask
+				if (mFormLoaderTask != null
+						&& mFormLoaderTask.getStatus() != AsyncTask.Status.FINISHED) {
+					mFormLoaderTask.setActivityResult(requestCode, resultCode,
+							intent);
+				} else {
+					Log.e(t,
+							"Got an activityResult without any pending form loader");
+				}
+				return;
 			}
-			return;
-		}
-
-		if (resultCode == RESULT_CANCELED) {
-			// request was canceled...
-			if (requestCode != HIERARCHY_ACTIVITY) {
-				((ODKView) mCurrentView).cancelWaitingForBinaryData();
+	
+			if (resultCode == RESULT_CANCELED) {
+				// request was canceled...
+				if (requestCode != HIERARCHY_ACTIVITY) {
+					((ODKView) mCurrentView).cancelWaitingForBinaryData();
+				}
+				return;
 			}
-			return;
-		}
-
-		switch (requestCode) {
-		case BARCODE_CAPTURE:
-			String sb = intent.getStringExtra("SCAN_RESULT");
-			((ODKView) mCurrentView).setBinaryData(sb);
-			saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
-			break;
-		case EX_STRING_CAPTURE:
-			String sv = intent.getStringExtra("value");
-			((ODKView) mCurrentView).setBinaryData(sv);
-			saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
-			break;
-		case EX_INT_CAPTURE:
-			Integer iv = intent.getIntExtra("value", 0);
-			((ODKView) mCurrentView).setBinaryData(iv);
-			saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
-			break;
-		case EX_DECIMAL_CAPTURE:
-			Double dv = intent.getDoubleExtra("value", 0.0);
-			((ODKView) mCurrentView).setBinaryData(dv);
-			saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
-			break;
-		case DRAW_IMAGE:
-		case ANNOTATE_IMAGE:
-		case SIGNATURE_CAPTURE:
-		case IMAGE_CAPTURE:
-			/*
-			 * We saved the image to the tempfile_path, but we really want it to
-			 * be in: /sdcard/odk/instances/[current instnace]/something.jpg so
-			 * we move it there before inserting it into the content provider.
-			 * Once the android image capture bug gets fixed, (read, we move on
-			 * from Android 1.6) we want to handle images the audio and video
-			 */
-			// The intent is empty, but we know we saved the image to the temp
-			// file
-			File fi = new File(Collect.TMPFILE_PATH);
-			String mInstanceFolder = formController.getInstancePath()
-					.getParent();
-			String s = mInstanceFolder + File.separator
-					+ System.currentTimeMillis() + ".jpg";
-
-			File nf = new File(s);
-			if (!fi.renameTo(nf)) {
-				Log.e(t, "Failed to rename " + fi.getAbsolutePath());
-			} else {
-				Log.i(t,
-						"renamed " + fi.getAbsolutePath() + " to "
-								+ nf.getAbsolutePath());
-			}
-
-			((ODKView) mCurrentView).setBinaryData(nf);
-			saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
-			break;
-		case IMAGE_CHOOSER:
-			/*
-			 * We have a saved image somewhere, but we really want it to be in:
-			 * /sdcard/odk/instances/[current instnace]/something.jpg so we move
-			 * it there before inserting it into the content provider. Once the
-			 * android image capture bug gets fixed, (read, we move on from
-			 * Android 1.6) we want to handle images the audio and video
-			 */
-
-			// get gp of chosen file
-			String sourceImagePath = null;
-			Uri selectedImage = intent.getData();
-			if (selectedImage.toString().startsWith("file")) {
-				sourceImagePath = selectedImage.toString().substring(6);
-			} else {
-				String[] projection = { MediaColumns.DATA };
-				Cursor cursor = null;
-				try {
-					cursor = getContentResolver().query(selectedImage,
-							projection, null, null, null);
-					int column_index = cursor
-							.getColumnIndexOrThrow(MediaColumns.DATA);
-					cursor.moveToFirst();
-					sourceImagePath = cursor.getString(column_index);
-				} finally {
-					if (cursor != null) {
-						cursor.close();
+	
+			switch (requestCode) {
+			case BARCODE_CAPTURE:
+				String sb = intent.getStringExtra("SCAN_RESULT");
+				((ODKView) mCurrentView).setBinaryData(sb);
+				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
+				break;
+			case EX_STRING_CAPTURE:
+				String sv = intent.getStringExtra("value");
+				((ODKView) mCurrentView).setBinaryData(sv);
+				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
+				break;
+			case EX_INT_CAPTURE:
+				Integer iv = intent.getIntExtra("value", 0);
+				((ODKView) mCurrentView).setBinaryData(iv);
+				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
+				break;
+			case EX_DECIMAL_CAPTURE:
+				Double dv = intent.getDoubleExtra("value", 0.0);
+				((ODKView) mCurrentView).setBinaryData(dv);
+				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
+				break;
+			case DRAW_IMAGE:
+			case ANNOTATE_IMAGE:
+			case SIGNATURE_CAPTURE:
+			case IMAGE_CAPTURE:
+				/*
+				 * We saved the image to the tempfile_path, but we really want it to
+				 * be in: /sdcard/odk/instances/[current instnace]/something.jpg so
+				 * we move it there before inserting it into the content provider.
+				 * Once the android image capture bug gets fixed, (read, we move on
+				 * from Android 1.6) we want to handle images the audio and video
+				 */
+				// The intent is empty, but we know we saved the image to the temp
+				// file
+				File fi = new File(Collect.TMPFILE_PATH);
+				String mInstanceFolder = formController.getInstancePath()
+						.getParent();
+				String s = mInstanceFolder + File.separator
+						+ System.currentTimeMillis() + ".jpg";
+	
+				File nf = new File(s);
+				if (!fi.renameTo(nf)) {
+					Log.e(t, "Failed to rename " + fi.getAbsolutePath());
+				} else {
+					Log.i(t,
+							"renamed " + fi.getAbsolutePath() + " to "
+									+ nf.getAbsolutePath());
+				}
+	
+				((ODKView) mCurrentView).setBinaryData(nf);
+				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
+				break;
+			case IMAGE_CHOOSER:
+				/*
+				 * We have a saved image somewhere, but we really want it to be in:
+				 * /sdcard/odk/instances/[current instnace]/something.jpg so we move
+				 * it there before inserting it into the content provider. Once the
+				 * android image capture bug gets fixed, (read, we move on from
+				 * Android 1.6) we want to handle images the audio and video
+				 */
+	
+				// get gp of chosen file
+				String sourceImagePath = null;
+				Uri selectedImage = intent.getData();
+				if (selectedImage.toString().startsWith("file")) {
+					sourceImagePath = selectedImage.toString().substring(6);
+				} else {
+					String[] projection = { MediaColumns.DATA };
+					Cursor cursor = null;
+					try {
+						cursor = getContentResolver().query(selectedImage,
+								projection, null, null, null);
+						int column_index = cursor
+								.getColumnIndexOrThrow(MediaColumns.DATA);
+						cursor.moveToFirst();
+						sourceImagePath = cursor.getString(column_index);
+					} finally {
+						if (cursor != null) {
+							cursor.close();
+						}
 					}
 				}
+	
+				// Copy file to sdcard
+				String mInstanceFolder1 = formController.getInstancePath()
+						.getParent();
+				String destImagePath = mInstanceFolder1 + File.separator
+						+ System.currentTimeMillis() + ".jpg";
+	
+				File source = new File(sourceImagePath);
+				File newImage = new File(destImagePath);
+				FileUtils.copyFile(source, newImage);
+	
+				((ODKView) mCurrentView).setBinaryData(newImage);
+				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
+				if (formController.indexIsInFieldList()){
+					updateView();
+				}
+				break;
+			case AUDIO_CAPTURE:
+			case VIDEO_CAPTURE:
+			case AUDIO_CHOOSER:
+			case VIDEO_CHOOSER:
+				// For audio/video capture/chooser, we get the URI from the content
+				// provider
+				// then the widget copies the file and makes a new entry in the
+				// content provider.
+				Uri media = intent.getData();
+				((ODKView) mCurrentView).setBinaryData(media);
+				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
+				if (formController.indexIsInFieldList()){
+					updateView();
+				}
+				break;
+			case LOCATION_CAPTURE:
+				String sl = intent.getStringExtra(LOCATION_RESULT);
+				((ODKView) mCurrentView).setBinaryData(sl);
+				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
+				break;
+			case HIERARCHY_ACTIVITY:
+				// We may have jumped to a new index in hierarchy activity, so
+				// refresh
+				break;
+	
 			}
-
-			// Copy file to sdcard
-			String mInstanceFolder1 = formController.getInstancePath()
-					.getParent();
-			String destImagePath = mInstanceFolder1 + File.separator
-					+ System.currentTimeMillis() + ".jpg";
-
-			File source = new File(sourceImagePath);
-			File newImage = new File(destImagePath);
-			FileUtils.copyFile(source, newImage);
-
-			((ODKView) mCurrentView).setBinaryData(newImage);
-			saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
-			if (formController.indexIsInFieldList()){
-				updateView();
-			}
-			break;
-		case AUDIO_CAPTURE:
-		case VIDEO_CAPTURE:
-		case AUDIO_CHOOSER:
-		case VIDEO_CHOOSER:
-			// For audio/video capture/chooser, we get the URI from the content
-			// provider
-			// then the widget copies the file and makes a new entry in the
-			// content provider.
-			Uri media = intent.getData();
-			((ODKView) mCurrentView).setBinaryData(media);
-			saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
-			if (formController.indexIsInFieldList()){
-				updateView();
-			}
-			break;
-		case LOCATION_CAPTURE:
-			String sl = intent.getStringExtra(LOCATION_RESULT);
-			((ODKView) mCurrentView).setBinaryData(sl);
-			saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
-			break;
-		case HIERARCHY_ACTIVITY:
-			// We may have jumped to a new index in hierarchy activity, so
-			// refresh
-			break;
-
+			refreshCurrentView();
 		}
-		refreshCurrentView();
 	}
 
 	/**
@@ -855,8 +865,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 					.getActivityLogger()
 					.logInstanceAction(this, "onOptionsItemSelected",
 							"MENU_PREFERENCES");
-			Intent pref = new Intent(this, ActivityPreferences.class);
-			startActivity(pref);
+			startActivityForResult((new Intent(this, ActivityPreferences.class)),RESULT_PREFERENCES);
 			return true;
 		case R.id.menu_help:
 			Intent mIntent=new Intent(this, ActivityHelp.class);
@@ -3106,5 +3115,7 @@ InstanceUploaderListener, DeleteInstancesListener {
         super.onKeyUp(keyCode, event);
         return true;
      }
+	
+	
 }
 

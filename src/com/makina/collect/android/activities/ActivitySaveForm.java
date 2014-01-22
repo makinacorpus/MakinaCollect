@@ -75,7 +75,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     private Cursor c;
     private SimpleCursorAdapter instances;
     private Menu menu;
-    
+    private final int RESULT_PREFERENCES=1;
     @SuppressLint("NewApi")
 	@Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -135,7 +135,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 	        	Finish.finishHome();
 	        return true;
 	        case R.id.menu_settings:
-	        	startActivity(new Intent(this, ActivityPreferences.class));
+	        	startActivityForResult((new Intent(this, ActivityPreferences.class)),RESULT_PREFERENCES);
 	        	return true;
 	        case R.id.menu_help:
 	        	Intent mIntent=new Intent(this, ActivityHelp.class);
@@ -241,9 +241,13 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     
     @Override
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
+    	if (requestCode == RESULT_PREFERENCES)
+    	{
+    		Intent i = getIntent();
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(i);
+    	}
     }
-
 
     /**
      * Stores the path of selected instance in the parent class and finishes.
@@ -340,5 +344,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         super.onKeyUp(keyCode, event);
         return true;
      }
+	
+	
 
 }

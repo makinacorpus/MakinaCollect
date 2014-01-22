@@ -129,6 +129,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
     private InstanceUploaderTask mInstanceUploaderTask ;
     private ListView listView;
     private Menu menu;
+    private final int RESULT_PREFERENCES=1;
 
 	public Cursor getAllCursor(String condition_search) {
 		// get all complete or failed submission instances
@@ -205,8 +206,8 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 	        	uploadInstancesOption();
 	        return true;
 	        case R.id.menu_settings:
-	        	startActivity(new Intent(this, ActivityPreferences.class));
-	        	return true;
+	        	 startActivityForResult((new Intent(this, ActivityPreferences.class)),RESULT_PREFERENCES);
+                return true;
 	        case R.id.menu_help:
 	        	Intent mIntent=new Intent(this, ActivityHelp.class);
 	        	Bundle mBundle=new Bundle();
@@ -842,4 +843,14 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
         super.onKeyUp(keyCode, event);
         return true;
      }
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+    	if (requestCode == RESULT_PREFERENCES)
+    	{
+    		Intent i = getIntent();
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(i);
+    	}
+    }
 }

@@ -136,6 +136,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     private ArrayList<String> mSelected = new ArrayList<String>();
     private ListView listView;
     private Menu menu;
+    private final int RESULT_PREFERENCES=1;
     
     @SuppressWarnings("unchecked")
     @Override
@@ -150,7 +151,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
         
         listView=(ListView)findViewById(R.id.listView);
         
-        getSupportActionBar().setTitle(getString(R.string.download_menu));
+        getSupportActionBar().setTitle(getString(R.string.download));
         getSupportActionBar().setSubtitle(getString(R.string.form));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
@@ -866,7 +867,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
 	        	getFormsOption();
 	        return true;
 	        case R.id.menu_settings:
-	        	startActivity(new Intent(this, ActivityPreferences.class));
+	        	startActivityForResult((new Intent(this, ActivityPreferences.class)),RESULT_PREFERENCES);
 	        	return true;
 	        case R.id.menu_help:
 	        	Intent mIntent=new Intent(this, ActivityHelp.class);
@@ -893,4 +894,13 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
         super.onKeyUp(keyCode, event);
         return true;
      }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+    	if (requestCode == RESULT_PREFERENCES)
+    	{
+    		Intent i = getIntent();
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(i);
+    	}
+    }
 }

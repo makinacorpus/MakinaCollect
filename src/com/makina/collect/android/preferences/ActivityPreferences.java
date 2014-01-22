@@ -71,6 +71,7 @@ import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.dialog.DialogExit;
+import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.UrlUtils;
 
@@ -157,6 +158,7 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
     
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
+    	 Theme.changeTheme(this);
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
 
@@ -539,13 +541,9 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 				String entry = (String) ((ListPreference) preference).getEntries()[index];
 				((ListPreference) preference).setSummary(entry);
 				
-				/*if (index==0)
-				{
-					Theme.changeToTheme(ActivityPreferences.this, Theme.THEME_DARK);
-				}
-				else
-					Theme.changeToTheme(ActivityPreferences.this, Theme.THEME_LIGHT);
-				*/
+				Intent i = getIntent();
+				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(i);
 				return true;
 			}
 		});

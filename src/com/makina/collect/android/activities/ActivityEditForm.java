@@ -96,6 +96,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     private ArrayList<Long> mSelected;
     private SimpleCursorAdapter instances;
     private Menu menu;
+    private final int RESULT_PREFERENCES=1;
     
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -313,7 +314,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
                 	Finish.finishHome();
                 return true;
                 case R.id.menu_settings:
-                	startActivity(new Intent(getApplicationContext(), ActivityPreferences.class));
+                	startActivityForResult((new Intent(getApplicationContext(), ActivityPreferences.class)),RESULT_PREFERENCES);
                 	return true;
                 case R.id.menu_help:
                 	Intent mIntent=new Intent(this, ActivityHelp.class);
@@ -484,5 +485,15 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
 	        super.onKeyUp(keyCode, event);
 	        return true;
 	     }
+        
+        protected void onActivityResult(int requestCode, int resultCode, Intent data)
+        {
+        	if (requestCode == RESULT_PREFERENCES)
+        	{
+        		Intent i = getIntent();
+    			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    			startActivity(i);
+        	}
+        }
 
 }
