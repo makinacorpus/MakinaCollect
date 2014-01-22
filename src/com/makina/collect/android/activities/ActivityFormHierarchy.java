@@ -48,6 +48,7 @@ import com.makina.collect.android.R;
 import com.makina.collect.android.adapters.HierarchyListAdapter;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
+import com.makina.collect.android.dialog.DialogExit;
 import com.makina.collect.android.logic.FormController;
 import com.makina.collect.android.logic.HierarchyElement;
 import com.makina.collect.android.preferences.ActivityPreferences;
@@ -500,7 +501,7 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 	        	DialogAboutUs.aboutUs(this);
 	        	return true;
 	        case R.id.menu_exit:
-	        	Finish.finish();
+	        	DialogExit.show(this);
 	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);

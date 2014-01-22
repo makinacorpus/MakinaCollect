@@ -36,6 +36,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
+import com.makina.collect.android.dialog.DialogExit;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
@@ -150,7 +151,7 @@ public class ActivityDashBoard extends SherlockActivity implements
                         DialogAboutUs.aboutUs(this);
                         return true;
                 case R.id.menu_exit:
-                        Finish.finish();
+                       	DialogExit.show(this);
                         return true;
                 default:
                         return super.onOptionsItemSelected(item);

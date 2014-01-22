@@ -64,6 +64,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
+import com.makina.collect.android.dialog.DialogExit;
 import com.makina.collect.android.dialog.DialogHelpWithConfirmation;
 import com.makina.collect.android.listeners.DeleteInstancesListener;
 import com.makina.collect.android.listeners.InstanceUploaderListener;
@@ -217,7 +218,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 	        	DialogAboutUs.aboutUs(this);
 	        	return true;
 	        case R.id.menu_exit:
-	        	Finish.finish();
+	        	DialogExit.show(this);
 	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);

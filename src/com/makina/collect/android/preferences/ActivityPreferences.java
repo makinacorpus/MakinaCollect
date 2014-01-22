@@ -70,6 +70,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
+import com.makina.collect.android.dialog.DialogExit;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.UrlUtils;
 
@@ -832,7 +833,7 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 	        	DialogAboutUs.aboutUs(this);
 	        	return true;
 	        case R.id.menu_exit:
-	        	Finish.finish();
+	        	DialogExit.show(getApplicationContext());
 	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);

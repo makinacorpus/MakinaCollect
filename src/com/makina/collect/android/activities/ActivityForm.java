@@ -91,6 +91,7 @@ import com.makina.collect.android.R;
 import com.makina.collect.android.adapters.HierarchyListAdapter;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
+import com.makina.collect.android.dialog.DialogExit;
 import com.makina.collect.android.listeners.AdvanceToNextListener;
 import com.makina.collect.android.listeners.DeleteInstancesListener;
 import com.makina.collect.android.listeners.FormLoaderListener;
@@ -113,7 +114,6 @@ import com.makina.collect.android.tasks.InstanceUploaderTask;
 import com.makina.collect.android.tasks.SaveToDiskTask;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.FileUtils;
-import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.MediaUtils;
 import com.makina.collect.android.views.CroutonView;
 import com.makina.collect.android.views.CustomActionBar;
@@ -870,7 +870,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 			DialogAboutUs.aboutUs(this);
 			return true;
 		case R.id.menu_exit:
-			Finish.finish();
+			DialogExit.show(this);
 			return true;
 		case android.R.id.home:
 	         // This is called when the Home (Up) button is pressed
