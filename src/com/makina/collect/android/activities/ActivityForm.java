@@ -115,6 +115,7 @@ import com.makina.collect.android.tasks.InstanceUploaderTask;
 import com.makina.collect.android.tasks.SaveToDiskTask;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.FileUtils;
+import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.MediaUtils;
 import com.makina.collect.android.views.CroutonView;
 import com.makina.collect.android.views.CustomActionBar;
@@ -252,8 +253,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 		super.onCreate(savedInstanceState);
 		Theme.changeTheme(this);
 		Log.i("FormEntryActivity", "onCreate");
-		
-		//Finish.ActivityForm = this;
+		Finish.activityForm = this;
 		current_page=1;
 		
 		// must be at the beginning of any activity that can be called from an
