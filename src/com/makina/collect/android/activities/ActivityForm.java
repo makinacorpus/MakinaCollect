@@ -243,6 +243,8 @@ InstanceUploaderListener, DeleteInstancesListener {
 	private boolean test_finish=true;
 
 	private static final String mIndent = "     ";
+	private Menu menu;
+	
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -807,6 +809,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
 		getSupportMenuInflater().inflate(R.menu.menu_activity_form, menu);
+		this.menu=menu;
 		return true;
 	}
 
@@ -3093,5 +3096,12 @@ InstanceUploaderListener, DeleteInstancesListener {
 		mNextButton.setText(value);
 	}
 
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+        	menu.performIdentifierAction(R.id.menu_other, 0);
+         }
+        super.onKeyUp(keyCode, event);
+        return true;
+     }
 }
 

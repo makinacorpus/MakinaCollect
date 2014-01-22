@@ -39,6 +39,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.InflateException;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -133,7 +134,8 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     private CustomFontTextview textView_pannier;
     private ArrayList<String> mSelected = new ArrayList<String>();
     private ListView listView;
-
+    private Menu menu;
+    
     @SuppressWarnings("unchecked")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -809,7 +811,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     {
         super.onCreateOptionsMenu(menu);
         getSupportMenuInflater().inflate(R.menu.menu_activity_download_form, menu);
-        
+        this.menu=menu;
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         final SearchView mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setImeOptions(mSearchView.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
@@ -883,5 +885,12 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
 	            return super.onOptionsItemSelected(item);
         }
     }
-
+    
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+        	menu.performIdentifierAction(R.id.menu_other, 0);
+         }
+        super.onKeyUp(keyCode, event);
+        return true;
+     }
 }

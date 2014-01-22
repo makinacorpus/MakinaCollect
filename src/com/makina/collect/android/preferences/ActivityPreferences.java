@@ -50,6 +50,7 @@ import android.text.Spanned;
 import android.text.method.PasswordTransformationMethod;
 import android.util.AttributeSet;
 import android.view.InflateException;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,10 +68,8 @@ import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
-import com.makina.collect.android.activities.ActivityDashBoard;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
-import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.UrlUtils;
 
@@ -153,8 +152,9 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
     private Window window;
     private int old_brightness;
     private float perc ;
-
-	@Override
+    private Menu menu;
+    
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
@@ -787,7 +787,7 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
     {
         super.onCreateOptionsMenu(menu);
         getSupportMenuInflater().inflate(R.menu.menu_activity_preferences, menu);
-        
+        this.menu=menu;
         getLayoutInflater().setFactory(new LayoutInflater.Factory()
         {
             public View onCreateView(String name, Context context, AttributeSet attrs)
@@ -904,10 +904,13 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 		return null;
 	}
 	
-	@Override
-	public void onBackPressed() {
-		// TODO Auto-generated method stub
-		finish();
-	}
+	 public boolean onKeyUp(int keyCode, KeyEvent event) {
+	        if (keyCode == KeyEvent.KEYCODE_MENU) {
+	        	menu.performIdentifierAction(R.id.menu_other, 0);
+	         }
+	        super.onKeyUp(keyCode, event);
+	        return true;
+	     }
+
 
 }

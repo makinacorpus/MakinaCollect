@@ -42,6 +42,7 @@ import android.provider.BaseColumns;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.InflateException;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -126,6 +127,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
     private Long[] mInstancesToSend;
     private InstanceUploaderTask mInstanceUploaderTask ;
     private ListView listView;
+    private Menu menu;
 
 	public Cursor getAllCursor(String condition_search) {
 		// get all complete or failed submission instances
@@ -143,7 +145,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
     {
         super.onCreateOptionsMenu(menu);
         getSupportMenuInflater().inflate(R.menu.menu_activity_send_form, menu);
-        
+        this.menu=menu;
         mUploadedInstances = new HashMap<String, String>();
         
         Finish.activitySendForm=this;
@@ -832,5 +834,11 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
         return null;
     }
 
-
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+        	menu.performIdentifierAction(R.id.menu_other, 0);
+         }
+        super.onKeyUp(keyCode, event);
+        return true;
+     }
 }

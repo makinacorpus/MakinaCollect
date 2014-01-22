@@ -29,6 +29,7 @@ import android.os.Handler;
 import android.provider.BaseColumns;
 import android.util.AttributeSet;
 import android.view.InflateException;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -56,7 +57,6 @@ import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.views.CustomActionBar;
-import com.makina.collect.android.views.CustomFontTextview;
 
 import de.timroes.swipetodismiss.SwipeDismissList;
 import de.timroes.swipetodismiss.SwipeDismissList.UndoMode;
@@ -73,6 +73,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 	private AlertDialog mAlertDialog;
     private Cursor c;
     private SimpleCursorAdapter instances;
+    private Menu menu;
     
     @SuppressLint("NewApi")
 	@Override
@@ -80,8 +81,8 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     {
         super.onCreateOptionsMenu(menu);
         getSupportMenuInflater().inflate(R.menu.menu_activity_edit_form, menu);
+        this.menu=menu;
         
-        Finish.activitySaveForm=this;
         
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         final SearchView mSearchView = (SearchView) searchItem.getActionView();
@@ -161,6 +162,8 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         Theme.changeTheme(this);
     	setContentView(R.layout.activity_save_form);
         
+    	Finish.activitySaveForm=this;
+    	
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_saved", false))
     		DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_title3),getString(R.string.help_save));
     	
@@ -329,5 +332,12 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 		return false;
 	}
 
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+        	menu.performIdentifierAction(R.id.menu_other, 0);
+         }
+        super.onKeyUp(keyCode, event);
+        return true;
+     }
 
 }

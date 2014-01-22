@@ -75,7 +75,8 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 
 	FormIndex mStartIndex;
 	private ListView listView_hierarchy;
-
+	private Menu menu;
+	    
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -423,7 +424,7 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
     {
         super.onCreateOptionsMenu(menu);
         getSupportMenuInflater().inflate(R.menu.menu_activity_dashboard, menu);
-        
+        this.menu=menu;
         getLayoutInflater().setFactory(new LayoutInflater.Factory()
         {
             public View onCreateView(String name, Context context, AttributeSet attrs)
@@ -516,4 +517,11 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 		}
 	}
 
+	public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
+        	menu.performIdentifierAction(R.id.menu_other, 0);
+         }
+        super.onKeyUp(keyCode, event);
+        return true;
+     }
 }

@@ -7,6 +7,7 @@
         android:showAsAction="always"
         android:title="@string/search"/>
     <item
+        android:id="@+id/menu_other"
          android:icon="@drawable/actionbar_menu"
         android:orderInCategory="100"
         android:showAsAction="always">

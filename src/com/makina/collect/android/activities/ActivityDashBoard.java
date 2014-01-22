@@ -24,11 +24,11 @@ import android.os.Handler;
 import android.text.Html;
 import android.util.AttributeSet;
 import android.view.InflateException;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -42,132 +42,141 @@ import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.views.CustomFontButton;
 
 public class ActivityDashBoard extends SherlockActivity implements
-		OnClickListener {
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		Theme.changeTheme(this);
-		super.onCreate(savedInstanceState);
-		
-		Typeface typeFace = Typeface.createFromAsset(getAssets(),
-				"fonts/avenir.ttc");
-		getSupportActionBar().setTitle(getString(R.string.app_name));
-		int titleId = Resources.getSystem().getIdentifier("action_bar_title",
-				"id", "android");
-		TextView actionbarTitle = (TextView) findViewById(titleId);
-		if (actionbarTitle != null) {
-			
-			actionbarTitle
-					.setText(Html
-							.fromHtml("<strong><font color=\"#C2EA60\">Makina</font> <font color=\"#1B8FAA\">Collect</font></strong>"));
-			actionbarTitle.setTypeface(typeFace);
-		}
-		setContentView(R.layout.activity_dashboard);
-		Finish.activityDashBoard = this;
-		Countly.sharedInstance().init(getApplicationContext(),
-				"http://countly.makina-corpus.net",
-				"279676abcbba16c3ee5e2b113a990fe579ddc527");
+                OnClickListener {
+	private Menu menu;
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                Theme.changeTheme(this);
+                Typeface typeFace = Typeface.createFromAsset(getAssets(),
+                                "fonts/avenir.ttc");
+                getSupportActionBar().setTitle(getString(R.string.app_name));
+                int titleId = Resources.getSystem().getIdentifier("action_bar_title",
+                                "id", "android");
+                TextView actionbarTitle = (TextView) findViewById(titleId);
+                if (actionbarTitle != null) {
+                        
+                        actionbarTitle
+                                        .setText(Html
+                                                        .fromHtml("<strong><font color=\"#C2EA60\">Makina</font> <font color=\"#1B8FAA\">Collect</font></strong>"));
+                        actionbarTitle.setTypeface(typeFace);
+                }
+                setContentView(R.layout.activity_dashboard);
+                Finish.activityDashBoard = this;
+                Countly.sharedInstance().init(getApplicationContext(),
+                                "http://countly.makina-corpus.net",
+                                "279676abcbba16c3ee5e2b113a990fe579ddc527");
 
-		CustomFontButton btnDownload = (CustomFontButton) findViewById(R.id.dashboard_download);
-		btnDownload.setOnClickListener(this);
-		CustomFontButton btnEdit = (CustomFontButton) findViewById(R.id.dashboard_edit);
-		btnEdit.setOnClickListener(this);
-		CustomFontButton btnSave = (CustomFontButton) findViewById(R.id.dashboard_save);
-		btnSave.setOnClickListener(this);
-		CustomFontButton btnSend = (CustomFontButton) findViewById(R.id.dashboard_send);
-		btnSend.setOnClickListener(this);
-	}
+                CustomFontButton btnDownload = (CustomFontButton) findViewById(R.id.dashboard_download);
+                btnDownload.setOnClickListener(this);
+                CustomFontButton btnEdit = (CustomFontButton) findViewById(R.id.dashboard_edit);
+                btnEdit.setOnClickListener(this);
+                CustomFontButton btnSave = (CustomFontButton) findViewById(R.id.dashboard_save);
+                btnSave.setOnClickListener(this);
+                CustomFontButton btnSend = (CustomFontButton) findViewById(R.id.dashboard_send);
+                btnSend.setOnClickListener(this);
+        }
 
-	@Override
-	public void onClick(View v) {
+        @Override
+        public void onClick(View v) {
 
-		switch (v.getId()) {
-		case R.id.dashboard_download:
-			startActivity(new Intent(getApplicationContext(),ActivityDownloadForm.class));
-			break;
-		case R.id.dashboard_edit:
-			startActivity(new Intent(getApplicationContext(),ActivityEditForm.class));
-			break;
-		case R.id.dashboard_save:
-			startActivity(new Intent(getApplicationContext(),ActivitySaveForm.class));
-			break;
-		case R.id.dashboard_send:
-			startActivity(new Intent(getApplicationContext(),
-					ActivitySendForm.class));
-			break;
-		}
-	}
+                switch (v.getId()) {
+                case R.id.dashboard_download:
+                        startActivity(new Intent(getApplicationContext(),ActivityDownloadForm.class));
+                        break;
+                case R.id.dashboard_edit:
+                        startActivity(new Intent(getApplicationContext(),ActivityEditForm.class));
+                        break;
+                case R.id.dashboard_save:
+                        startActivity(new Intent(getApplicationContext(),ActivitySaveForm.class));
+                        break;
+                case R.id.dashboard_send:
+                        startActivity(new Intent(getApplicationContext(),
+                                        ActivitySendForm.class));
+                        break;
+                }
+        }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		getSupportMenuInflater().inflate(R.menu.menu_activity_dashboard, menu);
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+                super.onCreateOptionsMenu(menu);
+                this.menu=menu;
+                getSupportMenuInflater().inflate(R.menu.menu_activity_dashboard, menu);
 
-		getLayoutInflater().setFactory(new LayoutInflater.Factory() {
-			public View onCreateView(String name, Context context,
-					AttributeSet attrs) {
-				if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")
-						|| name.equalsIgnoreCase("TextView")) {
-					try {
-						LayoutInflater li = LayoutInflater.from(context);
-						final View view = li.createView(name, null, attrs);
-						new Handler().post(new Runnable() {
-							public void run() {
-								((TextView) view).setTypeface(Typeface
-										.createFromAsset(getAssets(),
-												"fonts/avenir.ttc"));
-							}
-						});
-						return view;
-					} catch (InflateException e) {
-					} catch (ClassNotFoundException e) {
-					}
-				}
-				return null;
-			}
-		});
+                getLayoutInflater().setFactory(new LayoutInflater.Factory() {
+                        public View onCreateView(String name, Context context,
+                                        AttributeSet attrs) {
+                                if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")
+                                                || name.equalsIgnoreCase("TextView")) {
+                                        try {
+                                                LayoutInflater li = LayoutInflater.from(context);
+                                                final View view = li.createView(name, null, attrs);
+                                                new Handler().post(new Runnable() {
+                                                        public void run() {
+                                                                ((TextView) view).setTypeface(Typeface
+                                                                                .createFromAsset(getAssets(),
+                                                                                                "fonts/avenir.ttc"));
+                                                        }
+                                                });
+                                                return view;
+                                        } catch (InflateException e) {
+                                        } catch (ClassNotFoundException e) {
+                                        }
+                                }
+                                return null;
+                        }
+                });
 
-		return true;
-	}
+                return true;
+        }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// The action bar home/up action should open or close the drawer.
-		// ActionBarDrawerToggle will take care of this.
-		// Handle action buttons for all fragments
-		switch (item.getItemId()) {
-		case R.id.menu_settings:
-			startActivity(new Intent(this, ActivityPreferences.class));
-			return true;
-		 case R.id.menu_help:
-			Intent mIntent=new Intent(this, ActivityHelp.class);
-        	Bundle mBundle=new Bundle();
-        	mBundle.putInt("position", 0);
-        	mIntent.putExtras(mBundle);
-        	startActivity(mIntent);
-			 return true;
-		case R.id.menu_about_us:
-			DialogAboutUs.aboutUs(this);
-			return true;
-		case R.id.menu_exit:
-			Finish.finish();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+                // The action bar home/up action should open or close the drawer.
+                // ActionBarDrawerToggle will take care of this.
+                // Handle action buttons for all fragments
+                switch (item.getItemId()) {
+                case R.id.menu_settings:
+                        startActivity(new Intent(this, ActivityPreferences.class));
+                        return true;
+                 case R.id.menu_help:
+                        Intent mIntent=new Intent(this, ActivityHelp.class);
+                Bundle mBundle=new Bundle();
+                mBundle.putInt("position", 0);
+                mIntent.putExtras(mBundle);
+                startActivity(mIntent);
+                         return true;
+                case R.id.menu_about_us:
+                        DialogAboutUs.aboutUs(this);
+                        return true;
+                case R.id.menu_exit:
+                        Finish.finish();
+                        return true;
+                default:
+                        return super.onOptionsItemSelected(item);
+                }
+        }
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		Countly.sharedInstance().onStart();
-		Collect.getInstance().getActivityLogger().logOnStart(this);
-	}
+        @Override
+        protected void onStart() {
+                super.onStart();
+                Countly.sharedInstance().onStart();
+                Collect.getInstance().getActivityLogger().logOnStart(this);
+        }
 
-	@Override
-	protected void onStop() {
-		Countly.sharedInstance().onStop();
-		Collect.getInstance().getActivityLogger().logOnStop(this);
-		super.onStop();
-	}
+        @Override
+        protected void onStop() {
+                Countly.sharedInstance().onStop();
+                Collect.getInstance().getActivityLogger().logOnStop(this);
+                super.onStop();
+        }
+        
+        public boolean onKeyUp(int keyCode, KeyEvent event) {
+            if (keyCode == KeyEvent.KEYCODE_MENU) {
+            	menu.performIdentifierAction(R.id.menu_other, 0);
+             }
+            super.onKeyUp(keyCode, event);
+            return true;
+         }
 
 }

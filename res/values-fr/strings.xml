@@ -192,7 +192,7 @@ License.
 <string name="fetching_manifest">"%s. Recherche du Manifest &#8230;"</string>
 <string name="success">Succès</string>
 <string name="no_forms_uploaded">Désolé, pas de formulaires téléchargés.</string>
-<string name="upload_results">Résultats du téléchargement</string>
+<string name="upload_results">Résultat de l\'Envoi de Formulaires</string>
 <string name="xform_parse_error">Erreur d\'analyse de l\'XForm. %1$s manque l\'élément %2$s</string>
 <string name="choose_sound">Choisissez le son</string>
 <string name="choose_video">Choisissez la vidéo</string>

@@ -37,6 +37,7 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.InflateException;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -93,6 +94,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     private String statusText;
     private ArrayList<Long> mSelected;
     private SimpleCursorAdapter instances;
+    private Menu menu;
     
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -243,7 +245,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     {
         super.onCreateOptionsMenu(menu);
         getSupportMenuInflater().inflate(R.menu.menu_activity_edit_form, menu);
-        
+        this.menu=menu;
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         final SearchView mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setImeOptions(mSearchView.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
@@ -474,6 +476,12 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
                 }
         }
 
-
+        public boolean onKeyUp(int keyCode, KeyEvent event) {
+	        if (keyCode == KeyEvent.KEYCODE_MENU) {
+	        	menu.performIdentifierAction(R.id.menu_other, 0);
+	         }
+	        super.onKeyUp(keyCode, event);
+	        return true;
+	     }
 
 }
