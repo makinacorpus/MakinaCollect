@@ -2879,8 +2879,8 @@ containing a value of this type.
         public static final int text3=0x7f0b00cc;
         public static final int textView_check_all=0x7f0b0062;
         public static final int textView_pannier=0x7f0b005f;
-        public static final int textView_quiz_name=0x7f0b006b;
-        public static final int textView_quiz_question_number=0x7f0b006c;
+        public static final int textView_quiz_name=0x7f0b006c;
+        public static final int textView_quiz_question_number=0x7f0b006b;
         public static final int textview=0x7f0b0077;
         public static final int textview_about_us1=0x7f0b00a3;
         public static final int textview_about_us2=0x7f0b00a5;

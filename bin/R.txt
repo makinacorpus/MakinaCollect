@@ -1200,8 +1200,8 @@ int id text2 0x7f0b00cd
 int id text3 0x7f0b00cc
 int id textView_check_all 0x7f0b0062
 int id textView_pannier 0x7f0b005f
-int id textView_quiz_name 0x7f0b006b
-int id textView_quiz_question_number 0x7f0b006c
+int id textView_quiz_name 0x7f0b006c
+int id textView_quiz_question_number 0x7f0b006b
 int id textview 0x7f0b0077
 int id textview_about_us1 0x7f0b00a3
 int id textview_about_us2 0x7f0b00a5

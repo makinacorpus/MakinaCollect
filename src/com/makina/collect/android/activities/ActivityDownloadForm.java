@@ -795,7 +795,6 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     }
  
     public boolean onQueryTextSubmit(String query) {
-    	getFormsOption();
         return false;
     }
  

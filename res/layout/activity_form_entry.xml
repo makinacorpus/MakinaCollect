@@ -77,7 +77,6 @@
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/textView_quiz_question_number"
                 android:paddingLeft="10dip"
-                android:paddingRight="65dip"
                 android:textColor="@drawable/linear_blue"
                 android:textSize="25sp"
                 android:textStyle="bold" />

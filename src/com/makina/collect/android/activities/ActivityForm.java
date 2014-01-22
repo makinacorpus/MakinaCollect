@@ -83,6 +83,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -267,7 +268,6 @@ InstanceUploaderListener, DeleteInstancesListener {
 		setContentView(R.layout.activity_form_entry);
 		textView_quiz_question_number = (CustomFontTextview) findViewById(R.id.textView_quiz_question_number);
 		textView_quiz_name = ((CustomFontTextview) findViewById(R.id.textView_quiz_name));
-		
 		getSupportActionBar().setTitle(getString(R.string.edit));
 		getSupportActionBar().setSubtitle(getString(R.string.form));
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -1020,8 +1020,8 @@ InstanceUploaderListener, DeleteInstancesListener {
 		
 		
 		final FormController formController = Collect.getInstance().getFormController();
-		textView_quiz_name.setText(formController.getFormTitle());
 		textView_quiz_question_number.setText(current_page + "/" + size);
+		textView_quiz_name.setText(formController.getFormTitle());
 		findViewById(R.id.relativeLayout_informations).setVisibility(View.VISIBLE);
 		findViewById(R.id.buttonholder).setVisibility(View.VISIBLE);
 		if ( (FormEntryController.EVENT_END_OF_FORM==event) && (test_finish))
