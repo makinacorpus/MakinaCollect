@@ -4,21 +4,21 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/header"
         android:layout_width="fill_parent"
-        android:layout_height="50dip"
-        android:background="@drawable/linear_blue" >
+        android:layout_height="wrap_content"
+        android:background="@drawable/linear_blue"
+        android:padding="5dip" >
 
         <com.makina.collect.android.views.CustomFontTextview
             android:id="@+id/textview_help_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
             android:textColor="@drawable/white"
-            android:textSize="25sp" />
-    </RelativeLayout>
+            android:textSize="23sp" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/footer"

@@ -27,8 +27,8 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
@@ -45,8 +45,9 @@ public class ActivityDashBoard extends SherlockActivity implements
 		OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		Theme.changeTheme(this);
+		super.onCreate(savedInstanceState);
+		
 		Typeface typeFace = Typeface.createFromAsset(getAssets(),
 				"fonts/avenir.ttc");
 		getSupportActionBar().setTitle(getString(R.string.app_name));

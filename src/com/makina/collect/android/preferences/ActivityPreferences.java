@@ -904,5 +904,10 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 		return null;
 	}
 	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		finish();
+	}
 
 }
