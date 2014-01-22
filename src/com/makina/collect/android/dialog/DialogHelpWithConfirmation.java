@@ -15,14 +15,16 @@ public class DialogHelpWithConfirmation
 {
 	public static CustomFontCheckBox checkbox_help;
 	public static CustomFontTextview textview_help;
-	public static void helpDialog(final Context context, String message)
+	public static void helpDialog(final Context context, String title, String message)
 	{
 		final Dialog dialog_help = new Dialog(context);
 		dialog_help.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog_help.setContentView(R.layout.dialog_help_with_confirmation);
 		
         textview_help=(CustomFontTextview)dialog_help.findViewById(R.id.textview_help);
-		checkbox_help=(CustomFontCheckBox) dialog_help.findViewById(R.id.checkbox_help);
+        CustomFontTextview textview_help_title=(CustomFontTextview)dialog_help.findViewById(R.id.textview_help_title);
+        textview_help_title.setText(title);
+        checkbox_help=(CustomFontCheckBox) dialog_help.findViewById(R.id.checkbox_help);
 		LinearLayout linearlayout_ok=(LinearLayout) dialog_help.findViewById(R.id.linearlayout_ok);
 		
 		textview_help.setText(message);

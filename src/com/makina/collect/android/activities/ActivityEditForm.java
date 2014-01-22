@@ -114,7 +114,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
             CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
             
             if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_edit", false))
-                    DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_edit));
+                    DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_title2), getString(R.string.help_edit));
             
         loadListView();
         

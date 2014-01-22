@@ -11,11 +11,11 @@
         android:background="@drawable/linear_blue" >
 
         <com.makina.collect.android.views.CustomFontTextview
+            android:id="@+id/textview_help_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="@string/help"
             android:textColor="@drawable/white"
             android:textSize="25sp" />
     </RelativeLayout>

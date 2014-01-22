@@ -157,7 +157,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenDownload), getResources().getColor(R.color.actionbarTitleColorGris));
     	
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_download", false))
-    		DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_download));
+    		DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_title1), getString(R.string.help_download));
 		
     	
     	

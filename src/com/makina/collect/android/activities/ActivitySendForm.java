@@ -241,7 +241,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
         mProgressDialog = new ProgressDialog(this);
     	
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_send", false))
-    		DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_send));
+    		DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_title4),getString(R.string.help_send));
     	
         textView_pannier=(TextView)findViewById(R.id.textView_pannier);
         RelativeLayout relativeLayout_check_all=(RelativeLayout) findViewById(R.id.check_all);

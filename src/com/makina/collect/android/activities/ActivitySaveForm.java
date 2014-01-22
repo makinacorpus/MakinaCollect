@@ -162,7 +162,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     	setContentView(R.layout.activity_save_form);
         
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_saved", false))
-    		DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_save));
+    		DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_title3),getString(R.string.help_save));
     	
     	getSupportActionBar().setTitle(getString(R.string.finalize));
     	getSupportActionBar().setSubtitle(getString(R.string.my_forms));
