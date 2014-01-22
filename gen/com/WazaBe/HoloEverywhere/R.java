@@ -1107,7 +1107,7 @@ public final class R {
 		public static final int summary = 0x7f0b00d0;
 		public static final int rightSpacer = 0x7f0b002f;
 		public static final int buttonPanelTopDivivder = 0x7f0b0092;
-		public static final int next_button = 0x7f0b0069;
+		public static final int next_button = 0x7f0b0068;
 		public static final int abs__action_bar_container = 0x7f0b0045;
 		public static final int abs__default_activity_button = 0x7f0b003e;
 		public static final int homeAsUp = 0x7f0b0006;

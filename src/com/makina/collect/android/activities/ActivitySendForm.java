@@ -78,7 +78,6 @@ import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.WebUtils;
 import com.makina.collect.android.views.CroutonView;
 import com.makina.collect.android.views.CustomActionBar;
-import com.makina.collect.android.views.CustomFontTextview;
 
 import de.keyboardsurfer.mobile.app.android.widget.crouton.Style;
 import de.timroes.swipetodismiss.SwipeDismissList;
@@ -283,16 +282,6 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
             mUrl = savedInstanceState.getString(AUTH_URI);
         }
         
-        CustomFontTextview textview_download_form=(CustomFontTextview) findViewById(R.id.textview_download_form);
-        textview_download_form.setOnClickListener(new View.OnClickListener()
-        {
-			@Override
-			public void onClick(View arg0)
-			{
-				startActivity(new Intent(getApplicationContext(), ActivityDownloadForm.class));
-			}
-		});
-		
         listView.setOnItemLongClickListener(new OnItemLongClickListener()
         {
         	@Override
