@@ -41,6 +41,7 @@ import android.util.SparseBooleanArray;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
@@ -811,6 +812,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
         
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         final SearchView mSearchView = (SearchView) searchItem.getActionView();
+        mSearchView.setImeOptions(mSearchView.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
         int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
         ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
         if (searchButton!=null)

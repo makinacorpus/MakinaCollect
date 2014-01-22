@@ -39,6 +39,7 @@ import android.util.Log;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -66,6 +67,7 @@ import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.VersionHidingCursorAdapter;
 import com.makina.collect.android.views.CustomActionBar;
+import com.makina.collect.android.views.CustomFontTextview;
 
 import de.timroes.swipetodismiss.SwipeDismissList;
 import de.timroes.swipetodismiss.SwipeDismissList.UndoMode;
@@ -130,6 +132,15 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
             mDiskSyncTask.execute((Void[]) null);
         }
         
+        CustomFontTextview textview_download_form=(CustomFontTextview) findViewById(R.id.textview_download_form);
+        textview_download_form.setOnClickListener(new View.OnClickListener()
+        {
+                        @Override
+                        public void onClick(View arg0)
+                        {
+                                startActivity(new Intent(getApplicationContext(), ActivityDownloadForm.class));
+                        }
+                });
         
         getListView().setOnItemLongClickListener(new OnItemLongClickListener()
         {
@@ -235,6 +246,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         final SearchView mSearchView = (SearchView) searchItem.getActionView();
+        mSearchView.setImeOptions(mSearchView.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
         int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
         ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
         if (searchButton!=null)

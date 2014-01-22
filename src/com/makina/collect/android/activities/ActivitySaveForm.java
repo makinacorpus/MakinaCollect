@@ -31,6 +31,7 @@ import android.util.AttributeSet;
 import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -84,6 +85,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         final SearchView mSearchView = (SearchView) searchItem.getActionView();
+        mSearchView.setImeOptions(mSearchView.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
         int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
         ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
         if (searchButton!=null)
@@ -172,16 +174,6 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorBlueSave), getResources().getColor(R.color.actionbarTitleColorGris));
     	
     	loadListView();
-        
-        CustomFontTextview textview_download_form=(CustomFontTextview) findViewById(R.id.textview_download_form);
-        textview_download_form.setOnClickListener(new View.OnClickListener()
-        {
-			@Override
-			public void onClick(View arg0)
-			{
-				startActivity(new Intent(getApplicationContext(), ActivityDownloadForm.class));
-			}
-		});
         
         getListView().setOnItemLongClickListener(new OnItemLongClickListener()
         {
