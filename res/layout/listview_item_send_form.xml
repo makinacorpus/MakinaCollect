@@ -32,6 +32,7 @@
 
         <com.makina.collect.android.views.CustomFontTextview
             android:id="@+id/text1"
+            android:singleLine="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"/>

@@ -68,6 +68,7 @@ import com.makina.collect.android.tasks.DownloadFormListTask;
 import com.makina.collect.android.tasks.DownloadFormsTask;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
+import com.makina.collect.android.utilities.FinishHome;
 import com.makina.collect.android.utilities.WebUtils;
 import com.makina.collect.android.views.CroutonView;
 import com.makina.collect.android.views.CustomActionBar;
@@ -860,7 +861,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     	switch(item.getItemId())
     	{
 	        case android.R.id.home:
-	        	finish();
+	        	FinishHome.goToHome(getApplicationContext());
 	        return true;
 	        case R.id.menu_download:
 	        	getFormsOption();

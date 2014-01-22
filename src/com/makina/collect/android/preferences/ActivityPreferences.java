@@ -72,6 +72,7 @@ import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.dialog.DialogExit;
 import com.makina.collect.android.utilities.Finish;
+import com.makina.collect.android.utilities.FinishHome;
 import com.makina.collect.android.utilities.UrlUtils;
 
 
@@ -827,7 +828,7 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 		switch(item.getItemId())
     	{
 	        case android.R.id.home:
-	        	finish();
+	        	FinishHome.goToHome(getApplicationContext());
 	        return true;
 	        case R.id.menu_about_us:
 	        	DialogAboutUs.aboutUs(this);

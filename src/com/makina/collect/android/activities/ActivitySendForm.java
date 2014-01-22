@@ -78,6 +78,7 @@ import com.makina.collect.android.tasks.DeleteInstancesTask;
 import com.makina.collect.android.tasks.InstanceUploaderTask;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
+import com.makina.collect.android.utilities.FinishHome;
 import com.makina.collect.android.utilities.WebUtils;
 import com.makina.collect.android.views.CroutonView;
 import com.makina.collect.android.views.CustomActionBar;
@@ -199,7 +200,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
     	switch(item.getItemId())
     	{
 	        case android.R.id.home:
-	        	finish();
+	        	FinishHome.goToHome(getApplicationContext());
 	        return true;
 	        case R.id.menu_send:
 	        	uploadInstancesOption();
