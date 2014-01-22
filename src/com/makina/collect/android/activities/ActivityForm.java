@@ -862,7 +862,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 		case R.id.menu_help:
 			Intent mIntent=new Intent(this, ActivityHelp.class);
         	Bundle mBundle=new Bundle();
-        	mBundle.putInt("position", 0);
+        	mBundle.putInt("position", 1);
         	mIntent.putExtras(mBundle);
         	startActivity(mIntent);
 			return true;
