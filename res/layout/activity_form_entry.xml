@@ -59,18 +59,6 @@
             android:paddingTop="20dip" >
 
             <com.makina.collect.android.views.CustomFontTextview
-                android:id="@+id/textView_quiz_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:paddingLeft="10dip"
-                android:paddingRight="65dip"
-                android:textColor="@drawable/linear_blue"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-
-            <com.makina.collect.android.views.CustomFontTextview
                 android:id="@+id/textView_quiz_question_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,6 +67,19 @@
                 android:layout_marginRight="10dip"
                 android:textColor="@drawable/linear_blue"
                 android:textSize="35sp"
+                android:textStyle="bold" />
+
+            <com.makina.collect.android.views.CustomFontTextview
+                android:id="@+id/textView_quiz_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/textView_quiz_question_number"
+                android:paddingLeft="10dip"
+                android:paddingRight="65dip"
+                android:textColor="@drawable/linear_blue"
+                android:textSize="25sp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
