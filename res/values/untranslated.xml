@@ -65,7 +65,7 @@
     <string name="edit_menu">REMPLIR   \nun formulaire</string>
     <string name="save_menu">FINALISER \nmes formulaires</string>
     <string name="send_menu">Mes formulaires \nA ENVOYER</string>
-  	 <string name="download">TÉLÉCHARGER</string>
+  	 <string name="download_action_bar">TÉLÉCHARGER</string>
     <string name="edit">REMPLIR</string>
     <string name="my_forms">mes formulaires</string>
     <string name="my_forms_send">Mes formulaires</string>

@@ -151,7 +151,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
         
         listView=(ListView)findViewById(R.id.listView);
         
-        getSupportActionBar().setTitle(getString(R.string.download));
+        getSupportActionBar().setTitle(getString(R.string.download_action_bar));
         getSupportActionBar().setSubtitle(getString(R.string.form));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");

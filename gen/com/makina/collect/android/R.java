@@ -3113,7 +3113,7 @@ containing a value of this type.
         public static final int altitude=0x7f0a0044;
         /**  fin - DOWNLOAD FORM 
          */
-        public static final int app_name=0x7f0a0175;
+        public static final int app_name=0x7f0a0176;
         public static final int app_url=0x7f0a00cf;
         public static final int audio_file_error=0x7f0a0045;
         public static final int audio_file_invalid=0x7f0a0046;
@@ -3152,7 +3152,7 @@ containing a value of this type.
         public static final int change_username=0x7f0a0054;
         public static final int change_username_default=0x7f0a0110;
         public static final int change_view=0x7f0a00f8;
-        public static final int checkbox_error=0x7f0a016f;
+        public static final int checkbox_error=0x7f0a0170;
         public static final int choose_image=0x7f0a00e9;
         public static final int choose_sound=0x7f0a00e7;
         public static final int choose_video=0x7f0a00e8;
@@ -3224,9 +3224,9 @@ containing a value of this type.
         public static final int date_time_set=0x7f0a002a;
         public static final int default_completed=0x7f0a005d;
         public static final int default_completed_summary=0x7f0a005e;
-        public static final int default_odk_formlist=0x7f0a017a;
-        public static final int default_odk_submission=0x7f0a017b;
-        public static final int default_server_url=0x7f0a0179;
+        public static final int default_odk_formlist=0x7f0a017b;
+        public static final int default_odk_submission=0x7f0a017c;
+        public static final int default_server_url=0x7f0a017a;
         public static final int default_splash_path=0x7f0a00ca;
         public static final int delete_confirm=0x7f0a005f;
         public static final int delete_file=0x7f0a0060;
@@ -3236,13 +3236,14 @@ containing a value of this type.
         public static final int delete_repeat_confirm=0x7f0a0064;
         public static final int delete_repeat_no=0x7f0a0065;
         public static final int delete_yes=0x7f0a0066;
-        public static final int deselect_all=0x7f0a0171;
+        public static final int deselect_all=0x7f0a0172;
         public static final int discard_answer=0x7f0a0067;
         public static final int discard_group=0x7f0a0068;
         public static final int do_not_change=0x7f0a006c;
         public static final int do_not_exit=0x7f0a006d;
         public static final int do_not_save=0x7f0a006e;
         public static final int download=0x7f0a0069;
+        public static final int download_action_bar=0x7f0a015c;
         public static final int download_forms_result=0x7f0a006a;
         /**  FIN ActionBar 
  ActionBar Title 
@@ -3252,7 +3253,7 @@ containing a value of this type.
         public static final int draw_image=0x7f0a0109;
         public static final int drawer_close=0x7f0a0070;
         public static final int drawer_open=0x7f0a006f;
-        public static final int edit=0x7f0a015c;
+        public static final int edit=0x7f0a015d;
         public static final int edit_menu=0x7f0a0159;
         public static final int edit_prompt=0x7f0a00ee;
         public static final int empty_list=0x7f0a0143;
@@ -3277,7 +3278,7 @@ containing a value of this type.
         public static final int file_fetch_failed=0x7f0a00e1;
         public static final int file_invalid=0x7f0a007a;
         public static final int file_missing=0x7f0a007b;
-        public static final int finalize=0x7f0a015f;
+        public static final int finalize=0x7f0a0160;
         /**  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
@@ -3305,15 +3306,15 @@ containing a value of this type.
         public static final int font_size_large=0x7f0a00f4;
         public static final int font_size_medium=0x7f0a00f5;
         public static final int font_size_small=0x7f0a00f6;
-        public static final int form=0x7f0a0161;
+        public static final int form=0x7f0a0162;
         public static final int form_backward=0x7f0a0128;
         public static final int form_download_progress=0x7f0a00e0;
         public static final int form_forward=0x7f0a0127;
         public static final int form_scan_starting=0x7f0a00da;
-        public static final int form_selected=0x7f0a0173;
+        public static final int form_selected=0x7f0a0174;
         public static final int formlist_url=0x7f0a00d6;
         public static final int forms=0x7f0a007d;
-        public static final int forms_selected=0x7f0a0174;
+        public static final int forms_selected=0x7f0a0175;
         public static final int found_at_end=0x7f0a0124;
         public static final int found_in_main=0x7f0a0122;
         public static final int found_in_menu=0x7f0a011c;
@@ -3325,19 +3326,19 @@ containing a value of this type.
         public static final int getting_location=0x7f0a007e;
         public static final int go_to_location=0x7f0a00d1;
         public static final int help=0x7f0a0152;
-        public static final int help_confirmation=0x7f0a0167;
+        public static final int help_confirmation=0x7f0a0168;
         /**  FIN ActionBar Title 
  Help 
          */
-        public static final int help_download=0x7f0a0162;
-        public static final int help_edit=0x7f0a0163;
-        public static final int help_form=0x7f0a0164;
-        public static final int help_save=0x7f0a0165;
-        public static final int help_send=0x7f0a0166;
-        public static final int help_title1=0x7f0a0168;
-        public static final int help_title2=0x7f0a0169;
-        public static final int help_title3=0x7f0a016a;
-        public static final int help_title4=0x7f0a016b;
+        public static final int help_download=0x7f0a0163;
+        public static final int help_edit=0x7f0a0164;
+        public static final int help_form=0x7f0a0165;
+        public static final int help_save=0x7f0a0166;
+        public static final int help_send=0x7f0a0167;
+        public static final int help_title1=0x7f0a0169;
+        public static final int help_title2=0x7f0a016a;
+        public static final int help_title3=0x7f0a016b;
+        public static final int help_title4=0x7f0a016c;
         public static final int hierarchy=0x7f0a0157;
         /**  Hierarchy 
          */
@@ -3374,8 +3375,8 @@ containing a value of this type.
         public static final int marker_create=0x7f0a0093;
         public static final int marker_draggable=0x7f0a0094;
         public static final int markup_image=0x7f0a0108;
-        public static final int my_forms=0x7f0a015d;
-        public static final int my_forms_send=0x7f0a015e;
+        public static final int my_forms=0x7f0a015e;
+        public static final int my_forms_send=0x7f0a015f;
         /**  strings that should not be translated 
          */
         public static final int name=0x7f0a013b;
@@ -3388,7 +3389,7 @@ containing a value of this type.
         public static final int no_connexion=0x7f0a0139;
         public static final int no_form_finalled=0x7f0a0142;
         public static final int no_form_not_finalled=0x7f0a0141;
-        public static final int no_form_selected=0x7f0a0172;
+        public static final int no_form_selected=0x7f0a0173;
         public static final int no_forms_uploaded=0x7f0a00e4;
         public static final int no_items_display=0x7f0a0098;
         public static final int no_items_display_forms=0x7f0a0099;
@@ -3412,9 +3413,9 @@ containing a value of this type.
         public static final int please_wait=0x7f0a00a4;
         public static final int please_wait_long=0x7f0a00a5;
         public static final int protocol=0x7f0a00d3;
-        public static final int protocol_google=0x7f0a0177;
-        public static final int protocol_odk_default=0x7f0a0176;
-        public static final int protocol_other=0x7f0a0178;
+        public static final int protocol_google=0x7f0a0178;
+        public static final int protocol_odk_default=0x7f0a0177;
+        public static final int protocol_other=0x7f0a0179;
         public static final int provider_disabled_error=0x7f0a0082;
         public static final int quit_application=0x7f0a00a6;
         public static final int quit_entry=0x7f0a00a7;
@@ -3469,7 +3470,7 @@ containing a value of this type.
         /**  END FORM SAVING 
  DOWNLOAD FORM 
          */
-        public static final int select_all=0x7f0a0170;
+        public static final int select_all=0x7f0a0171;
         public static final int select_another_image=0x7f0a00cb;
         public static final int select_answer=0x7f0a00eb;
         public static final int select_drawing_color=0x7f0a010c;
@@ -3478,8 +3479,8 @@ containing a value of this type.
         public static final int selected_google_account_text=0x7f0a00ef;
         public static final int send_data=0x7f0a00b3;
         public static final int send_data_button=0x7f0a00b4;
-        public static final int send_form=0x7f0a016d;
-        public static final int send_form_and_restart=0x7f0a016e;
+        public static final int send_form=0x7f0a016e;
+        public static final int send_form_and_restart=0x7f0a016f;
         public static final int send_menu=0x7f0a015b;
         public static final int send_selected_data=0x7f0a00b5;
         /**  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
@@ -3576,8 +3577,8 @@ containing a value of this type.
         /**  FIN Help 
  FORM SAVING 
          */
-        public static final int to_not_send_form=0x7f0a016c;
-        public static final int to_send=0x7f0a0160;
+        public static final int to_not_send_form=0x7f0a016d;
+        public static final int to_send=0x7f0a0161;
         public static final int toggle_selected=0x7f0a00ba;
         public static final int trigger=0x7f0a00bb;
         public static final int two_item_icon=0x7f0a00bc;
