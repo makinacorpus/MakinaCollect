@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2009 University of Washington Licensed under the Apache
+	License, Version 2.0 (the "License"); you may not use this file except in
+	compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+	Unless required by applicable law or agreed to in writing, software distributed
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for
+	the specific language governing permissions and limitations under the License.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- strings that should not be translated -->
+
+    <string name="name">Nom</string>
+    <string name="next">Suivant</string>
+    <string name="back">Précédent</string>
+    <string name="finish">Terminer</string>
+    <string name="save">Sauvegarder</string>
+    <string name="clic_here_to_download">APPUYEZ ICI POUR TÉLÉCHARGER UN FORMULAIRE</string>
+    <string name="no_form_not_finalled">VOUS N\'AVEZ AUCUN FORMULAIRE NON FINALISÉ</string>
+    <string name="no_form_finalled">PAS DE FORMULAIRE FINALISÉ</string>
+    <string name="empty_list">Liste vide</string>
+
+    <!-- Hierarchy -->
+    <string name="hierarchy_text">Voici ci-dessous le résumé de votre questionnaire:</string>
+    <!-- END - Hierarchy -->
+
+
+    <!-- AboutUS -->
+    <string name="textview_about_us1">The mobile application "Makina Collect" was developed by Makina Corpus</string>
+    <string name="textview_about_us2">Développons de nouveaux horizons</string>
+    <string name="textview_about_us3">www.makina-corpus.com</string>
+    <string name="textview_about_us4">© Makina Corpus 2013</string>
+    <string name="web_site">http://www.makina-corpus.com/</string>
+    <!-- END AboutUs -->
+
+
+    <!-- Preferences -->
+    <string name="language">Langage</string>
+    <string name="current_language">English</string>
+    <string name="language_preferences">language_preferences</string>
+    <string name="theme">Thème</string>
+    <string name="theme_preferences">theme_preferences</string>
+    <string name="theme1">Thème1</string>
+    <string name="theme2">Thème2</string>
+    <string name="luminosity">Luminosité</string>
+    <!-- END- Preferences -->
+
+
+    <!-- ActionBar -->
+    <string name="search">Recherche</string>
+    <string name="settings">Paramètres</string>
+    <string name="help">Aide</string>
+    <string name="about_us">A propos</string>
+    <string name="exit">Quitter</string>
+    <string name="upload">Upload</string>
+    <string name="raz">RAZ</string>
+    <string name="hierarchy">Hierarchy</string>
+    <!-- FIN ActionBar -->
+
+
+    <!-- ActionBar Title -->
+    <string name="download_menu">TÉLÉCHARGER \nun formulaire</string>
+    <string name="edit_menu">REMPLIR   \nun formulaire</string>
+    <string name="save_menu">FINALISER \nmes formulaires</string>
+    <string name="send_menu">Mes formulaires \nA ENVOYER</string>
+  	 <string name="download_action_bar">TÉLÉCHARGER</string>
+    <string name="edit">REMPLIR</string>
+    <string name="my_forms">mes formulaires</string>
+    <string name="my_forms_send">Mes formulaires</string>
+    <string name="finalize">FINALISER</string>
+    <string name="to_send">A ENVOYER</string>
+    <string name="form">un formulaire</string>
+    <!-- FIN ActionBar Title -->
+
+
+    <!-- Help -->
+    <string name="help_download">Utiliser les formulaires de démonstration :\n
+		Nous vous proposons un certain nombre de formulaires de démonstration que Makina Corpus a créés spécifiquement pour cette application. Ils sont associés à l’adresse du serveur http://formulaires.makina-corpus.net:80/makinademo, accessible dans le menu Paramètres de l’application.\n\n
+
+		Créer vos propres formulaires :\n
+		Vous pouvez également utiliser l’application Makina Collect avec vos propres formulaires que vous aurez créés au préalable sur le site web Formhub (https://formhub.org/). Vous devez alors synchroniser l’application mobile, en modifiant l’adresse du serveur (à partir du menu Paramètres de l’application) par celle de votre propre compte Formhub.\n</string>
+    <string name="help_edit">Cette liste donne l’ensemble des formulaires vierges que vous avez téléchargé dans l’application mobile. En cliquant sur l’un d’eux, vous pourrez commencer la saisie. En gardant le doigt appuyé longtemps (ou par glissant sur la gauche), vous pourrez supprimer un formulaire de cette liste.\n
+		L’application Makina Collect a été conçue pour faciliter au maximum votre navigation lors de la saisie des formulaires.\n\n<strong>Comment passer d’une question à une autre?</strong>\n
+		Deux possibilités s’offrent à vous ; vous pouvez utiliser les flèches présentes en bas de page ou bien changer de question par un simple glissement de doigt horizontal (swipe).\n\n<strong>Comment modifier mes réponses?</strong>\n
+		A tout moment, via le bouton Hiérarchie, une visualisation de l’ensemble des réponses déjà saisies vous est proposé. Un clic sur une question vous redirige sur celle-ci pour que vous puissiez la modifier. En fin de formulaire, une visualisation de l’ensemble des réponses vous est automatiquement proposée, avant validation et envoi.\n\n<strong>Comment remettre à zéro toutes les réponses dans un formulaire?</strong>\n
+		A tout moment, un bouton dans l’action bar (la barre en haut de l’écran) vous permet, en cas d’erreur, d’effacer toutes les réponses déjà saisies et de recommencer le formulaire à partir de la première question.\n\n<strong>Comment sauvegarder un questionnaire en cours de saisie?</strong>\n
+		Le sous-menu “sauvegarder” dans le menu de l’action bar vous permet à tout moment de sauvegarder un formulaire en cours de saisie. Il ne sera pas envoyé au serveur et sera sauvegardé comme formulaire non finalisé, avec nom, date et heure. Il sera accessible à nouveau dans la liste de “mes formulaires sauvegardés” via l’interface d’accueil.\n\n<strong>Comment envoyer mes formulaires finalisés?</strong>		Une fois finalisés, après la dernière question, les formulaires seront envoyés et stockés dans le serveur Formhub.\n
+		Vous pouvez choisir de l’envoyer dès la finalisation du formulaire ou de le stocker dans la boite d’envoi de l’application mobile, pour décaler la transmission à plus tard (pas de connexion internet, envoi groupé….).\n
+		Dans le cas où la connexion internet serait défaillante et l’envoi du formulaire impossible, celui-ci sera automatiquement stocké dans la boite d’envoi de l’application.\n</string>
+    <string name="help_form">L’application Makina Collect a été conçue pour faciliter au maximum votre navigation lors de la saisie des formulaires.\n\n<strong>Comment passer d’une question à une autre?</strong>\n
+		Deux possibilités s’offrent à vous ; vous pouvez utiliser les flèches présentes en bas de page ou bien changer de question par un simple glissement de doigt horizontal (swipe).\n\n<strong>Comment modifier mes réponses?</strong>\n
+		A tout moment, via le bouton Hiérarchie, une visualisation de l’ensemble des réponses déjà saisies vous est proposé. Un clic sur une question vous redirige sur celle-ci pour que vous puissiez la modifier. En fin de formulaire, une visualisation de l’ensemble des réponses vous est automatiquement proposée, avant validation et envoi.\n\n<strong>Comment remettre à zéro toutes les réponses dans un formulaire?</strong>\n
+		A tout moment, un bouton dans l’action bar (la barre en haut de l’écran) vous permet, en cas d’erreur, d’effacer toutes les réponses déjà saisies et de recommencer le formulaire à partir de la première question.\n\n<strong>Comment sauvegarder un questionnaire en cours de saisie?</strong>\n
+		Le sous-menu “sauvegarder” dans le menu de l’action bar vous permet à tout moment de sauvegarder un formulaire en cours de saisie. Il ne sera pas envoyé au serveur et sera sauvegardé comme formulaire non finalisé, avec nom, date et heure. Il sera accessible à nouveau dans la liste de “mes formulaires sauvegardés” via l’interface d’accueil.\n\n<strong>Comment envoyer mes formulaires finalisés?</strong>		Une fois finalisés, après la dernière question, les formulaires seront envoyés et stockés dans le serveur Formhub.\n
+		Vous pouvez choisir de l’envoyer dès la finalisation du formulaire ou de le stocker dans la boite d’envoi de l’application mobile, pour décaler la transmission à plus tard (pas de connexion internet, envoi groupé….).\n
+		Dans le cas où la connexion internet serait défaillante et l’envoi du formulaire impossible, celui-ci sera automatiquement stocké dans la boite d’envoi de l’application.\n</string>
+    <string name="help_save">Cette liste décrit tous les formulaires que vous avez sauvegardés en cours de saisie. Ils sont classés par ordre chronologique décroissant.\n
+		En cliquant sur l’un d’eux, vous serez redirigé sur l’écran résumant les réponses données.\n
+		Pour supprimer un des formulaires sauvegardés de cette liste, il vous suffit de rester longtemps appuyé dessus ou bien de glisser votre doigt vers la gauche. Un message de confirmation de la suppression va s’afficher.\n</string>
+    <string name="help_send">Cette liste donne l’ensemble des formulaires finalisés qui n’ont pas encore envoyés au serveur, soit par votre choix, soit par échec d’envoi : les premiers sont marqués comme “finalisés” et les seconds comme “échec envoi”.\n
+		La boite d’envoi permet des transmissions seules ou groupées.\n\n
+
+		Vous pouvez supprimer les formulaires que vous souhaitez. La démarche à suivre est la même que celle utilisée pour “mes formulaires finalisés”.\n</string>
+    <string name="help_confirmation">Ne plus afficher ce message</string>
+    <string name="help_title1">Aide Télécharger un formulaire</string>
+    <string name="help_title2">Aide Remplir un formulaire</string>
+    <string name="help_title3">Aide Finaliser un formulaire</string>
+    <string name="help_title4">Aide Mes formulaires à envoyer</string>
+    <!-- FIN Help -->
+
+
+    <!-- FORM SAVING -->
+    <string name="to_not_send_form">Ne pas envoyer le formulaire</string>
+    <string name="send_form">Envoyer le formulaire</string>
+    <string name="send_form_and_restart">Envoyer le formulaire et le recommencer</string>
+    <string name="checkbox_error">Merci de sélectionner une réponse</string>
+    <!-- END FORM SAVING -->
+
+
+    <!-- DOWNLOAD FORM -->
+    <string name="select_all">TOUT SÉLECTIONNER</string>
+    <string name="deselect_all">TOUT DÉSÉLECTIONNER</string>
+    <string name="no_form_selected">Aucun formulaire sélectionné</string>
+    <string name="form_selected">1 formulaire sélectionné</string>
+    <string name="forms_selected">formulaires sélectionnés</string>
+    <!-- fin - DOWNLOAD FORM -->
+
+    <string name="app_name" translatable="false">Makina Collect</string>
+    <string name="protocol_odk_default" translatable="false">odk_default</string>
+    <string name="protocol_google" translatable="false">google</string>
+    <string name="protocol_other" translatable="false"></string>
+    <string name="default_server_url" translatable="false">http://formulaires.makina-corpus.net:80/makinademo</string>
+    <string name="default_odk_formlist" translatable="false">/formList</string>
+    <string name="default_odk_submission" translatable="false">/submission</string>
+
+    <item name="mapview" type="id"/>
+
+</resources>
