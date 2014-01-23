@@ -32,7 +32,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.v4.widget.SearchViewCompat.OnCloseListenerCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -51,7 +50,6 @@ import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.WazaBe.HoloEverywhere.app.AlertDialog;
 import com.WazaBe.HoloEverywhere.app.ProgressDialog;
@@ -803,12 +801,6 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
         return false;
     }
  
-    
-    protected boolean isAlwaysExpanded() {
-    	InputMethodManager imm = (InputMethodManager)getSystemService( Context.INPUT_METHOD_SERVICE);
-    	imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
-        return false;
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {

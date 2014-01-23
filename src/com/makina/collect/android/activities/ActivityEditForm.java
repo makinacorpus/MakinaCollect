@@ -41,6 +41,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -97,6 +98,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     private SimpleCursorAdapter instances;
     private Menu menu;
     private final int RESULT_PREFERENCES=1;
+    private SearchView mSearchView;
     
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
@@ -249,7 +251,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         getSupportMenuInflater().inflate(R.menu.menu_activity_edit_form, menu);
         this.menu=menu;
         MenuItem searchItem = menu.findItem(R.id.menu_search);
-        final SearchView mSearchView = (SearchView) searchItem.getActionView();
+        mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setImeOptions(mSearchView.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
         int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
         ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
@@ -461,8 +463,9 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
 
         @Override
         public boolean onQueryTextSubmit(String query) {
-                // TODO Auto-generated method stub
-                return false;
+        	InputMethodManager imm = (InputMethodManager)getSystemService( Context.INPUT_METHOD_SERVICE);
+        	imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
+            return false;
         }
 
 

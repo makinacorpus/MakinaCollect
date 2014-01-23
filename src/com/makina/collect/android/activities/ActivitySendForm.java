@@ -46,6 +46,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -130,6 +131,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
     private ListView listView;
     private Menu menu;
     private final int RESULT_PREFERENCES=1;
+    private SearchView mSearchView;
 
 	public Cursor getAllCursor(String condition_search) {
 		// get all complete or failed submission instances
@@ -153,7 +155,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
         Finish.activitySendForm=this;
         
         MenuItem searchItem = menu.findItem(R.id.menu_search);
-        final SearchView mSearchView = (SearchView) searchItem.getActionView();
+        mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setImeOptions(mSearchView.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
         int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
         ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
@@ -585,9 +587,10 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 
 	@Override
 	public boolean onQueryTextSubmit(String query) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    	InputMethodManager imm = (InputMethodManager)getSystemService( Context.INPUT_METHOD_SERVICE);
+    	imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
+        return false;
+    }
 
 	@Override
 	public void uploadingComplete(HashMap<String, String> result)
