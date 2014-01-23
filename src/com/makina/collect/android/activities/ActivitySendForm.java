@@ -260,7 +260,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 					ImageView imageView_check_all=(ImageView)findViewById(R.id.imageView_check_all);
 					imageView_check_all.setImageResource(R.drawable.case_off);
 					TextView textView_check_all=(TextView)findViewById(R.id.textView_check_all);
-					textView_check_all.setText("TOUT Sï¿½LECTIONNER");
+					textView_check_all.setText("TOUT SƒLECTIONNER");
 					
 				}
 				else
@@ -269,7 +269,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 					ImageView imageView_check_all=(ImageView)findViewById(R.id.imageView_check_all);
 					imageView_check_all.setImageResource(R.drawable.case_on);
 					TextView textView_check_all=(TextView)findViewById(R.id.textView_check_all);
-					textView_check_all.setText("TOUT Dï¿½Sï¿½LECTIONNER");
+					textView_check_all.setText("TOUT DƒSƒLECTIONNER");
 					
 				}
 			}

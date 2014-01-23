@@ -894,8 +894,8 @@ InstanceUploaderListener, DeleteInstancesListener {
 	private void razConfirmation() {
 
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		adb.setTitle("Remise ï¿½ zï¿½ro");
-		adb.setMessage("Voulez-vous vraiment remettre ï¿½ zï¿½ro?");
+		adb.setTitle("Remise ˆ zŽro");
+		adb.setMessage("Voulez-vous vraiment remettre ˆ zŽro?");
 		adb.setPositiveButton(getString(android.R.string.yes),new AlertDialog.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog,int which)
