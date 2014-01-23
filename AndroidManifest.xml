@@ -192,7 +192,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.makina.collect.android.activities.ActivityHelp"
-            android:configChanges="orientation|keyboardHidden"
             android:theme="@style/Theme.Transparent" />
         <!-- Enable Shortcuts for Command Actions -->
         <activity

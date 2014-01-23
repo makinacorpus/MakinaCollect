@@ -18,9 +18,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-import com.WazaBe.HoloEverywhere.app.AlertDialog;
-import com.WazaBe.HoloEverywhere.app.ProgressDialog;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -35,6 +32,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SearchViewCompat.OnCloseListenerCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -43,15 +41,20 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.WazaBe.HoloEverywhere.app.AlertDialog;
+import com.WazaBe.HoloEverywhere.app.ProgressDialog;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -74,8 +77,6 @@ import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
 
 import de.keyboardsurfer.mobile.app.android.widget.crouton.Style;
-
-import android.widget.SearchView;
 /**
  * Responsible for displaying, adding and deleting all the valid forms in the forms directory. One
  * caveat. If the server requires authentication, a dialog will pop up asking when you request the
@@ -137,6 +138,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     private ListView listView;
     private Menu menu;
     private final int RESULT_PREFERENCES=1;
+    private SearchView mSearchView;
     
     @SuppressWarnings("unchecked")
     @Override
@@ -796,15 +798,15 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     }
  
     public boolean onQueryTextSubmit(String query) {
+    	InputMethodManager imm = (InputMethodManager)getSystemService( Context.INPUT_METHOD_SERVICE);
+    	imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
         return false;
     }
  
-    public boolean onClose() {
-        
-        return false;
-    }
- 
+    
     protected boolean isAlwaysExpanded() {
+    	InputMethodManager imm = (InputMethodManager)getSystemService( Context.INPUT_METHOD_SERVICE);
+    	imm.hideSoftInputFromWindow(mSearchView.getWindowToken(), 0);
         return false;
     }
     @Override
@@ -814,7 +816,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
         getSupportMenuInflater().inflate(R.menu.menu_activity_download_form, menu);
         this.menu=menu;
         MenuItem searchItem = menu.findItem(R.id.menu_search);
-        final SearchView mSearchView = (SearchView) searchItem.getActionView();
+        mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setImeOptions(mSearchView.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
         int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
         ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
@@ -903,4 +905,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
 			startActivity(i);
     	}
     }
+
+    
+    
 }

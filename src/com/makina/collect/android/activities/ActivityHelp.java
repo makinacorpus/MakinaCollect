@@ -5,7 +5,6 @@ import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.makina.collect.android.R;
 import com.makina.collect.android.dialog.DialogHelp;
 import com.makina.collect.android.utilities.Finish;
 
@@ -15,7 +14,7 @@ public class ActivityHelp extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_help);
+		//setContentView(R.layout.activity_help);
 		
 		Window window = getWindow();
 	    WindowManager.LayoutParams wlp = window.getAttributes();
@@ -24,9 +23,11 @@ public class ActivityHelp extends FragmentActivity {
 	    wlp.dimAmount = (float) 0.6;
 	    window.setAttributes(wlp);
 		Finish.activityHelp=this;
-		DialogHelp dialog = new DialogHelp(getIntent().getExtras().getInt("position"));
+		DialogHelp.position=getIntent().getExtras().getInt("position");
+		DialogHelp dialog = new DialogHelp();
 		dialog.show(getSupportFragmentManager(), "");
 		dialog.setTargetFragment(dialog.getTargetFragment(),DIALOG_RESULT);
 	}
+	
 	
 }

@@ -1,6 +1,7 @@
 package com.makina.collect.android.dialog;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,23 +15,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.astuetz.PagerSlidingTabStrip.IconTabProvider;
 import com.makina.collect.android.R;
 import com.makina.collect.android.utilities.Finish;
 
-@SuppressLint({ "NewApi", "ValidFragment" })
-public class DialogHelp extends DialogFragment {
+@SuppressLint("NewApi")
+public class DialogHelp extends DialogFragment{
 
 	private PagerSlidingTabStrip tabs;
 	private ViewPager pager;
 	private ContactPagerAdapter adapter;
-	private int position;
+	public static int position=0;
 
-	public DialogHelp(int position) {
-		super();
-		this.position=position;
+	public static DialogHelp newInstance() {
+		DialogHelp f = new DialogHelp();
+		return f;
 	}
 
 	@Override
@@ -49,6 +51,7 @@ public class DialogHelp extends DialogFragment {
 
 		pager.setAdapter(adapter);
 		pager.setCurrentItem(position);
+		
 		tabs.setViewPager(pager);
 
 		return root;
@@ -133,11 +136,11 @@ public class DialogHelp extends DialogFragment {
 	}
 
 	@Override
-	public void onDestroy() {
+	public void onDismiss(DialogInterface dialog) {
 		// TODO Auto-generated method stub
-		super.onDestroy();
-		if (Finish.activityHelp!=null)
+		if (getActivity()!=null)
 			Finish.activityHelp.finish();
-			
 	}
+	
+	
 }

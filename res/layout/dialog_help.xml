@@ -4,26 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="30dp"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
-    android:paddingTop="30dp" >
+    android:padding="15dip" >
 
     <com.astuetz.PagerSlidingTabStrip
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="65dip"
+        android:layout_height="62dip"
         android:background="@android:color/white"
-        app:pstsDividerColor="@android:color/transparent"
+        app:pstsDividerColor="#00000000"
         app:pstsIndicatorColor="#FF33B5E6"
-        app:pstsTabPaddingLeftRight="15dip"
+        app:pstsTabPaddingLeftRight="14dip"
         app:pstsUnderlineColor="#FF33B5E6" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tabs"
-        android:layout_gravity="center" />
+        android:layout_below="@+id/tabs" />
 
 </RelativeLayout>
