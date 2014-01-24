@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2009 University of Washington
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License. You may obtain a copy of
+the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations under
+the License.
+-->
+<resources>
+
+    <drawable name="bleu_help_footer">#26d1ed</drawable>
+    <drawable name="bleu_help_footer_on">#24c3dd</drawable>
+    <drawable name="strocke_about_us">#b8d754</drawable>
+    <drawable name="background_drawer_list">#2fffffff</drawable>
+    <drawable name="linear_blue">#2bbccc</drawable>
+    <drawable name="pannier_blue">#44dbec</drawable>
+    <drawable name="check_all">#073239</drawable>
+    <drawable name="check_all_on">#1594a9</drawable>
+    <drawable name="linear_green">#b8d754</drawable>
+    <drawable name="background_swipe_delete">#36d2e3</drawable>
+    <drawable name="gris_background">#f2f4f4</drawable>
+
+    <color name="crouton_color">#ccec44</color>
+    <color name="dark_color">#073239</color>
+    <color name="background_window">#FFE5E5E5</color>
+    <color name="text_gris">#787c7d</color>
+    <color name="actionbarTitleColorGreenDownload">#c8e453</color>
+    <color name="actionbarTitleColorGreenEdit">#b8d754</color>
+    <color name="actionbarTitleColorBlueSave">#1baac2</color>
+    <color name="actionbarTitleColorBlueSend">#2bbccc</color>
+    <color name="actionbarTitleColorGreenDownload_on">#cded4c</color>
+    <color name="actionbarTitleColorGreenEdit_on">#b8d754</color>
+    <color name="actionbarTitleColorBlueSave_on">#1baac2</color>
+    <color name="actionbarTitleColorBlueSend_on">#2bbccc</color>
+    <color name="actionbarTitleColorGris">#787c7d</color>
+    <color name="about_us_blue">#073239</color>
+    <color name="color_emty_list">#149eb5</color>
+
+</resources>
