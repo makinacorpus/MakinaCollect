@@ -115,7 +115,7 @@ License.
 <string name="marker_draggable">Vous pouvez déplacer le marqueur sur la carte soit en appuyant longuement dessus et en le déplacant, soit en appuyant longuement là où vous voulez le placer</string>
 <string name="mark_finished">Marquer le formulaire comme finalisé</string>
 <string name="noselect_error">Désolé, vous n\'avez sélectionné aucun formulaire.</string>
-<string name="no_connexion">connexion au réseau non disponible</string>
+<string name="no_connexion">Erreur réseau. Veuillez vérifiez votre connexion internet</string>
 <string name="no_items_display">Rien à afficher.</string>
 <string name="no_items_display_forms">Rien à afficher.\n\nEssayez d\'obtenir et remplir un formulaire.</string>
 <string name="no_items_display_instances">Rien à afficher.\n\nEssayez de finaliser vos formulaires avant de les envoyer.</string>

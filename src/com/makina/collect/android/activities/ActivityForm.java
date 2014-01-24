@@ -2908,7 +2908,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 				if (ni == null || !ni.isConnected())
 				{
 					// no network connection
-					CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.no_connection), Style.ALERT);
+					CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.no_connexion), Style.ALERT);
 					
 					saveDataToDisk(false, true, save_as.toString());
 				}
@@ -2924,6 +2924,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 				NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
 				if (ni == null || !ni.isConnected())
 				{
+					CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.no_connexion), Style.ALERT);
 					saveDataToDisk(false, true, save_as.toString());
 				}
 				else

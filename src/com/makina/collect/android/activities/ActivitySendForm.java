@@ -496,7 +496,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 		{
 			//no network connection
 			Collect.getInstance().getActivityLogger().logAction(this, "uploadButton", "noConnection");
-			CroutonView.showBuiltInCrouton(ActivitySendForm.this, getString(R.string.no_connection), Style.ALERT);
+			CroutonView.showBuiltInCrouton(ActivitySendForm.this, getString(R.string.no_connexion), Style.ALERT);
 		} 
 		else
 		{

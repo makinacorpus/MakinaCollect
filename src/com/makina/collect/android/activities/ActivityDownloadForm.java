@@ -286,7 +286,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
         {
         	findViewById(R.id.empty).setVisibility(View.VISIBLE);
         	mProgressDialog.dismiss();
-        	CroutonView.showBuiltInCrouton(ActivityDownloadForm.this, getString(R.string.no_connection), Style.ALERT);
+        	CroutonView.showBuiltInCrouton(ActivityDownloadForm.this, getString(R.string.no_connexion), Style.ALERT);
 		} else {
 
             mFormNamesAndURLs = new HashMap<String, FormDetails>();

@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.astuetz.PagerSlidingTabStrip.IconTabProvider;
@@ -30,6 +29,15 @@ public class DialogHelp extends DialogFragment{
 	private ContactPagerAdapter adapter;
 	public static int position=0;
 
+	public DialogHelp(int pos)
+	{
+		super();
+		position=pos;
+	}
+	public DialogHelp()
+	{
+		super();
+	}
 	public static DialogHelp newInstance() {
 		DialogHelp f = new DialogHelp();
 		return f;
@@ -141,6 +149,5 @@ public class DialogHelp extends DialogFragment{
 		if (getActivity()!=null)
 			Finish.activityHelp.finish();
 	}
-	
 	
 }
