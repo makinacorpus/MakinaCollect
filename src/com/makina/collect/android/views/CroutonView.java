@@ -4,6 +4,7 @@ import com.makina.collect.android.R.color;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.app.Activity;
 import android.view.View;
 import de.keyboardsurfer.mobile.app.android.widget.crouton.Configuration;
 import de.keyboardsurfer.mobile.app.android.widget.crouton.Crouton;
@@ -30,4 +31,5 @@ public class CroutonView {
 						infinite ? CONFIGURATION_INFINITE
 								: Configuration.DEFAULT).show();
 	}
+
 }
