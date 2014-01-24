@@ -3089,7 +3089,7 @@ containing a value of this type.
         /**  END Message d'erreur liste vide 
          */
         public static final int accept_location=0x7f0a003b;
-        public static final int access_error=0x7f0a00db;
+        public static final int access_error=0x7f0a00da;
         public static final int accuracy=0x7f0a003c;
         public static final int activity_not_found=0x7f0a003d;
         public static final int add_another=0x7f0a003e;
@@ -3097,33 +3097,33 @@ containing a value of this type.
         public static final int add_more=0x7f0a0040;
         public static final int add_repeat=0x7f0a0041;
         public static final int add_repeat_no=0x7f0a0042;
-        public static final int added_on_date_at_time=0x7f0a00fb;
-        public static final int admin_access_settings=0x7f0a0112;
-        public static final int admin_password_changed=0x7f0a0117;
-        public static final int admin_password_disabled=0x7f0a0118;
-        public static final int admin_password_incorrect=0x7f0a011a;
-        public static final int admin_password_mismatch=0x7f0a0119;
-        public static final int admin_preferences=0x7f0a0111;
+        public static final int added_on_date_at_time=0x7f0a00fa;
+        public static final int admin_access_settings=0x7f0a0111;
+        public static final int admin_password_changed=0x7f0a0116;
+        public static final int admin_password_disabled=0x7f0a0117;
+        public static final int admin_password_incorrect=0x7f0a0119;
+        public static final int admin_password_mismatch=0x7f0a0118;
+        public static final int admin_preferences=0x7f0a0110;
         public static final int advance=0x7f0a0043;
-        public static final int advanced_pref=0x7f0a0133;
+        public static final int advanced_pref=0x7f0a0132;
         public static final int altitude=0x7f0a0044;
         /**  fin - DOWNLOAD FORM 
          */
         public static final int app_name=0x7f0a0178;
-        public static final int app_url=0x7f0a00cf;
+        public static final int app_url=0x7f0a00ce;
         public static final int audio_file_error=0x7f0a0045;
         public static final int audio_file_invalid=0x7f0a0046;
-        public static final int autosend=0x7f0a011d;
-        public static final int autosend_network=0x7f0a0120;
-        public static final int autosend_network_summary=0x7f0a0121;
-        public static final int autosend_wifi=0x7f0a011e;
-        public static final int autosend_wifi_summary=0x7f0a011f;
+        public static final int autosend=0x7f0a011c;
+        public static final int autosend_network=0x7f0a011f;
+        public static final int autosend_network_summary=0x7f0a0120;
+        public static final int autosend_wifi=0x7f0a011d;
+        public static final int autosend_wifi_summary=0x7f0a011e;
         public static final int back=0x7f0a013d;
         public static final int back_button_label=0x7f0a000f;
         public static final int backup=0x7f0a0047;
         public static final int barcode_scanner_error=0x7f0a0048;
-        public static final int buttons_instructions=0x7f0a012e;
-        public static final int buttons_navigation=0x7f0a012b;
+        public static final int buttons_instructions=0x7f0a012d;
+        public static final int buttons_navigation=0x7f0a012a;
         public static final int cancel=0x7f0a0049;
         public static final int cancel_loading_form=0x7f0a004a;
         public static final int cancel_location=0x7f0a004b;
@@ -3135,30 +3135,30 @@ containing a value of this type.
         public static final int capture_audio=0x7f0a004e;
         public static final int capture_image=0x7f0a004f;
         public static final int capture_video=0x7f0a0050;
-        public static final int change_font_size=0x7f0a00d9;
-        public static final int change_formlist_url=0x7f0a00d2;
+        public static final int change_font_size=0x7f0a00d8;
+        public static final int change_formlist_url=0x7f0a00d1;
         public static final int change_language=0x7f0a0051;
         public static final int change_password=0x7f0a0052;
-        public static final int change_protocol=0x7f0a00d4;
-        public static final int change_server=0x7f0a010f;
+        public static final int change_protocol=0x7f0a00d3;
+        public static final int change_server=0x7f0a010e;
         public static final int change_server_url=0x7f0a0053;
-        public static final int change_splash_path=0x7f0a00cd;
-        public static final int change_submission_url=0x7f0a00d5;
-        public static final int change_url_default=0x7f0a0130;
+        public static final int change_splash_path=0x7f0a00cc;
+        public static final int change_submission_url=0x7f0a00d4;
+        public static final int change_url_default=0x7f0a012f;
         public static final int change_username=0x7f0a0054;
-        public static final int change_username_default=0x7f0a0110;
-        public static final int change_view=0x7f0a00f8;
+        public static final int change_username_default=0x7f0a010f;
+        public static final int change_view=0x7f0a00f7;
         public static final int checkbox_error=0x7f0a0172;
-        public static final int choose_image=0x7f0a00e9;
-        public static final int choose_sound=0x7f0a00e7;
-        public static final int choose_video=0x7f0a00e8;
+        public static final int choose_image=0x7f0a00e8;
+        public static final int choose_sound=0x7f0a00e6;
+        public static final int choose_video=0x7f0a00e7;
         public static final int clear_answer=0x7f0a0056;
         public static final int clear_answer_ask=0x7f0a0057;
         public static final int clear_answer_no=0x7f0a0058;
         public static final int clearanswer_confirm=0x7f0a0055;
         public static final int clic_here_to_download=0x7f0a0140;
-        public static final int click_to_web=0x7f0a00c5;
-        public static final int client=0x7f0a00c6;
+        public static final int click_to_web=0x7f0a00c4;
+        public static final int client=0x7f0a00c5;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=30] 
@@ -3223,7 +3223,7 @@ containing a value of this type.
         public static final int default_odk_formlist=0x7f0a017d;
         public static final int default_odk_submission=0x7f0a017e;
         public static final int default_server_url=0x7f0a017c;
-        public static final int default_splash_path=0x7f0a00ca;
+        public static final int default_splash_path=0x7f0a00c9;
         public static final int delete_confirm=0x7f0a005f;
         public static final int delete_file=0x7f0a0060;
         public static final int delete_no=0x7f0a0061;
@@ -3246,32 +3246,32 @@ containing a value of this type.
          */
         public static final int download_menu=0x7f0a015a;
         public static final int downloading_data=0x7f0a006b;
-        public static final int draw_image=0x7f0a0109;
+        public static final int draw_image=0x7f0a0108;
         public static final int drawer_close=0x7f0a0070;
         public static final int drawer_open=0x7f0a006f;
         public static final int edit=0x7f0a015f;
         public static final int edit_menu=0x7f0a015b;
-        public static final int edit_prompt=0x7f0a00ee;
+        public static final int edit_prompt=0x7f0a00ed;
         public static final int empty_list=0x7f0a0143;
         /**  Message d'erreur liste vide 
          */
         public static final int empty_list_blank_form=0x7f0a0136;
         public static final int empty_list_finalized_form=0x7f0a0138;
         public static final int empty_list_saved_form=0x7f0a0137;
-        public static final int enter_admin_password=0x7f0a011b;
+        public static final int enter_admin_password=0x7f0a011a;
         public static final int enter_data=0x7f0a0073;
         public static final int enter_data_button=0x7f0a0074;
-        public static final int enter_new_password=0x7f0a0115;
+        public static final int enter_new_password=0x7f0a0114;
         public static final int entering_repeat=0x7f0a0071;
         public static final int entering_repeat_ask=0x7f0a0072;
         public static final int error_occured=0x7f0a0075;
         public static final int exit=0x7f0a0156;
         public static final int fetching_file=0x7f0a0076;
-        public static final int fetching_manifest=0x7f0a00e2;
+        public static final int fetching_manifest=0x7f0a00e1;
         public static final int file_delete_in_progress=0x7f0a0079;
         public static final int file_deleted_error=0x7f0a0077;
         public static final int file_deleted_ok=0x7f0a0078;
-        public static final int file_fetch_failed=0x7f0a00e1;
+        public static final int file_fetch_failed=0x7f0a00e0;
         public static final int file_invalid=0x7f0a007a;
         public static final int file_missing=0x7f0a007b;
         public static final int finalize=0x7f0a0162;
@@ -3293,34 +3293,34 @@ containing a value of this type.
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
          */
-        public static final int finalized_on_date_at_time=0x7f0a00fd;
+        public static final int finalized_on_date_at_time=0x7f0a00fc;
         public static final int finish=0x7f0a013e;
         public static final int finished_disk_scan=0x7f0a007c;
-        public static final int font_size=0x7f0a00d8;
-        public static final int font_size_extra_large=0x7f0a00f3;
-        public static final int font_size_extra_small=0x7f0a00f7;
-        public static final int font_size_large=0x7f0a00f4;
-        public static final int font_size_medium=0x7f0a00f5;
-        public static final int font_size_small=0x7f0a00f6;
+        public static final int font_size=0x7f0a00d7;
+        public static final int font_size_extra_large=0x7f0a00f2;
+        public static final int font_size_extra_small=0x7f0a00f6;
+        public static final int font_size_large=0x7f0a00f3;
+        public static final int font_size_medium=0x7f0a00f4;
+        public static final int font_size_small=0x7f0a00f5;
         public static final int form=0x7f0a0164;
-        public static final int form_backward=0x7f0a0128;
-        public static final int form_download_progress=0x7f0a00e0;
-        public static final int form_forward=0x7f0a0127;
-        public static final int form_scan_starting=0x7f0a00da;
+        public static final int form_backward=0x7f0a0127;
+        public static final int form_download_progress=0x7f0a00df;
+        public static final int form_forward=0x7f0a0126;
+        public static final int form_scan_starting=0x7f0a00d9;
         public static final int form_selected=0x7f0a0176;
-        public static final int formlist_url=0x7f0a00d6;
+        public static final int formlist_url=0x7f0a00d5;
         public static final int forms=0x7f0a007d;
         public static final int forms_selected=0x7f0a0177;
-        public static final int found_at_end=0x7f0a0124;
-        public static final int found_in_main=0x7f0a0122;
-        public static final int found_in_menu=0x7f0a011c;
-        public static final int found_in_settings=0x7f0a0123;
-        public static final int general_preferences=0x7f0a00c4;
+        public static final int found_at_end=0x7f0a0123;
+        public static final int found_in_main=0x7f0a0121;
+        public static final int found_in_menu=0x7f0a011b;
+        public static final int found_in_settings=0x7f0a0122;
+        public static final int general_preferences=0x7f0a00c3;
         public static final int get_barcode=0x7f0a007f;
         public static final int get_forms=0x7f0a0080;
         public static final int get_location=0x7f0a0081;
         public static final int getting_location=0x7f0a007e;
-        public static final int go_to_location=0x7f0a00d1;
+        public static final int go_to_location=0x7f0a00d0;
         public static final int help=0x7f0a0154;
         public static final int help_confirmation=0x7f0a016a;
         /**  FIN ActionBar Title 
@@ -3345,15 +3345,15 @@ containing a value of this type.
         public static final int jump_to_beginning=0x7f0a0084;
         public static final int jump_to_end=0x7f0a0085;
         public static final int jump_to_previous=0x7f0a0086;
-        public static final int keep_changes=0x7f0a00d0;
+        public static final int keep_changes=0x7f0a00cf;
         /**  END AboutUs 
  Preferences 
          */
         public static final int language=0x7f0a014b;
         public static final int language_preferences=0x7f0a014c;
         public static final int latitude=0x7f0a0087;
-        public static final int launch_app=0x7f0a0102;
-        public static final int launch_printer=0x7f0a0131;
+        public static final int launch_app=0x7f0a0101;
+        public static final int launch_printer=0x7f0a0130;
         public static final int leave_repeat_yes=0x7f0a0088;
         public static final int leaving_repeat_ask=0x7f0a0089;
         public static final int list_failed_with_error=0x7f0a008a;
@@ -3367,79 +3367,79 @@ containing a value of this type.
         public static final int main_menu=0x7f0a0090;
         public static final int main_menu_details=0x7f0a0091;
         public static final int manage_files=0x7f0a0092;
-        public static final int manifest_server_error=0x7f0a00dc;
-        public static final int manifest_tag_error=0x7f0a00df;
+        public static final int manifest_server_error=0x7f0a00db;
+        public static final int manifest_tag_error=0x7f0a00de;
         public static final int mark_finished=0x7f0a0095;
         public static final int marker_create=0x7f0a0093;
         public static final int marker_draggable=0x7f0a0094;
-        public static final int markup_image=0x7f0a0108;
+        public static final int markup_image=0x7f0a0107;
         public static final int my_forms=0x7f0a0160;
         public static final int my_forms_send=0x7f0a0161;
         /**  strings that should not be translated 
          */
         public static final int name=0x7f0a013b;
-        public static final int navigation=0x7f0a0129;
+        public static final int navigation=0x7f0a0128;
         public static final int next=0x7f0a013c;
         public static final int next_button_label=0x7f0a0011;
-        public static final int no_account=0x7f0a0125;
-        public static final int no_app=0x7f0a0103;
-        public static final int no_connection=0x7f0a0097;
+        public static final int no_account=0x7f0a0124;
+        public static final int no_app=0x7f0a0102;
+        public static final int no_connection=0x7f0a0133;
         public static final int no_connexion=0x7f0a0139;
         public static final int no_form_finalled=0x7f0a0142;
         public static final int no_form_not_finalled=0x7f0a0141;
         public static final int no_form_selected=0x7f0a0175;
-        public static final int no_forms_uploaded=0x7f0a00e4;
-        public static final int no_items_display=0x7f0a0098;
-        public static final int no_items_display_forms=0x7f0a0099;
-        public static final int no_items_display_instances=0x7f0a009a;
-        public static final int no_printer=0x7f0a0132;
+        public static final int no_forms_uploaded=0x7f0a00e3;
+        public static final int no_items_display=0x7f0a0097;
+        public static final int no_items_display_forms=0x7f0a0098;
+        public static final int no_items_display_instances=0x7f0a0099;
+        public static final int no_printer=0x7f0a0131;
         public static final int noselect_error=0x7f0a0096;
         public static final int number_picker_decrement_button=0x7f0a0019;
         public static final int number_picker_increment_button=0x7f0a0018;
         public static final int number_picker_increment_scroll_action=0x7f0a0017;
         public static final int number_picker_increment_scroll_mode=0x7f0a0016;
-        public static final int offline_mode=0x7f0a009b;
-        public static final int offline_mode_summary=0x7f0a009c;
-        public static final int ok=0x7f0a009d;
-        public static final int parent_form_not_present=0x7f0a0101;
-        public static final int parse_error=0x7f0a009e;
-        public static final int parse_legacy_formlist_failed=0x7f0a009f;
-        public static final int parse_openrosa_formlist_failed=0x7f0a00a0;
-        public static final int password=0x7f0a00a1;
-        public static final int play_audio=0x7f0a00a2;
-        public static final int play_video=0x7f0a00a3;
-        public static final int please_wait=0x7f0a00a4;
-        public static final int please_wait_long=0x7f0a00a5;
-        public static final int protocol=0x7f0a00d3;
+        public static final int offline_mode=0x7f0a009a;
+        public static final int offline_mode_summary=0x7f0a009b;
+        public static final int ok=0x7f0a009c;
+        public static final int parent_form_not_present=0x7f0a0100;
+        public static final int parse_error=0x7f0a009d;
+        public static final int parse_legacy_formlist_failed=0x7f0a009e;
+        public static final int parse_openrosa_formlist_failed=0x7f0a009f;
+        public static final int password=0x7f0a00a0;
+        public static final int play_audio=0x7f0a00a1;
+        public static final int play_video=0x7f0a00a2;
+        public static final int please_wait=0x7f0a00a3;
+        public static final int please_wait_long=0x7f0a00a4;
+        public static final int protocol=0x7f0a00d2;
         public static final int protocol_google=0x7f0a017a;
         public static final int protocol_odk_default=0x7f0a0179;
         public static final int protocol_other=0x7f0a017b;
         public static final int provider_disabled_error=0x7f0a0082;
-        public static final int quit_application=0x7f0a00a6;
-        public static final int quit_entry=0x7f0a00a7;
+        public static final int quit_application=0x7f0a00a5;
+        public static final int quit_entry=0x7f0a00a6;
         public static final int raz=0x7f0a0158;
-        public static final int refresh=0x7f0a00a8;
-        public static final int replace_barcode=0x7f0a00a9;
-        public static final int replace_location=0x7f0a00aa;
-        public static final int required_answer_error=0x7f0a00ab;
-        public static final int reset_image=0x7f0a010a;
-        public static final int review_data=0x7f0a00ac;
-        public static final int review_data_button=0x7f0a00ad;
+        public static final int refresh=0x7f0a00a7;
+        public static final int replace_barcode=0x7f0a00a8;
+        public static final int replace_location=0x7f0a00a9;
+        public static final int required_answer_error=0x7f0a00aa;
+        public static final int reset_image=0x7f0a0109;
+        public static final int review_data=0x7f0a00ab;
+        public static final int review_data_button=0x7f0a00ac;
         public static final int ringtone_default=0x7f0a002c;
         public static final int ringtone_picker_title=0x7f0a002b;
         public static final int ringtone_silent=0x7f0a002d;
-        public static final int root_element_error=0x7f0a00dd;
-        public static final int root_namespace_error=0x7f0a00de;
+        public static final int root_element_error=0x7f0a00dc;
+        public static final int root_namespace_error=0x7f0a00dd;
         public static final int save=0x7f0a013f;
-        public static final int save_all_answers=0x7f0a00af;
-        public static final int save_and_close=0x7f0a0106;
-        public static final int save_as_error=0x7f0a00ed;
-        public static final int save_enter_data_description=0x7f0a00b0;
-        public static final int save_form_as=0x7f0a00ec;
+        public static final int save_all_answers=0x7f0a00ae;
+        public static final int save_and_close=0x7f0a0105;
+        public static final int save_as_error=0x7f0a00ec;
+        public static final int save_enter_data_description=0x7f0a00af;
+        public static final int save_form_as=0x7f0a00eb;
         public static final int save_menu=0x7f0a015c;
-        public static final int save_mid=0x7f0a0114;
-        public static final int save_preferences=0x7f0a0126;
-        public static final int saved_data=0x7f0a00ae;
+        public static final int save_mid=0x7f0a0113;
+        public static final int save_preferences=0x7f0a0125;
+        public static final int saved_data=0x7f0a00ad;
         /**  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
@@ -3458,9 +3458,9 @@ containing a value of this type.
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
          */
-        public static final int saved_on_date_at_time=0x7f0a00fc;
-        public static final int savepoint_used=0x7f0a0105;
-        public static final int saving_form=0x7f0a00b1;
+        public static final int saved_on_date_at_time=0x7f0a00fb;
+        public static final int savepoint_used=0x7f0a0104;
+        public static final int saving_form=0x7f0a00b0;
         /**  END- Preferences 
  ActionBar 
          */
@@ -3469,18 +3469,18 @@ containing a value of this type.
  DOWNLOAD FORM 
          */
         public static final int select_all=0x7f0a0173;
-        public static final int select_another_image=0x7f0a00cb;
-        public static final int select_answer=0x7f0a00eb;
-        public static final int select_drawing_color=0x7f0a010c;
-        public static final int select_one=0x7f0a0104;
-        public static final int selected=0x7f0a00ea;
-        public static final int selected_google_account_text=0x7f0a00ef;
-        public static final int send_data=0x7f0a00b3;
-        public static final int send_data_button=0x7f0a00b4;
+        public static final int select_another_image=0x7f0a00ca;
+        public static final int select_answer=0x7f0a00ea;
+        public static final int select_drawing_color=0x7f0a010b;
+        public static final int select_one=0x7f0a0103;
+        public static final int selected=0x7f0a00e9;
+        public static final int selected_google_account_text=0x7f0a00ee;
+        public static final int send_data=0x7f0a00b2;
+        public static final int send_data_button=0x7f0a00b3;
         public static final int send_form=0x7f0a0170;
         public static final int send_form_and_restart=0x7f0a0171;
         public static final int send_menu=0x7f0a015d;
-        public static final int send_selected_data=0x7f0a00b5;
+        public static final int send_selected_data=0x7f0a00b4;
         /**  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
@@ -3499,8 +3499,8 @@ containing a value of this type.
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
          */
-        public static final int sending_failed_on_date_at_time=0x7f0a00ff;
-        public static final int sending_items=0x7f0a00b2;
+        public static final int sending_failed_on_date_at_time=0x7f0a00fe;
+        public static final int sending_items=0x7f0a00b1;
         /**  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
@@ -3519,22 +3519,22 @@ containing a value of this type.
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
          */
-        public static final int sent_on_date_at_time=0x7f0a00fe;
-        public static final int server_auth_credentials=0x7f0a00b6;
-        public static final int server_platform_google_forms=0x7f0a00f1;
-        public static final int server_platform_odk_aggregate=0x7f0a00f0;
-        public static final int server_platform_other=0x7f0a00f2;
-        public static final int server_preferences=0x7f0a00b9;
-        public static final int server_requires_auth=0x7f0a00b7;
-        public static final int server_url=0x7f0a00b8;
-        public static final int set_color=0x7f0a010b;
+        public static final int sent_on_date_at_time=0x7f0a00fd;
+        public static final int server_auth_credentials=0x7f0a00b5;
+        public static final int server_platform_google_forms=0x7f0a00f0;
+        public static final int server_platform_odk_aggregate=0x7f0a00ef;
+        public static final int server_platform_other=0x7f0a00f1;
+        public static final int server_preferences=0x7f0a00b8;
+        public static final int server_requires_auth=0x7f0a00b6;
+        public static final int server_url=0x7f0a00b7;
+        public static final int set_color=0x7f0a010a;
         public static final int settings=0x7f0a0153;
-        public static final int show_location=0x7f0a00ce;
-        public static final int show_sent_and_unsent_forms=0x7f0a00f9;
-        public static final int show_splash=0x7f0a00c7;
-        public static final int show_splash_summary=0x7f0a00c8;
-        public static final int show_unsent_forms=0x7f0a00fa;
-        public static final int sign_button=0x7f0a0107;
+        public static final int show_location=0x7f0a00cd;
+        public static final int show_sent_and_unsent_forms=0x7f0a00f8;
+        public static final int show_splash=0x7f0a00c6;
+        public static final int show_splash_summary=0x7f0a00c7;
+        public static final int show_unsent_forms=0x7f0a00f9;
+        public static final int sign_button=0x7f0a0106;
         /**  strings that should not be translated 
  strings that should not be translated 
  strings that should not be translated 
@@ -3543,13 +3543,13 @@ containing a value of this type.
          */
         public static final int size=0x7f0a013a;
         public static final int skip_button_label=0x7f0a0010;
-        public static final int splash_path=0x7f0a00c9;
-        public static final int submission_url=0x7f0a00d7;
-        public static final int success=0x7f0a00e3;
-        public static final int swipe_buttons_instructions=0x7f0a012f;
-        public static final int swipe_buttons_navigation=0x7f0a012c;
-        public static final int swipe_instructions=0x7f0a012d;
-        public static final int swipe_navigation=0x7f0a012a;
+        public static final int splash_path=0x7f0a00c8;
+        public static final int submission_url=0x7f0a00d6;
+        public static final int success=0x7f0a00e2;
+        public static final int swipe_buttons_instructions=0x7f0a012e;
+        public static final int swipe_buttons_navigation=0x7f0a012b;
+        public static final int swipe_instructions=0x7f0a012c;
+        public static final int swipe_navigation=0x7f0a0129;
         public static final int switch_off=0x7f0a002f;
         public static final int switch_on=0x7f0a002e;
         /**  AboutUS 
@@ -3577,24 +3577,24 @@ containing a value of this type.
          */
         public static final int to_not_send_form=0x7f0a016f;
         public static final int to_send=0x7f0a0163;
-        public static final int toggle_selected=0x7f0a00ba;
-        public static final int trigger=0x7f0a00bb;
-        public static final int two_item_icon=0x7f0a00bc;
+        public static final int toggle_selected=0x7f0a00b9;
+        public static final int trigger=0x7f0a00ba;
+        public static final int two_item_icon=0x7f0a00bb;
         public static final int undo=0x7f0a0000;
         public static final int undoall=0x7f0a0001;
         public static final int upload=0x7f0a0157;
-        public static final int upload_results=0x7f0a00e5;
-        public static final int uploading_data=0x7f0a00bd;
-        public static final int url_error=0x7f0a00be;
-        public static final int use_gps=0x7f0a00c0;
-        public static final int use_maps=0x7f0a00c1;
-        public static final int use_maps_summary=0x7f0a00c2;
-        public static final int use_odk_default=0x7f0a00cc;
-        public static final int user_access_form_entry=0x7f0a0113;
-        public static final int user_access_main_menu=0x7f0a010d;
-        public static final int user_access_preferences=0x7f0a010e;
-        public static final int username=0x7f0a00bf;
-        public static final int verify_new_password=0x7f0a0116;
+        public static final int upload_results=0x7f0a00e4;
+        public static final int uploading_data=0x7f0a00bc;
+        public static final int url_error=0x7f0a00bd;
+        public static final int use_gps=0x7f0a00bf;
+        public static final int use_maps=0x7f0a00c0;
+        public static final int use_maps_summary=0x7f0a00c1;
+        public static final int use_odk_default=0x7f0a00cb;
+        public static final int user_access_form_entry=0x7f0a0112;
+        public static final int user_access_main_menu=0x7f0a010c;
+        public static final int user_access_preferences=0x7f0a010d;
+        public static final int username=0x7f0a00be;
+        public static final int verify_new_password=0x7f0a0115;
         /**  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
@@ -3613,10 +3613,10 @@ containing a value of this type.
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
  http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html 
          */
-        public static final int version=0x7f0a0100;
-        public static final int view_hierarchy=0x7f0a00c3;
+        public static final int version=0x7f0a00ff;
+        public static final int view_hierarchy=0x7f0a00c2;
         public static final int web_site=0x7f0a014a;
-        public static final int xform_parse_error=0x7f0a00e6;
+        public static final int xform_parse_error=0x7f0a00e5;
     }
     public static final class style {
         /** 

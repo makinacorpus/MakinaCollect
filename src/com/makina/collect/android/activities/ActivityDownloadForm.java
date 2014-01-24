@@ -429,7 +429,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
                     };
                 mProgressDialog.setTitle(getString(R.string.downloading_data));
                 mProgressDialog.setMessage(getString(R.string.please_wait));
-                mProgressDialog.setIcon(R.drawable.actionbar_about_us);
+                mProgressDialog.setIcon(android.R.drawable.ic_menu_info_details);
                 mProgressDialog.setIndeterminate(true);
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.setButton(getString(R.string.cancel), loadingButtonListener);
@@ -732,7 +732,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
         };
         mAlertDialog.setCancelable(false);
         mAlertDialog.setButton(getString(R.string.ok), quitListener);
-        mAlertDialog.setIcon(R.drawable.actionbar_about_us);
+        mAlertDialog.setIcon(android.R.drawable.ic_menu_info_details);
         mAlertMsg = message;
         mAlertTitle = title;
         mAlertShowing = true;
