@@ -28,6 +28,7 @@ the License.
     <drawable name="background_swipe_delete">#36d2e3</drawable>
     <drawable name="gris_background">#f2f4f4</drawable>
 
+    <color name="crouton_color">#ccec44</color>
     <color name="dark_color">#073239</color>
     <color name="background_window">#FFE5E5E5</color>
     <color name="text_gris">#787c7d</color>
