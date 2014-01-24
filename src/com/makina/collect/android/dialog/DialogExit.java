@@ -13,8 +13,8 @@ public class DialogExit {
             AlertDialog.Builder adb = new AlertDialog.Builder(context);
             adb.setTitle("Quitter");
             adb.setMessage("Vous êtes sur le point de quitter l'application");
+            adb.setIcon(android.R.drawable.ic_dialog_alert);
             adb.setNegativeButton(context.getString(android.R.string.cancel),null);
-
             adb.setPositiveButton(context.getString(android.R.string.yes), new AlertDialog.OnClickListener()
             {
                     public void onClick(DialogInterface dialog,int which)

@@ -1844,6 +1844,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 				.setTitle(
 						getString(R.string.quit_application,
 								formController.getFormTitle()))
+				.setIcon(android.R.drawable.ic_dialog_alert)
 				.setNeutralButton(getString(R.string.do_not_exit),
 						new DialogInterface.OnClickListener() {
 							@Override
@@ -3132,10 +3133,8 @@ InstanceUploaderListener, DeleteInstancesListener {
 			form_name=textView_quiz_name.getText().toString();
 		input.setText(form_name);
 		alert.setView(input);
-
-		
+		alert.setIcon(android.R.drawable.ic_menu_save);
 		alert.setNegativeButton(getString(R.string.cancel), null);
-
 		alert.setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog, int whichButton)
