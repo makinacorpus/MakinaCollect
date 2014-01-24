@@ -118,6 +118,7 @@ import com.makina.collect.android.utilities.MediaUtils;
 import com.makina.collect.android.views.CroutonView;
 import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
+import com.makina.collect.android.views.CustomListViewExpanded;
 import com.makina.collect.android.views.ODKView;
 import com.makina.collect.android.widgets.QuestionWidget;
 
@@ -236,7 +237,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 	private final static int AUTH_DIALOG = 2;
 	private EditText saveAs ;
 	private List<HierarchyElement> formList;
-	private ListView hierarchyList;
+	private CustomListViewExpanded hierarchyList;
 	private static final int CHILD = 1;
 	private static final int COLLAPSED = 3;
 	private static final int QUESTION = 4;
@@ -1043,7 +1044,8 @@ InstanceUploaderListener, DeleteInstancesListener {
 			changeButtonNext(getResources().getDrawable(R.drawable.finish_background),R.style.ButtonFinishSave, getString(R.string.finish));
 			
 			((CustomFontTextview) endView.findViewById(R.id.textview_form_title)).setText(formController.getFormTitle());
-			hierarchyList=(ListView) endView.findViewById(R.id.hierarchyList);
+			hierarchyList=(CustomListViewExpanded) endView.findViewById(R.id.hierarchyList);
+			hierarchyList.setExpanded(true);
 			hierarchyList.post(new Runnable() {
 				@Override
 				public void run() {
