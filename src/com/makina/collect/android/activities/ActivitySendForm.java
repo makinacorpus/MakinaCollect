@@ -349,8 +349,8 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 		AlertDialog.Builder adb = new AlertDialog.Builder(ActivitySendForm.this);
 		adb.setTitle("Suppression");
 		adb.setMessage("Voulez-vous vraiment supprimer "+c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))+" ?");
+		adb.setIcon(android.R.drawable.ic_menu_delete);
 		adb.setNegativeButton(getString(android.R.string.cancel),null);
-
 		adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog,int which)
@@ -765,6 +765,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
                 mProgressDialog.setIndeterminate(true);
                 mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 mProgressDialog.setCancelable(false);
+                mProgressDialog.setIcon(android.R.drawable.ic_menu_upload);
                 mProgressDialog.setButton(getString(R.string.cancel), loadingButtonListener);
                 return mProgressDialog;
             case AUTH_DIALOG:
