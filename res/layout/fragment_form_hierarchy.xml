@@ -26,14 +26,15 @@
             android:text="@string/hierarchy_text"
             android:textSize="20dip" />
 
-        <ListView
+        <com.makina.collect.android.views.CustomListViewExpanded
             android:id="@+id/hierarchyList"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:dividerHeight="1dp"
             android:divider="@drawable/linear_blue"
-            android:listSelector="@drawable/selector_listview_hierarchy" />
+            android:dividerHeight="1dp"
+            android:listSelector="@drawable/selector_listview_hierarchy" >
+        </com.makina.collect.android.views.CustomListViewExpanded>
     </LinearLayout>
 
 </ScrollView>
