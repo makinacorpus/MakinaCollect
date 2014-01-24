@@ -2909,7 +2909,6 @@ InstanceUploaderListener, DeleteInstancesListener {
 				{
 					// no network connection
 					CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.no_connexion), Style.ALERT);
-					
 					saveDataToDisk(false, true, save_as.toString());
 				}
 				else

@@ -198,6 +198,8 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
                 		else
                 		{
                 			FormsProvider.deleteFileOrDir(Environment.getExternalStorageDirectory()+ File.separator + "odk/forms/"+(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)).replace("_", " ")).replace("-", " ")+".xml");
+                			FormsProvider.deleteFileOrDir(Environment.getExternalStorageDirectory()+ File.separator + "odk/forms/"+(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)).replace("_", " ")).replace("-", " ")+"-media");
+                			
                 			FormsProvider.deleteForm(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)));
                 		}
                         loadListView();

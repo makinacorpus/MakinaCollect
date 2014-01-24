@@ -335,7 +335,7 @@ public class InstanceProvider extends ContentProvider {
     {
     	SQLiteDatabase db = mDbHelper.getWritableDatabase();
     	int count=0;
-    	Cursor cursor = db.rawQuery( "SELECT * FROM "+INSTANCES_TABLE_NAME+" WHERE "+InstanceColumns.JR_FORM_ID +"='"+JR_FORM_ID+"'", null);
+    	Cursor cursor = db.rawQuery( "SELECT count(*) FROM "+INSTANCES_TABLE_NAME+" WHERE "+InstanceColumns.JR_FORM_ID +"='"+JR_FORM_ID+"' AND "+InstanceColumns.STATUS+"='"+InstanceProviderAPI.STATUS_INCOMPLETE+"'", null);
 		if (cursor.moveToFirst()) 
 		{
 			count= cursor.getInt(0);
