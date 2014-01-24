@@ -204,7 +204,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 			}
         };
         UndoMode mode = SwipeDismissList.UndoMode.SINGLE_UNDO;
-        SwipeDismissList swipeList = new SwipeDismissList(getListView(), callback, mode);
+        new SwipeDismissList(getListView(), callback, mode);
     }
     
     private void createDialogDelete(int position)
@@ -214,8 +214,8 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 		AlertDialog.Builder adb = new AlertDialog.Builder(ActivitySaveForm.this);
 		adb.setTitle("Suppression");
 		adb.setMessage("Voulez-vous vraiment supprimer "+c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))+" ?");
+		adb.setIcon(android.R.drawable.ic_dialog_alert);
 		adb.setNegativeButton(getString(android.R.string.cancel),null);
-
 		adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog,int which)

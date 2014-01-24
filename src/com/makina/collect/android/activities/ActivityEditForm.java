@@ -186,6 +186,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
                 adb.setTitle("Suppression");
                 adb.setMessage("Voulez-vous vraiment supprimer "+c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))+" ?");
                 adb.setNegativeButton(getString(android.R.string.cancel),null);
+                adb.setIcon(android.R.drawable.ic_dialog_alert);
                 adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
                 {
                     public void onClick(DialogInterface dialog,int which)
