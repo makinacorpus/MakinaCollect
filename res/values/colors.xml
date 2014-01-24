@@ -16,27 +16,21 @@ the License.
 -->
 <resources>
 
-    <color name="dark_color">#073239</color>
-    <color name="light_color">#fff</color>
-
     <drawable name="bleu_help_footer">#26d1ed</drawable>
     <drawable name="bleu_help_footer_on">#24c3dd</drawable>
-
-    <color name="black">#000000</color>
-    <color name="background_window">#FFE5E5E5</color>
-
     <drawable name="strocke_about_us">#b8d754</drawable>
     <drawable name="background_drawer_list">#2fffffff</drawable>
     <drawable name="linear_blue">#2bbccc</drawable>
-    <drawable name="text_gris">#787c7d</drawable>
     <drawable name="pannier_blue">#44dbec</drawable>
     <drawable name="check_all">#073239</drawable>
     <drawable name="check_all_on">#1594a9</drawable>
-    <drawable name="white">#fff</drawable>
     <drawable name="linear_green">#b8d754</drawable>
     <drawable name="background_swipe_delete">#36d2e3</drawable>
     <drawable name="gris_background">#f2f4f4</drawable>
 
+    <color name="dark_color">#073239</color>
+    <color name="background_window">#FFE5E5E5</color>
+    <color name="text_gris">#787c7d</color>
     <color name="actionbarTitleColorGreenDownload">#c8e453</color>
     <color name="actionbarTitleColorGreenEdit">#b8d754</color>
     <color name="actionbarTitleColorBlueSave">#1baac2</color>

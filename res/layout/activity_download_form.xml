@@ -51,7 +51,7 @@ the License.
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/no_form_selected"
-                    android:textColor="@drawable/white"
+                    android:textColor="@android:color/white"
                     android:textSize="20dip" />
             </RelativeLayout>
 
@@ -76,7 +76,7 @@ the License.
                     android:gravity="center_vertical"
                     android:paddingLeft="10dip"
                     android:text="@string/select_all"
-                    android:textColor="@drawable/white"
+                    android:textColor="@android:color/white"
                     android:textSize="20dip" />
             </RelativeLayout>
         </LinearLayout>

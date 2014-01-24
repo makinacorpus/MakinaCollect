@@ -13,6 +13,6 @@
         android:layout_height="wrap_content"
         android:autoLink="all"
         android:linksClickable="true"
-        android:textColor="@color/black" />
+        android:textColor="@android:color/black" />
 
 </ScrollView>

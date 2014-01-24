@@ -831,7 +831,8 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
                         {
                             public void run()
                             {
-                            	((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
                             }
                         });
                         return view;

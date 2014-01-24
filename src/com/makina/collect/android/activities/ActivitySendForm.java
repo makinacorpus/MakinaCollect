@@ -178,7 +178,8 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
                         {
                             public void run()
                             {
-                            	((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
                             }
                         });
                         return view;

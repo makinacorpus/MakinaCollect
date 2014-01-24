@@ -8,8 +8,10 @@
         <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
         <item name="actionBarStyle">@style/Widget.CollectThemeLight.ActionBar</item>
         <item name="android:actionBarStyle">@style/Widget.CollectThemeLight.ActionBar</item>
-        <item name="android:windowBackground">@color/light_color</item>
-        <item name="android:textColor">@drawable/text_gris</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:textColor">@color/text_gris</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="popupMenuStyle">@style/PopupMenu</item>
     </style>
 
     <style name="CollectThemeDark" parent="@style/Holo.Theme.Sherlock">
@@ -20,13 +22,15 @@
         <item name="actionBarStyle">@style/Widget.CollectThemeLight.ActionBar</item>
         <item name="android:actionBarStyle">@style/Widget.CollectThemeLight.ActionBar</item>
         <item name="android:windowBackground">@color/dark_color</item>
-        <item name="android:textColor">@color/light_color</item>
-        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="android:textColor">@android:color/white</item>
         <item name="android:homeAsUpIndicator">@drawable/abs__ic_ab_back_holo_light</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu</item>
+        <item name="popupMenuStyle">@style/PopupMenu</item>
     </style>
 
     <style name="PopupMenu" parent="android:Widget.Holo.Light.ListPopupWindow">
-        <item name="android:gestureColor">@drawable/text_gris</item>
+        <item name="android:textColor">@color/text_gris</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="CollectThemeLight.List">
@@ -35,4 +39,5 @@
         <item name="android:divider">@drawable/linear_blue</item>
         <item name="android:dividerHeight">1dip</item>
     </style>
+
 </resources>

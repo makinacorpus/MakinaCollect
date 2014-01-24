@@ -331,6 +331,19 @@ public class InstanceProvider extends ContentProvider {
 		return id;
     }
     
+    public static int getCountInstancesByFormId(String JR_FORM_ID)
+    {
+    	SQLiteDatabase db = mDbHelper.getWritableDatabase();
+    	int count=0;
+    	Cursor cursor = db.rawQuery( "SELECT * FROM "+INSTANCES_TABLE_NAME+" WHERE "+InstanceColumns.JR_FORM_ID +"='"+JR_FORM_ID+"'", null);
+		if (cursor.moveToFirst()) 
+		{
+			count= cursor.getInt(0);
+		}
+		db.close();
+		return count;
+    }
+    
     public static void deleteAllInstances()
     {
     	SQLiteDatabase db = mDbHelper.getWritableDatabase();

@@ -110,7 +110,8 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
                         {
                             public void run()
                             {
-                            	((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
                             }
                         });
                         return view;

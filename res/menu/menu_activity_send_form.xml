@@ -13,10 +13,10 @@
         android:title="@string/upload"/>
     <item
         android:id="@+id/menu_other"
-         android:icon="@drawable/actionbar_menu"
+        android:icon="@drawable/actionbar_menu"
         android:orderInCategory="100"
         android:showAsAction="always">
-        <menu android:popupBackground="@drawable/white" >
+        <menu style="@style/PopupMenu" >
             <item
                 android:id="@+id/menu_settings"
                 android:icon="@drawable/actionbar_settings"

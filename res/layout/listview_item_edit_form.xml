@@ -33,8 +33,7 @@
                 android:singleLine="true"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@drawable/text_gris" />
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
             <com.makina.collect.android.views.CustomFontTextview
                 android:id="@+id/text3"
@@ -42,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/text1"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@drawable/text_gris"
+                android:textColor="@color/text_gris"
                 android:visibility="gone" />
 
             <com.makina.collect.android.views.CustomFontTextview
@@ -52,7 +51,7 @@
                 android:layout_below="@+id/text3"
                 android:gravity="center_vertical"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@drawable/text_gris" />
+                android:textColor="@color/text_gris" />
         </RelativeLayout>
     </RelativeLayout>
 

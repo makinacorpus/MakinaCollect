@@ -115,9 +115,8 @@ public class ActivityDashBoard extends SherlockActivity implements
                                                 final View view = li.createView(name, null, attrs);
                                                 new Handler().post(new Runnable() {
                                                         public void run() {
-                                                                ((TextView) view).setTypeface(Typeface
-                                                                                .createFromAsset(getAssets(),
-                                                                                                "fonts/avenir.ttc"));
+                                                        	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+                                                            ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
                                                         }
                                                 });
                                                 return view;

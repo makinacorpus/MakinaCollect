@@ -24,6 +24,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -65,13 +66,16 @@ import com.makina.collect.android.listeners.DiskSyncListener;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.FormsProvider;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
+import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.tasks.DiskSyncTask;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.VersionHidingCursorAdapter;
+import com.makina.collect.android.views.CroutonView;
 import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
 
+import de.keyboardsurfer.mobile.app.android.widget.crouton.Style;
 import de.timroes.swipetodismiss.SwipeDismissList;
 import de.timroes.swipetodismiss.SwipeDismissList.UndoMode;
 import de.timroes.swipetodismiss.SwipeDismissList.Undoable;
@@ -170,27 +174,34 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
                         }
         };
         UndoMode mode = SwipeDismissList.UndoMode.SINGLE_UNDO;
-        SwipeDismissList swipeList = new SwipeDismissList(getListView(), callback, mode);
+        new SwipeDismissList(getListView(), callback, mode);
         
     }
     
-    private void createDialogDelete(int position)
+    private void createDialogDelete(final int position)
     {
-            final Cursor c=instances.getCursor();
+    			final Cursor c=instances.getCursor();
                 c.moveToPosition(position);
                 AlertDialog.Builder adb = new AlertDialog.Builder(ActivityEditForm.this);
                 adb.setTitle("Suppression");
                 adb.setMessage("Voulez-vous vraiment supprimer "+c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))+" ?");
                 adb.setNegativeButton(getString(android.R.string.cancel),null);
-
                 adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
                 {
-                        public void onClick(DialogInterface dialog,int which)
-                        {
-                                FormsProvider.deleteFileOrDir(Environment.getExternalStorageDirectory()+ File.separator + "odk/forms/"+(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)).replace("_", " ")).replace("-", " ")+".xml");
-                        FormsProvider.deleteForm(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)));
+                    public void onClick(DialogInterface dialog,int which)
+                    {
+                    	int countInstances=InstanceProvider.getCountInstancesByFormId(c.getString(c.getColumnIndex(FormsColumns.JR_FORM_ID)));
+                    	if (countInstances>1)
+                        	CroutonView.showBuiltInCrouton(ActivityEditForm.this, countInstances+" "+getString(R.string.instances_exist), Style.ALERT);
+                        else if (countInstances==1)
+                        	CroutonView.showBuiltInCrouton(ActivityEditForm.this, getString(R.string.instance_exist), Style.ALERT);
+                		else
+                		{
+                			FormsProvider.deleteFileOrDir(Environment.getExternalStorageDirectory()+ File.separator + "odk/forms/"+(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)).replace("_", " ")).replace("-", " ")+".xml");
+                			FormsProvider.deleteForm(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)));
+                		}
                         loadListView();
-                        }
+                    }
                 });
                 adb.show();
     }
@@ -200,7 +211,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
             String sortOrder = FormsColumns.DISPLAY_NAME + " ASC, " + FormsColumns.JR_VERSION + " DESC";
         Cursor c = managedQuery(FormsColumns.CONTENT_URI, null, null, null, sortOrder);
 
-        String[] data = new String[] {FormsColumns.DISPLAY_NAME, FormsColumns.DISPLAY_SUBTEXT, FormsColumns.JR_VERSION};
+        String[] data = new String[] {FormsColumns.DISPLAY_NAME, FormsColumns.DISPLAY_SUBTEXT, FormsColumns.JR_VERSION, FormsColumns.SUBMISSION_URI};
         int[] view = new int[] {R.id.text1, R.id.text2, R.id.text3};
 
         // render total instance view
@@ -273,7 +284,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
                         {
                             public void run()
                             {
-                                    ((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
                                 ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
                             }
                         });
@@ -497,6 +508,20 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     			startActivity(i);
         	}
+        }
+        
+        @Override
+        public void onConfigurationChanged(Configuration newConfig) {
+            super.onConfigurationChanged(newConfig);
+            int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
+            TextView actionbarTitle = (TextView)findViewById(titleId);
+            titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
+            TextView actionbarSubTitle = (TextView)findViewById(titleId);
+            CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
+            
+            /*Intent i = getIntent();
+			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(i);*/
         }
 
 }

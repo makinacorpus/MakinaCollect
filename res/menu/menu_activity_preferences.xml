@@ -6,7 +6,7 @@
          android:icon="@drawable/actionbar_menu"
         android:orderInCategory="100"
         android:showAsAction="always">
-        <menu android:popupBackground="@drawable/white" >
+        <menu style="@style/PopupMenu">
             <item
                 android:id="@+id/menu_about_us"
                 android:icon="@drawable/actionbar_about_us"

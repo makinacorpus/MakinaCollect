@@ -246,6 +246,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 	private Menu menu;
 	private boolean exit_to_home=false;
 	private final int RESULT_PREFERENCES=1;
+	private String form_name;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -819,6 +820,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 		super.onCreateOptionsMenu(menu);
 		getSupportMenuInflater().inflate(R.menu.menu_activity_form, menu);
 		this.menu=menu;
+		
 		return true;
 	}
 
@@ -844,7 +846,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 					.logInstanceAction(this, "onOptionsItemSelected",
 							"MENU_SAVE");
 			// don't exit
-			saveDataToDisk(DO_NOT_EXIT, isInstanceComplete(false), null);
+			dialogSaveName(false,false);
 			return true;
 		case R.id.menu_hierachy:
 			Collect.getInstance()
@@ -1030,6 +1032,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 		final FormController formController = Collect.getInstance().getFormController();
 		textView_quiz_question_number.setText(current_page + "/" + size);
 		textView_quiz_name.setText(formController.getFormTitle());
+		
 		findViewById(R.id.relativeLayout_informations).setVisibility(View.VISIBLE);
 		findViewById(R.id.buttonholder).setVisibility(View.VISIBLE);
 		if ( (FormEntryController.EVENT_END_OF_FORM==event) && (test_finish))
@@ -1874,9 +1877,8 @@ InstanceUploaderListener, DeleteInstancesListener {
 										.logInstanceAction(this,
 												"createQuitDialog",
 												"saveAndExit");
-								exit_to_home=true;
-								saveDataToDisk(EXIT, isInstanceComplete(false),
-										null);
+								dialogSaveName(true,true);
+								
 							} else {
 								Collect.getInstance()
 										.getActivityLogger()
@@ -3117,5 +3119,36 @@ InstanceUploaderListener, DeleteInstancesListener {
      }
 	
 	
+	private void dialogSaveName(final boolean _exit_to_home, final boolean exit)
+	{
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+		alert.setTitle("Nom du formulaire");
+		alert.setMessage("Veuillez saisir le nom du formulaire");
+
+		// Set an EditText view to get user input 
+		final EditText input = new EditText(this);
+		if (form_name==null)
+			form_name=textView_quiz_name.getText().toString();
+		input.setText(form_name);
+		alert.setView(input);
+
+		
+		alert.setNegativeButton(getString(R.string.cancel), null);
+
+		alert.setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener()
+		{
+			public void onClick(DialogInterface dialog, int whichButton)
+			{
+				form_name=input.getText().toString();
+				exit_to_home=_exit_to_home;
+				saveDataToDisk(exit, isInstanceComplete(false),form_name);
+				dialog.dismiss();
+          	}
+		});
+
+		alert.show();
+		
+	}
 }
 
