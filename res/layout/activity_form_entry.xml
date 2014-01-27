@@ -66,19 +66,20 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dip"
                 android:textColor="@drawable/linear_blue"
-                android:textSize="35sp"
+                android:textSize="27sp"
                 android:textStyle="bold" />
 
             <com.makina.collect.android.views.CustomFontTextview
                 android:id="@+id/textView_quiz_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:singleLine="true"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/textView_quiz_question_number"
                 android:paddingLeft="10dip"
                 android:textColor="@drawable/linear_blue"
-                android:textSize="25sp"
+                android:textSize="23sp"
                 android:textStyle="bold" />
         </RelativeLayout>
 
