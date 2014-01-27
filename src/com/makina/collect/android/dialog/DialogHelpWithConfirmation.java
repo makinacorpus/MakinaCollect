@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
 import android.view.Window;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.views.CustomFontCheckBox;
@@ -25,7 +25,7 @@ public class DialogHelpWithConfirmation
         CustomFontTextview textview_help_title=(CustomFontTextview)dialog_help.findViewById(R.id.textview_help_title);
         textview_help_title.setText(title);
         checkbox_help=(CustomFontCheckBox) dialog_help.findViewById(R.id.checkbox_help);
-		LinearLayout linearlayout_ok=(LinearLayout) dialog_help.findViewById(R.id.linearlayout_ok);
+		RelativeLayout linearlayout_ok=(RelativeLayout) dialog_help.findViewById(R.id.linearlayout_ok);
 		
 		textview_help.setText(message);
 		linearlayout_ok.setOnClickListener(new View.OnClickListener()
