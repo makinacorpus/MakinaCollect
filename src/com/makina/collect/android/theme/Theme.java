@@ -1,7 +1,11 @@
 package com.makina.collect.android.theme;
 
+import java.util.Locale;
+
 import android.app.Activity;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.preferences.ActivityPreferences;
@@ -23,6 +27,20 @@ public class Theme
 			activity.setTheme(R.style.CollectThemeLight);
 		else
 			activity.setTheme(R.style.CollectThemeDark);
+		
+		
+		Resources res = activity.getResources();
+	    // Change locale settings in the app.
+	    DisplayMetrics dm = res.getDisplayMetrics();
+	    android.content.res.Configuration conf = res.getConfiguration();
+		String languageChoice = PreferenceManager.getDefaultSharedPreferences(activity).getString(ActivityPreferences.KEY_THEME, ActivityPreferences.KEY_THEME);
+		if ( (languageChoice != null) && (languageChoice.contains(activity.getString(R.string.french))) )
+			conf.locale = new Locale("fr");
+		else
+			conf.locale = new Locale("en");
+		
+	    res.updateConfiguration(conf, dm);
+	    
 	}
 
 }

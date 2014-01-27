@@ -35,9 +35,6 @@ import org.javarosa.form.api.FormEntryPrompt;
 import org.javarosa.model.xform.XFormsModule;
 import org.javarosa.xpath.XPathTypeMismatchException;
 
-import com.WazaBe.HoloEverywhere.app.AlertDialog;
-import com.WazaBe.HoloEverywhere.app.Dialog;
-import com.WazaBe.HoloEverywhere.app.ProgressDialog;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
@@ -47,23 +44,28 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.BaseColumns;
 import android.provider.MediaStore.MediaColumns;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
+import android.view.InflateException;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -79,10 +81,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.WazaBe.HoloEverywhere.app.AlertDialog;
+import com.WazaBe.HoloEverywhere.app.Dialog;
+import com.WazaBe.HoloEverywhere.app.ProgressDialog;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -98,11 +103,11 @@ import com.makina.collect.android.listeners.FormSavedListener;
 import com.makina.collect.android.listeners.InstanceUploaderListener;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.logic.FormController;
-import com.makina.collect.android.logic.HierarchyElement;
 import com.makina.collect.android.logic.FormController.FailedConstraint;
+import com.makina.collect.android.logic.HierarchyElement;
 import com.makina.collect.android.logic.PropertyManager;
-import com.makina.collect.android.preferences.AdminPreferencesActivity;
 import com.makina.collect.android.preferences.ActivityPreferences;
+import com.makina.collect.android.preferences.AdminPreferencesActivity;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.provider.InstanceProviderAPI;
@@ -254,6 +259,8 @@ InstanceUploaderListener, DeleteInstancesListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Theme.changeTheme(this);
+		
+		 
 		Log.i("FormEntryActivity", "onCreate");
 		Finish.activityForm = this;
 		current_page=1;
@@ -819,8 +826,32 @@ InstanceUploaderListener, DeleteInstancesListener {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		getSupportMenuInflater().inflate(R.menu.menu_activity_form, menu);
 		this.menu=menu;
+		getSupportMenuInflater().inflate(R.menu.menu_activity_form, menu);
+		
+		/*getLayoutInflater().setFactory(new LayoutInflater.Factory() {
+            public View onCreateView(String name, Context context,
+                            AttributeSet attrs) {
+                    if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")
+                                    || name.equalsIgnoreCase("TextView")) {
+                            try {
+                                    LayoutInflater li = LayoutInflater.from(context);
+                                    final View view = li.createView(name, null, attrs);
+                                    new Handler().post(new Runnable() {
+                                            public void run() {
+                                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
+                                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
+                                            }
+                                    });
+                                    return view;
+                            } catch (InflateException e) {
+                            } catch (ClassNotFoundException e) {
+                            }
+                    }
+                    return null;
+            }
+    });*/
+
 		
 		return true;
 	}
@@ -3075,7 +3106,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 					// of its children
 					HierarchyElement group = new HierarchyElement(
 							fc.getLongText(), null, getResources().getDrawable(
-									R.drawable.expander_ic_minimized),
+									R.drawable.expander_ic_right),
 							Color.BLACK, COLLAPSED, fc.getIndex());
 					repeatedGroupRef = formController.getFormIndex()
 							.getReference().toString(false);

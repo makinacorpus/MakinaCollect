@@ -38,6 +38,12 @@
 		<item>@string/font_size_extra_small</item>
 	</string-array>
 	<!-- DO NOT alter navigation_entry_values - used internally in preferences activity -->
+	
+	<string-array
+		name="language_entries">
+		<item>@string/english</item>
+		<item>@string/french</item>
+	</string-array>
 	<string-array
 		name="theme_entries">
 		<item>@string/theme1</item>

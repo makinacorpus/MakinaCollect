@@ -13,10 +13,7 @@
  */
 
 package com.makina.collect.android.activities;
-import java.io.File;
 import java.util.ArrayList;
-
-import com.WazaBe.HoloEverywhere.app.AlertDialog;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -32,7 +29,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -53,6 +49,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.WazaBe.HoloEverywhere.app.AlertDialog;
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -198,9 +195,8 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
                         	CroutonView.showBuiltInCrouton(ActivityEditForm.this, getString(R.string.instance_exist), Style.ALERT);
                 		else
                 		{
-                			FormsProvider.deleteFileOrDir(Environment.getExternalStorageDirectory()+ File.separator + "odk/forms/"+(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)).replace("_", " ")).replace("-", " ")+".xml");
-                			FormsProvider.deleteFileOrDir(Environment.getExternalStorageDirectory()+ File.separator + "odk/forms/"+(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)).replace("_", " ")).replace("-", " ")+"-media");
-                			
+                			FormsProvider.deleteFileOrDir(c.getString(c.getColumnIndex(FormsColumns.FORM_FILE_PATH)));
+                			FormsProvider.deleteFileOrDir(c.getString(c.getColumnIndex(FormsColumns.FORM_MEDIA_PATH)));
                 			FormsProvider.deleteForm(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)));
                 		}
                         loadListView();

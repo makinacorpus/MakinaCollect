@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="english">Anglais</string>
+    <string name="french">Français</string>
+    
     <string name="name">Nom</string>
     <string name="next">Suivant</string>
     <string name="back">Précédent</string>
@@ -67,10 +70,10 @@
 
 
     <!-- Help -->
-    <string name="help_download">Utiliser les formulaires de démonstration :\n
+    <string name="help_download"><b>Utiliser les formulaires de démonstration :</b>\n
 		Nous vous proposons un certain nombre de formulaires de démonstration que Makina Corpus a créés spécifiquement pour cette application. Ils sont associés à l’adresse du serveur http://formulaires.makina-corpus.net:80/makinademo, accessible dans le menu Paramètres de l’application.\n\n
 
-		Créer vos propres formulaires :\n
+		<b>Créer vos propres formulaires :</b>\n
 		Vous pouvez également utiliser l’application Makina Collect avec vos propres formulaires que vous aurez créés au préalable sur le site web Formhub (https://formhub.org/). Vous devez alors synchroniser l’application mobile, en modifiant l’adresse du serveur (à partir du menu Paramètres de l’application) par celle de votre propre compte Formhub.\n</string>
     <string name="help_edit">Cette liste donne l’ensemble des formulaires vierges que vous avez téléchargé dans l’application mobile. En cliquant sur l’un d’eux, vous pourrez commencer la saisie. En gardant le doigt appuyé longtemps (ou par glissant sur la gauche), vous pourrez supprimer un formulaire de cette liste.\n
 		L’application Makina Collect a été conçue pour faciliter au maximum votre navigation lors de la saisie des formulaires.\n\n<strong>Comment passer d’une question à une autre?</strong>\n

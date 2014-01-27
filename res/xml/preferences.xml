@@ -40,10 +40,12 @@
     <PreferenceCategory
         android:key="@string/client"
         android:title="@string/client" >
-        <Preference
+        <ListPreference
             android:id="@+id/langue"
             android:defaultValue="@string/current_language"
-            android:inputType="textNoSuggestions"
+            android:dialogTitle="@string/language"
+            android:entries="@array/language_entries"
+            android:entryValues="@array/language_entries"
             android:key="language"
             android:title="@string/language" />
 

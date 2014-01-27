@@ -18,7 +18,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import android.app.Activity;
-import com.WazaBe.HoloEverywhere.app.ProgressDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;

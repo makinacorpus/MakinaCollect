@@ -14,7 +14,6 @@
 
 package com.makina.collect.android.activities;
 
-import com.WazaBe.HoloEverywhere.app.AlertDialog;
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
@@ -36,13 +35,14 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.SimpleCursorAdapter; 
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemLongClickListener;
 
+import com.WazaBe.HoloEverywhere.app.AlertDialog;
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -52,9 +52,9 @@ import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.dialog.DialogExit;
 import com.makina.collect.android.dialog.DialogHelpWithConfirmation;
 import com.makina.collect.android.preferences.ActivityPreferences;
+import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.provider.InstanceProviderAPI;
-import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;

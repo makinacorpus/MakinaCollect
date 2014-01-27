@@ -81,7 +81,6 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 	
 	protected static final int IMAGE_CHOOSER = 0;
 
-	private static final int REQUEST_CODE_LANGUAGE=22;
 	
 	public static final String KEY_INFO = "info";
 	public static final String KEY_LAST_VERSION = "lastVersion";
@@ -127,8 +126,8 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 	private EditTextPreference mServerUrlPreference;
 	private EditTextPreference mUsernamePreference;
 	private EditTextPreference mPasswordPreference;
-	private Preference mLanguagePreference;
 	private Preference mLuminosityPreference;
+	private ListPreference mLanguagePreference;
 	private ListPreference mThemePreference;
 	private ListPreference mSelectedGoogleAccountPreference;
 	private ListPreference mFontSizePreference;
@@ -250,16 +249,21 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 			}
 		});
 
-		mLanguagePreference = (Preference) findPreference(KEY_LANGUAGE);
-		mLanguagePreference.setSummary(getString(R.string.current_language));
-		mLanguagePreference.setOnPreferenceClickListener(new OnPreferenceClickListener()
+		mLanguagePreference = (ListPreference) findPreference(KEY_LANGUAGE);
+		mLanguagePreference.setSummary(mLanguagePreference.getEntry());
+		mLanguagePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
 			@Override
-			public boolean onPreferenceClick(Preference arg0)
+			public boolean onPreferenceChange(Preference preference,Object newValue)
 			{
-				// TODO Auto-generated method stub
-				startActivityForResult(new Intent(android.provider.Settings.ACTION_LOCALE_SETTINGS), REQUEST_CODE_LANGUAGE);
-				return false;
+				int index = ((ListPreference) preference).findIndexOfValue(newValue.toString());
+				String entry = (String) ((ListPreference) preference).getEntries()[index];
+				((ListPreference) preference).setSummary(entry);
+				
+				Intent i = getIntent();
+				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(i);
+				return true;
 			}
 		});
 		
@@ -721,10 +725,6 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 				}
 			}
 			setSplashPath(sourceImagePath);
-			break;
-		case REQUEST_CODE_LANGUAGE:
-			mLanguagePreference = (Preference) findPreference(KEY_LANGUAGE);
-			mLanguagePreference.setSummary(getString(R.string.current_language));
 			break;
 		}
 	}

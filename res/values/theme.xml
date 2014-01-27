@@ -28,6 +28,7 @@
         <item name="popupMenuStyle">@style/PopupMenu</item>
     </style>
 
+
     <style name="PopupMenu" parent="android:Widget.Holo.Light.ListPopupWindow">
         <item name="android:textColor">@color/text_gris</item>
         <item name="android:textStyle">bold</item>

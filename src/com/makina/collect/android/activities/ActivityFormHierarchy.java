@@ -148,7 +148,7 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 						formList.remove(position + 1);
 					}
 					h.setIcon(getResources().getDrawable(
-							R.drawable.expander_ic_minimized));
+							R.drawable.expander_ic_right));
 					h.setColor(Color.BLACK);
 					break;
 				case COLLAPSED:
@@ -164,7 +164,7 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 
 					}
 					h.setIcon(getResources().getDrawable(
-							R.drawable.expander_ic_maximized));
+							R.drawable.expander_ic_right));
 					h.setColor(Color.BLACK);
 					break;
 				case QUESTION:
@@ -357,7 +357,7 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 					// of its children
 					HierarchyElement group = new HierarchyElement(
 							fc.getLongText(), null, getResources().getDrawable(
-									R.drawable.expander_ic_minimized),
+									R.drawable.expander_ic_right),
 							Color.BLACK, COLLAPSED, fc.getIndex());
 					repeatedGroupRef = formController.getFormIndex()
 							.getReference().toString(false);
