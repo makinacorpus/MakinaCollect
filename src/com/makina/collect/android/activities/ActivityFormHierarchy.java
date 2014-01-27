@@ -56,6 +56,7 @@ import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
+import com.makina.collect.android.views.CustomListViewExpanded;
 
 public class ActivityFormHierarchy extends SherlockActivity implements OnClickListener{
 
@@ -75,7 +76,7 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 	List<HierarchyElement> formList;
 
 	FormIndex mStartIndex;
-	private ListView listView_hierarchy;
+	private CustomListViewExpanded listView_hierarchy;
 	private Menu menu;
 	private final int RESULT_PREFERENCES=1;
 	
@@ -104,8 +105,8 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
     	TextView actionbarSubTitle = (TextView)findViewById(titleId);
     	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
     	
-    	listView_hierarchy=(ListView)findViewById(R.id.listView_hierarchy);
-    	
+    	listView_hierarchy=(CustomListViewExpanded)findViewById(R.id.listView_hierarchy);
+    	listView_hierarchy.setExpanded(true);
     	// kinda slow, but works.
 		// this scrolls to the last question the user was looking at
     	listView_hierarchy.post(new Runnable() {
