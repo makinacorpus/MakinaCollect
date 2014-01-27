@@ -12,6 +12,7 @@
 -->
 <resources>
 
+    <string name="no_connexion">No network connection!</string>
     <string name="accept_location">Record Location</string>
     <string name="accuracy">Accuracy</string>
     <string name="activity_not_found">No activity found to handle: %s</string>
