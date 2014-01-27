@@ -92,10 +92,12 @@ the License.
     </RelativeLayout>
 
     <LinearLayout
+        android:layout_toRightOf="@id/linear_blue"
         android:id="@+id/empty"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
         android:orientation="vertical"
         android:visibility="gone" >
 
