@@ -41,7 +41,6 @@ import android.view.InflateException;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -734,7 +733,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
         };
         mAlertDialog.setCancelable(false);
         mAlertDialog.setButton(getString(R.string.ok), quitListener);
-        mAlertDialog.setIcon(android.R.drawable.ic_menu_info_details);
+        mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
         mAlertShowing = true;
         mAlertMsg = message;
         mAlertDialog.show();
