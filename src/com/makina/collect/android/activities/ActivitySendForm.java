@@ -628,7 +628,10 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
                         String name =
                             results.getString(results.getColumnIndex(InstanceColumns.DISPLAY_NAME));
                         String id = results.getString(results.getColumnIndex(BaseColumns._ID));
-                        message.append(name + " - " + result.get(id) + "\n\n");
+                        if (!result.get(id).equals(getString(R.string.success)))
+                        	message.append(name + " - " + getString(R.string.fail) + "\n\n");
+                        else
+                        	message.append(name + " - " + result.get(id) + "\n\n");
                     }
                 } else {
                     message.append(getString(R.string.no_forms_uploaded));

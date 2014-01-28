@@ -9,6 +9,7 @@
     <string name="raz_confirmation">Voulez-vous vraiment remettre à zéro?</string>
     <string name="form_name">Nom du formulaire</string>
     <string name="form_name_description">Veuillez saisir le nom du formulaire</string>
+    <string name="fail">Échec</string>
     <!-- END Alert Dialog -->
     
     <!-- Form-->

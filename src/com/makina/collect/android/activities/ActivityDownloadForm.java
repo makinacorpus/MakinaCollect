@@ -50,6 +50,7 @@ import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.WazaBe.HoloEverywhere.app.AlertDialog;
 import com.WazaBe.HoloEverywhere.app.ProgressDialog;
@@ -685,7 +686,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
                 item.put(FORMNAME, details.formName);
                 item.put(FORMID_DISPLAY,((details.formVersion == null) ? "" : (getString(R.string.version) + " " + details.formVersion + " ")) +"ID: " + details.formID );
                 item.put(FORMDETAIL_KEY, formDetailsKey);
-
+               Log.i("dfdfdfdfdfdfdfdfddfdfdfdfdfd", "nom: "+details.formName+" / version: "+details.formVersion);
                 // Insert the new form in alphabetical order.
                 if (mFormList.size() == 0)
                 {

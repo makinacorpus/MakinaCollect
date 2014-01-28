@@ -15,7 +15,6 @@
   -->
 
 <resources>
-    <dimen name="margin_icon_dashboard1">30dp</dimen>
-    <dimen name="margin_icon_dashboard2">95dp</dimen>
-    <dimen name="list_item_height_small">48dp</dimen>
+    <dimen name="margin_icon_dashboard1">100dp</dimen>
+    <dimen name="margin_icon_dashboard2">180dp</dimen>
 </resources>
