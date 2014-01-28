@@ -809,7 +809,6 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
         this.menu=menu;
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         mSearchView = (SearchView) searchItem.getActionView();
-        mSearchView.setImeOptions(mSearchView.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
         int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
         ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
         if (searchButton!=null)

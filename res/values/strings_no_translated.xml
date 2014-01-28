@@ -1,48 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="english">Anglais</string>
-    <string name="french">Français</string>
     
+    <!-- Alert Dialig -->
+    <string name="delete">Suppression</string>
+    <string name="delete_confirmation">Voulez-vous vraiment supprimer %s ?</string>
+    <string name="raz">Remise à zéro</string>
+    <string name="raz_confirmation">Voulez-vous vraiment remettre à zéro?</string>
+    <string name="form_name">Nom du formulaire</string>
+    <string name="form_name_description">Veuillez saisir le nom du formulaire</string>
+    <!-- END Alert Dialog -->
+    
+    <!-- Form-->
     <string name="name">Nom</string>
     <string name="next">Suivant</string>
     <string name="back">Précédent</string>
     <string name="finish">Terminer</string>
     <string name="save">Sauvegarder</string>
+    <!-- END Form -->
+    
+    <!-- EditForm -->
     <string name="clic_here_to_download">APPUYEZ ICI POUR TÉLÉCHARGER UN FORMULAIRE</string>
     <string name="no_form_not_finalled">VOUS N\'AVEZ AUCUN FORMULAIRE NON FINALISÉ</string>
     <string name="no_form_finalled">PAS DE FORMULAIRE FINALISÉ</string>
     <string name="empty_list">Liste vide</string>
     <string name="instances_exist">instances de ce modèle existe déjà!</string>
     <string name="instance_exist">1 instance de ce modèle existe déjà!</string>
-
+	<!-- END EditForm -->
+	
     <!-- Hierarchy -->
     <string name="hierarchy_text">Voici ci-dessous le résumé de votre questionnaire:</string>
     <!-- END - Hierarchy -->
 
-
-    <!-- AboutUS -->
+	<!-- AboutUS -->
     <string name="textview_about_us1">The mobile application "Makina Collect" was developed by Makina Corpus</string>
-    <string name="textview_about_us2">Développons de nouveaux horizons</string>
-    <string name="textview_about_us3">www.makina-corpus.com</string>
-    <string name="textview_about_us4">© Makina Corpus 2013</string>
-    <string name="web_site">http://www.makina-corpus.com/</string>
     <!-- END AboutUs -->
 
-
-    <!-- Preferences -->
-    <string name="language">Langage</string>
-    <string name="current_language">English</string>
+	<!-- Preferences -->
+    <string name="language">Langue</string>
     <string name="language_preferences">language_preferences</string>
     <string name="theme">Thème</string>
     <string name="theme_preferences">theme_preferences</string>
     <string name="theme1">Thème sombre</string>
     <string name="theme2">Thème clair</string>
     <string name="luminosity">Luminosité</string>
+    <string name="english">Anglais</string>
+    <string name="french">Français</string>
     <!-- END- Preferences -->
 
-
-    <!-- ActionBar -->
+	<!-- ActionBar -->
     <string name="search">Recherche</string>
     <string name="settings">Paramètres</string>
     <string name="help">Aide</string>
@@ -51,6 +57,7 @@
     <string name="upload">Upload</string>
     <string name="raz">RAZ</string>
     <string name="hierarchy">Hierarchy</string>
+    <string name="refresh">Refresh</string>
     <!-- FIN ActionBar -->
 
 

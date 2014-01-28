@@ -16,7 +16,7 @@
         android:icon="@drawable/actionbar_menu"
         android:orderInCategory="100"
         android:showAsAction="always">
-        <menu style="@style/PopupMenu">
+        <menu style="@style/PopupMenu" >
             <item
                 android:id="@+id/menu_save"
                 android:icon="@drawable/actionbar_save"

@@ -83,13 +83,12 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     public boolean onCreateOptionsMenu(Menu menu)
     {
         super.onCreateOptionsMenu(menu);
-        getSupportMenuInflater().inflate(R.menu.menu_activity_edit_form, menu);
+        getSupportMenuInflater().inflate(R.menu.menu_activity_save_form, menu);
         this.menu=menu;
         
         
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         mSearchView = (SearchView) searchItem.getActionView();
-        mSearchView.setImeOptions(mSearchView.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
         int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
         ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
         if (searchButton!=null)
@@ -205,6 +204,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         };
         UndoMode mode = SwipeDismissList.UndoMode.SINGLE_UNDO;
         new SwipeDismissList(getListView(), callback, mode);
+        
     }
     
     private void createDialogDelete(int position)
@@ -212,8 +212,8 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     	final Cursor c=instances.getCursor();
 		c.moveToPosition(position);
 		AlertDialog.Builder adb = new AlertDialog.Builder(ActivitySaveForm.this);
-		adb.setTitle("Suppression");
-		adb.setMessage("Voulez-vous vraiment supprimer "+c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))+" ?");
+		adb.setTitle(getString(R.string.delete));
+		adb.setMessage(getString(R.string.delete,c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))));
 		adb.setIcon(android.R.drawable.ic_dialog_alert);
 		adb.setNegativeButton(getString(android.R.string.cancel),null);
 		adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()

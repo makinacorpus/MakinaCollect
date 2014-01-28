@@ -3,10 +3,10 @@
 
     <item
         android:id="@+id/menu_other"
-         android:icon="@drawable/actionbar_menu"
+        android:icon="@drawable/actionbar_menu"
         android:orderInCategory="100"
         android:showAsAction="always">
-        <menu style="@style/PopupMenu">
+        <menu style="@style/PopupMenu" >
             <item
                 android:id="@+id/menu_about_us"
                 android:icon="@drawable/actionbar_about_us"

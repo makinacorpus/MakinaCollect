@@ -8,6 +8,10 @@
     <string name="default_server_url" translatable="false">http://formulaires.makina-corpus.net:80/makinademo</string>
     <string name="default_odk_formlist" translatable="false">/formList</string>
     <string name="default_odk_submission" translatable="false">/submission</string>
+    <string name="textview_about_us3" translatable="false">www.makina-corpus.com</string>
+    <string name="textview_about_us4" translatable="false">© Makina Corpus 2013</string>
+    <string name="web_site" translatable="false">http://www.makina-corpus.com/</string>
+    <string name="textview_about_us2" translatable="false">Développons de nouveaux horizons</string>
 
     <item name="mapview" type="id"/>
 

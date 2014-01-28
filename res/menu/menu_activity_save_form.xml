@@ -4,14 +4,9 @@
     <item
         android:id="@+id/menu_search"
         android:actionViewClass="android.widget.SearchView"
-        android:showAsAction="always"
         android:imeOptions="flagNoFullscreen"
-        android:title="@string/search"/>
-    <item
-        android:id="@+id/menu_refresh"
-        android:icon="@drawable/actionbar_refresh"
         android:showAsAction="always"
-        android:title="@string/refresh"/>
+        android:title="@string/search"/>
     <item
         android:id="@+id/menu_other"
         android:icon="@drawable/actionbar_menu"

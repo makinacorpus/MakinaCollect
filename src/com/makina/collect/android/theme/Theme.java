@@ -12,10 +12,6 @@ import com.makina.collect.android.preferences.ActivityPreferences;
 
 public class Theme
 {
-
-	public final static int THEME_DARK = 0;
-	public final static int THEME_LIGHT = 1;
-
 	/**
 	 * Set the theme of the Activity, and restart it by creating a new Activity
 	 * of the same type.

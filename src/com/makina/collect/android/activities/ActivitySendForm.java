@@ -155,7 +155,6 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
         
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         mSearchView = (SearchView) searchItem.getActionView();
-        mSearchView.setImeOptions(mSearchView.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
         int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
         ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
         if (searchButton!=null)
@@ -262,7 +261,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 					ImageView imageView_check_all=(ImageView)findViewById(R.id.imageView_check_all);
 					imageView_check_all.setImageResource(R.drawable.case_off);
 					TextView textView_check_all=(TextView)findViewById(R.id.textView_check_all);
-					textView_check_all.setText("TOUT SÉLECTIONNER");
+					textView_check_all.setText(getString(R.string.select_all));
 					
 				}
 				else
@@ -271,7 +270,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 					ImageView imageView_check_all=(ImageView)findViewById(R.id.imageView_check_all);
 					imageView_check_all.setImageResource(R.drawable.case_on);
 					TextView textView_check_all=(TextView)findViewById(R.id.textView_check_all);
-					textView_check_all.setText("TOUT DÉSÉLECTIONNER");
+					textView_check_all.setText(getString(R.string.deselect_all));
 					
 				}
 			}
@@ -346,8 +345,8 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
     	final Cursor c=mInstances.getCursor();
 		c.moveToPosition(position);
 		AlertDialog.Builder adb = new AlertDialog.Builder(ActivitySendForm.this);
-		adb.setTitle("Suppression");
-		adb.setMessage("Voulez-vous vraiment supprimer "+c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))+" ?");
+		adb.setTitle(getString(R.string.delete));
+		adb.setMessage(getString(R.string.delete_confirmation,c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))));
 		adb.setIcon(android.R.drawable.ic_menu_delete);
 		adb.setNegativeButton(getString(android.R.string.cancel),null);
 		adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()

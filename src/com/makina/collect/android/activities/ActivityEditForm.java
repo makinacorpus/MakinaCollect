@@ -14,6 +14,7 @@
 
 package com.makina.collect.android.activities;
 import java.util.ArrayList;
+import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -30,6 +31,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.BaseColumns;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -45,7 +47,6 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,12 +55,14 @@ import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
+import com.makina.collect.android.adapters.FormsListAdapter;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.dialog.DialogExit;
 import com.makina.collect.android.dialog.DialogHelpWithConfirmation;
 import com.makina.collect.android.listeners.DeleteInstancesListener;
 import com.makina.collect.android.listeners.DiskSyncListener;
+import com.makina.collect.android.model.Form;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.FormsProvider;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
@@ -67,7 +70,6 @@ import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.tasks.DiskSyncTask;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
-import com.makina.collect.android.utilities.VersionHidingCursorAdapter;
 import com.makina.collect.android.views.CroutonView;
 import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
@@ -96,17 +98,18 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     
     private String statusText;
     private ArrayList<Long> mSelected;
-    private SimpleCursorAdapter instances;
+    private FormsListAdapter instances;
     private Menu menu;
     private final int RESULT_PREFERENCES=1;
     private SearchView mSearchView;
+    private List<Form> forms;
     
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+    	Theme.changeTheme(this);
         super.onCreate(savedInstanceState);
-        Theme.changeTheme(this);
         setContentView(R.layout.activity_edit_form);
         
         Finish.activityEditForm=this;
@@ -152,23 +155,23 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         getListView().setOnItemLongClickListener(new OnItemLongClickListener()
         {
                 @Override
-                        public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int position, long arg3)
-                        {
-                                // TODO Auto-generated method stub
-                        createDialogDelete(position);
-                        return false;
-                        }
+                public boolean onItemLongClick(AdapterView<?> arg0, View arg1,int position, long arg3)
+                {
+                        // TODO Auto-generated method stub
+                createDialogDelete(position);
+                return false;
+                }
                 });
         
         SwipeDismissList.OnDismissCallback callback = new SwipeDismissList.OnDismissCallback()
         {
             @Override
-                        public Undoable onDismiss(AbsListView listView, int position)
-                        {
-                                // TODO Auto-generated method stub
-                    createDialogDelete(position);
-                                return null;
-                        }
+            public Undoable onDismiss(AbsListView listView, int position)
+            {
+                    // TODO Auto-generated method stub
+            		createDialogDelete(position);
+                    return null;
+            }
         };
         UndoMode mode = SwipeDismissList.UndoMode.SINGLE_UNDO;
         new SwipeDismissList(getListView(), callback, mode);
@@ -177,45 +180,53 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     
     private void createDialogDelete(final int position)
     {
-    			final Cursor c=instances.getCursor();
-                c.moveToPosition(position);
-                AlertDialog.Builder adb = new AlertDialog.Builder(ActivityEditForm.this);
-                adb.setTitle("Suppression");
-                adb.setMessage("Voulez-vous vraiment supprimer "+c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))+" ?");
-                adb.setNegativeButton(getString(android.R.string.cancel),null);
-                adb.setIcon(android.R.drawable.ic_dialog_alert);
-                adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog,int which)
-                    {
-                    	int countInstances=InstanceProvider.getCountInstancesByFormId(c.getString(c.getColumnIndex(FormsColumns.JR_FORM_ID)));
-                    	if (countInstances>1)
-                        	CroutonView.showBuiltInCrouton(ActivityEditForm.this, countInstances+" "+getString(R.string.instances_exist), Style.ALERT);
-                        else if (countInstances==1)
-                        	CroutonView.showBuiltInCrouton(ActivityEditForm.this, getString(R.string.instance_exist), Style.ALERT);
-                		else
-                		{
-                			FormsProvider.deleteFileOrDir(c.getString(c.getColumnIndex(FormsColumns.FORM_FILE_PATH)));
-                			FormsProvider.deleteFileOrDir(c.getString(c.getColumnIndex(FormsColumns.FORM_MEDIA_PATH)));
-                			FormsProvider.deleteForm(c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)));
-                		}
-                        loadListView();
-                    }
-                });
-                adb.show();
+    	final Form formDeleted=forms.get(position);
+		forms.remove(position);
+    	instances.notifyDataSetChanged();
+        AlertDialog.Builder adb = new AlertDialog.Builder(ActivityEditForm.this);
+        adb.setTitle(getString(R.string.delete));
+        adb.setMessage(getString(R.string.delete_confirmation, formDeleted.getName()));
+        adb.setIcon(android.R.drawable.ic_dialog_alert);
+        adb.setNegativeButton(getString(android.R.string.cancel),new AlertDialog.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog,int which)
+            {
+            	forms.add(position, formDeleted);
+            	instances.notifyDataSetChanged();
+            }
+        });
+        adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog,int which)
+            {
+            	int countInstances=InstanceProvider.getCountInstancesByFormId(formDeleted.getForm_id());
+            	if (countInstances>1)
+                	CroutonView.showBuiltInCrouton(ActivityEditForm.this, countInstances+" "+getString(R.string.instances_exist), Style.ALERT);
+                else if (countInstances==1)
+                	CroutonView.showBuiltInCrouton(ActivityEditForm.this, getString(R.string.instance_exist), Style.ALERT);
+        		else
+        		{
+        			FormsProvider.deleteFileOrDir(formDeleted.getFile_path());
+        			FormsProvider.deleteFileOrDir(formDeleted.getDirectory_path());
+        			FormsProvider.deleteForm(formDeleted.getName());
+        		}
+            }
+        });
+        adb.show();
     }
     
     private void loadListView()
     {
-            String sortOrder = FormsColumns.DISPLAY_NAME + " ASC, " + FormsColumns.JR_VERSION + " DESC";
+        String sortOrder = FormsColumns.DISPLAY_NAME + " ASC, " + FormsColumns.JR_VERSION + " DESC";
         Cursor c = managedQuery(FormsColumns.CONTENT_URI, null, null, null, sortOrder);
-
-        String[] data = new String[] {FormsColumns.DISPLAY_NAME, FormsColumns.DISPLAY_SUBTEXT, FormsColumns.JR_VERSION, FormsColumns.SUBMISSION_URI};
-        int[] view = new int[] {R.id.text1, R.id.text2, R.id.text3};
-
-        // render total instance view
-        instances =new VersionHidingCursorAdapter(FormsColumns.JR_VERSION, getApplicationContext(), R.layout.listview_item_edit_form, c, data, view);
-        setListAdapter(instances);
+        if(c.getCount()> 0)
+		{
+			forms=new ArrayList<Form>();
+			while (c.moveToNext())
+				forms.add(new Form(c.getInt(c.getColumnIndex(BaseColumns._ID)),c.getString(c.getColumnIndex(FormsColumns.JR_FORM_ID)),c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)), c.getString(c.getColumnIndex(FormsColumns.DISPLAY_SUBTEXT)),c.getString(c.getColumnIndex(FormsColumns.FORM_FILE_PATH)),c.getString(c.getColumnIndex(FormsColumns.FORM_MEDIA_PATH))));
+			instances=new FormsListAdapter(getApplicationContext(), forms);
+	        setListAdapter(instances);
+		}
         
     }
     
@@ -226,11 +237,11 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     }
 
     @Override
-           public void onListItemClick(ListView listView, View view, int position, long id)
+    public void onListItemClick(ListView listView, View view, int position, long id)
     {
             ActivityForm.current_page=1;
            // get uri to form
-               long idFormsTable = ((SimpleCursorAdapter) getListAdapter()).getItemId(position);
+               long idFormsTable = forms.get(position).getId();
          Uri formUri = ContentUris.withAppendedId(FormsColumns.CONTENT_URI, idFormsTable);
 
                    Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", formUri.toString());
@@ -262,7 +273,6 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         this.menu=menu;
         MenuItem searchItem = menu.findItem(R.id.menu_search);
         mSearchView = (SearchView) searchItem.getActionView();
-        mSearchView.setImeOptions(mSearchView.getImeOptions() | EditorInfo.IME_FLAG_NO_EXTRACT_UI | EditorInfo.IME_FLAG_NO_FULLSCREEN);
         int searchImgId = getResources().getIdentifier("android:id/search_button", null, null);
         ImageView searchButton = (ImageView) mSearchView.findViewById(searchImgId);
         if (searchButton!=null)
@@ -302,17 +312,18 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
     @Override
     public boolean onQueryTextChange(String newText)
     {
-            String sortOrder = FormsColumns.DISPLAY_NAME + " ASC, " + FormsColumns.JR_VERSION + " DESC";
-            String condition=FormsColumns.DISPLAY_NAME+" LIKE '%"+newText+"%'";
-            Cursor c = managedQuery(FormsColumns.CONTENT_URI, null, condition, null, sortOrder);
-        
-        String[] data = new String[]{ FormsColumns.DISPLAY_NAME, FormsColumns.DISPLAY_SUBTEXT, FormsColumns.JR_VERSION};
-        int[] view = new int[] { R.id.text1, R.id.text2, R.id.text3};
-
-        // render total instance view
-        instances = new VersionHidingCursorAdapter(FormsColumns.JR_VERSION, this, R.layout.listview_item_edit_form, c, data, view);
-        setListAdapter(instances);
-        return false;
+         String sortOrder = FormsColumns.DISPLAY_NAME + " ASC, " + FormsColumns.JR_VERSION + " DESC";
+         String condition=FormsColumns.DISPLAY_NAME+" LIKE '%"+newText+"%'";
+         Cursor c = managedQuery(FormsColumns.CONTENT_URI, null, condition, null, sortOrder);
+         if(c.getCount()> 0)
+ 		 {
+        	forms=new ArrayList<Form>();
+ 			while (c.moveToNext())
+ 				forms.add(new Form(c.getInt(c.getColumnIndex(BaseColumns._ID)),c.getString(c.getColumnIndex(FormsColumns.JR_FORM_ID)),c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)), c.getString(c.getColumnIndex(FormsColumns.DISPLAY_SUBTEXT)),c.getString(c.getColumnIndex(FormsColumns.FORM_FILE_PATH)),c.getString(c.getColumnIndex(FormsColumns.FORM_MEDIA_PATH))));
+ 			instances=new FormsListAdapter(getApplicationContext(), forms);
+ 	        setListAdapter(instances);
+ 		 }
+         return false;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item)

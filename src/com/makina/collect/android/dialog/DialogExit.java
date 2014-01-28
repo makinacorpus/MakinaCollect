@@ -1,9 +1,10 @@
 package com.makina.collect.android.dialog;
 
-import android.app.AlertDialog;
+
 import android.content.Context;
 import android.content.DialogInterface;
 
+import com.WazaBe.HoloEverywhere.app.AlertDialog;
 import com.makina.collect.android.utilities.Finish;
 
 public class DialogExit {

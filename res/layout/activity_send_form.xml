@@ -41,7 +41,7 @@ the License.
             <RelativeLayout
                 android:id="@+id/pannier"
                 android:layout_width="fill_parent"
-                android:layout_height="60dip"
+                android:layout_height="40dip"
                 android:background="@drawable/pannier_blue"
                 android:gravity="center" >
 
@@ -57,7 +57,7 @@ the License.
             <RelativeLayout
                 android:id="@+id/check_all"
                 android:layout_width="fill_parent"
-                android:layout_height="70dip"
+                android:layout_height="50dip"
                 android:background="@drawable/check_all_selector"
                 android:gravity="center" >
 

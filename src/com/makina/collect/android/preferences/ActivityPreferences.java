@@ -825,7 +825,7 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 		switch(item.getItemId())
     	{
 	        case android.R.id.home:
-	        	Finish.finishHome();
+	        	finish();
 	        return true;
 	        case R.id.menu_about_us:
 	        	DialogAboutUs.aboutUs(this);

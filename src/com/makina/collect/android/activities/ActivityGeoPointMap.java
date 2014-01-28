@@ -62,7 +62,6 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 
 	private Location mLocation;
 	private Button mAcceptLocation;
-	private Button mCancelLocation;
 	private Button mRefreshLocation;
 	private LatLng mLatLng;
 
@@ -220,16 +219,6 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 					Toast.LENGTH_LONG).show();
 		}
 
-		mCancelLocation = (Button) findViewById(R.id.cancel_location);
-		mCancelLocation.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// Exit activity without saving location.
-				Collect.getInstance().getActivityLogger()
-						.logInstanceAction(this, "cancelLocation", "cancel");
-				finish();
-			}
-		});
 
 		mAcceptLocation = (Button) findViewById(R.id.accept_location);
 		mAcceptLocation.setVisibility(View.VISIBLE);

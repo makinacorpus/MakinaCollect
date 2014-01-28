@@ -928,8 +928,8 @@ InstanceUploaderListener, DeleteInstancesListener {
 	private void razConfirmation() {
 
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
-		adb.setTitle("Remise à zéro");
-		adb.setMessage("Voulez-vous vraiment remettre à zéro?");
+		adb.setTitle(getString(R.string.raz));
+		adb.setMessage(getString(R.string.raz_confirmation));
 		adb.setPositiveButton(getString(android.R.string.yes),new AlertDialog.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog,int which)
@@ -3157,8 +3157,8 @@ InstanceUploaderListener, DeleteInstancesListener {
 	{
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-		alert.setTitle("Nom du formulaire");
-		alert.setMessage("Veuillez saisir le nom du formulaire");
+		alert.setTitle(getString(R.string.form_name));
+		alert.setMessage(getString(R.string.form_name_description));
 
 		// Set an EditText view to get user input 
 		final EditText input = new EditText(this);
