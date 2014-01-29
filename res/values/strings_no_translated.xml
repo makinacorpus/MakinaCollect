@@ -78,33 +78,74 @@
 
 
     <!-- Help -->
-    <string name="help_download"><b>Utiliser les formulaires de démonstration :</b>\n
-		Nous vous proposons un certain nombre de formulaires de démonstration que Makina Corpus a créés spécifiquement pour cette application. Ils sont associés à l’adresse du serveur http://formulaires.makina-corpus.net:80/makinademo, accessible dans le menu Paramètres de l’application.\n\n
+    <string name="help_download">
+        <![CDATA[
+        <b>Utiliser les formulaires de démonstration :</b><br/>
+		Nous vous proposons un certain nombre de formulaires de démonstration que Makina Corpus a créés spécifiquement pour cette application. Ils sont associés à l’adresse du serveur http://formulaires.makina-corpus.net:80/makinademo, accessible dans le menu Paramètres de l’application.<br/><br/>
 
-		<b>Créer vos propres formulaires :</b>\n
-		Vous pouvez également utiliser l’application Makina Collect avec vos propres formulaires que vous aurez créés au préalable sur le site web Formhub (https://formhub.org/). Vous devez alors synchroniser l’application mobile, en modifiant l’adresse du serveur (à partir du menu Paramètres de l’application) par celle de votre propre compte Formhub.\n</string>
-    <string name="help_edit">Cette liste donne l’ensemble des formulaires vierges que vous avez téléchargé dans l’application mobile. En cliquant sur l’un d’eux, vous pourrez commencer la saisie. En gardant le doigt appuyé longtemps (ou par glissant sur la gauche), vous pourrez supprimer un formulaire de cette liste.\n
-		L’application Makina Collect a été conçue pour faciliter au maximum votre navigation lors de la saisie des formulaires.\n\n<strong>Comment passer d’une question à une autre?</strong>\n
-		Deux possibilités s’offrent à vous ; vous pouvez utiliser les flèches présentes en bas de page ou bien changer de question par un simple glissement de doigt horizontal (swipe).\n\n<strong>Comment modifier mes réponses?</strong>\n
-		A tout moment, via le bouton Hiérarchie, une visualisation de l’ensemble des réponses déjà saisies vous est proposé. Un clic sur une question vous redirige sur celle-ci pour que vous puissiez la modifier. En fin de formulaire, une visualisation de l’ensemble des réponses vous est automatiquement proposée, avant validation et envoi.\n\n<strong>Comment remettre à zéro toutes les réponses dans un formulaire?</strong>\n
-		A tout moment, un bouton dans l’action bar (la barre en haut de l’écran) vous permet, en cas d’erreur, d’effacer toutes les réponses déjà saisies et de recommencer le formulaire à partir de la première question.\n\n<strong>Comment sauvegarder un questionnaire en cours de saisie?</strong>\n
-		Le sous-menu “sauvegarder” dans le menu de l’action bar vous permet à tout moment de sauvegarder un formulaire en cours de saisie. Il ne sera pas envoyé au serveur et sera sauvegardé comme formulaire non finalisé, avec nom, date et heure. Il sera accessible à nouveau dans la liste de “mes formulaires sauvegardés” via l’interface d’accueil.\n\n<strong>Comment envoyer mes formulaires finalisés?</strong>		Une fois finalisés, après la dernière question, les formulaires seront envoyés et stockés dans le serveur Formhub.\n
-		Vous pouvez choisir de l’envoyer dès la finalisation du formulaire ou de le stocker dans la boite d’envoi de l’application mobile, pour décaler la transmission à plus tard (pas de connexion internet, envoi groupé….).\n
-		Dans le cas où la connexion internet serait défaillante et l’envoi du formulaire impossible, celui-ci sera automatiquement stocké dans la boite d’envoi de l’application.\n</string>
-    <string name="help_form">L’application Makina Collect a été conçue pour faciliter au maximum votre navigation lors de la saisie des formulaires.\n\n<strong>Comment passer d’une question à une autre?</strong>\n
-		Deux possibilités s’offrent à vous ; vous pouvez utiliser les flèches présentes en bas de page ou bien changer de question par un simple glissement de doigt horizontal (swipe).\n\n<strong>Comment modifier mes réponses?</strong>\n
-		A tout moment, via le bouton Hiérarchie, une visualisation de l’ensemble des réponses déjà saisies vous est proposé. Un clic sur une question vous redirige sur celle-ci pour que vous puissiez la modifier. En fin de formulaire, une visualisation de l’ensemble des réponses vous est automatiquement proposée, avant validation et envoi.\n\n<strong>Comment remettre à zéro toutes les réponses dans un formulaire?</strong>\n
-		A tout moment, un bouton dans l’action bar (la barre en haut de l’écran) vous permet, en cas d’erreur, d’effacer toutes les réponses déjà saisies et de recommencer le formulaire à partir de la première question.\n\n<strong>Comment sauvegarder un questionnaire en cours de saisie?</strong>\n
-		Le sous-menu “sauvegarder” dans le menu de l’action bar vous permet à tout moment de sauvegarder un formulaire en cours de saisie. Il ne sera pas envoyé au serveur et sera sauvegardé comme formulaire non finalisé, avec nom, date et heure. Il sera accessible à nouveau dans la liste de “mes formulaires sauvegardés” via l’interface d’accueil.\n\n<strong>Comment envoyer mes formulaires finalisés?</strong>		Une fois finalisés, après la dernière question, les formulaires seront envoyés et stockés dans le serveur Formhub.\n
-		Vous pouvez choisir de l’envoyer dès la finalisation du formulaire ou de le stocker dans la boite d’envoi de l’application mobile, pour décaler la transmission à plus tard (pas de connexion internet, envoi groupé….).\n
-		Dans le cas où la connexion internet serait défaillante et l’envoi du formulaire impossible, celui-ci sera automatiquement stocké dans la boite d’envoi de l’application.\n</string>
-    <string name="help_save">Cette liste décrit tous les formulaires que vous avez sauvegardés en cours de saisie. Ils sont classés par ordre chronologique décroissant.\n
-		En cliquant sur l’un d’eux, vous serez redirigé sur l’écran résumant les réponses données.\n
-		Pour supprimer un des formulaires sauvegardés de cette liste, il vous suffit de rester longtemps appuyé dessus ou bien de glisser votre doigt vers la gauche. Un message de confirmation de la suppression va s’afficher.\n</string>
-    <string name="help_send">Cette liste donne l’ensemble des formulaires finalisés qui n’ont pas encore envoyés au serveur, soit par votre choix, soit par échec d’envoi : les premiers sont marqués comme “finalisés” et les seconds comme “échec envoi”.\n
-		La boite d’envoi permet des transmissions seules ou groupées.\n\n
+		<b>Créer vos propres formulaires :</b><br/>
+		Vous pouvez également utiliser l’application Makina Collect avec vos propres formulaires que vous aurez créés au préalable sur le site web Formhub (https://formhub.org/). Vous devez alors synchroniser l’application mobile, en modifiant l’adresse du serveur (à partir du menu Paramètres de l’application) par celle de votre propre compte Formhub.<br/>
+		 ]]>
+	</string>
+   
+    <string name="help_edit">
+        <![CDATA[
+        Cette liste donne l’ensemble des formulaires vierges que vous avez téléchargé dans l’application mobile. En cliquant sur l’un d’eux, vous pourrez commencer la saisie. En gardant le doigt appuyé longtemps (ou par glissant sur la gauche), vous pourrez supprimer un formulaire de cette liste.<br/>
+		L’application Makina Collect a été conçue pour faciliter au maximum votre navigation lors de la saisie des formulaires.<br/><br/>
+		
+		<b>Comment passer d’une question à une autre?</b><br/>
+		Deux possibilités s’offrent à vous ; vous pouvez utiliser les flèches présentes en bas de page ou bien changer de question par un simple glissement de doigt horizontal (swipe).<br/><br/><b>Comment modifier mes réponses?</b><br/>
+		A tout moment, via le bouton Hiérarchie, une visualisation de l’ensemble des réponses déjà saisies vous est proposé. Un clic sur une question vous redirige sur celle-ci pour que vous puissiez la modifier. En fin de formulaire, une visualisation de l’ensemble des réponses vous est automatiquement proposée, avant validation et envoi.<br/><br/>
+		
+		<b>Comment remettre à zéro toutes les réponses dans un formulaire?</b><br/>
+		A tout moment, un bouton dans l’action bar (la barre en haut de l’écran) vous permet, en cas d’erreur, d’effacer toutes les réponses déjà saisies et de recommencer le formulaire à partir de la première question.<br/><br/>
+		
+		<b>Comment sauvegarder un questionnaire en cours de saisie?</b><br/>
+		Le sous-menu “sauvegarder” dans le menu de l’action bar vous permet à tout moment de sauvegarder un formulaire en cours de saisie. Il ne sera pas envoyé au serveur et sera sauvegardé comme formulaire non finalisé, avec nom, date et heure. Il sera accessible à nouveau dans la liste de “mes formulaires sauvegardés” via l’interface d’accueil.<br/><br/>
+		
+		<b>Comment envoyer mes formulaires finalisés?</b><br/>
+		Une fois finalisés, après la dernière question, les formulaires seront envoyés et stockés dans le serveur Formhub.<br/>
+		Vous pouvez choisir de l’envoyer dès la finalisation du formulaire ou de le stocker dans la boite d’envoi de l’application mobile, pour décaler la transmission à plus tard (pas de connexion internet, envoi groupé….).<br/>
+		Dans le cas où la connexion internet serait défaillante et l’envoi du formulaire impossible, celui-ci sera automatiquement stocké dans la boite d’envoi de l’application.<br/>
+		]]>
+	</string>
+    <string name="help_form">
+    	<![CDATA[
+        L’application Makina Collect a été conçue pour faciliter au maximum votre navigation lors de la saisie des formulaires.<br/><br/>
+        
+        <b>Comment passer d’une question à une autre?</b><br/>
+		Deux possibilités s’offrent à vous ; vous pouvez utiliser les flèches présentes en bas de page ou bien changer de question par un simple glissement de doigt horizontal (swipe).<br/><br/>
+		
+		<b>Comment modifier mes réponses?</b><br/>
+		A tout moment, via le bouton Hiérarchie, une visualisation de l’ensemble des réponses déjà saisies vous est proposé. Un clic sur une question vous redirige sur celle-ci pour que vous puissiez la modifier. En fin de formulaire, une visualisation de l’ensemble des réponses vous est automatiquement proposée, avant validation et envoi.<br/><br/>
+		
+		<b>Comment remettre à zéro toutes les réponses dans un formulaire?</b><br/>
+		A tout moment, un bouton dans l’action bar (la barre en haut de l’écran) vous permet, en cas d’erreur, d’effacer toutes les réponses déjà saisies et de recommencer le formulaire à partir de la première question.<br/><br/>
+		
+		<b>Comment sauvegarder un questionnaire en cours de saisie?</b><br/>
+		Le sous-menu “sauvegarder” dans le menu de l’action bar vous permet à tout moment de sauvegarder un formulaire en cours de saisie. Il ne sera pas envoyé au serveur et sera sauvegardé comme formulaire non finalisé, avec nom, date et heure. Il sera accessible à nouveau dans la liste de “mes formulaires sauvegardés” via l’interface d’accueil.<br/><br/>
+		
+		<b>Comment envoyer mes formulaires finalisés?</b>
+		Une fois finalisés, après la dernière question, les formulaires seront envoyés et stockés dans le serveur Formhub.<br/>
+		Vous pouvez choisir de l’envoyer dès la finalisation du formulaire ou de le stocker dans la boite d’envoi de l’application mobile, pour décaler la transmission à plus tard (pas de connexion internet, envoi groupé….).<br/>
+		Dans le cas où la connexion internet serait défaillante et l’envoi du formulaire impossible, celui-ci sera automatiquement stocké dans la boite d’envoi de l’application.<br/>
+		]]>
+	</string>
+    <string name="help_save">
+    	<![CDATA[
+        Cette liste décrit tous les formulaires que vous avez sauvegardés en cours de saisie. Ils sont classés par ordre chronologique décroissant.<br/>
+		En cliquant sur l’un d’eux, vous serez redirigé sur l’écran résumant les réponses données.<br/>
+		Pour supprimer un des formulaires sauvegardés de cette liste, il vous suffit de rester longtemps appuyé dessus ou bien de glisser votre doigt vers la gauche. Un message de confirmation de la suppression va s’afficher.<br/>
+		]]>
+	</string>
+    <string name="help_send">
+    	<![CDATA[
+        Cette liste donne l’ensemble des formulaires finalisés qui n’ont pas encore envoyés au serveur, soit par votre choix, soit par échec d’envoi : les premiers sont marqués comme “finalisés” et les seconds comme “échec envoi”.<br/>
+		La boite d’envoi permet des transmissions seules ou groupées.<br/><br/>
 
-		Vous pouvez supprimer les formulaires que vous souhaitez. La démarche à suivre est la même que celle utilisée pour “mes formulaires finalisés”.\n</string>
+		Vous pouvez supprimer les formulaires que vous souhaitez. La démarche à suivre est la même que celle utilisée pour “mes formulaires finalisés”.<br/>
+		]]>
+	</string>
     <string name="help_confirmation">Ne plus afficher ce message</string>
     <string name="help_title1">Aide Télécharger un formulaire</string>
     <string name="help_title2">Aide Remplir un formulaire</string>
