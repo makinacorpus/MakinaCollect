@@ -17,6 +17,7 @@ package com.makina.collect.android.adapters;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import android.widget.BaseAdapter;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.model.Form;
+import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.views.CustomFontTextview;
 
 /**
@@ -35,46 +37,18 @@ import com.makina.collect.android.views.CustomFontTextview;
  */
 public class FormsListAdapter extends BaseAdapter {
 	
-	 private Context context;
+	private Activity activity;
     private static LayoutInflater inflater=null;
     private List<Form> forms;
 
-    public FormsListAdapter(Context context, List<Form> forms)
+    public FormsListAdapter(Activity activity, List<Form> forms)
     {
-    	this.context = context;
-        inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    	Theme.changeTheme(activity);
+    	this.activity = activity;
+        inflater = (LayoutInflater)this.activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.forms=forms;
     }
-	/*public FormsListAdapter(String versionColumnName, Context context, int layout, Cursor c, String[] from, int[] to) {
-		super(context, layout, c, from, to);
-		this.versionColumnName = versionColumnName;
-		ctxt =  context;
-		originalBinder = getViewBinder();
-		setViewBinder( new ViewBinder(){
-
-			@Override
-			public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
-				String columnName = cursor.getColumnName(columnIndex);
-				if ( !columnName.equals(FormsListAdapter.this.versionColumnName) ) {
-					if ( originalBinder != null ) {
-						return originalBinder.setViewValue(view, cursor, columnIndex);
-					}
-					return false;
-				} else {
-					String version = cursor.getString(columnIndex);
-					TextView v = (TextView) view;
-					if ( version != null ) {
-						v.setText(ctxt.getString(R.string.version) + " " + version);
-						v.setVisibility(View.VISIBLE);
-					} else {
-						v.setText(null);
-						v.setVisibility(View.GONE);
-					}
-				}
-				return true;
-			}} );
-	}*/
-
+	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -97,7 +71,7 @@ public class FormsListAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup arg2) {
 		 View vi=convertView;
          if(convertView==null)
-            vi = inflater.inflate(R.layout.listview_item_edit_form, null);
+            vi = inflater.inflate(R.layout.listview_item_save_form, null);
 
          CustomFontTextview text1=(CustomFontTextview)vi.findViewById(R.id.text1);
          CustomFontTextview text2=(CustomFontTextview)vi.findViewById(R.id.text2);

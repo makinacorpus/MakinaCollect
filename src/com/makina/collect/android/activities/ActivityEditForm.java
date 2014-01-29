@@ -117,13 +117,13 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         getSupportActionBar().setSubtitle(getString(R.string.form));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
-            TextView actionbarTitle = (TextView)findViewById(titleId);
-            titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-            TextView actionbarSubTitle = (TextView)findViewById(titleId);
-            CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
-            
-            if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_edit", false))
-                    DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_title2), getString(R.string.help_edit));
+        TextView actionbarTitle = (TextView)findViewById(titleId);
+        titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
+        TextView actionbarSubTitle = (TextView)findViewById(titleId);
+        CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
+        
+        if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_edit", false))
+                DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_title2), getString(R.string.help_edit));
             
         loadListView();
         
@@ -144,12 +144,12 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         CustomFontTextview textview_download_form=(CustomFontTextview) findViewById(R.id.textview_download_form);
         textview_download_form.setOnClickListener(new View.OnClickListener()
         {
-                        @Override
-                        public void onClick(View arg0)
-                        {
-                                startActivity(new Intent(getApplicationContext(), ActivityDownloadForm.class));
-                        }
-                });
+            @Override
+            public void onClick(View arg0)
+            {
+                startActivity(new Intent(getApplicationContext(), ActivityDownloadForm.class));
+            }
+        });
         
         getListView().setOnItemLongClickListener(new OnItemLongClickListener()
         {
@@ -223,7 +223,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
 			forms=new ArrayList<Form>();
 			while (c.moveToNext())
 				forms.add(new Form(c.getInt(c.getColumnIndex(BaseColumns._ID)),c.getString(c.getColumnIndex(FormsColumns.JR_FORM_ID)),c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)), c.getString(c.getColumnIndex(FormsColumns.DISPLAY_SUBTEXT)),c.getString(c.getColumnIndex(FormsColumns.FORM_FILE_PATH)),c.getString(c.getColumnIndex(FormsColumns.FORM_MEDIA_PATH))));
-			instances=new FormsListAdapter(getApplicationContext(), forms);
+			instances=new FormsListAdapter(this, forms);
 	        setListAdapter(instances);
 		}
         
@@ -319,7 +319,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         	forms=new ArrayList<Form>();
  			while (c.moveToNext())
  				forms.add(new Form(c.getInt(c.getColumnIndex(BaseColumns._ID)),c.getString(c.getColumnIndex(FormsColumns.JR_FORM_ID)),c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME)), c.getString(c.getColumnIndex(FormsColumns.DISPLAY_SUBTEXT)),c.getString(c.getColumnIndex(FormsColumns.FORM_FILE_PATH)),c.getString(c.getColumnIndex(FormsColumns.FORM_MEDIA_PATH))));
- 			instances=new FormsListAdapter(getApplicationContext(), forms);
+ 			instances=new FormsListAdapter(this, forms);
  	        setListAdapter(instances);
  		 }
          return false;

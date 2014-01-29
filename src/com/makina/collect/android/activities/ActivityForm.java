@@ -808,8 +808,6 @@ InstanceUploaderListener, DeleteInstancesListener {
 				ScrollView current = createView(event, false);
 				showView(current, AnimationType.FADE);
 			}
-			//update menu cause of sherlock bar
-			supportInvalidateOptionsMenu();
 		}
 		else
 		{
@@ -829,7 +827,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 		this.menu=menu;
 		getSupportMenuInflater().inflate(R.menu.menu_activity_form, menu);
 		
-		/*getLayoutInflater().setFactory(new LayoutInflater.Factory() {
+		getLayoutInflater().setFactory(new LayoutInflater.Factory() {
             public View onCreateView(String name, Context context,
                             AttributeSet attrs) {
                     if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")
@@ -850,7 +848,7 @@ InstanceUploaderListener, DeleteInstancesListener {
                     }
                     return null;
             }
-    });*/
+    });
 
 		
 		return true;

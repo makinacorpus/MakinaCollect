@@ -14,6 +14,9 @@
 
 package com.makina.collect.android.activities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
@@ -31,7 +34,6 @@ import android.view.InflateException;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -47,10 +49,12 @@ import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
+import com.makina.collect.android.adapters.FormsListAdapter;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.dialog.DialogExit;
 import com.makina.collect.android.dialog.DialogHelpWithConfirmation;
+import com.makina.collect.android.model.Form;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.provider.InstanceProvider;
@@ -74,10 +78,11 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 
 	private AlertDialog mAlertDialog;
     private Cursor c;
-    private SimpleCursorAdapter instances;
+    private FormsListAdapter instances;
     private Menu menu;
     private final int RESULT_PREFERENCES=1;
     private SearchView mSearchView;
+    private List<Form> forms;
     @SuppressLint("NewApi")
 	@Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -207,21 +212,29 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         
     }
     
-    private void createDialogDelete(int position)
+    private void createDialogDelete(final int position)
     {
-    	final Cursor c=instances.getCursor();
-		c.moveToPosition(position);
+    	//final Cursor c=instances.getCursor();
+    	final Form formDeleted=forms.get(position);
+		forms.remove(position);
+    	instances.notifyDataSetChanged();
 		AlertDialog.Builder adb = new AlertDialog.Builder(ActivitySaveForm.this);
 		adb.setTitle(getString(R.string.delete));
-		adb.setMessage(getString(R.string.delete,c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))));
+		adb.setMessage(getString(R.string.delete_confirmation,formDeleted.getName()));
 		adb.setIcon(android.R.drawable.ic_dialog_alert);
-		adb.setNegativeButton(getString(android.R.string.cancel),null);
+		adb.setNegativeButton(getString(android.R.string.cancel),new AlertDialog.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog,int which)
+            {
+            	forms.add(position, formDeleted);
+            	instances.notifyDataSetChanged();
+            }
+        });
 		adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog,int which)
 			{
-				InstanceProvider.deleteInstance(c.getLong(c.getColumnIndex(BaseColumns._ID)));
-				loadListView();
+				InstanceProvider.deleteInstance(formDeleted.getId());
 			}
 		});
 		adb.show();
@@ -233,13 +246,14 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         //String[] selectionArgs = {InstanceProviderAPI.STATUS_SUBMITTED};
         String sortOrder = InstanceColumns.STATUS + " DESC, " + InstanceColumns.DISPLAY_NAME + " ASC";
         Cursor c = managedQuery(InstanceColumns.CONTENT_URI, null, selection, selectionArgs, sortOrder);
-
-        String[] data = new String[] {InstanceColumns.DISPLAY_NAME, InstanceColumns.DISPLAY_SUBTEXT};
-        int[] view = new int[] { R.id.text1, R.id.text2 };
-
-        // render total instance view
-        instances =new SimpleCursorAdapter(this, R.layout.listview_item_save_form, c, data, view);
-        setListAdapter(instances);
+        if(c.getCount()> 0)
+		{
+			forms=new ArrayList<Form>();
+			while (c.moveToNext())
+				forms.add(new Form(c.getInt(c.getColumnIndex(BaseColumns._ID)),c.getString(c.getColumnIndex(InstanceColumns.JR_FORM_ID)),c.getString(c.getColumnIndex(InstanceColumns.DISPLAY_NAME)), c.getString(c.getColumnIndex(InstanceColumns.DISPLAY_SUBTEXT)),c.getString(c.getColumnIndex(InstanceColumns.INSTANCE_FILE_PATH)),""));
+			instances=new FormsListAdapter(this, forms);
+	        setListAdapter(instances);
+		}
     }
     
     @Override
@@ -257,15 +271,14 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
      */
     @Override
 	public void onListItemClick(ListView listView, View view, int position, long id) {
-        c = (Cursor) getListAdapter().getItem(position);
-        startManagingCursor(c);
-        Uri instanceUri =ContentUris.withAppendedId(InstanceColumns.CONTENT_URI,c.getLong(c.getColumnIndex(BaseColumns._ID)));
+        
+        Uri instanceUri =ContentUris.withAppendedId(InstanceColumns.CONTENT_URI,forms.get(position).getId());
 
         Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", instanceUri.toString());
 
         Intent intent=new Intent(Intent.ACTION_EDIT, instanceUri);
     	Bundle bundle=new Bundle();
-    	bundle.putLong("id", c.getLong(c.getColumnIndex(BaseColumns._ID)));
+    	bundle.putLong("id", forms.get(position).getId());
     	intent.putExtras(bundle);
     	startActivity(intent);
         //TODO 
