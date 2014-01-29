@@ -3,6 +3,7 @@ package com.makina.collect.android.dialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.Html;
 import android.view.View;
 import android.view.Window;
 import android.widget.RelativeLayout;
@@ -27,7 +28,7 @@ public class DialogHelpWithConfirmation
         checkbox_help=(CustomFontCheckBox) dialog_help.findViewById(R.id.checkbox_help);
 		RelativeLayout linearlayout_ok=(RelativeLayout) dialog_help.findViewById(R.id.linearlayout_ok);
 		
-		textview_help.setText(message);
+		textview_help.setText(Html.fromHtml(message));
 		linearlayout_ok.setOnClickListener(new View.OnClickListener()
 		{
 			@Override

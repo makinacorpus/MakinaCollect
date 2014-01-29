@@ -12,6 +12,177 @@
 -->
 <resources>
 
+    <!-- Alert Dialig -->
+    <string name="delete">Delete</string>
+    <string name="delete_confirmation">Do you really want to delete %s ?</string>
+    <string name="raz">Reset</string>
+    <string name="raz_confirmation">Do you really want to reset the form?</string>
+    <string name="form_name">Form Name</string>
+    <string name="form_name_description">Please write the name of this form</string>
+    <string name="fail">Fail</string>
+    <!-- END Alert Dialog -->
+
+
+    <!-- Form -->
+    <string name="name">Name</string>
+    <string name="next">Next</string>
+    <string name="back">Previous</string>
+    <string name="finish">Finish</string>
+    <string name="save">Save</string>
+    <!-- END Form -->
+
+
+    <!-- EditForm -->
+    <string name="clic_here_to_download">PRESS HERE TO DOWNLOAD A FORM</string>
+    <string name="no_form_not_finalled">YOU DON\'T HAVE ANY UNFINISHED FORM</string>
+    <string name="no_form_finalled">NO UNFINISHED FORM</string>
+    <string name="empty_list">empty list</string>
+    <string name="instances_exist">versions of this pattern already exist!</string>
+    <string name="instance_exist">1 version of this pattern already exists!</string>
+    <!-- END EditForm -->
+
+
+    <!-- Hierarchy -->
+    <string name="hierarchy_text">Here is the summury of the survey:</string>
+    <!-- END - Hierarchy -->
+
+
+    <!-- AboutUS -->
+    <string name="textview_about_us1">The mobile application "Makina Collect" was developed by Makina Corpus</string>
+    <!-- END AboutUs -->
+
+
+    <!-- Preferences -->
+    <string name="language">Language</string>
+    <string name="language_preferences">language_preferences</string>
+    <string name="theme">Theme</string>
+    <string name="theme_preferences">theme_preferences</string>
+    <string name="theme1">Dark theme</string>
+    <string name="theme2">Light theme</string>
+    <string name="luminosity">Luminosity</string>
+    <string name="english">English</string>
+    <string name="french">French</string>
+    <!-- END- Preferences -->
+
+
+    <!-- ActionBar -->
+    <string name="search">Search</string>
+    <string name="settings">Settings</string>
+    <string name="help">Help</string>
+    <string name="about_us">About us</string>
+    <string name="exit">Exit</string>
+    <string name="upload">Upload</string>
+    <string name="raz">Reset</string>
+    <string name="hierarchy">Hierarchy</string>
+    <string name="refresh">Refresh</string>
+    <!-- FIN ActionBar -->
+
+
+    <!-- ActionBar Title -->
+    <string name="download_menu">DOWNLOAD \na form</string>
+    <string name="edit_menu">FILL IN   \na form</string>
+    <string name="save_menu">FINISH \nmy forms</string>
+    <string name="send_menu">My forms \nTO SEND</string>
+    <string name="download_action_bar">DOWNLOAD</string>
+    <string name="edit">FILL IN</string>
+    <string name="my_forms">my forms</string>
+    <string name="my_forms_send">My forms</string>
+    <string name="finalize">FINISH</string>
+    <string name="to_send">TO SEND</string>
+    <string name="form">a form</string>
+    <!-- FIN ActionBar Title -->
+
+
+    <!-- Help -->
+    <string name="help_download">
+<![CDATA[
+        <strong>Use the demo forms :</strong><br/>
+		We offer you some demonstration forms that Makina Corpus have already created specifically for this app. They are available on http://formulaires.makina-corpus.net:80/makinademo server, accessible from the "Settings" menu of the app.<br/><br/><strong>Create your own forms :</strong><br/>
+You can also use the Makina Collect App with your own forms that you have created in advance on the Formhub Makina Corpus website (http://formulaires.makina-corpus.net/). Then, you must synchronize the mobile application by modifying the server address (from the Settings menu of the application) to one of your own Formhub Makina Corpus account.<br/>
+ ]]>
+    </string>
+    <string name="help_edit">
+<![CDATA[
+        This list gives you all the patterns forms that you have downloaded into the app. By clicking on one of them, you can start filling in it. With a long press clic (or by sliding on the left), you can delete a form.<br/>
+		
+	Makina Collect app has been conceived very user friendly to help you when you need to gather information via forms.<br/><br/><strong>How to move from one question to another?</strong><br/>
+		Two options are available : you can use the "Previous" and "Next" buttons at the bottom of the screen or you can just swipe horizontally.<br/><br/>
+		
+		<strong>How can I change the answers?</strong><br/>
+		Any time, via the Hierarchy button, you can access to the summary of all the answers you gave. Clicking on one specific question redirects you directly to it so you can change your answer. At the end of the form, a visualization of all the answers provided is automatically displayed before validation and submission.<br/><br/>
+		
+		<strong>How can I reset the current form?</strong><br/>
+		Any time, the "reset" button available in the eaction bar (the bar at the top of the screen) allows you, in case of error, to erase all the answers already entered and restart the form from the beginning.<br/><br/>
+		
+		<strong>How can I save my survey during the fill in?</strong><br/>
+		The "save" action available in the action bar allows you to save a form any time during the fill in. The form will not be sent to the server but it will be saved as un-finished form with its name, date and time. It will be available again in the list of "Un-finished forms" via the home screen.<br/><br/><strong>How to send the finished forms?</strong>
+		Once they are finished, after the last question, the forms will be sent and saved on the Makina Corpus Formhub server.<br/>
+		You can choose to send it right after the end of the form or you can choose to save it in the "finished form" section of the app to postpone the sending. (no internet connexion, combined sending,….).<br/>
+		If the internet connexion doesn\'t work, the sending of the form will be impossible. It will automatially saved in the "finished form" section of the app.<br/>
+	 ]]>
+    </string>
+    <string name="help_form">
+<![CDATA[
+        Makina Collect app has been conceived very user friendly to help you when you need to gather information via forms.<br/><br/>
+        
+        <strong>How to move from one question to another?</strong><br/>
+		Two options are available : you can use the "Previous" and "Next" buttons at the bottom of the screen or you can just swipe horizontally.<br/><br/>
+		
+		<strong>How can I change the answers?</strong><br/>
+		Any time, via the Hierarchy button, you can access to the summary of all the answers you gave. Clicking on one specific question redirects you directly to it so you can change your answer. At the end of the form, a visualization of all the answers provided is automatically displayed before validation and submission.<br/><br/>
+		
+		<strong>How can I reset the current form?</strong><br/>
+		Any time, the "reset" button available in the eaction bar (the bar at the top of the screen) allows you, in case of error, to erase all the answers already entered and restart the form from the beginning.<br/><br/>
+		
+		<strong>How can I save my survey during the fill in?</strong><br/>
+		The "save" action available in the action bar allows you to save a form any time during the fill in. The form will not be sent to the server but it will be saved as un-finished form with its name, date and time. It will be available again in the list of "Un-finished forms" via the home screen.<br/><br/>
+		
+		<strong>How to send the finished forms?</strong><br/>
+		Once they are finished, after the last question, the forms will be sent and saved on the Makina Corpus Formhub server.<br/>
+		You can choose to send it right after the end of the form or you can choose to save it in the "finished form" section of the app to postpone the sending. (no internet connexion, combined sending,….).<br/>
+		If the internet connexion doesn\'t work, the sending of the form will be impossible. It will automatially saved in the "finished form" section of the app.<br/>
+		 ]]>
+    </string>
+    <string name="help_save">
+        <![CDATA[
+        This list regroups all of the un-finished forms. They are descending chronologically ordered.<br/>
+		By clicking on one of them, you will be automatically redirected on the summary of this survey.<br/>
+		To delete one of these survey, you just have to press long on it or swipe on the left. A popUp essage will display to confirm the deletion.<br/>
+		]]>
+	</string>
+    
+    <string name="help_send">
+<![CDATA[
+        This list regroups all of the finished form that have not been sent to the server, by choice, or because of a failure in the sending : first ones are labeled “un-finished”, the second one as “sending failure”.<br/>
+		The sending box ("finished forms" section) allows you to send one or many forms at the same time.<br/><br/>
+
+		You can delete all the forms you want. You have to do it the same way as in the "finished forms" section.<br/>
+		 ]]>
+    </string>
+    <string name="help_confirmation">Do not show this message again</string>
+    <string name="help_title1">Help Download a form</string>
+    <string name="help_title2">Help Fill in a form</string>
+    <string name="help_title3">Help Finish a form</string>
+    <string name="help_title4">Help My forms to send</string>
+    <!-- FIN Help -->
+
+
+    <!-- FORM SAVING -->
+    <string name="to_not_send_form">Do not send this form</string>
+    <string name="send_form">Send this form</string>
+    <string name="send_form_and_restart">Send this form and restart it</string>
+    <string name="checkbox_error">Please select an answer</string>
+    <!-- END FORM SAVING -->
+
+
+    <!-- DOWNLOAD FORM -->
+    <string name="select_all">SELECT ALL</string>
+    <string name="deselect_all">DESELECT ALL</string>
+    <string name="no_form_selected">No selected form</string>
+    <string name="form_selected">1 selected form</string>
+    <string name="forms_selected">selected forms</string>
+    <!-- fin - DOWNLOAD FORM -->
+
     <string name="no_connexion">No network connection!</string>
     <string name="accept_location">Record Location</string>
     <string name="accuracy">Accuracy</string>
@@ -105,7 +276,6 @@
     <string name="marker_draggable">You can move the marker by long pressing it and then drag it, or long pressing where you want it to be</string>
     <string name="mark_finished">Mark form as finalized</string>
     <string name="noselect_error">Sorry, you have not selected any forms!</string>
-    
     <string name="no_items_display">Nothing available to display.</string>
     <string name="no_items_display_forms">Nothing available to display.\n\nTry getting and filling out a blank form.</string>
     <string name="no_items_display_instances">Nothing available to display.\n\nTry finalizing saved forms before sending.</string>

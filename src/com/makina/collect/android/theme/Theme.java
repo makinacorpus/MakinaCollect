@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
+import android.widget.Toast;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.preferences.ActivityPreferences;
@@ -29,8 +30,8 @@ public class Theme
 	    // Change locale settings in the app.
 	    DisplayMetrics dm = res.getDisplayMetrics();
 	    android.content.res.Configuration conf = res.getConfiguration();
-		String languageChoice = PreferenceManager.getDefaultSharedPreferences(activity).getString(ActivityPreferences.KEY_THEME, ActivityPreferences.KEY_THEME);
-		if ( (languageChoice != null) && (languageChoice.contains(activity.getString(R.string.french))) )
+		String languageChoice = PreferenceManager.getDefaultSharedPreferences(activity).getString(ActivityPreferences.KEY_LANGUAGE, ActivityPreferences.KEY_LANGUAGE);
+		if ( (languageChoice != null) && (languageChoice.equals("1")) )
 			conf.locale = new Locale("fr");
 		else
 			conf.locale = new Locale("en");

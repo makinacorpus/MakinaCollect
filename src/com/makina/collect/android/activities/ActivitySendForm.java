@@ -624,12 +624,18 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
                 		null, selection.toString(), selectionArgs, null);
                 if (results.getCount() > 0) {
                     results.moveToPosition(-1);
-                    while (results.moveToNext()) {
+                    i=-1;
+                    while (results.moveToNext())
+                    {
+                    	i++;
                         String name =
                             results.getString(results.getColumnIndex(InstanceColumns.DISPLAY_NAME));
                         String id = results.getString(results.getColumnIndex(BaseColumns._ID));
                         if (!result.get(id).equals(getString(R.string.success)))
+                        {
                         	message.append(name + " - " + getString(R.string.fail) + "\n\n");
+                        	mSelected.remove(i);
+                        }
                         else
                         	message.append(name + " - " + result.get(id) + "\n\n");
                     }

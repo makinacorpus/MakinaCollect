@@ -256,9 +256,7 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 			@Override
 			public boolean onPreferenceChange(Preference preference,Object newValue)
 			{
-				int index = ((ListPreference) preference).findIndexOfValue(newValue.toString());
-				String entry = (String) ((ListPreference) preference).getEntries()[index];
-				((ListPreference) preference).setSummary(entry);
+				((ListPreference) preference).setSummary(""+((ListPreference) preference).findIndexOfValue(newValue.toString()));
 				
 				Intent i = getIntent();
 				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

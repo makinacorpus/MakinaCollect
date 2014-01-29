@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.Html;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -119,14 +120,16 @@ public class DialogHelp extends DialogFragment{
 			// looks a little bit messy here
 			View view= View.inflate(getActivity(), R.layout.fragment_help, null);
 			TextView textview_help=(TextView) view.findViewById(R.id.textview_help);
+			
 			if (position==0)
-				textview_help.setText(getString(R.string.help_download));
+				textview_help.setText(Html.fromHtml(getString(R.string.help_download)));
 			else if (position==1)
-				textview_help.setText(getString(R.string.help_edit));
+				textview_help.setText(Html.fromHtml(getString(R.string.help_edit)));
 			else if (position==2)
-				textview_help.setText(getString(R.string.help_save));
+				textview_help.setText(Html.fromHtml(getString(R.string.help_save)));
 			else if (position==3)
-				textview_help.setText(getString(R.string.help_send));
+				textview_help.setText(Html.fromHtml(getString(R.string.help_send)));
+			
 			container.addView(view, 0);
 			return view;
 		}
