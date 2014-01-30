@@ -166,6 +166,7 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 				String filePath = Environment.getExternalStorageDirectory()
 						.toString()
 						+ "/odk/tiles8bits.mbtiles";
+				Toast.makeText(getApplicationContext(), filePath, Toast.LENGTH_SHORT).show();
 				Log.i("pppppppppppppppppppppppp", filePath);
 				Log.e(getClass().getName(), filePath);
 				options.tileProvider(new MapBoxOfflineTileProvider(filePath));

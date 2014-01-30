@@ -50,7 +50,7 @@ import android.widget.RelativeLayout;
 import android.widget.SearchView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.WazaBe.HoloEverywhere.app.AlertDialog;
 import com.WazaBe.HoloEverywhere.app.ProgressDialog;
@@ -449,7 +449,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
                     };
                 mProgressDialog.setTitle(getString(R.string.downloading_data));
                 mProgressDialog.setMessage(getString(R.string.please_wait));
-                mProgressDialog.setIcon(android.R.drawable.ic_dialog_info);
+                mProgressDialog.setIconAttribute(R.attr.dialog_icon_info);
                 mProgressDialog.setIndeterminate(true);
                 mProgressDialog.setCancelable(false);
                 mProgressDialog.setButton(getString(R.string.cancel), loadingButtonListener);
@@ -752,7 +752,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
         };
         mAlertDialog.setCancelable(false);
         mAlertDialog.setButton(getString(R.string.ok), quitListener);
-        mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+        mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
         mAlertMsg = message;
         mAlertTitle = title;
         mAlertShowing = true;

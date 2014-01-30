@@ -1875,7 +1875,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 				.setTitle(
 						getString(R.string.quit_application,
 								formController.getFormTitle()))
-				.setIcon(android.R.drawable.ic_dialog_alert)
+				.setIconAttribute(android.R.attr.alertDialogIcon)
 				.setNeutralButton(getString(R.string.do_not_exit),
 						new DialogInterface.OnClickListener() {
 							@Override

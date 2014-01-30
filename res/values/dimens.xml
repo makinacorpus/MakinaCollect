@@ -15,6 +15,7 @@
   -->
 
 <resources>
+    <dimen name="text_dashboard_size">23dp</dimen>
     <dimen name="margin_icon_dashboard1">30dp</dimen>
     <dimen name="margin_icon_dashboard2">95dp</dimen>
     <dimen name="list_item_height_small">48dp</dimen>

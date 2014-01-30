@@ -250,7 +250,10 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 		});
 
 		mLanguagePreference = (ListPreference) findPreference(KEY_LANGUAGE);
-		mLanguagePreference.setSummary(mLanguagePreference.getEntry());
+		if (mLanguagePreference.getEntry()==null)
+			mLanguagePreference.setSummary(getString(R.string.current_language));
+		else
+			mLanguagePreference.setSummary(mLanguagePreference.getEntry());
 		mLanguagePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
 		{
 			@Override

@@ -221,7 +221,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
 		AlertDialog.Builder adb = new AlertDialog.Builder(ActivitySaveForm.this);
 		adb.setTitle(getString(R.string.delete));
 		adb.setMessage(getString(R.string.delete_confirmation,formDeleted.getName()));
-		adb.setIcon(android.R.drawable.ic_dialog_alert);
+		adb.setIconAttribute(android.R.attr.alertDialogIcon);
 		adb.setNegativeButton(getString(android.R.string.cancel),new AlertDialog.OnClickListener()
         {
             public void onClick(DialogInterface dialog,int which)

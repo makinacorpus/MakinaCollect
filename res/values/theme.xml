@@ -12,6 +12,7 @@
         <item name="android:textColor">@color/text_gris</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <item name="popupMenuStyle">@style/PopupMenu</item>
+        <item name="dialog_icon_info">@drawable/ic_dialog_info_gray</item>
     </style>
 
     <style name="CollectThemeDark" parent="@style/Holo.Theme.Sherlock">
@@ -26,6 +27,7 @@
         <item name="android:homeAsUpIndicator">@drawable/abs__ic_ab_back_holo_light</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <item name="popupMenuStyle">@style/PopupMenu</item>
+        <item name="dialog_icon_info">@android:drawable/ic_dialog_info</item>
     </style>
 
 

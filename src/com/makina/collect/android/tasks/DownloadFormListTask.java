@@ -97,8 +97,7 @@ public class DownloadFormListTask extends AsyncTask<Void, String, HashMap<String
         }
 
         if (result.isOpenRosaResponse) {
-        	Log.i("ddddddddddddddddd","laaaaaaaa");
-            // Attempt OpenRosa 1.0 parsing
+        	// Attempt OpenRosa 1.0 parsing
             Element xformsElement = result.doc.getRootElement();
             if (!xformsElement.getName().equals("xforms")) {
                 String error = "root element is not <xforms> : " + xformsElement.getName();
@@ -169,7 +168,6 @@ public class DownloadFormListTask extends AsyncTask<Void, String, HashMap<String
                         }
                     } else if (tag.equals("version")) {
                         version = XFormParser.getXMLText(child, true);
-                        Log.i("dvvvvvvvvvvvvvvvvv",""+version);
                         if (version != null && version.length() == 0) {
                         	version = null;
                         }
