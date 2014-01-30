@@ -139,8 +139,7 @@ import de.keyboardsurfer.mobile.app.android.widget.crouton.Style;
 
 @SuppressLint("NewApi")
 public class ActivityForm extends SherlockActivity implements AnimationListener, FormLoaderListener, FormSavedListener,
-AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener,
-InstanceUploaderListener, DeleteInstancesListener {
+AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUploaderListener, DeleteInstancesListener {
 	private static final String t = "FormEntryActivity";
 
 	// save with every swipe forward or back. Timings indicate this takes .25
@@ -253,6 +252,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 	private boolean exit_to_home=false;
 	private final int RESULT_PREFERENCES=1;
 	private String form_name;
+	private boolean fail=false;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -2502,6 +2502,15 @@ InstanceUploaderListener, DeleteInstancesListener {
 	 */
 	@Override
 	public void savingComplete(int saveStatus) {
+		if (fail)
+		{
+			fail=false;
+			ContentValues cv = new ContentValues();
+			Uri toUpdate;
+			toUpdate = Uri.withAppendedPath(InstanceColumns.CONTENT_URI, ""+InstanceProvider.getLastIdInstance());
+			cv.put(InstanceColumns.STATUS, InstanceProviderAPI.STATUS_SUBMISSION_FAILED);
+	        Collect.getInstance().getContentResolver().update(toUpdate, cv, null, null);
+		}
 		dismissDialog(SAVING_DIALOG);
 		switch (saveStatus) {
 		case SaveToDiskTask.SAVED:
@@ -2530,7 +2539,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 		// send list of _IDs.
 
 		mInstancesToSend = new Long[1];
-		mInstancesToSend[0] = InstanceProvider.getLastIdSaved();
+		mInstancesToSend[0] = InstanceProvider.getLastIdInstance();
 
 		InstanceUploaderTask mInstanceUploaderTask = (InstanceUploaderTask) getLastNonConfigurationInstance();
 		if (mInstanceUploaderTask == null) {
@@ -2820,7 +2829,14 @@ InstanceUploaderListener, DeleteInstancesListener {
                             results.getString(results.getColumnIndex(InstanceColumns.DISPLAY_NAME));
                         String id = results.getString(results.getColumnIndex(BaseColumns._ID));
                         if (!result.get(id).equals(getString(R.string.success)))
+                        {
+                        	ContentValues cv = new ContentValues();
+                			Uri toUpdate;
+                			toUpdate = Uri.withAppendedPath(InstanceColumns.CONTENT_URI, ""+InstanceProvider.getLastIdInstance());
+                			cv.put(InstanceColumns.STATUS, InstanceProviderAPI.STATUS_SUBMISSION_FAILED);
+                	        Collect.getInstance().getContentResolver().update(toUpdate, cv, null, null);
                         	message.append(name + " - " + getString(R.string.fail) + "\n\n");
+                        }
                         else
                         	message.append(name + " - " + result.get(id) + "\n\n");
                     }
@@ -2943,6 +2959,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 				if (ni == null || !ni.isConnected())
 				{
 					// no network connection
+					fail=true;
 					CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.no_connexion), Style.ALERT);
 					saveDataToDisk(false, true, save_as.toString());
 				}
@@ -2958,6 +2975,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 				NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
 				if (ni == null || !ni.isConnected())
 				{
+					fail=true;
 					CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.no_connexion), Style.ALERT);
 					saveDataToDisk(false, true, save_as.toString());
 				}
