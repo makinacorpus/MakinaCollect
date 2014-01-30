@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -70,7 +69,6 @@ import com.makina.collect.android.tasks.DiskSyncTask;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.views.CroutonView;
-import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
 
 import de.keyboardsurfer.mobile.app.android.widget.crouton.Style;
@@ -113,14 +111,12 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         
         Finish.activityEditForm=this;
         
-        getSupportActionBar().setTitle(getString(R.string.edit));
-        getSupportActionBar().setSubtitle(getString(R.string.form));
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
-        TextView actionbarTitle = (TextView)findViewById(titleId);
-        titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-        TextView actionbarSubTitle = (TextView)findViewById(titleId);
-        CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.actionbar_title_layout_edit_form, null);
+        getSupportActionBar().setCustomView(v);
         
         if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_edit", false))
                 DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_title2), getString(R.string.help_edit));
@@ -177,6 +173,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         
     }
     
+   
     private void createDialogDelete(final int position)
     {
     	final Form formDeleted=forms.get(position);
@@ -521,16 +518,14 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         
         @Override
         public void onConfigurationChanged(Configuration newConfig) {
-            super.onConfigurationChanged(newConfig);
-            int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
-            TextView actionbarTitle = (TextView)findViewById(titleId);
-            titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-            TextView actionbarSubTitle = (TextView)findViewById(titleId);
-            CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
-            
-            /*Intent i = getIntent();
-			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			startActivity(i);*/
+        	// TODO Auto-generated method stub
+        	super.onConfigurationChanged(newConfig);
+        	LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        	View v;
+        	if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE)
+        		v = inflator.inflate(R.layout.actionbar_title_layout_edit_form_land, null);
+            else
+            	v = inflator.inflate(R.layout.actionbar_title_layout_edit_form, null);
+            getSupportActionBar().setCustomView(v);
         }
-
 }

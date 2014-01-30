@@ -22,7 +22,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -61,7 +61,6 @@ import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
-import com.makina.collect.android.views.CustomActionBar;
 
 import de.timroes.swipetodismiss.SwipeDismissList;
 import de.timroes.swipetodismiss.SwipeDismissList.UndoMode;
@@ -173,16 +172,14 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_saved", false))
     		DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_title3),getString(R.string.help_save));
     	
-    	getSupportActionBar().setTitle(getString(R.string.finalize));
-    	getSupportActionBar().setSubtitle(getString(R.string.my_forms));
-    	getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    	int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
-    	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	int subTitleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-    	TextView actionbarSubTitle = (TextView)findViewById(subTitleId);
-    	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorBlueSave), getResources().getColor(R.color.actionbarTitleColorGris));
+    	getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.actionbar_title_layout_save_form, null);
+        getSupportActionBar().setCustomView(v);
     	
-    	loadListView();
+        loadListView();
         
         getListView().setOnItemLongClickListener(new OnItemLongClickListener()
         {
@@ -359,6 +356,17 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         return true;
      }
 	
-	
+	@Override
+    public void onConfigurationChanged(Configuration newConfig) {
+    	// TODO Auto-generated method stub
+    	super.onConfigurationChanged(newConfig);
+    	LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    	View v;
+    	if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE)
+    		v = inflator.inflate(R.layout.actionbar_title_layout_save_form_land, null);
+        else
+        	v = inflator.inflate(R.layout.actionbar_title_layout_save_form, null);
+        getSupportActionBar().setCustomView(v);
+    }
 
 }

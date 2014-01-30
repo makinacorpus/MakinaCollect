@@ -24,7 +24,7 @@ import org.javarosa.form.api.FormEntryPrompt;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -53,7 +53,6 @@ import com.makina.collect.android.logic.HierarchyElement;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
-import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
 import com.makina.collect.android.views.CustomListViewExpanded;
 
@@ -95,15 +94,13 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 		// We use a static FormEntryController to make jumping faster.
 		mStartIndex = formController.getFormIndex();
 
-		getSupportActionBar().setTitle(getString(R.string.edit));
-        getSupportActionBar().setSubtitle(getString(R.string.form));
+		getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
-    	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-    	TextView actionbarSubTitle = (TextView)findViewById(titleId);
-    	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenEdit), getResources().getColor(R.color.actionbarTitleColorGris));
-    	
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.actionbar_title_layout_edit_form, null);
+        getSupportActionBar().setCustomView(v);
+        
     	listView_hierarchy=(CustomListViewExpanded)findViewById(R.id.listView_hierarchy);
     	listView_hierarchy.setExpanded(true);
     	// kinda slow, but works.
@@ -535,5 +532,18 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(i);
     	}
+    }
+	
+	@Override
+    public void onConfigurationChanged(Configuration newConfig) {
+    	// TODO Auto-generated method stub
+    	super.onConfigurationChanged(newConfig);
+    	LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    	View v;
+    	if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE)
+    		v = inflator.inflate(R.layout.actionbar_title_layout_edit_form_land, null);
+        else
+        	v = inflator.inflate(R.layout.actionbar_title_layout_edit_form, null);
+        getSupportActionBar().setCustomView(v);
     }
 }

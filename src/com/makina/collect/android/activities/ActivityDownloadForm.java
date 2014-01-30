@@ -23,7 +23,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -71,7 +71,6 @@ import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.WebUtils;
 import com.makina.collect.android.views.CroutonView;
-import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
 
 import de.keyboardsurfer.mobile.app.android.widget.crouton.Style;
@@ -154,15 +153,13 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
         
         listView=(ListView)findViewById(R.id.listView);
         
-        getSupportActionBar().setTitle(getString(R.string.download_action_bar));
-        getSupportActionBar().setSubtitle(getString(R.string.form));
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
-    	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-    	TextView actionbarSubTitle = (TextView)findViewById(titleId);
-    	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenDownload), getResources().getColor(R.color.actionbarTitleColorGris));
-    	
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.actionbar_title_layout_download_form, null);
+        getSupportActionBar().setCustomView(v);
+        
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_download", false))
     	DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_title1), getString(R.string.help_download));
     	
@@ -962,4 +959,17 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
 			startActivity(i);
     	}
     }  
+    
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+    	// TODO Auto-generated method stub
+    	super.onConfigurationChanged(newConfig);
+    	LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    	View v;
+    	if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE)
+    		v = inflator.inflate(R.layout.actionbar_title_layout_download_form_land, null);
+        else
+        	v = inflator.inflate(R.layout.actionbar_title_layout_download_form, null);
+        getSupportActionBar().setCustomView(v);
+    }
 }

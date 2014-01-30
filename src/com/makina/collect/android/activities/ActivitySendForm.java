@@ -27,7 +27,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
@@ -81,7 +81,6 @@ import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.WebUtils;
 import com.makina.collect.android.views.CroutonView;
-import com.makina.collect.android.views.CustomActionBar;
 
 import de.keyboardsurfer.mobile.app.android.widget.crouton.Style;
 import de.timroes.swipetodismiss.SwipeDismissList;
@@ -236,15 +235,13 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
         
         listView=(ListView) findViewById(R.id.listView);
         
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    	getSupportActionBar().setTitle(getString(R.string.my_forms_send));
-    	getSupportActionBar().setSubtitle(getString(R.string.to_send));
-    	int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
-    	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	titleId = Resources.getSystem().getIdentifier("action_bar_subtitle", "id", "android");
-    	TextView actionbarSubTitle = (TextView)findViewById(titleId);
-    	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGris), getResources().getColor(R.color.actionbarTitleColorBlueSend));
-    	
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.actionbar_title_layout_send_form, null);
+        getSupportActionBar().setCustomView(v);
+        
         mProgressDialog = new ProgressDialog(this);
     	
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_send", false))
@@ -891,5 +888,18 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(i);
     	}
+    }
+	
+	@Override
+    public void onConfigurationChanged(Configuration newConfig) {
+    	// TODO Auto-generated method stub
+    	super.onConfigurationChanged(newConfig);
+    	LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    	View v;
+    	if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE)
+    		v = inflator.inflate(R.layout.actionbar_title_layout_send_form_land, null);
+        else
+        	v = inflator.inflate(R.layout.actionbar_title_layout_send_form, null);
+        getSupportActionBar().setCustomView(v);
     }
 }

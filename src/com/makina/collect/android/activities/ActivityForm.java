@@ -41,7 +41,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -121,7 +121,6 @@ import com.makina.collect.android.utilities.FileUtils;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.MediaUtils;
 import com.makina.collect.android.views.CroutonView;
-import com.makina.collect.android.views.CustomActionBar;
 import com.makina.collect.android.views.CustomFontTextview;
 import com.makina.collect.android.views.CustomListViewExpanded;
 import com.makina.collect.android.views.ODKView;
@@ -277,18 +276,13 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		setContentView(R.layout.activity_form_entry);
 		textView_quiz_question_number = (CustomFontTextview) findViewById(R.id.textView_quiz_question_number);
 		textView_quiz_name = ((CustomFontTextview) findViewById(R.id.textView_quiz_name));
-		getSupportActionBar().setTitle(getString(R.string.edit));
-		getSupportActionBar().setSubtitle(getString(R.string.form));
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		int titleId = Resources.getSystem().getIdentifier("action_bar_title",
-				"id", "android");
-		TextView actionbarTitle = (TextView) findViewById(titleId);
-		titleId = Resources.getSystem().getIdentifier("action_bar_subtitle",
-				"id", "android");
-		TextView actionbarSubTitle = (TextView) findViewById(titleId);
-		CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle,
-				getResources().getColor(R.color.actionbarTitleColorGreenEdit),
-				getResources().getColor(R.color.actionbarTitleColorGris));
+		
+		getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.actionbar_title_layout_edit_form, null);
+        getSupportActionBar().setCustomView(v);
 		
 		Intent intent = getIntent();
 		
@@ -3201,5 +3195,18 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		alert.show();
 		
 	}
+	
+	@Override
+    public void onConfigurationChanged(Configuration newConfig) {
+    	// TODO Auto-generated method stub
+    	super.onConfigurationChanged(newConfig);
+    	LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    	View v;
+    	if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE)
+    		v = inflator.inflate(R.layout.actionbar_title_layout_edit_form_land, null);
+        else
+        	v = inflator.inflate(R.layout.actionbar_title_layout_edit_form, null);
+        getSupportActionBar().setCustomView(v);
+    }
 }
 
