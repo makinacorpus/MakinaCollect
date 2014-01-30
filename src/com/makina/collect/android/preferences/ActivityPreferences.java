@@ -15,6 +15,7 @@
 package com.makina.collect.android.preferences;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import android.accounts.Account;
@@ -165,8 +166,6 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 		
 		Finish.activityPreferences=this;
 		
-		
-		
 		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
 		setTitle(getString(R.string.settings));
 		int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
@@ -251,7 +250,10 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 
 		mLanguagePreference = (ListPreference) findPreference(KEY_LANGUAGE);
 		if (mLanguagePreference.getEntry()==null)
+		{
 			mLanguagePreference.setSummary(getString(R.string.current_language));
+			mLanguagePreference.setValueIndex(Arrays.asList(getResources().getStringArray(R.array.language_entries)).indexOf(getString(R.string.current_language)));
+		}
 		else
 			mLanguagePreference.setSummary(mLanguagePreference.getEntry());
 		mLanguagePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
