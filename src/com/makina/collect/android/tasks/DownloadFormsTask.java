@@ -485,7 +485,6 @@ public class DownloadFormsTask extends
                     return "cancelled";
                 }
                 ++mediaCount;
-                
                 publishProgress(
                     Collect.getInstance().getString(R.string.form_download_progress, fd.formName,
                         mediaCount, files.size()), Integer.valueOf(count).toString(), Integer

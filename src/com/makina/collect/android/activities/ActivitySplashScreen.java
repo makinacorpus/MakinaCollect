@@ -1,20 +1,22 @@
 package com.makina.collect.android.activities;
+import java.io.File;
+
 import ly.count.android.api.Countly;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Window;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
-import com.makina.collect.android.provider.InstanceProvider;
+
 import com.makina.collect.android.theme.Theme;
 
 public class ActivitySplashScreen extends Activity {
 
     private static final int mSplashTimeout = 3000; // milliseconds
-
+    private long folder_size;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,14 +37,20 @@ public class ActivitySplashScreen extends Activity {
             return;
         }
 
-        
-        if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("first_time", false))
+        String url = PreferenceManager.getDefaultSharedPreferences(this).getString("server_url", "");
+		if ((url==null) || (url.equals("")))
 		{
-        	InstanceProvider.deleteAllInstances();
-        	SharedPreferences.Editor prefsEditor = getSharedPreferences("session", MODE_PRIVATE).edit();
-		    prefsEditor.putBoolean("first_time", true);
-		    prefsEditor.commit();
+			final File f = new File(Collect.FORMS_PATH);
+			if(f.isDirectory())
+			{
+				folder_size = 0;
+		        File[] fileList = f.listFiles();
+		        for(int i = 0; i < fileList.length; i++)
+		        	folder_size += fileList[i].length();
+		    }
 		}
+		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+		
         
         startSplashScreen();
 
@@ -52,7 +60,11 @@ public class ActivitySplashScreen extends Activity {
     private void endSplashScreen()
     {
     	// launch new activity and close splash screen
-        startActivity(new Intent(ActivitySplashScreen.this, ActivityDashBoard.class));
+    	Intent mIntent=new Intent(getApplicationContext(), ActivityDashBoard.class);
+    	Bundle mBundle=new Bundle();
+    	mBundle.putLong("folder_size", folder_size);
+    	mIntent.putExtras(mBundle);
+        startActivity(mIntent);
         finish();
     }
 

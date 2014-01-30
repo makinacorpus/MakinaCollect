@@ -185,6 +185,13 @@ public class FormsProvider extends ContentProvider {
     	mDbHelper = new DatabaseHelper(DATABASE_NAME);
     }
 
+    public static void deleteAllForms()
+    {
+    	SQLiteDatabase db = mDbHelper.getWritableDatabase();
+    	db.delete(FORMS_TABLE_NAME, null, null);
+    	db.close();
+    }
+    
     @Override
     public boolean onCreate() {
 

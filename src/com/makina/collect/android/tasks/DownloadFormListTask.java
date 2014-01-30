@@ -97,7 +97,7 @@ public class DownloadFormListTask extends AsyncTask<Void, String, HashMap<String
         }
 
         if (result.isOpenRosaResponse) {
-        	// Attempt OpenRosa 1.0 parsing
+            // Attempt OpenRosa 1.0 parsing
             Element xformsElement = result.doc.getRootElement();
             if (!xformsElement.getName().equals("xforms")) {
                 String error = "root element is not <xforms> : " + xformsElement.getName();
@@ -210,11 +210,9 @@ public class DownloadFormListTask extends AsyncTask<Void, String, HashMap<String
         } else {
             // Aggregate 0.9.x mode...
             // populate HashMap with form names and urls
-        	Log.i("ddddddddddddddddd","iciii");
             Element formsElement = result.doc.getRootElement();
             int formsCount = formsElement.getChildCount();
             String formId = null;
-            String version = null;
             for (int i = 0; i < formsCount; ++i) {
                 if (formsElement.getType(i) != Node.ELEMENT) {
                     // whitespace
@@ -226,12 +224,6 @@ public class DownloadFormListTask extends AsyncTask<Void, String, HashMap<String
                     formId = XFormParser.getXMLText(child, true);
                     if (formId != null && formId.length() == 0) {
                         formId = null;
-                    }
-                }
-                if (tag.equals("version")) {
-                    version = XFormParser.getXMLText(child, true);
-                    if (version != null && version.length() == 0) {
-                    	version = null;
                     }
                 }
                 if (tag.equalsIgnoreCase("form")) {
@@ -256,7 +248,7 @@ public class DownloadFormListTask extends AsyncTask<Void, String, HashMap<String
                                 R.string.parse_legacy_formlist_failed, error)));
                         return formList;
                     }
-                    formList.put(formName, new FormDetails(formName, downloadUrl, null, formId, version));
+                    formList.put(formName, new FormDetails(formName, downloadUrl, null, formId, null));
 
                     formId = null;
                 }

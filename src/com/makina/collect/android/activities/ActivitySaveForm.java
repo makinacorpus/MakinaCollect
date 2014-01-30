@@ -56,7 +56,6 @@ import com.makina.collect.android.dialog.DialogExit;
 import com.makina.collect.android.dialog.DialogHelpWithConfirmation;
 import com.makina.collect.android.model.Form;
 import com.makina.collect.android.preferences.ActivityPreferences;
-import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
@@ -77,7 +76,6 @@ import de.timroes.swipetodismiss.SwipeDismissList.Undoable;
 public class ActivitySaveForm extends SherlockListActivity implements SearchView.OnQueryTextListener{
 
 	private AlertDialog mAlertDialog;
-    private Cursor c;
     private FormsListAdapter instances;
     private Menu menu;
     private final int RESULT_PREFERENCES=1;

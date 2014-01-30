@@ -229,7 +229,7 @@ public class InstanceProvider extends ContentProvider {
         }
     }
 
-    private void deleteAllFilesInDirectory(File directory) {
+    public static void deleteAllFilesInDirectory(File directory) {
         if (directory.exists()) {
             if (directory.isDirectory()) {
             	// delete any media entries for files in this directory...
@@ -318,7 +318,7 @@ public class InstanceProvider extends ContentProvider {
         return count;
     }
 
-    public static long getLastIdSaved()
+    public static long getLastIdInstance()
     {
     	SQLiteDatabase db = mDbHelper.getWritableDatabase();
     	long id=0;

@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
@@ -140,23 +139,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     private SearchView mSearchView;
     
     
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-    	Theme.changeTheme(this);
-        super.onConfigurationChanged(newConfig);
-        int orient = getResources().getConfiguration().orientation; 
-        switch(orient)
-        {
-            case Configuration.ORIENTATION_LANDSCAPE:
-            	getSupportActionBar().setTitle(getString(R.string.download_action_bar)+" "+getString(R.string.form));
-            	getSupportActionBar().setSubtitle("");
-            	break;
-            case Configuration.ORIENTATION_PORTRAIT:
-            	getSupportActionBar().setTitle(getString(R.string.download_action_bar));
-            	getSupportActionBar().setSubtitle(getString(R.string.form));
-            	break;
-         }
-    }
+   
     
     @SuppressWarnings("unchecked")
     @Override
@@ -181,8 +164,8 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     	CustomActionBar.showActionBar(this, actionbarTitle, actionbarSubTitle, getResources().getColor(R.color.actionbarTitleColorGreenDownload), getResources().getColor(R.color.actionbarTitleColorGris));
     	
     	if (!getSharedPreferences("session", MODE_PRIVATE).getBoolean("help_download", false))
-    		DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_title1), getString(R.string.help_download));
-		
+    	DialogHelpWithConfirmation.helpDialog(this, getString(R.string.help_title1), getString(R.string.help_download));
+    	
     	
     	
         // need clear background before load
@@ -273,9 +256,71 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
 		        	textView_pannier.setText(mSelected.size()+" "+getString(R.string.forms_selected));
 		    }
 		});
-		
+        
     }
 
+    @Override
+    public void onResume() {
+        
+        if (this.getLastNonConfigurationInstance() instanceof DownloadFormListTask)
+        {
+        mDownloadFormListTask = (DownloadFormListTask) this.getLastNonConfigurationInstance();
+        if (mDownloadFormListTask.getStatus() == AsyncTask.Status.FINISHED)
+        {
+            try
+            {
+                this.dismissDialog(PROGRESS_DIALOG);
+            }
+            catch (IllegalArgumentException e)
+            {
+                Log.i(t, "Attempting to close a dialog that was not previously opened");
+            }
+            mDownloadFormsTask = null;
+        }
+    }
+        else if (this.getLastNonConfigurationInstance() instanceof DownloadFormsTask)
+        {
+        mDownloadFormsTask = (DownloadFormsTask) this.getLastNonConfigurationInstance();
+        if (mDownloadFormsTask.getStatus() == AsyncTask.Status.FINISHED)
+        {
+            try
+            {
+                this.dismissDialog(PROGRESS_DIALOG);
+            }
+            catch (IllegalArgumentException e)
+            {
+                Log.i(t, "Attempting to close a dialog that was not previously opened");
+            }
+            mDownloadFormsTask = null;
+        }
+    }
+        else if (this.getLastNonConfigurationInstance() == null)
+        {
+        // first time, so get the formlist
+        downloadFormList();
+    }
+        
+        String[] data = new String[] {FORMNAME, FORMID_DISPLAY, FORMDETAIL_KEY};
+    int[] view = new int[] {R.id.text1, R.id.text2};
+
+    mFormListAdapter =new SimpleAdapter(this, mFormList, R.layout.listview_item_download_form, data, view);
+    listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+    listView.setItemsCanFocus(false);
+    listView.setAdapter(mFormListAdapter);
+    
+    if (mDownloadFormListTask != null) {
+        mDownloadFormListTask.setDownloaderListener(this);
+    }
+    if (mDownloadFormsTask != null) {
+        mDownloadFormsTask.setDownloaderListener(this);
+    }
+    if (mAlertShowing)
+    {
+        createAlertDialog(mAlertTitle, mAlertMsg, mShouldExit);
+    }
+    
+    super.onResume();
+}
 
     @Override
 	public void onStart() {
@@ -566,7 +611,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     }
 
    
-    @Override
+   /* @Override
 	public void onResume() {
     	
     	if (this.getLastNonConfigurationInstance() instanceof DownloadFormListTask)
@@ -627,7 +672,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
         }
         
         super.onResume();
-    }
+    }*/
 
 
     @Override
@@ -916,8 +961,5 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
 			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(i);
     	}
-    }
-
-    
-    
+    }  
 }

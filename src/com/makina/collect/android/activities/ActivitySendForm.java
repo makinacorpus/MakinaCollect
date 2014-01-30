@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -483,32 +484,42 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
 
-		if (NetworkReceiver.running == true) 
+		if (mSelected.size() == 0) 
+		{
+			CroutonView.showBuiltInCrouton(ActivitySendForm.this, getString(R.string.noselect_error), Style.ALERT);
+	    	
+		}
+		else if (NetworkReceiver.running == true) 
 		{
 			//another upload is already running
 			CroutonView.showBuiltInCrouton(ActivitySendForm.this, "Background send running, please try again shortly", Style.ALERT);
-    		
+			ContentValues cv = new ContentValues();
+			Uri toUpdate;
+			for (int i=0; i<mSelected.size(); i++)
+			{
+				toUpdate = Uri.withAppendedPath(InstanceColumns.CONTENT_URI, ""+mSelected.get(i));
+				cv.put(InstanceColumns.STATUS, InstanceProviderAPI.STATUS_SUBMISSION_FAILED);
+                Collect.getInstance().getContentResolver().update(toUpdate, cv, null, null);
+			}
 		} 
 		else if (ni == null || !ni.isConnected()) 
 		{
 			//no network connection
 			Collect.getInstance().getActivityLogger().logAction(this, "uploadButton", "noConnection");
 			CroutonView.showBuiltInCrouton(ActivitySendForm.this, getString(R.string.no_connexion), Style.ALERT);
+			ContentValues cv = new ContentValues();
+			Uri toUpdate;
+			for (int i=0; i<mSelected.size(); i++)
+			{
+				toUpdate = Uri.withAppendedPath(InstanceColumns.CONTENT_URI, ""+mSelected.get(i));
+				cv.put(InstanceColumns.STATUS, InstanceProviderAPI.STATUS_SUBMISSION_FAILED);
+                Collect.getInstance().getContentResolver().update(toUpdate, cv, null, null);
+			}
 		} 
 		else
 		{
 			Collect.getInstance().getActivityLogger().logAction(this, "uploadButton",Integer.toString(mSelected.size()));
-
-			if (mSelected.size() > 0) 
-			{
-				// items selected
-				uploadSelectedFiles();
-			}
-			else 
-			{
-				// no items selected
-				CroutonView.showBuiltInCrouton(ActivitySendForm.this, getString(R.string.noselect_error), Style.ALERT);
-	    	}
+			uploadSelectedFiles();
 		}
 	}
 	

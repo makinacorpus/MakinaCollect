@@ -4,7 +4,6 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.content.res.Resources;
-import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 

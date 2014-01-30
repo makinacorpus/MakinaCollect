@@ -16,6 +16,7 @@ package com.makina.collect.android.activities;
 
 import ly.count.android.api.Countly;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Typeface;
@@ -30,6 +31,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.WazaBe.HoloEverywhere.app.AlertDialog;
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -38,6 +40,8 @@ import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.dialog.DialogExit;
 import com.makina.collect.android.preferences.ActivityPreferences;
+import com.makina.collect.android.provider.FormsProvider;
+import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.views.CustomFontButton;
@@ -77,6 +81,25 @@ public class ActivityDashBoard extends SherlockActivity implements
                 btnSave.setOnClickListener(this);
                 CustomFontButton btnSend = (CustomFontButton) findViewById(R.id.dashboard_send);
                 btnSend.setOnClickListener(this);
+                
+                if (getIntent().getExtras().getLong("folder_size")>0)
+		        {
+					AlertDialog.Builder adb = new AlertDialog.Builder(this);
+					adb.setTitle(getString(R.string.delete));
+					adb.setMessage("Vous possédé de formulaires vierges ou remplis anciens. Voulez-vous les supprimer?");
+					adb.setIconAttribute(android.R.attr.alertDialogIcon);
+					adb.setNegativeButton(getString(android.R.string.cancel),null);
+					adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
+					{
+						public void onClick(DialogInterface dialog,int which)
+						{
+							InstanceProvider.deleteAllInstances();
+							FormsProvider.deleteAllForms();
+							FormsProvider.deleteFileOrDir(Collect.ODK_ROOT);
+						}
+					});
+					adb.show();
+		        }
         }
 
         @Override

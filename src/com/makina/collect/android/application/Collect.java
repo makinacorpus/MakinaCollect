@@ -189,7 +189,7 @@ public class Collect extends Application {
         // log.enableInfo(false);
         // log.enableDebug(false);
 
-        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+       
         super.onCreate();
 
         PropertyManager mgr = new PropertyManager(this);

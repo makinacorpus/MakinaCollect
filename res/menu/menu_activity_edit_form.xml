@@ -8,11 +8,6 @@
         android:showAsAction="always"
         android:title="@string/search"/>
     <item
-        android:id="@+id/menu_refresh"
-        android:icon="@drawable/actionbar_refresh"
-        android:showAsAction="always"
-        android:title="@string/refresh"/>
-    <item
         android:id="@+id/menu_other"
         android:icon="@drawable/actionbar_menu"
         android:orderInCategory="100"
