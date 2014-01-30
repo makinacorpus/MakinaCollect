@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import android.annotation.SuppressLint;
@@ -52,7 +53,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import com.WazaBe.HoloEverywhere.app.AlertDialog;
@@ -62,14 +62,15 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
+import com.makina.collect.android.adapters.FormsListAdapter;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.dialog.DialogExit;
 import com.makina.collect.android.dialog.DialogHelpWithConfirmation;
 import com.makina.collect.android.listeners.DeleteInstancesListener;
 import com.makina.collect.android.listeners.InstanceUploaderListener;
+import com.makina.collect.android.model.Form;
 import com.makina.collect.android.preferences.ActivityPreferences;
-import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.provider.InstanceProviderAPI.InstanceColumns;
@@ -108,7 +109,8 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 	private String mAlertMsg;
 
 	//private boolean mShowUnsent = true;
-	private SimpleCursorAdapter mInstances;
+	private FormsListAdapter mInstances;
+	 private List<Form> forms;
 	private ArrayList<Long> mSelected = new ArrayList<Long>();
 	private boolean mRestored = false;
 	private boolean mToggled = false;
@@ -340,20 +342,28 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
         new SwipeDismissList(listView, callback, mode);
 	}
 	
-	private void createDialogDelete(int position)
+	private void createDialogDelete(final int position)
     {
-    	final Cursor c=mInstances.getCursor();
-		c.moveToPosition(position);
+		final Form formDeleted=forms.get(position);
+		forms.remove(position);
+    	mInstances.notifyDataSetChanged();
 		AlertDialog.Builder adb = new AlertDialog.Builder(ActivitySendForm.this);
 		adb.setTitle(getString(R.string.delete));
-		adb.setMessage(getString(R.string.delete_confirmation,c.getString(c.getColumnIndex(FormsColumns.DISPLAY_NAME))));
+		adb.setMessage(getString(R.string.delete_confirmation,formDeleted.getName()));
 		adb.setIcon(android.R.drawable.ic_menu_delete);
-		adb.setNegativeButton(getString(android.R.string.cancel),null);
+		adb.setNegativeButton(getString(android.R.string.cancel),new AlertDialog.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog,int which)
+            {
+            	forms.add(position, formDeleted);
+            	mInstances.notifyDataSetChanged();
+            }
+        });
 		adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
 		{
 			public void onClick(DialogInterface dialog,int which)
 			{
-				InstanceProvider.deleteInstance(c.getLong(c.getColumnIndex(BaseColumns._ID)));
+				InstanceProvider.deleteInstance(formDeleted.getId());
 				loadListView();
 			}
 		});
@@ -364,11 +374,15 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 	{
 		Cursor c = getAllCursor("");
 
-		String[] data = new String[] { InstanceColumns.DISPLAY_NAME,InstanceColumns.DISPLAY_SUBTEXT };
-		int[] view = new int[] { R.id.text1, R.id.text2 };
-
 		// render total instance view
-		mInstances = new SimpleCursorAdapter(this,R.layout.listview_item_send_form, c, data, view);
+		if(c.getCount()> 0)
+		{
+			forms=new ArrayList<Form>();
+			while (c.moveToNext())
+				forms.add(new Form(c.getInt(c.getColumnIndex(BaseColumns._ID)),c.getString(c.getColumnIndex(InstanceColumns.JR_FORM_ID)),c.getString(c.getColumnIndex(InstanceColumns.DISPLAY_NAME)), c.getString(c.getColumnIndex(InstanceColumns.DISPLAY_SUBTEXT)),c.getString(c.getColumnIndex(InstanceColumns.INSTANCE_FILE_PATH)),""));
+			mInstances=new FormsListAdapter(this, forms);
+	        listView.setAdapter(mInstances);
+		}
 		
 		listView.setAdapter(mInstances);
 		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
@@ -578,11 +592,14 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 		// TODO Auto-generated method stub
 		Cursor c = getAllCursor(newText);
 
-		String[] data = new String[] { InstanceColumns.DISPLAY_NAME,InstanceColumns.DISPLAY_SUBTEXT };
-		int[] view = new int[] { R.id.text1, R.id.text2 };
-
-		// render total instance view
-		mInstances = new SimpleCursorAdapter(this,R.layout.listview_item_send_form, c, data, view);
+		if(c.getCount()> 0)
+		{
+			forms=new ArrayList<Form>();
+			while (c.moveToNext())
+				forms.add(new Form(c.getInt(c.getColumnIndex(BaseColumns._ID)),c.getString(c.getColumnIndex(InstanceColumns.JR_FORM_ID)),c.getString(c.getColumnIndex(InstanceColumns.DISPLAY_NAME)), c.getString(c.getColumnIndex(InstanceColumns.DISPLAY_SUBTEXT)),c.getString(c.getColumnIndex(InstanceColumns.INSTANCE_FILE_PATH)),""));
+			mInstances=new FormsListAdapter(this, forms);
+	        listView.setAdapter(mInstances);
+		}
 		
 		listView.setAdapter(mInstances);
         for (int i=0;i<listView.getCount();i++)
