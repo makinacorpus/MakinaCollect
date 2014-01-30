@@ -565,11 +565,11 @@ public class FormsProvider extends ContentProvider {
         return count;
     }
 
-    public static void deleteForm(String form_name)
+    public static void deleteForm(String form_id)
     {
     	mDbHelper=new DatabaseHelper(DATABASE_NAME);
     	SQLiteDatabase db = mDbHelper.getWritableDatabase();
-    	db.delete(FORMS_TABLE_NAME, FormsColumns.DISPLAY_NAME +"='"+form_name+"'", null);
+    	db.delete(FORMS_TABLE_NAME, FormsColumns.JR_FORM_ID +"='"+form_id+"'", null);
     }
     static {
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
