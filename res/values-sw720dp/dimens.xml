@@ -15,6 +15,6 @@
   -->
 
 <resources>
-    <dimen name="margin_icon_dashboard1">100dp</dimen>
-    <dimen name="margin_icon_dashboard2">180dp</dimen>
+    <dimen name="margin_icon_dashboard1">120dp</dimen>
+    <dimen name="margin_icon_dashboard2">250dp</dimen>
 </resources>
