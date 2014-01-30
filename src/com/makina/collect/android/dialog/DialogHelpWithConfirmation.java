@@ -15,15 +15,15 @@ import com.makina.collect.android.views.CustomFontTextview;
 public class DialogHelpWithConfirmation
 {
 	public static CustomFontCheckBox checkbox_help;
-	public static CustomFontTextview textview_help;
+	public static CustomFontTextview textview_help_title;
 	public static void helpDialog(final Context context, String title, String message)
 	{
 		final Dialog dialog_help = new Dialog(context);
 		dialog_help.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog_help.setContentView(R.layout.dialog_help_with_confirmation);
 		
-        textview_help=(CustomFontTextview)dialog_help.findViewById(R.id.textview_help);
-        CustomFontTextview textview_help_title=(CustomFontTextview)dialog_help.findViewById(R.id.textview_help_title);
+		CustomFontTextview textview_help=(CustomFontTextview)dialog_help.findViewById(R.id.textview_help);
+		textview_help_title=(CustomFontTextview)dialog_help.findViewById(R.id.textview_help_title);
         textview_help_title.setText(title);
         checkbox_help=(CustomFontCheckBox) dialog_help.findViewById(R.id.checkbox_help);
 		RelativeLayout linearlayout_ok=(RelativeLayout) dialog_help.findViewById(R.id.linearlayout_ok);
@@ -36,31 +36,31 @@ public class DialogHelpWithConfirmation
 			{
 				if (checkbox_help.isChecked())
 				{
-					if (textview_help.getText().toString().equals(context.getString(R.string.help_download)))
+					if (textview_help_title.getText().toString().equals(context.getString(R.string.help_title1)))
 					{
 						SharedPreferences.Editor prefsEditor = context.getSharedPreferences("session", Context.MODE_PRIVATE).edit();
 					    prefsEditor.putBoolean("help_download", true);
 					    prefsEditor.commit();
 					}
-					else if (textview_help.getText().toString().equals(context.getString(R.string.help_edit)))
+					else if (textview_help_title.getText().toString().equals(context.getString(R.string.help_title2)))
 					{
 						SharedPreferences.Editor prefsEditor = context.getSharedPreferences("session", Context.MODE_PRIVATE).edit();
 					    prefsEditor.putBoolean("help_edit", true);
 					    prefsEditor.commit();
 					}
-					else if (textview_help.getText().toString().equals(context.getString(R.string.help_save)))
+					else if (textview_help_title.getText().toString().equals(context.getString(R.string.help_title3)))
 					{
 						SharedPreferences.Editor prefsEditor = context.getSharedPreferences("session", Context.MODE_PRIVATE).edit();
 					    prefsEditor.putBoolean("help_saved", true);
 					    prefsEditor.commit();
 					}
-					else if (textview_help.getText().toString().equals(context.getString(R.string.help_send)))
+					else if (textview_help_title.getText().toString().equals(context.getString(R.string.help_title4)))
 					{
 						SharedPreferences.Editor prefsEditor = context.getSharedPreferences("session", Context.MODE_PRIVATE).edit();
 					    prefsEditor.putBoolean("help_send", true);
 					    prefsEditor.commit();
 					}
-					else if (textview_help.getText().toString().equals(context.getString(R.string.help_form)))
+					else if (textview_help_title.getText().toString().equals(context.getString(R.string.help_title2)))
 					{
 						SharedPreferences.Editor prefsEditor = context.getSharedPreferences("session", Context.MODE_PRIVATE).edit();
 					    prefsEditor.putBoolean("help_form", true);
