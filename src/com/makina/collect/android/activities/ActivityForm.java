@@ -3140,7 +3140,7 @@ InstanceUploaderListener, DeleteInstancesListener {
 	
 	private void changeButtonNext(Drawable background, int id_style, String value)
 	{
-		mNextButton.setBackground(background);
+		mNextButton.setBackgroundDrawable(background);
 		mNextButton.setTextAppearance(this, id_style);
 		mNextButton.setText(value);
 	}

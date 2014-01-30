@@ -12,6 +12,8 @@
 -->
 <resources>
 
+    <string name="current_language">English</string>
+    
     <!-- Alert Dialig -->
     <string name="delete">Delete</string>
     <string name="delete_confirmation">Do you really want to delete %s ?</string>
