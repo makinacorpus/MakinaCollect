@@ -148,10 +148,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	private static final int SAVEPOINT_INTERVAL = 1;
 
 	// Defines for FormEntryActivity
-	private static final boolean EXIT = true;
-	private static final boolean DO_NOT_EXIT = false;
-	private static final boolean EVALUATE_CONSTRAINTS = true;
-	private static final boolean DO_NOT_EVALUATE_CONSTRAINTS = false;
+	private final boolean EXIT = true;
+	private final boolean DO_NOT_EXIT = false;
+	private final boolean EVALUATE_CONSTRAINTS = true;
+	private final boolean DO_NOT_EVALUATE_CONSTRAINTS = false;
 
 	// Request codes for returning data from specified intent.
 	public static final int IMAGE_CAPTURE = 1;
@@ -195,7 +195,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	private static final int SAVING_DIALOG = 2;
 
 	// Random ID
-	private static final int DELETE_REPEAT = 654321;
+	private final int DELETE_REPEAT = 654321;
 
 	private String mFormPath;
 	private GestureDetector mGestureDetector;
@@ -241,9 +241,9 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	private EditText saveAs ;
 	private List<HierarchyElement> formList;
 	private CustomListViewExpanded hierarchyList;
-	private static final int CHILD = 1;
-	private static final int COLLAPSED = 3;
-	private static final int QUESTION = 4;
+	private final int CHILD = 1;
+	private final int COLLAPSED = 3;
+	private final int QUESTION = 4;
 	private boolean test_finish=true;
 
 	private static final String mIndent = "     ";
