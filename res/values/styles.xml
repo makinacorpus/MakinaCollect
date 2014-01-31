@@ -7,6 +7,7 @@
 
     <style name="ButtonNext" parent="@style/ButtonBarButton">
         <item name="android:background">@drawable/selectable_item_background</item>
+        <item name="android:textColor">?attr/text_color</item>
     </style>
 
     <style name="ButtonBarButton">

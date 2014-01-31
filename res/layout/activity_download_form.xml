@@ -111,6 +111,7 @@ the License.
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:text="@string/empty_list"
+            android:textColor="@color/color_emty_list"
             android:textSize="30sp" />
     </LinearLayout>
 

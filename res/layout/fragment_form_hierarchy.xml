@@ -24,6 +24,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:text="@string/hierarchy_text"
+            android:textColor="?attr/text_color"
             android:textSize="20dip" />
 
         <com.makina.collect.android.views.CustomListViewExpanded

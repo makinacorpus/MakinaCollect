@@ -71,6 +71,7 @@ the License.
             android:gravity="center_horizontal"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
+            android:textColor="?attr/text_color"
             android:text="@string/no_downloaded_forms"
             android:textSize="20sp" />
     </LinearLayout>

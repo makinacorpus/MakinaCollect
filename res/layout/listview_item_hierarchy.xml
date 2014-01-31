@@ -26,6 +26,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@id/textview_hierarchy_question"
         android:gravity="center_vertical"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="?attr/text_color" />
 
 </RelativeLayout>

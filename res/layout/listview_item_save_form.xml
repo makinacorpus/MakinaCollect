@@ -31,6 +31,7 @@
         android:layout_toLeftOf="@id/ic_edit"
         android:gravity="center_vertical"
         android:singleLine="true"
+        android:textColor="?attr/text_color"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <com.makina.collect.android.views.CustomFontTextview

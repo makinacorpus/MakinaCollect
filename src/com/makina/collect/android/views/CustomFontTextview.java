@@ -23,7 +23,8 @@ public class CustomFontTextview extends TextView {
     }
 
     private void init() {
-        if (!isInEditMode()) {
+        if (!isInEditMode())
+        {
             Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/avenir.ttc");
             setTypeface(tf);
         }

@@ -92,12 +92,12 @@ the License.
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_toRightOf="@id/linear_blue"
         android:id="@+id/empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/linear_blue"
         android:orientation="vertical"
         android:visibility="gone" >
 
@@ -110,8 +110,8 @@ the License.
         <com.makina.collect.android.views.CustomFontTextview
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dip"
             android:text="@string/empty_list"
             android:textColor="@color/color_emty_list"
             android:textSize="27sp" />
@@ -122,6 +122,7 @@ the License.
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:text="@string/no_form_to_send"
+            android:textColor="?attr/text_color"
             android:textSize="20sp" />
     </LinearLayout>
 

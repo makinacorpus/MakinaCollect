@@ -11,7 +11,7 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -24,7 +24,6 @@
         android:paddingRight="20dp" >
 
         <RelativeLayout
-            android:id="@+id/relativelayout_checkbox1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" >
 
@@ -34,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/name"
+                android:textColor="?attr/text_color"
                 android:textSize="21sp" />
 
             <com.makina.collect.android.views.CustomFontEditText
@@ -53,7 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:text="Ce formulaire est maintenant complété.\nQue souhaitez-vous faire?"
-           android:textSize="21sp" />
+            android:textColor="?attr/text_color"
+            android:textSize="21sp" />
 
         <RelativeLayout
             android:id="@+id/relativelayout_checkbox1"

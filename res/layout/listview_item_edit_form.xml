@@ -29,6 +29,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@id/ic_edit"
+        android:textColor="?attr/text_color"
         android:gravity="center_vertical"
         android:singleLine="true" />
 

@@ -27,15 +27,16 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/checkbox"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/checkbox" >
 
         <com.makina.collect.android.views.CustomFontTextview
             android:id="@+id/text1"
-            android:singleLine="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="?attr/text_color" />
 
         <com.makina.collect.android.views.CustomFontTextview
             android:id="@+id/text2"

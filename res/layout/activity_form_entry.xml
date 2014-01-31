@@ -22,13 +22,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <Button
+            <com.makina.collect.android.views.CustomFontButton
                 android:id="@+id/prev_button"
                 style="@style/ButtonNext"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/back"
+                android:textColor="?attr/text_color"
                 android:visibility="invisible" />
 
             <View
@@ -36,12 +37,13 @@
                 android:layout_height="match_parent"
                 android:background="?android:attr/listDivider" />
 
-            <Button
+            <com.makina.collect.android.views.CustomFontButton
                 android:id="@+id/next_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/next" />
+                android:text="@string/next"
+                android:textColor="?attr/text_color" />
         </LinearLayout>
     </LinearLayout>
 
@@ -73,11 +75,11 @@
                 android:id="@+id/textView_quiz_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/textView_quiz_question_number"
                 android:paddingLeft="10dip"
+                android:singleLine="true"
                 android:textColor="@drawable/linear_blue"
                 android:textSize="23sp"
                 android:textStyle="bold" />

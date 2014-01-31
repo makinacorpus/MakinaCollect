@@ -76,10 +76,8 @@ import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -121,6 +119,8 @@ import com.makina.collect.android.utilities.FileUtils;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.MediaUtils;
 import com.makina.collect.android.views.CroutonView;
+import com.makina.collect.android.views.CustomFontButton;
+import com.makina.collect.android.views.CustomFontEditText;
 import com.makina.collect.android.views.CustomFontTextview;
 import com.makina.collect.android.views.CustomListViewExpanded;
 import com.makina.collect.android.views.ODKView;
@@ -217,7 +217,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	private FormLoaderTask mFormLoaderTask;
 	private SaveToDiskTask mSaveToDiskTask;
 
-	private Button mNextButton,mBackButton;
+	private CustomFontButton mNextButton,mBackButton;
 	private CustomFontTextview textView_quiz_question_number,textView_quiz_name;
 	
 	private boolean mAnswersChanged;
@@ -238,7 +238,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	private String mAlertMsg;
 	private Uri uri;
 	private final static int AUTH_DIALOG = 2;
-	private EditText saveAs ;
+	private CustomFontEditText saveAs ;
 	private List<HierarchyElement> formList;
 	private CustomListViewExpanded hierarchyList;
 	private final int CHILD = 1;
@@ -297,7 +297,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		mAdminPreferences = getSharedPreferences(
 				AdminPreferencesActivity.ADMIN_PREFERENCES, 0);
 
-		mNextButton = (Button) findViewById(R.id.next_button);
+		mNextButton = (CustomFontButton) findViewById(R.id.next_button);
 		mNextButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -315,7 +315,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			}
 		});
 
-		mBackButton = (Button) findViewById(R.id.prev_button);
+		mBackButton = (CustomFontButton) findViewById(R.id.prev_button);
 		mBackButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1110,7 +1110,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				endView = (ScrollView) View.inflate(this, R.layout.activity_form_entry_end, null);
 				
 				// edittext to change the displayed name of the instance
-				saveAs = (EditText) endView
+				saveAs = (CustomFontEditText) endView
 						.findViewById(R.id.save_name);
 
 				// disallow carriage returns in the name
@@ -3183,7 +3183,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		alert.setMessage(getString(R.string.form_name_description));
 
 		// Set an EditText view to get user input 
-		final EditText input = new EditText(this);
+		final CustomFontEditText input = new CustomFontEditText(this);
 		if (form_name==null)
 			form_name=textView_quiz_name.getText().toString();
 		input.setText(form_name);

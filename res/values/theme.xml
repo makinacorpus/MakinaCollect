@@ -9,13 +9,13 @@
         <item name="actionBarStyle">@style/Widget.CollectThemeLight.ActionBar</item>
         <item name="android:actionBarStyle">@style/Widget.CollectThemeLight.ActionBar</item>
         <item name="android:windowBackground">@android:color/white</item>
-        <item name="android:textColor">@color/text_gris</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <item name="popupMenuStyle">@style/PopupMenu</item>
         <item name="dialog_icon_info">@drawable/ic_dialog_info_gray</item>
         <item name="dialog_icon_alert">@drawable/ic_dialog_alert_gray</item>
         <item name="dialog_icon_delete">@drawable/ic_dialog_delete_gray</item>
         <item name="dialog_icon_save">@drawable/ic_dialog_save_gray</item>
+        <item name="text_color">@color/text_gris</item>
     </style>
 
     <style name="CollectThemeDark" parent="@style/Holo.Theme.Sherlock">
@@ -26,7 +26,6 @@
         <item name="actionBarStyle">@style/Widget.CollectThemeDark.ActionBar</item>
         <item name="android:actionBarStyle">@style/Widget.CollectThemeDark.ActionBar</item>
         <item name="android:windowBackground">@color/dark_color</item>
-        <item name="android:textColor">@android:color/white</item>
         <item name="android:homeAsUpIndicator">@drawable/abs__ic_ab_back_holo_light</item>
         <item name="android:popupMenuStyle">@style/PopupMenu</item>
         <item name="popupMenuStyle">@style/PopupMenu</item>
@@ -34,6 +33,7 @@
         <item name="dialog_icon_alert">@drawable/ic_dialog_alert_white</item>
         <item name="dialog_icon_delete">@drawable/ic_dialog_delete_white</item>
         <item name="dialog_icon_save">@drawable/ic_dialog_save_white</item>
+        <item name="text_color">@android:color/white</item>
     </style>
 
     <style name="PopupMenu" parent="android:Widget.Holo.Light.ListPopupWindow">

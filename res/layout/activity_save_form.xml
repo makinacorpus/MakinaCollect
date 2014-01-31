@@ -65,12 +65,13 @@ the License.
         <com.makina.collect.android.views.CustomFontTextview
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dip"
             android:gravity="center_horizontal"
-            android:layout_gravity="center_horizontal"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
             android:text="@string/no_form_not_finalled"
+            android:textColor="?attr/text_color"
             android:textSize="20sp" />
     </LinearLayout>
 
