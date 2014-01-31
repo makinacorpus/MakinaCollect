@@ -3,6 +3,9 @@
 
     <declare-styleable name="customAttrs">
         <attr name="dialog_icon_info" format="reference" />
+        <attr name="dialog_icon_alert" format="reference" />
+        <attr name="dialog_icon_delete" format="reference" />
+        <attr name="dialog_icon_save" format="reference" />
     </declare-styleable>
 
 </resources>

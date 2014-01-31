@@ -182,7 +182,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         AlertDialog.Builder adb = new AlertDialog.Builder(ActivityEditForm.this);
         adb.setTitle(getString(R.string.delete));
         adb.setMessage(getString(R.string.delete_confirmation, formDeleted.getName()));
-        adb.setIconAttribute(android.R.attr.alertDialogIcon);
+        adb.setIconAttribute(R.attr.dialog_icon_delete);
         adb.setNegativeButton(getString(android.R.string.cancel),new AlertDialog.OnClickListener()
         {
             public void onClick(DialogInterface dialog,int which)
@@ -463,7 +463,7 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
             Collect.getInstance().getActivityLogger().logAction(this, "createErrorDialog", "show");
 
         mAlertDialog = new AlertDialog.Builder(this).create();
-        mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+        mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
         mAlertDialog.setMessage(errorMsg);
         DialogInterface.OnClickListener errorListener = new DialogInterface.OnClickListener() {
             @Override

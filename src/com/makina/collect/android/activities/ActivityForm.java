@@ -1675,7 +1675,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		Collect.getInstance().getActivityLogger()
 				.logInstanceAction(this, "createRepeatDialog", "show");
 		mAlertDialog = new AlertDialog.Builder(this).create();
-		mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+		mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
 		DialogInterface.OnClickListener repeatListener = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int i) {
@@ -1749,7 +1749,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 						"show." + Boolean.toString(shouldExit));
 		mErrorMessage = errorMsg;
 		mAlertDialog = new AlertDialog.Builder(this).create();
-		mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+		mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
 		mAlertDialog.setTitle(getString(R.string.error_occured));
 		mAlertDialog.setMessage(errorMsg);
 		DialogInterface.OnClickListener errorListener = new DialogInterface.OnClickListener() {
@@ -1782,7 +1782,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		FormController formController = Collect.getInstance()
 				.getFormController();
 		mAlertDialog = new AlertDialog.Builder(this).create();
-		mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+		mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
 		String name = formController.getLastRepeatedGroupName();
 		int repeatcount = formController.getLastRepeatedGroupRepeatCount();
 		if (repeatcount != -1) {
@@ -2010,7 +2010,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				.logInstanceAction(this, "createClearDialog", "show",
 						qw.getPrompt().getIndex());
 		mAlertDialog = new AlertDialog.Builder(this).create();
-		mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+		mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
 
 		mAlertDialog.setTitle(getString(R.string.clear_answer_ask));
 
@@ -2159,7 +2159,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 					finish();
 				}
 			};
-			mProgressDialog.setIcon(android.R.drawable.ic_dialog_info);
+			mProgressDialog.setIconAttribute(R.attr.dialog_icon_info);
 			mProgressDialog.setTitle(getString(R.string.loading_form));
 			mProgressDialog.setMessage(getString(R.string.please_wait));
 			mProgressDialog.setIndeterminate(true);
@@ -2187,7 +2187,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 					t.cancel(true);
 				}
 			};
-			mProgressDialog.setIcon(android.R.drawable.ic_dialog_info);
+			mProgressDialog.setIconAttribute(R.attr.dialog_icon_info);
 			mProgressDialog.setTitle(getString(R.string.saving_form));
 			mProgressDialog.setMessage(getString(R.string.please_wait));
 			mProgressDialog.setIndeterminate(true);
@@ -2883,7 +2883,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
         };
         mAlertDialog.setCancelable(false);
         mAlertDialog.setButton(getString(R.string.ok), quitListener);
-        mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+        mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
         mAlertMsg = message;
         mAlertDialog.show();
     }
@@ -3188,7 +3188,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			form_name=textView_quiz_name.getText().toString();
 		input.setText(form_name);
 		alert.setView(input);
-		alert.setIcon(android.R.drawable.ic_menu_save);
+		alert.setIconAttribute(R.attr.dialog_icon_save);
 		alert.setNegativeButton(getString(R.string.cancel), null);
 		alert.setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener()
 		{

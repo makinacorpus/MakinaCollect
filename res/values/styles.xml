@@ -20,6 +20,13 @@
         <item name="android:subtitleTextStyle">@style/CustomSubTitleColorBar</item>
     </style>
 
+    <style name="Widget.CollectThemeDark.ActionBar" parent="@style/Widget.Sherlock.Light.ActionBar">
+        <item name="android:background">@drawable/action_bar_gradient_light</item>
+        <item name="titleTextStyle">@style/CustomTitleColorBar</item>
+        <item name="android:titleTextStyle">@style/CustomTitleColorBar</item>
+        <item name="android:subtitleTextStyle">@style/CustomSubTitleColorBar</item>
+    </style>
+    
     <style name="ButtonBar" parent="@android:style/ButtonBar">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:padding">0dp</item>

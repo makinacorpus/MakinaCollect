@@ -62,7 +62,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
-import com.makina.collect.android.adapters.FormsListAdapter;
+import com.makina.collect.android.adapters.SendFormsListAdapter;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.dialog.DialogExit;
@@ -108,7 +108,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 	private String mAlertMsg;
 
 	//private boolean mShowUnsent = true;
-	private FormsListAdapter mInstances;
+	private SendFormsListAdapter mInstances;
 	 private List<Form> forms;
 	private ArrayList<Long> mSelected = new ArrayList<Long>();
 	private boolean mRestored = false;
@@ -304,8 +304,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 			public void onItemClick(AdapterView<?> a, View v, int position, long id)
 			{
 				// get row id from db
-				Cursor c = (Cursor) listView.getAdapter().getItem(position);
-				long k = c.getLong(c.getColumnIndex(BaseColumns._ID));
+				long k = forms.get(position).getId();
 
 				Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", Long.toString(k));
 
@@ -347,7 +346,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 		AlertDialog.Builder adb = new AlertDialog.Builder(ActivitySendForm.this);
 		adb.setTitle(getString(R.string.delete));
 		adb.setMessage(getString(R.string.delete_confirmation,formDeleted.getName()));
-		adb.setIcon(android.R.drawable.ic_menu_delete);
+		adb.setIconAttribute(R.attr.dialog_icon_delete);
 		adb.setNegativeButton(getString(android.R.string.cancel),new AlertDialog.OnClickListener()
         {
             public void onClick(DialogInterface dialog,int which)
@@ -377,7 +376,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 			forms=new ArrayList<Form>();
 			while (c.moveToNext())
 				forms.add(new Form(c.getInt(c.getColumnIndex(BaseColumns._ID)),c.getString(c.getColumnIndex(InstanceColumns.JR_FORM_ID)),c.getString(c.getColumnIndex(InstanceColumns.DISPLAY_NAME)), c.getString(c.getColumnIndex(InstanceColumns.DISPLAY_SUBTEXT)),c.getString(c.getColumnIndex(InstanceColumns.INSTANCE_FILE_PATH)),""));
-			mInstances=new FormsListAdapter(this, forms);
+			mInstances=new SendFormsListAdapter(this, forms);
 	        listView.setAdapter(mInstances);
 		}
 		
@@ -565,7 +564,9 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 		
 		mDeleteInstancesTask = null;
 		mSelected.clear();
-		listView.clearChoices(); // doesn't unset the checkboxes
+		listView.clearChoices();
+		loadListView();
+		// doesn't unset the checkboxes
 		for ( int i = 0 ; i < listView.getCount() ; ++i ) {
 			listView.setItemChecked(i, false);
 		}
@@ -581,6 +582,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
         	findViewById(R.id.empty).setVisibility(View.GONE);
         }
 		
+		
     }
 
 	@Override
@@ -594,7 +596,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 			forms=new ArrayList<Form>();
 			while (c.moveToNext())
 				forms.add(new Form(c.getInt(c.getColumnIndex(BaseColumns._ID)),c.getString(c.getColumnIndex(InstanceColumns.JR_FORM_ID)),c.getString(c.getColumnIndex(InstanceColumns.DISPLAY_NAME)), c.getString(c.getColumnIndex(InstanceColumns.DISPLAY_SUBTEXT)),c.getString(c.getColumnIndex(InstanceColumns.INSTANCE_FILE_PATH)),""));
-			mInstances=new FormsListAdapter(this, forms);
+			mInstances=new SendFormsListAdapter(this, forms);
 	        listView.setAdapter(mInstances);
 		}
 		
@@ -767,7 +769,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
         };
         mAlertDialog.setCancelable(false);
         mAlertDialog.setButton(getString(R.string.ok), quitListener);
-        mAlertDialog.setIcon(android.R.drawable.ic_dialog_info);
+        mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
         mAlertShowing = true;
         mAlertMsg = message;
         mAlertDialog.show();
