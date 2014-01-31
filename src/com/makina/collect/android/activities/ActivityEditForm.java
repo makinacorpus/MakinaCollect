@@ -206,6 +206,12 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         			FormsProvider.deleteFileOrDir(formDeleted.getDirectory_path());
         			FormsProvider.deleteForm(formDeleted.getForm_id());
         		}
+            	
+            	if (countInstances>0)
+            	{
+            		forms.add(position, formDeleted);
+                	instances.notifyDataSetChanged();
+            	}
             }
         });
         adb.show();
