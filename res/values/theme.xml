@@ -15,7 +15,7 @@
         <item name="dialog_icon_info">@drawable/ic_dialog_info_gray</item>
     </style>
 
-    <style name="CollectThemeDark" parent="@style/Holo.Theme.Sherlock">
+    <style name="CollectThemeDark" parent="@style/Holo.Theme.Sherlock.Light">
         <item name="android:scrollbarThumbHorizontal">@drawable/thumb</item>
         <item name="android:scrollbarThumbVertical">@drawable/thumb</item>
         <item name="android:scrollbarSize">1dp</item>
