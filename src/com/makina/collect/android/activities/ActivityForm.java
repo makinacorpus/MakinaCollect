@@ -308,7 +308,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 					test_finish=false;
 					showNextView();
 				}
-				else if (mNextButton.getText().equals(getString(R.string.save)))
+				else if (mNextButton.getText().equals(getString(R.string.submit)))
 					saveForm(saveAs.getText().toString());
 				else
 					showNextView();
@@ -1105,7 +1105,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				findViewById(R.id.relativeLayout_informations).setVisibility(View.GONE);
 				test_finish=true;
 				ScrollView endView;
-				changeButtonNext(getResources().getDrawable(R.drawable.finish_background),R.style.ButtonFinishSave, getString(R.string.save));
+				changeButtonNext(getResources().getDrawable(R.drawable.finish_background),R.style.ButtonFinishSave, getString(R.string.submit));
 				
 				endView = (ScrollView) View.inflate(this, R.layout.activity_form_entry_end, null);
 				
@@ -1433,7 +1433,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	 * model without checking constraints.
 	 */
 	private void showPreviousView() {
-		if (mNextButton.getText().toString().equals(getString(R.string.save)))
+		if (mNextButton.getText().toString().equals(getString(R.string.submit)))
 			changeButtonNext(getResources().getDrawable(R.drawable.finish_background),R.style.ButtonFinishSave, getString(R.string.finish));
 		else
 			changeButtonNext(getResources().getDrawable(R.drawable.selectable_item_background),R.style.ButtonNext, getString(R.string.next));
@@ -2694,7 +2694,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 						test_finish=false;
 						showNextView();
 					}
-					else if (!mNextButton.getText().equals(getString(R.string.save)))
+					else if (!mNextButton.getText().equals(getString(R.string.submit)))
 						showNextView();
 					
 				} else if (current_page > 1) {
@@ -2718,7 +2718,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 						test_finish=false;
 						showNextView();
 					}
-					else if (!mNextButton.getText().equals(getString(R.string.save)))
+					else if (!mNextButton.getText().equals(getString(R.string.submit)))
 						showNextView();
 				}
 			}
