@@ -2810,13 +2810,16 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
             }
         }
         
+        boolean success=false;
         StringBuilder message = new StringBuilder();
         {
         	Cursor results = null;
-        	try {
+        	try
+        	{
                 results = getContentResolver().query(InstanceColumns.CONTENT_URI,
                 		null, selection.toString(), selectionArgs, null);
-                if (results.getCount() > 0) {
+                if (results.getCount() > 0)
+                {
                     results.moveToPosition(-1);
                     while (results.moveToNext()) {
                         String name =
@@ -2832,9 +2835,14 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
                         	message.append(name + " - " + getString(R.string.fail) + "\n\n");
                         }
                         else
+                        {
                         	message.append(name + " - " + result.get(id) + "\n\n");
+                        	success=true;
+                        }
                     }
-                } else {
+                }
+                else
+                {
                     message.append(getString(R.string.no_forms_uploaded));
                 }
         	} finally {
@@ -2843,7 +2851,8 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
         		}
         	}
         }
-        deleteSelectedInstances();
+        if (success)
+        	deleteSelectedInstances();
         createAlertDialog(message.toString().trim());
 		
 	}
