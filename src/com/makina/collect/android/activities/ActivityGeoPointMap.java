@@ -160,18 +160,16 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 			}
 
 			// Set offline mode or not according to settings
-			if (intent.hasExtra("offLine")) {
+			/*if (intent.hasExtra("offLine")) {
 				mMap.setMapType(GoogleMap.MAP_TYPE_NONE);
 				TileOverlayOptions options = new TileOverlayOptions();
-				String filePath = Environment.getExternalStorageDirectory()
-						.toString()
-						+ "/odk/tiles8bits.mbtiles";
+				String filePath = Environment.getExternalStorageDirectory().toString()+ "/odk/tiles8bits.mbtiles";
 				Toast.makeText(getApplicationContext(), filePath, Toast.LENGTH_SHORT).show();
 				Log.i("pppppppppppppppppppppppp", filePath);
 				Log.e(getClass().getName(), filePath);
 				options.tileProvider(new MapBoxOfflineTileProvider(filePath));
 				mMap.addTileOverlay(options);
-			}
+			}*/
 
 			// Get accuracy.
 			if (intent.hasExtra(GeoPointWidget.ACCURACY_THRESHOLD)) {

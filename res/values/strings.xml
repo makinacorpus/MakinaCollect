@@ -22,6 +22,7 @@
     <string name="form_name">Form Name</string>
     <string name="form_name_description">Please write the name of this form</string>
     <string name="fail">Fail</string>
+    <string name="delete_old_forms">You have some former patterns and un-finished forms. Would you like to delete them ?</string>
     <!-- END Alert Dialog -->
 
 

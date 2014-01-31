@@ -3,14 +3,18 @@ import java.io.File;
 
 import ly.count.android.api.Countly;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Window;
 
+import com.WazaBe.HoloEverywhere.app.AlertDialog;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 
+import com.makina.collect.android.provider.FormsProvider;
+import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.theme.Theme;
 
 public class ActivitySplashScreen extends Activity {
@@ -28,14 +32,7 @@ public class ActivitySplashScreen extends Activity {
         Countly.sharedInstance().init(getApplicationContext(), "http://countly.makina-corpus.net", "279676abcbba16c3ee5e2b113a990fe579ddc527");
         
         // must be at the beginning of any activity that can be called from an external intent
-        try
-        {
-            Collect.createODKDirs();
-        }
-        catch (RuntimeException e)
-        {
-            return;
-        }
+        
 
         String url = PreferenceManager.getDefaultSharedPreferences(this).getString("server_url", "");
 		if ((url==null) || (url.equals("")))
@@ -48,7 +45,9 @@ public class ActivitySplashScreen extends Activity {
 		        for(int i = 0; i < fileList.length; i++)
 		        	folder_size += fileList[i].length();
 		    }
+			
 		}
+		
 		PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 		
         

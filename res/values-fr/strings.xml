@@ -20,6 +20,7 @@ License.
     <string name="form_name">Nom du formulaire</string>
     <string name="form_name_description">Veuillez saisir le nom du formulaire</string>
     <string name="fail">Échec</string>
+    <string name="delete_old_forms">Vous possédez d\'anciens formulaires vierges et/ou complétés. Souhaitez-vous les supprimer ?</string>
     <!-- END Alert Dialog -->
 
 

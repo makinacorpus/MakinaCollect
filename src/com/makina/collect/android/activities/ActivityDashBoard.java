@@ -14,6 +14,8 @@
 
 package com.makina.collect.android.activities;
 
+import java.io.File;
+
 import ly.count.android.api.Countly;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -82,24 +84,50 @@ public class ActivityDashBoard extends SherlockActivity implements
                 CustomFontButton btnSend = (CustomFontButton) findViewById(R.id.dashboard_send);
                 btnSend.setOnClickListener(this);
                 
-                if (getIntent().getExtras().getLong("folder_size")>0)
-		        {
-					AlertDialog.Builder adb = new AlertDialog.Builder(this);
-					adb.setTitle(getString(R.string.delete));
-					adb.setMessage("Vous possŽdŽ de formulaires vierges ou remplis anciens. Voulez-vous les supprimer?");
-					adb.setIconAttribute(android.R.attr.alertDialogIcon);
-					adb.setNegativeButton(getString(android.R.string.cancel),null);
-					adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
-					{
-						public void onClick(DialogInterface dialog,int which)
-						{
-							InstanceProvider.deleteAllInstances();
-							FormsProvider.deleteAllForms();
-							FormsProvider.deleteFileOrDir(Collect.ODK_ROOT);
-						}
-					});
-					adb.show();
-		        }
+                if ( (getIntent().getExtras()!=null) && (getIntent().getExtras().getLong("folder_size")>0))
+    	        {
+                	final File f = new File(Collect.FORMS_PATH);
+    				AlertDialog.Builder adb = new AlertDialog.Builder(this);
+    				adb.setTitle(getString(R.string.delete));
+    				adb.setMessage(getString(R.string.delete_old_forms));
+    				adb.setIconAttribute(android.R.attr.alertDialogIcon);
+    				adb.setNegativeButton(getString(android.R.string.cancel),new AlertDialog.OnClickListener()
+    				{
+    					public void onClick(DialogInterface dialog,int which)
+    					{
+    						try
+    				        {
+    				            Collect.createODKDirs();
+    				        }
+    				        catch (RuntimeException e)
+    				        {
+    				            return;
+    				        }
+    					}
+    				});
+    				adb.setPositiveButton(getString(android.R.string.yes), new AlertDialog.OnClickListener()
+    				{
+    					public void onClick(DialogInterface dialog,int which)
+    					{
+    						InstanceProvider.deleteAllInstances();
+    						FormsProvider.deleteAllForms();
+    						for(File file: f.listFiles()) 
+    							file.delete();
+    						
+    						try
+    				        {
+    				            Collect.createODKDirs();
+    				        }
+    				        catch (RuntimeException e)
+    				        {
+    				            return;
+    				        }
+    					}
+    				});
+    				adb.setCancelable(false);
+    				adb.show();
+    				getIntent().removeExtra("folder_size");
+    	        }
         }
 
         @Override
