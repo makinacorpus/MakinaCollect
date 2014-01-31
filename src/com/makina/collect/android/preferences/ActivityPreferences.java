@@ -28,7 +28,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -162,16 +162,14 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
 
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.actionbar_title_layout_preferences, null);
+        getSupportActionBar().setCustomView(v);
 		
 		Finish.activityPreferences=this;
-		
-		Typeface typeFace = Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"); 
-		setTitle(getString(R.string.settings));
-		int titleId = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
-    	TextView actionbarTitle = (TextView)findViewById(titleId);
-    	if (actionbarTitle!=null)
-    		actionbarTitle.setTypeface(typeFace);
 		
 		// not super safe, but we're just putting in this mode to help
 		// administrate
@@ -261,7 +259,9 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 			@Override
 			public boolean onPreferenceChange(Preference preference,Object newValue)
 			{
-				((ListPreference) preference).setSummary(""+((ListPreference) preference).findIndexOfValue(newValue.toString()));
+				int index = ((ListPreference) preference).findIndexOfValue(newValue.toString());
+				String entry = (String) ((ListPreference) preference).getEntries()[index];
+				((ListPreference) preference).setSummary(entry);
 				
 				Intent i = getIntent();
 				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -270,6 +270,30 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 			}
 		});
 		
+		mThemePreference = (ListPreference) findPreference(KEY_THEME);
+		mLanguagePreference = (ListPreference) findPreference(KEY_LANGUAGE);
+		if (mThemePreference.getEntry()==null)
+		{
+			mThemePreference.setSummary(getString(R.string.theme1));
+			mThemePreference.setValueIndex(Arrays.asList(getResources().getStringArray(R.array.theme_entries)).indexOf(getString(R.string.theme1)));
+		}
+		else
+			mThemePreference.setSummary(mThemePreference.getEntry());
+		mThemePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
+		{
+			@Override
+			public boolean onPreferenceChange(Preference preference,Object newValue)
+			{
+				int index = ((ListPreference) preference).findIndexOfValue(newValue.toString());
+				String entry = (String) ((ListPreference) preference).getEntries()[index];
+				((ListPreference) preference).setSummary(entry);
+				
+				Intent i = getIntent();
+				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(i);
+				return true;
+			}
+		});
 		
 		mLuminosityPreference = (Preference) findPreference(KEY_LUMINOSITY);
 		//Get the content resolver
@@ -536,26 +560,6 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 
 		PreferenceCategory clientCategory = (PreferenceCategory) findPreference(getString(R.string.client));
 
-		
-		mThemePreference = (ListPreference) findPreference(KEY_THEME);
-		mThemePreference.setSummary(mThemePreference.getEntry());
-		mThemePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener()
-		{
-			@Override
-			public boolean onPreferenceChange(Preference preference,Object newValue)
-			{
-				int index = ((ListPreference) preference).findIndexOfValue(newValue.toString());
-				String entry = (String) ((ListPreference) preference).getEntries()[index];
-				((ListPreference) preference).setSummary(entry);
-				
-				Intent i = getIntent();
-				i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(i);
-				return true;
-			}
-		});
-		
-		
 		boolean fontAvailable = mAdminPreferences.getBoolean(
 				AdminPreferencesActivity.KEY_CHANGE_FONT_SIZE, true);
 		mFontSizePreference = (ListPreference) findPreference(KEY_FONT_SIZE);
@@ -913,6 +917,13 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 	        super.onKeyUp(keyCode, event);
 	        return true;
 	     }
+	 
+	 @Override
+	    public void onConfigurationChanged(Configuration newConfig) {
+	    	// TODO Auto-generated method stub
+	    	super.onConfigurationChanged(newConfig);
+	    	Theme.changeTheme(this);
+	    }
 
 
 }

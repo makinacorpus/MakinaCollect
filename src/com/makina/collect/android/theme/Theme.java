@@ -19,7 +19,7 @@ public class Theme
 	public static void changeTheme(Activity activity)
 	{
 		String themeChoice = PreferenceManager.getDefaultSharedPreferences(activity).getString(ActivityPreferences.KEY_THEME, ActivityPreferences.KEY_THEME);
-		if ( (themeChoice != null) && (themeChoice.contains(activity.getString(R.string.theme2))) )
+		if ( (themeChoice != null) && (themeChoice.equals("1")) )
 			activity.setTheme(R.style.CollectThemeLight);
 		else
 			activity.setTheme(R.style.CollectThemeDark);
