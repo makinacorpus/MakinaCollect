@@ -21,33 +21,36 @@ License.
     <string name="form_name_description">Veuillez saisir le nom du formulaire</string>
     <string name="fail">Échec</string>
     <!-- END Alert Dialog -->
-    
-    <!-- Form-->
+
+
+    <!-- Form -->
     <string name="name">Nom</string>
     <string name="next">Suivant</string>
     <string name="back">Précédent</string>
     <string name="finish">Terminer</string>
     <string name="save">Sauvegarder</string>
     <!-- END Form -->
-    
+
+
     <!-- EditForm -->
-    <string name="clic_here_to_download">APPUYEZ ICI POUR TÉLÉCHARGER UN FORMULAIRE</string>
-    <string name="no_form_not_finalled">VOUS N\'AVEZ AUCUN FORMULAIRE NON FINALISÉ</string>
-    <string name="no_form_finalled">PAS DE FORMULAIRE FINALISÉ</string>
+    <string name="no_downloaded_forms">VOUS N\'AVEZ AUCUN MODÈLE DE FORMULAIRE TELECHARGE</string>
     <string name="empty_list">Liste vide</string>
     <string name="instances_exist">instances de ce modèle existent déjà!</string>
     <string name="instance_exist">1 instance de ce modèle existe déjà!</string>
-	<!-- END EditForm -->
-	
+    <!-- END EditForm -->
+
+
     <!-- Hierarchy -->
     <string name="hierarchy_text">Voici ci-dessous le résumé de votre questionnaire:</string>
     <!-- END - Hierarchy -->
 
-	<!-- AboutUS -->
+
+    <!-- AboutUS -->
     <string name="textview_about_us1">L\'application mobile "Makina Collect" a été développée par Makina Corpus</string>
     <!-- END AboutUs -->
 
-	<!-- Preferences -->
+
+    <!-- Preferences -->
     <string name="language">Langue</string>
     <string name="language_preferences">language_preferences</string>
     <string name="theme">Thème</string>
@@ -59,7 +62,8 @@ License.
     <string name="french">Français</string>
     <!-- END- Preferences -->
 
-	<!-- ActionBar -->
+
+    <!-- ActionBar -->
     <string name="search">Recherche</string>
     <string name="settings">Paramètres</string>
     <string name="help">Aide</string>
@@ -86,19 +90,19 @@ License.
     <string name="form">un formulaire</string>
     <!-- FIN ActionBar Title -->
 
-	<!-- Help -->
+
+    <!-- Help -->
     <string name="help_download">
-        <![CDATA[
+<![CDATA[
         <b>Utiliser les formulaires de démonstration :</b><br/>
 		Nous vous proposons un certain nombre de formulaires de démonstration que Makina Corpus a créés spécifiquement pour cette application. Ils sont associés à l’adresse du serveur http://formulaires.makina-corpus.net:80/makinademo, accessible dans le menu Paramètres de l’application.<br/><br/>
 
 		<b>Créer vos propres formulaires :</b><br/>
 		Vous pouvez également utiliser l’application Makina Collect avec vos propres formulaires que vous aurez créés au préalable sur le site web Formhub (https://formhub.org/). Vous devez alors synchroniser l’application mobile, en modifiant l’adresse du serveur (à partir du menu Paramètres de l’application) par celle de votre propre compte Formhub.<br/>
 		 ]]>
-	</string>
-   
+    </string>
     <string name="help_edit">
-        <![CDATA[
+<![CDATA[
         Cette liste donne l’ensemble des formulaires vierges que vous avez téléchargé dans l’application mobile. En cliquant sur l’un d’eux, vous pourrez commencer la saisie. En gardant le doigt appuyé longtemps (ou par glissant sur la gauche), vous pourrez supprimer un formulaire de cette liste.<br/>
 		L’application Makina Collect a été conçue pour faciliter au maximum votre navigation lors de la saisie des formulaires.<br/><br/>
 		
@@ -117,9 +121,9 @@ License.
 		Vous pouvez choisir de l’envoyer dès la finalisation du formulaire ou de le stocker dans la boite d’envoi de l’application mobile, pour décaler la transmission à plus tard (pas de connexion internet, envoi groupé….).<br/>
 		Dans le cas où la connexion internet serait défaillante et l’envoi du formulaire impossible, celui-ci sera automatiquement stocké dans la boite d’envoi de l’application.<br/>
 		]]>
-	</string>
+    </string>
     <string name="help_form">
-    	<![CDATA[
+<![CDATA[
         L’application Makina Collect a été conçue pour faciliter au maximum votre navigation lors de la saisie des formulaires.<br/><br/>
         
         <b>Comment passer d’une question à une autre?</b><br/>
@@ -139,23 +143,22 @@ License.
 		Vous pouvez choisir de l’envoyer dès la finalisation du formulaire ou de le stocker dans la boite d’envoi de l’application mobile, pour décaler la transmission à plus tard (pas de connexion internet, envoi groupé….).<br/>
 		Dans le cas où la connexion internet serait défaillante et l’envoi du formulaire impossible, celui-ci sera automatiquement stocké dans la boite d’envoi de l’application.<br/>
 		]]>
-	</string>
+    </string>
     <string name="help_save">
-    	<![CDATA[
+<![CDATA[
         Cette liste décrit tous les formulaires que vous avez sauvegardés en cours de saisie. Ils sont classés par ordre chronologique décroissant.<br/>
 		En cliquant sur l’un d’eux, vous serez redirigé sur l’écran résumant les réponses données.<br/>
 		Pour supprimer un des formulaires sauvegardés de cette liste, il vous suffit de rester longtemps appuyé dessus ou bien de glisser votre doigt vers la gauche. Un message de confirmation de la suppression va s’afficher.<br/>
 		]]>
-	</string>
+    </string>
     <string name="help_send">
-    	<![CDATA[
+<![CDATA[
         Cette liste donne l’ensemble des formulaires finalisés qui n’ont pas encore envoyés au serveur, soit par votre choix, soit par échec d’envoi : les premiers sont marqués comme “finalisés” et les seconds comme “échec envoi”.<br/>
 		La boite d’envoi permet des transmissions seules ou groupées.<br/><br/>
 
 		Vous pouvez supprimer les formulaires que vous souhaitez. La démarche à suivre est la même que celle utilisée pour “mes formulaires finalisés”.<br/>
 		]]>
-	</string>
-   
+    </string>
     <string name="help_confirmation">Ne plus afficher ce message</string>
     <string name="help_title1">Aide Télécharger un formulaire</string>
     <string name="help_title2">Aide Remplir un formulaire</string>
@@ -166,7 +169,9 @@ License.
 
     <!-- FORM SAVING -->
     <string name="to_not_send_form">Ne pas envoyer le formulaire</string>
+    <string name="no_form_not_finalled">VOUS N\'AVEZ AUCUN FORMULAIRE NON FINALISÉ</string>
     <string name="send_form">Envoyer le formulaire</string>
+    <string name="no_form_finalled">PAS DE FORMULAIRE FINALISÉ</string>
     <string name="send_form_and_restart">Envoyer le formulaire et le recommencer</string>
     <string name="checkbox_error">Merci de sélectionner une réponse</string>
     <!-- END FORM SAVING -->
@@ -179,7 +184,7 @@ License.
     <string name="form_selected">1 formulaire sélectionné</string>
     <string name="forms_selected">formulaires sélectionnés</string>
     <!-- fin - DOWNLOAD FORM -->
-    
+
     <string name="current_language">Français</string>
     <!-- Message d'erreur liste vide -->
     <string name="empty_list_blank_form">Aucun formulaire téléchargé !</string>

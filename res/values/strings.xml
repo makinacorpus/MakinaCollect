@@ -13,7 +13,7 @@
 <resources>
 
     <string name="current_language">English</string>
-    
+
     <!-- Alert Dialig -->
     <string name="delete">Delete</string>
     <string name="delete_confirmation">Do you really want to delete %s ?</string>
@@ -35,9 +35,7 @@
 
 
     <!-- EditForm -->
-    <string name="clic_here_to_download">PRESS HERE TO DOWNLOAD A FORM</string>
-    <string name="no_form_not_finalled">YOU DON\'T HAVE ANY UNFINISHED FORM</string>
-    <string name="no_form_finalled">NO UNFINISHED FORM</string>
+    <string name="no_downloaded_forms">YOU DON\'T HAVE ANY DOWNLOADED FORM</string>
     <string name="empty_list">empty list</string>
     <string name="instances_exist">versions of this pattern already exist!</string>
     <string name="instance_exist">1 version of this pattern already exists!</string>
@@ -146,13 +144,12 @@ You can also use the Makina Collect App with your own forms that you have create
 		 ]]>
     </string>
     <string name="help_save">
-        <![CDATA[
+<![CDATA[
         This list regroups all of the un-finished forms. They are descending chronologically ordered.<br/>
 		By clicking on one of them, you will be automatically redirected on the summary of this survey.<br/>
 		To delete one of these survey, you just have to press long on it or swipe on the left. A popUp essage will display to confirm the deletion.<br/>
 		]]>
-	</string>
-    
+    </string>
     <string name="help_send">
 <![CDATA[
         This list regroups all of the finished form that have not been sent to the server, by choice, or because of a failure in the sending : first ones are labeled “un-finished”, the second one as “sending failure”.<br/>
@@ -171,7 +168,9 @@ You can also use the Makina Collect App with your own forms that you have create
 
     <!-- FORM SAVING -->
     <string name="to_not_send_form">Do not send this form</string>
+    <string name="no_form_not_finalled">YOU DON\'T HAVE ANY UNFINISHED FORM</string>
     <string name="send_form">Send this form</string>
+    <string name="no_form_finalled">NO UNFINISHED FORM</string>
     <string name="send_form_and_restart">Send this form and restart it</string>
     <string name="checkbox_error">Please select an answer</string>
     <!-- END FORM SAVING -->
