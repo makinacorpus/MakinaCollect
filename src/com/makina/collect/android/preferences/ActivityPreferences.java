@@ -324,7 +324,6 @@ public class ActivityPreferences extends SherlockPreferenceActivity implements
 				    View layout = inflater.inflate(R.layout.dialog_luminosity, (ViewGroup) findViewById(R.id.layoutRoot));
 				    AlertDialog.Builder builder = new AlertDialog.Builder(ActivityPreferences.this).setView(layout);
 				    builder.setTitle(getString(R.string.luminosity));
-				    builder.setIcon(getResources().getDrawable(android.R.drawable.ic_lock_idle_low_battery));
 				    builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 				               @Override
 				               public void onClick(DialogInterface dialog, int id) {
