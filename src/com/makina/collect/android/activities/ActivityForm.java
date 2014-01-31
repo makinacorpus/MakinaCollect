@@ -3200,6 +3200,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
     public void onConfigurationChanged(Configuration newConfig) {
     	// TODO Auto-generated method stub
     	super.onConfigurationChanged(newConfig);
+    	Theme.changeTheme(this);
     	LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     	View v;
     	if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE)
