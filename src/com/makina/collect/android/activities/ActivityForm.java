@@ -58,7 +58,6 @@ import android.text.InputFilter;
 import android.text.Spanned;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.GestureDetector;
@@ -74,8 +73,6 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -118,6 +115,7 @@ import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.FileUtils;
 import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.utilities.MediaUtils;
+import com.makina.collect.android.utilities.StaticMethods;
 import com.makina.collect.android.views.CroutonView;
 import com.makina.collect.android.views.CustomFontButton;
 import com.makina.collect.android.views.CustomFontEditText;
@@ -139,13 +137,7 @@ import de.keyboardsurfer.mobile.app.android.widget.crouton.Style;
 @SuppressLint("NewApi")
 public class ActivityForm extends SherlockActivity implements AnimationListener, FormLoaderListener, FormSavedListener,
 AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUploaderListener, DeleteInstancesListener {
-	private static final String t = "FormEntryActivity";
-
-	// save with every swipe forward or back. Timings indicate this takes .25
-	// seconds.
-	// if it ever becomes an issue, this value can be changed to save every n'th
-	// screen.
-	private static final int SAVEPOINT_INTERVAL = 1;
+	private final int SAVEPOINT_INTERVAL = 1;
 
 	// Defines for FormEntryActivity
 	private final boolean EXIT = true;
@@ -153,46 +145,25 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	private final boolean EVALUATE_CONSTRAINTS = true;
 	private final boolean DO_NOT_EVALUATE_CONSTRAINTS = false;
 
-	// Request codes for returning data from specified intent.
-	public static final int IMAGE_CAPTURE = 1;
-	public static final int BARCODE_CAPTURE = 2;
-	public static final int AUDIO_CAPTURE = 3;
-	public static final int VIDEO_CAPTURE = 4;
-	public static final int LOCATION_CAPTURE = 5;
-	public static final int HIERARCHY_ACTIVITY = 6;
-	public static final int IMAGE_CHOOSER = 7;
-	public static final int AUDIO_CHOOSER = 8;
-	public static final int VIDEO_CHOOSER = 9;
-	public static final int EX_STRING_CAPTURE = 10;
-	public static final int EX_INT_CAPTURE = 11;
-	public static final int EX_DECIMAL_CAPTURE = 12;
-	public static final int DRAW_IMAGE = 13;
-	public static final int SIGNATURE_CAPTURE = 14;
-	public static final int ANNOTATE_IMAGE = 15;
-
 	// Extra returned from gp activity
-	public static final String LOCATION_RESULT = "LOCATION_RESULT";
-
-	public static final String KEY_INSTANCES = "instances";
-	public static final String KEY_SUCCESS = "success";
-	public static final String KEY_ERROR = "error";
+	private final String KEY_ERROR = "error";
 
 	// Identifies the gp of the form used to launch form entry
-	public static final String KEY_FORMPATH = "formpath";
+	private final String KEY_FORMPATH = "formpath";
 
 	// Identifies whether this is a new form, or reloading a form after a screen
 	// rotation (or similar)
-	private static final String NEWFORM = "newform";
+	private final String NEWFORM = "newform";
 	// these are only processed if we shut down and are restoring after an
 	// external intent fires
 
-	private static final String KEY_INSTANCEPATH = "instancepath";
-	private static final String KEY_XPATH = "xpath";
-	private static final String KEY_XPATH_WAITING_FOR_DATA = "xpathwaiting";
+	private final String KEY_INSTANCEPATH = "instancepath";
+	private final String KEY_XPATH = "xpath";
+	private final String KEY_XPATH_WAITING_FOR_DATA = "xpathwaiting";
 
 
-	private static final int PROGRESS_DIALOG = 1;
-	private static final int SAVING_DIALOG = 2;
+	private final int PROGRESS_DIALOG = 1;
+	private final int SAVING_DIALOG = 2;
 
 	// Random ID
 	private final int DELETE_REPEAT = 654321;
@@ -237,16 +208,15 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	private Long[] mInstancesToSend;
 	private String mAlertMsg;
 	private Uri uri;
-	private final static int AUTH_DIALOG = 2;
+	private final int AUTH_DIALOG = 2;
 	private CustomFontEditText saveAs ;
 	private List<HierarchyElement> formList;
 	private CustomListViewExpanded hierarchyList;
 	private final int CHILD = 1;
 	private final int COLLAPSED = 3;
 	private final int QUESTION = 4;
-	private boolean test_finish=true;
 
-	private static final String mIndent = "     ";
+	private final String mIndent = "     ";
 	private Menu menu;
 	private boolean exit_to_home=false;
 	private final int RESULT_PREFERENCES=1;
@@ -259,8 +229,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		super.onCreate(savedInstanceState);
 		Theme.changeTheme(this);
 		
-		 
-		Log.i("FormEntryActivity", "onCreate");
 		Finish.activityForm = this;
 		current_page=1;
 		
@@ -302,13 +270,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				test_finish=true;
-				if (mNextButton.getText().equals(getString(R.string.finish)))
-				{
-					test_finish=false;
-					showNextView();
-				}
-				else if (mNextButton.getText().equals(getString(R.string.submit)))
+				if (mNextButton.getText().equals(getString(R.string.submit)))
 					saveForm(saveAs.getText().toString());
 				else
 					showNextView();
@@ -344,12 +306,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			}
 			if (savedInstanceState.containsKey(KEY_XPATH)) {
 				startingXPath = savedInstanceState.getString(KEY_XPATH);
-				Log.i(t, "startingXPath is: " + startingXPath);
 			}
 			if (savedInstanceState.containsKey(KEY_XPATH_WAITING_FOR_DATA)) {
 				waitingXPath = savedInstanceState
 						.getString(KEY_XPATH_WAITING_FOR_DATA);
-				Log.i(t, "waitingXPath is: " + waitingXPath);
 			}
 			if (savedInstanceState.containsKey(NEWFORM)) {
 				newForm = savedInstanceState.getBoolean(NEWFORM, true);
@@ -378,13 +338,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				if (Collect.getInstance().getFormController() != null) {
 					refreshCurrentView();
 				} else {
-					Log.w(t, "Reloading form and restoring state.");
 					// we need to launch the form loader to load the form
 					// controller...
 					mFormLoaderTask = new FormLoaderTask(instancePath,
 							startingXPath, waitingXPath);
-					Collect.getInstance().getActivityLogger()
-							.logAction(this, "formReloaded", mFormPath);
 					// TODO: this doesn' work (dialog does not get removed):
 					// showDialog(PROGRESS_DIALOG);
 					// show dialog before we execute...
@@ -423,11 +380,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 								instancePath = instanceCursor
 										.getString(instanceCursor
 												.getColumnIndex(InstanceColumns.INSTANCE_FILE_PATH));
-								Collect.getInstance()
-										.getActivityLogger()
-										.logAction(this, "instanceLoaded",
-												instancePath);
-
+								
 								jrFormId = instanceCursor
 										.getString(instanceCursor
 												.getColumnIndex(InstanceColumns.JR_FORM_ID));
@@ -570,14 +523,11 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 						}
 					}
 				} else {
-					Log.e(t, "unrecognized URI");
 					this.createErrorDialog("unrecognized URI: " + uri, EXIT);
 					return;
 				}
 
 				mFormLoaderTask = new FormLoaderTask(instancePath, null, null);
-				Collect.getInstance().getActivityLogger()
-						.logAction(this, "formLoaded", mFormPath);
 				showDialog(PROGRESS_DIALOG);
 				// show dialog before we execute...
 				mFormLoaderTask.execute(mFormPath);
@@ -629,46 +579,43 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 						&& mFormLoaderTask.getStatus() != AsyncTask.Status.FINISHED) {
 					mFormLoaderTask.setActivityResult(requestCode, resultCode,
 							intent);
-				} else {
-					Log.e(t,
-							"Got an activityResult without any pending form loader");
 				}
 				return;
 			}
 	
 			if (resultCode == RESULT_CANCELED) {
 				// request was canceled...
-				if (requestCode != HIERARCHY_ACTIVITY) {
+				if (requestCode != StaticMethods.HIERARCHY_ACTIVITY) {
 					((ODKView) mCurrentView).cancelWaitingForBinaryData();
 				}
 				return;
 			}
 	
 			switch (requestCode) {
-			case BARCODE_CAPTURE:
+			case StaticMethods.BARCODE_CAPTURE:
 				String sb = intent.getStringExtra("SCAN_RESULT");
 				((ODKView) mCurrentView).setBinaryData(sb);
 				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
 				break;
-			case EX_STRING_CAPTURE:
+			case StaticMethods.EX_STRING_CAPTURE:
 				String sv = intent.getStringExtra("value");
 				((ODKView) mCurrentView).setBinaryData(sv);
 				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
 				break;
-			case EX_INT_CAPTURE:
+			case StaticMethods.EX_INT_CAPTURE:
 				Integer iv = intent.getIntExtra("value", 0);
 				((ODKView) mCurrentView).setBinaryData(iv);
 				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
 				break;
-			case EX_DECIMAL_CAPTURE:
+			case StaticMethods.EX_DECIMAL_CAPTURE:
 				Double dv = intent.getDoubleExtra("value", 0.0);
 				((ODKView) mCurrentView).setBinaryData(dv);
 				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
 				break;
-			case DRAW_IMAGE:
-			case ANNOTATE_IMAGE:
-			case SIGNATURE_CAPTURE:
-			case IMAGE_CAPTURE:
+			case StaticMethods.DRAW_IMAGE:
+			case StaticMethods.ANNOTATE_IMAGE:
+			case StaticMethods.SIGNATURE_CAPTURE:
+			case StaticMethods.IMAGE_CAPTURE:
 				/*
 				 * We saved the image to the tempfile_path, but we really want it to
 				 * be in: /sdcard/odk/instances/[current instnace]/something.jpg so
@@ -685,18 +632,12 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 						+ System.currentTimeMillis() + ".jpg";
 	
 				File nf = new File(s);
-				if (!fi.renameTo(nf)) {
-					Log.e(t, "Failed to rename " + fi.getAbsolutePath());
-				} else {
-					Log.i(t,
-							"renamed " + fi.getAbsolutePath() + " to "
-									+ nf.getAbsolutePath());
-				}
+				fi.renameTo(nf);
 	
 				((ODKView) mCurrentView).setBinaryData(nf);
 				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
 				break;
-			case IMAGE_CHOOSER:
+			case StaticMethods.IMAGE_CHOOSER:
 				/*
 				 * We have a saved image somewhere, but we really want it to be in:
 				 * /sdcard/odk/instances/[current instnace]/something.jpg so we move
@@ -743,10 +684,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 					updateView();
 				}
 				break;
-			case AUDIO_CAPTURE:
-			case VIDEO_CAPTURE:
-			case AUDIO_CHOOSER:
-			case VIDEO_CHOOSER:
+			case StaticMethods.AUDIO_CAPTURE:
+			case StaticMethods.VIDEO_CAPTURE:
+			case StaticMethods.AUDIO_CHOOSER:
+			case StaticMethods.VIDEO_CHOOSER:
 				// For audio/video capture/chooser, we get the URI from the content
 				// provider
 				// then the widget copies the file and makes a new entry in the
@@ -758,12 +699,12 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 					updateView();
 				}
 				break;
-			case LOCATION_CAPTURE:
-				String sl = intent.getStringExtra(LOCATION_RESULT);
+			case StaticMethods.LOCATION_CAPTURE:
+				String sl = intent.getStringExtra(StaticMethods.LOCATION_RESULT);
 				((ODKView) mCurrentView).setBinaryData(sl);
 				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
 				break;
-			case HIERARCHY_ACTIVITY:
+			case StaticMethods.HIERARCHY_ACTIVITY:
 				// We may have jumped to a new index in hierarchy activity, so
 				// refresh
 				break;
@@ -855,42 +796,26 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				.getFormController();
 		switch (item.getItemId()) {
 		case 0:
-			Collect.getInstance()
-			.getActivityLogger()
-			.logInstanceAction(this, "onOptionsItemSelected",
-					"Refresh ODKView");
 			if (mCurrentView != null){
 				updateView();
 			}
 			return true;
 
 		case R.id.menu_save:
-			Collect.getInstance()
-					.getActivityLogger()
-					.logInstanceAction(this, "onOptionsItemSelected",
-							"MENU_SAVE");
 			// don't exit
 			dialogSaveName(false,false);
 			return true;
 		case R.id.menu_hierachy:
-			Collect.getInstance()
-					.getActivityLogger()
-					.logInstanceAction(this, "onOptionsItemSelected",
-							"MENU_HIERARCHY_VIEW");
 			if (formController.currentPromptIsQuestion()) {
 				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
 			}
 			Intent i = new Intent(this, ActivityFormHierarchy.class);
-			startActivityForResult(i, HIERARCHY_ACTIVITY);
+			startActivityForResult(i, StaticMethods.HIERARCHY_ACTIVITY);
 			return true;
 		case R.id.menu_raz:
 			razConfirmation();
 			return true;
 		case R.id.menu_settings:
-			Collect.getInstance()
-					.getActivityLogger()
-					.logInstanceAction(this, "onOptionsItemSelected",
-							"MENU_PREFERENCES");
 			startActivityForResult((new Intent(this, ActivityPreferences.class)),RESULT_PREFERENCES);
 			return true;
 		case R.id.menu_help:
@@ -907,10 +832,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			DialogExit.show(this);
 			return true;
 		case android.R.id.home:
-	         // This is called when the Home (Up) button is pressed
-			// in the Action Bar.
-			Collect.getInstance().getActivityLogger()
-					.logInstanceAction(this, "onKeyDown.KEYCODE_BACK", "quit");
 			createQuitDialog(true);
 			return true;
 		}
@@ -977,8 +898,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
-		Collect.getInstance().getActivityLogger()
-				.logInstanceAction(this, "onCreateContextMenu", "show");
 		FormController formController = Collect.getInstance()
 				.getFormController();
 
@@ -1000,18 +919,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		 */
 		for (QuestionWidget qw : ((ODKView) mCurrentView).getWidgets()) {
 			if (item.getItemId() == qw.getId()) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(this, "onContextItemSelected",
-								"createClearDialog", qw.getPrompt().getIndex());
 				createClearDialog(qw);
 			}
 		}
 		if (item.getItemId() == DELETE_REPEAT) {
-			Collect.getInstance()
-					.getActivityLogger()
-					.logInstanceAction(this, "onContextItemSelected",
-							"createDeleteRepeatConfirmDialog");
 			createDeleteRepeatConfirmDialog();
 		}
 
@@ -1059,265 +970,218 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		
 		findViewById(R.id.relativeLayout_informations).setVisibility(View.VISIBLE);
 		findViewById(R.id.buttonholder).setVisibility(View.VISIBLE);
-		if ( (FormEntryController.EVENT_END_OF_FORM==event) && (test_finish))
+		
+		switch (event)
 		{
+		
+		case FormEntryController.EVENT_END_OF_FORM:
 			findViewById(R.id.relativeLayout_informations).setVisibility(View.GONE);
-			ScrollView endView = (ScrollView) View.inflate(this, R.layout.fragment_form_hierarchy, null);
+			ScrollView endView;
+			changeButtonNext(getResources().getDrawable(R.drawable.finish_background),R.style.ButtonFinishSave, getString(R.string.submit));
 			
-			changeButtonNext(getResources().getDrawable(R.drawable.finish_background),R.style.ButtonFinishSave, getString(R.string.finish));
+			endView = (ScrollView) View.inflate(this, R.layout.activity_form_entry_end, null);
 			
-			((CustomFontTextview) endView.findViewById(R.id.textview_form_title)).setText(formController.getFormTitle());
-			hierarchyList=(CustomListViewExpanded) endView.findViewById(R.id.hierarchyList);
-			hierarchyList.setExpanded(true);
-			hierarchyList.post(new Runnable() {
+			// edittext to change the displayed name of the instance
+			saveAs = (CustomFontEditText) endView
+					.findViewById(R.id.save_name);
+
+			// disallow carriage returns in the name
+			InputFilter returnFilter = new InputFilter() {
 				@Override
-				public void run() {
-					int position = 0;
-					for (int i = 0; i < hierarchyList.getAdapter().getCount(); i++) {
-						HierarchyElement he = formList.get(i);
-						if (formController.getFormIndex().equals(he.getFormIndex())) {
-							position = i;
-							break;
+				public CharSequence filter(CharSequence source, int start,
+						int end, Spanned dest, int dstart, int dend) {
+					for (int i = start; i < end; i++) {
+						if (Character.getType((source.charAt(i))) == Character.CONTROL) {
+							return "";
 						}
 					}
-					hierarchyList.setSelection(position);
+					return null;
 				}
-			});
-			hierarchyList.setOnItemClickListener(new OnItemClickListener()
+			};
+			saveAs.setFilters(new InputFilter[] { returnFilter });
+
+			String saveName = formController.getSubmissionMetadata().instanceName;
+			
+			
+			
+			if (saveName == null) {
+				//TODO Default saveAs text should be previous save name
+				// no meta/instanceName field in the form -- see if we have a
+				// name for this instance from a previous save attempt...
+				if (getContentResolver().getType(getIntent().getData()) == InstanceColumns.CONTENT_ITEM_TYPE) {
+					Uri instanceUri = getIntent().getData();
+					Cursor instance = null;
+					try {
+						instance = getContentResolver().query(instanceUri,
+								null, null, null, null);
+						if (instance.getCount() == 1) {
+							instance.moveToFirst();
+							saveName = instance
+									.getString(instance
+											.getColumnIndex(InstanceColumns.DISPLAY_NAME));
+						}
+					} finally {
+						if (instance != null) {
+							instance.close();
+						}
+					}
+				}
+				// present the prompt to allow user to name the form
+				// TODO if savename != null don"t need to initialize it
+				if (saveName == null || saveName.length() == 0){
+					saveName = formController.getFormTitle();
+				}
+				saveAs.setText(saveName);
+				saveAs.setEnabled(true);
+				saveAs.setVisibility(View.VISIBLE);
+			}
+			else
 			{
-				public void onItemClick(AdapterView<?> a, View v, int position, long id)
-				{
-					HierarchyElement h = formList.get(position);
-					FormIndex index = h.getFormIndex();
-					showPreviousViewFromHierarchy(position, index);
+				// if instanceName is defined in form, this is the name -- no
+				// revisions
+				// display only the name, not the prompt, and disable edits
+				
+				saveAs.setText(saveName);
+				saveAs.setEnabled(false);
+				saveAs.setBackgroundColor(Color.WHITE);
+				saveAs.setVisibility(View.VISIBLE);
+			}
+
+			// override the visibility settings based upon admin preferences
+			if (!mAdminPreferences.getBoolean(
+					AdminPreferencesActivity.KEY_SAVE_AS, true)) {
+				saveAs.setVisibility(View.GONE);
+			}
+
+			
+				checkBox1 = (CheckBox) endView.findViewById(R.id.checkbox1);
+				checkBox2 = (CheckBox) endView.findViewById(R.id.checkbox2);
+				checkBox3 = (CheckBox) endView.findViewById(R.id.checkbox3);
+				relativelayout_checkbox1 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox1);
+				relativelayout_checkbox2 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox2);
+				relativelayout_checkbox3 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox3);
+			
+			relativelayout_checkbox1.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					if (checkBox1.isChecked())
+						checkBox1.setChecked(false);
+					else
+					{
+						checkBox1.setChecked(true);
+						checkBox2.setChecked(false);
+						checkBox3.setChecked(false);
+					}
 				}
 			});
 			
-			refreshViewHierarchy();
+			relativelayout_checkbox2.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					if (checkBox2.isChecked())
+						checkBox2.setChecked(false);
+					else
+					{
+						checkBox2.setChecked(true);
+						checkBox1.setChecked(false);
+						checkBox3.setChecked(false);
+					}
+				}
+			});
+			
+			relativelayout_checkbox3.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					// TODO Auto-generated method stub
+					if (checkBox3.isChecked())
+						checkBox3.setChecked(false);
+					else
+					{
+						checkBox3.setChecked(true);
+						checkBox1.setChecked(false);
+						checkBox2.setChecked(false);
+					}
+				}
+			});
+			checkBox1
+					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+						@Override
+						public void onCheckedChanged(CompoundButton arg0,
+								boolean status) {
+							// TODO Auto-generated method stub
+							if (status) {
+								checkBox2.setChecked(false);
+								checkBox3.setChecked(false);
+							}
+						}
+					});
+			checkBox2
+					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+						@Override
+						public void onCheckedChanged(CompoundButton arg0,
+								boolean status) {
+							// TODO Auto-generated method stub
+							if (status) {
+								checkBox1.setChecked(false);
+								checkBox3.setChecked(false);
+							}
+						}
+					});
+			checkBox3
+					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+						@Override
+						public void onCheckedChanged(CompoundButton arg0,
+								boolean status) {
+							// TODO Auto-generated method stub
+							if (status) {
+								checkBox1.setChecked(false);
+								checkBox2.setChecked(false);
+							}
+						}
+					});
+		
+			
 			return endView;
-		}
-		else
-		{	
-			switch (event)
-			{
-			
-			case FormEntryController.EVENT_END_OF_FORM:
-				findViewById(R.id.relativeLayout_informations).setVisibility(View.GONE);
-				test_finish=true;
-				ScrollView endView;
-				changeButtonNext(getResources().getDrawable(R.drawable.finish_background),R.style.ButtonFinishSave, getString(R.string.submit));
-				
-				endView = (ScrollView) View.inflate(this, R.layout.activity_form_entry_end, null);
-				
-				// edittext to change the displayed name of the instance
-				saveAs = (CustomFontEditText) endView
-						.findViewById(R.id.save_name);
-
-				// disallow carriage returns in the name
-				InputFilter returnFilter = new InputFilter() {
-					@Override
-					public CharSequence filter(CharSequence source, int start,
-							int end, Spanned dest, int dstart, int dend) {
-						for (int i = start; i < end; i++) {
-							if (Character.getType((source.charAt(i))) == Character.CONTROL) {
-								return "";
-							}
-						}
-						return null;
-					}
-				};
-				saveAs.setFilters(new InputFilter[] { returnFilter });
-
-				String saveName = formController.getSubmissionMetadata().instanceName;
-				
-				
-				
-				if (saveName == null) {
-					//TODO Default saveAs text should be previous save name
-					// no meta/instanceName field in the form -- see if we have a
-					// name for this instance from a previous save attempt...
-					if (getContentResolver().getType(getIntent().getData()) == InstanceColumns.CONTENT_ITEM_TYPE) {
-						Uri instanceUri = getIntent().getData();
-						Cursor instance = null;
-						try {
-							instance = getContentResolver().query(instanceUri,
-									null, null, null, null);
-							if (instance.getCount() == 1) {
-								instance.moveToFirst();
-								saveName = instance
-										.getString(instance
-												.getColumnIndex(InstanceColumns.DISPLAY_NAME));
-							}
-						} finally {
-							if (instance != null) {
-								instance.close();
-							}
-						}
-					}
-					// present the prompt to allow user to name the form
-					// TODO if savename != null don"t need to initialize it
-					if (saveName == null || saveName.length() == 0){
-						saveName = formController.getFormTitle();
-					}
-					saveAs.setText(saveName);
-					saveAs.setEnabled(true);
-					saveAs.setVisibility(View.VISIBLE);
-				}
-				else
-				{
-					// if instanceName is defined in form, this is the name -- no
-					// revisions
-					// display only the name, not the prompt, and disable edits
-					
-					saveAs.setText(saveName);
-					saveAs.setEnabled(false);
-					saveAs.setBackgroundColor(Color.WHITE);
-					saveAs.setVisibility(View.VISIBLE);
-				}
-
-				// override the visibility settings based upon admin preferences
-				if (!mAdminPreferences.getBoolean(
-						AdminPreferencesActivity.KEY_SAVE_AS, true)) {
-					saveAs.setVisibility(View.GONE);
-				}
-
-				
-					checkBox1 = (CheckBox) endView.findViewById(R.id.checkbox1);
-					checkBox2 = (CheckBox) endView.findViewById(R.id.checkbox2);
-					checkBox3 = (CheckBox) endView.findViewById(R.id.checkbox3);
-					relativelayout_checkbox1 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox1);
-					relativelayout_checkbox2 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox2);
-					relativelayout_checkbox3 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox3);
-				
-				relativelayout_checkbox1.setOnClickListener(new View.OnClickListener() {
-					
-					@Override
-					public void onClick(View arg0) {
-						// TODO Auto-generated method stub
-						if (checkBox1.isChecked())
-							checkBox1.setChecked(false);
-						else
-						{
-							checkBox1.setChecked(true);
-							checkBox2.setChecked(false);
-							checkBox3.setChecked(false);
-						}
-					}
-				});
-				
-				relativelayout_checkbox2.setOnClickListener(new View.OnClickListener() {
-					
-					@Override
-					public void onClick(View arg0) {
-						// TODO Auto-generated method stub
-						if (checkBox2.isChecked())
-							checkBox2.setChecked(false);
-						else
-						{
-							checkBox2.setChecked(true);
-							checkBox1.setChecked(false);
-							checkBox3.setChecked(false);
-						}
-					}
-				});
-				
-				relativelayout_checkbox3.setOnClickListener(new View.OnClickListener() {
-					
-					@Override
-					public void onClick(View arg0) {
-						// TODO Auto-generated method stub
-						if (checkBox3.isChecked())
-							checkBox3.setChecked(false);
-						else
-						{
-							checkBox3.setChecked(true);
-							checkBox1.setChecked(false);
-							checkBox2.setChecked(false);
-						}
-					}
-				});
-				checkBox1
-						.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-							@Override
-							public void onCheckedChanged(CompoundButton arg0,
-									boolean status) {
-								// TODO Auto-generated method stub
-								if (status) {
-									checkBox2.setChecked(false);
-									checkBox3.setChecked(false);
-								}
-							}
-						});
-				checkBox2
-						.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-							@Override
-							public void onCheckedChanged(CompoundButton arg0,
-									boolean status) {
-								// TODO Auto-generated method stub
-								if (status) {
-									checkBox1.setChecked(false);
-									checkBox3.setChecked(false);
-								}
-							}
-						});
-				checkBox3
-						.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-							@Override
-							public void onCheckedChanged(CompoundButton arg0,
-									boolean status) {
-								// TODO Auto-generated method stub
-								if (status) {
-									checkBox1.setChecked(false);
-									checkBox2.setChecked(false);
-								}
-							}
-						});
-			
-				
-				return endView;
-			case FormEntryController.EVENT_QUESTION:
-			case FormEntryController.EVENT_GROUP:
-			case FormEntryController.EVENT_REPEAT:
-				ODKView odkv = null;
-				// should only be a group here if the event_group is a field-list
-				try {
-					FormEntryPrompt[] prompts = formController.getQuestionPrompts();
-					FormEntryCaption[] groups = formController
-							.getGroupsForCurrentIndex();
-					odkv = new ODKView(this, this, formController.getQuestionPrompts(),
-							groups, advancingPage);
-					Log.i(t,
-							"created view for group "
-									+ (groups.length > 0 ? groups[groups.length - 1]
-											.getLongText() : "[top]")
-									+ " "
-									+ (prompts.length > 0 ? prompts[0]
-											.getQuestionText() : "[no question]"));
-				} catch (RuntimeException e) {
-					createErrorDialog(e.getMessage(), EXIT);
-					e.printStackTrace();
-					// this is badness to avoid a crash.
-					event = formController.stepToNextScreenEvent();
-					return createView(event, advancingPage);
-				}
-	
-				// Makes a "clear answer" menu pop up on long-click
-				for (QuestionWidget qw : odkv.getWidgets()) {
-					if (!qw.getPrompt().isReadOnly()) {
-						registerForContextMenu(qw);
-					}
-				}
-	
-				if (mBackButton.isShown() && mNextButton.isShown()) {
-					mBackButton.setEnabled(true);
-					mNextButton.setEnabled(true);
-				}
-				return odkv;
-			default:
+		case FormEntryController.EVENT_QUESTION:
+		case FormEntryController.EVENT_GROUP:
+		case FormEntryController.EVENT_REPEAT:
+			ODKView odkv = null;
+			// should only be a group here if the event_group is a field-list
+			try {
+				FormEntryPrompt[] prompts = formController.getQuestionPrompts();
+				FormEntryCaption[] groups = formController
+						.getGroupsForCurrentIndex();
+				odkv = new ODKView(this, this, formController.getQuestionPrompts(),
+						groups, advancingPage);
+			} catch (RuntimeException e) {
+				createErrorDialog(e.getMessage(), EXIT);
+				e.printStackTrace();
 				// this is badness to avoid a crash.
 				event = formController.stepToNextScreenEvent();
 				return createView(event, advancingPage);
 			}
+
+			// Makes a "clear answer" menu pop up on long-click
+			for (QuestionWidget qw : odkv.getWidgets()) {
+				if (!qw.getPrompt().isReadOnly()) {
+					registerForContextMenu(qw);
+				}
+			}
+
+			if (mBackButton.isShown() && mNextButton.isShown()) {
+				mBackButton.setEnabled(true);
+				mNextButton.setEnabled(true);
+			}
+			return odkv;
+		default:
+			// this is badness to avoid a crash.
+			event = formController.stepToNextScreenEvent();
+			return createView(event, advancingPage);
 		}
 	}
 
@@ -1369,20 +1233,15 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			createRepeatDialog();
 			break;
 		case FormEntryController.EVENT_REPEAT_JUNCTURE:
-			Log.i(t, "repeat juncture: "
-					+ formController.getFormIndex().getReference());
 			// skip repeat junctures until we implement them
 			break;
 		default:
-			Log.w(t,
-					"JavaRosa added a new EVENT type and didn't tell us... shame on them.");
 			break;
 		}
 	}
 	
 	@Override
 	public void updateView() {
-		Log.i(getClass().getName(), "UpdateView " + Boolean.toString(mAnswersChanged));
 		FormController formController = Collect.getInstance()
 				.getFormController();
 		if (formController.indexIsInFieldList()&&mAnswersChanged){
@@ -1415,13 +1274,8 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				createRepeatDialog();
 				break;
 			case FormEntryController.EVENT_REPEAT_JUNCTURE:
-				Log.i(t, "repeat juncture: "
-						+ formController.getFormIndex().getReference());
-				// skip repeat junctures until we implement them
 				break;
 			default:
-				Log.w(t,
-						"JavaRosa added a new EVENT type and didn't tell us... shame on them.");
 				break;
 			}
 		}
@@ -1433,12 +1287,8 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	 * model without checking constraints.
 	 */
 	private void showPreviousView() {
-		if (mNextButton.getText().toString().equals(getString(R.string.submit)))
-			changeButtonNext(getResources().getDrawable(R.drawable.finish_background),R.style.ButtonFinishSave, getString(R.string.finish));
-		else
-			changeButtonNext(getResources().getDrawable(R.drawable.selectable_item_background),R.style.ButtonNext, getString(R.string.next));
+		changeButtonNext(getResources().getDrawable(R.drawable.selectable_item_background),R.style.ButtonNext, getString(R.string.next));
 		
-		test_finish=true;
 		current_page--;
 		mBackButton.setVisibility(current_page <= 1 ? View.INVISIBLE : View.VISIBLE);
 		FormController formController = Collect.getInstance()
@@ -1582,14 +1432,11 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			logString = "update";
 			break;
 		}
-		Log.e("FormEntryActivity", "scroll y : "+mY);
 		mCurrentView.post(new Runnable() { 
 	        public void run() { 
 	             mCurrentView.scrollTo(0, mY);
 	        } 
 		});
-		Collect.getInstance().getActivityLogger()
-				.logInstanceAction(this, "showView", logString);
 	}
 
 	// Hopefully someday we can use managed dialogs when the bugs are fixed
@@ -1614,11 +1461,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				.getConstraintText();
 		switch (saveStatus) {
 		case FormEntryController.ANSWER_CONSTRAINT_VIOLATED:
-			Collect.getInstance()
-					.getActivityLogger()
-					.logInstanceAction(this,
-							"createConstraintToast.ANSWER_CONSTRAINT_VIOLATED",
-							"show", index);
 			if (constraintText == null) {
 				constraintText = formController.getQuestionPrompt(index)
 						.getSpecialFormQuestionText("constraintMsg");
@@ -1628,11 +1470,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			}
 			break;
 		case FormEntryController.ANSWER_REQUIRED_BUT_EMPTY:
-			Collect.getInstance()
-					.getActivityLogger()
-					.logInstanceAction(this,
-							"createConstraintToast.ANSWER_REQUIRED_BUT_EMPTY",
-							"show", index);
 			constraintText = formController.getQuestionPrompt(index).getSpecialFormQuestionText("requiredMsg");
 			if (constraintText == null){
 				constraintText = getString(R.string.required_answer_error);
@@ -1672,8 +1509,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	private void createRepeatDialog() {
 		FormController formController = Collect.getInstance()
 				.getFormController();
-		Collect.getInstance().getActivityLogger()
-				.logInstanceAction(this, "createRepeatDialog", "show");
 		mAlertDialog = new AlertDialog.Builder(this).create();
 		mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
 		DialogInterface.OnClickListener repeatListener = new DialogInterface.OnClickListener() {
@@ -1683,10 +1518,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 						.getFormController();
 				switch (i) {
 				case DialogInterface.BUTTON1: // yes, repeat
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this, "createRepeatDialog",
-									"addRepeat");
 					try {
 						formController.newRepeat();
 					} catch (XPathTypeMismatchException e) {
@@ -1708,10 +1539,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 					}
 					break;
 				case DialogInterface.BUTTON2: // no, no repeat
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this, "createRepeatDialog",
-									"showNext");
 					showNextView();
 					break;
 				}
@@ -1743,10 +1570,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	 * Creates and displays dialog with the given errorMsg.
 	 */
 	private void createErrorDialog(String errorMsg, final boolean shouldExit) {
-		Collect.getInstance()
-				.getActivityLogger()
-				.logInstanceAction(this, "createErrorDialog",
-						"show." + Boolean.toString(shouldExit));
 		mErrorMessage = errorMsg;
 		mAlertDialog = new AlertDialog.Builder(this).create();
 		mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
@@ -1757,8 +1580,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			public void onClick(DialogInterface dialog, int i) {
 				switch (i) {
 				case DialogInterface.BUTTON1:
-					Collect.getInstance().getActivityLogger()
-							.logInstanceAction(this, "createErrorDialog", "OK");
 					if (shouldExit) {
 						finish();
 					}
@@ -1775,10 +1596,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	 * Creates a confirm/cancel dialog for deleting repeats.
 	 */
 	private void createDeleteRepeatConfirmDialog() {
-		Collect.getInstance()
-				.getActivityLogger()
-				.logInstanceAction(this, "createDeleteRepeatConfirmDialog",
-						"show");
 		FormController formController = Collect.getInstance()
 				.getFormController();
 		mAlertDialog = new AlertDialog.Builder(this).create();
@@ -1798,18 +1615,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 						.getFormController();
 				switch (i) {
 				case DialogInterface.BUTTON1: // yes
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this,
-									"createDeleteRepeatConfirmDialog", "OK");
 					formController.deleteRepeat();
 					showPreviousView();
 					break;
 				case DialogInterface.BUTTON2: // no
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this,
-									"createDeleteRepeatConfirmDialog", "cancel");
 					break;
 				}
 			}
@@ -1863,8 +1672,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			items = one;
 		}
 
-		Collect.getInstance().getActivityLogger()
-				.logInstanceAction(this, "createQuitDialog", "show");
 		mAlertDialog = new AlertDialog.Builder(this)
 				.setTitle(
 						getString(R.string.quit_application,
@@ -1875,10 +1682,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 							@Override
 							public void onClick(DialogInterface dialog, int id) {
 
-								Collect.getInstance()
-										.getActivityLogger()
-										.logInstanceAction(this,
-												"createQuitDialog", "cancel");
 								dialog.cancel();
 
 							}
@@ -1898,39 +1701,20 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 									.getBoolean(
 											AdminPreferencesActivity.KEY_SAVE_MID,
 											true)) {
-								Collect.getInstance()
-										.getActivityLogger()
-										.logInstanceAction(this,
-												"createQuitDialog",
-												"saveAndExit");
-								dialogSaveName(true,true);
+								dialogSaveName(test,true);
 								
 							} else {
-								Collect.getInstance()
-										.getActivityLogger()
-										.logInstanceAction(this,
-												"createQuitDialog",
-												"discardAndExit");
 								removeTempInstance();
 								finishReturnInstance(test);
 							}
 							break;
 
 						case 1: // discard changes and exit
-							Collect.getInstance()
-									.getActivityLogger()
-									.logInstanceAction(this,
-											"createQuitDialog",
-											"discardAndExit");
 							removeTempInstance();
 							finishReturnInstance(test);
 							break;
 
 						case 2:// do nothing
-							Collect.getInstance()
-									.getActivityLogger()
-									.logInstanceAction(this,
-											"createQuitDialog", "cancel");
 							break;
 						}
 					}
@@ -1976,7 +1760,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			// delete media first
 			String instanceFolder = formController.getInstancePath()
 					.getParent();
-			Log.i(t, "attempting to delete: " + instanceFolder);
 			int images = MediaUtils
 					.deleteImagesInFolderFromMediaProvider(formController
 							.getInstancePath().getParentFile());
@@ -1987,13 +1770,9 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 					.deleteVideoInFolderFromMediaProvider(formController
 							.getInstancePath().getParentFile());
 
-			Log.i(t, "removed from content providers: " + images
-					+ " image files, " + audio + " audio files," + " and "
-					+ video + " video files.");
 			File f = new File(instanceFolder);
 			if (f.exists() && f.isDirectory()) {
 				for (File del : f.listFiles()) {
-					Log.i(t, "deleting file: " + del.getAbsolutePath());
 					del.delete();
 				}
 				f.delete();
@@ -2005,10 +1784,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	 * Confirm clear answer dialog
 	 */
 	private void createClearDialog(final QuestionWidget qw) {
-		Collect.getInstance()
-				.getActivityLogger()
-				.logInstanceAction(this, "createClearDialog", "show",
-						qw.getPrompt().getIndex());
 		mAlertDialog = new AlertDialog.Builder(this).create();
 		mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
 
@@ -2031,18 +1806,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			public void onClick(DialogInterface dialog, int i) {
 				switch (i) {
 				case DialogInterface.BUTTON1: // yes
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this, "createClearDialog",
-									"clearAnswer", qw.getPrompt().getIndex());
 					clearAnswer(qw);
 					saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
 					break;
 				case DialogInterface.BUTTON2: // no
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this, "createClearDialog",
-									"cancel", qw.getPrompt().getIndex());
 					break;
 				}
 			}
@@ -2060,8 +1827,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	 * the form.
 	 */
 	private void createLanguageDialog() {
-		Collect.getInstance().getActivityLogger()
-				.logInstanceAction(this, "createLanguageDialog", "show");
 		FormController formController = Collect.getInstance()
 				.getFormController();
 		final String[] languages = formController.getLanguages();
@@ -2094,17 +1859,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 								int updated = getContentResolver().update(
 										FormsColumns.CONTENT_URI, values,
 										selection, selectArgs);
-								Log.i(t, "Updated language to: "
-										+ languages[whichButton] + " in "
-										+ updated + " rows");
 
-								Collect.getInstance()
-										.getActivityLogger()
-										.logInstanceAction(
-												this,
-												"createLanguageDialog",
-												"changeLanguage."
-														+ languages[whichButton]);
 								formController
 										.setLanguage(languages[whichButton]);
 								dialog.dismiss();
@@ -2120,11 +1875,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 							@Override
 							public void onClick(DialogInterface dialog,
 									int whichButton) {
-								Collect.getInstance()
-										.getActivityLogger()
-										.logInstanceAction(this,
-												"createLanguageDialog",
-												"cancel");
 							}
 						}).create();
 		mAlertDialog.show();
@@ -2137,19 +1887,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 		case PROGRESS_DIALOG:
-			Log.e(t, "Creating PROGRESS_DIALOG");
-			Collect.getInstance()
-					.getActivityLogger()
-					.logInstanceAction(this, "onCreateDialog.PROGRESS_DIALOG",
-							"show");
 			mProgressDialog = new ProgressDialog(this);
 			DialogInterface.OnClickListener loadingButtonListener = new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this,
-									"onCreateDialog.PROGRESS_DIALOG", "cancel");
 					dialog.dismiss();
 					mFormLoaderTask.setFormLoaderListener(null);
 					FormLoaderTask t = mFormLoaderTask;
@@ -2168,18 +1909,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 					loadingButtonListener);
 			return mProgressDialog;
 		case SAVING_DIALOG:
-			Collect.getInstance()
-					.getActivityLogger()
-					.logInstanceAction(this, "onCreateDialog.SAVING_DIALOG",
-							"show");
 			mProgressDialog = new ProgressDialog(this);
 			DialogInterface.OnClickListener savingButtonListener = new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this,
-									"onCreateDialog.SAVING_DIALOG", "cancel");
 					dialog.dismiss();
 					mSaveToDiskTask.setFormSavedListener(null);
 					SaveToDiskTask t = mSaveToDiskTask;
@@ -2205,7 +1938,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	 * Dismiss any showing dialogs that we manually manage.
 	 */
 	private void dismissDialogs() {
-		Log.e(t, "Dismiss dialogs");
 		if (mAlertDialog != null && mAlertDialog.isShowing()) {
 			mAlertDialog.dismiss();
 		}
@@ -2234,7 +1966,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		super.onResume();
 		FormController formController = Collect.getInstance()
 				.getFormController();
-		Collect.getInstance().getActivityLogger().open();
 
 		if (mFormLoaderTask != null) {
 			mFormLoaderTask.setFormLoaderListener(this);
@@ -2268,10 +1999,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		if (formController!=null)
 			event=formController.getEvent();
 		if (event != FormEntryController.EVENT_END_OF_FORM)
-		{
 			changeButtonNext(getResources().getDrawable(R.drawable.selectable_item_background),R.style.ButtonNext, getString(R.string.next));
-			test_finish=true;
-		}
 		if (current_page==1)
 			mBackButton.setVisibility(View.INVISIBLE);
 	}
@@ -2280,26 +2008,16 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_BACK:
-			Collect.getInstance().getActivityLogger()
-					.logInstanceAction(this, "onKeyDown.KEYCODE_BACK", "quit");
 			createQuitDialog(false);
 			return true;
 		case KeyEvent.KEYCODE_DPAD_RIGHT:
 			if (event.isAltPressed()) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(this,
-								"onKeyDown.KEYCODE_DPAD_RIGHT", "showNext");
 				showNextView();
 				return true;
 			}
 			break;
 		case KeyEvent.KEYCODE_DPAD_LEFT:
 			if (event.isAltPressed()) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(this, "onKeyDown.KEYCODE_DPAD_LEFT",
-								"showPrevious");
 				showPreviousView();
 				return true;
 			}
@@ -2339,7 +2057,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	private int mAnimationCompletionSet = 0;
 
 	private void afterAllAnimations() {
-		Log.i(t, "afterAllAnimations");
 		if (mStaleView != null) {
 			if (mStaleView instanceof ODKView) {
 				// http://code.google.com/p/android/issues/detail?id=8488
@@ -2355,15 +2072,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 
 	@Override
 	public void onAnimationEnd(Animation animation) {
-		Log.i(t, "onAnimationEnd "
-				+ ((animation == mInAnimation) ? "in"
-						: ((animation == mOutAnimation) ? "out" : "other")));
 		if (mInAnimation == animation) {
 			mAnimationCompletionSet |= 1;
 		} else if (mOutAnimation == animation) {
 			mAnimationCompletionSet |= 2;
-		} else {
-			Log.e(t, "Unexpected animation");
 		}
 
 		if (mAnimationCompletionSet == 3) {
@@ -2373,18 +2085,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 
 	@Override
 	public void onAnimationRepeat(Animation animation) {
-		// Added by AnimationListener interface.
-		Log.i(t, "onAnimationRepeat "
-				+ ((animation == mInAnimation) ? "in"
-						: ((animation == mOutAnimation) ? "out" : "other")));
 	}
 
 	@Override
 	public void onAnimationStart(Animation animation) {
-		// Added by AnimationListener interface.
-		Log.i(t, "onAnimationStart "
-				+ ((animation == mInAnimation) ? "in"
-						: ((animation == mOutAnimation) ? "out" : "other")));
 	}
 
 	/**
@@ -2688,37 +2392,19 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				|| Math.abs(e1.getX() - e2.getX()) > xPixelLimit * 2) {
 			if (velocityX > 0) {
 				if (e1.getX() > e2.getX()) {
-					test_finish=true;
-					if (mNextButton.getText().equals(getString(R.string.finish)))
-					{
-						test_finish=false;
-						showNextView();
-					}
-					else if (!mNextButton.getText().equals(getString(R.string.submit)))
+					if (!mNextButton.getText().equals(getString(R.string.submit)))
 						showNextView();
 					
 				} else if (current_page > 1) {
-					Collect.getInstance().getActivityLogger()
-							.logInstanceAction(this, "onFling", "showPrevious");
 					showPreviousView();
 				}
 			} else {
 				if (e1.getX() < e2.getX()) {
 					if (current_page > 1) {
-						Collect.getInstance()
-								.getActivityLogger()
-								.logInstanceAction(this, "onFling",
-										"showPrevious");
 						showPreviousView();
 					}
 				} else {
-					test_finish=true;
-					if (mNextButton.getText().equals(getString(R.string.finish)))
-					{
-						test_finish=false;
-						showNextView();
-					}
-					else if (!mNextButton.getText().equals(getString(R.string.submit)))
+					if (!mNextButton.getText().equals(getString(R.string.submit)))
 						showNextView();
 				}
 			}
@@ -2759,12 +2445,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	@Override
 	protected void onStart() {
 		super.onStart();
-		Collect.getInstance().getActivityLogger().logOnStart(this);
 	}
 
 	@Override
 	protected void onStop() {
-		Collect.getInstance().getActivityLogger().logOnStop(this);
 		super.onStop();
 	}
 
@@ -2776,7 +2460,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 
 	@Override
 	public void setAnswerChange(boolean hasChanged) {
-		Log.i(getClass().getName(), "setAnswerChange " + Boolean.toString(hasChanged));
 		mAnswersChanged = hasChanged;
 	}
 
@@ -2858,8 +2541,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	}
 
 	private void createAlertDialog(String message) {
-    	Collect.getInstance().getActivityLogger().logAction(this, "createAlertDialog", "show");
-
         mAlertDialog = new AlertDialog.Builder(this).create();
         mAlertDialog.setTitle(getString(R.string.upload_results));
         mAlertDialog.setMessage(message);
@@ -2868,8 +2549,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
             public void onClick(DialogInterface dialog, int i) {
                 switch (i) {
                     case DialogInterface.BUTTON1: // ok
-                    	Collect.getInstance().getActivityLogger().logAction(this, "createAlertDialog", "OK");
-                        // always exit this activity since it has no interface
+                    	// always exit this activity since it has no interface
                         finish();
                         if (restart)
                 		{
@@ -2925,11 +2605,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 
             while (itr.hasNext()) {
                 Long removeMe = Long.valueOf(itr.next());
-                boolean removed = workingSet.remove(removeMe);
-                if (removed) {
-                    Log.i(t, removeMe
-                            + " was already sent, removing from queue before restarting task");
-                }
+                workingSet.remove(removeMe);
             }
             mUploadedInstances.putAll(doneSoFar);
         }
