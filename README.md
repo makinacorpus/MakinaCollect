@@ -22,5 +22,5 @@ Libraries
 ------------
 * The SwipeToDismissUndoList is a library to add swipe to dismiss functionality to a ListView and undo deletions again: https://github.com/timroes/SwipeToDismissUndoList
 * Android PagerSlidingTabStrip, an interactive paging indicator widget, compatible with the ViewPager from the Android Support Library: https://github.com/astuetz/PagerSlidingTabStrip 
-* The HoloEverywhere library to bring Holo Theme from Android 4.1 to 2.1 and above: https://github.com/Prototik/HoloEverywhere/
+* The HoloEverywhere library to bring Holo Theme from Android 4.1 to 2.1 and above: https://bitbucket.org/frankiesardo/holoeverywhere/src/051a8fe9e74b?at=dev
 * Crouton, a context sensitive notifications for Android: https://github.com/keyboardsurfer/Crouton
