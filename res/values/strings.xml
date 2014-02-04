@@ -169,7 +169,8 @@ You can also use the Makina Collect App with your own forms that you have create
 
 
     <!-- FORM SAVING -->
-    <string name="to_not_send_form">Do not send this form</string>
+    <string name="save_description">This form is now finalized.\nYou can change the title.</string>
+    <string name="save_form">Save the form</string>
     <string name="no_form_not_finalled">YOU DON\'T HAVE ANY UNFINISHED FORM</string>
     <string name="send_form">Send this form</string>
     <string name="send_form_and_restart">Send this form and restart it</string>
@@ -259,7 +260,6 @@ You can also use the Makina Collect App with your own forms that you have create
     <string name="getting_location">Loading Location</string>
     <string name="get_barcode">Get Barcode</string>
     <string name="get_forms">Get Blank Form</string>
-    <string name="get_location">Record Location</string>
     <string name="provider_disabled_error">Sorry, Location providers are disabled!</string>
     <string name="invalid_answer_error">Sorry, this response is invalid!</string>
     <string name="jump_to_beginning">Go To Start</string>
@@ -299,7 +299,7 @@ You can also use the Makina Collect App with your own forms that you have create
     <string name="quit_entry">Save Form</string>
     <string name="refresh">Refresh</string>
     <string name="replace_barcode">Replace Barcode</string>
-    <string name="replace_location">Replace Location</string>
+    <string name="choose_location">Choose Location</string>
     <string name="required_answer_error">Sorry, this response is required!</string>
     <string name="review_data">Edit Saved Form</string>
     <string name="review_data_button">Edit Saved Form (%s)</string>

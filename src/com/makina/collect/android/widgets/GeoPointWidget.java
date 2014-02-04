@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2009 University of Washington
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package com.makina.collect.android.widgets;
 
 import java.text.DecimalFormat;
@@ -29,19 +15,17 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
-import android.widget.TextView;
 
 import com.makina.collect.android.R;
-import com.makina.collect.android.activities.ActivityForm;
-import com.makina.collect.android.activities.ActivityGeoPoint;
 import com.makina.collect.android.activities.ActivityGeoPointMap;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
+import com.makina.collect.android.utilities.StaticMethods;
+import com.makina.collect.android.views.CustomFontButton;
+import com.makina.collect.android.views.CustomFontEditText;
+import com.makina.collect.android.views.CustomFontTextview;
 
 /**
  * GeoPointWidget is the widget that allows the user to get GPS readings.
@@ -55,16 +39,15 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget {
 
 	public static final double DEFAULT_LOCATION_ACCURACY = 35.0;
 
-	private Button mGetLocationButton;
-	private Button mViewButton;
-	private Button mOkButton;
-	private EditText mLatField;
-	private EditText mLongField;
-	private TextView mLatInfo;
-	private TextView mLongInfo;
+	private CustomFontButton mGetLocationButton;
+	private CustomFontButton mOkButton;
+	private CustomFontEditText mLatField;
+	private CustomFontEditText mLongField;
+	private CustomFontTextview mLatInfo;
+	private CustomFontTextview mLongInfo;
 
-	private TextView mStringAnswer;
-	private TextView mAnswerDisplay;
+	private CustomFontTextview mStringAnswer;
+	private CustomFontTextview mAnswerDisplay;
 	private boolean mUseMaps;
 	private boolean mUseGPS;
 	private boolean mIsReadOnly;
@@ -92,7 +75,7 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget {
 		
 		//CheckBox allow the user to chose whether to use gps or not
 		
-		CheckBox useGPSinput = new CheckBox(getContext());
+		/*CheckBox useGPSinput = new CheckBox(getContext());
 		useGPSinput.setId(QuestionWidget.newUniqueId());
 		useGPSinput.setChecked(true);
 		useGPSinput.setText(R.string.use_gps);
@@ -106,90 +89,48 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget {
 			  }
 			});
 		addView(useGPSinput);
-		useGPSinput.setVisibility(View.VISIBLE);
+		useGPSinput.setVisibility(View.VISIBLE);*/
 
 		//setup the get location button
-		mGetLocationButton = (Button)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
+		mGetLocationButton = (CustomFontButton)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
 		mGetLocationButton.setId(QuestionWidget.newUniqueId());
 		mGetLocationButton.setText(getContext()
-				.getString(R.string.get_location));
+				.getString(R.string.choose_location));
 		mGetLocationButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mAnswerFontsize);
 		mGetLocationButton.setEnabled(!prompt.isReadOnly());
 		mGetLocationButton.setLayoutParams(params);
-		mGetLocationButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_menu_save, 0, 0, 0);
+		mGetLocationButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_menu_mylocation, 0, 0, 0);
 
 		mIsReadOnly = prompt.isReadOnly();
 
-		// setup play button
-		mViewButton = (Button)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
-		mViewButton.setId(QuestionWidget.newUniqueId());
-		mViewButton.setText(getContext().getString(R.string.show_location));
-		mViewButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mAnswerFontsize);
-		mViewButton.setPadding(20, 20, 20, 20);
-		mViewButton.setLayoutParams(params);
-		mViewButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_menu_mylocation, 0, 0, 0);
-		// on play, launch the appropriate viewer
-		mViewButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(this, "showLocation", "click",
-								mPrompt.getIndex());
-				Intent i = new Intent(getContext(), ActivityGeoPointMap.class);
-				if (mOfflineMode == true){
-					i.putExtra("offLine", true);
-				}
-				if (mUseMaps && !mUseGPS){
-					i.putExtra("noGPS", true);
-				}
-				if (mStringAnswer != null && mStringAnswer.length() != 0){
-					String s = mStringAnswer.getText().toString();
-					String[] sa = s.split(" ");
-					double gp[] = new double[4];
-					gp[0] = Double.valueOf(sa[0]).doubleValue();
-					gp[1] = Double.valueOf(sa[1]).doubleValue();
-					gp[2] = Double.valueOf(sa[2]).doubleValue();
-					gp[3] = Double.valueOf(sa[3]).doubleValue();
-					
-					i.putExtra(LOCATION, gp);
-					i.putExtra(ACCURACY_THRESHOLD, mAccuracyThreshold);
-				}
-				Collect.getInstance().getFormController()
-				.setIndexWaitingForData(mPrompt.getIndex());
-				((Activity) getContext()).startActivityForResult(i,
-						ActivityForm.LOCATION_CAPTURE);
-
-			}
-		});
 		
 		//Those fields are used to get the location if maps and gps are both unavailable 
-		mLatInfo = new TextView(getContext());
+		mLatInfo = new CustomFontTextview(getContext());
 		mLatInfo.setId(QuestionWidget.newUniqueId());
 		mLatInfo.setText("Latitude : ");
 		mLatInfo.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mAnswerFontsize);
 		addView(mLatInfo);
 		
-		mLatField = new EditText(getContext());
+		mLatField = new CustomFontEditText(getContext());
 		mLatField.setId(QuestionWidget.newUniqueId());
 		mLatField.setText("0");
 		mLatField.setRawInputType(InputType.TYPE_CLASS_NUMBER);
 		addView(mLatField);
 		
-		mLongInfo = new TextView(getContext());
+		mLongInfo = new CustomFontTextview(getContext());
 		mLongInfo.setId(QuestionWidget.newUniqueId());
 		mLongInfo.setText("Longitude : ");
 		mLongInfo.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mAnswerFontsize);
 		addView(mLongInfo);
 		
-		mLongField = new EditText(getContext());
+		mLongField = new CustomFontEditText(getContext());
 		mLongField.setId(QuestionWidget.newUniqueId());
 		mLongField.setText("0");
 		mLongField.setRawInputType(InputType.TYPE_CLASS_NUMBER);
 		addView(mLongField);
 		
 		//Ok button to submit the values entered in the fields above
-		mOkButton = (Button)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
+		mOkButton = (CustomFontButton)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
 		mOkButton.setId(QuestionWidget.newUniqueId());
 		mOkButton.setText(R.string.ok);
 		mOkButton.setEnabled(!prompt.isReadOnly());
@@ -210,17 +151,16 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget {
 					mStringAnswer.setText(mLatField.getText().toString() + " " + mLongField.getText().toString() + " "
 		                    + 0 + " " + 0);
 					Collect.getInstance().getFormController().setIndexWaitingForData(null); 
-					mViewButton.setEnabled(true);
 				}
 			}
 		});
 		addView(mOkButton);
 
 		//Display the answer
-		mStringAnswer = new TextView(getContext());
+		mStringAnswer = new CustomFontTextview(getContext());
 		mStringAnswer.setId(QuestionWidget.newUniqueId());
 
-		mAnswerDisplay = new TextView(getContext());
+		mAnswerDisplay = new CustomFontTextview(getContext());
 		mAnswerDisplay.setId(QuestionWidget.newUniqueId());
 		mAnswerDisplay
 				.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mAnswerFontsize);
@@ -229,13 +169,8 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget {
 		
 		String s = prompt.getAnswerText();
 		if (s != null && !s.equals("")) {
-			mGetLocationButton.setText(getContext().getString(
-					R.string.replace_location));
 			setBinaryData(s);
-			mViewButton.setEnabled(true);
-		} else {
-			mViewButton.setEnabled(false);
-		}
+		} 
 
 		// use maps or not
 		try {
@@ -250,26 +185,31 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget {
 		mGetLocationButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(this, "recordLocation", "click",
-								mPrompt.getIndex());
 				Intent i = null;
 				
-				if (mUseMaps) {
-					i = new Intent(getContext(), ActivityGeoPointMap.class);
-					if (mOfflineMode == true){
-						i.putExtra("offLine", true);
-					}
-				} else {
-					i = new Intent(getContext(), ActivityGeoPoint.class);
+				
+				i = new Intent(getContext(), ActivityGeoPointMap.class);
+				if (mOfflineMode == true){
+					i.putExtra("offLine", true);
 				}
 				
+				
+				if (mStringAnswer != null && mStringAnswer.length() != 0){
+					String s = mStringAnswer.getText().toString();
+					String[] sa = s.split(" ");
+					double gp[] = new double[4];
+					gp[0] = Double.valueOf(sa[0]).doubleValue();
+					gp[1] = Double.valueOf(sa[1]).doubleValue();
+					gp[2] = Double.valueOf(sa[2]).doubleValue();
+					gp[3] = Double.valueOf(sa[3]).doubleValue();
+					
+					i.putExtra(LOCATION, gp);
+				}
 				i.putExtra(ACCURACY_THRESHOLD, mAccuracyThreshold);
 				Collect.getInstance().getFormController()
 						.setIndexWaitingForData(mPrompt.getIndex());
 				((Activity) getContext()).startActivityForResult(i,
-						ActivityForm.LOCATION_CAPTURE);
+						StaticMethods.LOCATION_CAPTURE);
 			}
 		});
 
@@ -277,7 +217,7 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget {
 		// retrieve answer from data model and update ui
 
 		addView(mGetLocationButton);
-		addView(mViewButton);
+		//addView(mViewButton);
 		addView(mAnswerDisplay);
 
 		refreshWidget ();
@@ -287,8 +227,6 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget {
 	public void clearAnswer() {
 		mStringAnswer.setText(null);
 		mAnswerDisplay.setText(null);
-		mGetLocationButton.setText(getContext()
-				.getString(R.string.get_location));
 
 	}
 
@@ -386,7 +324,6 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget {
 
 	@Override
 	public void setOnLongClickListener(OnLongClickListener l) {
-		mViewButton.setOnLongClickListener(l);
 		mGetLocationButton.setOnLongClickListener(l);
 		mStringAnswer.setOnLongClickListener(l);
 		mAnswerDisplay.setOnLongClickListener(l);
@@ -395,7 +332,6 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget {
 	@Override
 	public void cancelLongPress() {
 		super.cancelLongPress();
-		mViewButton.cancelLongPress();
 		mGetLocationButton.cancelLongPress();
 		mStringAnswer.cancelLongPress();
 		mAnswerDisplay.cancelLongPress();
@@ -408,28 +344,22 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget {
 			if (mUseMaps){
 				if (mUseGPS){
 					mGetLocationButton.setVisibility(View.VISIBLE);
-					mViewButton.setVisibility(View.VISIBLE);
 					mLatField.setVisibility(View.GONE);
 					mLatInfo.setVisibility(View.GONE);
 					mLongInfo.setVisibility(View.GONE);
 					mLongField.setVisibility(View.GONE);
 					mOkButton.setVisibility(View.GONE);
-					mViewButton.setText(R.string.show_location);
 				} else {
 					mGetLocationButton.setVisibility(View.GONE);
-					mViewButton.setVisibility(View.VISIBLE);
 					mLatField.setVisibility(View.GONE);
 					mLatInfo.setVisibility(View.GONE);
 					mLongInfo.setVisibility(View.GONE);
 					mLongField.setVisibility(View.GONE);
 					mOkButton.setVisibility(View.GONE);
-					mViewButton.setEnabled(true);
-					mViewButton.setText(R.string.get_location);
 				}
 			}else{
 				if (mUseGPS){
 					mGetLocationButton.setVisibility(View.VISIBLE);
-					mViewButton.setVisibility(View.GONE);
 					mLatField.setVisibility(View.GONE);
 					mLatInfo.setVisibility(View.GONE);
 					mLongInfo.setVisibility(View.GONE);
@@ -437,7 +367,6 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget {
 					mOkButton.setVisibility(View.GONE);
 				} else {
 					mGetLocationButton.setVisibility(View.GONE);
-					mViewButton.setVisibility(View.GONE);
 					mLatField.setVisibility(View.VISIBLE);
 					mLatInfo.setVisibility(View.VISIBLE);
 					mLongInfo.setVisibility(View.VISIBLE);
@@ -448,16 +377,13 @@ public class GeoPointWidget extends QuestionWidget implements IBinaryWidget {
 		}else{
 			if (mUseMaps){
 				mGetLocationButton.setVisibility(View.GONE);
-				mViewButton.setVisibility(View.VISIBLE);
 				mLatField.setVisibility(View.GONE);
 				mLatInfo.setVisibility(View.GONE);
 				mLongInfo.setVisibility(View.GONE);
 				mLongField.setVisibility(View.GONE);
 				mOkButton.setVisibility(View.GONE);
-				mViewButton.setText(R.string.show_location);
 			}else{
 				mGetLocationButton.setVisibility(View.GONE);
-				mViewButton.setVisibility(View.GONE);
 				mLatField.setVisibility(View.GONE);
 				mLatInfo.setVisibility(View.GONE);
 				mLongInfo.setVisibility(View.GONE);

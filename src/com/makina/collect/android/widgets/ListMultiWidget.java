@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2011 University of Washington
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package com.makina.collect.android.widgets;
 
 import java.io.File;
@@ -37,18 +23,17 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.makina.collect.android.R;
-import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.utilities.FileUtils;
+import com.makina.collect.android.views.CustomFontCheckBox;
+import com.makina.collect.android.views.CustomFontTextview;
 
 /**
  * ListMultiWidget handles multiple selection fields using check boxes. The check boxes are aligned
@@ -72,7 +57,7 @@ public class ListMultiWidget extends QuestionWidget {
     
     private Vector<SelectChoice> mItems; // may take a while to compute...
 
-    private ArrayList<CheckBox> mCheckboxes;
+    private ArrayList<CustomFontCheckBox> mCheckboxes;
 
 
     @SuppressWarnings("unchecked")
@@ -80,7 +65,7 @@ public class ListMultiWidget extends QuestionWidget {
         super(context, widgetAnsweredListener, prompt);
 
         mItems = prompt.getSelectChoices();
-        mCheckboxes = new ArrayList<CheckBox>();
+        mCheckboxes = new ArrayList<CustomFontCheckBox>();
         mPrompt = prompt;
 
         // Layout holds the horizontal list of buttons
@@ -93,7 +78,7 @@ public class ListMultiWidget extends QuestionWidget {
 
         if (mItems != null) {
             for (int i = 0; i < mItems.size(); i++) {
-                CheckBox c = new CheckBox(getContext());
+            	CustomFontCheckBox c = new CustomFontCheckBox(getContext());
                 c.setTag(Integer.valueOf(i));
                 c.setId(QuestionWidget.newUniqueId());
                 c.setFocusable(!prompt.isReadOnly());
@@ -115,12 +100,8 @@ public class ListMultiWidget extends QuestionWidget {
                         if (!mCheckboxInit && mPrompt.isReadOnly()) {
                             if (buttonView.isChecked()) {
                                 buttonView.setChecked(false);
-                               	Collect.getInstance().getActivityLogger().logInstanceAction(this, "onItemClick.deselect", 
-                            			mItems.get((Integer)buttonView.getTag()).getValue(), mPrompt.getIndex());
                             } else {
                                 buttonView.setChecked(true);
-                               	Collect.getInstance().getActivityLogger().logInstanceAction(this, "onItemClick.select", 
-                            			mItems.get((Integer)buttonView.getTag()).getValue(), mPrompt.getIndex());
                             }
                         }
                     }
@@ -133,7 +114,7 @@ public class ListMultiWidget extends QuestionWidget {
 
                 // build image view (if an image is provided)
                 ImageView mImageView = null;
-                TextView mMissingImage = null;
+                CustomFontTextview mMissingImage = null;
 
                 final int labelId = QuestionWidget.newUniqueId();
 
@@ -182,7 +163,7 @@ public class ListMultiWidget extends QuestionWidget {
                         if (errorMsg != null) {
                             // errorMsg is only set when an error has occured
                             Log.e(t, errorMsg);
-                            mMissingImage = new TextView(getContext());
+                            mMissingImage = new CustomFontTextview(getContext());
                             mMissingImage.setText(errorMsg);
 
                             mMissingImage.setPadding(2, 2, 2, 2);
@@ -198,7 +179,7 @@ public class ListMultiWidget extends QuestionWidget {
 
                 // build text label. Don't assign the text to the built in label to he
                 // button because it aligns horizontally, and we want the label on top
-                TextView label = new TextView(getContext());
+                CustomFontTextview label = new CustomFontTextview(getContext());
                 label.setText(prompt.getSelectChoiceText(mItems.get(i)));
                 label.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mAnswerFontsize);
                 label.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -270,7 +251,7 @@ public class ListMultiWidget extends QuestionWidget {
     @Override
     public void clearAnswer() {
         for (int i = 0; i < mCheckboxes.size(); i++) {
-        	CheckBox c = mCheckboxes.get(i);
+        	CustomFontCheckBox c = mCheckboxes.get(i);
             if (c.isChecked()) {
                 c.setChecked(false);
             }
@@ -282,7 +263,7 @@ public class ListMultiWidget extends QuestionWidget {
     public IAnswerData getAnswer() {
         Vector<Selection> vc = new Vector<Selection>();
         for (int i = 0; i < mCheckboxes.size(); i++) {
-        	CheckBox c = mCheckboxes.get(i);
+        	CustomFontCheckBox c = mCheckboxes.get(i);
             if (c.isChecked()) {
                 vc.add(new Selection(mItems.get(i)));
             }
@@ -312,7 +293,7 @@ public class ListMultiWidget extends QuestionWidget {
 	protected void addQuestionText(FormEntryPrompt p) {
 
         // Add the text view. Textview always exists, regardless of whether there's text.
-    	TextView questionText = new TextView(getContext());
+    	CustomFontTextview questionText = new CustomFontTextview(getContext());
         questionText.setText(p.getLongText());
         questionText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mQuestionFontsize);
         questionText.setTypeface(null, Typeface.BOLD);
@@ -340,7 +321,7 @@ public class ListMultiWidget extends QuestionWidget {
 
     @Override
     public void setOnLongClickListener(OnLongClickListener l) {
-        for (CheckBox c : mCheckboxes) {
+        for (CustomFontCheckBox c : mCheckboxes) {
             c.setOnLongClickListener(l);
         }
     }
@@ -349,7 +330,7 @@ public class ListMultiWidget extends QuestionWidget {
     @Override
     public void cancelLongPress() {
         super.cancelLongPress();
-        for (CheckBox c : mCheckboxes) {
+        for (CustomFontCheckBox c : mCheckboxes) {
             c.cancelLongPress();
         }
     }

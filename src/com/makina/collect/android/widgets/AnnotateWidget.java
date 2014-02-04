@@ -25,17 +25,17 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.activities.ActivityDraw;
-import com.makina.collect.android.activities.ActivityForm;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.utilities.FileUtils;
 import com.makina.collect.android.utilities.MediaUtils;
+import com.makina.collect.android.utilities.StaticMethods;
 import com.makina.collect.android.views.CustomFontButton;
+import com.makina.collect.android.views.CustomFontTextview;
 
 /**
  * Image widget that supports annotations on the image.
@@ -57,7 +57,7 @@ public class AnnotateWidget extends QuestionWidget implements IBinaryWidget {
 
 	private String mInstanceFolder;
 
-	private TextView mErrorTextView;
+	private CustomFontTextview mErrorTextView;
 
 	public AnnotateWidget(Activity activity, WidgetAnsweredListener widgetAnsweredListener, FormEntryPrompt prompt) {
 		super(activity, widgetAnsweredListener, prompt);
@@ -70,7 +70,7 @@ public class AnnotateWidget extends QuestionWidget implements IBinaryWidget {
 		TableLayout.LayoutParams params = new TableLayout.LayoutParams();
 		params.setMargins(7, 5, 7, 5);
 
-		mErrorTextView = new TextView(activity);
+		mErrorTextView = new CustomFontTextview(activity);
 		mErrorTextView.setId(QuestionWidget.newUniqueId());
 		mErrorTextView.setText("Selected file is not a valid image");
 
@@ -89,10 +89,6 @@ public class AnnotateWidget extends QuestionWidget implements IBinaryWidget {
 		mCaptureButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(this, "captureButton", "click",
-								mPrompt.getIndex());
 				mErrorTextView.setVisibility(View.GONE);
 				Intent i = new Intent(
 						android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -112,7 +108,7 @@ public class AnnotateWidget extends QuestionWidget implements IBinaryWidget {
 					Collect.getInstance().getFormController()
 							.setIndexWaitingForData(mPrompt.getIndex());
 					((Activity) getContext()).startActivityForResult(i,
-							ActivityForm.IMAGE_CAPTURE);
+							StaticMethods.IMAGE_CAPTURE);
 				} catch (ActivityNotFoundException e) {
 					Toast.makeText(
 							getContext(),
@@ -140,10 +136,6 @@ public class AnnotateWidget extends QuestionWidget implements IBinaryWidget {
 		mChooseButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(this, "chooseButton", "click",
-								mPrompt.getIndex());
 				mErrorTextView.setVisibility(View.GONE);
 				Intent i = new Intent(Intent.ACTION_GET_CONTENT);
 				i.setType("image/*");
@@ -152,7 +144,7 @@ public class AnnotateWidget extends QuestionWidget implements IBinaryWidget {
 					Collect.getInstance().getFormController()
 							.setIndexWaitingForData(mPrompt.getIndex());
 					((Activity) getContext()).startActivityForResult(i,
-							ActivityForm.IMAGE_CHOOSER);
+							StaticMethods.IMAGE_CHOOSER);
 				} catch (ActivityNotFoundException e) {
 					Toast.makeText(
 							getContext(),
@@ -180,10 +172,6 @@ public class AnnotateWidget extends QuestionWidget implements IBinaryWidget {
 		mAnnotateButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(this, "annotateButton", "click",
-								mPrompt.getIndex());
 				launchAnnotateActivity();
 			}
 		});
@@ -235,10 +223,6 @@ public class AnnotateWidget extends QuestionWidget implements IBinaryWidget {
 			mImageView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this, "viewImage", "click",
-									mPrompt.getIndex());
 					launchAnnotateActivity();
 				}
 			});
@@ -263,7 +247,7 @@ public class AnnotateWidget extends QuestionWidget implements IBinaryWidget {
 			Collect.getInstance().getFormController()
 					.setIndexWaitingForData(mPrompt.getIndex());
 			((Activity) getContext()).startActivityForResult(i,
-					ActivityForm.ANNOTATE_IMAGE);
+					StaticMethods.ANNOTATE_IMAGE);
 		} catch (ActivityNotFoundException e) {
 			Toast.makeText(
 					getContext(),

@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2009 University of Washington
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package com.makina.collect.android.widgets;
 
 import java.io.File;
@@ -33,17 +19,17 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
 import com.makina.collect.android.R;
-import com.makina.collect.android.activities.ActivityForm;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.utilities.FileUtils;
 import com.makina.collect.android.utilities.MediaUtils;
+import com.makina.collect.android.utilities.StaticMethods;
+import com.makina.collect.android.views.CustomFontButton;
 
 /**
  * Widget that allows user to take pictures, sounds or video and add them to the
@@ -55,9 +41,9 @@ import com.makina.collect.android.utilities.MediaUtils;
 public class VideoWidget extends QuestionWidget implements IBinaryWidget {
 	private final static String t = "MediaWidget";
 
-	private Button mCaptureButton;
-	private Button mPlayButton;
-	private Button mChooseButton;
+	private CustomFontButton mCaptureButton;
+	private CustomFontButton mPlayButton;
+	private CustomFontButton mChooseButton;
 
 	private String mBinaryName;
 
@@ -80,7 +66,7 @@ public class VideoWidget extends QuestionWidget implements IBinaryWidget {
 		TableLayout.LayoutParams params = new TableLayout.LayoutParams();
 		params.setMargins(7, 5, 7, 5);
 		// setup capture button
-		mCaptureButton = (Button)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
+		mCaptureButton = (CustomFontButton)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
 		mCaptureButton.setId(QuestionWidget.newUniqueId());
 		mCaptureButton.setText(getContext().getString(R.string.capture_video));
 		mCaptureButton
@@ -94,10 +80,6 @@ public class VideoWidget extends QuestionWidget implements IBinaryWidget {
 		mCaptureButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(VideoWidget.this, "captureButton",
-								"click", mPrompt.getIndex());
 				Intent i = new Intent(
 						android.provider.MediaStore.ACTION_VIDEO_CAPTURE);
 				i.putExtra(android.provider.MediaStore.EXTRA_OUTPUT,
@@ -107,7 +89,7 @@ public class VideoWidget extends QuestionWidget implements IBinaryWidget {
 							.setIndexWaitingForData(mPrompt.getIndex());
 					mWidgetAnsweredListener.setAnswerChange(true);
 					((Activity) getContext()).startActivityForResult(i,
-							ActivityForm.VIDEO_CAPTURE);
+							StaticMethods.VIDEO_CAPTURE);
 				} catch (ActivityNotFoundException e) {
 					Toast.makeText(
 							getContext(),
@@ -122,7 +104,7 @@ public class VideoWidget extends QuestionWidget implements IBinaryWidget {
 		});
 
 		// setup capture button
-		mChooseButton = (Button)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
+		mChooseButton = (CustomFontButton)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
 		mChooseButton.setId(QuestionWidget.newUniqueId());
 		mChooseButton.setText(getContext().getString(R.string.choose_video));
 		mChooseButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mAnswerFontsize);
@@ -135,10 +117,6 @@ public class VideoWidget extends QuestionWidget implements IBinaryWidget {
 		mChooseButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(VideoWidget.this, "chooseButton",
-								"click", mPrompt.getIndex());
 				Intent i = new Intent(Intent.ACTION_GET_CONTENT);
 				i.setType("video/*");
 				// Intent i =
@@ -149,7 +127,7 @@ public class VideoWidget extends QuestionWidget implements IBinaryWidget {
 							.setIndexWaitingForData(mPrompt.getIndex());
 					mWidgetAnsweredListener.setAnswerChange(true);
 					((Activity) getContext()).startActivityForResult(i,
-							ActivityForm.VIDEO_CHOOSER);
+							StaticMethods.VIDEO_CHOOSER);
 				} catch (ActivityNotFoundException e) {
 					Toast.makeText(
 							getContext(),
@@ -164,7 +142,7 @@ public class VideoWidget extends QuestionWidget implements IBinaryWidget {
 		});
 
 		// setup play button
-		mPlayButton = (Button)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
+		mPlayButton = (CustomFontButton)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
 		mPlayButton.setId(QuestionWidget.newUniqueId());
 		mPlayButton.setText(getContext().getString(R.string.play_video));
 		mPlayButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mAnswerFontsize);
@@ -176,10 +154,6 @@ public class VideoWidget extends QuestionWidget implements IBinaryWidget {
 		mPlayButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(VideoWidget.this, "playButton",
-								"click", mPrompt.getIndex());
 				Intent i = new Intent("android.intent.action.VIEW");
 				File f = new File(mInstanceFolder + File.separator
 						+ mBinaryName);

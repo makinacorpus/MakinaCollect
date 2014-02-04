@@ -170,7 +170,8 @@ License.
 
 
     <!-- FORM SAVING -->
-    <string name="to_not_send_form">Ne pas envoyer le formulaire</string>
+    <string name="save_description">Ce formulaire est maintenant finalisé.\nVous pouvez modifier son titre.</string>
+    <string name="save_form">Sauvegarder le formulaire</string>
     <string name="no_form_not_finalled">VOUS N\'AVEZ AUCUN FORMULAIRE NON FINALISÉ</string>
     <string name="send_form">Envoyer le formulaire</string>
     <string name="send_form_and_restart">Envoyer le formulaire et le recommencer</string>
@@ -267,7 +268,6 @@ License.
     <string name="getting_location">Chargement de la localisation</string>
     <string name="get_barcode">Obtention du code-barre</string>
     <string name="get_forms">Télécharger un\nformulaire vierge</string>
-    <string name="get_location">Enregistrement du lieu</string>
     <string name="provider_disabled_error">Désolé, le fournisseur de localisation est désactivé.</string>
     <string name="invalid_answer_error">Désolé, la réponse n\'est pas valable.</string>
     <string name="jump_to_beginning">Aller au début</string>
@@ -308,7 +308,7 @@ License.
     <string name="quit_entry">Sauvegarder</string>
     <string name="refresh">Rafraîchir</string>
     <string name="replace_barcode">Remplacer le code-barre</string>
-    <string name="replace_location">Remplacer le lieu</string>
+    <string name="choose_location">Choisir le lieu</string>
     <string name="required_answer_error">Réponse obligatoire !</string>
     <string name="review_data">Editer un formulaire sauvegardé</string>
     <string name="review_data_button">Editer un formulaire\nsauvegardé</string>

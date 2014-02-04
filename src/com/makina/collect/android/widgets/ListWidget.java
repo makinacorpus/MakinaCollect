@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2011 University of Washington
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package com.makina.collect.android.widgets;
 
 import java.io.File;
@@ -42,14 +28,13 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.makina.collect.android.R;
-import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.utilities.FileUtils;
+import com.makina.collect.android.views.CustomFontRadioButton;
+import com.makina.collect.android.views.CustomFontTextview;
 
 /**
  * ListWidget handles select-one fields using radio buttons. The radio buttons are aligned
@@ -70,13 +55,13 @@ public class ListWidget extends QuestionWidget implements OnCheckedChangeListene
 
     Vector<SelectChoice> mItems; // may take a while to compute
     
-    ArrayList<RadioButton> buttons;
+    ArrayList<CustomFontRadioButton> buttons;
 
     public ListWidget(Context context, WidgetAnsweredListener widgetAnsweredListener, FormEntryPrompt prompt, boolean displayLabel) {
         super(context, widgetAnsweredListener, prompt);
         
         mItems = prompt.getSelectChoices();
-        buttons = new ArrayList<RadioButton>();
+        buttons = new ArrayList<CustomFontRadioButton>();
 
         // Layout holds the horizontal list of buttons
         LinearLayout buttonLayout = new LinearLayout(context);
@@ -88,7 +73,7 @@ public class ListWidget extends QuestionWidget implements OnCheckedChangeListene
 
         if (mItems != null) {
             for (int i = 0; i < mItems.size(); i++) {
-                RadioButton r = new RadioButton(getContext());
+            	CustomFontRadioButton r = new CustomFontRadioButton(getContext());
 
                 r.setId(QuestionWidget.newUniqueId());
                 r.setTag(Integer.valueOf(i));
@@ -109,7 +94,7 @@ public class ListWidget extends QuestionWidget implements OnCheckedChangeListene
 
                 // build image view (if an image is provided)
                 ImageView mImageView = null;
-                TextView mMissingImage = null;
+                CustomFontTextview mMissingImage = null;
 
                 final int labelId = QuestionWidget.newUniqueId();
                 
@@ -158,7 +143,7 @@ public class ListWidget extends QuestionWidget implements OnCheckedChangeListene
                         if (errorMsg != null) {
                             // errorMsg is only set when an error has occured
                             Log.e(t, errorMsg);
-                            mMissingImage = new TextView(getContext());
+                            mMissingImage = new CustomFontTextview(getContext());
                             mMissingImage.setText(errorMsg);
 
                             mMissingImage.setPadding(2, 2, 2, 2);
@@ -174,7 +159,7 @@ public class ListWidget extends QuestionWidget implements OnCheckedChangeListene
 
                 // build text label. Don't assign the text to the built in label to he
                 // button because it aligns horizontally, and we want the label on top
-                TextView label = new TextView(getContext());
+                CustomFontTextview label = new CustomFontTextview(getContext());
                 label.setText(prompt.getSelectChoiceText(mItems.get(i)));
                 label.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mAnswerFontsize);
                 label.setGravity(Gravity.CENTER_HORIZONTAL);
@@ -247,7 +232,7 @@ public class ListWidget extends QuestionWidget implements OnCheckedChangeListene
 
     @Override
     public void clearAnswer() {
-        for (RadioButton button : this.buttons) {
+        for (CustomFontRadioButton button : this.buttons) {
             if (button.isChecked()) {
                 button.setChecked(false);
                 return;
@@ -279,7 +264,7 @@ public class ListWidget extends QuestionWidget implements OnCheckedChangeListene
 
     public int getCheckedId() {
     	for (int i=0; i < buttons.size(); ++i ) {
-    		RadioButton button = buttons.get(i);
+    		CustomFontRadioButton button = buttons.get(i);
     		if (button.isChecked()) {
     			return i;
     		}
@@ -295,14 +280,12 @@ public class ListWidget extends QuestionWidget implements OnCheckedChangeListene
             return;
         }
 
-        for (RadioButton button : this.buttons) {
+        for (CustomFontRadioButton button : this.buttons) {
             if (button.isChecked() && !(buttonView == button)) {
                 button.setChecked(false);
             }
         }
         
-       	Collect.getInstance().getActivityLogger().logInstanceAction(this, "onCheckedChanged", 
-    			mItems.get((Integer)buttonView.getTag()).getValue(), mPrompt.getIndex());
     }
 
 
@@ -312,7 +295,7 @@ public class ListWidget extends QuestionWidget implements OnCheckedChangeListene
 	protected void addQuestionText(FormEntryPrompt p) {
 
         // Add the text view. Textview always exists, regardless of whether there's text.
-        TextView questionText = new TextView(getContext());
+        CustomFontTextview questionText = new CustomFontTextview(getContext());
         questionText.setText(p.getLongText());
         questionText.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mQuestionFontsize);
         questionText.setTypeface(null, Typeface.BOLD);
@@ -340,7 +323,7 @@ public class ListWidget extends QuestionWidget implements OnCheckedChangeListene
 
     @Override
     public void setOnLongClickListener(OnLongClickListener l) {
-        for (RadioButton r : buttons) {
+        for (CustomFontRadioButton r : buttons) {
             r.setOnLongClickListener(l);
         }
     }
@@ -349,7 +332,7 @@ public class ListWidget extends QuestionWidget implements OnCheckedChangeListene
     @Override
     public void cancelLongPress() {
         super.cancelLongPress();
-        for (RadioButton r : buttons) {
+        for (CustomFontRadioButton r : buttons) {
             r.cancelLongPress();
         }
     }

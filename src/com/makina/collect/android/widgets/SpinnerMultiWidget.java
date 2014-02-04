@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2011 University of Washington
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package com.makina.collect.android.widgets;
 
 import java.util.Vector;
@@ -28,11 +14,11 @@ import android.content.DialogInterface;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
+import com.makina.collect.android.views.CustomFontButton;
+import com.makina.collect.android.views.CustomFontTextview;
 
 
 /**
@@ -54,7 +40,7 @@ public class SpinnerMultiWidget extends QuestionWidget {
     CharSequence[] answer_items;
 
     // The button to push to display the answers to choose from
-    Button button;
+    CustomFontButton button;
 
     // Defines which answers are selected
     boolean[] selections;
@@ -63,7 +49,7 @@ public class SpinnerMultiWidget extends QuestionWidget {
     AlertDialog.Builder alert_builder;
 
     // Displays the current selections below the button
-    TextView selectionText;
+    CustomFontTextview selectionText;
 
 
     @SuppressWarnings("unchecked")
@@ -75,8 +61,8 @@ public class SpinnerMultiWidget extends QuestionWidget {
         selections = new boolean[mItems.size()];
         answer_items = new CharSequence[mItems.size()];
         alert_builder = new AlertDialog.Builder(context);
-        button = new Button(context);
-        selectionText = new TextView(getContext());
+        button = new CustomFontButton(context);
+        selectionText = new CustomFontTextview(getContext());
 
         // Build View
         for (int i = 0; i < mItems.size(); i++) {

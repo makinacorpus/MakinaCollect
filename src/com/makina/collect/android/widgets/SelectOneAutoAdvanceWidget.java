@@ -34,11 +34,9 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
 import com.makina.collect.android.R;
-import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.AdvanceToNextListener;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.views.CustomFontRadioButton;
@@ -53,7 +51,7 @@ import com.makina.collect.android.views.MediaLayout;
  */
 public class SelectOneAutoAdvanceWidget extends QuestionWidget implements OnCheckedChangeListener {
 	Vector<SelectChoice> mItems; // may take a while to compute
-    ArrayList<RadioButton> buttons;
+    ArrayList<CustomFontRadioButton> buttons;
     AdvanceToNextListener listener;
 
 
@@ -63,7 +61,7 @@ public class SelectOneAutoAdvanceWidget extends QuestionWidget implements OnChec
         LayoutInflater inflater = LayoutInflater.from(getContext());
 
         mItems = prompt.getSelectChoices();
-        buttons = new ArrayList<RadioButton>();
+        buttons = new ArrayList<CustomFontRadioButton>();
         listener = (AdvanceToNextListener) context;
 
         String s = null;
@@ -136,7 +134,7 @@ public class SelectOneAutoAdvanceWidget extends QuestionWidget implements OnChec
 
     @Override
     public void clearAnswer() {
-        for (RadioButton button : this.buttons) {
+        for (CustomFontRadioButton button : this.buttons) {
             if (button.isChecked()) {
                 button.setChecked(false);
                 return;
@@ -168,7 +166,7 @@ public class SelectOneAutoAdvanceWidget extends QuestionWidget implements OnChec
 
     public int getCheckedId() {
     	for (int i = 0; i < buttons.size(); ++i) {
-    		RadioButton button = buttons.get(i);
+    		CustomFontRadioButton button = buttons.get(i);
             if (button.isChecked()) {
                 return i;
             }
@@ -187,21 +185,19 @@ public class SelectOneAutoAdvanceWidget extends QuestionWidget implements OnChec
             return;
         }
 
-        for (RadioButton button : this.buttons) {
+        for (CustomFontRadioButton button : this.buttons) {
             if (button.isChecked() && !(buttonView == button)) {
                 button.setChecked(false);
             }
         }
-       	Collect.getInstance().getActivityLogger().logInstanceAction(this, "onCheckedChanged", 
-    			mItems.get((Integer)buttonView.getTag()).getValue(), mPrompt.getIndex());
-
+       	
        	listener.advance();
     }
 
 
     @Override
     public void setOnLongClickListener(OnLongClickListener l) {
-        for (RadioButton r : buttons) {
+        for (CustomFontRadioButton r : buttons) {
             r.setOnLongClickListener(l);
         }
     }
@@ -210,7 +206,7 @@ public class SelectOneAutoAdvanceWidget extends QuestionWidget implements OnChec
     @Override
     public void cancelLongPress() {
         super.cancelLongPress();
-        for (RadioButton r : buttons) {
+        for (CustomFontRadioButton r : buttons) {
             r.cancelLongPress();
         }
     }

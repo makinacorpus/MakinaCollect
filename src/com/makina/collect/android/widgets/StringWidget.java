@@ -32,7 +32,6 @@ import android.view.View.OnFocusChangeListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TableLayout;
 
-import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.views.CustomFontEditText;
 
@@ -133,8 +132,6 @@ public class StringWidget extends QuestionWidget implements OnFocusChangeListene
 						Log.i("StringWidget", "textChanged : true");
 						mAnswerListener.setAnswerChange(true);
 					}
-					Collect.getInstance().getActivityLogger()
-						.logInstanceAction(this, "answerTextChanged", s.toString(),	getPrompt().getIndex());
 				}
 			}
 

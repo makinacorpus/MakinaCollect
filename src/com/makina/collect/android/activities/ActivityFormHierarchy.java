@@ -135,10 +135,6 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 
 				switch (h.getType()) {
 				case EXPANDED:
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this, "onListItemClick", "COLLAPSED",
-									h.getFormIndex());
 					h.setType(COLLAPSED);
 					ArrayList<HierarchyElement> children = h.getChildren();
 					for (int i = 0; i < children.size(); i++) {
@@ -149,10 +145,6 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 					h.setColor(Color.BLACK);
 					break;
 				case COLLAPSED:
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this, "onListItemClick", "EXPANDED",
-									h.getFormIndex());
 					h.setType(EXPANDED);
 					ArrayList<HierarchyElement> children1 = h.getChildren();
 					for (int i = 0; i < children1.size(); i++) {
@@ -165,10 +157,6 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 					h.setColor(Color.BLACK);
 					break;
 				case QUESTION:
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this, "onListItemClick",
-									"QUESTION-JUMP", index);
 					Collect.getInstance().getFormController().jumpToIndex(index);
 					if (Collect.getInstance().getFormController().indexIsInFieldList()) {
 						Collect.getInstance().getFormController()
@@ -178,12 +166,6 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 					finish();
 					return;
 				case CHILD:
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this, "onListItemClick", "REPEAT-JUMP",
-									h.getFormIndex());
-					Collect.getInstance().getFormController()
-							.jumpToIndex(h.getFormIndex());
 					setResult(RESULT_OK);
 					refreshView();
 					return;
@@ -199,20 +181,6 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 		 
 		findViewById(R.id.linearLayout_footer).setOnClickListener(this);
 	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-		Collect.getInstance().getActivityLogger().logOnStart(this);
-	}
-
-	@Override
-	protected void onStop() {
-		Collect.getInstance().getActivityLogger().logOnStop(this);
-		super.onStop();
-	}
-
-	
 
 	private void goUpLevel() {
 		Collect.getInstance().getFormController().stepToOuterScreenEvent();
@@ -391,11 +359,6 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_BACK:
 			if (mIsSavedForm){
-				Log.e(getClass().getName(), "Back to List");
-				Collect.getInstance()
-				.getActivityLogger()
-				.logInstanceAction(this, "onKeyDown", "KEYCODE_BACK.JUMP",
-						mStartIndex);
 				Intent i;
 				if (mToFormChooser){
 					i  = new Intent(this, ActivityDashBoard.class);
@@ -406,11 +369,6 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 				}
 				startActivity(i);
 			}else{
-				Log.e(getClass().getName(), "Back to Form");
-				Collect.getInstance()
-				.getActivityLogger()
-				.logInstanceAction(this, "onKeyDown", "KEYCODE_BACK.JUMP",
-						mStartIndex);
 				Collect.getInstance().getFormController().jumpToIndex(mStartIndex);
 				
 			}
@@ -476,11 +434,6 @@ public class ActivityFormHierarchy extends SherlockActivity implements OnClickLi
 					}
 					startActivity(i);
 				}else{
-					Log.e(getClass().getName(), "Back to Form");
-					Collect.getInstance()
-					.getActivityLogger()
-					.logInstanceAction(this, "onOptionsItemSelected", "HOME",
-							mStartIndex);
 					Collect.getInstance().getFormController().jumpToIndex(mStartIndex);
 					finish();
 				}

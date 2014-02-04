@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2012 University of Washington
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package com.makina.collect.android.widgets;
 
 import java.io.File;
@@ -36,20 +22,21 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
+
+import com.makina.collect.android.views.CustomFontButton;
 import com.makina.collect.android.views.CustomFontTextview;
 import android.widget.Toast;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.activities.ActivityDraw;
-import com.makina.collect.android.activities.ActivityForm;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.utilities.FileUtils;
 import com.makina.collect.android.utilities.MediaUtils;
+import com.makina.collect.android.utilities.StaticMethods;
 
 /**
  * Free drawing widget.
@@ -60,7 +47,7 @@ import com.makina.collect.android.utilities.MediaUtils;
 public class DrawWidget extends QuestionWidget implements IBinaryWidget {
 	private final static String t = "DrawWidget";
 
-	private Button mDrawButton;
+	private CustomFontButton mDrawButton;
 	private String mBinaryName;
 	private String mInstanceFolder;
 	private ImageView mImageView;
@@ -80,7 +67,7 @@ public class DrawWidget extends QuestionWidget implements IBinaryWidget {
 		TableLayout.LayoutParams params = new TableLayout.LayoutParams();
 		params.setMargins(7, 5, 7, 5);
 		// setup Blank Image Button
-		mDrawButton = (Button)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
+		mDrawButton = (CustomFontButton)activity.getLayoutInflater().inflate(R.layout.widget_button, null);
 		mDrawButton.setId(QuestionWidget.newUniqueId());
 		mDrawButton.setText(getContext().getString(R.string.draw_image));
 		mDrawButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mAnswerFontsize);
@@ -93,10 +80,6 @@ public class DrawWidget extends QuestionWidget implements IBinaryWidget {
 		mDrawButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(this, "drawButton", "click",
-								mPrompt.getIndex());
 				launchDrawActivity();
 			}
 		});
@@ -140,10 +123,6 @@ public class DrawWidget extends QuestionWidget implements IBinaryWidget {
 			mImageView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this, "viewImage", "click",
-									mPrompt.getIndex());
 					launchDrawActivity();
 				}
 			});
@@ -169,7 +148,7 @@ public class DrawWidget extends QuestionWidget implements IBinaryWidget {
 			Collect.getInstance().getFormController()
 					.setIndexWaitingForData(mPrompt.getIndex());
 			((Activity) getContext()).startActivityForResult(i,
-					ActivityForm.DRAW_IMAGE);
+					StaticMethods.DRAW_IMAGE);
 		} catch (ActivityNotFoundException e) {
 			Toast.makeText(
 					getContext(),

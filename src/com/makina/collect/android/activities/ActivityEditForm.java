@@ -54,7 +54,6 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.adapters.FormsListAdapter;
-import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.dialog.DialogExit;
 import com.makina.collect.android.dialog.DialogHelpWithConfirmation;
@@ -246,8 +245,6 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
                long idFormsTable = forms.get(position).getId();
          Uri formUri = ContentUris.withAppendedId(FormsColumns.CONTENT_URI, idFormsTable);
 
-                   Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", formUri.toString());
-
            String action = getIntent().getAction();
            if (Intent.ACTION_PICK.equals(action))
            {
@@ -427,19 +424,6 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
         super.onPause();
     }
 
-
-    @Override
-        public void onStart() {
-            super.onStart();
-                Collect.getInstance().getActivityLogger().logOnStart(this); 
-    }
-    
-    @Override
-        public void onStop() {
-                Collect.getInstance().getActivityLogger().logOnStop(this); 
-            super.onStop();
-    }
-    
     
     /**
      * Called by DiskSyncTask when the task is finished
@@ -460,8 +444,6 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
      */
     private void createErrorDialog(String errorMsg, final boolean shouldExit) {
 
-            Collect.getInstance().getActivityLogger().logAction(this, "createErrorDialog", "show");
-
         mAlertDialog = new AlertDialog.Builder(this).create();
         mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
         mAlertDialog.setMessage(errorMsg);
@@ -470,8 +452,6 @@ public class ActivityEditForm extends SherlockListActivity implements DiskSyncLi
             public void onClick(DialogInterface dialog, int i) {
                 switch (i) {
                     case DialogInterface.BUTTON1:
-                            Collect.getInstance().getActivityLogger().logAction(this, "createErrorDialog", 
-                                            shouldExit ? "exitApplication" : "OK");
                         if (shouldExit) {
                                 finish();
                         }

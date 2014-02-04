@@ -30,7 +30,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 
-import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 
 /**
@@ -87,16 +86,12 @@ public class DateWidget extends QuestionWidget{
                     // endless loop.
                     if (day > max) {
                         if (! (mDatePicker.getDayOfMonth()==day && mDatePicker.getMonth()==month && mDatePicker.getYear()==year) ) {
-                        	Collect.getInstance().getActivityLogger().logInstanceAction(DateWidget.this, "onDateChanged", 
-                        			String.format("%1$04d-%2$02d-%3$02d",year, month, max), mPrompt.getIndex());
-                            mDatePicker.updateDate(year, month, max);
+                        	mDatePicker.updateDate(year, month, max);
                             mAnswerListener.setAnswerChange(true);
                         }
                     } else {
                         if (! (mDatePicker.getDayOfMonth()==day && mDatePicker.getMonth()==month && mDatePicker.getYear()==year) ) {
-                        	Collect.getInstance().getActivityLogger().logInstanceAction(DateWidget.this, "onDateChanged", 
-                        			String.format("%1$04d-%2$02d-%3$02d",year, month, day), mPrompt.getIndex());
-                            mDatePicker.updateDate(year, month, day);
+                        	mDatePicker.updateDate(year, month, day);
                             mAnswerListener.setAnswerChange(true);
                         }
                     }

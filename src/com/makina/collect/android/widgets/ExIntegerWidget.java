@@ -25,9 +25,9 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
 
-import com.makina.collect.android.activities.ActivityForm;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
+import com.makina.collect.android.utilities.StaticMethods;
 
 
 /**
@@ -80,10 +80,8 @@ public class ExIntegerWidget extends ExStringWidget {
 
     @Override
     protected void fireActivity(Intent i) throws ActivityNotFoundException {
-       	Collect.getInstance().getActivityLogger().logInstanceAction(this, "launchIntent", 
-    			i.getAction(), mPrompt.getIndex());
-        ((Activity) getContext()).startActivityForResult(i,
-                ActivityForm.EX_INT_CAPTURE);
+       	((Activity) getContext()).startActivityForResult(i,
+        		StaticMethods.EX_INT_CAPTURE);
     }
 
     

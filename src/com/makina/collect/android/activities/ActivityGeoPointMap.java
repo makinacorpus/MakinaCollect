@@ -1,24 +1,22 @@
-
 package com.makina.collect.android.activities;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -33,11 +31,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.makina.collect.android.R;
-import com.makina.collect.android.application.Collect;
-import com.makina.collect.android.provider.MapBoxOfflineTileProvider;
+import com.makina.collect.android.dialog.DialogAboutUs;
+import com.makina.collect.android.dialog.DialogExit;
+import com.makina.collect.android.preferences.ActivityPreferences;
+import com.makina.collect.android.theme.Theme;
 import com.makina.collect.android.utilities.InfoLogger;
+import com.makina.collect.android.utilities.StaticMethods;
 import com.makina.collect.android.widgets.GeoPointWidget;
 
 /**
@@ -53,7 +53,6 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 
 	private static final String LOCATION_COUNT = "locationCount";
 
-	private TextView mLocationStatus;
 
 	private LocationManager mLocationManager;
 	private GoogleMap mMap;
@@ -67,35 +66,55 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 
 	private boolean mCaptureLocation = true;
 	private boolean mIsDragged = false;
-	private Button mShowLocation;
-
 	private boolean mGPSOn = false;
 	private boolean mNetworkOn = false;
 
 	private double mLocationAccuracy;
 	private int mLocationCount = 0;
-
+	private final int RESULT_PREFERENCES=1;
 	
     /* Called whenever we call invalidateOptionsMenu() */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
     	MenuInflater inflater = getSupportMenuInflater();
         menu.clear();
+        inflater.inflate(R.menu.menu_activity_dashboard, menu);
         
         return super.onCreateOptionsMenu(menu);
     }
     
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-       switch(item.getItemId())
-       {
-       		case android.R.id.home:
-        	finish();
-        	return true;
-        }
-        return super.onOptionsItemSelected(item);
+            // The action bar home/up action should open or close the drawer.
+            // ActionBarDrawerToggle will take care of this.
+            // Handle action buttons for all fragments
+            switch (item.getItemId()) {
+            case android.R.id.home:
+            	finish();
+            	return true;
+            case R.id.menu_settings:
+                    startActivityForResult((new Intent(this, ActivityPreferences.class)),RESULT_PREFERENCES);
+                    return true;
+             case R.id.menu_help:
+                    Intent mIntent=new Intent(this, ActivityHelp.class);
+            Bundle mBundle=new Bundle();
+            mBundle.putInt("position", 1);
+            mIntent.putExtras(mBundle);
+            startActivity(mIntent);
+                     return true;
+            case R.id.menu_about_us:
+                    DialogAboutUs.aboutUs(this);
+                    return true;
+            case R.id.menu_exit:
+                   	DialogExit.show(this);
+                    return true;
+            default:
+                    return super.onOptionsItemSelected(item);
+            }
     }
-    private void startPreloaderAnimation()
+    
+
+    /*private void startPreloaderAnimation()
 	{
 		setSupportProgress(Window.PROGRESS_END);
 		setSupportProgressBarIndeterminateVisibility(true);
@@ -103,7 +122,7 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 
 	private void stopPreloaderAnimation() {
 		setSupportProgressBarIndeterminateVisibility(false);
-	}
+	}*/
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -114,9 +133,14 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 			mLocationCount = savedInstanceState.getInt(LOCATION_COUNT);
 		}
 
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        startPreloaderAnimation();
+		getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.actionbar_title_layout_edit_form, null);
+        getSupportActionBar().setCustomView(v);
+        
+        //startPreloaderAnimation();
 		boolean withLoc = true;
 
 		//requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -135,19 +159,19 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 		mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(
 				0, 0), 2));
 
+		mMap.setOnMapLongClickListener(this);
 		if (intent != null && intent.getExtras() != null) {
 
 			
 			// No geolocation
 			if (intent.hasExtra("noGPS")) {
 				withLoc = false;
-				mMap.setOnMapLongClickListener(this);
 				mCaptureLocation = false;
 			}
 
 			// Show previous location
 			if (intent.hasExtra(GeoPointWidget.LOCATION)) {
-				stopPreloaderAnimation();
+				//stopPreloaderAnimation();
 				double[] location = intent
 						.getDoubleArrayExtra(GeoPointWidget.LOCATION);
 				mLatLng = new LatLng(location[0], location[1]);
@@ -155,21 +179,9 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 				mMarker = mMap.addMarker(mMarkerOption);
 				mMarker.setDraggable(true);
 				mCaptureLocation = false;
-				mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng,
-						10));
+				mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng,16));
 			}
 
-			// Set offline mode or not according to settings
-			/*if (intent.hasExtra("offLine")) {
-				mMap.setMapType(GoogleMap.MAP_TYPE_NONE);
-				TileOverlayOptions options = new TileOverlayOptions();
-				String filePath = Environment.getExternalStorageDirectory().toString()+ "/odk/tiles8bits.mbtiles";
-				Toast.makeText(getApplicationContext(), filePath, Toast.LENGTH_SHORT).show();
-				Log.i("pppppppppppppppppppppppp", filePath);
-				Log.e(getClass().getName(), filePath);
-				options.tileProvider(new MapBoxOfflineTileProvider(filePath));
-				mMap.addTileOverlay(options);
-			}*/
 
 			// Get accuracy.
 			if (intent.hasExtra(GeoPointWidget.ACCURACY_THRESHOLD)) {
@@ -219,14 +231,11 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 					Toast.LENGTH_LONG).show();
 		}
 
-
 		mAcceptLocation = (Button) findViewById(R.id.accept_location);
 		mAcceptLocation.setVisibility(View.VISIBLE);
 		mAcceptLocation.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Collect.getInstance().getActivityLogger()
-						.logInstanceAction(this, "acceptLocation", "OK");
 				returnResult();
 			}
 		});
@@ -265,58 +274,18 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 			}
 		}
 
-		// Focuses on marked location
-		mShowLocation = ((Button) findViewById(R.id.show_location));
-		mShowLocation.setVisibility(View.VISIBLE);
-		mShowLocation.setOnClickListener(new OnClickListener() {
+		mRefreshLocation = ((Button) findViewById(R.id.refresh_location));
+		mRefreshLocation.setVisibility(View.VISIBLE);
+		mRefreshLocation.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Collect.getInstance().getActivityLogger()
-						.logInstanceAction(this, "showLocation", "onClick");
-				mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng,
-						16));
+				getIntent().removeExtra(GeoPointWidget.LOCATION);
+				onResume();
+				if (mMarker!=null)
+					mMarker.setDraggable(false);
 			}
 		});
-		mShowLocation.setClickable(mMarker != null);
-
-		if (mCaptureLocation) {
-			// Case where we show the current location according to the provider
-			mLocationStatus = (TextView) findViewById(R.id.location_status);
-			mRefreshLocation = ((Button) findViewById(R.id.refresh_location));
-			mRefreshLocation.setVisibility(View.VISIBLE);
-			mRefreshLocation.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Collect.getInstance()
-							.getActivityLogger()
-							.logInstanceAction(this, "refreshLocation",
-									"onClick");
-					onResume();
-					mMarker.setDraggable(false);
-				}
-			});
-			mRefreshLocation.setClickable(false);
-
-		} else {
-			// Case where we only show the saved location
-			((TextView) findViewById(R.id.location_status))
-					.setVisibility(View.GONE);
-			mAcceptLocation.setClickable(false);
-
-		}
-
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-		Collect.getInstance().getActivityLogger().logOnStart(this);
-	}
-
-	@Override
-	protected void onStop() {
-		Collect.getInstance().getActivityLogger().logOnStop(this);
-		super.onStop();
+		
 	}
 
 	// Used to return the location if we used the gps/network
@@ -329,7 +298,7 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 							+ mLocation.getAccuracy());
 			Intent i = new Intent();
 			i.putExtra(
-					ActivityForm.LOCATION_RESULT,
+					StaticMethods.LOCATION_RESULT,
 					mLocation.getLatitude() + " " + mLocation.getLongitude()
 							+ " " + mLocation.getAltitude() + " "
 							+ mLocation.getAccuracy());
@@ -346,15 +315,12 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 				+ mLatLng.latitude + " Long : " + mLatLng.longitude + " Alt : "
 				+ 0 + " Acc : " + 0);
 		Intent i = new Intent();
-		i.putExtra(ActivityForm.LOCATION_RESULT, mLatLng.latitude + " "
+		i.putExtra(StaticMethods.LOCATION_RESULT, mLatLng.latitude + " "
 				+ mLatLng.longitude + " " + 0 + " " + 0);
 		setResult(RESULT_OK, i);
 		finish();
 	}
 
-	private String truncateFloat(float f) {
-		return new DecimalFormat("#.##").format(f);
-	}
 
 	@Override
 	protected void onPause() {
@@ -394,10 +360,6 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 						+ " long: " + mLocation.getLongitude() + " acc: "
 						+ mLocation.getAccuracy());
 				if (mLocationCount > 1) {
-					mLocationStatus.setText(getString(
-							R.string.location_provider_accuracy,
-							mLocation.getProvider(),
-							truncateFloat(mLocation.getAccuracy())));
 					mLatLng = new LatLng(mLocation.getLatitude(),
 							mLocation.getLongitude());
 					mMap.animateCamera(CameraUpdateFactory.newLatLng(mLatLng));
@@ -423,14 +385,13 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 				if (mMarker == null) {
 					mMarkerOption.position(mLatLng);
 					mMarker = mMap.addMarker(mMarkerOption);
-					mShowLocation.setClickable(true);
 				} else {
 					mMarker.setPosition(mLatLng);
 				}
 				mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng,
 						16));
 				
-				stopPreloaderAnimation();
+				//stopPreloaderAnimation();
 			} else {
 				InfoLogger.geolog("GeoPointMapActivity: "
 						+ System.currentTimeMillis() + " onLocationChanged("
@@ -465,7 +426,7 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 		mLatLng = marker.getPosition();
 		mAcceptLocation.setClickable(true);
 		mIsDragged = true;
-		mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng, 11));
+		mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng, mMap.getCameraPosition().zoom));
 	}
 
 	@Override
@@ -495,11 +456,23 @@ public class ActivityGeoPointMap extends SherlockFragmentActivity implements
 		mMarker = mMap.addMarker(mMarkerOption);
 		mMarker.setDraggable(true);
 		mAcceptLocation.setClickable(true);
-		mShowLocation.setClickable(true);
 		mIsDragged = true;
 		Log.i(getClass().getName(), "x = " + mLatLng.latitude + " y = "
 				+ mLatLng.longitude);
-		mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng, 11));
+		mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mLatLng, mMap.getCameraPosition().zoom));
 	}
 
+	@Override
+    public void onConfigurationChanged(Configuration newConfig) {
+    	// TODO Auto-generated method stub
+    	super.onConfigurationChanged(newConfig);
+    	Theme.changeTheme(this);
+    	LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    	View v;
+    	if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE)
+    		v = inflator.inflate(R.layout.actionbar_title_layout_edit_form_land, null);
+        else
+        	v = inflator.inflate(R.layout.actionbar_title_layout_edit_form, null);
+        getSupportActionBar().setCustomView(v);
+    }
 }

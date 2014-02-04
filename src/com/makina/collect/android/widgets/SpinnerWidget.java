@@ -21,12 +21,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 import com.makina.collect.android.R;
-import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.views.CustomFontSpinner;
+import com.makina.collect.android.views.CustomFontTextview;
 
 /**
  * SpinnerWidget handles select-one fields. Instead of a list of buttons it uses a spinner, wherein
@@ -88,8 +87,6 @@ public class SpinnerWidget extends QuestionWidget implements OnFocusChangeListen
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
 				if ( position == mItems.size() ) {
-					Collect.getInstance().getActivityLogger().logInstanceAction(this, "onCheckedChanged.clearValue", 
-		    			"", mPrompt.getIndex());
 					if (!mInit){
 						mAnswerListener.setAnswerChange(true);
 						Log.i(getClass().getName(), "clearValue : answer changed : true");
@@ -98,8 +95,6 @@ public class SpinnerWidget extends QuestionWidget implements OnFocusChangeListen
 					}
 					mInit = false;
 				} else {
-					Collect.getInstance().getActivityLogger().logInstanceAction(this, "onCheckedChanged", 
-			    			mItems.get(position).getValue(), mPrompt.getIndex());
 					if (!mInit){
 						mAnswerListener.setAnswerChange(true);
 						Log.i(getClass().getName(), "clearValue : answer changed : true");
@@ -177,7 +172,7 @@ public class SpinnerWidget extends QuestionWidget implements OnFocusChangeListen
                 convertView = inflater.inflate(R.layout.widget_spinner_item, parent, false);
             }
 
-            TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
+            CustomFontTextview tv = (CustomFontTextview) convertView.findViewById(android.R.id.text1);
             tv.setTextSize(textUnit, textSize);
             tv.setBackgroundColor(Color.DKGRAY);
         	tv.setPadding(10, 10, 10, 10); // Are these values OK?
@@ -207,7 +202,7 @@ public class SpinnerWidget extends QuestionWidget implements OnFocusChangeListen
                 convertView = inflater.inflate(android.R.layout.simple_spinner_item, parent, false);
             }
 
-            TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
+            CustomFontTextview tv = (CustomFontTextview) convertView.findViewById(android.R.id.text1);
             tv.setText(items[position]);
             tv.setTextSize(textUnit, textSize);
             tv.setTextColor(Color.CYAN);

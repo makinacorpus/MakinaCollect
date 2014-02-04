@@ -305,9 +305,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 			{
 				// get row id from db
 				long k = forms.get(position).getId();
-
-				Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", Long.toString(k));
-
+				
 				// add/remove from selected list
 				if (mSelected.contains(k))
 					mSelected.remove(k);
@@ -419,19 +417,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 		super.onResume();
 		loadListView();
 	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		Collect.getInstance().getActivityLogger().logOnStart(this);
-	}
-
-	@Override
-	public void onStop() {
-		Collect.getInstance().getActivityLogger().logOnStop(this);
-		super.onStop();
-	}
-
+	
 	private void uploadSelectedFiles() {
 		// send list of _IDs.
 		instanceIDs = new long[mSelected.size()];
@@ -471,10 +457,6 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 		// toggle selections of items to all or none
 		mToggled = !mToggled;
 
-		Collect.getInstance()
-				.getActivityLogger()
-				.logAction(this, "toggleButton",
-		Boolean.toString(mToggled));
 		// remove all items from selected list
 		mSelected.clear();
 		for (int pos = 0; pos < listView.getCount(); pos++) {
@@ -515,7 +497,6 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 		else if (ni == null || !ni.isConnected()) 
 		{
 			//no network connection
-			Collect.getInstance().getActivityLogger().logAction(this, "uploadButton", "noConnection");
 			CroutonView.showBuiltInCrouton(ActivitySendForm.this, getString(R.string.no_connexion), Style.ALERT);
 			ContentValues cv = new ContentValues();
 			Uri toUpdate;
@@ -528,7 +509,6 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 		} 
 		else
 		{
-			Collect.getInstance().getActivityLogger().logAction(this, "uploadButton",Integer.toString(mSelected.size()));
 			uploadSelectedFiles();
 		}
 	}
@@ -559,9 +539,6 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 
 	@Override
 	public void deleteComplete(int deletedInstances) {
-		Log.i(t, "Delete instances complete");
-        Collect.getInstance().getActivityLogger().logAction(this, "deleteComplete", Integer.toString(deletedInstances));
-		
 		mDeleteInstancesTask = null;
 		mSelected.clear();
 		listView.clearChoices();
@@ -749,9 +726,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 	}
 	
 	private void createAlertDialog(String message) {
-    	Collect.getInstance().getActivityLogger().logAction(this, "createAlertDialog", "show");
-
-        mAlertDialog = new AlertDialog.Builder(this).create();
+    	mAlertDialog = new AlertDialog.Builder(this).create();
         mAlertDialog.setTitle(getString(R.string.upload_results));
         mAlertDialog.setMessage(message);
         DialogInterface.OnClickListener quitListener = new DialogInterface.OnClickListener() {
@@ -759,8 +734,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
             public void onClick(DialogInterface dialog, int i) {
                 switch (i) {
                     case DialogInterface.BUTTON1: // ok
-                    	Collect.getInstance().getActivityLogger().logAction(this, "createAlertDialog", "OK");
-                        // always exit this activity since it has no interface
+                    	// always exit this activity since it has no interface
                         mAlertShowing = false;
                         textView_pannier.setText(getString(R.string.no_form_selected));
                         break;
@@ -779,15 +753,12 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
     protected Dialog onCreateDialog(int id) {
         switch (id) {
             case PROGRESS_DIALOG:
-            	Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.PROGRESS_DIALOG", "show");
-
-                mProgressDialog = new ProgressDialog(this);
+            	mProgressDialog = new ProgressDialog(this);
                 DialogInterface.OnClickListener loadingButtonListener =
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                        	Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.PROGRESS_DIALOG", "cancel");
-                            dialog.dismiss();
+                        	dialog.dismiss();
                             mInstanceUploaderTask.cancel(true);
                             mInstanceUploaderTask.setUploaderListener(null);
                             finish();
@@ -803,8 +774,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
                 return mProgressDialog;
             case AUTH_DIALOG:
                 Log.i(t, "onCreateDialog(AUTH_DIALOG): for upload of " + mInstancesToSend.length + " instances!");
-            	Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.AUTH_DIALOG", "show");
-                AlertDialog.Builder b = new AlertDialog.Builder(this);
+            	AlertDialog.Builder b = new AlertDialog.Builder(this);
 
                 LayoutInflater factory = LayoutInflater.from(this);
                 final View dialogView = factory.inflate(R.layout.dialog_server_authentification, null);
@@ -842,8 +812,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
                 b.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                    	Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.AUTH_DIALOG", "OK");
-                        EditText username = (EditText) dialogView.findViewById(R.id.username_edit);
+                    	EditText username = (EditText) dialogView.findViewById(R.id.username_edit);
                         EditText password = (EditText) dialogView.findViewById(R.id.password_edit);
 
                         Uri u = Uri.parse(url);
@@ -863,8 +832,7 @@ public class ActivitySendForm extends SherlockActivity implements DeleteInstance
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                    	Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.AUTH_DIALOG", "cancel");
-                        finish();
+                    	finish();
                     }
                 });
 

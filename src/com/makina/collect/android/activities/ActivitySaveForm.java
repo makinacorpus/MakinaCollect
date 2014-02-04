@@ -269,8 +269,6 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         
         Uri instanceUri =ContentUris.withAppendedId(InstanceColumns.CONTENT_URI,forms.get(position).getId());
 
-        Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", instanceUri.toString());
-
         Intent intent=new Intent(Intent.ACTION_EDIT, instanceUri);
     	Bundle bundle=new Bundle();
     	bundle.putLong("id", forms.get(position).getId());
@@ -280,18 +278,6 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
         //getActivity().finish();
     }
 	
-    @Override
-	public void onStart() {
-    	super.onStart();
-		Collect.getInstance().getActivityLogger().logOnStart(this); 
-    }
-    
-    @Override
-	public void onStop() {
-		Collect.getInstance().getActivityLogger().logOnStop(this); 
-    	super.onStop();
-    }
-
     
     /**
      * Creates a dialog with the given message. Will exit the activity when the user preses "ok" if
@@ -301,8 +287,6 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
      * @param shouldExit
      */
 	private void createErrorDialog(String errorMsg, final boolean shouldExit) {
-        Collect.getInstance().getActivityLogger().logAction(this, "createErrorDialog", "show");
-
         mAlertDialog = new AlertDialog.Builder(this).create();
         mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
         mAlertDialog.setMessage(errorMsg);
@@ -311,9 +295,7 @@ public class ActivitySaveForm extends SherlockListActivity implements SearchView
             public void onClick(DialogInterface dialog, int i) {
                 switch (i) {
                     case DialogInterface.BUTTON1:
-                        Collect.getInstance().getActivityLogger().logAction(this, "createErrorDialog", 
-                        		shouldExit ? "exitApplication" : "OK");
-                        if (shouldExit) {
+                    	if (shouldExit) {
                             finish();
                         }
                         break;

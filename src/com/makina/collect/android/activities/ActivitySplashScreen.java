@@ -100,13 +100,11 @@ public class ActivitySplashScreen extends Activity {
     protected void onStart() {
     	super.onStart();
     	Countly.sharedInstance().onStart();
-		Collect.getInstance().getActivityLogger().logOnStart(this); 
     }
     
     @Override
     protected void onStop() {
     	Countly.sharedInstance().onStop();
-		Collect.getInstance().getActivityLogger().logOnStop(this); 
     	super.onStop();
     }
 

@@ -45,14 +45,13 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.makina.collect.android.R;
-import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.AdvanceToNextListener;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.utilities.FileUtils;
 import com.makina.collect.android.views.AudioButton.AudioHandler;
+import com.makina.collect.android.views.CustomFontTextview;
 import com.makina.collect.android.views.ExpandedHeightGridView;
 
 /**
@@ -212,7 +211,7 @@ public class GridWidget extends QuestionWidget {
             if (errorMsg != null) {
                 choices[i] = prompt.getSelectChoiceText(sc);
 
-                TextView missingImage = new TextView(getContext());
+                CustomFontTextview missingImage = new CustomFontTextview(getContext());
                 missingImage.setTextSize(TypedValue.COMPLEX_UNIT_DIP, mAnswerFontsize);
                 missingImage.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
                 missingImage.setPadding(IMAGE_PADDING, IMAGE_PADDING, IMAGE_PADDING, IMAGE_PADDING);
@@ -291,9 +290,7 @@ public class GridWidget extends QuestionWidget {
                     }
                 }
                 selected[position] = true;
-               	Collect.getInstance().getActivityLogger().logInstanceAction(this, "onItemClick.select",
-            			mItems.get(position).getValue(), mPrompt.getIndex());
-                imageViews[position].setBackgroundColor(Color.rgb(orangeRedVal, orangeGreenVal,
+               	imageViews[position].setBackgroundColor(Color.rgb(orangeRedVal, orangeGreenVal,
                     orangeBlueVal));
                 if (quickAdvance) {
                     listener.advance();

@@ -23,9 +23,17 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp" >
 
+        <com.makina.collect.android.views.CustomFontTextview
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_description"
+            android:textColor="?attr/text_color"
+            android:textSize="21sp" />
+
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip" >
 
             <com.makina.collect.android.views.CustomFontTextview
                 android:id="@+id/form_name"
@@ -48,14 +56,6 @@
                 android:textSize="21sp" />
         </RelativeLayout>
 
-        <com.makina.collect.android.views.CustomFontTextview
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
-            android:text="Ce formulaire est maintenant complété.\nQue souhaitez-vous faire?"
-            android:textColor="?attr/text_color"
-            android:textSize="21sp" />
-
         <RelativeLayout
             android:id="@+id/relativelayout_checkbox1"
             android:layout_width="fill_parent"
@@ -76,7 +76,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dip"
                 android:layout_toRightOf="@id/checkbox1"
-                android:text="@string/to_not_send_form"
+                android:text="@string/save_form"
                 android:textColor="@color/actionbarTitleColorBlueSend"
                 android:textSize="19sp" />
         </RelativeLayout>

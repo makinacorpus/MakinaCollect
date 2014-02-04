@@ -205,14 +205,6 @@ public class ActivityDraw extends Activity {
 		btnDrawColor.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(
-								ActivityDraw.this,
-								"setColorButton",
-								"click",
-								Collect.getInstance().getFormController()
-										.getFormIndex());
 				ColorPickerDialog cpd = new ColorPickerDialog(
 						ActivityDraw.this,
 						new ColorPickerDialog.OnColorChangedListener() {
@@ -235,14 +227,6 @@ public class ActivityDraw extends Activity {
 		btnFinished.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(
-								ActivityDraw.this,
-								"saveAndCloseButton",
-								"click",
-								Collect.getInstance().getFormController()
-										.getFormIndex());
 				SaveAndClose();
 			}
 		});
@@ -250,14 +234,6 @@ public class ActivityDraw extends Activity {
 		btnReset.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(
-								ActivityDraw.this,
-								"resetButton",
-								"click",
-								Collect.getInstance().getFormController()
-										.getFormIndex());
 				Reset();
 			}
 		});
@@ -265,14 +241,6 @@ public class ActivityDraw extends Activity {
 		btnCancel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(
-								ActivityDraw.this,
-								"cancelAndCloseButton",
-								"click",
-								Collect.getInstance().getFormController()
-										.getFormIndex());
 				CancelAndClose();
 			}
 		});
@@ -346,26 +314,16 @@ public class ActivityDraw extends Activity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_BACK:
-			Collect.getInstance().getActivityLogger()
-					.logInstanceAction(this, "onKeyDown.KEYCODE_BACK", "quit");
 			createQuitDrawDialog();
 			return true;
 		case KeyEvent.KEYCODE_DPAD_RIGHT:
 			if (event.isAltPressed()) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(this,
-								"onKeyDown.KEYCODE_DPAD_RIGHT", "showNext");
 				createQuitDrawDialog();
 				return true;
 			}
 			break;
 		case KeyEvent.KEYCODE_DPAD_LEFT:
 			if (event.isAltPressed()) {
-				Collect.getInstance()
-						.getActivityLogger()
-						.logInstanceAction(this, "onKeyDown.KEYCODE_DPAD_LEFT",
-								"showPrevious");
 				createQuitDrawDialog();
 				return true;
 			}
@@ -382,8 +340,6 @@ public class ActivityDraw extends Activity {
 		String[] items = { getString(R.string.keep_changes),
 				getString(R.string.do_not_save) };
 
-		Collect.getInstance().getActivityLogger()
-				.logInstanceAction(this, "createQuitDrawDialog", "show");
 		alertDialog = new AlertDialog.Builder(this)
 				.setIcon(android.R.drawable.ic_dialog_info)
 				.setTitle(alertTitleString)
@@ -392,11 +348,6 @@ public class ActivityDraw extends Activity {
 							@Override
 							public void onClick(DialogInterface dialog, int id) {
 
-								Collect.getInstance()
-										.getActivityLogger()
-										.logInstanceAction(this,
-												"createQuitDrawDialog",
-												"cancel");
 								dialog.cancel();
 
 							}
@@ -407,29 +358,15 @@ public class ActivityDraw extends Activity {
 						switch (which) {
 
 						case 0: // save and exit
-							Collect.getInstance()
-									.getActivityLogger()
-									.logInstanceAction(this,
-											"createQuitDrawDialog",
-											"saveAndExit");
 							SaveAndClose();
 							break;
 
 						case 1: // discard changes and exit
 
-							Collect.getInstance()
-									.getActivityLogger()
-									.logInstanceAction(this,
-											"createQuitDrawDialog",
-											"discardAndExit");
 							CancelAndClose();
 							break;
 
 						case 2:// do nothing
-							Collect.getInstance()
-									.getActivityLogger()
-									.logInstanceAction(this,
-											"createQuitDrawDialog", "cancel");
 							break;
 						}
 					}

@@ -243,8 +243,6 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
 		        else
 		        	mSelected.add(detail.formID);
 		        
-		        Collect.getInstance().getActivityLogger().logAction(this, "onListItemClick", detail.downloadUrl);
-		        
 		        if (mSelected.size()==0)
 		        	textView_pannier.setText(getString(R.string.no_form_selected));
 		        else if (mSelected.size()==1)
@@ -322,12 +320,10 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     @Override
 	public void onStart() {
     	super.onStart();
-		Collect.getInstance().getActivityLogger().logOnStart(this);
     }
 
     @Override
 	public void onStop() {
-		Collect.getInstance().getActivityLogger().logOnStop(this);
     	super.onStop();
     }
 
@@ -405,7 +401,6 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     }
 
     protected void refreshFormsOption(){
-    	Collect.getInstance().getActivityLogger().logAction(this, "refreshForms", "");
         mToggled = false;
         downloadFormList();
         listView.clearChoices();
@@ -420,7 +415,6 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
     
     protected void selectAllOption(){
         mToggled = !mToggled;
-        Collect.getInstance().getActivityLogger().logAction(this, "toggleFormCheckbox", Boolean.toString(mToggled));
         mSelected.clear();
         if (mToggled)
 	        for (int pos = 0; pos < listView.getCount(); pos++)
@@ -467,13 +461,11 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
         switch (id)
         {
             case PROGRESS_DIALOG:
-                Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.PROGRESS_DIALOG", "show");
                 mProgressDialog = new ProgressDialog(this);
                 DialogInterface.OnClickListener loadingButtonListener =
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.PROGRESS_DIALOG", "OK");
                             dialog.dismiss();
                             // we use the same progress dialog for both
                             // so whatever isn't null is running
@@ -498,7 +490,6 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
                 mProgressDialog.show();
                 break;
             case AUTH_DIALOG:
-                Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.AUTH_DIALOG", "show");
                 AlertDialog.Builder b = new AlertDialog.Builder(this);
 
                 LayoutInflater factory = LayoutInflater.from(this);
@@ -530,9 +521,7 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
                 b.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.AUTH_DIALOG", "OK");
-
-                        EditText username = (EditText) dialogView.findViewById(R.id.username_edit);
+                    	EditText username = (EditText) dialogView.findViewById(R.id.username_edit);
                         EditText password = (EditText) dialogView.findViewById(R.id.password_edit);
 
                         Uri u = Uri.parse(url);
@@ -546,8 +535,6 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Collect.getInstance().getActivityLogger().logAction(this, "onCreateDialog.AUTH_DIALOG", "Cancel");
-                            //this.finish();
                         }
                     });
 
@@ -569,8 +556,6 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
         for (int i = 0; i < mSelected.size(); i++)
             filesToDownload.add(mFormNamesAndURLs.get(mSelected.get(i)));
         totalCount = filesToDownload.size();
-
-        Collect.getInstance().getActivityLogger().logAction(this, "downloadSelectedFiles", Integer.toString(totalCount));
 
         if (totalCount > 0) {
             // show dialog box
@@ -774,7 +759,6 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
      * @param shouldExit
      */
     private void createAlertDialog(String title, String message, final boolean shouldExit) {
-        Collect.getInstance().getActivityLogger().logAction(this, "createAlertDialog", "show");
         mAlertDialog = new AlertDialog.Builder(this).create();
         mAlertDialog.setTitle(title);
         mAlertDialog.setMessage(message);
@@ -783,7 +767,6 @@ public class ActivityDownloadForm extends SherlockActivity implements FormListDo
             public void onClick(DialogInterface dialog, int i) {
                 switch (i) {
                     case DialogInterface.BUTTON1: // ok
-                        Collect.getInstance().getActivityLogger().logAction(this, "createAlertDialog", "OK");
                         // just close the dialog
                         mAlertShowing = false;
                         finish();

@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2009 University of Washington
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package com.makina.collect.android.widgets;
 
 import java.util.ArrayList;
@@ -27,12 +13,10 @@ import org.javarosa.form.api.FormEntryPrompt;
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.views.CustomFontCheckBox;
 import com.makina.collect.android.views.MediaLayout;
@@ -47,14 +31,14 @@ public class SelectMultiWidget extends QuestionWidget {
     private boolean mCheckboxInit = true;
     Vector<SelectChoice> mItems;
 
-    private ArrayList<CheckBox> mCheckboxes;
+    private ArrayList<CustomFontCheckBox> mCheckboxes;
     private WidgetAnsweredListener mAnsListener;
 
     @SuppressWarnings("unchecked")
     public SelectMultiWidget(Context context, WidgetAnsweredListener widgetAnsweredListener, FormEntryPrompt prompt) {
         super(context, widgetAnsweredListener, prompt);
         mPrompt = prompt;
-        mCheckboxes = new ArrayList<CheckBox>();
+        mCheckboxes = new ArrayList<CustomFontCheckBox>();
         mItems = prompt.getSelectChoices();
         mAnsListener = widgetAnsweredListener;
         setOrientation(LinearLayout.VERTICAL);
@@ -91,12 +75,8 @@ public class SelectMultiWidget extends QuestionWidget {
                         if (!mCheckboxInit && mPrompt.isReadOnly()) {
                             if (buttonView.isChecked()) {
                                 buttonView.setChecked(false);
-                               	Collect.getInstance().getActivityLogger().logInstanceAction(this, "onItemClick.deselect", 
-                            			mItems.get((Integer)buttonView.getTag()).getValue(), mPrompt.getIndex());
                             } else {
                                 buttonView.setChecked(true);
-                               	Collect.getInstance().getActivityLogger().logInstanceAction(this, "onItemClick.select", 
-                            			mItems.get((Integer)buttonView.getTag()).getValue(), mPrompt.getIndex());
                             }
                             mAnsListener.setAnswerChange(true);
                     		mAnsListener.updateView();
@@ -142,7 +122,7 @@ public class SelectMultiWidget extends QuestionWidget {
 
     @Override
     public void clearAnswer() {
-    	for ( CheckBox c : mCheckboxes ) {
+    	for ( CustomFontCheckBox c : mCheckboxes ) {
     		if ( c.isChecked() ) {
     			c.setChecked(false);
     		}
@@ -154,7 +134,7 @@ public class SelectMultiWidget extends QuestionWidget {
     public IAnswerData getAnswer() {
         Vector<Selection> vc = new Vector<Selection>();
         for ( int i = 0; i < mCheckboxes.size() ; ++i ) {
-        	CheckBox c = mCheckboxes.get(i);
+        	CustomFontCheckBox c = mCheckboxes.get(i);
         	if ( c.isChecked() ) {
         		vc.add(new Selection(mItems.get(i)));
         	}
@@ -180,7 +160,7 @@ public class SelectMultiWidget extends QuestionWidget {
 
     @Override
     public void setOnLongClickListener(OnLongClickListener l) {
-        for (CheckBox c : mCheckboxes) {
+        for (CustomFontCheckBox c : mCheckboxes) {
             c.setOnLongClickListener(l);
         }
     }
@@ -189,7 +169,7 @@ public class SelectMultiWidget extends QuestionWidget {
     @Override
     public void cancelLongPress() {
         super.cancelLongPress();
-        for (CheckBox c : mCheckboxes) {
+        for (CustomFontCheckBox c : mCheckboxes) {
             c.cancelLongPress();
         }
     }

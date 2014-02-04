@@ -1,17 +1,3 @@
-/*
- * Copyright (C) 2009 University of Washington
- * 
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- * 
- * http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software distributed under the License
- * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
- * or implied. See the License for the specific language governing permissions and limitations under
- * the License.
- */
-
 package com.makina.collect.android.widgets;
 
 import java.util.ArrayList;
@@ -33,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 
-import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.WidgetAnsweredListener;
 import com.makina.collect.android.views.CustomFontRadioButton;
 import com.makina.collect.android.views.MediaLayout;
@@ -48,7 +33,7 @@ public class SelectOneWidget extends QuestionWidget implements
 		OnCheckedChangeListener {
 
 	Vector<SelectChoice> mItems; // may take a while to compute
-	ArrayList<RadioButton> buttons;
+	ArrayList<CustomFontRadioButton> buttons;
 	
 	private WidgetAnsweredListener mAnsListener;
 
@@ -56,7 +41,7 @@ public class SelectOneWidget extends QuestionWidget implements
 		super(context, widgetAnsweredListener, prompt);
 
 		mItems = prompt.getSelectChoices();
-		buttons = new ArrayList<RadioButton>();
+		buttons = new ArrayList<CustomFontRadioButton>();
 
 		mAnsListener = widgetAnsweredListener;
 		
@@ -178,9 +163,7 @@ public class SelectOneWidget extends QuestionWidget implements
 		mAnsListener.setAnswerChange(true);
 		mAnsListener.updateView();
 		mAnsListener.setAnswerChange(false);
-       	Collect.getInstance().getActivityLogger().logInstanceAction(this, "onCheckedChanged", 
-    			mItems.get((Integer)buttonView.getTag()).getValue(), mPrompt.getIndex());
-	}
+    }
 
 	@Override
 	public void setOnLongClickListener(OnLongClickListener l) {
