@@ -13,7 +13,7 @@
     android:allowBackup="false"
     android:hardwareAccelerated="true"
     android:installLocation="auto"
-    android:versionCode="1029"
+    android:versionCode="1030"
     android:versionName="1.3" >
 
     <uses-feature
@@ -228,7 +228,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDrIrtIzY1y8-_bag1exAocH23YCauyiq0" />
+            android:value="AIzaSyAbWgEd1Sdd5AWENMkz24REYR8MbcaBNvg" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

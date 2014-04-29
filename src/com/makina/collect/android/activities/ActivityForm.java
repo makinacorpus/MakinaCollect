@@ -126,18 +126,21 @@ import com.makina.collect.android.widgets.QuestionWidget;
 
 import de.keyboardsurfer.mobile.app.android.widget.crouton.Style;
 
-
 /**
  * FormEntryActivity is responsible for displaying questions, animating
  * transitions between questions, and allowing the user to enter data.
- *
+ * 
  * @author Carl Hartung (carlhartung@gmail.com)
- */ 
+ */
 
 @SuppressLint("NewApi")
-public class ActivityForm extends SherlockActivity implements AnimationListener, FormLoaderListener, FormSavedListener,
-AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUploaderListener, DeleteInstancesListener {
+public class ActivityForm extends SherlockActivity implements
+		AnimationListener, FormLoaderListener, FormSavedListener,
+		AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener,
+		InstanceUploaderListener, DeleteInstancesListener {
 	private final int SAVEPOINT_INTERVAL = 1;
+
+	public static final String LOCATION_RESULT = "1986";
 
 	// Defines for FormEntryActivity
 	private final boolean EXIT = true;
@@ -160,7 +163,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	private final String KEY_INSTANCEPATH = "instancepath";
 	private final String KEY_XPATH = "xpath";
 	private final String KEY_XPATH_WAITING_FOR_DATA = "xpathwaiting";
-
 
 	private final int PROGRESS_DIALOG = 1;
 	private final int SAVING_DIALOG = 2;
@@ -188,20 +190,22 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	private FormLoaderTask mFormLoaderTask;
 	private SaveToDiskTask mSaveToDiskTask;
 
-	private CustomFontButton mNextButton,mBackButton;
-	private CustomFontTextview textView_quiz_question_number,textView_quiz_name;
-	
+	private CustomFontButton mNextButton, mBackButton;
+	private CustomFontTextview textView_quiz_question_number,
+			textView_quiz_name;
+
 	private boolean mAnswersChanged;
-	
+
 	enum AnimationType {
 		LEFT, RIGHT, FADE, NONE
 	}
 
 	private SharedPreferences mAdminPreferences;
-	
-	public static int current_page,size;
+
+	public static int current_page, size;
 	private CheckBox checkBox1, checkBox2, checkBox3;
-	private RelativeLayout relativelayout_checkbox1, relativelayout_checkbox2, relativelayout_checkbox3;
+	private RelativeLayout relativelayout_checkbox1, relativelayout_checkbox2,
+			relativelayout_checkbox3;
 	private int event;
 	private boolean send = false, restart = false;
 	private HashMap<String, String> mUploadedInstances;
@@ -209,7 +213,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	private String mAlertMsg;
 	private Uri uri;
 	private final int AUTH_DIALOG = 2;
-	private CustomFontEditText saveAs ;
+	private CustomFontEditText saveAs;
 	private List<HierarchyElement> formList;
 	private CustomListViewExpanded hierarchyList;
 	private final int CHILD = 1;
@@ -218,20 +222,20 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 
 	private final String mIndent = "     ";
 	private Menu menu;
-	private boolean exit_to_home=false;
-	private final int RESULT_PREFERENCES=1;
+	private boolean exit_to_home = false;
+	private final int RESULT_PREFERENCES = 1;
 	private String form_name;
-	private boolean fail=false;
-	
+	private boolean fail = false;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Theme.changeTheme(this);
-		
+
 		Finish.activityForm = this;
-		current_page=1;
-		
+		current_page = 1;
+
 		// must be at the beginning of any activity that can be called from an
 		// external intent
 		try {
@@ -244,16 +248,17 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		setContentView(R.layout.activity_form_entry);
 		textView_quiz_question_number = (CustomFontTextview) findViewById(R.id.textView_quiz_question_number);
 		textView_quiz_name = ((CustomFontTextview) findViewById(R.id.textView_quiz_name));
-		
+
 		getSupportActionBar().setDisplayShowCustomEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflator.inflate(R.layout.actionbar_title_layout_edit_form, null);
-        getSupportActionBar().setCustomView(v);
-		
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		getSupportActionBar().setDisplayShowTitleEnabled(false);
+		LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View v = inflator.inflate(R.layout.actionbar_title_layout_edit_form,
+				null);
+		getSupportActionBar().setCustomView(v);
+
 		Intent intent = getIntent();
-		
+
 		mAlertDialog = null;
 		mCurrentView = null;
 		mInAnimation = null;
@@ -317,7 +322,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			if (savedInstanceState.containsKey(KEY_ERROR)) {
 				mErrorMessage = savedInstanceState.getString(KEY_ERROR);
 			}
-			
+
 		}
 
 		// If a parse error message is showing then nothing else is loaded
@@ -353,34 +358,27 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			// Not a restart from a screen orientation change (or other).
 			Collect.getInstance().setFormController(null);
 
-			
-			if (intent != null)
-			{
+			if (intent != null) {
 				uri = intent.getData();
-				
-				if (getContentResolver().getType(uri) == InstanceColumns.CONTENT_ITEM_TYPE)
-				{
+
+				if (getContentResolver().getType(uri) == InstanceColumns.CONTENT_ITEM_TYPE) {
 					// get the formId and version for this instance...
 					String jrFormId = null;
 					String jrVersion = null;
 					{
 						Cursor instanceCursor = null;
-						try
-						{
+						try {
 							instanceCursor = getContentResolver().query(uri,
 									null, null, null, null);
-							if (instanceCursor.getCount() != 1)
-							{
+							if (instanceCursor.getCount() != 1) {
 								this.createErrorDialog("Bad URI: " + uri, EXIT);
 								return;
-							}
-							else
-							{
+							} else {
 								instanceCursor.moveToFirst();
 								instancePath = instanceCursor
 										.getString(instanceCursor
 												.getColumnIndex(InstanceColumns.INSTANCE_FILE_PATH));
-								
+
 								jrFormId = instanceCursor
 										.getString(instanceCursor
 												.getColumnIndex(InstanceColumns.JR_FORM_ID));
@@ -561,14 +559,11 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode,
 			Intent intent) {
-		if (requestCode == RESULT_PREFERENCES)
-    	{
-    		Intent i = getIntent();
+		if (requestCode == RESULT_PREFERENCES) {
+			Intent i = getIntent();
 			i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(i);
-    	}
-		else
-		{
+		} else {
 			super.onActivityResult(requestCode, resultCode, intent);
 			FormController formController = Collect.getInstance()
 					.getFormController();
@@ -582,7 +577,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				}
 				return;
 			}
-	
+
 			if (resultCode == RESULT_CANCELED) {
 				// request was canceled...
 				if (requestCode != StaticMethods.HIERARCHY_ACTIVITY) {
@@ -590,7 +585,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				}
 				return;
 			}
-	
+
 			switch (requestCode) {
 			case StaticMethods.BARCODE_CAPTURE:
 				String sb = intent.getStringExtra("SCAN_RESULT");
@@ -617,35 +612,38 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			case StaticMethods.SIGNATURE_CAPTURE:
 			case StaticMethods.IMAGE_CAPTURE:
 				/*
-				 * We saved the image to the tempfile_path, but we really want it to
-				 * be in: /sdcard/odk/instances/[current instnace]/something.jpg so
-				 * we move it there before inserting it into the content provider.
-				 * Once the android image capture bug gets fixed, (read, we move on
-				 * from Android 1.6) we want to handle images the audio and video
+				 * We saved the image to the tempfile_path, but we really want
+				 * it to be in: /sdcard/odk/instances/[current
+				 * instnace]/something.jpg so we move it there before inserting
+				 * it into the content provider. Once the android image capture
+				 * bug gets fixed, (read, we move on from Android 1.6) we want
+				 * to handle images the audio and video
 				 */
-				// The intent is empty, but we know we saved the image to the temp
+				// The intent is empty, but we know we saved the image to the
+				// temp
 				// file
 				File fi = new File(Collect.TMPFILE_PATH);
 				String mInstanceFolder = formController.getInstancePath()
 						.getParent();
 				String s = mInstanceFolder + File.separator
 						+ System.currentTimeMillis() + ".jpg";
-	
+
 				File nf = new File(s);
 				fi.renameTo(nf);
-	
+
 				((ODKView) mCurrentView).setBinaryData(nf);
 				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
 				break;
 			case StaticMethods.IMAGE_CHOOSER:
 				/*
-				 * We have a saved image somewhere, but we really want it to be in:
-				 * /sdcard/odk/instances/[current instnace]/something.jpg so we move
-				 * it there before inserting it into the content provider. Once the
-				 * android image capture bug gets fixed, (read, we move on from
-				 * Android 1.6) we want to handle images the audio and video
+				 * We have a saved image somewhere, but we really want it to be
+				 * in: /sdcard/odk/instances/[current instnace]/something.jpg so
+				 * we move it there before inserting it into the content
+				 * provider. Once the android image capture bug gets fixed,
+				 * (read, we move on from Android 1.6) we want to handle images
+				 * the audio and video
 				 */
-	
+
 				// get gp of chosen file
 				String sourceImagePath = null;
 				Uri selectedImage = intent.getData();
@@ -667,20 +665,20 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 						}
 					}
 				}
-	
+
 				// Copy file to sdcard
 				String mInstanceFolder1 = formController.getInstancePath()
 						.getParent();
 				String destImagePath = mInstanceFolder1 + File.separator
 						+ System.currentTimeMillis() + ".jpg";
-	
+
 				File source = new File(sourceImagePath);
 				File newImage = new File(destImagePath);
 				FileUtils.copyFile(source, newImage);
-	
+
 				((ODKView) mCurrentView).setBinaryData(newImage);
 				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
-				if (formController.indexIsInFieldList()){
+				if (formController.indexIsInFieldList()) {
 					updateView();
 				}
 				break;
@@ -688,19 +686,21 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			case StaticMethods.VIDEO_CAPTURE:
 			case StaticMethods.AUDIO_CHOOSER:
 			case StaticMethods.VIDEO_CHOOSER:
-				// For audio/video capture/chooser, we get the URI from the content
+				// For audio/video capture/chooser, we get the URI from the
+				// content
 				// provider
 				// then the widget copies the file and makes a new entry in the
 				// content provider.
 				Uri media = intent.getData();
 				((ODKView) mCurrentView).setBinaryData(media);
 				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
-				if (formController.indexIsInFieldList()){
+				if (formController.indexIsInFieldList()) {
 					updateView();
 				}
 				break;
 			case StaticMethods.LOCATION_CAPTURE:
-				String sl = intent.getStringExtra(StaticMethods.LOCATION_RESULT);
+				String sl = intent
+						.getStringExtra(StaticMethods.LOCATION_RESULT);
 				((ODKView) mCurrentView).setBinaryData(sl);
 				saveAnswersForCurrentScreen(DO_NOT_EVALUATE_CONSTRAINTS);
 				break;
@@ -708,7 +708,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				// We may have jumped to a new index in hierarchy activity, so
 				// refresh
 				break;
-	
+
 			}
 			refreshCurrentView();
 		}
@@ -722,20 +722,22 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	public void refreshCurrentView() {
 		FormController formController = Collect.getInstance()
 				.getFormController();
-		
-		if (formController!=null)
-		{
+
+		if (formController != null) {
 			int event = formController.getEvent();
-	
-			// When we refresh, repeat dialog state isn't maintained, so step back
+
+			// When we refresh, repeat dialog state isn't maintained, so step
+			// back
 			// to the previous
 			// question.
-			// Also, if we're within a group labeled 'field list', step back to the
+			// Also, if we're within a group labeled 'field list', step back to
+			// the
 			// beginning of that
 			// group.
 			// That is, skip backwards over repeat prompts, groups that are not
 			// field-lists,
-			// repeat events, and indexes in field-lists that is not the containing
+			// repeat events, and indexes in field-lists that is not the
+			// containing
 			// group.
 			if (event == FormEntryController.EVENT_PROMPT_NEW_REPEAT) {
 				createRepeatDialog();
@@ -743,52 +745,50 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				ScrollView current = createView(event, false);
 				showView(current, AnimationType.FADE);
 			}
-		}
-		else
-		{
+		} else {
 			Bundle extra = getIntent().getExtras();
-			if (extra!=null)
-			{
-				//InstanceProvider.supprimerZgaw(extra.getLong("id"));
+			if (extra != null) {
+				// InstanceProvider.supprimerZgaw(extra.getLong("id"));
 			}
 		}
 	}
-	
-	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		super.onCreateOptionsMenu(menu);
-		this.menu=menu;
+		this.menu = menu;
 		getSupportMenuInflater().inflate(R.menu.menu_activity_form, menu);
-		
-		getLayoutInflater().setFactory(new LayoutInflater.Factory() {
-            public View onCreateView(String name, Context context,
-                            AttributeSet attrs) {
-                    if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")
-                                    || name.equalsIgnoreCase("TextView")) {
-                            try {
-                                    LayoutInflater li = LayoutInflater.from(context);
-                                    final View view = li.createView(name, null, attrs);
-                                    new Handler().post(new Runnable() {
-                                            public void run() {
-                                            	((TextView)view).setTextColor(getResources().getColor(R.color.actionbarTitleColorGris));
-                                                ((TextView)view).setTypeface(Typeface.createFromAsset(getAssets(),"fonts/avenir.ttc"));
-                                            }
-                                    });
-                                    return view;
-                            } catch (InflateException e) {
-                            } catch (ClassNotFoundException e) {
-                            }
-                    }
-                    return null;
-            }
-    });
 
-		
+		getLayoutInflater().setFactory(new LayoutInflater.Factory() {
+			public View onCreateView(String name, Context context,
+					AttributeSet attrs) {
+				if (name.equalsIgnoreCase("com.android.internal.view.menu.IconMenuItemView")
+						|| name.equalsIgnoreCase("TextView")) {
+					try {
+						LayoutInflater li = LayoutInflater.from(context);
+						final View view = li.createView(name, null, attrs);
+						new Handler().post(new Runnable() {
+							public void run() {
+								((TextView) view)
+										.setTextColor(getResources()
+												.getColor(
+														R.color.actionbarTitleColorGris));
+								((TextView) view).setTypeface(Typeface
+										.createFromAsset(getAssets(),
+												"fonts/avenir.ttc"));
+							}
+						});
+						return view;
+					} catch (InflateException e) {
+					} catch (ClassNotFoundException e) {
+					}
+				}
+				return null;
+			}
+		});
+
 		return true;
 	}
-
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -796,14 +796,14 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				.getFormController();
 		switch (item.getItemId()) {
 		case 0:
-			if (mCurrentView != null){
+			if (mCurrentView != null) {
 				updateView();
 			}
 			return true;
 
 		case R.id.menu_save:
 			// don't exit
-			dialogSaveName(false,false);
+			dialogSaveName(false, false);
 			return true;
 		case R.id.menu_hierachy:
 			if (formController.currentPromptIsQuestion()) {
@@ -816,14 +816,16 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			razConfirmation();
 			return true;
 		case R.id.menu_settings:
-			startActivityForResult((new Intent(this, ActivityPreferences.class)),RESULT_PREFERENCES);
+			startActivityForResult(
+					(new Intent(this, ActivityPreferences.class)),
+					RESULT_PREFERENCES);
 			return true;
 		case R.id.menu_help:
-			Intent mIntent=new Intent(this, ActivityHelp.class);
-        	Bundle mBundle=new Bundle();
-        	mBundle.putInt("position", 1);
-        	mIntent.putExtras(mBundle);
-        	startActivity(mIntent);
+			Intent mIntent = new Intent(this, ActivityHelp.class);
+			Bundle mBundle = new Bundle();
+			mBundle.putInt("position", 1);
+			mIntent.putExtras(mBundle);
+			startActivity(mIntent);
 			return true;
 		case R.id.menu_about_us:
 			DialogAboutUs.aboutUs(this);
@@ -843,26 +845,25 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		AlertDialog.Builder adb = new AlertDialog.Builder(this);
 		adb.setTitle(getString(R.string.raz));
 		adb.setMessage(getString(R.string.raz_confirmation));
-		adb.setPositiveButton(getString(android.R.string.yes),new AlertDialog.OnClickListener()
-		{
-			public void onClick(DialogInterface dialog,int which)
-			{
-				removeTempInstance();
-				finishReturnInstance(false);
-				Intent myIntent = new Intent(Intent.ACTION_EDIT, uri);
-				myIntent.putExtra("newForm", true);
-		        startActivity(myIntent);
-			}
-		});
+		adb.setPositiveButton(getString(android.R.string.yes),
+				new AlertDialog.OnClickListener() {
+					public void onClick(DialogInterface dialog, int which) {
+						removeTempInstance();
+						finishReturnInstance(false);
+						Intent myIntent = new Intent(Intent.ACTION_EDIT, uri);
+						myIntent.putExtra("newForm", true);
+						startActivity(myIntent);
+					}
+				});
 		adb.setNegativeButton(getString(android.R.string.no), null);
 		adb.show();
-		
+
 	}
-	
+
 	/**
 	 * Attempt to save the answer(s) in the current screen to into the data
 	 * model.
-	 *
+	 * 
 	 * @param evaluateConstraints
 	 * @return false if any error occurs while saving (constraint violated,
 	 *         etc...), true otherwise.
@@ -889,7 +890,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	 * Clears the answer on the screen.
 	 */
 	private void clearAnswer(QuestionWidget qw) {
-		if ( qw.getAnswer() != null) {
+		if (qw.getAnswer() != null) {
 			qw.clearAnswer();
 		}
 	}
@@ -907,8 +908,6 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		}
 		menu.setHeaderTitle(getString(R.string.edit_prompt));
 	}
-	
-	
 
 	@Override
 	public boolean onContextItemSelected(android.view.MenuItem item) {
@@ -955,35 +954,38 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 
 	/**
 	 * Creates a view given the View type and an event
-	 *
+	 * 
 	 * @param event
 	 * @param advancingPage
 	 *            -- true if this results from advancing through the form
 	 * @return newly created View
 	 */
 	private ScrollView createView(int event, boolean advancingPage) {
-		
-		
-		final FormController formController = Collect.getInstance().getFormController();
+
+		final FormController formController = Collect.getInstance()
+				.getFormController();
 		textView_quiz_question_number.setText(current_page + "/" + size);
 		textView_quiz_name.setText(formController.getFormTitle());
-		
-		findViewById(R.id.relativeLayout_informations).setVisibility(View.VISIBLE);
+
+		findViewById(R.id.relativeLayout_informations).setVisibility(
+				View.VISIBLE);
 		findViewById(R.id.buttonholder).setVisibility(View.VISIBLE);
-		
-		switch (event)
-		{
-		
+
+		switch (event) {
+
 		case FormEntryController.EVENT_END_OF_FORM:
-			findViewById(R.id.relativeLayout_informations).setVisibility(View.GONE);
+			findViewById(R.id.relativeLayout_informations).setVisibility(
+					View.GONE);
 			ScrollView endView;
-			changeButtonNext(getResources().getDrawable(R.drawable.finish_background),R.style.ButtonFinishSave, getString(R.string.submit));
-			
-			endView = (ScrollView) View.inflate(this, R.layout.activity_form_entry_end, null);
-			
+			changeButtonNext(
+					getResources().getDrawable(R.drawable.finish_background),
+					R.style.ButtonFinishSave, getString(R.string.submit));
+
+			endView = (ScrollView) View.inflate(this,
+					R.layout.activity_form_entry_end, null);
+
 			// edittext to change the displayed name of the instance
-			saveAs = (CustomFontEditText) endView
-					.findViewById(R.id.save_name);
+			saveAs = (CustomFontEditText) endView.findViewById(R.id.save_name);
 
 			// disallow carriage returns in the name
 			InputFilter returnFilter = new InputFilter() {
@@ -1001,11 +1003,9 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			saveAs.setFilters(new InputFilter[] { returnFilter });
 
 			String saveName = formController.getSubmissionMetadata().instanceName;
-			
-			
-			
+
 			if (saveName == null) {
-				//TODO Default saveAs text should be previous save name
+				// TODO Default saveAs text should be previous save name
 				// no meta/instanceName field in the form -- see if we have a
 				// name for this instance from a previous save attempt...
 				if (getContentResolver().getType(getIntent().getData()) == InstanceColumns.CONTENT_ITEM_TYPE) {
@@ -1028,19 +1028,17 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				}
 				// present the prompt to allow user to name the form
 				// TODO if savename != null don"t need to initialize it
-				if (saveName == null || saveName.length() == 0){
+				if (saveName == null || saveName.length() == 0) {
 					saveName = formController.getFormTitle();
 				}
 				saveAs.setText(saveName);
 				saveAs.setEnabled(true);
 				saveAs.setVisibility(View.VISIBLE);
-			}
-			else
-			{
+			} else {
 				// if instanceName is defined in form, this is the name -- no
 				// revisions
 				// display only the name, not the prompt, and disable edits
-				
+
 				saveAs.setText(saveName);
 				saveAs.setEnabled(false);
 				saveAs.setBackgroundColor(Color.WHITE);
@@ -1053,61 +1051,63 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				saveAs.setVisibility(View.GONE);
 			}
 
-			
-				checkBox1 = (CheckBox) endView.findViewById(R.id.checkbox1);
-				checkBox2 = (CheckBox) endView.findViewById(R.id.checkbox2);
-				checkBox3 = (CheckBox) endView.findViewById(R.id.checkbox3);
-				relativelayout_checkbox1 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox1);
-				relativelayout_checkbox2 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox2);
-				relativelayout_checkbox3 = (RelativeLayout) endView.findViewById(R.id.relativelayout_checkbox3);
-			
-			relativelayout_checkbox1.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					// TODO Auto-generated method stub
-					if (checkBox1.isChecked())
-						checkBox1.setChecked(false);
-					else
-					{
-						checkBox1.setChecked(true);
-						checkBox2.setChecked(false);
-						checkBox3.setChecked(false);
-					}
-				}
-			});
-			
-			relativelayout_checkbox2.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					// TODO Auto-generated method stub
-					if (checkBox2.isChecked())
-						checkBox2.setChecked(false);
-					else
-					{
-						checkBox2.setChecked(true);
-						checkBox1.setChecked(false);
-						checkBox3.setChecked(false);
-					}
-				}
-			});
-			
-			relativelayout_checkbox3.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View arg0) {
-					// TODO Auto-generated method stub
-					if (checkBox3.isChecked())
-						checkBox3.setChecked(false);
-					else
-					{
-						checkBox3.setChecked(true);
-						checkBox1.setChecked(false);
-						checkBox2.setChecked(false);
-					}
-				}
-			});
+			checkBox1 = (CheckBox) endView.findViewById(R.id.checkbox1);
+			checkBox2 = (CheckBox) endView.findViewById(R.id.checkbox2);
+			checkBox3 = (CheckBox) endView.findViewById(R.id.checkbox3);
+			relativelayout_checkbox1 = (RelativeLayout) endView
+					.findViewById(R.id.relativelayout_checkbox1);
+			relativelayout_checkbox2 = (RelativeLayout) endView
+					.findViewById(R.id.relativelayout_checkbox2);
+			relativelayout_checkbox3 = (RelativeLayout) endView
+					.findViewById(R.id.relativelayout_checkbox3);
+
+			relativelayout_checkbox1
+					.setOnClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View arg0) {
+							// TODO Auto-generated method stub
+							if (checkBox1.isChecked())
+								checkBox1.setChecked(false);
+							else {
+								checkBox1.setChecked(true);
+								checkBox2.setChecked(false);
+								checkBox3.setChecked(false);
+							}
+						}
+					});
+
+			relativelayout_checkbox2
+					.setOnClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View arg0) {
+							// TODO Auto-generated method stub
+							if (checkBox2.isChecked())
+								checkBox2.setChecked(false);
+							else {
+								checkBox2.setChecked(true);
+								checkBox1.setChecked(false);
+								checkBox3.setChecked(false);
+							}
+						}
+					});
+
+			relativelayout_checkbox3
+					.setOnClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View arg0) {
+							// TODO Auto-generated method stub
+							if (checkBox3.isChecked())
+								checkBox3.setChecked(false);
+							else {
+								checkBox3.setChecked(true);
+								checkBox1.setChecked(false);
+								checkBox2.setChecked(false);
+							}
+						}
+					});
 			checkBox1
 					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 						@Override
@@ -1144,8 +1144,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 							}
 						}
 					});
-		
-			
+
 			return endView;
 		case FormEntryController.EVENT_QUESTION:
 		case FormEntryController.EVENT_GROUP:
@@ -1156,8 +1155,9 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				FormEntryPrompt[] prompts = formController.getQuestionPrompts();
 				FormEntryCaption[] groups = formController
 						.getGroupsForCurrentIndex();
-				odkv = new ODKView(this, this, formController.getQuestionPrompts(),
-						groups, advancingPage);
+				odkv = new ODKView(this, this,
+						formController.getQuestionPrompts(), groups,
+						advancingPage);
 			} catch (RuntimeException e) {
 				createErrorDialog(e.getMessage(), EXIT);
 				e.printStackTrace();
@@ -1239,12 +1239,12 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			break;
 		}
 	}
-	
+
 	@Override
 	public void updateView() {
 		FormController formController = Collect.getInstance()
 				.getFormController();
-		if (formController.indexIsInFieldList()&&mAnswersChanged){
+		if (formController.indexIsInFieldList() && mAnswersChanged) {
 			if (formController.currentPromptIsQuestion()) {
 				if (!saveAnswersForCurrentScreen(EVALUATE_CONSTRAINTS)) {
 					// A constraint was violated so a dialog should be showing.
@@ -1287,10 +1287,14 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	 * model without checking constraints.
 	 */
 	private void showPreviousView() {
-		changeButtonNext(getResources().getDrawable(R.drawable.selectable_item_background),R.style.ButtonNext, getString(R.string.next));
-		
+		changeButtonNext(
+				getResources().getDrawable(
+						R.drawable.selectable_item_background),
+				R.style.ButtonNext, getString(R.string.next));
+
 		current_page--;
-		mBackButton.setVisibility(current_page <= 1 ? View.INVISIBLE : View.VISIBLE);
+		mBackButton.setVisibility(current_page <= 1 ? View.INVISIBLE
+				: View.VISIBLE);
 		FormController formController = Collect.getInstance()
 				.getFormController();
 		textView_quiz_question_number.setText(current_page + "/" + size);
@@ -1301,10 +1305,11 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		}
 
 		if (formController.getEvent() != FormEntryController.EVENT_BEGINNING_OF_FORM) {
-			
-			if (mNextButton.getText().toString().equals(getString(R.string.next)))
+
+			if (mNextButton.getText().toString()
+					.equals(getString(R.string.next)))
 				event = formController.stepToPreviousScreenEvent();
-			
+
 			if (event == FormEntryController.EVENT_BEGINNING_OF_FORM
 					|| event == FormEntryController.EVENT_GROUP
 					|| event == FormEntryController.EVENT_QUESTION) {
@@ -1317,19 +1322,23 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			showView(next, AnimationType.LEFT);
 		}
 	}
-	
-	private void showPreviousViewFromHierarchy(int position, FormIndex index)
-	{
-		changeButtonNext(getResources().getDrawable(R.drawable.selectable_item_background),R.style.ButtonNext, getString(R.string.next));
-		
-		current_page=position+1;
-		mBackButton.setVisibility(current_page <= 1 ? View.INVISIBLE : View.VISIBLE);
-		FormController formController = Collect.getInstance().getFormController();
+
+	private void showPreviousViewFromHierarchy(int position, FormIndex index) {
+		changeButtonNext(
+				getResources().getDrawable(
+						R.drawable.selectable_item_background),
+				R.style.ButtonNext, getString(R.string.next));
+
+		current_page = position + 1;
+		mBackButton.setVisibility(current_page <= 1 ? View.INVISIBLE
+				: View.VISIBLE);
+		FormController formController = Collect.getInstance()
+				.getFormController();
 		formController.jumpToIndex(index);
 		textView_quiz_question_number.setText(current_page + "/" + size);
 		// The answer is saved on a back swipe, but question constraints are
 		// ignored.
-		event=formController.getEvent();
+		event = formController.getEvent();
 		if (event == FormEntryController.EVENT_BEGINNING_OF_FORM
 				|| event == FormEntryController.EVENT_GROUP
 				|| event == FormEntryController.EVENT_QUESTION) {
@@ -1348,7 +1357,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	 * the progress bar.
 	 */
 	public void showView(ScrollView next, AnimationType from) {
-		if (from != AnimationType.NONE){
+		if (from != AnimationType.NONE) {
 			// disable notifications...
 			if (mInAnimation != null) {
 				mInAnimation.setAnimationListener(null);
@@ -1356,8 +1365,9 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			if (mOutAnimation != null) {
 				mOutAnimation.setAnimationListener(null);
 			}
-	
-			// logging of the view being shown is already done, as this was handled
+
+			// logging of the view being shown is already done, as this was
+			// handled
 			// by createView()
 			switch (from) {
 			case RIGHT:
@@ -1373,15 +1383,17 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 						R.anim.push_right_out);
 				break;
 			case FADE:
-				mInAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
-				mOutAnimation = AnimationUtils.loadAnimation(this, R.anim.fade_out);
+				mInAnimation = AnimationUtils.loadAnimation(this,
+						R.anim.fade_in);
+				mOutAnimation = AnimationUtils.loadAnimation(this,
+						R.anim.fade_out);
 				break;
 			}
-	
+
 			// complete setup for animations...
 			mInAnimation.setAnimationListener(this);
 			mOutAnimation.setAnimationListener(this);
-		}else{
+		} else {
 			mInAnimation = null;
 			mOutAnimation = null;
 		}
@@ -1403,7 +1415,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		mAnimationCompletionSet = 0;
 
 		if (mStaleView != null) {
-			if (from != AnimationType.NONE){
+			if (from != AnimationType.NONE) {
 				// start OutAnimation for transition...
 				mStaleView.startAnimation(mOutAnimation);
 			}
@@ -1413,10 +1425,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			mAnimationCompletionSet = 2;
 		}
 		// start InAnimation for transition...
-		if (from != AnimationType.NONE){
+		if (from != AnimationType.NONE) {
 			mCurrentView.startAnimation(mInAnimation);
 		}
-		
+
 		String logString = "";
 		switch (from) {
 		case RIGHT:
@@ -1432,10 +1444,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			logString = "update";
 			break;
 		}
-		mCurrentView.post(new Runnable() { 
-	        public void run() { 
-	             mCurrentView.scrollTo(0, mY);
-	        } 
+		mCurrentView.post(new Runnable() {
+			public void run() {
+				mCurrentView.scrollTo(0, mY);
+			}
 		});
 	}
 
@@ -1453,8 +1465,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	/**
 	 * Creates and displays a dialog displaying the violated constraint.
 	 */
-	private void createConstraintToast(FormIndex index, int saveStatus)
-	{
+	private void createConstraintToast(FormIndex index, int saveStatus) {
 		FormController formController = Collect.getInstance()
 				.getFormController();
 		String constraintText = formController.getQuestionPrompt(index)
@@ -1470,37 +1481,37 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			}
 			break;
 		case FormEntryController.ANSWER_REQUIRED_BUT_EMPTY:
-			constraintText = formController.getQuestionPrompt(index).getSpecialFormQuestionText("requiredMsg");
-			if (constraintText == null){
+			constraintText = formController.getQuestionPrompt(index)
+					.getSpecialFormQuestionText("requiredMsg");
+			if (constraintText == null) {
 				constraintText = getString(R.string.required_answer_error);
 			}
 			break;
 		}
-		
-		CroutonView.showBuiltInCrouton(ActivityForm.this, constraintText, Style.ALERT);
-		
+
+		CroutonView.showBuiltInCrouton(ActivityForm.this, constraintText,
+				Style.ALERT);
+
 	}
 
 	/**
 	 * Creates a toast with the specified message.
-	 *
+	 * 
 	 * @param message
 	 */
-	/*private void showCustomToast(String message, int duration) {
-		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-		View view = inflater.inflate(R.layout.widget_toast, null);
-
-		// set the text in the view
-		TextView tv = (TextView) view.findViewById(R.id.message);
-		tv.setText(message);
-
-		Toast t = new Toast(this);
-		t.setView(view);
-		t.setDuration(duration);
-		t.setGravity(Gravity.CENTER, 0, 0);
-		t.show();
-	}*/
+	/*
+	 * private void showCustomToast(String message, int duration) {
+	 * LayoutInflater inflater = (LayoutInflater)
+	 * getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	 * 
+	 * View view = inflater.inflate(R.layout.widget_toast, null);
+	 * 
+	 * // set the text in the view TextView tv = (TextView)
+	 * view.findViewById(R.id.message); tv.setText(message);
+	 * 
+	 * Toast t = new Toast(this); t.setView(view); t.setDuration(duration);
+	 * t.setGravity(Gravity.CENTER, 0, 0); t.show(); }
+	 */
 
 	/**
 	 * Creates and displays a dialog asking the user if they'd like to create a
@@ -1521,8 +1532,8 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 					try {
 						formController.newRepeat();
 					} catch (XPathTypeMismatchException e) {
-						ActivityForm.this.createErrorDialog(
-								e.getMessage(), EXIT);
+						ActivityForm.this.createErrorDialog(e.getMessage(),
+								EXIT);
 						return;
 					}
 					if (!formController.indexIsInFieldList()) {
@@ -1640,7 +1651,8 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			String updatedSaveName) {
 		// save current answer
 		if (!saveAnswersForCurrentScreen(complete)) {
-			CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.data_saved_error), Style.ALERT);
+			CroutonView.showBuiltInCrouton(ActivityForm.this,
+					getString(R.string.data_saved_error), Style.ALERT);
 			return false;
 		}
 
@@ -1701,8 +1713,8 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 									.getBoolean(
 											AdminPreferencesActivity.KEY_SAVE_MID,
 											true)) {
-								dialogSaveName(test,true);
-								
+								dialogSaveName(test, true);
+
 							} else {
 								removeTempInstance();
 								finishReturnInstance(test);
@@ -1996,11 +2008,14 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			createErrorDialog(mErrorMessage, EXIT);
 			return;
 		}
-		if (formController!=null)
-			event=formController.getEvent();
+		if (formController != null)
+			event = formController.getEvent();
 		if (event != FormEntryController.EVENT_END_OF_FORM)
-			changeButtonNext(getResources().getDrawable(R.drawable.selectable_item_background),R.style.ButtonNext, getString(R.string.next));
-		if (current_page==1)
+			changeButtonNext(
+					getResources().getDrawable(
+							R.drawable.selectable_item_background),
+					R.style.ButtonNext, getString(R.string.next));
+		if (current_page == 1)
 			mBackButton.setVisibility(View.INVISIBLE);
 	}
 
@@ -2113,8 +2128,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		t.cancel(true);
 		t.destroy();
 		Collect.getInstance().setFormController(formController);
-		//updateMenu
-		
+		// updateMenu
 
 		// Set the language if one has already been set in the past
 		String[] languageTest = formController.getLanguages();
@@ -2163,7 +2177,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		// returned to ODK Collect and chose Edit Saved Form, but that the
 		// savepoint for that
 		// form is newer than the last saved version of their form data.
-		
+
 		// Set saved answer path
 		if (formController.getInstancePath() == null) {
 
@@ -2200,14 +2214,16 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	 */
 	@Override
 	public void savingComplete(int saveStatus) {
-		if (fail)
-		{
-			fail=false;
+		if (fail) {
+			fail = false;
 			ContentValues cv = new ContentValues();
 			Uri toUpdate;
-			toUpdate = Uri.withAppendedPath(InstanceColumns.CONTENT_URI, ""+InstanceProvider.getLastIdInstance());
-			cv.put(InstanceColumns.STATUS, InstanceProviderAPI.STATUS_SUBMISSION_FAILED);
-	        Collect.getInstance().getContentResolver().update(toUpdate, cv, null, null);
+			toUpdate = Uri.withAppendedPath(InstanceColumns.CONTENT_URI, ""
+					+ InstanceProvider.getLastIdInstance());
+			cv.put(InstanceColumns.STATUS,
+					InstanceProviderAPI.STATUS_SUBMISSION_FAILED);
+			Collect.getInstance().getContentResolver()
+					.update(toUpdate, cv, null, null);
 		}
 		dismissDialog(SAVING_DIALOG);
 		switch (saveStatus) {
@@ -2219,7 +2235,8 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 			finishReturnInstance(exit_to_home);
 			break;
 		case SaveToDiskTask.SAVE_ERROR:
-			CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.data_saved_error), Style.ALERT);
+			CroutonView.showBuiltInCrouton(ActivityForm.this,
+					getString(R.string.data_saved_error), Style.ALERT);
 			break;
 		case FormEntryController.ANSWER_CONSTRAINT_VIOLATED:
 		case FormEntryController.ANSWER_REQUIRED_BUT_EMPTY:
@@ -2254,10 +2271,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		}
 
 	}
-	
+
 	/**
 	 * Attempts to save an answer to the specified index.
-	 *
+	 * 
 	 * @param answer
 	 * @param index
 	 * @param evaluateConstraints
@@ -2279,7 +2296,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	 * Checks the database to determine if the current instance being edited has
 	 * already been 'marked completed'. A form can be 'unmarked' complete and
 	 * then resaved.
-	 *
+	 * 
 	 * @return true if form has been marked completed, false otherwise.
 	 */
 	private boolean isInstanceComplete(boolean end) {
@@ -2289,13 +2306,13 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		boolean complete = false;
 
 		// if we're at the end of the form, then check the preferences
-		/*if (end) {
-			// First get the value from the preferences
-			SharedPreferences sharedPreferences = PreferenceManager
-					.getDefaultSharedPreferences(this);
-			complete = sharedPreferences.getBoolean(
-					ActivityPreferences.KEY_COMPLETED_DEFAULT, true);
-		}*/
+		/*
+		 * if (end) { // First get the value from the preferences
+		 * SharedPreferences sharedPreferences = PreferenceManager
+		 * .getDefaultSharedPreferences(this); complete =
+		 * sharedPreferences.getBoolean(
+		 * ActivityPreferences.KEY_COMPLETED_DEFAULT, true); }
+		 */
 
 		// Then see if we've already marked this form as complete before
 		String selection = InstanceColumns.INSTANCE_FILE_PATH + "=?";
@@ -2342,8 +2359,7 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				if (c.getCount() > 0) {
 					// should only be one...
 					c.moveToFirst();
-					String id = c.getString(c
-							.getColumnIndex(BaseColumns._ID));
+					String id = c.getString(c.getColumnIndex(BaseColumns._ID));
 					Uri instance = Uri.withAppendedPath(
 							InstanceColumns.CONTENT_URI, id);
 					setResult(RESULT_OK, new Intent().setData(instance));
@@ -2392,9 +2408,10 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 				|| Math.abs(e1.getX() - e2.getX()) > xPixelLimit * 2) {
 			if (velocityX > 0) {
 				if (e1.getX() > e2.getX()) {
-					if (!mNextButton.getText().equals(getString(R.string.submit)))
+					if (!mNextButton.getText().equals(
+							getString(R.string.submit)))
 						showNextView();
-					
+
 				} else if (current_page > 1) {
 					showPreviousView();
 				}
@@ -2404,7 +2421,8 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 						showPreviousView();
 					}
 				} else {
-					if (!mNextButton.getText().equals(getString(R.string.submit)))
+					if (!mNextButton.getText().equals(
+							getString(R.string.submit)))
 						showNextView();
 				}
 			}
@@ -2466,210 +2484,200 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 	@Override
 	public void deleteComplete(int deletedInstances) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void uploadingComplete(HashMap<String, String> result) {
 		// TODO Auto-generated method stub
 		try {
-            dismissDialog(PROGRESS_DIALOG);
-        } catch (Exception e) {
-            // tried to close a dialog not open. don't care.
-        }
+			dismissDialog(PROGRESS_DIALOG);
+		} catch (Exception e) {
+			// tried to close a dialog not open. don't care.
+		}
 
-        StringBuilder selection = new StringBuilder();
-        Set<String> keys = result.keySet();
-        Iterator<String> it = keys.iterator();
+		StringBuilder selection = new StringBuilder();
+		Set<String> keys = result.keySet();
+		Iterator<String> it = keys.iterator();
 
-        String[] selectionArgs = new String[keys.size()];
-        int i = 0;
-        while (it.hasNext()) {
-            String id = it.next();
-            selection.append(BaseColumns._ID + "=?");
-            selectionArgs[i++] = id;
-            if (i != keys.size()) {
-                selection.append(" or ");
-            }
-        }
-        
-        boolean success=false;
-        StringBuilder message = new StringBuilder();
-        {
-        	Cursor results = null;
-        	try
-        	{
-                results = getContentResolver().query(InstanceColumns.CONTENT_URI,
-                		null, selection.toString(), selectionArgs, null);
-                if (results.getCount() > 0)
-                {
-                    results.moveToPosition(-1);
-                    while (results.moveToNext()) {
-                        String name =
-                            results.getString(results.getColumnIndex(InstanceColumns.DISPLAY_NAME));
-                        String id = results.getString(results.getColumnIndex(BaseColumns._ID));
-                        if (!result.get(id).equals(getString(R.string.success)))
-                        {
-                        	ContentValues cv = new ContentValues();
-                			Uri toUpdate;
-                			toUpdate = Uri.withAppendedPath(InstanceColumns.CONTENT_URI, ""+InstanceProvider.getLastIdInstance());
-                			cv.put(InstanceColumns.STATUS, InstanceProviderAPI.STATUS_SUBMISSION_FAILED);
-                	        Collect.getInstance().getContentResolver().update(toUpdate, cv, null, null);
-                        	message.append(name + " - " + getString(R.string.fail) + "\n\n");
-                        }
-                        else
-                        {
-                        	message.append(name + " - " + result.get(id) + "\n\n");
-                        	success=true;
-                        }
-                    }
-                }
-                else
-                {
-                    message.append(getString(R.string.no_forms_uploaded));
-                }
-        	} finally {
-        		if ( results != null ) {
-        			results.close();
-        		}
-        	}
-        }
-        if (success)
-        	deleteSelectedInstances();
-        createAlertDialog(message.toString().trim());
-		
+		String[] selectionArgs = new String[keys.size()];
+		int i = 0;
+		while (it.hasNext()) {
+			String id = it.next();
+			selection.append(BaseColumns._ID + "=?");
+			selectionArgs[i++] = id;
+			if (i != keys.size()) {
+				selection.append(" or ");
+			}
+		}
+
+		boolean success = false;
+		StringBuilder message = new StringBuilder();
+		{
+			Cursor results = null;
+			try {
+				results = getContentResolver().query(
+						InstanceColumns.CONTENT_URI, null,
+						selection.toString(), selectionArgs, null);
+				if (results.getCount() > 0) {
+					results.moveToPosition(-1);
+					while (results.moveToNext()) {
+						String name = results.getString(results
+								.getColumnIndex(InstanceColumns.DISPLAY_NAME));
+						String id = results.getString(results
+								.getColumnIndex(BaseColumns._ID));
+						if (!result.get(id).equals(getString(R.string.success))) {
+							ContentValues cv = new ContentValues();
+							Uri toUpdate;
+							toUpdate = Uri.withAppendedPath(
+									InstanceColumns.CONTENT_URI,
+									"" + InstanceProvider.getLastIdInstance());
+							cv.put(InstanceColumns.STATUS,
+									InstanceProviderAPI.STATUS_SUBMISSION_FAILED);
+							Collect.getInstance().getContentResolver()
+									.update(toUpdate, cv, null, null);
+							message.append(name + " - "
+									+ getString(R.string.fail) + "\n\n");
+						} else {
+							message.append(name + " - " + result.get(id)
+									+ "\n\n");
+							success = true;
+						}
+					}
+				} else {
+					message.append(getString(R.string.no_forms_uploaded));
+				}
+			} finally {
+				if (results != null) {
+					results.close();
+				}
+			}
+		}
+		if (success)
+			deleteSelectedInstances();
+		createAlertDialog(message.toString().trim());
+
 	}
 
 	private void createAlertDialog(String message) {
-        mAlertDialog = new AlertDialog.Builder(this).create();
-        mAlertDialog.setTitle(getString(R.string.upload_results));
-        mAlertDialog.setMessage(message);
-        DialogInterface.OnClickListener quitListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int i) {
-                switch (i) {
-                    case DialogInterface.BUTTON1: // ok
-                    	// always exit this activity since it has no interface
-                        finish();
-                        if (restart)
-                		{
-                			Intent myIntent = new Intent(Intent.ACTION_EDIT, uri);
-                			myIntent.putExtra("newForm", true);
-                	        startActivity(myIntent);
-                		}
-                    	break;
-                }
-            }
-        };
-        mAlertDialog.setCancelable(false);
-        mAlertDialog.setButton(getString(R.string.ok), quitListener);
-        mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
-        mAlertMsg = message;
-        mAlertDialog.show();
-    }
-	
-	private void deleteSelectedInstances()
-	{
-		ArrayList<Long> mSelected=new ArrayList<Long>();
-		mSelected.add(mInstancesToSend[0]); 
-		
+		mAlertDialog = new AlertDialog.Builder(this).create();
+		mAlertDialog.setTitle(getString(R.string.upload_results));
+		mAlertDialog.setMessage(message);
+		DialogInterface.OnClickListener quitListener = new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int i) {
+				switch (i) {
+				case DialogInterface.BUTTON1: // ok
+					// always exit this activity since it has no interface
+					finish();
+					if (restart) {
+						Intent myIntent = new Intent(Intent.ACTION_EDIT, uri);
+						myIntent.putExtra("newForm", true);
+						startActivity(myIntent);
+					}
+					break;
+				}
+			}
+		};
+		mAlertDialog.setCancelable(false);
+		mAlertDialog.setButton(getString(R.string.ok), quitListener);
+		mAlertDialog.setIconAttribute(R.attr.dialog_icon_info);
+		mAlertMsg = message;
+		mAlertDialog.show();
+	}
+
+	private void deleteSelectedInstances() {
+		ArrayList<Long> mSelected = new ArrayList<Long>();
+		mSelected.add(mInstancesToSend[0]);
+
 		DeleteInstancesTask mDeleteInstancesTask = new DeleteInstancesTask();
 		mDeleteInstancesTask.setContentResolver(getContentResolver());
 		mDeleteInstancesTask.setDeleteListener(this);
-		mDeleteInstancesTask.execute(mSelected.toArray(new Long[mSelected.size()]));
+		mDeleteInstancesTask.execute(mSelected.toArray(new Long[mSelected
+				.size()]));
 	}
-	
+
 	@Override
 	public void progressUpdate(int progress, int total) {
 		// TODO Auto-generated method stub
 		mAlertMsg = getString(R.string.sending_items, progress, total);
-        mProgressDialog.setMessage(mAlertMsg);
-		
+		mProgressDialog.setMessage(mAlertMsg);
+
 	}
 
 	@Override
 	public void authRequest(Uri url, HashMap<String, String> doneSoFar) {
 		// TODO Auto-generated method stub
 		if (mProgressDialog.isShowing()) {
-            // should always be showing here
-            mProgressDialog.dismiss();
-        }
+			// should always be showing here
+			mProgressDialog.dismiss();
+		}
 
-        // add our list of completed uploads to "completed"
-        // and remove them from our toSend list.
-        ArrayList<Long> workingSet = new ArrayList<Long>();
-        Collections.addAll(workingSet, mInstancesToSend);
-        if (doneSoFar != null) {
-            Set<String> uploadedInstances = doneSoFar.keySet();
-            Iterator<String> itr = uploadedInstances.iterator();
+		// add our list of completed uploads to "completed"
+		// and remove them from our toSend list.
+		ArrayList<Long> workingSet = new ArrayList<Long>();
+		Collections.addAll(workingSet, mInstancesToSend);
+		if (doneSoFar != null) {
+			Set<String> uploadedInstances = doneSoFar.keySet();
+			Iterator<String> itr = uploadedInstances.iterator();
 
-            while (itr.hasNext()) {
-                Long removeMe = Long.valueOf(itr.next());
-                workingSet.remove(removeMe);
-            }
-            mUploadedInstances.putAll(doneSoFar);
-        }
-
-        // and reconstruct the pending set of instances to send
-        Long[] updatedToSend = new Long[workingSet.size()];
-        for ( int i = 0 ; i < workingSet.size() ; ++i ) {
-        	updatedToSend[i] = workingSet.get(i);
-        }
-        mInstancesToSend = updatedToSend;
-
-        showDialog(AUTH_DIALOG);
-	}
-	
-	private void saveForm(String save_as)
-	{
-		if (save_as.length() < 1)
-			CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.save_as_error), Style.ALERT);
-		else
-		{
-			Boolean instanceComplete=true;
-			if (checkBox1.isChecked())
-			{
-				saveDataToDisk(EXIT, instanceComplete, save_as.toString());
+			while (itr.hasNext()) {
+				Long removeMe = Long.valueOf(itr.next());
+				workingSet.remove(removeMe);
 			}
-			else if (checkBox2.isChecked())
-			{
+			mUploadedInstances.putAll(doneSoFar);
+		}
+
+		// and reconstruct the pending set of instances to send
+		Long[] updatedToSend = new Long[workingSet.size()];
+		for (int i = 0; i < workingSet.size(); ++i) {
+			updatedToSend[i] = workingSet.get(i);
+		}
+		mInstancesToSend = updatedToSend;
+
+		showDialog(AUTH_DIALOG);
+	}
+
+	private void saveForm(String save_as) {
+		if (save_as.length() < 1)
+			CroutonView.showBuiltInCrouton(ActivityForm.this,
+					getString(R.string.save_as_error), Style.ALERT);
+		else {
+			Boolean instanceComplete = true;
+			if (checkBox1.isChecked()) {
+				saveDataToDisk(EXIT, instanceComplete, save_as.toString());
+			} else if (checkBox2.isChecked()) {
 				ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 				NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
-				if (ni == null || !ni.isConnected())
-				{
+				if (ni == null || !ni.isConnected()) {
 					// no network connection
-					fail=true;
-					CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.no_connexion), Style.ALERT);
+					fail = true;
+					CroutonView.showBuiltInCrouton(ActivityForm.this,
+							getString(R.string.no_connexion), Style.ALERT);
 					saveDataToDisk(false, true, save_as.toString());
-				}
-				else
-				{
+				} else {
 					saveDataToDisk(false, true, save_as.toString());
 					send = true;
 				}
-			}
-			else if (checkBox3.isChecked())
-			{
+			} else if (checkBox3.isChecked()) {
 				ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 				NetworkInfo ni = connectivityManager.getActiveNetworkInfo();
-				if (ni == null || !ni.isConnected())
-				{
-					fail=true;
-					CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.no_connexion), Style.ALERT);
+				if (ni == null || !ni.isConnected()) {
+					fail = true;
+					CroutonView.showBuiltInCrouton(ActivityForm.this,
+							getString(R.string.no_connexion), Style.ALERT);
 					saveDataToDisk(false, true, save_as.toString());
-				}
-				else
-				{
+				} else {
 					saveDataToDisk(false, true, save_as.toString());
 					send = true;
 					restart = true;
 				}
-			}
-			else
-				CroutonView.showBuiltInCrouton(ActivityForm.this, getString(R.string.checkbox_error), Style.ALERT);
+			} else
+				CroutonView.showBuiltInCrouton(ActivityForm.this,
+						getString(R.string.checkbox_error), Style.ALERT);
 		}
 	}
-	
+
 	public void refreshViewHierarchy() {
 		FormController formController = Collect.getInstance()
 				.getFormController();
@@ -2804,8 +2812,8 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 					// of its children
 					HierarchyElement group = new HierarchyElement(
 							fc.getLongText(), null, getResources().getDrawable(
-									R.drawable.expander_ic_right),
-							Color.BLACK, COLLAPSED, fc.getIndex());
+									R.drawable.expander_ic_right), Color.BLACK,
+							COLLAPSED, fc.getIndex());
 					repeatedGroupRef = formController.getFormIndex()
 							.getReference().toString(false);
 					formList.add(group);
@@ -2834,65 +2842,64 @@ AdvanceToNextListener, OnGestureListener, WidgetAnsweredListener, InstanceUpload
 		// 'back'
 		formController.jumpToIndex(currentIndex);
 	}
-	
-	private void changeButtonNext(Drawable background, int id_style, String value)
-	{
+
+	private void changeButtonNext(Drawable background, int id_style,
+			String value) {
 		mNextButton.setBackgroundDrawable(background);
 		mNextButton.setTextAppearance(this, id_style);
 		mNextButton.setText(value);
 	}
 
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU) {
-        	menu.performIdentifierAction(R.id.menu_other, 0);
-         }
-        super.onKeyUp(keyCode, event);
-        return true;
-     }
-	
-	
-	private void dialogSaveName(final boolean _exit_to_home, final boolean exit)
-	{
+		if (keyCode == KeyEvent.KEYCODE_MENU) {
+			menu.performIdentifierAction(R.id.menu_other, 0);
+		}
+		super.onKeyUp(keyCode, event);
+		return true;
+	}
+
+	private void dialogSaveName(final boolean _exit_to_home, final boolean exit) {
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 		alert.setTitle(getString(R.string.form_name));
 		alert.setMessage(getString(R.string.form_name_description));
 
-		// Set an EditText view to get user input 
+		// Set an EditText view to get user input
 		final CustomFontEditText input = new CustomFontEditText(this);
-		if (form_name==null)
-			form_name=textView_quiz_name.getText().toString();
+		if (form_name == null)
+			form_name = textView_quiz_name.getText().toString();
 		input.setText(form_name);
 		alert.setView(input);
 		alert.setIconAttribute(R.attr.dialog_icon_save);
 		alert.setNegativeButton(getString(R.string.cancel), null);
-		alert.setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener()
-		{
-			public void onClick(DialogInterface dialog, int whichButton)
-			{
-				form_name=input.getText().toString();
-				exit_to_home=_exit_to_home;
-				saveDataToDisk(exit, isInstanceComplete(false),form_name);
-				dialog.dismiss();
-          	}
-		});
+		alert.setPositiveButton(getString(android.R.string.ok),
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						form_name = input.getText().toString();
+						exit_to_home = _exit_to_home;
+						saveDataToDisk(exit, isInstanceComplete(false),
+								form_name);
+						dialog.dismiss();
+					}
+				});
 
 		alert.show();
-		
-	}
-	
-	@Override
-    public void onConfigurationChanged(Configuration newConfig) {
-    	// TODO Auto-generated method stub
-    	super.onConfigurationChanged(newConfig);
-    	Theme.changeTheme(this);
-    	LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    	View v;
-    	if(newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE)
-    		v = inflator.inflate(R.layout.actionbar_title_layout_edit_form_land, null);
-        else
-        	v = inflator.inflate(R.layout.actionbar_title_layout_edit_form, null);
-        getSupportActionBar().setCustomView(v);
-    }
-}
 
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		// TODO Auto-generated method stub
+		super.onConfigurationChanged(newConfig);
+		Theme.changeTheme(this);
+		LayoutInflater inflator = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View v;
+		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+			v = inflator.inflate(
+					R.layout.actionbar_title_layout_edit_form_land, null);
+		else
+			v = inflator.inflate(R.layout.actionbar_title_layout_edit_form,
+					null);
+		getSupportActionBar().setCustomView(v);
+	}
+}
