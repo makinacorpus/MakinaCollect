@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_hierachy"
+        android:icon="@drawable/ic_action_file_folder_hierarchy"
+        android:orderInCategory="10"
+        android:title="@string/view_hierarchy"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_raz"
+        android:icon="@drawable/ic_action_restore"
+        android:orderInCategory="20"
+        android:title="@string/raz"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_save"
+        android:icon="@drawable/ic_action_content_save"
+        android:orderInCategory="30"
+        android:title="@string/save"
+        app:showAsAction="ifRoom" />
+
+</menu>
