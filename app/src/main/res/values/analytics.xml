@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Countly Analytics server configuration -->
+    <string name="__config_analytics_server_url">http://countly.makina-corpus.net</string>
+    <string name="__config_analytics_app_key">279676abcbba16c3ee5e2b113a990fe579ddc527</string>
+
+</resources>
