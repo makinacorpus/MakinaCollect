@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menu_send"
-        android:icon="@drawable/ic_action_content_send"
+        android:icon="@drawable/ic_action_form_send"
         android:orderInCategory="10"
         android:title="@string/upload"
         app:showAsAction="always" />
