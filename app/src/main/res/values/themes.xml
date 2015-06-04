@@ -18,6 +18,7 @@
         <item name="colorAccent">@color/greenAccentColor</item>
 
         <item name="actionBarStyle">@style/AppTheme.Light.ActionBar.Variant</item>
+        <item name="android:listDivider">@drawable/list_divider_green</item>
     </style>
 
     <style name="AppTheme.Dark.Green">
@@ -28,6 +29,7 @@
         <item name="colorAccent">@color/greenAccentColor</item>
 
         <item name="actionBarStyle">@style/AppTheme.Dark.ActionBar.Variant</item>
+        <item name="android:listDivider">@drawable/list_divider_green</item>
     </style>
 
     <style name="AppTheme.Light.Blue">
@@ -38,6 +40,7 @@
         <item name="colorAccent">@color/blueAccentColor</item>
 
         <item name="actionBarStyle">@style/AppTheme.Light.ActionBar.Variant</item>
+        <item name="android:listDivider">@drawable/list_divider_blue</item>
     </style>
 
     <style name="AppTheme.Dark.Blue">
@@ -48,6 +51,7 @@
         <item name="colorAccent">@color/blueAccentColor</item>
 
         <item name="actionBarStyle">@style/AppTheme.Dark.ActionBar.Variant</item>
+        <item name="android:listDivider">@drawable/list_divider_blue</item>
     </style>
 
     <!-- deprecated themes -->
