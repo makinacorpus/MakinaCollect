@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="512"
+   viewBox="0 0 512 512"
+   width="512"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="list_background.svg"
+   style="fill:#000000"
+   inkscape:export-filename="/Users/sgrimault/Desktop/list_background.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <metadata
+     id="metadata12">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs10">
+    <filter
+       inkscape:collect="always"
+       id="filter3768"
+       x="-0.17456973"
+       width="1.3491395"
+       y="-0.18577895"
+       height="1.3715579">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="36.76875"
+         id="feGaussianBlur3770" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1212"
+     inkscape:window-height="815"
+     id="namedview8"
+     showgrid="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:zoom="0.68"
+     inkscape:cx="211.44809"
+     inkscape:cy="282.35918"
+     inkscape:window-x="218"
+     inkscape:window-y="16"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2"
+     inkscape:snap-global="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3761"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="13.162879,256"
+       id="guide3763" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="6.5,253.64777"
+       id="guide3765" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="505.5,253.48037"
+       id="guide3767" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="120,475"
+       id="guide3769" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="111.42289,37"
+       id="guide3771" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="131.5,35.32197"
+       id="guide3773" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="380.5,35.807292"
+       id="guide3775" />
+    <sodipodi:guide
+       orientation="1,0"
+       position="256,290"
+       id="guide3777" />
+  </sodipodi:namedview>
+  <g
+     id="g2997"
+     style="opacity:0.25;filter:url(#filter3768)"
+     transform="matrix(0.75074415,0,0,0.75074415,66.249416,49.920731)">
+    <path
+       style="fill:none"
+       inkscape:connector-curvature="0"
+       id="path4"
+       d="m 0,488 h 24 v 24 H 0 z" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3802"
+       d="M 131.5,37 256,256 6.5,256 z"
+       style="fill:#33b5c4;fill-opacity:1;stroke:none" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3804"
+       d="m 131.5,37 249,0 L 256,256 z"
+       style="fill:#d3ed6a;fill-opacity:1;stroke:none" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3806"
+       d="m 380.5,37 125,219 -249.5,0 z"
+       style="fill:#b1ce53;fill-opacity:1;stroke:none" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3808"
+       d="M 505.5,256 380.5,475 256,256 z"
+       style="fill:#b1ce53;fill-opacity:1;stroke:none" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3810"
+       d="m 256,256 -124.5,219 249,0 z"
+       style="fill:#2b98ae;fill-opacity:1;stroke:none" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3812"
+       d="M 131.5,475 6.5,256 256,256 z"
+       style="fill:#33b5c4;fill-opacity:1;stroke:none" />
+  </g>
+</svg>
