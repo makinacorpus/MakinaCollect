@@ -6,11 +6,12 @@ import android.util.Log;
 /**
  * {@code Loader} used to initialize the application.
  * <p/>
- * This {@code Loader} do nothing for the moment.
+ * This {@code Loader} does nothing for now.
  *
  * @author <a href="mailto:sebastien.grimault@makina-corpus.com">S. Grimault</a>
  */
-public class InitLoader extends AbstractAsyncTaskLoader<Void> {
+public class InitLoader
+        extends AbstractAsyncTaskLoader<Void> {
 
     private static final String TAG = InitLoader.class.getName();
 
@@ -27,7 +28,8 @@ public class InitLoader extends AbstractAsyncTaskLoader<Void> {
             Thread.sleep(SPLASH_DISPLAY_TIME);
         }
         catch (InterruptedException ie) {
-            Log.w(TAG, ie.getMessage());
+            Log.w(TAG,
+                  ie.getMessage());
         }
 
         return null;

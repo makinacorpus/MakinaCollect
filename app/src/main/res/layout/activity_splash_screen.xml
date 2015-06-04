@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:adjustViewBounds="true"
+        android:src="@drawable/splash_background"
+        tools:ignore="ContentDescription,RtlHardcoded"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_launcher_splash"
+            tools:ignore="ContentDescription"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/app_name_text1"
+            android:textColor="@color/greenPrimaryDarkColor"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/app_name_text2"
+            android:textColor="@color/bluePrimaryDarkColor"
+            android:layout_marginTop="-10dp"
+            android:textSize="30sp"/>
+
+    </LinearLayout>
+
+    <com.makina.collect.android.views.CustomFontTextview
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:padding="10dp"
+        android:text="@string/textview_about_us4"
+        android:textColor="?colorPrimaryDark"/>
+
+</FrameLayout>

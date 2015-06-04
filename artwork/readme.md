@@ -1,3 +1,10 @@
+splash screen icons
+-------------------
+
+do not trim
+size: 100dp
+padding: 2dp
+
 dashboard icons
 ---------------
 

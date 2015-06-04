@@ -14,7 +14,10 @@
    version="1.1"
    inkscape:version="0.48.5 r10040"
    sodipodi:docname="launcher.svg"
-   style="fill:#000000">
+   style="fill:#000000"
+   inkscape:export-filename="/Users/sgrimault/Desktop/launcher.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <metadata
      id="metadata12">
     <rdf:RDF>
@@ -44,11 +47,11 @@
      showgrid="true"
      showguides="true"
      inkscape:guide-bbox="true"
-     inkscape:zoom="1.0595703"
+     inkscape:zoom="0.91"
      inkscape:cx="211.44809"
      inkscape:cy="282.35918"
-     inkscape:window-x="218"
-     inkscape:window-y="16"
+     inkscape:window-x="208"
+     inkscape:window-y="12"
      inkscape:window-maximized="0"
      inkscape:current-layer="svg2"
      inkscape:snap-global="false">
