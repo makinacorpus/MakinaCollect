@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme.Light" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarStyle">@style/AppTheme.Light.ActionBar</item>
+    </style>
+
+    <style name="AppTheme.Dark" parent="Theme.AppCompat">
+        <item name="android:windowBackground">@color/dark_color</item>
+        <item name="actionBarStyle">@style/AppTheme.Dark.ActionBar</item>
+    </style>
+
+    <style name="AppTheme.Light.Green">
+
+        <!-- main theme colors -->
+        <item name="colorPrimary">@color/greenPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/greenPrimaryDarkColor</item>
+        <item name="colorAccent">@color/greenAccentColor</item>
+
+        <item name="actionBarStyle">@style/AppTheme.Light.ActionBar.Variant</item>
+    </style>
+
+    <style name="AppTheme.Dark.Green">
+
+        <!-- main theme colors -->
+        <item name="colorPrimary">@color/greenPrimaryColor</item>
+        <item name="colorPrimaryDark">@color/greenPrimaryDarkColor</item>
+        <item name="colorAccent">@color/greenAccentColor</item>
+
+        <item name="actionBarStyle">@style/AppTheme.Dark.ActionBar.Variant</item>
+    </style>
+
+    <style name="AppTheme.Light.Blue">
+
+        <!-- main theme colors -->
+        <item name="colorPrimary">@color/bluePrimaryColor</item>
+        <item name="colorPrimaryDark">@color/bluePrimaryDarkColor</item>
+        <item name="colorAccent">@color/blueAccentColor</item>
+
+        <item name="actionBarStyle">@style/AppTheme.Light.ActionBar.Variant</item>
+    </style>
+
+    <style name="AppTheme.Dark.Blue">
+
+        <!-- main theme colors -->
+        <item name="colorPrimary">@color/bluePrimaryColor</item>
+        <item name="colorPrimaryDark">@color/bluePrimaryDarkColor</item>
+        <item name="colorAccent">@color/blueAccentColor</item>
+
+        <item name="actionBarStyle">@style/AppTheme.Dark.ActionBar.Variant</item>
+    </style>
+
+    <!-- deprecated themes -->
+
+    <style name="CollectThemeLight" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:scrollbarThumbHorizontal">@drawable/thumb</item>
+        <item name="android:scrollbarThumbVertical">@drawable/thumb</item>
+        <item name="android:scrollbarSize">1dp</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="actionBarStyle">@style/CollectThemeLight.ActionBar</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="popupMenuStyle">@style/PopupMenu</item>
+        <item name="dialog_icon_info">@drawable/ic_dialog_info_gray</item>
+        <item name="dialog_icon_alert">@drawable/ic_dialog_alert_gray</item>
+        <item name="dialog_icon_delete">@drawable/ic_dialog_delete_gray</item>
+        <item name="dialog_icon_save">@drawable/ic_dialog_save_gray</item>
+        <item name="text_color">@color/text_gris</item>
+    </style>
+
+    <style name="CollectThemeDark" parent="Theme.AppCompat">
+        <item name="android:scrollbarThumbHorizontal">@drawable/thumb</item>
+        <item name="android:scrollbarThumbVertical">@drawable/thumb</item>
+        <item name="android:scrollbarSize">1dp</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="actionBarStyle">@style/CollectThemeDark.ActionBar</item>
+        <item name="android:windowBackground">@color/dark_color</item>
+        <item name="popupMenuStyle">@style/PopupMenu</item>
+        <item name="dialog_icon_info">@drawable/ic_dialog_info_white</item>
+        <item name="dialog_icon_alert">@drawable/ic_dialog_alert_white</item>
+        <item name="dialog_icon_delete">@drawable/ic_dialog_delete_white</item>
+        <item name="dialog_icon_save">@drawable/ic_dialog_save_white</item>
+        <item name="text_color">@android:color/white</item>
+    </style>
+
+    <style name="PopupMenu" parent="Widget.AppCompat.Light.ListPopupWindow">
+        <item name="android:textColor">@color/text_gris</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>

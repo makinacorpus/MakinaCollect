@@ -1,0 +1,113 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppTheme.Light.ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="displayOptions">showTitle|useLogo|showHome</item>
+        <item name="logo">@drawable/ic_logo_inverse</item>
+        <item name="background">@color/actionbarBackgroundColor</item>
+    </style>
+    <style name="AppTheme.Light.ActionBar.Variant">
+        <item name="titleTextStyle">@style/TextAppearance.ActionBar.Title</item>
+    </style>
+
+    <style name="AppTheme.Dark.ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
+        <item name="displayOptions">showTitle|useLogo|showHome</item>
+        <item name="logo">@drawable/ic_logo_inverse</item>
+        <item name="background">@color/actionbarBackgroundColor</item>
+    </style>
+    <style name="AppTheme.Dark.ActionBar.Variant">
+        <item name="titleTextStyle">@style/TextAppearance.ActionBar.Title</item>
+    </style>
+
+    <style name="TextAppearance.ActionBar.Title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">?colorPrimaryDark</item>
+    </style>
+    <style name="TextAppearance.ActionBar.Title.Green">
+        <item name="android:textColor">@color/greenPrimaryDarkColor</item>
+    </style>
+    <style name="TextAppearance.ActionBar.Title.Blue">
+        <item name="android:textColor">@color/bluePrimaryDarkColor</item>
+    </style>
+
+    <!-- deprecated styles -->
+
+    <style name="ButtonFinishSave" parent="@style/ButtonBarButton">
+        <item name="android:background">@drawable/finish_background</item>
+        <item name="android:textColor">@color/dark_color</item>
+    </style>
+
+    <style name="ButtonNext" parent="@style/ButtonBarButton">
+        <item name="android:background">@drawable/selectable_item_background</item>
+        <item name="android:textColor">?attr/text_color</item>
+    </style>
+
+    <style name="ButtonBarButton">
+        <item name="android:minHeight">@dimen/list_item_height_small</item>
+    </style>
+
+    <style name="CollectThemeLight.ActionBar" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="displayOptions">showTitle|useLogo|showHome</item>
+        <item name="logo">@drawable/ic_logo_inverse</item>
+        <!--
+        <item name="titleTextStyle">@style/CustomTitleColorBar</item>
+        <item name="subtitleTextStyle">@style/CustomSubTitleColorBar</item>
+        -->
+    </style>
+
+    <style name="CollectThemeDark.ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
+        <item name="android:background">@drawable/action_bar_gradient_light</item>
+        <item name="titleTextStyle">@style/CustomTitleColorBar</item>
+        <item name="subtitleTextStyle">@style/CustomSubTitleColorBar</item>
+    </style>
+    
+    <style name="ButtonBar" parent="@android:style/ButtonBar">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="Theme.Transparent" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="CollectThemeLight.MainLayout">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+    </style>
+
+    <style name="CollectThemeLight.Button1">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_margin">2dp</item>
+    </style>
+
+    <style name="CollectThemeLight.Button2">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_margin">1dp</item>
+    </style>
+
+    <style name="CollectThemeLight.ButtonLand">
+        <item name="android:padding">5dp</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:layout_margin">1dp</item>
+    </style>
+
+    <style name="CustomTitleColorBar" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/actionbarTitleColorBlueSend</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CustomSubTitleColorBar" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>
