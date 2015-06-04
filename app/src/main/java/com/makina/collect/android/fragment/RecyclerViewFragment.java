@@ -23,7 +23,8 @@ public class RecyclerViewFragment
 
     protected RecyclerView mRecyclerView;
     protected View mProgressView;
-    protected TextView mTextViewEmpty;
+    protected View mEmptyView;
+    protected TextView mEmptyTextView;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -47,7 +48,8 @@ public class RecyclerViewFragment
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mProgressView = view.findViewById(android.R.id.progress);
-        mTextViewEmpty = (TextView) view.findViewById(android.R.id.message);
+        mEmptyView = view.findViewById(android.R.id.empty);
+        mEmptyTextView = (TextView) view.findViewById(android.R.id.message);
     }
 
     public RecyclerView getRecyclerView() {
@@ -68,7 +70,7 @@ public class RecyclerViewFragment
                                                         super.onChanged();
 
                                                         showProgressBar(false);
-                                                        showEmptyText(mRecyclerView.getAdapter()
+                                                        showEmptyView(mRecyclerView.getAdapter()
                                                                                    .getItemCount() == 0);
                                                     }
 
@@ -79,14 +81,14 @@ public class RecyclerViewFragment
                                                                                   itemCount);
 
                                                         showProgressBar(false);
-                                                        showEmptyText(false);
+                                                        showEmptyView(false);
                                                     }
                                                 });
         }
     }
 
     public void setEmptyText(CharSequence message) {
-        mTextViewEmpty.setText(message);
+        mEmptyTextView.setText(message);
     }
 
     public void showProgressBar(boolean show) {
@@ -95,7 +97,7 @@ public class RecyclerViewFragment
         }
 
         if (show) {
-            mTextViewEmpty.setVisibility(View.GONE);
+            mEmptyTextView.setVisibility(View.GONE);
             mProgressView.startAnimation(AnimationUtils.loadAnimation(getActivity(),
                                                                       android.R.anim.fade_in));
             mProgressView.setVisibility(View.VISIBLE);
@@ -108,21 +110,21 @@ public class RecyclerViewFragment
         }
     }
 
-    private void showEmptyText(boolean show) {
-        if ((mTextViewEmpty.getVisibility() == View.VISIBLE) == show) {
+    private void showEmptyView(boolean show) {
+        if ((mEmptyView.getVisibility() == View.VISIBLE) == show) {
             return;
         }
 
         if (show) {
-            mTextViewEmpty.startAnimation(AnimationUtils.loadAnimation(getActivity(),
+            mEmptyView.startAnimation(AnimationUtils.loadAnimation(getActivity(),
                                                                        android.R.anim.fade_in));
-            mTextViewEmpty.setVisibility(View.VISIBLE);
+            mEmptyView.setVisibility(View.VISIBLE);
 
         }
         else {
-            mTextViewEmpty.startAnimation(AnimationUtils.loadAnimation(getActivity(),
+            mEmptyView.startAnimation(AnimationUtils.loadAnimation(getActivity(),
                                                                        android.R.anim.fade_out));
-            mTextViewEmpty.setVisibility(View.GONE);
+            mEmptyView.setVisibility(View.GONE);
         }
     }
 }

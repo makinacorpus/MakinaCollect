@@ -22,13 +22,30 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <TextView
-        android:id="@android:id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:text="@string/empty_list"
-        android:visibility="gone"/>
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="?emptyListDrawable"
+            tools:ignore="ContentDescription"/>
+
+        <TextView
+            android:id="@android:id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/empty_list"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="?colorPrimaryDark"/>
+
+    </LinearLayout>
 
 </FrameLayout>
 
