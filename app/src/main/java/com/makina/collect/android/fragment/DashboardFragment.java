@@ -16,7 +16,9 @@ import com.makina.collect.android.R;
  *
  * @author <a href="mailto:sebastien.grimault@makina-corpus.com">S. Grimault</a>
  */
-public class DashboardFragment extends Fragment implements View.OnClickListener {
+public class DashboardFragment
+        extends Fragment
+        implements View.OnClickListener {
 
     @Nullable
     protected OnDashboardFragmentListener mOnDashboardFragmentListener;
@@ -34,20 +36,34 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
         return dashboardFragment;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false);
+    public DashboardFragment() {
+        // required empty public constructor
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
+        // inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_dashboard,
+                                container,
+                                false);
+    }
 
-        view.findViewById(R.id.dashboardFormDownloadButton).setOnClickListener(this);
-        view.findViewById(R.id.dashboardFormEditButton).setOnClickListener(this);
-        view.findViewById(R.id.dashboardFormFinishButton).setOnClickListener(this);
-        view.findViewById(R.id.dashboardFormSendButton).setOnClickListener(this);
+    @Override
+    public void onViewCreated(View view,
+                              Bundle savedInstanceState) {
+        super.onViewCreated(view,
+                            savedInstanceState);
+
+        view.findViewById(R.id.dashboardFormDownloadButton)
+            .setOnClickListener(this);
+        view.findViewById(R.id.dashboardFormEditButton)
+            .setOnClickListener(this);
+        view.findViewById(R.id.dashboardFormFinishButton)
+            .setOnClickListener(this);
+        view.findViewById(R.id.dashboardFormSendButton)
+            .setOnClickListener(this);
     }
 
     @Override
@@ -77,16 +93,16 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
 
         switch (v.getId()) {
             case R.id.dashboardFormDownloadButton:
-                mOnDashboardFragmentListener.onFormDownload();
+                mOnDashboardFragmentListener.onFormShowDownload();
                 break;
             case R.id.dashboardFormEditButton:
-                mOnDashboardFragmentListener.onFormEdit();
+                mOnDashboardFragmentListener.onFormShowEdit();
                 break;
             case R.id.dashboardFormFinishButton:
-                mOnDashboardFragmentListener.onFormFinish();
+                mOnDashboardFragmentListener.onFormShowFinish();
                 break;
             case R.id.dashboardFormSendButton:
-                mOnDashboardFragmentListener.onFormSend();
+                mOnDashboardFragmentListener.onFormShowSend();
                 break;
         }
     }
@@ -101,12 +117,12 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
      */
     public interface OnDashboardFragmentListener {
 
-        void onFormDownload();
+        void onFormShowDownload();
 
-        void onFormEdit();
+        void onFormShowEdit();
 
-        void onFormFinish();
+        void onFormShowFinish();
 
-        void onFormSend();
+        void onFormShowSend();
     }
 }

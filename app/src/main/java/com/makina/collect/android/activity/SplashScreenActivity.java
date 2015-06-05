@@ -9,7 +9,6 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBar;
 
 import com.makina.collect.android.R;
-import com.makina.collect.android.activities.ActivityDashBoard;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.loader.InitLoader;
 import com.makina.collect.android.utilities.ThemeUtils;
@@ -83,9 +82,9 @@ public class SplashScreenActivity
     @Override
     public void onLoadFinished(Loader<Void> loader,
                                Void data) {
-        // launch ActivityDashBoard and close splash screen
+        // launch DashBoardActivity and close splash screen
         final Intent intent = new Intent(getApplicationContext(),
-                                         ActivityDashBoard.class);
+                                         DashBoardActivity.class);
 
         final Bundle bundle = new Bundle();
         // TODO: still useful ?
