@@ -21,3 +21,8 @@ empty list icon
 * padding: 2dp
 * color: `<theme variant color>`PrimaryDarkColor
 * opacity: 33%
+
+disabled state action icon
+--------------------------
+
+* opacity: 50%
