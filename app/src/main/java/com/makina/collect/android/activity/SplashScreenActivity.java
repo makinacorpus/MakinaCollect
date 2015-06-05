@@ -1,4 +1,4 @@
-package com.makina.collect.android.activities;
+package com.makina.collect.android.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.support.v4.content.Loader;
 import android.support.v7.app.ActionBar;
 
 import com.makina.collect.android.R;
+import com.makina.collect.android.activities.ActivityDashBoard;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.loader.InitLoader;
 import com.makina.collect.android.utilities.ThemeUtils;

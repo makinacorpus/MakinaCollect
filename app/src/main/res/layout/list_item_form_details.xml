@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="?attr/selectableItemBackground"
+              android:orientation="horizontal">
+
+    <com.makina.collect.android.views.SelectorView
+        android:id="@+id/selectorView"
+        android:layout_width="?attr/listPreferredItemHeightSmall"
+        android:layout_height="?attr/listPreferredItemHeightSmall"/>
+
+    <TextView
+        android:id="@android:id/text1"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:minHeight="?attr/listPreferredItemHeightSmall"
+        android:paddingLeft="?attr/listPreferredItemPaddingLeft"
+        android:paddingRight="?attr/listPreferredItemPaddingRight"
+        android:textAppearance="?attr/textAppearanceListItemSmall"
+        tools:ignore="RtlHardcoded"/>
+
+</LinearLayout>

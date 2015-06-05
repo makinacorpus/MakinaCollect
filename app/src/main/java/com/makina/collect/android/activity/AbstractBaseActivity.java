@@ -1,4 +1,4 @@
-package com.makina.collect.android.activities;
+package com.makina.collect.android.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

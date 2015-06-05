@@ -97,6 +97,24 @@ public abstract class AbstractListAdapter<T, VH extends RecyclerView.ViewHolder>
     }
 
     /**
+     * Replaces the current object at the specified location in the array with the specified object.
+     *
+     * @param object the object to insert
+     */
+    public void update(int index,
+                       T object) {
+        if ((index < 0) || (index > mObjects.size() - 1)) {
+            return;
+        }
+
+        if (index != -1) {
+            mObjects.set(index,
+                         object);
+            notifyItemChanged(index);
+        }
+    }
+
+    /**
      * Get the object item associated with the specified position in the data set.
      *
      * @param index index of the object to retrieve
@@ -110,6 +128,17 @@ public abstract class AbstractListAdapter<T, VH extends RecyclerView.ViewHolder>
         }
 
         return mObjects.get(index);
+    }
+
+    /**
+     * Gets the current position of the given object.
+     *
+     * @param object the object on which to retrieve its position
+     *
+     * @return the object position or {@code -1} if not found
+     */
+    public int getItemPosition(T object) {
+        return mObjects.indexOf(object);
     }
 
     /**
