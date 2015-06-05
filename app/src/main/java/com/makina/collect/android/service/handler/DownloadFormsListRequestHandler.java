@@ -44,9 +44,13 @@ public class DownloadFormsListRequestHandler
             if (value == null) {
                 mRequestHandlerStatus = new RequestHandlerStatus(RequestHandlerStatus.Status.FINISHED_WITH_ERRORS);
             }
+            else if (value.containsKey(DownloadFormListTask.DL_AUTH_REQUIRED)) {
+                mRequestHandlerStatus = new RequestHandlerStatus(RequestHandlerStatus.Status.FINISHED_WITH_ERRORS,
+                                                                 DownloadFormListTask.DL_AUTH_REQUIRED);
+            }
             else if (value.containsKey(DownloadFormListTask.DL_ERROR_MSG)) {
                 mRequestHandlerStatus = new RequestHandlerStatus(RequestHandlerStatus.Status.FINISHED_WITH_ERRORS,
-                                                                 value.get(DownloadFormListTask.DL_ERROR_MSG).errorStr);
+                                                                 DownloadFormListTask.DL_ERROR_MSG);
             }
             else {
                 mRequestHandlerStatus = new RequestHandlerStatus(RequestHandlerStatus.Status.FINISHED);
