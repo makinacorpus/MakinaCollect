@@ -74,6 +74,7 @@ public class FormDetailsRecyclerViewFragment
                 }
 
                 mActionMode.setTitle(String.valueOf(mSelectedFormDetailsList.size()));
+                mActionMode.invalidate();
             }
         }
     };
@@ -133,15 +134,38 @@ public class FormDetailsRecyclerViewFragment
         @Override
         public boolean onPrepareActionMode(ActionMode mode,
                                            Menu menu) {
-            return false;
+            final MenuItem menuItemToggleSelection = menu.findItem(R.id.menu_toggle_selection);
+            final MenuItem menuItemDownload = menu.findItem(R.id.menu_download);
+
+            menuItemDownload.setEnabled(!mSelectedFormDetailsList.isEmpty());
+
+            if (mSelectedFormDetailsList.isEmpty()) {
+                menuItemToggleSelection.setTitle(getString(R.string.select_all));
+                menuItemToggleSelection.setIcon(R.drawable.ic_action_content_select_all);
+            }
+            else {
+                menuItemToggleSelection.setTitle(getString(R.string.deselect_all));
+                menuItemToggleSelection.setIcon(R.drawable.ic_action_content_clear);
+            }
+
+            return true;
         }
 
         @Override
         public boolean onActionItemClicked(ActionMode mode,
                                            MenuItem item) {
             switch (item.getItemId()) {
-                case R.menu.download:
+                case R.id.menu_download:
                     // TODO: perform download selections
+                    return true;
+                case R.id.menu_toggle_selection:
+                    if (mSelectedFormDetailsList.isEmpty()) {
+                        selectAll();
+                    }
+                    else {
+                        clearSelection();
+                    }
+
                     return true;
                 default:
                     return false;
@@ -251,6 +275,31 @@ public class FormDetailsRecyclerViewFragment
         }
 
         mSelectedFormDetailsList.clear();
+
+        if (mActionMode != null) {
+            mActionMode.setTitle(String.valueOf(mSelectedFormDetailsList.size()));
+            mActionMode.invalidate();
+        }
+    }
+
+    private void selectAll() {
+        for (int i = 0; i < mFormDetailsListAdapter.getItemCount(); i++) {
+            final FormDetails formDetails = mFormDetailsListAdapter.getItem(i);
+
+            // should never occur
+            if ((formDetails != null) && !formDetails.checked) {
+                formDetails.checked = true;
+
+                mFormDetailsListAdapter.update(mFormDetailsListAdapter.getItemPosition(formDetails),
+                                               formDetails);
+                mSelectedFormDetailsList.add(formDetails);
+            }
+        }
+
+        if (mActionMode != null) {
+            mActionMode.setTitle(String.valueOf(mSelectedFormDetailsList.size()));
+            mActionMode.invalidate();
+        }
     }
 
     private void handleMessageForDownloadFormsListRequestHandler(@NonNull final Bundle data) {
