@@ -119,44 +119,80 @@ public class SelectorView
 
         typedArray.recycle();
 
-        updateView();
+        mBackgroundImageView.setImageDrawable(isChecked() ? mBackgroundIndicatorOn : mBackgroundIndicatorOff);
+        mCheckBoxImageView.setVisibility(isChecked() ? VISIBLE : INVISIBLE);
     }
 
     @SuppressLint("NewApi")
     private void updateView() {
-        mBackgroundImageView.setImageDrawable(isChecked() ? mBackgroundIndicatorOn : mBackgroundIndicatorOff);
-
         if (DeviceUtils.isPostHoneycombMR1()) {
-            mCheckBoxImageView.animate()
-                              .scaleX(isChecked() ? 1f : 0f)
-                              .scaleY(isChecked() ? 1f : 0f)
-                              .setDuration(200)
-                              .setListener(new Animator.AnimatorListener() {
-                                  @Override
-                                  public void onAnimationStart(Animator animation) {
-                                      mCheckBoxImageView.setScaleX(isChecked() ? 0f : 1f);
-                                      mCheckBoxImageView.setScaleY(isChecked() ? 0f : 1f);
-                                      mCheckBoxImageView.setVisibility(VISIBLE);
-                                  }
+            if (isChecked()) {
+                mCheckBoxImageView.setScaleX(0f);
+                mCheckBoxImageView.setScaleY(0f);
+                mCheckBoxImageView.setVisibility(VISIBLE);
+                mCheckBoxImageView.animate()
+                                  .scaleX(1f)
+                                  .scaleY(1f)
+                                  .setDuration(200)
+                                  .setStartDelay(400);
+            }
+            else {
+                mCheckBoxImageView.setVisibility(INVISIBLE);
+            }
 
-                                  @Override
-                                  public void onAnimationEnd(Animator animation) {
-                                      mCheckBoxImageView.setVisibility(isChecked() ? VISIBLE : INVISIBLE);
-                                  }
+            mBackgroundImageView.animate()
+                                .scaleX(0f)
+                                .setDuration(200)
+                                .setListener(new Animator.AnimatorListener() {
+                                    @Override
+                                    public void onAnimationStart(Animator animation) {
+                                        mBackgroundImageView.setImageDrawable(isChecked() ? mBackgroundIndicatorOff : mBackgroundIndicatorOn);
+                                        mBackgroundImageView.setScaleX(1f);
+                                    }
 
-                                  @Override
-                                  public void onAnimationCancel(Animator animation) {
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        mBackgroundImageView.animate()
+                                                            .scaleX(1f)
+                                                            .setDuration(200)
+                                                            .setListener(new Animator.AnimatorListener() {
+                                                                @Override
+                                                                public void onAnimationStart(Animator animation) {
+                                                                    mBackgroundImageView.setImageDrawable(isChecked() ? mBackgroundIndicatorOn : mBackgroundIndicatorOff);
+                                                                    mBackgroundImageView.setScaleX(0f);
+                                                                }
 
-                                  }
+                                                                @Override
+                                                                public void onAnimationEnd(Animator animation) {
 
-                                  @Override
-                                  public void onAnimationRepeat(Animator animation) {
+                                                                }
 
-                                  }
-                              });
+                                                                @Override
+                                                                public void onAnimationCancel(Animator animation) {
+
+                                                                }
+
+                                                                @Override
+                                                                public void onAnimationRepeat(Animator animation) {
+
+                                                                }
+                                                            });
+                                    }
+
+                                    @Override
+                                    public void onAnimationCancel(Animator animation) {
+
+                                    }
+
+                                    @Override
+                                    public void onAnimationRepeat(Animator animation) {
+
+                                    }
+                                });
         }
         else {
             // no animation for old devices. Sorry !
+            mBackgroundImageView.setImageDrawable(isChecked() ? mBackgroundIndicatorOn : mBackgroundIndicatorOff);
             mCheckBoxImageView.setVisibility(isChecked() ? VISIBLE : INVISIBLE);
         }
     }
