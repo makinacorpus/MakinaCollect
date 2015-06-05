@@ -1,5 +1,6 @@
 package com.makina.collect.android.fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,15 +11,18 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.makina.collect.android.BuildConfig;
 import com.makina.collect.android.R;
 import com.makina.collect.android.adapter.FormDetailsListAdapter;
+import com.makina.collect.android.dialog.ProgressDialogFragment;
 import com.makina.collect.android.model.FormDetails;
 import com.makina.collect.android.service.AbstractRequestHandler;
 import com.makina.collect.android.service.RequestHandlerServiceClient;
 import com.makina.collect.android.service.RequestHandlerStatus;
 import com.makina.collect.android.service.handler.DownloadFormsListRequestHandler;
+import com.makina.collect.android.service.handler.DownloadFormsRequestHandler;
 import com.makina.collect.android.widgets.recyclerview.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -39,6 +43,8 @@ public class FormDetailsRecyclerViewFragment
 
     private static final String KEY_REQUEST_HANDLER_SERVICE_CLIENT_TOKEN = "KEY_REQUEST_HANDLER_SERVICE_CLIENT_TOKEN";
     private static final String KEY_SELECTED_FORM_DETAILS = "KEY_SELECTED_FORM_DETAILS";
+
+    protected static final String PROGRESS_DIALOG_FRAGMENT = "PROGRESS_DIALOG_FRAGMENT";
 
     private RequestHandlerServiceClient mRequestHandlerServiceClient;
 
@@ -93,13 +99,21 @@ public class FormDetailsRecyclerViewFragment
                     token
             );
 
-            // send Message to get the current status of DownloadFormsListRequestHandler
-            final Bundle data = new Bundle();
-            data.putSerializable(DownloadFormsListRequestHandler.KEY_COMMAND,
-                                 DownloadFormsListRequestHandler.Command.GET_STATUS);
+            final Bundle dataForDownloadFormsListRequestHandler = new Bundle();
+            dataForDownloadFormsListRequestHandler.putSerializable(DownloadFormsListRequestHandler.KEY_COMMAND,
+                                                                   DownloadFormsListRequestHandler.Command.GET_STATUS);
 
+            // send Message to get the current status of DownloadFormsListRequestHandler
             mRequestHandlerServiceClient.send(DownloadFormsListRequestHandler.class,
-                                              data);
+                                              dataForDownloadFormsListRequestHandler);
+
+            final Bundle dataForDownloadFormsRequestHandler = new Bundle();
+            dataForDownloadFormsRequestHandler.putSerializable(DownloadFormsRequestHandler.KEY_COMMAND,
+                                                               DownloadFormsRequestHandler.Command.GET_STATUS);
+
+            // send Message to get the current status of DownloadFormsRequestHandler
+            mRequestHandlerServiceClient.send(DownloadFormsRequestHandler.class,
+                                              dataForDownloadFormsRequestHandler);
         }
 
         @Override
@@ -115,6 +129,10 @@ public class FormDetailsRecyclerViewFragment
                                     @NonNull Bundle data) {
             if (requestHandler instanceof DownloadFormsListRequestHandler) {
                 handleMessageForDownloadFormsListRequestHandler(data);
+            }
+
+            if (requestHandler instanceof DownloadFormsRequestHandler) {
+                handleMessageForDownloadFormsRequestHandler(data);
             }
         }
     };
@@ -156,7 +174,22 @@ public class FormDetailsRecyclerViewFragment
                                            MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.menu_download:
-                    // TODO: perform download selections
+                    // send Message to perform the download of the selected forms
+                    final Bundle data = new Bundle();
+                    data.putSerializable(DownloadFormsRequestHandler.KEY_COMMAND,
+                                         DownloadFormsRequestHandler.Command.START);
+                    data.putParcelableArrayList(DownloadFormsRequestHandler.KEY_SELECTED_FORM_DETAILS,
+                                                new ArrayList<>(mSelectedFormDetailsList));
+
+                    mRequestHandlerServiceClient.send(DownloadFormsRequestHandler.class,
+                                                      data);
+
+                    clearSelection();
+
+                    if (mActionMode != null) {
+                        mActionMode.finish();
+                    }
+
                     return true;
                 case R.id.menu_toggle_selection:
                     if (mSelectedFormDetailsList.isEmpty()) {
@@ -321,8 +354,6 @@ public class FormDetailsRecyclerViewFragment
                                                       data);
 
                     break;
-                case RUNNING:
-                    break;
                 case FINISHED:
                     final List<FormDetails> formDetailsList = data.getParcelableArrayList(DownloadFormsListRequestHandler.KEY_FORMS_LIST);
 
@@ -339,6 +370,10 @@ public class FormDetailsRecyclerViewFragment
                         }
                     }
                     else {
+                        if (getActivity() == null) {
+                            return;
+                        }
+
                         if (mActionMode == null) {
                             mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(mActionModeCallback);
                         }
@@ -348,6 +383,84 @@ public class FormDetailsRecyclerViewFragment
 
                     break;
                 case FINISHED_WITH_ERRORS:
+                    // TODO: manage errors
+                    break;
+            }
+        }
+    }
+
+    private void handleMessageForDownloadFormsRequestHandler(@NonNull final Bundle data) {
+        if (data.containsKey(DownloadFormsRequestHandler.KEY_STATUS)) {
+            final RequestHandlerStatus.Status status = ((RequestHandlerStatus) data.getParcelable(DownloadFormsRequestHandler.KEY_STATUS)).getStatus();
+
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG,
+                      "onHandleMessage: DownloadFormsRequestHandler status " + status.name());
+            }
+
+            switch (status) {
+                case RUNNING:
+                    if (data.containsKey(DownloadFormsRequestHandler.KEY_CURRENT_FORM_NAME) &&
+                            data.containsKey(DownloadFormsRequestHandler.KEY_PROGRESS_VALUE) &&
+                            data.containsKey(DownloadFormsRequestHandler.KEY_PROGRESS_SIZE)) {
+
+                        if (getActivity() == null) {
+                            return;
+                        }
+
+                        // find ProgressDialogFragment to update
+                        ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) getActivity().getSupportFragmentManager().findFragmentByTag(PROGRESS_DIALOG_FRAGMENT);
+
+                        if (progressDialogFragment == null) {
+                            progressDialogFragment = ProgressDialogFragment.newInstance(
+                                    getString(R.string.downloading),
+                                    ProgressDialog.STYLE_HORIZONTAL,
+                                    data.getInt(DownloadFormsRequestHandler.KEY_PROGRESS_SIZE));
+                            progressDialogFragment.show(getActivity().getSupportFragmentManager(),
+                                                        PROGRESS_DIALOG_FRAGMENT);
+                        }
+
+                        progressDialogFragment.setProgress(data.getInt(DownloadFormsRequestHandler.KEY_PROGRESS_VALUE));
+                    }
+
+                    break;
+                case FINISHED:
+                    if (data.containsKey(DownloadFormsRequestHandler.KEY_FORMS_LIST)) {
+                        int numberOfFormsDownloaded = data.getParcelableArrayList(DownloadFormsRequestHandler.KEY_FORMS_LIST)
+                                                          .size();
+
+                        if (getActivity() == null) {
+                            return;
+                        }
+
+                        // find ProgressDialogFragment to dismiss
+                        ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) getActivity().getSupportFragmentManager().findFragmentByTag(PROGRESS_DIALOG_FRAGMENT);
+
+                        if (progressDialogFragment != null) {
+                            progressDialogFragment.dismiss();
+                        }
+
+                        Toast.makeText(getActivity(),
+                                       getResources().getQuantityString(R.plurals.download_forms_finish,
+                                                                        numberOfFormsDownloaded,
+                                                                        numberOfFormsDownloaded),
+                                       Toast.LENGTH_LONG)
+                             .show();
+                    }
+
+                    break;
+                case FINISHED_WITH_ERRORS:
+                    if (getActivity() == null) {
+                        return;
+                    }
+
+                    // find ProgressDialogFragment to dismiss
+                    ProgressDialogFragment progressDialogFragment = (ProgressDialogFragment) getActivity().getSupportFragmentManager().findFragmentByTag(PROGRESS_DIALOG_FRAGMENT);
+
+                    if (progressDialogFragment != null) {
+                        progressDialogFragment.dismiss();
+                    }
+
                     break;
             }
         }

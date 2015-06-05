@@ -14,14 +14,6 @@
 
 package com.makina.collect.android.tasks;
 
-import java.util.HashMap;
-
-import org.javarosa.xform.parse.XFormParser;
-import org.kxml2.kdom.Element;
-import org.kxml2.kdom.Node;
-import org.opendatakit.httpclientandroidlib.client.HttpClient;
-import org.opendatakit.httpclientandroidlib.protocol.HttpContext;
-
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
@@ -30,10 +22,18 @@ import android.util.Log;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.FormListDownloaderListener;
-import com.makina.collect.android.logic.FormDetails;
+import com.makina.collect.android.model.FormDetails;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.utilities.DocumentFetchResult;
 import com.makina.collect.android.utilities.WebUtils;
+
+import org.javarosa.xform.parse.XFormParser;
+import org.kxml2.kdom.Element;
+import org.kxml2.kdom.Node;
+import org.opendatakit.httpclientandroidlib.client.HttpClient;
+import org.opendatakit.httpclientandroidlib.protocol.HttpContext;
+
+import java.util.HashMap;
 
 /**
  * Background task for downloading forms from urls or a formlist from a url. We overload this task a
@@ -77,7 +77,7 @@ public class DownloadFormListTask extends AsyncTask<Void, String, HashMap<String
 
         // We populate this with available forms from the specified server.
         // <formname, details>
-        HashMap<String, FormDetails> formList = new HashMap<String, FormDetails>();
+        HashMap<String, FormDetails> formList = new HashMap<>();
 
         // get shared HttpContext so that authentication and cookies are retained.
         HttpContext localContext = Collect.getInstance().getHttpContext();

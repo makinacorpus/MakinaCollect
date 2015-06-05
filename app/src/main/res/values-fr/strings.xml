@@ -15,7 +15,6 @@
     <!-- Alert Dialig -->
     <string name="delete">Suppression</string>
     <string name="delete_confirmation">Voulez-vous vraiment supprimer %s ?</string>
-    <string name="raz">Remise à zéro</string>
     <string name="raz_confirmation">Voulez-vous vraiment remettre à zéro?</string>
     <string name="form_name">Nom du formulaire</string>
     <string name="form_name_description">Veuillez saisir le nom du formulaire</string>
@@ -184,8 +183,8 @@
 
 
     <!-- DOWNLOAD FORM -->
-    <string name="select_all">TOUT SÉLECTIONNER</string>
-    <string name="deselect_all">TOUT DÉSÉLECTIONNER</string>
+    <string name="select_all">tout sélectionner</string>
+    <string name="deselect_all">annuler la sélection</string>
     <string name="no_form_selected">Aucun formulaire sélectionné</string>
     <string name="form_selected">1 formulaire sélectionné</string>
     <string name="forms_selected">formulaires sélectionnés</string>
@@ -246,6 +245,11 @@
     <string name="discard_group">Enlever le groupe</string>
     <string name="download">Télécharger celui sélectionné</string>
     <string name="download_forms_result">Résultat du téléchargement</string>
+    <plurals name="download_forms_finish">
+        <item quantity="one">%1$d formulaire téléchargé</item>
+        <item quantity="other">%1$d formulaires téléchargés</item>
+    </plurals>
+    <string name="downloading">Téléchargment en cours …</string>
     <string name="downloading_data">Connexion au serveur…</string>
     <string name="do_not_change">Annuler</string>
     <string name="do_not_exit">Annuler</string>
@@ -306,7 +310,6 @@
     <string name="please_wait_long">Veuillez patienter. Cette action peut prendre quelques minutes.</string>
     <string name="quit_application">Vous allez sortir du formulaire, que souhaitez-vous faire?</string>
     <string name="quit_entry">Sauvegarder</string>
-    <string name="refresh">Rafraîchir</string>
     <string name="replace_barcode">Remplacer le code-barre</string>
     <string name="choose_location">Choisir le lieu</string>
     <string name="required_answer_error">Réponse obligatoire !</string>

@@ -14,6 +14,31 @@
 
 package com.makina.collect.android.tasks;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.provider.BaseColumns;
+import android.util.Log;
+
+import com.makina.collect.android.R;
+import com.makina.collect.android.application.Collect;
+import com.makina.collect.android.listeners.FormDownloaderListener;
+import com.makina.collect.android.model.FormDetails;
+import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
+import com.makina.collect.android.utilities.DocumentFetchResult;
+import com.makina.collect.android.utilities.FileUtils;
+import com.makina.collect.android.utilities.WebUtils;
+
+import org.javarosa.xform.parse.XFormParser;
+import org.kxml2.kdom.Element;
+import org.kxml2.kdom.Node;
+import org.opendatakit.httpclientandroidlib.HttpResponse;
+import org.opendatakit.httpclientandroidlib.HttpStatus;
+import org.opendatakit.httpclientandroidlib.client.HttpClient;
+import org.opendatakit.httpclientandroidlib.client.methods.HttpGet;
+import org.opendatakit.httpclientandroidlib.protocol.HttpContext;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -27,31 +52,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.javarosa.xform.parse.XFormParser;
-import org.kxml2.kdom.Element;
-import org.kxml2.kdom.Node;
-import org.opendatakit.httpclientandroidlib.HttpResponse;
-import org.opendatakit.httpclientandroidlib.HttpStatus;
-import org.opendatakit.httpclientandroidlib.client.HttpClient;
-import org.opendatakit.httpclientandroidlib.client.methods.HttpGet;
-import org.opendatakit.httpclientandroidlib.protocol.HttpContext;
-
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.provider.BaseColumns;
-import android.util.Log;
-
-import com.makina.collect.android.R;
-import com.makina.collect.android.application.Collect;
-import com.makina.collect.android.listeners.FormDownloaderListener;
-import com.makina.collect.android.logic.FormDetails;
-import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
-import com.makina.collect.android.utilities.DocumentFetchResult;
-import com.makina.collect.android.utilities.FileUtils;
-import com.makina.collect.android.utilities.WebUtils;
-
 /**
  * Background task for downloading a given list of forms. We assume right now that the forms are
  * coming from the same server that presented the form list, but theoretically that won't always be
@@ -61,7 +61,7 @@ import com.makina.collect.android.utilities.WebUtils;
  * @author carlhartung
  */
 public class DownloadFormsTask extends
-        AsyncTask<ArrayList<FormDetails>, String, HashMap<FormDetails, String>> {
+        AsyncTask<List<FormDetails>, String, HashMap<FormDetails, String>> {
 
     private static final String t = "DownloadFormsTask";
 
@@ -78,14 +78,14 @@ public class DownloadFormsTask extends
 
 
     @Override
-    protected HashMap<FormDetails, String> doInBackground(ArrayList<FormDetails>... values) {
-        ArrayList<FormDetails> toDownload = values[0];
+    protected HashMap<FormDetails, String> doInBackground(List<FormDetails>... values) {
+        List<FormDetails> toDownload = values[0];
 
         int total = toDownload.size();
         int count = 1;
     	Collect.getInstance().getActivityLogger().logAction(this, "downloadForms", String.valueOf(total));
 
-        HashMap<FormDetails, String> result = new HashMap<FormDetails, String>();
+        HashMap<FormDetails, String> result = new HashMap<>();
 
         for (int i = 0; i < total; i++) {
             FormDetails fd = toDownload.get(i);

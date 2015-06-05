@@ -51,18 +51,14 @@ public class DownloadFormsListRequestHandler
             else {
                 mRequestHandlerStatus = new RequestHandlerStatus(RequestHandlerStatus.Status.FINISHED);
 
-                if (mMessageData != null) {
-                    mMessageData.putParcelableArrayList(KEY_FORMS_LIST,
-                                                        new ArrayList<>(value.values()));
-                }
+                mMessageData.putParcelableArrayList(KEY_FORMS_LIST,
+                                                    new ArrayList<>(value.values()));
             }
 
-            if (mMessageData != null) {
-                mMessageData.putParcelable(KEY_STATUS,
-                                           mRequestHandlerStatus);
+            mMessageData.putParcelable(KEY_STATUS,
+                                       mRequestHandlerStatus);
 
-                sendMessage(mMessageData);
-            }
+            sendMessage(mMessageData);
         }
     };
 

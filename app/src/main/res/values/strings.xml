@@ -14,17 +14,15 @@
 
     <string name="current_language">English</string>
 
-    <!-- Alert Dialig -->
+    <!-- Alert Dialog -->
     <string name="delete">Delete</string>
     <string name="delete_confirmation">Do you really want to delete %s ?</string>
-    <string name="raz">Reset</string>
     <string name="raz_confirmation">Do you really want to reset the form?</string>
     <string name="form_name">Form Name</string>
     <string name="form_name_description">Please write the name of this form</string>
     <string name="fail">Fail</string>
     <string name="delete_old_forms">You have some former patterns and un-finished forms. Would you like to delete them ?</string>
     <!-- END Alert Dialog -->
-
 
     <!-- Form -->
     <string name="name">Name</string>
@@ -35,7 +33,6 @@
     <string name="submit">OK</string>
     <!-- END Form -->
 
-
     <!-- EditForm -->
     <string name="no_downloaded_forms">YOU DON\'T HAVE ANY DOWNLOADED FORM</string>
     <string name="empty_list">empty list</string>
@@ -43,16 +40,13 @@
     <string name="instance_exist">1 version of this pattern already exists!</string>
     <!-- END EditForm -->
 
-
     <!-- Hierarchy -->
     <string name="hierarchy_text">Here is the summury of the survey:</string>
     <!-- END - Hierarchy -->
 
-
     <!-- AboutUS -->
     <string name="textview_about_us1">The mobile application "Makina Collect" was developed by Makina Corpus</string>
     <!-- END AboutUs -->
-
 
     <!-- Preferences -->
     <string name="language">Language</string>
@@ -66,7 +60,6 @@
     <string name="french">French</string>
     <!-- END- Preferences -->
 
-
     <!-- ActionBar -->
     <string name="search">Search</string>
     <string name="settings">Settings</string>
@@ -78,7 +71,6 @@
     <string name="hierarchy">Hierarchy</string>
     <string name="refresh">Refresh</string>
     <!-- FIN ActionBar -->
-
 
     <!-- ActionBar Title -->
     <string name="download_menu">DOWNLOAD \na form</string>
@@ -93,7 +85,6 @@
     <string name="to_send">TO SEND</string>
     <string name="form">a form</string>
     <!-- FIN ActionBar Title -->
-
 
     <!-- Help -->
     <string name="help_download">
@@ -167,7 +158,6 @@ You can also use the Makina Collect App with your own forms that you have create
     <string name="help_title4">Help My forms to send</string>
     <!-- FIN Help -->
 
-
     <!-- FORM SAVING -->
     <string name="save_description">This form is now finalized.\nYou can change the title.</string>
     <string name="save_form">Save the form</string>
@@ -182,8 +172,8 @@ You can also use the Makina Collect App with your own forms that you have create
     <!-- END FORM SEND -->
 
     <!-- DOWNLOAD FORM -->
-    <string name="select_all">SELECT ALL</string>
-    <string name="deselect_all">DESELECT ALL</string>
+    <string name="select_all">select all</string>
+    <string name="deselect_all">discard selection</string>
     <string name="no_form_selected">No selected form</string>
     <string name="form_selected">1 selected form</string>
     <string name="forms_selected">selected forms</string>
@@ -238,6 +228,11 @@ You can also use the Makina Collect App with your own forms that you have create
     <string name="discard_group">Remove group</string>
     <string name="download">Get Selected</string>
     <string name="download_forms_result">Download Result</string>
+    <plurals name="download_forms_finish">
+        <item quantity="one">%1$d form downloaded</item>
+        <item quantity="other">%1$d forms downloaded</item>
+    </plurals>
+    <string name="downloading">Downloading …</string>
     <string name="downloading_data">Connecting to Server</string>
     <string name="do_not_change">Cancel</string>
     <string name="do_not_exit">Cancel</string>
@@ -297,7 +292,6 @@ You can also use the Makina Collect App with your own forms that you have create
     <string name="please_wait_long">Please wait. This could take a few minutes.</string>
     <string name="quit_application">Exit %s</string>
     <string name="quit_entry">Save Form</string>
-    <string name="refresh">Refresh</string>
     <string name="replace_barcode">Replace Barcode</string>
     <string name="choose_location">Choose Location</string>
     <string name="required_answer_error">Sorry, this response is required!</string>
