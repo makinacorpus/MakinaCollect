@@ -1,5 +1,7 @@
 package com.makina.collect.android.views;
 
+import android.animation.Animator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -12,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.makina.collect.android.R;
+import com.makina.collect.android.utilities.DeviceUtils;
 
 /**
  * Custom {@code View} acting like a checkbox with animation effects.
@@ -119,12 +122,47 @@ public class SelectorView
         updateView();
     }
 
+    @SuppressLint("NewApi")
     private void updateView() {
         mBackgroundImageView.setImageDrawable(isChecked() ? mBackgroundIndicatorOn : mBackgroundIndicatorOff);
-        mCheckBoxImageView.setVisibility(isChecked() ? VISIBLE : INVISIBLE);
+
+        if (DeviceUtils.isPostHoneycombMR1()) {
+            mCheckBoxImageView.animate()
+                              .scaleX(isChecked() ? 1f : 0f)
+                              .scaleY(isChecked() ? 1f : 0f)
+                              .setDuration(200)
+                              .setListener(new Animator.AnimatorListener() {
+                                  @Override
+                                  public void onAnimationStart(Animator animation) {
+                                      mCheckBoxImageView.setScaleX(isChecked() ? 0f : 1f);
+                                      mCheckBoxImageView.setScaleY(isChecked() ? 0f : 1f);
+                                      mCheckBoxImageView.setVisibility(VISIBLE);
+                                  }
+
+                                  @Override
+                                  public void onAnimationEnd(Animator animation) {
+                                      mCheckBoxImageView.setVisibility(isChecked() ? VISIBLE : INVISIBLE);
+                                  }
+
+                                  @Override
+                                  public void onAnimationCancel(Animator animation) {
+
+                                  }
+
+                                  @Override
+                                  public void onAnimationRepeat(Animator animation) {
+
+                                  }
+                              });
+        }
+        else {
+            // no animation for old devices. Sorry !
+            mCheckBoxImageView.setVisibility(isChecked() ? VISIBLE : INVISIBLE);
+        }
     }
 
-    static class SavedState extends BaseSavedState {
+    static class SavedState
+            extends BaseSavedState {
         boolean checked;
 
         /**
@@ -144,8 +182,10 @@ public class SelectorView
         }
 
         @Override
-        public void writeToParcel(@NonNull Parcel out, int flags) {
-            super.writeToParcel(out, flags);
+        public void writeToParcel(@NonNull Parcel out,
+                                  int flags) {
+            super.writeToParcel(out,
+                                flags);
 
             out.writeValue(checked);
         }
