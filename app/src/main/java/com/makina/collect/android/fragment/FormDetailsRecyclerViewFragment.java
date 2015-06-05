@@ -244,14 +244,13 @@ public class FormDetailsRecyclerViewFragment
     }
 
     private void clearSelection() {
+        for (FormDetails formDetails : mSelectedFormDetailsList) {
+            formDetails.checked = false;
+            mFormDetailsListAdapter.update(mFormDetailsListAdapter.getItemPosition(formDetails),
+                                           formDetails);
+        }
+
         mSelectedFormDetailsList.clear();
-
-        final Bundle data = new Bundle();
-        data.putSerializable(DownloadFormsListRequestHandler.KEY_COMMAND,
-                             DownloadFormsListRequestHandler.Command.GET_STATUS);
-
-        mRequestHandlerServiceClient.send(DownloadFormsListRequestHandler.class,
-                                          data);
     }
 
     private void handleMessageForDownloadFormsListRequestHandler(@NonNull final Bundle data) {
