@@ -2,16 +2,22 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="AppTheme.Light" parent="Theme.AppCompat.Light.DarkActionBar">
+
         <item name="actionBarStyle">@style/AppTheme.Light.ActionBar</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_action_done_inverse</item>
 
         <item name="emptyListDrawable">@drawable/ic_list_empty</item>
+
     </style>
 
     <style name="AppTheme.Dark" parent="Theme.AppCompat">
+
         <item name="android:windowBackground">@color/dark_color</item>
         <item name="actionBarStyle">@style/AppTheme.Dark.ActionBar</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_action_done_inverse</item>
 
         <item name="emptyListDrawable">@drawable/ic_list_empty</item>
+
     </style>
 
     <style name="AppTheme.Light.Green">
@@ -26,6 +32,9 @@
         <item name="android:listDivider">@drawable/list_divider_green</item>
         <item name="selectableItemBackground">@drawable/list_item_background_selector_green</item>
         <item name="emptyListDrawable">@drawable/ic_list_empty_green</item>
+
+        <item name="selectorViewStyle">@style/SelectorViewStyle.Green</item>
+
     </style>
 
     <style name="AppTheme.Dark.Green">
@@ -40,6 +49,9 @@
         <item name="android:listDivider">@drawable/list_divider_green</item>
         <item name="selectableItemBackground">@drawable/list_item_background_selector_green</item>
         <item name="emptyListDrawable">@drawable/ic_list_empty_green</item>
+
+        <item name="selectorViewStyle">@style/SelectorViewStyle.Green</item>
+
     </style>
 
     <style name="AppTheme.Light.Blue">
@@ -54,6 +66,9 @@
         <item name="android:listDivider">@drawable/list_divider_blue</item>
         <item name="selectableItemBackground">@drawable/list_item_background_selector_blue</item>
         <item name="emptyListDrawable">@drawable/ic_list_empty_blue</item>
+
+        <item name="selectorViewStyle">@style/SelectorViewStyle.Blue</item>
+
     </style>
 
     <style name="AppTheme.Dark.Blue">
@@ -68,6 +83,9 @@
         <item name="android:listDivider">@drawable/list_divider_blue</item>
         <item name="selectableItemBackground">@drawable/list_item_background_selector_blue</item>
         <item name="emptyListDrawable">@drawable/ic_list_empty_blue</item>
+
+        <item name="selectorViewStyle">@style/SelectorViewStyle.Blue</item>
+
     </style>
 
     <!-- deprecated themes -->

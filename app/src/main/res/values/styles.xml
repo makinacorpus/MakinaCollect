@@ -28,6 +28,19 @@
         <item name="android:textColor">@color/bluePrimaryDarkColor</item>
     </style>
 
+    <style name="SelectorViewStyle">
+        <item name="android:padding">4dp</item>
+        <item name="checkBoxIndicator">@drawable/ic_action_done_inverse</item>
+    </style>
+    <style name="SelectorViewStyle.Green">
+        <item name="backgroundIndicatorOff">@drawable/selector_background_green_off</item>
+        <item name="backgroundIndicatorOn">@drawable/selector_background_green_on</item>
+    </style>
+    <style name="SelectorViewStyle.Blue">
+        <item name="backgroundIndicatorOff">@drawable/selector_background_blue_off</item>
+        <item name="backgroundIndicatorOn">@drawable/selector_background_blue_on</item>
+    </style>
+
     <!-- deprecated styles -->
 
     <style name="ButtonFinishSave" parent="@style/ButtonBarButton">

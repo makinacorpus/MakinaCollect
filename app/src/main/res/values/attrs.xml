@@ -3,6 +3,13 @@
 
     <declare-styleable name="AppTheme">
         <attr name="emptyListDrawable" format="reference"/>
+        <attr name="selectorViewStyle" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="SelectorView">
+        <attr name="backgroundIndicatorOff" format="reference"/>
+        <attr name="backgroundIndicatorOn" format="reference"/>
+        <attr name="checkBoxIndicator" format="reference"/>
     </declare-styleable>
 
 </resources>
