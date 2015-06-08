@@ -20,7 +20,7 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
- * Convenience definitions for NotePadProvider
+ * Convenience definitions for FormsProvider
  */
 public final class FormsProviderAPI {
     public static final String AUTHORITY = "com.makina.collect.android.provider.odk.forms";

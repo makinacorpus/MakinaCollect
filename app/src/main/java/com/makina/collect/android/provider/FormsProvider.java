@@ -14,12 +14,6 @@
 
 package com.makina.collect.android.provider;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -39,6 +33,12 @@ import com.makina.collect.android.database.ODKSQLiteOpenHelper;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.utilities.FileUtils;
 import com.makina.collect.android.utilities.MediaUtils;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 
 /**
  *
@@ -302,7 +302,7 @@ public class FormsProvider extends ContentProvider {
             values.put(FormsColumns.JRCACHE_FILE_PATH, cachePath);
         }
         if (values.containsKey(FormsColumns.FORM_MEDIA_PATH) == false) {
-            String pathNoExtension = filePath.substring(0, filePath.lastIndexOf("."));
+            String pathNoExtension = filePath.substring(0, filePath.lastIndexOf(""));
             String mediaPath = pathNoExtension + "-media";
             values.put(FormsColumns.FORM_MEDIA_PATH, mediaPath);
         }

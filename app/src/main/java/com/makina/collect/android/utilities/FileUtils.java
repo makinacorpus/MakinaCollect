@@ -14,6 +14,15 @@
 
 package com.makina.collect.android.utilities;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
+
+import org.javarosa.xform.parse.XFormParser;
+import org.kxml2.kdom.Document;
+import org.kxml2.kdom.Element;
+import org.kxml2.kdom.Node;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,15 +36,6 @@ import java.nio.channels.FileChannel;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-
-import org.javarosa.xform.parse.XFormParser;
-import org.kxml2.kdom.Document;
-import org.kxml2.kdom.Element;
-import org.kxml2.kdom.Node;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
 
 /**
  * Static methods used for common file operations.
@@ -174,7 +174,7 @@ public class FileUtils {
             Log.e("No Cache File", e.getMessage());
             return null;
         } catch (IOException e) {
-            Log.e("Problem reading from file", e.getMessage());
+            Log.e("I/O error", e.getMessage());
             return null;
         }
 

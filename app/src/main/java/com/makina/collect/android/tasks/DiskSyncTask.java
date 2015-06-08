@@ -14,13 +14,6 @@
 
 package com.makina.collect.android.tasks;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -34,6 +27,13 @@ import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.DiskSyncListener;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.utilities.FileUtils;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Background task for adding to the forms content provider, any forms that have been added to the
@@ -75,7 +75,7 @@ public class DiskSyncTask extends AsyncTask<Void, String, String> {
 	        File formDir = new File(Collect.FORMS_PATH);
 	        if (formDir.exists() && formDir.isDirectory()) {
 	            // Get all the files in the /odk/foms directory
-	            List<File> xFormsToAdd = new LinkedList<File>();
+	            List<File> xFormsToAdd = new LinkedList<>();
 	            
 	            // Step 1: assemble the candidate form files
 	            //         discard files beginning with "." 
@@ -84,7 +84,7 @@ public class DiskSyncTask extends AsyncTask<Void, String, String> {
 	            	File[] formDefs = formDir.listFiles();
 	            	for ( File addMe: formDefs ) {
 	                    // Ignore invisible files that start with periods.
-	                    if (!addMe.getName().startsWith(".")
+	                    if (!addMe.getName().startsWith("")
 	                            && (addMe.getName().endsWith(".xml") || addMe.getName().endsWith(".xhtml"))) {
 	                    	xFormsToAdd.add(addMe);
 	                    } else { 
@@ -96,7 +96,7 @@ public class DiskSyncTask extends AsyncTask<Void, String, String> {
 	            // Step 2: quickly run through and figure out what files we need to 
 	            // parse and update; this is quick, as we only calculate the md5
 	            // and see if it has changed.
-	            List<UriFile> uriToUpdate = new ArrayList<UriFile>();
+	            List<UriFile> uriToUpdate = new ArrayList<>();
 		        Cursor mCursor = null;
 		        // open the cursor within a try-catch block so it can always be closed. 
 		        try {
@@ -305,7 +305,7 @@ public class DiskSyncTask extends AsyncTask<Void, String, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         if (mListener != null) {
-            mListener.SyncComplete(result);
+            mListener.syncComplete(result);
         }
     }
 

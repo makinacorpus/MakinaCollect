@@ -14,15 +14,6 @@
 
 package com.makina.collect.android.application;
 
-import java.io.File;
-
-import org.opendatakit.httpclientandroidlib.client.CookieStore;
-import org.opendatakit.httpclientandroidlib.client.CredentialsProvider;
-import org.opendatakit.httpclientandroidlib.client.protocol.ClientContext;
-import org.opendatakit.httpclientandroidlib.impl.client.BasicCookieStore;
-import org.opendatakit.httpclientandroidlib.protocol.BasicHttpContext;
-import org.opendatakit.httpclientandroidlib.protocol.HttpContext;
-
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -36,6 +27,15 @@ import com.makina.collect.android.logic.FormController;
 import com.makina.collect.android.logic.PropertyManager;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.utilities.AgingCredentialsProvider;
+
+import org.opendatakit.httpclientandroidlib.client.CookieStore;
+import org.opendatakit.httpclientandroidlib.client.CredentialsProvider;
+import org.opendatakit.httpclientandroidlib.client.protocol.ClientContext;
+import org.opendatakit.httpclientandroidlib.impl.client.BasicCookieStore;
+import org.opendatakit.httpclientandroidlib.protocol.BasicHttpContext;
+import org.opendatakit.httpclientandroidlib.protocol.HttpContext;
+
+import java.io.File;
 
 /**
  * Extends the Application class to implement
