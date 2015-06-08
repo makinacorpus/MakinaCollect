@@ -23,7 +23,7 @@ import com.makina.collect.android.service.RequestHandlerServiceClient;
 import com.makina.collect.android.service.RequestHandlerStatus;
 import com.makina.collect.android.service.handler.DownloadFormsListRequestHandler;
 import com.makina.collect.android.service.handler.DownloadFormsRequestHandler;
-import com.makina.collect.android.widgets.recyclerview.DividerItemDecoration;
+import com.makina.collect.android.widget.recyclerview.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.HashSet;

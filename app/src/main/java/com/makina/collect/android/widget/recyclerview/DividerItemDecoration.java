@@ -1,4 +1,4 @@
-package com.makina.collect.android.widgets.recyclerview;
+package com.makina.collect.android.widget.recyclerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
