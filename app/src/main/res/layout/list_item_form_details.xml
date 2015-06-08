@@ -5,7 +5,7 @@
               android:background="?attr/selectableItemBackground"
               android:orientation="horizontal">
 
-    <com.makina.collect.android.views.SelectorView
+    <com.makina.collect.android.widget.CheckBoxView
         android:id="@+id/selectorView"
         android:layout_width="?attr/listPreferredItemHeightSmall"
         android:layout_height="?attr/listPreferredItemHeightSmall"/>
