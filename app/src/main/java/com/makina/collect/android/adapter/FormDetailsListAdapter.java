@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.model.FormDetails;
-import com.makina.collect.android.views.SelectorView;
+import com.makina.collect.android.widget.CheckBoxView;
 
 /**
  * Default {@code Adapter} about {@link FormDetails}.
@@ -48,18 +48,18 @@ public class FormDetailsListAdapter
     public class ViewHolder
             extends RecyclerView.ViewHolder {
 
-        private final SelectorView mSelectorView;
+        private final CheckBoxView mCheckBoxView;
         private final TextView mTextViewFormName;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            mSelectorView = (SelectorView) itemView.findViewById(R.id.selectorView);
+            mCheckBoxView = (CheckBoxView) itemView.findViewById(R.id.selectorView);
             mTextViewFormName = (TextView) itemView.findViewById(android.R.id.text1);
         }
 
         public void bind(final FormDetails formDetails) {
-            mSelectorView.setChecked(formDetails.checked);
+            mCheckBoxView.setChecked(formDetails.checked);
             mTextViewFormName.setText(formDetails.formName);
 
             if (mOnFormDetailsItemListener != null) {
@@ -68,7 +68,7 @@ public class FormDetailsListAdapter
                     public void onClick(View v) {
                         formDetails.checked = !formDetails.checked;
 
-                        mSelectorView.setChecked(formDetails.checked);
+                        mCheckBoxView.setChecked(formDetails.checked);
                         mOnFormDetailsItemListener.onFormDetailsSelected(formDetails);
                     }
                 });

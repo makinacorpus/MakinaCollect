@@ -1,4 +1,4 @@
-package com.makina.collect.android.views;
+package com.makina.collect.android.widget;
 
 import android.animation.Animator;
 import android.annotation.SuppressLint;
@@ -21,7 +21,7 @@ import com.makina.collect.android.utilities.DeviceUtils;
  *
  * @author <a href="mailto:sebastien.grimault@makina-corpus.com">S. Grimault</a>
  */
-public class SelectorView
+public class CheckBoxView
         extends FrameLayout
         implements Checkable {
 
@@ -34,19 +34,19 @@ public class SelectorView
     private Drawable mBackgroundIndicatorOn;
     private Drawable mCheckBoxIndicator;
 
-    public SelectorView(Context context) {
+    public CheckBoxView(Context context) {
         this(context,
              null);
     }
 
-    public SelectorView(Context context,
+    public CheckBoxView(Context context,
                         AttributeSet attrs) {
         this(context,
              attrs,
-             R.attr.selectorViewStyle);
+             R.attr.checkBoxViewStyle);
     }
 
-    public SelectorView(Context context,
+    public CheckBoxView(Context context,
                         AttributeSet attrs,
                         int defStyleAttr) {
         super(context,
@@ -99,7 +99,7 @@ public class SelectorView
     private void init(AttributeSet attrs,
                       int defStyle) {
         inflate(getContext(),
-                R.layout.view_selector,
+                R.layout.view_checkbox,
                 this);
 
         mBackgroundImageView = (ImageView) findViewById(android.R.id.background);
@@ -107,13 +107,13 @@ public class SelectorView
 
         // load attributes
         final TypedArray typedArray = getContext().obtainStyledAttributes(attrs,
-                                                                          R.styleable.SelectorView,
+                                                                          R.styleable.CheckBoxView,
                                                                           defStyle,
                                                                           0);
 
-        mBackgroundIndicatorOff = typedArray.getDrawable(R.styleable.SelectorView_backgroundIndicatorOff);
-        mBackgroundIndicatorOn = typedArray.getDrawable(R.styleable.SelectorView_backgroundIndicatorOn);
-        mCheckBoxIndicator = typedArray.getDrawable(R.styleable.SelectorView_checkBoxIndicator);
+        mBackgroundIndicatorOff = typedArray.getDrawable(R.styleable.CheckBoxView_backgroundIndicatorOff);
+        mBackgroundIndicatorOn = typedArray.getDrawable(R.styleable.CheckBoxView_backgroundIndicatorOn);
+        mCheckBoxIndicator = typedArray.getDrawable(R.styleable.CheckBoxView_checkBoxIndicator);
 
         mCheckBoxImageView.setImageDrawable(mCheckBoxIndicator);
 
@@ -202,7 +202,7 @@ public class SelectorView
         boolean checked;
 
         /**
-         * Constructor called from {@link SelectorView#onSaveInstanceState()}
+         * Constructor called from {@link CheckBoxView#onSaveInstanceState()}
          */
         SavedState(Parcelable superState) {
             super(superState);
