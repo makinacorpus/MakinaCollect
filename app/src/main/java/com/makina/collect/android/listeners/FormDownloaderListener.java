@@ -14,9 +14,9 @@
 
 package com.makina.collect.android.listeners;
 
-import java.util.HashMap;
+import com.makina.collect.android.model.FormDetails;
 
-import com.makina.collect.android.logic.FormDetails;
+import java.util.HashMap;
 
 
 
