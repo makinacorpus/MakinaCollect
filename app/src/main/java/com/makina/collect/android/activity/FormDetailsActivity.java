@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import com.makina.collect.android.R;
 import com.makina.collect.android.fragment.FormDetailsRecyclerViewFragment;
 import com.makina.collect.android.model.FormDetails;
-import com.makina.collect.android.utilities.ThemeUtils;
+import com.makina.collect.android.util.ThemeUtils;
 
 /**
  * Simple {@code Activity} about {@link FormDetails}.

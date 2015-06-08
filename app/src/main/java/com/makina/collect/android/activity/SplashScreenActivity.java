@@ -11,7 +11,7 @@ import android.support.v7.app.ActionBar;
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.loader.InitLoader;
-import com.makina.collect.android.utilities.ThemeUtils;
+import com.makina.collect.android.util.ThemeUtils;
 
 import java.io.File;
 

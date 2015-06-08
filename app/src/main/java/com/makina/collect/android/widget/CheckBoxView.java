@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.makina.collect.android.R;
-import com.makina.collect.android.utilities.DeviceUtils;
+import com.makina.collect.android.util.DeviceUtils;
 
 /**
  * Custom {@code View} acting like a checkbox with animation effects.

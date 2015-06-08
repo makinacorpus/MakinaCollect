@@ -23,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.makina.collect.android.R;
-import com.makina.collect.android.activities.ActivityDownloadForm;
 import com.makina.collect.android.activities.ActivityEditForm;
 import com.makina.collect.android.activities.ActivityHelp;
 import com.makina.collect.android.activities.ActivitySaveForm;
@@ -35,7 +34,7 @@ import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.FormsProvider;
 import com.makina.collect.android.provider.InstanceProvider;
 import com.makina.collect.android.utilities.Finish;
-import com.makina.collect.android.utilities.SpannableUtils;
+import com.makina.collect.android.util.SpannableUtils;
 
 import java.io.File;
 
@@ -165,7 +164,7 @@ public class DashBoardActivity
     @Override
     public void onFormShowDownload() {
         startActivity(new Intent(this,
-                                 ActivityDownloadForm.class));
+                                 FormDetailsActivity.class));
     }
 
     @Override

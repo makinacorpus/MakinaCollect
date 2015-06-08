@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.makina.collect.android.R;
-import com.makina.collect.android.utilities.ThemeUtils;
+import com.makina.collect.android.util.ThemeUtils;
 
 import ly.count.android.api.Countly;
 

@@ -1,4 +1,4 @@
-package com.makina.collect.android.utilities;
+package com.makina.collect.android.util;
 
 import android.os.Build;
 
