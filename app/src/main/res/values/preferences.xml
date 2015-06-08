@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="preference_server_url_key">server_url</string>
+    <string name="preference_server_url_label">@string/server_url</string>
+    <string name="preference_server_login_key">username</string>
+    <string name="preference_server_login_label">@string/username</string>
+    <string name="preference_server_password_key">password</string>
+    <string name="preference_server_password_label">@string/password</string>
+    <string name="preference_server_forms_list_url_path_key">formlist_url</string>
+    <string name="preference_server_forms_list_url_path_label">@string/formlist_url</string>
+    <string name="preference_server_submission_url_path_key">submission_url</string>
+    <string name="preference_server_submission_url_path_label">@string/submission_url</string>
+
+    <string name="preference_ui_language_key">language</string>
+    <string name="preference_ui_language_label">@string/language</string>
+    <string name="preference_ui_theme_key">theme</string>
+    <string name="preference_ui_theme_label">@string/theme</string>
+
+</resources>

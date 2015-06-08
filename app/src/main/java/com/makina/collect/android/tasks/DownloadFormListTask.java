@@ -14,16 +14,13 @@
 
 package com.makina.collect.android.tasks;
 
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.listeners.FormListDownloaderListener;
 import com.makina.collect.android.model.FormDetails;
-import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.utilities.DocumentFetchResult;
 import com.makina.collect.android.utilities.WebUtils;
 
@@ -43,8 +40,10 @@ import java.util.HashMap;
  *
  * @author carlhartung
  */
-public class DownloadFormListTask extends AsyncTask<Void, String, HashMap<String, FormDetails>> {
-    private static final String t = "DownloadFormsTask";
+public class DownloadFormListTask
+        extends AsyncTask<String, String, HashMap<String, FormDetails>> {
+
+    private static final String TAG = DownloadFormListTask.class.getName();
 
     // used to store error message if one occurs
     public static final String DL_ERROR_MSG = "dlerrormessage";
@@ -60,31 +59,26 @@ public class DownloadFormListTask extends AsyncTask<Void, String, HashMap<String
         return e.getNamespace().equalsIgnoreCase(NAMESPACE_OPENROSA_ORG_XFORMS_XFORMS_LIST);
     }
 
-
     @Override
-    protected HashMap<String, FormDetails> doInBackground(Void... values) {
-        SharedPreferences settings =
-            PreferenceManager.getDefaultSharedPreferences(Collect.getInstance().getBaseContext());
-        String downloadListUrl =
-            settings.getString(ActivityPreferences.KEY_SERVER_URL,
-                Collect.getInstance().getString(R.string.default_server_url));
-        // NOTE: /formlist must not be translated! It is the well-known path on the server.
-        String formListUrl = Collect.getInstance().getApplicationContext().getString(R.string.default_odk_formlist);
-        String downloadPath = settings.getString(ActivityPreferences.KEY_FORMLIST_URL, formListUrl);
-        downloadListUrl += downloadPath;
+    protected HashMap<String, FormDetails> doInBackground(String... values) {
+        final HashMap<String, FormDetails> formList = new HashMap<>();
 
-    	Collect.getInstance().getActivityLogger().logAction(this, formListUrl, downloadListUrl);
+        if (values == null || values.length == 0) {
+            return formList;
+        }
 
-        // We populate this with available forms from the specified server.
-        // <formname, details>
-        HashMap<String, FormDetails> formList = new HashMap<>();
+        final String serverUrl = values[0];
+
+        Log.i(TAG,
+              "doInBackground: " + serverUrl);
 
         // get shared HttpContext so that authentication and cookies are retained.
         HttpContext localContext = Collect.getInstance().getHttpContext();
         HttpClient httpclient = WebUtils.createHttpClient(WebUtils.CONNECTION_TIMEOUT);
 
-        DocumentFetchResult result =
-            WebUtils.getXmlDocument(downloadListUrl, localContext, httpclient);
+        DocumentFetchResult result = WebUtils.getXmlDocument(serverUrl,
+                                                             localContext,
+                                                             httpclient);
 
         // If we can't get the document, return the error, cancel the task
         if (result.errorMessage != null) {
@@ -101,7 +95,7 @@ public class DownloadFormListTask extends AsyncTask<Void, String, HashMap<String
             Element xformsElement = result.doc.getRootElement();
             if (!xformsElement.getName().equals("xforms")) {
                 String error = "root element is not <xforms> : " + xformsElement.getName();
-                Log.e(t, "Parsing OpenRosa reply -- " + error);
+                Log.e(TAG, "Parsing OpenRosa reply -- " + error);
                 formList.put(
                     DL_ERROR_MSG,
                     new FormDetails(Collect.getInstance().getString(
@@ -111,7 +105,7 @@ public class DownloadFormListTask extends AsyncTask<Void, String, HashMap<String
             String namespace = xformsElement.getNamespace();
             if (!isXformsListNamespacedElement(xformsElement)) {
                 String error = "root element namespace is incorrect:" + namespace;
-                Log.e(t, "Parsing OpenRosa reply -- " + error);
+                Log.e(TAG, "Parsing OpenRosa reply -- " + error);
                 formList.put(
                     DL_ERROR_MSG,
                     new FormDetails(Collect.getInstance().getString(
@@ -197,7 +191,7 @@ public class DownloadFormListTask extends AsyncTask<Void, String, HashMap<String
                     String error =
                         "Forms list entry " + Integer.toString(i)
                                 + " is missing one or more tags: formId, name, or downloadUrl";
-                    Log.e(t, "Parsing OpenRosa reply -- " + error);
+                    Log.e(TAG, "Parsing OpenRosa reply -- " + error);
                     formList.clear();
                     formList.put(
                         DL_ERROR_MSG,
@@ -240,7 +234,7 @@ public class DownloadFormListTask extends AsyncTask<Void, String, HashMap<String
                         String error =
                             "Forms list entry " + Integer.toString(i)
                                     + " is missing form name or url attribute";
-                        Log.e(t, "Parsing OpenRosa reply -- " + error);
+                        Log.e(TAG, "Parsing OpenRosa reply -- " + error);
                         formList.clear();
                         formList.put(
                             DL_ERROR_MSG,
