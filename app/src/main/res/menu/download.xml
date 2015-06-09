@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_toggle_selection"
-        android:icon="@drawable/ic_action_content_select_all"
-        android:orderInCategory="10"
-        android:title="@string/select_all"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/menu_download"
         android:icon="@drawable/ic_action_form_download_selector"
         android:orderInCategory="20"

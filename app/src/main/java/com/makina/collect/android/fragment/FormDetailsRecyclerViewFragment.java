@@ -69,19 +69,7 @@ public class FormDetailsRecyclerViewFragment
                 mSelectedFormDetailsList.remove(formDetails);
             }
 
-            if (mSelectedFormDetailsList.isEmpty()) {
-                if (mActionMode != null) {
-                    mActionMode.finish();
-                }
-            }
-            else {
-                if (mActionMode == null) {
-                    mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(mActionModeCallback);
-                }
-
-                mActionMode.setTitle(String.valueOf(mSelectedFormDetailsList.size()));
-                mActionMode.invalidate();
-            }
+            updateActionMode(true);
         }
     };
 
@@ -143,6 +131,8 @@ public class FormDetailsRecyclerViewFragment
         public boolean onCreateActionMode(ActionMode mode,
                                           Menu menu) {
             final MenuInflater menuInflater = getActivity().getMenuInflater();
+            menuInflater.inflate(R.menu.toggle_selection,
+                                 menu);
             menuInflater.inflate(R.menu.download,
                                  menu);
 
@@ -157,7 +147,7 @@ public class FormDetailsRecyclerViewFragment
 
             menuItemDownload.setEnabled(!mSelectedFormDetailsList.isEmpty());
 
-            if (mSelectedFormDetailsList.isEmpty()) {
+            if (mSelectedFormDetailsList.size() < mFormDetailsListAdapter.getItemCount()) {
                 menuItemToggleSelection.setTitle(getString(R.string.select_all));
                 menuItemToggleSelection.setIcon(R.drawable.ic_action_content_select_all);
             }
@@ -185,19 +175,18 @@ public class FormDetailsRecyclerViewFragment
                                                       data);
 
                     clearSelection();
-
-                    if (mActionMode != null) {
-                        mActionMode.finish();
-                    }
+                    updateActionMode(true);
 
                     return true;
                 case R.id.menu_toggle_selection:
-                    if (mSelectedFormDetailsList.isEmpty()) {
+                    if (mSelectedFormDetailsList.size() < mFormDetailsListAdapter.getItemCount()) {
                         selectAll();
                     }
                     else {
                         clearSelection();
                     }
+
+                    updateActionMode(false);
 
                     return true;
                 default:
@@ -308,11 +297,6 @@ public class FormDetailsRecyclerViewFragment
         }
 
         mSelectedFormDetailsList.clear();
-
-        if (mActionMode != null) {
-            mActionMode.setTitle(String.valueOf(mSelectedFormDetailsList.size()));
-            mActionMode.invalidate();
-        }
     }
 
     private void selectAll() {
@@ -328,8 +312,23 @@ public class FormDetailsRecyclerViewFragment
                 mSelectedFormDetailsList.add(formDetails);
             }
         }
+    }
 
-        if (mActionMode != null) {
+    private void updateActionMode(boolean finishIfEmpty) {
+        if (mSelectedFormDetailsList.isEmpty() && finishIfEmpty) {
+            if (mActionMode != null) {
+                mActionMode.finish();
+            }
+        }
+        else {
+            if (getActivity() == null) {
+                return;
+            }
+
+            if (mActionMode == null) {
+                mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(mActionModeCallback);
+            }
+
             mActionMode.setTitle(String.valueOf(mSelectedFormDetailsList.size()));
             mActionMode.invalidate();
         }
@@ -364,22 +363,7 @@ public class FormDetailsRecyclerViewFragment
                     mFormDetailsListAdapter.clear();
                     mFormDetailsListAdapter.addAll(formDetailsSet);
 
-                    if (mSelectedFormDetailsList.isEmpty()) {
-                        if (mActionMode != null) {
-                            mActionMode.finish();
-                        }
-                    }
-                    else {
-                        if (getActivity() == null) {
-                            return;
-                        }
-
-                        if (mActionMode == null) {
-                            mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(mActionModeCallback);
-                        }
-
-                        mActionMode.setTitle(String.valueOf(mSelectedFormDetailsList.size()));
-                    }
+                    updateActionMode(true);
 
                     break;
                 case FINISHED_WITH_ERRORS:

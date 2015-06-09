@@ -61,20 +61,7 @@ public class EditFormRecyclerViewFragment
             Log.d(TAG,
                   "onFormDetailsSelected: " + formDetails.formName);
 
-            if (mEditFormCursorAdapter.getSelection().isEmpty()) {
-                if (mActionMode != null) {
-                    mActionMode.finish();
-                }
-            }
-            else {
-                if (mActionMode == null) {
-                    mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(mActionModeCallback);
-                }
-
-                mActionMode.setTitle(String.valueOf(mEditFormCursorAdapter.getSelection()
-                                                                          .size()));
-                mActionMode.invalidate();
-            }
+            updateActionMode(true);
         }
 
         @Override
@@ -168,9 +155,7 @@ public class EditFormRecyclerViewFragment
 
                     mEditFormCursorAdapter.clearSelection();
 
-                    if (mActionMode != null) {
-                        mActionMode.finish();
-                    }
+                    updateActionMode(true);
 
                     return true;
                 default:
@@ -299,7 +284,19 @@ public class EditFormRecyclerViewFragment
                                Cursor data) {
         mEditFormCursorAdapter.swapCursor(data);
 
-        if (mEditFormCursorAdapter.getSelection().isEmpty()) {
+        updateActionMode(true);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        // data is not available anymore, delete reference
+        if (mEditFormCursorAdapter != null) {
+            mEditFormCursorAdapter.swapCursor(null);
+        }
+    }
+
+    private void updateActionMode(boolean finishIfEmpty) {
+        if (mEditFormCursorAdapter.getSelection().isEmpty() && finishIfEmpty) {
             if (mActionMode != null) {
                 mActionMode.finish();
             }
@@ -314,14 +311,7 @@ public class EditFormRecyclerViewFragment
             }
 
             mActionMode.setTitle(String.valueOf(mEditFormCursorAdapter.getSelection().size()));
-        }
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        // data is not available anymore, delete reference
-        if (mEditFormCursorAdapter != null) {
-            mEditFormCursorAdapter.swapCursor(null);
+            mActionMode.invalidate();
         }
     }
 
