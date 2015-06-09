@@ -6,6 +6,7 @@ import android.os.Message;
 import android.util.Log;
 
 import com.makina.collect.android.BuildConfig;
+import com.makina.collect.android.content.AppSharedPreferences;
 import com.makina.collect.android.listeners.FormListDownloaderListener;
 import com.makina.collect.android.model.FormDetails;
 import com.makina.collect.android.service.AbstractRequestHandler;
@@ -92,9 +93,11 @@ public class DownloadFormsListRequestHandler
 
                     sendMessage(mMessageData);
 
+                    final AppSharedPreferences appSharedPreferences = new AppSharedPreferences(getContext());
+
                     final DownloadFormListTask downloadFormListTask = new DownloadFormListTask();
                     downloadFormListTask.setDownloaderListener(mFormListDownloaderListener);
-                    downloadFormListTask.execute();
+                    downloadFormListTask.execute(appSharedPreferences.getServerUrl() + appSharedPreferences.getFormsListUrlPath());
 
                     break;
                 case GET_STATUS:
