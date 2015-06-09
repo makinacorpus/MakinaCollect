@@ -23,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.makina.collect.android.R;
-import com.makina.collect.android.activities.ActivityEditForm;
 import com.makina.collect.android.activities.ActivityHelp;
 import com.makina.collect.android.activities.ActivitySaveForm;
 import com.makina.collect.android.activities.ActivitySendForm;
@@ -33,8 +32,8 @@ import com.makina.collect.android.fragment.DashboardFragment;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.FormsProvider;
 import com.makina.collect.android.provider.InstanceProvider;
-import com.makina.collect.android.utilities.Finish;
 import com.makina.collect.android.util.SpannableUtils;
+import com.makina.collect.android.utilities.Finish;
 
 import java.io.File;
 
@@ -170,7 +169,7 @@ public class DashBoardActivity
     @Override
     public void onFormShowEdit() {
         startActivity(new Intent(this,
-                                 ActivityEditForm.class));
+                                 EditFormActivity.class));
     }
 
     @Override

@@ -27,6 +27,7 @@ import com.makina.collect.android.service.AbstractRequestHandler;
 import com.makina.collect.android.service.RequestHandlerServiceClient;
 import com.makina.collect.android.service.RequestHandlerStatus;
 import com.makina.collect.android.service.handler.DeleteFormsRequestHandler;
+import com.makina.collect.android.service.handler.DiskSyncRequestHandler;
 import com.makina.collect.android.widget.recyclerview.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -90,6 +91,14 @@ public class EditFormRecyclerViewFragment
             mSavedState.putString(KEY_REQUEST_HANDLER_SERVICE_CLIENT_TOKEN,
                                   token);
 
+            final Bundle dataForDiskSyncRequestHandler = new Bundle();
+            dataForDiskSyncRequestHandler.putSerializable(DiskSyncRequestHandler.KEY_COMMAND,
+                                                          DiskSyncRequestHandler.Command.GET_STATUS);
+
+            // send Message to get the current status of DiskSyncRequestHandler
+            mRequestHandlerServiceClient.send(DiskSyncRequestHandler.class,
+                                              dataForDiskSyncRequestHandler);
+
             final Bundle dataForDeleteFormsRequestHandler = new Bundle();
             dataForDeleteFormsRequestHandler.putSerializable(DeleteFormsRequestHandler.KEY_COMMAND,
                                                              DeleteFormsRequestHandler.Command.GET_STATUS);
@@ -110,6 +119,10 @@ public class EditFormRecyclerViewFragment
         @Override
         public void onHandleMessage(@NonNull AbstractRequestHandler requestHandler,
                                     @NonNull Bundle data) {
+            if (requestHandler instanceof DiskSyncRequestHandler) {
+                handleMessageForDiskSyncRequestHandler(data);
+            }
+
             if (requestHandler instanceof DeleteFormsRequestHandler) {
                 handleMessageForDeleteFormsRequestHandler(data);
             }
@@ -228,16 +241,6 @@ public class EditFormRecyclerViewFragment
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        // prepare the loader, either re-connect with an existing one, or start a new one
-        getLoaderManager().initLoader(0,
-                                      null,
-                                      this);
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
 
@@ -310,8 +313,48 @@ public class EditFormRecyclerViewFragment
                 mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(mActionModeCallback);
             }
 
-            mActionMode.setTitle(String.valueOf(mEditFormCursorAdapter.getSelection().size()));
+            mActionMode.setTitle(String.valueOf(mEditFormCursorAdapter.getSelection()
+                                                                      .size()));
             mActionMode.invalidate();
+        }
+    }
+
+    private void handleMessageForDiskSyncRequestHandler(@NonNull final Bundle data) {
+        if (data.containsKey(DiskSyncRequestHandler.KEY_STATUS)) {
+            final RequestHandlerStatus.Status status = ((RequestHandlerStatus) data.getParcelable(DiskSyncRequestHandler.KEY_STATUS)).getStatus();
+
+            if (BuildConfig.DEBUG) {
+                Log.d(TAG,
+                      "onHandleMessage: DiskSyncRequestHandler status " + status.name());
+            }
+
+            switch (status) {
+                case PENDING:
+                    // send Message to start the task
+                    data.putSerializable(DiskSyncRequestHandler.KEY_COMMAND,
+                                         DiskSyncRequestHandler.Command.START);
+
+                    mRequestHandlerServiceClient.send(DiskSyncRequestHandler.class,
+                                                      data);
+
+                    break;
+                case FINISHED:
+                    // prepare the loader, either re-connect with an existing one, or start a new one
+                    getLoaderManager().initLoader(0,
+                                                  null,
+                                                  this);
+
+                    break;
+                case FINISHED_WITH_ERRORS:
+                    // TODO: manage errors
+
+                    // prepare the loader, either re-connect with an existing one, or start a new one
+                    getLoaderManager().initLoader(0,
+                                                  null,
+                                                  this);
+
+                    break;
+            }
         }
     }
 
