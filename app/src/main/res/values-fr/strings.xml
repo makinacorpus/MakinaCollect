@@ -249,7 +249,7 @@
         <item quantity="one">%1$d formulaire téléchargé</item>
         <item quantity="other">%1$d formulaires téléchargés</item>
     </plurals>
-    <string name="downloading">Téléchargment en cours …</string>
+    <string name="downloading">Téléchargement en cours …</string>
     <string name="downloading_data">Connexion au serveur…</string>
     <string name="do_not_change">Annuler</string>
     <string name="do_not_exit">Annuler</string>
@@ -264,6 +264,12 @@
     <string name="fetching_file">Téléchargement de formulaires : %1$s.\n\nForm %2$s de %3$s .</string>
     <string name="file_deleted_error">Désolé, %1$s de %2$s formulaires sélectionnés ont échoué la suppression.</string>
     <string name="file_deleted_ok">%s formulaire(s) supprimé(s) avec succès.</string>
+    <plurals name="files_deleted_finish">
+        <item quantity="one">%1$d formulaire supprimé</item>
+        <item quantity="other">%1$d formulaires supprimés</item>
+    </plurals>
+    <string name="file_deleted_ko">Une erreur s\'est produite lors de la suppression des formulaires</string>
+    <string name="file_deleted_warning">Votre sélection contient des formulaires en cours</string>
     <string name="file_delete_in_progress">Désolé, une action de suppression d\'un formulaire est en cours.</string>
     <string name="file_invalid">Le fichier %s n\'est pas valable.</string>
     <string name="file_missing">Fichier %s manquant</string>
