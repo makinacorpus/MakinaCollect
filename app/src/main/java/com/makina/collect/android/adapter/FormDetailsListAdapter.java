@@ -25,19 +25,19 @@ public class FormDetailsListAdapter
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup,
-                                         int i) {
+    public ViewHolder onCreateViewHolder(ViewGroup parent,
+                                         int viewType) {
         // create a new ViewHolder
-        return new ViewHolder(LayoutInflater.from(viewGroup.getContext())
+        return new ViewHolder(LayoutInflater.from(parent.getContext())
                                             .inflate(R.layout.list_item_form_details,
-                                                     viewGroup,
+                                                     parent,
                                                      false));
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder,
-                                 int i) {
-        viewHolder.bind(getItem(i));
+    public void onBindViewHolder(ViewHolder holder,
+                                 int position) {
+        holder.bind(getItem(position));
     }
 
     /**
@@ -56,6 +56,8 @@ public class FormDetailsListAdapter
 
             mCheckBoxView = (CheckBoxView) itemView.findViewById(R.id.selectorView);
             mTextViewFormName = (TextView) itemView.findViewById(android.R.id.text1);
+
+            itemView.findViewById(android.R.id.text2).setVisibility(View.GONE);
         }
 
         public void bind(final FormDetails formDetails) {

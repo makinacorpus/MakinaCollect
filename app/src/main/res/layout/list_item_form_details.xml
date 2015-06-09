@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="?attr/selectableItemBackground"
+              android:padding="10dp"
               android:orientation="horizontal">
 
     <com.makina.collect.android.widget.CheckBoxView
@@ -10,17 +12,31 @@
         android:layout_width="?attr/listPreferredItemHeightSmall"
         android:layout_height="?attr/listPreferredItemHeightSmall"/>
 
-    <TextView
-        android:id="@android:id/text1"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:minHeight="?attr/listPreferredItemHeightSmall"
+        android:orientation="vertical"
         android:paddingLeft="?attr/listPreferredItemPaddingLeft"
         android:paddingRight="?attr/listPreferredItemPaddingRight"
-        android:textAppearance="?attr/textAppearanceListItemSmall"
-        tools:ignore="RtlHardcoded"/>
+        tools:ignore="RtlHardcoded">
+
+        <TextView
+            android:id="@android:id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textAppearance="?attr/textAppearanceListItemSmall"/>
+
+        <TextView
+            android:id="@android:id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textAppearance="?attr/textAppearanceListItemSmall"
+            android:textStyle="italic"/>
+
+    </LinearLayout>
 
 </LinearLayout>

@@ -107,11 +107,9 @@ public abstract class AbstractListAdapter<T, VH extends RecyclerView.ViewHolder>
             return;
         }
 
-        if (index != -1) {
-            mObjects.set(index,
-                         object);
-            notifyItemChanged(index);
-        }
+        mObjects.set(index,
+                     object);
+        notifyItemChanged(index);
     }
 
     /**
