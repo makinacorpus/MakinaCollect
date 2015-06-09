@@ -20,14 +20,26 @@ import android.os.Parcelable;
 public class FormDetails
         implements Parcelable {
 
-    public final String errorStr;
-    public final String formName;
-    public final String downloadUrl;
-    public final String manifestUrl;
-    public final String formID;
-    public final String formVersion;
+    public long id;
+
+    @Deprecated
+    public String errorStr;
+
+    public String formName;
+    public String downloadUrl;
+    public String manifestUrl;
+    public String formID;
+    public String formVersion;
+    public String description;
+    public String filePath;
+    public String directoryPath;
     public boolean checked;
 
+    public FormDetails() {
+        checked = false;
+    }
+
+    @Deprecated
     public FormDetails(String error) {
         errorStr = error;
         formName = null;
@@ -38,7 +50,7 @@ public class FormDetails
         checked = false;
     }
 
-
+    @Deprecated
     public FormDetails(String name,
                        String url,
                        String manifest,
@@ -54,12 +66,16 @@ public class FormDetails
     }
 
     private FormDetails(Parcel source) {
+        id = source.readLong();
         errorStr = source.readString();
         formName = source.readString();
         downloadUrl = source.readString();
         manifestUrl = source.readString();
         formID = source.readString();
         formVersion = source.readString();
+        description = source.readString();
+        filePath = source.readString();
+        directoryPath = source.readString();
         checked = (Boolean) source.readValue(null);
     }
 
@@ -71,12 +87,16 @@ public class FormDetails
     @Override
     public void writeToParcel(Parcel dest,
                               int flags) {
+        dest.writeLong(id);
         dest.writeString(errorStr);
         dest.writeString(formName);
         dest.writeString(downloadUrl);
         dest.writeString(manifestUrl);
         dest.writeString(formID);
         dest.writeString(formVersion);
+        dest.writeString(description);
+        dest.writeString(filePath);
+        dest.writeString(directoryPath);
         dest.writeValue(checked);
     }
 
@@ -92,15 +112,11 @@ public class FormDetails
 
         FormDetails that = (FormDetails) o;
 
+        if (id != that.id) {
+            return false;
+        }
+
         if (formName != null ? !formName.equals(that.formName) : that.formName != null) {
-            return false;
-        }
-
-        if (downloadUrl != null ? !downloadUrl.equals(that.downloadUrl) : that.downloadUrl != null) {
-            return false;
-        }
-
-        if (manifestUrl != null ? !manifestUrl.equals(that.manifestUrl) : that.manifestUrl != null) {
             return false;
         }
 
@@ -113,9 +129,8 @@ public class FormDetails
 
     @Override
     public int hashCode() {
-        int result = formName != null ? formName.hashCode() : 0;
-        result = 31 * result + (downloadUrl != null ? downloadUrl.hashCode() : 0);
-        result = 31 * result + (manifestUrl != null ? manifestUrl.hashCode() : 0);
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (formName != null ? formName.hashCode() : 0);
         result = 31 * result + (formID != null ? formID.hashCode() : 0);
         result = 31 * result + (formVersion != null ? formVersion.hashCode() : 0);
 

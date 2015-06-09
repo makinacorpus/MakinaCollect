@@ -89,6 +89,11 @@ public class RequestHandlerStatus
         FINISHED,
 
         /**
+         * Indicates that the {@link AbstractRequestHandler} has finished with warnings.
+         */
+        FINISHED_WITH_WARNINGS,
+
+        /**
          * Indicates that the {@link AbstractRequestHandler} has finished with errors.
          */
         FINISHED_WITH_ERRORS
