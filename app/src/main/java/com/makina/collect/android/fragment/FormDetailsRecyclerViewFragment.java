@@ -4,8 +4,11 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -202,6 +205,22 @@ public class FormDetailsRecyclerViewFragment
         }
     };
 
+    private SearchView.OnQueryTextListener mOnQueryTextListener = new SearchView.OnQueryTextListener() {
+
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            // nothing to do: let the SearchView perform the default action
+            return false;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            mFormDetailsListAdapter.getFilter().filter(TextUtils.isEmpty(newText) ? "" : newText);
+
+            return true;
+        }
+    };
+
     /**
      * Use this factory method to create a new instance of this fragment.
      *
@@ -259,6 +278,35 @@ public class FormDetailsRecyclerViewFragment
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu,
+                                    MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu,
+                                  inflater);
+
+        inflater.inflate(R.menu.search,
+                         menu);
+
+        final MenuItem searchItem = menu.findItem(R.id.menu_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setQueryHint(getString(R.string.search));
+        searchView.setOnQueryTextListener(mOnQueryTextListener);
+        searchView.requestFocus();
+        searchView.requestFocusFromTouch();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
@@ -292,8 +340,8 @@ public class FormDetailsRecyclerViewFragment
     private void clearSelection() {
         for (FormDetails formDetails : mSelectedFormDetailsList) {
             formDetails.checked = false;
-            mFormDetailsListAdapter.update(mFormDetailsListAdapter.getItemPosition(formDetails),
-                                           formDetails);
+            mFormDetailsListAdapter.update(formDetails,
+                                           mFormDetailsListAdapter.getItemPosition(formDetails));
         }
 
         mSelectedFormDetailsList.clear();
@@ -307,8 +355,8 @@ public class FormDetailsRecyclerViewFragment
             if ((formDetails != null) && !formDetails.checked) {
                 formDetails.checked = true;
 
-                mFormDetailsListAdapter.update(mFormDetailsListAdapter.getItemPosition(formDetails),
-                                               formDetails);
+                mFormDetailsListAdapter.update(formDetails,
+                                               mFormDetailsListAdapter.getItemPosition(formDetails));
                 mSelectedFormDetailsList.add(formDetails);
             }
         }
