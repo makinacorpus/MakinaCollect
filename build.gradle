@@ -21,3 +21,29 @@ allprojects {
         mavenCentral()
     }
 }
+
+def int updateVersionCode(moduleName) {
+    def versionPropsFile = file(moduleName + '/version.properties')
+
+    println("getVersionCode: loading '" + versionPropsFile + "'")
+
+    if (!versionPropsFile.exists()) {
+        versionPropsFile.createNewFile()
+    }
+
+    def Properties versionProps = new Properties()
+    versionProps.load(new FileInputStream(versionPropsFile))
+
+    def versionCode = 1
+
+    if (versionProps['VERSION_CODE'] != null) {
+        versionCode = Integer.parseInt(versionProps['VERSION_CODE'].toString()).intValue() + 1;
+    }
+
+    versionProps['VERSION_CODE'] = versionCode.toString()
+    versionProps.store(versionPropsFile.newWriter(), null)
+
+    println("getVersionCode: " + versionCode)
+
+    return versionCode;
+}
