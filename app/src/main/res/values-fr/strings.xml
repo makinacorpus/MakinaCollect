@@ -34,7 +34,7 @@
 
 
     <!-- EditForm -->
-    <string name="no_downloaded_forms">VOUS N\'AVEZ AUCUN MODÈLE DE FORMULAIRE TELECHARGE</string>
+    <string name="no_downloaded_forms">Vous n\'avez aucun modèle de formulaire téléchargé</string>
     <string name="empty_list">Liste vide</string>
     <string name="instances_exist">instances de ce modèle existent déjà!</string>
     <string name="instance_exist">1 instance de ce modèle existe déjà!</string>
@@ -171,14 +171,14 @@
     <!-- FORM SAVING -->
     <string name="save_description">Ce formulaire est maintenant finalisé.\nVous pouvez modifier son titre.</string>
     <string name="save_form">Sauvegarder le formulaire</string>
-    <string name="no_form_not_finalled">VOUS N\'AVEZ AUCUN FORMULAIRE NON FINALISÉ</string>
+    <string name="no_form_not_finalized">Vous n\'avez aucun formulaire non finalisé</string>
     <string name="send_form">Envoyer le formulaire</string>
     <string name="send_form_and_restart">Envoyer le formulaire et le recommencer</string>
     <string name="checkbox_error">Merci de sélectionner une réponse</string>
     <!-- END FORM SAVING -->
     
     <!-- FORM SEND -->
-    <string name="no_form_to_send">VOUS N\'AVEZ AUCUN FORMULAIRE PRÊT A ÊTRE ENVOYÉ</string>
+    <string name="no_form_to_send">Vous n\'avez aucun formulaire prêt à être envoyé</string>
     <!-- END FORM SEND -->
 
 

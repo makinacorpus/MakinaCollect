@@ -34,14 +34,14 @@
     <!-- END Form -->
 
     <!-- EditForm -->
-    <string name="no_downloaded_forms">YOU DON\'T HAVE ANY DOWNLOADED FORM</string>
+    <string name="no_downloaded_forms">No downloaded form template</string>
     <string name="empty_list">empty list</string>
     <string name="instances_exist">versions of this pattern already exist!</string>
     <string name="instance_exist">1 version of this pattern already exists!</string>
     <!-- END EditForm -->
 
     <!-- Hierarchy -->
-    <string name="hierarchy_text">Here is the summury of the survey:</string>
+    <string name="hierarchy_text">Here is the summary of the survey:</string>
     <!-- END - Hierarchy -->
 
     <!-- AboutUS -->
@@ -161,14 +161,14 @@ You can also use the Makina Collect App with your own forms that you have create
     <!-- FORM SAVING -->
     <string name="save_description">This form is now finalized.\nYou can change the title.</string>
     <string name="save_form">Save the form</string>
-    <string name="no_form_not_finalled">YOU DON\'T HAVE ANY UNFINISHED FORM</string>
+    <string name="no_form_not_finalized">no unfinalized form</string>
     <string name="send_form">Send this form</string>
     <string name="send_form_and_restart">Send this form and restart it</string>
     <string name="checkbox_error">Please select an answer</string>
     <!-- END FORM SAVING -->
 
 	<!-- FORM SEND -->
-    <string name="no_form_to_send">NO FORMS TO SEND</string>
+    <string name="no_form_to_send">No form to send</string>
     <!-- END FORM SEND -->
 
     <!-- DOWNLOAD FORM -->

@@ -234,6 +234,8 @@ public class EditFormRecyclerViewFragment
         super.onViewCreated(view,
                             savedInstanceState);
 
+        setEmptyText(getString(R.string.no_downloaded_forms));
+
         getRecyclerView().addItemDecoration(new DividerItemDecoration(getActivity(),
                                                                       DividerItemDecoration.VERTICAL_LIST));
 

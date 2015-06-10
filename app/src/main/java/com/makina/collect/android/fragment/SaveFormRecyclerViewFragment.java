@@ -222,6 +222,8 @@ public class SaveFormRecyclerViewFragment
         super.onViewCreated(view,
                             savedInstanceState);
 
+        setEmptyText(getString(R.string.no_form_not_finalized));
+
         getRecyclerView().addItemDecoration(new DividerItemDecoration(getActivity(),
                                                                       DividerItemDecoration.VERTICAL_LIST));
 
