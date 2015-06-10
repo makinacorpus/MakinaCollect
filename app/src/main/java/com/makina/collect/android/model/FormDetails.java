@@ -101,6 +101,11 @@ public class FormDetails
     }
 
     @Override
+    public String toString() {
+        return formName;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
