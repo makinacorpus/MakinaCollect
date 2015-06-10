@@ -29,6 +29,7 @@ public class DeleteFormsRequestHandler
     public static final String KEY_COMMAND = "KEY_COMMAND";
     public static final String KEY_STATUS = "KEY_STATUS";
     public static final String KEY_SELECTED_FORM_DETAILS = "KEY_SELECTED_FORM_DETAILS";
+    public static final String KEY_SELECTED_FORM_DETAILS_INSTANCES = "KEY_SELECTED_FORM_DETAILS_INSTANCES";
     public static final String KEY_FORMS_DELETED = "KEY_FORMS_DELETED";
 
     protected RequestHandlerStatus mRequestHandlerStatus;
@@ -54,6 +55,11 @@ public class DeleteFormsRequestHandler
                     if (message.getData().containsKey(KEY_SELECTED_FORM_DETAILS)) {
                         final DeleteFormsAsyncTask deleteFormsAsyncTask = new DeleteFormsAsyncTask(message.getData());
                         deleteFormsAsyncTask.execute();
+                    }
+
+                    if (message.getData().containsKey(KEY_SELECTED_FORM_DETAILS_INSTANCES)) {
+                        final DeleteFormInstancesAsyncTask deleteFormInstancesAsyncTask = new DeleteFormInstancesAsyncTask(message.getData());
+                        deleteFormInstancesAsyncTask.execute();
                     }
 
                     break;
@@ -136,6 +142,65 @@ public class DeleteFormsRequestHandler
 
             mData.putInt(KEY_FORMS_DELETED,
                                 integer);
+            mData.putParcelable(KEY_STATUS,
+                                mRequestHandlerStatus);
+
+            sendMessage(mData);
+        }
+    }
+
+    /**
+     * Default {@code AsyncTask} about deleting a {@code List} of selected {@link FormDetails} instances.
+     *
+     * @author <a href="mailto:sebastien.grimault@makina-corpus.com">S. Grimault</a>
+     */
+    private class DeleteFormInstancesAsyncTask extends AsyncTask<Void, Void, Integer> {
+
+        private Bundle mData;
+
+        public DeleteFormInstancesAsyncTask(Bundle pData) {
+            this.mData = pData;
+        }
+
+        @Override
+        protected Integer doInBackground(Void... params) {
+            if (BuildConfig.DEBUG) {
+                Log.d(getClass().getName(),
+                      "doInBackground");
+            }
+
+            mRequestHandlerStatus = new RequestHandlerStatus(RequestHandlerStatus.Status.RUNNING);
+
+            mData.putParcelable(KEY_STATUS,
+                                mRequestHandlerStatus);
+
+            sendMessage(mData);
+
+            int deletedForms = 0;
+
+            if (mData.containsKey(KEY_SELECTED_FORM_DETAILS_INSTANCES)) {
+                final List<FormDetails> selectedFormDetailsList = mData.getParcelableArrayList(KEY_SELECTED_FORM_DETAILS_INSTANCES);
+
+                for (FormDetails formDetails : selectedFormDetailsList) {
+                    InstanceProvider.deleteInstance(formDetails.id);
+                }
+
+                deletedForms = selectedFormDetailsList.size();
+                mRequestHandlerStatus = new RequestHandlerStatus(RequestHandlerStatus.Status.FINISHED);
+            }
+            else {
+                mRequestHandlerStatus = new RequestHandlerStatus(RequestHandlerStatus.Status.FINISHED_WITH_ERRORS);
+            }
+
+            return deletedForms;
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+
+            mData.putInt(KEY_FORMS_DELETED,
+                         integer);
             mData.putParcelable(KEY_STATUS,
                                 mRequestHandlerStatus);
 

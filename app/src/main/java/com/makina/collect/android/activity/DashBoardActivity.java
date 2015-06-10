@@ -24,7 +24,6 @@ import android.view.MenuItem;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.activities.ActivityHelp;
-import com.makina.collect.android.activities.ActivitySaveForm;
 import com.makina.collect.android.activities.ActivitySendForm;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.dialog.DialogAboutUs;
@@ -175,7 +174,7 @@ public class DashBoardActivity
     @Override
     public void onFormShowFinish() {
         startActivity(new Intent(this,
-                                 ActivitySaveForm.class));
+                                 SaveFormActivity.class));
     }
 
     @Override
