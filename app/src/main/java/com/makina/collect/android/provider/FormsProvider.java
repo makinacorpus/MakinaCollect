@@ -24,14 +24,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.provider.BaseColumns;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.application.Collect;
 import com.makina.collect.android.database.ODKSQLiteOpenHelper;
-import com.makina.collect.android.model.FormDetails;
 import com.makina.collect.android.provider.FormsProviderAPI.FormsColumns;
 import com.makina.collect.android.utilities.FileUtils;
 import com.makina.collect.android.utilities.MediaUtils;
@@ -584,23 +582,6 @@ public class FormsProvider extends ContentProvider {
     	db.delete(FORMS_TABLE_NAME,
                   FormsColumns.JR_FORM_ID + "='" + form_id + "'",
                   null);
-    }
-
-    @Nullable
-    public static FormDetails fromCursor(Cursor cursor) {
-        if ((cursor == null) || cursor.isClosed()) {
-            return null;
-        }
-
-        final FormDetails formDetails = new FormDetails();
-        formDetails.id = cursor.getLong(cursor.getColumnIndex(BaseColumns._ID));
-        formDetails.formID = cursor.getString(cursor.getColumnIndex(FormsColumns.JR_FORM_ID));
-        formDetails.formName = cursor.getString(cursor.getColumnIndex(FormsColumns.DISPLAY_NAME));
-        formDetails.description = cursor.getString(cursor.getColumnIndex(FormsColumns.DISPLAY_SUBTEXT));
-        formDetails.filePath = cursor.getString(cursor.getColumnIndex(FormsColumns.FORM_FILE_PATH));
-        formDetails.directoryPath = cursor.getString(cursor.getColumnIndex(FormsColumns.FORM_MEDIA_PATH));
-
-        return formDetails;
     }
 
     static {

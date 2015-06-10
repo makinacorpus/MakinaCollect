@@ -14,8 +14,14 @@
 
 package com.makina.collect.android.model;
 
+import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.provider.BaseColumns;
+import android.support.annotation.Nullable;
+
+import com.makina.collect.android.provider.FormsProviderAPI;
+import com.makina.collect.android.provider.InstanceProviderAPI;
 
 public class FormDetails
         implements Parcelable {
@@ -33,6 +39,8 @@ public class FormDetails
     public String description;
     public String filePath;
     public String directoryPath;
+    public String instanceFilePath;
+
     public boolean checked;
 
     public FormDetails() {
@@ -63,6 +71,46 @@ public class FormDetails
         formID = id;
         formVersion = version;
         checked = false;
+    }
+
+    /**
+     * Creates a new instance of {@link FormDetails} from a given {@code Cursor}.
+     *
+     * @param cursor a valid cursor
+     *
+     * @return a new instance of {@link FormDetails}
+     */
+    @Nullable
+    public static FormDetails fromCursor(Cursor cursor) {
+        if ((cursor == null) || cursor.isClosed()) {
+            return null;
+        }
+
+        final FormDetails formDetails = new FormDetails();
+        formDetails.id = cursor.getLong(cursor.getColumnIndex(BaseColumns._ID));
+        formDetails.formID = cursor.getString(cursor.getColumnIndex(FormsProviderAPI.FormsColumns.JR_FORM_ID));
+        formDetails.formName = cursor.getString(cursor.getColumnIndex(FormsProviderAPI.FormsColumns.DISPLAY_NAME));
+        formDetails.description = cursor.getString(cursor.getColumnIndex(FormsProviderAPI.FormsColumns.DISPLAY_SUBTEXT));
+
+        int formFilePathIndex = cursor.getColumnIndex(FormsProviderAPI.FormsColumns.FORM_FILE_PATH);
+
+        if (formFilePathIndex != - 1) {
+            formDetails.filePath = cursor.getString(formFilePathIndex);
+        }
+
+        int formMediaPathIndex = cursor.getColumnIndex(FormsProviderAPI.FormsColumns.FORM_MEDIA_PATH);
+
+        if (formMediaPathIndex != -1) {
+            formDetails.directoryPath = cursor.getString(formMediaPathIndex);
+        }
+
+        int instanceFilePath = cursor.getColumnIndex(InstanceProviderAPI.InstanceColumns.INSTANCE_FILE_PATH);
+
+        if (instanceFilePath != -1) {
+            formDetails.instanceFilePath = cursor.getString(instanceFilePath);
+        }
+
+        return formDetails;
     }
 
     private FormDetails(Parcel source) {
@@ -101,6 +149,11 @@ public class FormDetails
     }
 
     @Override
+    public String toString() {
+        return formName;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -120,6 +173,7 @@ public class FormDetails
             return false;
         }
 
+        // noinspection SimplifiableIfStatement
         if (formID != null ? !formID.equals(that.formID) : that.formID != null) {
             return false;
         }

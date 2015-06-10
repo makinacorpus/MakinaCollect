@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.makina.collect.android.R;
 import com.makina.collect.android.model.FormDetails;
-import com.makina.collect.android.provider.FormsProvider;
 import com.makina.collect.android.widget.CheckBoxView;
 
 import java.util.ArrayList;
@@ -96,7 +95,7 @@ public class EditFormCursorAdapter
         }
 
         public void bind(final Cursor cursor) {
-            final FormDetails formDetails = FormsProvider.fromCursor(cursor);
+            final FormDetails formDetails = FormDetails.fromCursor(cursor);
 
             if (formDetails == null) {
                 return;
