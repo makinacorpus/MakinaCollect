@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Google Maps-based APIs key -->
+    <string name="__config_google_geo_api_key"
+            templateMergeStrategy="preserve"
+            translatable="false">AIzaSyB-vpXp2nDeyQFG35OHrQLa7CSquH04mIg</string>
+
+</resources>
