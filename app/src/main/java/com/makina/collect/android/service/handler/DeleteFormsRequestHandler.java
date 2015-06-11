@@ -1,6 +1,8 @@
 package com.makina.collect.android.service.handler;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
@@ -10,6 +12,7 @@ import com.makina.collect.android.BuildConfig;
 import com.makina.collect.android.model.FormDetails;
 import com.makina.collect.android.provider.FormsProvider;
 import com.makina.collect.android.provider.InstanceProvider;
+import com.makina.collect.android.provider.InstanceProviderAPI;
 import com.makina.collect.android.service.AbstractRequestHandler;
 import com.makina.collect.android.service.RequestHandlerStatus;
 
@@ -157,9 +160,11 @@ public class DeleteFormsRequestHandler
     private class DeleteFormInstancesAsyncTask extends AsyncTask<Void, Void, Integer> {
 
         private Bundle mData;
+        private ContentResolver mContentResolver;
 
         public DeleteFormInstancesAsyncTask(Bundle pData) {
             this.mData = pData;
+            this.mContentResolver = getContext().getContentResolver();
         }
 
         @Override
@@ -182,10 +187,14 @@ public class DeleteFormsRequestHandler
                 final List<FormDetails> selectedFormDetailsList = mData.getParcelableArrayList(KEY_SELECTED_FORM_DETAILS_INSTANCES);
 
                 for (FormDetails formDetails : selectedFormDetailsList) {
-                    InstanceProvider.deleteInstance(formDetails.id);
+                    final Uri deleteFormInstance = Uri.withAppendedPath(InstanceProviderAPI.InstanceColumns.CONTENT_URI,
+                                                                  Long.toString(formDetails.id));
+
+                    deletedForms += mContentResolver.delete(deleteFormInstance,
+                                                            null,
+                                                            null);
                 }
 
-                deletedForms = selectedFormDetailsList.size();
                 mRequestHandlerStatus = new RequestHandlerStatus(RequestHandlerStatus.Status.FINISHED);
             }
             else {
