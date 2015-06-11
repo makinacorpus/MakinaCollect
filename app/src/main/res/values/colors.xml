@@ -12,6 +12,8 @@
     <color name="greenListItemBackgroundColor">#80b1ce53</color>
     <color name="blueListItemBackgroundColor">#802b98ae</color>
 
+    <color name="background_light_transparent_20">#33ffffff</color>
+
     <!-- deprecated colors definition -->
 
     <drawable name="bleu_help_footer">#26d1ed</drawable>

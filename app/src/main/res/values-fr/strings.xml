@@ -336,6 +336,7 @@
     <string name="toggle_selected">(dé)sélectionner tout</string>
     <string name="trigger">OK. Continuer.</string>
     <string name="two_item_icon">Icône</string>
+    <string name="undo">Annuler</string>
     <string name="uploading_data">Envoi du formulaire…</string>
     <string name="url_error">URL non valable!</string>
     <string name="username">Nom d\'utilisateur</string>

@@ -318,6 +318,7 @@ You can also use the Makina Collect App with your own forms that you have create
     <string name="toggle_selected">Toggle All</string>
     <string name="trigger">OK. Please continue.</string>
     <string name="two_item_icon">Icon</string>
+    <string name="undo">Undo</string>
     <string name="uploading_data">Sending Form</string>
     <string name="url_error">Sorry, invalid URL!</string>
     <string name="username">Username</string>
