@@ -30,6 +30,7 @@ import com.makina.collect.android.fragment.DashboardFragment;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.FormsProvider;
 import com.makina.collect.android.provider.InstanceProvider;
+import com.makina.collect.android.util.IntentUtils;
 import com.makina.collect.android.util.SpannableUtils;
 import com.makina.collect.android.utilities.Finish;
 
@@ -68,8 +69,9 @@ public class DashBoardActivity
                                        .commit();
         }
 
-        if ((getIntent().getExtras() != null) && (getIntent().getExtras()
-                                                             .getLong("folder_size") > 0)) {
+        if ((getIntent().getExtras() != null) && (!getIntent().getExtras()
+                                                              .getBoolean(IntentUtils.FORMS_PATH_EMPTY,
+                                                                          true))) {
             final File f = new File(Collect.FORMS_PATH);
             AlertDialog.Builder adb = new AlertDialog.Builder(this);
             adb.setTitle(getString(R.string.delete));
@@ -107,7 +109,7 @@ public class DashBoardActivity
                                   });
             adb.setCancelable(false);
             adb.show();
-            getIntent().removeExtra("folder_size");
+            getIntent().removeExtra(IntentUtils.FORMS_PATH_EMPTY);
         }
     }
 

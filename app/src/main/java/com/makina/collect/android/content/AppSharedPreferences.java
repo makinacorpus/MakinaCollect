@@ -24,11 +24,16 @@ public class AppSharedPreferences {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(pContext);
     }
 
+    public boolean isServerUrlDefined() {
+        return mSharedPreferences.contains(mContext.getString(R.string.preference_server_url_key)) &&
+                !TextUtils.isEmpty(mSharedPreferences.getString(mContext.getString(R.string.preference_server_url_key), ""));
+    }
+
     @NonNull
     public String getServerUrl() {
         final String defaultServerUrl = mContext.getString(R.string.default_server_url);
 
-        if (!mSharedPreferences.contains(mContext.getString(R.string.preference_server_url_key))) {
+        if (!isServerUrlDefined()) {
             setServerUrl(defaultServerUrl);
         }
 
