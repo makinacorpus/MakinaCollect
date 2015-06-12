@@ -384,6 +384,7 @@ public class EditFormRecyclerViewFragment
                                                                     deletedForms),
                                    Toast.LENGTH_LONG)
                          .show();
+
                     break;
                 case FINISHED_WITH_WARNINGS:
                     getLoaderManager().restartLoader(0,

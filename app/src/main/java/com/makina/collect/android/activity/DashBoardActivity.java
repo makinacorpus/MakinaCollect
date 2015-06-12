@@ -26,7 +26,6 @@ import com.makina.collect.android.R;
 import com.makina.collect.android.activities.ActivityHelp;
 import com.makina.collect.android.activities.ActivitySendForm;
 import com.makina.collect.android.application.Collect;
-import com.makina.collect.android.dialog.DialogAboutUs;
 import com.makina.collect.android.fragment.DashboardFragment;
 import com.makina.collect.android.preferences.ActivityPreferences;
 import com.makina.collect.android.provider.FormsProvider;
@@ -133,16 +132,17 @@ public class DashBoardActivity
                                        RESULT_PREFERENCES);
                 return true;
             case R.id.menu_help:
-                Intent mIntent = new Intent(this,
+                Intent intent = new Intent(this,
                                             ActivityHelp.class);
-                Bundle mBundle = new Bundle();
-                mBundle.putInt("position",
+                Bundle bundle = new Bundle();
+                bundle.putInt("position",
                                0);
-                mIntent.putExtras(mBundle);
-                startActivity(mIntent);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 return true;
             case R.id.menu_about_us:
-                DialogAboutUs.aboutUs(this);
+                startActivity(new Intent(this,
+                                         AboutActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
