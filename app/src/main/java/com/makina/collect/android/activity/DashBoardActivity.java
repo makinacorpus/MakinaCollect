@@ -51,10 +51,10 @@ public class DashBoardActivity
             final String appName = getString(R.string.app_name);
             final String substring = appName.split(" ").length == 2 ? appName.split(" ")[1] : null;
             actionBar.setTitle(SpannableUtils.makeTwoTextAppearanceSpannable(this,
-                                                                                         R.style.TextAppearance_ActionBar_Title_Green,
-                                                                                         R.style.TextAppearance_ActionBar_Title_Blue,
-                                                                                         appName,
-                                                                                         substring));
+                                                                             R.style.TextAppearance_ActionBar_Title_Green,
+                                                                             R.style.TextAppearance_ActionBar_Title_Blue,
+                                                                             appName,
+                                                                             substring));
         }
 
         setContentView(R.layout.activity_single);

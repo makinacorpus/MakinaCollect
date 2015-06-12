@@ -21,7 +21,7 @@ public class SpannableUtils {
     }
 
     /**
-     * Apply text appearance styles to the the given text and its substring.
+     * Apply text appearance styles to the given text and its substring.
      *
      * @param context              the current context
      * @param firstTextAppearance  the text appearance style to apply to the given text
