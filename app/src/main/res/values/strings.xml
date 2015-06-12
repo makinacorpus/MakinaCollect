@@ -74,15 +74,14 @@
 
     <!-- ActionBar Title -->
     <string name="download_menu">DOWNLOAD \na form</string>
-    <string name="edit_menu">FILL IN   \na form</string>
+    <string name="edit_menu">FILL IN \na form</string>
     <string name="save_menu">FINISH \nmy forms</string>
-    <string name="send_menu">My forms \nTO SEND</string>
+    <string name="send_menu">SEND \nmy forms</string>
     <string name="download_action_bar">DOWNLOAD</string>
     <string name="edit">FILL IN</string>
     <string name="my_forms">my forms</string>
-    <string name="my_forms_send">My forms</string>
     <string name="finalize">FINISH</string>
-    <string name="to_send">TO SEND</string>
+    <string name="send">SEND</string>
     <string name="form">a form</string>
     <!-- FIN ActionBar Title -->
 

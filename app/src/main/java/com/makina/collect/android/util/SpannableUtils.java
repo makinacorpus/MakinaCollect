@@ -34,10 +34,11 @@ public class SpannableUtils {
     public static SpannableString makeTwoTextAppearanceSpannable(final Context context,
                                                                  @StyleRes final int firstTextAppearance,
                                                                  @StyleRes final int secondTextAppearance,
-                                                                 @NonNull final String text,
-                                                                 @Nullable final String substring) {
+                                                                 @NonNull final CharSequence text,
+                                                                 @Nullable final CharSequence substring) {
         final SpannableString spannableString = new SpannableString(text);
-        final int substringOffsetStart = TextUtils.isEmpty(substring) ? - 1 : text.indexOf(substring);
+        final int substringOffsetStart = TextUtils.isEmpty(substring) ? -1 : text.toString()
+                                                                                 .indexOf(substring.toString());
 
         spannableString.setSpan(new TextAppearanceSpan(context,
                                                        firstTextAppearance),
