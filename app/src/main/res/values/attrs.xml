@@ -4,12 +4,18 @@
     <declare-styleable name="AppTheme">
         <attr name="emptyListDrawable" format="reference"/>
         <attr name="checkBoxViewStyle" format="reference"/>
+        <attr name="typefaceViewStyle" format="reference"/>
     </declare-styleable>
 
     <declare-styleable name="CheckBoxView">
         <attr name="backgroundIndicatorOff" format="reference"/>
         <attr name="backgroundIndicatorOn" format="reference"/>
         <attr name="checkBoxIndicator" format="reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="TypefaceView">
+        <attr name="fontFamilyName" format="string"/>
+        <attr name="textCapitalize" format="boolean"/>
     </declare-styleable>
 
 </resources>
