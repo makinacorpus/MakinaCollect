@@ -7,7 +7,7 @@
               android:padding="10dp"
               android:orientation="horizontal">
 
-    <com.makina.collect.android.widget.CheckBoxView
+    <com.makina.collect.widget.CheckBoxView
         android:id="@+id/selectorView"
         android:layout_width="?attr/listPreferredItemHeightSmall"
         android:layout_height="?attr/listPreferredItemHeightSmall"/>

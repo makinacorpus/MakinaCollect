@@ -28,6 +28,16 @@
         <item name="android:textColor">@color/bluePrimaryDarkColor</item>
     </style>
 
+    <style name="TextAppearance.DashBoard" parent="@style/TextAppearance.AppCompat.Medium">
+        <item name="fontFamilyName">avenir</item>
+    </style>
+    <style name="TextAppearance.DashBoard.Green">
+        <item name="android:textColor">@color/greenPrimaryDarkColor</item>
+    </style>
+    <style name="TextAppearance.DashBoard.Blue">
+        <item name="android:textColor">@color/bluePrimaryDarkColor</item>
+    </style>
+
     <style name="SelectorViewStyle">
         <item name="android:padding">4dp</item>
         <item name="checkBoxIndicator">@drawable/ic_action_done_inverse</item>

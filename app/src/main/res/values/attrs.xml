@@ -13,6 +13,14 @@
         <attr name="checkBoxIndicator" format="reference"/>
     </declare-styleable>
 
+    <declare-styleable name="DashBoardButton">
+        <attr name="icon"/>
+        <attr name="text1" format="reference|string"/>
+        <attr name="text2" format="reference|string"/>
+        <attr name="text1Appearance" format="reference"/>
+        <attr name="text2Appearance" format="reference"/>
+    </declare-styleable>
+
     <declare-styleable name="TypefaceView">
         <attr name="fontFamilyName" format="string"/>
         <attr name="textCapitalize" format="boolean"/>

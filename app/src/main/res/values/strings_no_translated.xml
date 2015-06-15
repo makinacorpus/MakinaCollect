@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- EditForm -->
+    <string name="clic_here_to_download">APPUYEZ ICI POUR TÉLÉCHARGER UN FORMULAIRE</string>
+    <string name="no_form_finalled">PAS DE FORMULAIRE FINALISÉ</string>
+    <!-- END EditForm -->
+
+    <!-- FORM SAVING -->
+    <string name="to_not_send_form">Ne pas envoyer le formulaire</string>
+    <!-- END FORM SAVING -->
+
+</resources>

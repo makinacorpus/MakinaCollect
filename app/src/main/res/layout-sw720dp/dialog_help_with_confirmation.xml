@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/linear_blue"
+        android:padding="5dip" >
+
+        <com.makina.collect.views.CustomFontTextview
+            android:id="@+id/textview_help_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <com.makina.collect.views.CustomFontTextview
+        android:id="@+id/textview_help"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:layout_marginLeft="7dip"
+        android:layout_marginRight="7dip"
+        android:layout_marginTop="10dp"
+        android:autoLink="all"
+        android:linksClickable="true" />
+
+    <LinearLayout
+        android:id="@+id/footer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_help"
+        android:layout_marginTop="5dip"
+        android:orientation="vertical"
+        android:paddingTop="5dp" >
+
+        <com.makina.collect.views.CustomFontCheckBox
+            android:id="@+id/checkbox_help"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:button="@drawable/checkbox_help_selector"
+            android:text="@string/help_confirmation"
+            android:textAlignment="center" />
+
+        <RelativeLayout
+            android:id="@+id/linearlayout_ok"
+            android:layout_width="fill_parent"
+            android:layout_height="40dip"
+            android:layout_marginTop="5dip"
+            android:background="@drawable/selector_footer_help" >
+
+            <com.makina.collect.views.CustomFontTextview
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/ok"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

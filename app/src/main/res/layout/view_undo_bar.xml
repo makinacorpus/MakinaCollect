@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.makina.collect.android.widget.UndoBarView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.makina.collect.widget.UndoBarView xmlns:android="http://schemas.android.com/apk/res/android"
                                                xmlns:tools="http://schemas.android.com/tools"
                                                android:id="@+id/undoBarView"
                                                android:layout_width="match_parent"
@@ -32,4 +32,4 @@
         android:text="@string/undo"
         android:textColor="?colorPrimaryDark"/>
 
-</com.makina.collect.android.widget.UndoBarView>
+</com.makina.collect.widget.UndoBarView>

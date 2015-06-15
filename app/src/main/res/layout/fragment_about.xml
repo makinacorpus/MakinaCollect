@@ -29,7 +29,7 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <com.makina.collect.android.widget.typeface.TypefaceTextView
+            <com.makina.collect.widget.typeface.TypefaceTextView
                 android:id="@+id/textview_about_us1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                 android:contentDescription="@string/textview_about_us5"
                 android:src="@drawable/logo_makina_corpus"/>
 
-            <com.makina.collect.android.widget.typeface.TypefaceTextView
+            <com.makina.collect.widget.typeface.TypefaceTextView
                 android:id="@+id/textview_about_us2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                 android:autoLink="web"
                 android:text="@string/textview_about_us3"/>
 
-            <com.makina.collect.android.widget.typeface.TypefaceTextView
+            <com.makina.collect.widget.typeface.TypefaceTextView
                 android:id="@+id/textview_about_us4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -1,0 +1,95 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:id="@+id/buttonholder"
+        style="@style/ButtonBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <com.makina.collect.views.CustomFontButton
+                android:id="@+id/prev_button"
+                style="@style/ButtonNext"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/back"
+                android:textColor="?attr/text_color"
+                android:visibility="invisible" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="?android:attr/listDivider" />
+
+            <com.makina.collect.views.CustomFontButton
+                android:id="@+id/next_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/next"
+                android:textColor="?attr/text_color" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/buttonholder"
+        android:layout_alignParentTop="true" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout_informations"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dip"
+            android:paddingTop="20dip" >
+
+            <com.makina.collect.views.CustomFontTextview
+                android:id="@+id/textView_quiz_question_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dip"
+                android:textColor="@drawable/linear_blue"
+                android:textSize="27sp"
+                android:textStyle="bold" />
+
+            <com.makina.collect.views.CustomFontTextview
+                android:id="@+id/textView_quiz_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/textView_quiz_question_number"
+                android:paddingLeft="10dip"
+                android:singleLine="true"
+                android:textColor="@drawable/linear_blue"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/questionholder"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/relativeLayout_informations" >
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

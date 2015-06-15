@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:src="@drawable/list_background"
+        tools:ignore="ContentDescription,RtlHardcoded" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/linear_blue"
+            android:layout_width="4dip"
+            android:layout_height="fill_parent"
+            android:background="?colorPrimaryDark" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout_footer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:id="@+id/pannier"
+                android:layout_width="fill_parent"
+                android:layout_height="40dip"
+                android:background="@drawable/pannier_blue"
+                android:gravity="center">
+
+                <com.makina.collect.views.CustomFontTextview
+                    android:id="@+id/textView_pannier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no_form_selected"
+                    android:textColor="@android:color/white"
+                    android:textSize="18dip" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/check_all"
+                android:layout_width="fill_parent"
+                android:layout_height="50dip"
+                android:background="@drawable/check_all_selector"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imageView_check_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/case_off" />
+
+                <com.makina.collect.views.CustomFontTextview
+                    android:id="@+id/textView_check_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/imageView_check_all"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dip"
+                    android:text="@string/select_all"
+                    android:textColor="@android:color/white"
+                    android:textSize="18dip" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@id/linearLayout_footer"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@id/linear_blue"
+            android:divider="@drawable/linear_blue"
+            android:dividerHeight="1dip" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/no_list" />
+
+        <com.makina.collect.views.CustomFontTextview
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dip"
+            android:text="@string/empty_list"
+            android:textColor="@color/color_emty_list"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+</FrameLayout>

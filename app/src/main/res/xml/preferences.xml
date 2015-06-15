@@ -1,0 +1,127 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:key="@string/server_preferences"
+        android:title="@string/server_preferences" >
+        <EditTextPreference
+            android:id="@+id/server_url"
+            android:defaultValue="@string/default_server_url"
+            android:dialogTitle="@string/change_server_url"
+            android:inputType="textNoSuggestions"
+            android:key="server_url"
+            android:title="@string/server_url" />
+        <EditTextPreference
+            android:id="@+id/username"
+            android:dialogTitle="@string/change_username"
+            android:inputType="textNoSuggestions"
+            android:key="username"
+            android:title="@string/username" />
+        <EditTextPreference
+            android:id="@+id/password"
+            android:dialogTitle="@string/change_password"
+            android:inputType="textNoSuggestions"
+            android:key="password"
+            android:title="@string/password" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="@string/client"
+        android:title="@string/client" >
+        <ListPreference
+            android:id="@+id/langue"
+            android:defaultValue="@string/current_language"
+            android:dialogTitle="@string/language"
+            android:entries="@array/language_entries"
+            android:entryValues="@array/language_entries_values"
+            android:key="language"
+            android:title="@string/language" />
+        <ListPreference
+            android:id="@+id/theme"
+            android:defaultValue="@string/theme1"
+            android:dialogTitle="@string/theme"
+            android:entries="@array/theme_entries"
+            android:entryValues="@array/theme_entry_values"
+            android:key="theme"
+            android:title="@string/theme" />
+
+        <Preference
+            android:id="@+id/luminosity"
+            android:dialogTitle="@string/luminosity"
+            android:inputType="textNoSuggestions"
+            android:key="luminosity"
+            android:title="@string/luminosity" />
+
+        <ListPreference
+            android:id="@+id/font_size"
+            android:defaultValue="21"
+            android:dialogTitle="@string/change_font_size"
+            android:entries="@array/font_size_entries"
+            android:entryValues="@array/font_size_entry_values"
+            android:key="font_size"
+            android:title="@string/font_size" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="@string/autosend"
+        android:title="@string/autosend" >
+        <CheckBoxPreference
+            android:id="@+id/autosend_wifi"
+            android:defaultValue="false"
+            android:key="autosend_wifi"
+            android:summary="@string/autosend_wifi_summary"
+            android:title="@string/autosend_wifi" />
+        <CheckBoxPreference
+            android:id="@+id/autosend_network"
+            android:defaultValue="false"
+            android:key="autosend_network"
+            android:summary="@string/autosend_network_summary"
+            android:title="@string/autosend_network" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="@string/advanced_pref"
+        android:title="@string/advanced_pref" >
+        <ListPreference
+            android:id="@+id/selected_google_account"
+            android:defaultValue=""
+            android:key="selected_google_account"
+            android:title="@string/selected_google_account_text" />
+        <ListPreference
+            android:id="@+id/protocol"
+            android:defaultValue="odk_default"
+            android:dialogTitle="@string/change_protocol"
+            android:entries="@array/protocol_entries"
+            android:entryValues="@array/protocol_entry_values"
+            android:key="protocol"
+            android:title="@string/protocol" />
+
+        <EditTextPreference
+            android:id="@+id/formlist_url"
+            android:defaultValue="@string/default_odk_formlist"
+            android:dialogTitle="@string/change_formlist_url"
+            android:inputType="textNoSuggestions"
+            android:key="formlist_url"
+            android:layout="?android:attr/preferenceLayoutChild"
+            android:title="@string/formlist_url" />
+        <EditTextPreference
+            android:id="@+id/submission_url"
+            android:defaultValue="@string/default_odk_submission"
+            android:dialogTitle="@string/change_submission_url"
+            android:inputType="textNoSuggestions"
+            android:key="submission_url"
+            android:layout="?android:attr/preferenceLayoutChild"
+            android:title="@string/submission_url" />
+
+        <CheckBoxPreference
+            android:id="@+id/show_splash"
+            android:key="showSplash"
+            android:summary="@string/show_splash_summary"
+            android:title="@string/show_splash" />
+
+        <PreferenceScreen
+            android:id="@+id/splash_path"
+            android:defaultValue="@string/default_splash_path"
+            android:dependency="showSplash"
+            android:key="splashPath"
+            android:layout="?android:attr/preferenceLayoutChild"
+            android:title="@string/splash_path" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
