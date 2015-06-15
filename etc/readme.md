@@ -20,4 +20,19 @@ To print details:
 >       keytool -v \
               -list \
               -keystore debug.keystore \
-              -storepass android
+              -alias androiddebugkey \
+              -storepass android \
+              -keypass android
+
+Get the app's certificate information
+-------------------------------------
+
+SHA-1 fingerprint:
+
+>       keytool -v \
+              -list \
+              -keystore debug.keystore \
+              -alias androiddebugkey \
+              -storepass android \
+              -keypass android \
+              | grep SHA1 | head -n 1 | cut -d" " -f4

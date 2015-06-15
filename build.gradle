@@ -22,7 +22,7 @@ allprojects {
     }
 }
 
-def int updateVersionCode(moduleName) {
+def File getVersionPropertiesFile(moduleName) {
     def versionPropsFile = file(moduleName + '/version.properties')
 
     println("getVersionCode: loading '" + versionPropsFile + "'")
@@ -31,19 +31,34 @@ def int updateVersionCode(moduleName) {
         versionPropsFile.createNewFile()
     }
 
+    return versionPropsFile
+}
+
+def Properties readVersionProperties(moduleName) {
     def Properties versionProps = new Properties()
-    versionProps.load(new FileInputStream(versionPropsFile))
+    versionProps.load(new FileInputStream(getVersionPropertiesFile(moduleName)))
 
-    def versionCode = 1
-
-    if (versionProps['VERSION_CODE'] != null) {
-        versionCode = Integer.parseInt(versionProps['VERSION_CODE'].toString()).intValue() + 1;
+    if (!versionProps['VERSION_CODE']) {
+        versionProps['VERSION_CODE'] = "1"
     }
 
+    return versionProps
+}
+
+def int getVersionCode(moduleName) {
+    def Properties versionProps = readVersionProperties(moduleName)
+
+    return Integer.parseInt(versionProps['VERSION_CODE'].toString()).intValue()
+}
+
+def int updateVersionCode(moduleName) {
+    def Properties versionProps = readVersionProperties(moduleName)
+    def versionCode = getVersionCode(moduleName) + 1;
+
     versionProps['VERSION_CODE'] = versionCode.toString()
-    versionProps.store(versionPropsFile.newWriter(), null)
+    versionProps.store(getVersionPropertiesFile(moduleName).newWriter(), null)
 
-    println("getVersionCode: " + versionCode)
+    println("updateVersionCode: " + versionCode)
 
-    return versionCode;
+    return versionCode
 }
