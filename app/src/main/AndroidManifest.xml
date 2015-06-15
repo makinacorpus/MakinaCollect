@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.makina.collect"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+
+    <permission
+        android:name="com.makina.collect.MAPS_RECEIVE"
+        android:protectionLevel="signature"/>
+
+    <uses-permission android:name="com.makina.collect.MAPS_RECEIVE"/>
+
+    <!-- Maps API needs OpenGL ES 2.0. -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
+
+    <application
+        android:name="com.makina.collect.application.Collect"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/CollectThemeLight">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/__config_google_geo_api_key"/>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+
+        <activity
+            android:name="com.makina.collect.activity.SplashScreenActivity"
+            android:label="@string/app_name"
+            android:noHistory="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.makina.collect.activity.DashBoardActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.makina.collect.activity.AboutActivity"/>
+        <activity android:name="com.makina.collect.activity.FormDetailsActivity"/>
+        <activity android:name="com.makina.collect.activity.EditFormActivity"/>
+        <activity android:name="com.makina.collect.activity.SaveFormActivity"/>
+
+        <!--
+        <activity
+            android:name=".activities.ActivityDownloadForm"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"/>
+        <activity
+            android:name=".activities.ActivityEditForm"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.EDIT"/>
+                <action android:name="android.intent.action.PICK"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="vnd.android.cursor.dir/vnd.odk.form"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.ActivitySaveForm"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"/>
+        -->
+
+        <activity
+            android:name="com.makina.collect.activities.ActivitySendForm"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"/>
+        <activity
+            android:name="com.makina.collect.activities.ActivityForm"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.EDIT"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="vnd.android.cursor.item/vnd.odk.form"/>
+                <data android:mimeType="vnd.android.cursor.item/vnd.odk.instance"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.makina.collect.activities.ActivityDraw"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.EDIT"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="vnd.android.cursor.dir/vnd.odk.instance"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.makina.collect.preferences.ActivityPreferences"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"/>
+        <activity
+            android:name="com.makina.collect.preferences.AdminPreferencesActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"/>
+        <activity
+            android:name="com.makina.collect.activities.ActivityFormHierarchy"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"/>
+        <activity
+            android:name="com.makina.collect.activities.ActivityGeoPoint"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"/>
+        <activity
+            android:name="com.makina.collect.activities.ActivityGeoPointMap"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"/>
+        <activity
+            android:name="com.makina.collect.activities.ActivityHelp"
+            android:theme="@style/Theme.Transparent"/>
+
+        <receiver
+            android:name="com.makina.collect.receivers.NetworkReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.makina.collect.android.FormSaved"/>
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="com.makina.collect.provider.FormsProvider"
+            android:authorities="com.makina.collect.provider.odk.forms"
+            android:exported="false"/>
+        <provider
+            android:name="com.makina.collect.provider.InstanceProvider"
+            android:authorities="com.makina.collect.provider.odk.instances"
+            android:exported="false"/>
+
+        <service
+            android:name="com.makina.collect.service.RequestHandlerService"
+            android:exported="false"/>
+        <service
+            android:name="org.openudid.OpenUDID_service"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="org.openudid.GETUDID"/>
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>
