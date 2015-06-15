@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent">
@@ -9,28 +10,28 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|left"
         android:src="@drawable/dashboard_background_top_left"
-        tools:ignore="ContentDescription,RtlHardcoded" />
+        tools:ignore="ContentDescription,RtlHardcoded"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
         android:src="@drawable/dashboard_background_bottom_left"
-        tools:ignore="ContentDescription,RtlHardcoded" />
+        tools:ignore="ContentDescription,RtlHardcoded"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:src="@drawable/dashboard_background_bottom_right"
-        tools:ignore="ContentDescription,RtlHardcoded" />
+        tools:ignore="ContentDescription,RtlHardcoded"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left|center_vertical"
         android:src="@drawable/dashboard_background_middle_left"
-        tools:ignore="ContentDescription,RtlHardcoded" />
+        tools:ignore="ContentDescription,RtlHardcoded"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,77 +40,57 @@
         android:orientation="vertical"
         tools:ignore="RtlHardcoded">
 
-        <com.makina.collect.views.CustomFontButton
+        <com.makina.collect.widget.DashBoardButton
             android:id="@+id/dashboardFormDownloadButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="1dip"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="@dimen/margin_icon_dashboard1"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="45dip"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:drawableLeft="@drawable/dashboard_form_download_layer_list"
-            android:drawablePadding="@dimen/drawable_padding"
-            android:gravity="center_vertical|left"
-            android:text="@string/download_menu"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/greenPrimaryDarkColor"
-            tools:ignore="RtlHardcoded" />
+            android:layout_marginTop="10dp"
+            app:icon="@drawable/dashboard_form_download_layer_list"
+            app:text1="@string/download_action_bar"
+            app:text1Appearance="@style/TextAppearance.DashBoard.Green"
+            app:text2="@string/form"
+            app:text2Appearance="@style/TextAppearance.DashBoard.Green"/>
 
-        <com.makina.collect.views.CustomFontButton
+        <com.makina.collect.widget.DashBoardButton
             android:id="@+id/dashboardFormEditButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="1dip"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="@dimen/margin_icon_dashboard2"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="1dip"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:drawableLeft="@drawable/dashboard_form_edit_layer_list"
-            android:drawablePadding="@dimen/drawable_padding"
-            android:gravity="center_vertical|left"
-            android:text="@string/edit_menu"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/greenPrimaryDarkColor"
-            tools:ignore="RtlHardcoded" />
+            android:layout_marginTop="10dp"
+            app:icon="@drawable/dashboard_form_edit_layer_list"
+            app:text1="@string/edit"
+            app:text1Appearance="@style/TextAppearance.DashBoard.Green"
+            app:text2="@string/form"
+            app:text2Appearance="@style/TextAppearance.DashBoard.Green"/>
 
-        <com.makina.collect.views.CustomFontButton
+        <com.makina.collect.widget.DashBoardButton
             android:id="@+id/dashboardFormFinishButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="1dip"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="@dimen/margin_icon_dashboard2"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="1dip"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:drawableLeft="@drawable/dashboard_form_finish_layer_list"
-            android:drawablePadding="@dimen/drawable_padding"
-            android:gravity="center_vertical|left"
-            android:text="@string/save_menu"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/bluePrimaryDarkColor"
-            tools:ignore="RtlHardcoded" />
+            android:layout_marginTop="10dp"
+            app:icon="@drawable/dashboard_form_finish_layer_list"
+            app:text1="@string/finish"
+            app:text1Appearance="@style/TextAppearance.DashBoard.Blue"
+            app:text2="@string/my_forms"
+            app:text2Appearance="@style/TextAppearance.DashBoard.Blue"/>
 
-        <com.makina.collect.views.CustomFontButton
+        <com.makina.collect.widget.DashBoardButton
             android:id="@+id/dashboardFormSendButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="100dip"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="@dimen/margin_icon_dashboard1"
-            android:layout_marginRight="10dip"
-            android:layout_marginTop="1dip"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:drawableLeft="@drawable/dashboard_form_send_layer_list"
-            android:drawablePadding="@dimen/drawable_padding"
-            android:gravity="center_vertical|left"
-            android:text="@string/send_menu"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/bluePrimaryDarkColor"
-            tools:ignore="RtlHardcoded" />
+            android:layout_marginTop="10dp"
+            app:icon="@drawable/dashboard_form_send_layer_list"
+            app:text1="@string/send"
+            app:text1Appearance="@style/TextAppearance.DashBoard.Blue"
+            app:text2="@string/my_forms"
+            app:text2Appearance="@style/TextAppearance.DashBoard.Blue"/>
 
     </LinearLayout>
 

@@ -3,6 +3,7 @@ package com.makina.collect.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,10 +43,32 @@ public class DashBoardButton
 
     public void setText1(final CharSequence text1) {
         mTextView1.setText(text1);
+
+        setContentDescription(buildContentDescription());
     }
 
     public void setText2(final CharSequence text2) {
         mTextView2.setText(text2);
+
+        setContentDescription(buildContentDescription());
+    }
+
+    private CharSequence buildContentDescription() {
+        final StringBuilder stringBuilder = new StringBuilder();
+
+        if (!TextUtils.isEmpty(mTextView1.getText())) {
+            stringBuilder.append(mTextView1.getText());
+        }
+
+        if (stringBuilder.length() > 0) {
+            stringBuilder.append(' ');
+        }
+
+        if (!TextUtils.isEmpty(mTextView2.getText())) {
+            stringBuilder.append(mTextView2.getText());
+        }
+
+        return stringBuilder;
     }
 
     private void init(AttributeSet attrs) {
@@ -87,6 +110,8 @@ public class DashBoardButton
         else {
             mTextView2.setText(text2ResourceId);
         }
+
+        setContentDescription(buildContentDescription());
 
         initTextStyleAttributes(mTextView2,
                                 typedArray.getResourceId(R.styleable.DashBoardButton_text2Appearance,
